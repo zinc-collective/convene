@@ -23,8 +23,9 @@ esac
 done
 
 packer build \
-  -var 'instance_type=${INSTANCE_TYPE}' \
-  -var 'ssl_certificate=${SSL_CERTIFICATE}' \
-  -var 'public_domain=${PUBLIC_DOMAIN}' \
-  -var 'include_nginx=${INCLUDE_NGINX}'\
+  -var "instance_type=${INSTANCE_TYPE}" \
+  -var "ssl_certificate=${SSL_CERTIFICATE}" \
+  -var "public_domain=${PUBLIC_DOMAIN}" \
+  -var "include_nginx=${INCLUDE_NGINX}"\
+  -var "region=${REGION}"
   example.json
