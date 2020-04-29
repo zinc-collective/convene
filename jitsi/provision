@@ -15,6 +15,10 @@ case $i in
     PUBLIC_DOMAIN="${i#*=}"
     shift
     ;;
+    --region=*)
+    REGION="${i#*=}"
+    shift
+    ;;
     --include-nginx)
     INCLUDE_NGINX=YES
     shift
@@ -27,5 +31,5 @@ packer build \
   -var "ssl_certificate=${SSL_CERTIFICATE}" \
   -var "public_domain=${PUBLIC_DOMAIN}" \
   -var "include_nginx=${INCLUDE_NGINX}"\
-  -var "region=${REGION}"
-  example.json
+  -var "region=${REGION}"\
+  aws-ebs.json
