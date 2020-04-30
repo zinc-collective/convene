@@ -25,14 +25,6 @@
   }],
   "provisioners": [{
     "type": "shell",
-    "inline": [
-      "sleep 30",
-      "echo 'deb https://download.jitsi.org stable/' | sudo tee -a /etc/apt/sources.list.d/jitsi-stable.list",
-      "sudo wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -",
-      "sudo apt-get install apt-transport-https",
-      "sudo apt-get update",
-      "sudo apt-add-repository universe",
-      "sudo apt-get -y install jitsi-meet"
-    ]
+    "script": "jitsi/install"
   }]
 }

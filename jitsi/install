@@ -1,0 +1,19 @@
+#!/bin/bash
+
+sleep 30
+echo 'deb https://download.jitsi.org stable/' | sudo tee -a /etc/apt/sources.list.d/jitsi-stable.list
+sudo wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
+sudo apt-get install apt-transport-https debconf-utils
+sudo apt-get update
+sudo apt-add-repository universe
+
+cat << EOF | sudo debconf-set-selections
+jitsi-videobridge	jitsi-videobridge/jvb-hostname	string	meet1.zinc.coop
+jitsi-meet-prosody	jitsi-videobridge/jvb-hostname	string	meet1.zinc.coop
+jitsi-meet-web-config	jitsi-meet/cert-choice	select	I want to use my own certificate
+
+EOF
+
+sudo apt-get -y install jitsi-meet
+
+sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
