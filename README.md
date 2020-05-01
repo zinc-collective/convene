@@ -11,8 +11,9 @@ efforts; but requires people or organizations to maintain their own
 infrastructure tooling or pay privately held companies to host the services they
 use.
 
-As a result, much of the software tools to safely, securely, efficiently, reliably and
-self-sufficiently host public-domain services is unavailable to the public.
+As a result, much of the software tools to safely, securely, efficiently,
+reliably and self-sufficiently host public-domain services is unavailable to the
+public.
 
 Convene provides software tools to reliably, safely, and securely provision,
 deploy, host and scale public-domain software services for personal, communal,
@@ -56,6 +57,15 @@ Paid support is available for \$135 USD per hour<sup>[1][footnote-1]</sup>.
 
 [prosperity public license]: https://prosperitylicense.com/
 [issue-tracker]: https://github.com/zinc-collective/convene/issues
+
+## Architecture
+
+At present, Convene is split into three modules:
+
+- `infrastructure`, which contains infrastructure management code for Packer,
+  Terraform and Ansible.
+- `web` which provides the human interface for Convene.
+- `api` which stores data long-term and provides a programmatic interface.
 
 ## Footnotes
 

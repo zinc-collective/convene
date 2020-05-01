@@ -1,0 +1,27 @@
+{
+  "name": "convene",
+  "version": "0.1.0",
+  "description": "Community owned tools that bring people together, both online and off",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zinc-collective/convene.git"
+  },
+  "keywords": [
+    "community",
+    "events",
+    "infrastructure"
+  ],
+  "author": "Zinc Collective, LLC",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/zinc-collective/convene/issues"
+  },
+  "homepage": "https://github.com/zinc-collective/convene#readme",
+  "devDependencies": {
+    "cucumber": "^6.0.5"
+  }
+}
