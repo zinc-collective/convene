@@ -1,3 +1,4 @@
+@unscheduled
 Feature: Zulip Hosting
   In order to facilitate asynchronous text conversations
   As an Operator
