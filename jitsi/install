@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Note: The sleep 30 is very important.
+# Because Packer is able to detect and SSH into the instance as soon as SSH is available,
+# Ubuntu actually doesn't get proper amounts of time to initialize.
+# The sleep makes sure that the OS properly initializes.
+# https://www.packer.io/intro/getting-started/provision.html#configuring-provisioners
+sleep 30
+echo 'deb https://download.jitsi.org stable/' | sudo tee -a /etc/apt/sources.list.d/jitsi-stable.list
+sudo wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install debconf-utils
+sudo apt-add-repository universe
+
+# TODO: Install Jitsi doesn't work yet, require script to interact with Jitsi setup
+# cat << EOF | sudo debconf-set-selections
+# jitsi-videobridge	jitsi-videobridge/jvb-hostname string	meet.zinc.coop
+# jitsi-meet-prosody	jitsi-videobridge/jvb-hostname string	meet.zinc.coop
+# jitsi-meet-web-config	jitsi-meet/cert-choice select I want to use my own certificate
+# EOF
+
+# sudo apt-get -y install jitsi-meet <<EOF
+# test placeholder
+# test
+# EOF
