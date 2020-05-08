@@ -26,6 +26,7 @@ case $i in
 esac
 done
 
+# Automated: Build AMI
 packer build \
   -var "instance_type=${INSTANCE_TYPE}" \
   -var "ssl_certificate=${SSL_CERTIFICATE}" \
@@ -33,3 +34,17 @@ packer build \
   -var "include_nginx=${INCLUDE_NGINX}"\
   -var "region=${REGION}"\
   aws-ebs.json
+
+# Manually: Deploy instance:
+#   * Launch an instance
+#   * Apply a ssl certificate
+#   * Configure Network setting
+#     * Terraform tool could config it
+
+# Manually release instance
+#   * Point DNS record to the instance
+
+# Manually: Install Jitsi
+#   * Interact with Jitsi interface
+#     * Using expect
+#     * What value should be put in there
