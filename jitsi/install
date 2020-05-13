@@ -6,20 +6,20 @@
 # The sleep makes sure that the OS properly initializes.
 # https://www.packer.io/intro/getting-started/provision.html#configuring-provisioners
 sleep 30
+set +o +x
+
 echo 'deb https://download.jitsi.org stable/' | sudo tee -a /etc/apt/sources.list.d/jitsi-stable.list
-sudo wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install debconf-utils
+wget -qO -  https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add -
 sudo apt-add-repository universe
+sudo apt-get update
+sudo apt-get -y install debconf-utils nginx-full
 
-# TODO: Install Jitsi doesn't work yet, require script to interact with Jitsi setup
-# cat << EOF | sudo debconf-set-selections
-# jitsi-videobridge	jitsi-videobridge/jvb-hostname string	meet.zinc.coop
-# jitsi-meet-prosody	jitsi-videobridge/jvb-hostname string	meet.zinc.coop
-# jitsi-meet-web-config	jitsi-meet/cert-choice select I want to use my own certificate
-# EOF
+# We pipe a single command at a time into debconf-set-selections to configure
+# See `man debconf-set-selections`
+echo jitsi-videobridge	jitsi-videobridge/jvb-hostname string	meet.zinc.coop | sudo debconf-set-selections
+echo jitsi-meet-prosody	jitsi-videobridge/jvb-hostname string	meet.zinc.coop | sudo debconf-set-selections
+echo "jitsi-meet-web-config	jitsi-meet/cert-choice select Generate a new self-signed certificate (You will later get a chance to obtain a Let's encrypt certificate)" | sudo debconf-set-selections
+echo jitsi-meet-web-config    jitsi-meet/cert-path-crt    string    /etc/ssl/meet.zinc.coop.crt | sudo debconf-set-selections
+echo jitsi-meet-web-config    jitsi-meet/cert-path-key    string    /etc/ssl/meet.zinc.coop.key | sudo debconf-set-selections
 
-# sudo apt-get -y install jitsi-meet <<EOF
-# test placeholder
-# test
-# EOF
+sudo apt-get -y install jitsi-meet
