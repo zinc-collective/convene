@@ -42,12 +42,12 @@ packer build \
 # TODO: Figure out how to safely share the terraform.tstate (push to private bucket/pull from private bucket?)
 # TODO: Parameterize this?
 terraform apply -var-file clients/zinc.tfvars -var-file clients/zinc-secrets.tfvars
-# Manually: Deploy instance:
+
+# Push the certbot install script that works for Ubuntu 20.04 to the server
+scp jitsi/install-letsencrypt-cert.sh ubuntu@meet.zinc.coop:
+
+# Manually:
 #   * Apply a ssl certificate
-scp jitsi/install-letsencrypt-cert.sh
-
-#   * Configure Network setting
-#     * Terraform tool could config it
-
-# Manually release instance
-#   * Point DNS record to the instance
+#     - ssh ubuntu@meet.zinc.coop
+#     - sudo ./install-letsencrypt-cert.sh
+#     - enter your email
