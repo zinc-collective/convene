@@ -1,1 +1,4 @@
 node_modules
+.terraform
+*.tfstate*
+*secrets.tfvars

@@ -35,11 +35,19 @@ packer build \
   -var "region=${REGION}"\
   jitsi/aws-ebs.json
 
-# Manually: Deploy instance:
-#   * Launch an instance
-#   * Apply a ssl certificate
-#   * Configure Network setting
-#     * Terraform tool could config it
 
-# Manually release instance
-#   * Point DNS record to the instance
+
+# Provision instance(s) for the zinc client
+# TODO: Figure out how to share the secrets safely
+# TODO: Figure out how to safely share the terraform.tstate (push to private bucket/pull from private bucket?)
+# TODO: Parameterize this?
+terraform apply -var-file clients/zinc.tfvars -var-file clients/zinc-secrets.tfvars
+
+# Push the certbot install script that works for Ubuntu 20.04 to the server
+scp jitsi/install-letsencrypt-cert.sh ubuntu@meet.zinc.coop:
+
+# Manually:
+#   * Apply a ssl certificate
+#     - ssh ubuntu@meet.zinc.coop
+#     - sudo ./install-letsencrypt-cert.sh
+#     - enter your email
