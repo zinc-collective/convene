@@ -35,9 +35,17 @@ packer build \
   -var "region=${REGION}"\
   jitsi/aws-ebs.json
 
+
+
+# Provision instance(s) for the zinc client
+# TODO: Figure out how to share the secrets safely
+# TODO: Figure out how to safely share the terraform.tstate (push to private bucket/pull from private bucket?)
+# TODO: Parameterize this?
+terraform apply -var-file clients/zinc.tfvars -var-file clients/zinc-secrets.tfvars
 # Manually: Deploy instance:
-#   * Launch an instance
 #   * Apply a ssl certificate
+scp jitsi/install-letsencrypt-cert.sh
+
 #   * Configure Network setting
 #     * Terraform tool could config it
 
