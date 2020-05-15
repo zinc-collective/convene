@@ -26,17 +26,6 @@ case $i in
 esac
 done
 
-# Automated: Build AMI
-packer build \
-  -var "instance_type=${INSTANCE_TYPE}" \
-  -var "ssl_certificate=${SSL_CERTIFICATE}" \
-  -var "public_domain=${PUBLIC_DOMAIN}" \
-  -var "include_nginx=${INCLUDE_NGINX}"\
-  -var "region=${REGION}"\
-  jitsi/aws-ebs.json
-
-
-
 # Provision instance(s) for the zinc client
 # TODO: Figure out how to share the secrets safely
 # TODO: Figure out how to safely share the terraform.tstate (push to private bucket/pull from private bucket?)
