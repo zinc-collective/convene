@@ -16,3 +16,11 @@ Feature: Jitsi Hosting
       | size           | t3.micro                         |
       | region         | us-west-1                        |
       | accessible-via | https://{{subdomain}}.{{domain}} |
+
+  Scenario: Operator Builds a single-server JITSI AMI on AWS
+    When an Operator runs the `jitsi/build` command with:
+      | arguments          |
+      | --region=us-west-1 |
+      | --provider=aws     |
+      | --at-domain   | {{subdomain}}.{{domain}} |
+    Then a convene-jitsi-{{subdomain}}.{{domain}} is available within the us-west-1 region
