@@ -1,0 +1,38 @@
+#!/bin/bash
+
+for i in "$@"
+do
+case $i in
+    --instance-type=*)
+    INSTANCE_TYPE="${i#*=}"
+    shift
+    ;;
+    --ssl-certificate=*)
+    SSL_CERTIFICATE="${i#*=}"
+    shift
+    ;;
+    --public-domain=*)
+    PUBLIC_DOMAIN="${i#*=}"
+    shift
+    ;;
+    --region=*)
+    REGION="${i#*=}"
+    shift
+    ;;
+    --include-nginx)
+    INCLUDE_NGINX=YES
+    shift
+    ;;
+esac
+done
+
+# Automated: Build AMI
+packer build \
+  -var "instance_type=${INSTANCE_TYPE}" \
+  -var "ssl_certificate=${SSL_CERTIFICATE}" \
+  -var "public_domain=${PUBLIC_DOMAIN}" \
+  -var "include_nginx=${INCLUDE_NGINX}"\
+  -var "region=${REGION}"\
+  jitsi/aws-ebs.json
+
+
