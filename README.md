@@ -67,6 +67,9 @@ At present, Convene is split into three modules:
 - `web` which provides the human interface for Convene.
 - `api` which stores data long-term and provides a programmatic interface.
 
+## Customer Development
+[Link to Folder on G Docs](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
+
 ## Footnotes
 
 ### Paid Support
