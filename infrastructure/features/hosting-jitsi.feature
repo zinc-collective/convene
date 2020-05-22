@@ -3,24 +3,19 @@ Feature: Jitsi Hosting
   As an Operator
   I want to host a JITSI Meet server
 
-  Scenario: Operator Provisions a single-server JITSI instance on AWS
-    Given an existing convene-jitsi AMI for {{subdomain}}.{{domain}} within the us-west-1 region
+  @0.1-alpha
+  Scenario: Operator Provisions a Clients single-server JITSI instance on AWS
+    Given an Operator has ran `jitsi/build` for {{clientDomain}}
     When an Operator runs the `jitsi/provision` command with:
-      | arguments          |
-      | --region=us-west-1 |
-      | --provider=aws     |
-      | --size=t3.micro    |
-      | --at-domain   https://{{subdomain}}.{{domain}} |
-    Then a JITSI meet instance is provisioned on AWS with the following attributes:
-      | attribute      | value                            |
-      | size           | t3.micro                         |
-      | region         | us-west-1                        |
-      | accessible-via | https://{{subdomain}}.{{domain}} |
+      | arguments                        |
+      | --client-domain={{clientDomain}} |
+    Then a JITSI meet instance is available at https://{{clientDomain}}
 
-  Scenario: Operator Builds a single-server JITSI AMI on AWS
+  @0.1-alpha
+  Scenario: Operator Builds a Clients single-server JITSI AMI on AWS
     When an Operator runs the `jitsi/build` command with:
-      | arguments          |
-      | --region=us-west-1 |
-      | --provider=aws     |
-      | --at-domain   | {{subdomain}}.{{domain}} |
-    Then a convene-jitsi-{{subdomain}}.{{domain}} is available within the us-west-1 region
+      | arguments                        |
+      | --region=us-west-1               |
+      | --provider=aws                   |
+      | --client-domain={{clientDomain}} |
+    Then a convene-jitsi-{{clientDomain}} is available within the us-west-1 region

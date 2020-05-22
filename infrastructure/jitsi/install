@@ -16,10 +16,10 @@ sudo apt-get -y install debconf-utils nginx-full
 
 # We pipe a single command at a time into debconf-set-selections to configure
 # See `man debconf-set-selections`
-echo jitsi-videobridge	jitsi-videobridge/jvb-hostname string	meet.zinc.coop | sudo debconf-set-selections
-echo jitsi-meet-prosody	jitsi-videobridge/jvb-hostname string	meet.zinc.coop | sudo debconf-set-selections
+echo jitsi-videobridge	jitsi-videobridge/jvb-hostname string	$CLIENT_DOMAIN | sudo debconf-set-selections
+echo jitsi-meet-prosody	jitsi-videobridge/jvb-hostname string	$CLIENT_DOMAIN | sudo debconf-set-selections
 echo "jitsi-meet-web-config	jitsi-meet/cert-choice select Generate a new self-signed certificate (You will later get a chance to obtain a Let's encrypt certificate)" | sudo debconf-set-selections
-echo jitsi-meet-web-config    jitsi-meet/cert-path-crt    string    /etc/ssl/meet.zinc.coop.crt | sudo debconf-set-selections
-echo jitsi-meet-web-config    jitsi-meet/cert-path-key    string    /etc/ssl/meet.zinc.coop.key | sudo debconf-set-selections
+echo jitsi-meet-web-config    jitsi-meet/cert-path-crt    string    /etc/ssl/$CLIENT_DOMAIN.crt | sudo debconf-set-selections
+echo jitsi-meet-web-config    jitsi-meet/cert-path-key    string    /etc/ssl/$CLIENT_DOMAIN.key | sudo debconf-set-selections
 
 sudo apt-get -y install jitsi-meet

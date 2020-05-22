@@ -3,40 +3,17 @@
 for i in "$@"
 do
 case $i in
-    --instance-type=*)
-    INSTANCE_TYPE="${i#*=}"
-    shift
-    ;;
-    --ssl-certificate=*)
-    SSL_CERTIFICATE="${i#*=}"
-    shift
-    ;;
-    --public-domain=*)
-    PUBLIC_DOMAIN="${i#*=}"
-    shift
-    ;;
-    --region=*)
-    REGION="${i#*=}"
-    shift
-    ;;
-    --include-nginx)
-    INCLUDE_NGINX=YES
+    --client-domain=*)
+    CLIENT_DOMAIN="${i#*=}"
     shift
     ;;
 esac
 done
 
-# Provision instance(s) for the zinc client
-# TODO: Figure out how to share the secrets safely
-# TODO: Figure out how to safely share the terraform.tstate (push to private bucket/pull from private bucket?)
-# TODO: Parameterize this?
-terraform apply -var-file clients/zinc.tfvars -var-file clients/zinc-secrets.tfvars
+
+# TODO: Figure out how to share the secrets safely and the terraform.tstate (push/pull from private bucket? Spin up a consul instance?)
+(cd clients/$CLIENT_DOMAIN && terraform init && terraform apply -var-file public.tfvars -var-file secrets.tfvars)
 
 # Push the certbot install script that works for Ubuntu 20.04 to the server
-scp jitsi/install-letsencrypt-cert.sh ubuntu@meet.zinc.coop:
-
-# Manually:
-#   * Apply a ssl certificate
-#     - ssh ubuntu@meet.zinc.coop
-#     - sudo ./install-letsencrypt-cert.sh
-#     - enter your email
+scp jitsi/install-letsencrypt-cert.sh ubuntu@$CLIENT_DOMAIN:
+ssh -t ubuntu@$CLIENT_DOMAIN 'sudo ./install-letsencrypt-cert.sh'
