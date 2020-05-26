@@ -1,0 +1,28 @@
+#!/bin/bash
+
+for i in "$@"
+do
+case $i in
+    --client-domain=*)
+    CLIENT_DOMAIN="${i#*=}"
+    shift
+    ;;
+    --region=*)
+    REGION="${i#*=}"
+    shift
+    ;;
+    --provider=*)
+    PROVIDER="${i#*=}"
+    shift
+    ;;
+esac
+done
+
+echo
+# Automated: Build AMI
+packer build \
+  -var "client_domain=${CLIENT_DOMAIN}" \
+  -var "region=${REGION}"\
+  jitsi/${PROVIDER}.json
+
+

@@ -20,8 +20,7 @@ echo ""
 echo "You need to agree to the ACME server's Subscriber Agreement (https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf) "
 echo "by providing an email address for important account notifications"
 
-echo -n "Enter your email and press [ENTER]: "
-read EMAIL
+EMAIL="operations+convene@zinc.coop"
 
 cd /usr/local/sbin
 

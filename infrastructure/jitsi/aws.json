@@ -2,7 +2,8 @@
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
     "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
-    "instance_type": "{{env `INSTANCE_TYPE`}}",
+    "client_domain": "{{env `CLIENT_DOMAIN`}}",
+    "instance_type": "t2.micro",
     "region": "{{env `REGION`}}"
   },
   "builders": [{
@@ -21,9 +22,12 @@
     },
     "instance_type": "{{user `instance_type`}}",
     "ssh_username": "ubuntu",
-    "ami_name": "convene-jitsi {{timestamp}}"
+    "ami_name": "convene-jitsi-{{user `client_domain`}} {{timestamp}}"
   }],
   "provisioners": [{
+    "environment_vars": [
+      "CLIENT_DOMAIN={{ user `client_domain` }}"
+    ],
     "type": "shell",
     "script": "jitsi/install"
   }]
