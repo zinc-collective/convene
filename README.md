@@ -67,8 +67,9 @@ At present, Convene is split into three modules:
 - `web` which provides the human interface for Convene.
 - `api` which stores data long-term and provides a programmatic interface.
 
-## Customer Development
-[Link to Folder on G Docs](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
+## Design
+
+We have a set of [Personas](https://drive.google.com/open?id=1JwTh2uFTc6pxsXu3njEVKQrv-J5HWExhd1rgT-ravt4) that we use to guide our design and development. Designers who have agreed to protect the privacy of our clients may access our [Customer Research Interviews](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
 
 ## Footnotes
 
