@@ -35,6 +35,9 @@ variable "jitsi_ami" {
 }
 
 resource "aws_instance" "convene_video" {
+  # TODO: Can we _infer_ this value or somehow detect the AMI based upon it's name?
+  #       Because every time we run `jitsi/build` it creates a new AMI on a
+  #       per-client basis.
   ami           = var.jitsi_ami
   instance_type = "t2.micro"
   tags = {
