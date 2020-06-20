@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# TODO: This is not being used, need to figure out interacting with Jitsi install
-sudo /usr/share/jitsi-meet/scripts/install-letsencrypt-cert.sh
