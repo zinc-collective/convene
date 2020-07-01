@@ -24,3 +24,9 @@ echo jitsi-meet-web-config    jitsi-meet/cert-path-key    string    /etc/ssl/$CL
 
 sudo apt-get -y install jitsi-meet
 sudo rm /usr/share/jitsi-meet/images/watermark.png
+
+# Restart instance every PST midnight
+sudo crontab -l > mycron
+echo "0 7 * * * /usr/sbin/shutdown -r now" >> mycron
+sudo crontab mycron
+rm mycron
