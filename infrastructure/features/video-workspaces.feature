@@ -3,7 +3,6 @@ Feature: Video Workspaces
   As Colin Collaborator and Felicia Faciliator
   I want a Video Workspace
 
-  @0.1-alpha
   Scenario: Operator Provisions an 8 person Video Workspace on AWS
     Given an Operator has ran `jitsi/build` for {{clientDomain}}
     When an Operator runs the `jitsi/provision` command with:
@@ -11,7 +10,6 @@ Feature: Video Workspaces
       | --client-domain={{clientDomain}} |
     Then a JITSI meet instance is available at https://{{clientDomain}}
 
-  @0.1-alpha
   Scenario: Operator Builds an 8 person Video Workspace on AWS
     When an Operator runs the `jitsi/build` command with:
       | arguments                        |
