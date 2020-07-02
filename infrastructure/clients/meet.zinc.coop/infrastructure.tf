@@ -45,7 +45,6 @@ resource "aws_instance" "convene_video" {
 
 data "aws_ami" "convene_ami" {
   most_recent      = true
-  # name_regex       = "^convene-jitsi-*"
   owners           = ["self"]
 
   filter {
