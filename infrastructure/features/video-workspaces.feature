@@ -17,3 +17,11 @@ Feature: Video Workspaces
       | --provider=aws                   |
       | --client-domain={{clientDomain}} |
     Then a convene-jitsi-{{clientDomain}} is available within the us-west-1 region
+
+  Scenario: Operator Builds an 8 person Video Workspace on Vultr
+    When an Operator runs the `jitsi/build` command with:
+      | arguments                        |
+      | --region=12                      |
+      | --provider=vultr                 |
+      | --client-domain={{clientDomain}} |
+    Then a convene-jitsi-{{clientDomain}} is available within region 12 (Silcon Valley)
