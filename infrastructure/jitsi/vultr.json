@@ -1,0 +1,28 @@
+{
+  "variables": {
+    "vultr_api_key": "{{env `VULTR_API_KEY`}}",
+    "client_domain": "{{env `CLIENT_DOMAIN`}}",
+    "instance_type": "201",
+    "region": "{{env `REGION`}}"
+  },
+  "builders": [
+    {
+      "type": "vultr",
+      "api_key": "{{user `vultr_api_key`}}",
+      "snapshot_description": "convene-jitsi-{{user `client_domain`}} {{timestamp}}",
+      "region_id": "{{user `region`}}",
+      "plan_id": "{{user `instance_type`}}",
+      "os_id": "387",
+      "ssh_username": "root",
+      "state_timeout": "10m",
+      "ssh_key_ids": ["5f07727e6fddc"]
+    }
+  ],
+  "provisioners": [{
+    "environment_vars": [
+      "CLIENT_DOMAIN={{ user `client_domain` }}"
+    ],
+    "type": "shell",
+    "script": "jitsi/install"
+  }]
+}

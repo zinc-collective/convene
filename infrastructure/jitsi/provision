@@ -1,5 +1,5 @@
 #!/bin/bash
-
+SSH_USERNAME='ubuntu'
 for i in "$@"
 do
 case $i in
@@ -9,6 +9,10 @@ case $i in
     ;;
     --flush-dns-cache)
     FLUSH_DNS_CACHE=YES
+    shift
+    ;;
+    --ssh-username=*)
+    SSH_USERNAME="${i#*=}"
     shift
     ;;
 esac
@@ -25,5 +29,6 @@ if [ $FLUSH_DNS_CACHE ]; then
     echo "Flushing DNS cache"
     sudo killall -HUP mDNSResponder
 fi
-scp jitsi/install-letsencrypt-cert.sh ubuntu@$CLIENT_DOMAIN:
-ssh -t ubuntu@$CLIENT_DOMAIN 'sudo ./install-letsencrypt-cert.sh'
+echo $CLIENT_DOMAIN
+scp jitsi/install-letsencrypt-cert.sh $SSH_USERNAME@$CLIENT_DOMAIN:
+ssh -t $SSH_USERNAME@$CLIENT_DOMAIN 'sudo ./install-letsencrypt-cert.sh'
