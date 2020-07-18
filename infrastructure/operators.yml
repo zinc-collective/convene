@@ -1,0 +1,28 @@
+---
+# This is provided by the Packer Ansible provisioner
+# https://www.packer.io/docs/provisioners/ansible.html#host_alias
+- hosts: default
+  vars:
+    users:
+    - username: tomlee
+      shell: /bin/bash
+      github: user512
+    - username: zee
+      shell: /bin/bash
+      github: zspencer
+
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: "ensure sudoers dont need to put in a password"
+    lineinfile:
+      path: /etc/sudoers
+      regexp: '^%sudo ALL='
+      line: '%sudo   ALL=(ALL:ALL) NOPASSWD:ALL'
+
+  - name: Create users
+    with_items: "{{ users }}"
+    user: name={{ item.username }} shell={{ item.shell }} groups=sudo state=present
+  - name: "Set authorized key"
+    with_items: "{{ users }}"
+    authorized_key: user={{ item.username }} key=https://github.com/{{ item.github }}.keys exclusive=yes state=present

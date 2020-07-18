@@ -30,5 +30,14 @@
     ],
     "type": "shell",
     "script": "jitsi/install"
+  },
+  {
+    "type": "ansible",
+    "__comment": [
+      "Ensure we are using the default user created by AWS",
+      "https://www.packer.io/docs/provisioners/ansible#user"
+    ],
+    "user": "ubuntu",
+    "playbook_file": "operators.yml"
   }]
 }
