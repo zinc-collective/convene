@@ -1,4 +1,6 @@
 ---
+# This is provided by the Packer Ansible provisioner
+# https://www.packer.io/docs/provisioners/ansible.html#host_alias
 - hosts: default
   vars:
     users:
@@ -12,12 +14,6 @@
   become: yes
   become_method: sudo
   tasks:
-  - name: "make sure SSH is allowed"
-    ufw:
-      rule: allow
-      port: 22
-      proto: tcp
-
   - name: "ensure sudoers dont need to put in a password"
     lineinfile:
       path: /etc/sudoers
