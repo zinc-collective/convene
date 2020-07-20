@@ -18,9 +18,9 @@ provider "cloudflare" {
 }
 
 # Create a record
-resource "cloudflare_record" "convene-test" {
+resource "cloudflare_record" "convene-test-aws" {
   zone_id = var.cloudflare_zone_id
-  name    = "convene-test"
+  name    = "convene-test-aws"
   value   = aws_eip.convene_ip.public_ip
   type    = "A"
   ttl     = 1
@@ -44,7 +44,7 @@ resource "aws_instance" "convene_video" {
   ami           = data.aws_ami.convene_ami.id
   instance_type = "t2.micro"
   tags = {
-    Name = "convene-test.zinc.coop"
+    Name = "convene-test-aws.zinc.coop"
   }
   security_groups = [aws_security_group.allow_ssh.name,
                      aws_security_group.allow_http.name,
