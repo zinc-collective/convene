@@ -51,6 +51,7 @@ resource "vultr_server" "convene_vultr_video" {
   snapshot_id = var.vultr_snapshot_id
   region_id = "12"
   plan_id = "201"
+  label = "meet.zinc.coop"
   firewall_group_id = vultr_firewall_group.convene_vultr_firewall_group.id
   ssh_key_ids = [vultr_ssh_key.my_ssh_key.id]
 }

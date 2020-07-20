@@ -31,5 +31,5 @@ Feature: Video Workspaces
     When an Operator runs the `jitsi/provision` command with:
       | arguments                        |
       | --client-domain={{clientDomain}} |
-      | --ssh-username={{ssh_username}}  |
+      | --ssh-username=root              |
     Then a JITSI meet instance is available at https://{{clientDomain}}
