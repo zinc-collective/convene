@@ -4,3 +4,10 @@ node_modules
 *secrets.tfvars
 .env
 .env.production
+convene-web/log
+convene-web/tmp/*
+convene-web/node_modules/
+*master.key
+*credentials.yml.enc
+*.log*
+*log/
