@@ -5,7 +5,10 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "^5.1.1",
+    "@tailwindcss/ui": "^0.4.0",
     "stimulus": "^1.1.1",
+    "tailwindcss": "^1.5.2",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
