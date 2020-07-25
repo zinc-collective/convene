@@ -1,73 +1,10 @@
-
 <div>
   <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <li data-room-name="ada" class="col-span-1 flex items-center bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden">
-      <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-white text-center text-sm leading-5 font-medium bg-pink-600">
-        Ada
-      </div>
-      <div class="flex-1 px-4 py-2 truncate">
-        <a href="#" class="text-gray-900 text-sm leading-5 font-medium hover:text-gray-600 transition ease-in-out duration-150">Ada</a>
-      </div>
-    </li>
-    <li data-room-name="talk-to-zee" class="col-span-1 flex items-center bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden">
-      <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-white text-center text-sm leading-5 font-medium bg-purple-600">
-        TZ
-      </div>
-      <div class="flex-1 px-4 py-2 truncate">
-        <a href="#" class="text-gray-900 text-sm leading-5 font-medium hover:text-gray-600 transition ease-in-out duration-150">Talk to Zee</a>
-      </div>
-    </li>
-    <li data-room-name="talk-to-vivek" class="col-span-1 flex items-center bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden">
-      <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-white text-center text-sm leading-5 font-medium bg-orange-500">
-        TV
-      </div>
-      <div class="flex-1 px-4 py-2 truncate">
-        <a href="#" class="text-gray-900 text-sm leading-5 font-medium hover:text-gray-600 transition ease-in-out duration-150">Talk to Vivek</a>
-      </div>
-    </li>
-    <li data-room-name="weekly-convene-meeting" class="col-span-1 flex items-center bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden">
-      <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-white text-center text-sm leading-5 font-medium bg-green-400">
-        WM
-      </div>
-      <div class="flex-1 px-4 py-2 truncate">
-        <a href="#" class="text-gray-900 text-sm leading-5 font-medium hover:text-gray-600 transition ease-in-out duration-150">Weekly Convene Meeting</a>
-      </div>
-    </li>
+    <% room_names = ['ada', 'talk-to-zee', 'talk-to-tom', 'weekly-meet'] %>
+    <% room_names.each do |room_name| %>
+      <%= render partial: 'lobbies/room_card', locals: { room_name: room_name } %>
+    <% end %>
   </ul>
 </div>
 
 <div id="meet"></div>
-<script src='https://meet.zinc.coop/external_api.js'></script>
-<script>
-  let api = {};
-  const domain = 'meet.zinc.coop';
-
-  $(document).on('click', '*[data-room-name]', function(e) {
-    if (api.dispose) {
-      api.dispose();
-    }
-
-    const roomName = $(e.target).parent('*[data-room-name]').data('roomName');
-    const options = {
-        roomName: roomName,
-        parentNode: document.querySelector('#meet'),
-        interfaceConfigOverwrite: {
-          TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'tileview'],
-          DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
-          DISABLE_PRESENCE_STATUS: true,
-          MOBILE_APP_PROMO: false,
-          APP_NAME: 'Convene',
-          DISABLE_RINGING: true,
-          SETTINGS_SECTIONS: [],
-
-        },
-    };
-    api = new JitsiMeetExternalAPI(domain, options);
-    window.addEventListener('beforeunload', function() {
-      api.dispose();
-    })
-    api.on('videoConferenceLeft', function() {
-      api.dispose();
-    })
-  })
-</script>
