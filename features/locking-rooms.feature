@@ -36,7 +36,7 @@ Feature: Locking Rooms
   Scenario: Workspace Member who does not know the Room Key cannot enter Locked Room
     Given a Workspace with a Locked Room
     When a Workspace Member provides the wrong Room Key
-    Then the Workspace Member is placed in the Room
+    Then the Workspace Member is not placed in the Room
 
   Scenario: Guest who knows Room Key enters Locked Room
     Given a Workspace with a Locked Room
