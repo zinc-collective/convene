@@ -5,7 +5,7 @@ export default class extends Controller {
 
   enterRoom() {
     document.jitsiApi && document.jitsiApi.dispose();
-    const domain = 'meet.zinc.coop'; // TODO: Move this into Rails controller
+    const domain = this.data.get('jitsiInstanceDomain');
     const roomName = this.data.get('roomName');
 
     const options = {

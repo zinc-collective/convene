@@ -1,0 +1,14 @@
+<li
+  data-controller="room-picker"
+  data-action="click->room-picker#enterRoom"
+  data-room-picker-room-name=<%= "#{room.slug}" %>
+  data-room-picker-jitsi-instance-domain=<%= "#{room.workspace.jitsi_meet_domain}" %>
+  class="col-span-1 flex items-center bg-white border border-gray-200 rounded-md shadow-sm overflow-hidden"
+>
+  <div class="flex-shrink-0 flex items-center justify-center w-16 h-16 text-white text-center text-sm leading-5 font-medium bg-pink-600">
+    <%= room.name %>
+  </div>
+  <div class="flex-1 px-4 py-2 truncate">
+    <%= room.name %>
+  </div>
+</li>
