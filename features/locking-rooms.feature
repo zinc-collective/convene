@@ -14,6 +14,10 @@ Feature: Locking Rooms
   Design and discussion of the room access model may be found on GitHub at
   https://github.com/zinc-collective/convene/issues/12
 
+
+  The following scenarios illustrate how these permissions play out
+  based upon who is accessing rooms with which access level.
+
   Scenario: Workspace Admin who knows Room Key enters Locked Room
     Given a Workspace with a Locked Room
     When a Workspace Admin provides the correct Room Key

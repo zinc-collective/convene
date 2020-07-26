@@ -1,21 +1,18 @@
 const { Given, When, Then } = require("cucumber");
 
-
-Given('a Workspace with a {accessLevel} {room}', function (accessLevel, room) {
+Given("a Workspace with a {accessLevel} {room}", function (accessLevel, room) {
   // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+  return "pending";
 });
 
-
-When('a {actor} provides the wrong {room} Key', function (actor, room) {
+When("a {actor} provides the wrong {room} Key", function (actor, room) {
   // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+  return "pending";
 });
 
-
-When('a {actor} provides the correct {room} Key', function (actor, room) {
+When("a {actor} provides the correct {room} Key", function (actor, room) {
   // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+  return "pending";
 });
 
 Then("the {actor} is placed in the {room}", function (actor, room) {
@@ -23,7 +20,7 @@ Then("the {actor} is placed in the {room}", function (actor, room) {
   return "pending";
 });
 
-Then('the {actor} is not placed in the {room}', function (actor, room) {
+Then("the {actor} is not placed in the {room}", function (actor, room) {
   // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+  return "pending";
 });
