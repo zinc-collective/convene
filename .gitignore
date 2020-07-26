@@ -4,6 +4,7 @@ node_modules
 *secrets.tfvars
 .env
 .env.production
+.vscode
 
 # gitignore for convene-web
 convene-web/log
