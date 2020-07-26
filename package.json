@@ -4,7 +4,7 @@
   "description": "Community owned tools that bring people together, both online and off",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js --tags 'not @unscheduled'"
+    "test": "cucumber-js --tags 'not @unscheduled and not @wip'"
   },
   "repository": {
     "type": "git",
