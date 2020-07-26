@@ -1,0 +1,17 @@
+name: Deploy convene.zinc.coop
+on:
+  push:
+    branches: [ development ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Add Heroku remote origin
+      run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+
+    - name: Deploy convene.zinc.coop
+      run: 'git push heroku `git subtree split --prefix convene-web HEAD`:master --force'
