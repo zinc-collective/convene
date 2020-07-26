@@ -20,6 +20,9 @@ export default class extends Controller {
         DISABLE_RINGING: true,
         SETTINGS_SECTIONS: [],
       },
+      configOverwrite: {
+        disableDeepLinking: true,
+      },
     };
 
     document.jitsiApi = new JitsiMeetExternalAPI(domain, options);
