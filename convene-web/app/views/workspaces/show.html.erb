@@ -3,9 +3,11 @@
   data-controller="jitsi"
   data-target="jitsi.wrapper"
   data-action="connectJitsi@document->jitsi#connectJitsiApi"
-></div>
+  class="bg-gray-800"
+>
+</div>
 
-<div>
+<div class="p-6">
   <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
     <% @rooms.each do |room| %>
       <%= render partial: 'workspaces/room_card', locals: { room: room } %>

@@ -9,7 +9,7 @@ export default class extends Controller {
 
     document.jitsiApi = new JitsiMeetExternalAPI(domain, this.jitsiApiOption(roomName));
     const jitsiWrapper = this.wrapperTarget;
-    jitsiWrapper.classList.add('h-screen');
+    jitsiWrapper.classList.add('active-jitsi-room');
 
     window.addEventListener('beforeunload', function() {
       document.jitsiApi.dispose();
@@ -17,7 +17,7 @@ export default class extends Controller {
 
     document.jitsiApi.on('videoConferenceLeft', function() {
       document.jitsiApi.dispose();
-      jitsiWrapper.classList.remove('h-screen');
+      jitsiWrapper.classList.remove('active-jitsi-room');
     })
   }
 
