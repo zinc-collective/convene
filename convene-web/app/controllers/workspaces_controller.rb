@@ -1,9 +1,9 @@
 class WorkspacesController < ApplicationController
   def show
-    @rooms = current_workspace.rooms
+    @workspace = current_workspace
   end
 
   def current_workspace
-    @current_workspace ||= Workspace.friendly.find(params[:id])
+    @current_workspace ||= Workspace.includes(:rooms).friendly.find(params[:id])
   end
 end
