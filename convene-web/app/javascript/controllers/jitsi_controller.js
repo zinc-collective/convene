@@ -8,7 +8,8 @@ export default class extends Controller {
     document.jitsiApi && document.jitsiApi.dispose();
 
     document.jitsiApi = new JitsiMeetExternalAPI(domain, this.jitsiApiOption(roomName));
-    this.wrapperTarget.classList.add('h-screen');
+    const jitsiWrapper = this.wrapperTarget;
+    jitsiWrapper.classList.add('h-screen');
 
     window.addEventListener('beforeunload', function() {
       document.jitsiApi.dispose();
@@ -16,6 +17,7 @@ export default class extends Controller {
 
     document.jitsiApi.on('videoConferenceLeft', function() {
       document.jitsiApi.dispose();
+      jitsiWrapper.classList.remove('h-screen');
     })
   }
 
@@ -24,7 +26,7 @@ export default class extends Controller {
       roomName: roomName,
       parentNode: this.wrapperTarget,
       interfaceConfigOverwrite: {
-        TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'tileview'],
+        TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'tileview', 'hangup'],
         DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
         DISABLE_PRESENCE_STATUS: true,
         MOBILE_APP_PROMO: false,
