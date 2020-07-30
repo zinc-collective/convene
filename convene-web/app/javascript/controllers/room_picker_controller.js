@@ -5,11 +5,10 @@ export default class extends Controller {
 
   enterRoom(event) {
     event.preventDefault();
-    document.jitsiApi && document.jitsiApi.dispose();
-    const domain = this.data.get('jitsiInstanceDomain');
+    const domain = this.data.get('instanceDomain');
     const roomName = this.data.get('roomName');
 
-    const jitsiEvent = new CustomEvent("connectJitsi", { detail: { domain, roomName } });
-    document.dispatchEvent(jitsiEvent);
+    const connectVideoEvent = new CustomEvent('connectVideo', { detail: { domain, roomName } });
+    document.dispatchEvent(connectVideoEvent);
   }
 }

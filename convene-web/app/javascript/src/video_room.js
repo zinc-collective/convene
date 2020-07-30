@@ -1,15 +1,14 @@
-import { Controller } from "stimulus"
+export default class VideoRoom {
+  constructor(domain, roomName, parentNode) {
+    this.domain = domain;
+    this.roomName = roomName;
+    this.parentNode = parentNode;
+  }
 
-export default class extends Controller {
-  static targets = [ "wrapper" ]
-
-  connectJitsiApi(event) {
-    const { domain, roomName } = event.detail;
+  connectJitsiApi() {
     document.jitsiApi && document.jitsiApi.dispose();
 
-    document.jitsiApi = new JitsiMeetExternalAPI(domain, this.jitsiApiOption(roomName));
-    const jitsiWrapper = this.wrapperTarget;
-    jitsiWrapper.classList.add('active-jitsi-room');
+    document.jitsiApi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
 
     window.addEventListener('beforeunload', function() {
       document.jitsiApi.dispose();
@@ -17,14 +16,15 @@ export default class extends Controller {
 
     document.jitsiApi.on('videoConferenceLeft', function() {
       document.jitsiApi.dispose();
-      jitsiWrapper.classList.remove('active-jitsi-room');
+      const closeVideoRoomEvent = new CustomEvent("closeVideoRoom");
+      document.dispatchEvent(closeVideoRoomEvent);
     })
   }
 
-  jitsiApiOption(roomName) {
+  jitsiApiOption() {
     return {
-      roomName: roomName,
-      parentNode: this.wrapperTarget,
+      roomName: this.roomName,
+      parentNode: this.parentNode,
       interfaceConfigOverwrite: {
         TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'tileview', 'hangup'],
         DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
