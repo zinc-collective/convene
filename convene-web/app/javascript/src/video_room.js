@@ -6,16 +6,17 @@ export default class VideoRoom {
   }
 
   connectJitsiApi() {
-    document.jitsiApi && document.jitsiApi.dispose();
+    const parentNode = this.parentNode;
+    parentNode.jitsiApi && parentNode.jitsiApi.dispose();
 
-    document.jitsiApi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
+    parentNode.jitsiApi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
 
-    window.addEventListener('beforeunload', function() {
-      document.jitsiApi.dispose();
+    parentNode.addEventListener('beforeunload', function() {
+      parentNode.jitsiApi.dispose();
     })
 
-    document.jitsiApi.on('videoConferenceLeft', function() {
-      document.jitsiApi.dispose();
+    parentNode.jitsiApi.on('videoConferenceLeft', function() {
+      parentNode.jitsiApi.dispose();
       const closeVideoRoomEvent = new CustomEvent("closeVideoRoom");
       document.dispatchEvent(closeVideoRoomEvent);
     })
