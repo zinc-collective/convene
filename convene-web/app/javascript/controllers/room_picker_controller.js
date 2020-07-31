@@ -2,8 +2,6 @@ import { Controller } from "stimulus"
 import VideoRoom from "../src/video_room";
 
 export default class extends Controller {
-  static targets = [ "roomName" ]
-
   connect() {
     this.videoRoom = new VideoRoom(this.videoHost);
   }
