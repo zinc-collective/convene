@@ -1,15 +1,23 @@
 import { Controller } from "stimulus"
+import VideoRoom from "../src/video_room";
 
 export default class extends Controller {
   static targets = [ "roomName" ]
 
+  connect() {
+    this.videoRoom = new VideoRoom(this.videoHost);
+  }
+
   enterRoom(event) {
     event.preventDefault();
-    document.jitsiApi && document.jitsiApi.dispose();
-    const domain = this.data.get('jitsiInstanceDomain');
-    const roomName = this.data.get('roomName');
+    this.videoRoom.enterRoom(this.roomName);
+  }
 
-    const jitsiEvent = new CustomEvent("connectJitsi", { detail: { domain, roomName } });
-    document.dispatchEvent(jitsiEvent);
+  get videoHost() {
+    return this.data.get('videoHost');
+  }
+
+  get roomName() {
+    return this.data.get('roomName');
   }
 }
