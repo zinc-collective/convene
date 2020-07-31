@@ -2,7 +2,7 @@
   id="meet"
   data-controller="video-room"
   data-target="video-room.wrapper"
-  data-action="connectVideo@document->video-room#connectVideoRoom closeVideoRoom@document->video-room#collapseVideoRoom"
+  data-video-room-video-host=<%= "#{@workspace.jitsi_meet_domain}" %>
   class="bg-gray-800"
 >
 </div>

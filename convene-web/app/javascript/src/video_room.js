@@ -1,31 +1,67 @@
+import { EventTarget } from 'event-target-shim';
+
+const jitsiApiByDomain = {}
+let wrapper = null;
+const eventBus = new EventTarget()
 export default class VideoRoom {
-  constructor(domain, roomName, parentNode) {
+  constructor(domain, parentNode) {
     this.domain = domain;
+    if (!wrapper) {
+      wrapper = parentNode;
+      wrapper.addEventListener('beforeunload', () => this.cleanup() )
+    }
+    this.connectJitsiApi();
+  }
+
+  enterRoom(roomName) {
     this.roomName = roomName;
-    this.parentNode = parentNode;
+    this.connectJitsiApi();
+    const enteredRoomEvent = new CustomEvent("enteredRoom", { details: { roomName } });
+    this.dispatchEvent(enteredRoomEvent);
+  }
+
+  exitRoom() {
+    this.jitsi.dispose();
+    const exitedRoomEvent = new CustomEvent("exitedRoom");
+    this.dispatchEvent(exitedRoomEvent);
+  }
+
+  cleanup() {
+    this.jitsi.dispose();
+  }
+
+  set jitsi(api) {
+    jitsiApiByDomain[this.domain] = api
+  }
+
+  get jitsi() {
+    return jitsiApiByDomain[this.domain]
+  }
+
+  addEventListener(type, listener, option) {
+    eventBus.addEventListener(type, listener, option);
+  }
+
+  dispatchEvent(event) {
+    eventBus.dispatchEvent(event);
+  }
+
+  removeEventListener(type, listener, option) {
+    eventBus.removeEventListener(type, listener, option);
   }
 
   connectJitsiApi() {
-    const parentNode = this.parentNode;
-    parentNode.jitsiApi && parentNode.jitsiApi.dispose();
+    if (!this.roomName) return;
+    this.jitsi && this.jitsi.dispose();
+    this.jitsi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
 
-    parentNode.jitsiApi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
-
-    parentNode.addEventListener('beforeunload', function() {
-      parentNode.jitsiApi.dispose();
-    })
-
-    parentNode.jitsiApi.on('videoConferenceLeft', function() {
-      parentNode.jitsiApi.dispose();
-      const closeVideoRoomEvent = new CustomEvent("closeVideoRoom");
-      document.dispatchEvent(closeVideoRoomEvent);
-    })
+    this.jitsi.on('videoConferenceLeft', () => this.exitRoom() )
   }
 
   jitsiApiOption() {
     return {
       roomName: this.roomName,
-      parentNode: this.parentNode,
+      parentNode: wrapper,
       interfaceConfigOverwrite: {
         TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'tileview', 'hangup'],
         DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,

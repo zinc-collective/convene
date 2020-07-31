@@ -4,16 +4,13 @@ import VideoRoom from "../src/video_room";
 export default class extends Controller {
   static targets = [ "wrapper" ]
 
-  connectVideoRoom(event) {
-    const { domain, roomName } = event.detail;
-    const videoRoomWrapper = this.wrapperTarget;
-    videoRoomWrapper.classList.add('active-room');
-
-    const videoRoom = new VideoRoom(domain, roomName, videoRoomWrapper);
-    videoRoom.connectJitsiApi();
-  }
-
-  collapseVideoRoom() {
-    this.wrapperTarget.classList.remove('active-room');
+  connect() {
+    this.videoRoom = new VideoRoom(this.data.get('videoHost'), this.wrapperTarget);
+    this.videoRoom.addEventListener('enteredRoom', () => {
+      this.wrapperTarget.classList.add('active-room');
+    });
+    this.videoRoom.addEventListener('exitedRoom', () => {
+      this.wrapperTarget.classList.remove('active-room');
+    })
   }
 }

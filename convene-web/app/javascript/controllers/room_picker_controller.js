@@ -1,14 +1,23 @@
 import { Controller } from "stimulus"
+import VideoRoom from "../src/video_room";
 
 export default class extends Controller {
   static targets = [ "roomName" ]
 
+  connect() {
+    this.videoRoom = new VideoRoom(this.videoHost);
+  }
+
   enterRoom(event) {
     event.preventDefault();
-    const domain = this.data.get('instanceDomain');
-    const roomName = this.data.get('roomName');
+    this.videoRoom.enterRoom(this.roomName);
+  }
 
-    const connectVideoEvent = new CustomEvent('connectVideo', { detail: { domain, roomName } });
-    document.dispatchEvent(connectVideoEvent);
+  get videoHost() {
+    return this.data.get('videoHost');
+  }
+
+  get roomName() {
+    return this.data.get('roomName');
   }
 }
