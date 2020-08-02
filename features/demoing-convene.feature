@@ -5,7 +5,7 @@ Feature: Demoing Convene
   @unscheduled
   Scenario: Prospective Client Schedules a Demo
 
-  @wip
+  @unimplemented-steps
   Scenario: Customer Team Member May Perform Demo
     Given a fresh Convene deployment
     When I visit the fresh Convene deployment
@@ -14,4 +14,4 @@ Feature: Demoing Convene
     And the "Convene Demo" Workspace has a "Zee's Desk" Room
     And the "Convene Demo" Workspace has a "Water Cooler" Room
     And the "Convene Demo" Workspace has a "The Ada Lovelace Room" Room
-    And the "Convene Demo" Workspace is available at the "convene-demo" subdomain within the deployments fully qualified domain name
+    And the "Convene Demo" Workspace is available at the "convene-demo.zinc.coop" domain
