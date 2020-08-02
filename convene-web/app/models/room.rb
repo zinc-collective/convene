@@ -42,6 +42,6 @@ class Room < ApplicationRecord
   scope :accessable_by, -> (person = nil) {
     listed
     # TODO: Uncomment below when we implement https://github.com/zinc-collective/convene/issues/39
-    # owned_by(person).union(self.listed)
+    # union(self.owned_by(person)).union(self.listed)
   }
 end
