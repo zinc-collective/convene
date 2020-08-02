@@ -14,6 +14,8 @@ export default class VideoRoom {
   }
 
   enterRoom(roomName) {
+    window.history.pushState('', '', `?active_room=${roomName}`)
+
     this.roomName = roomName;
     this.connectJitsiApi();
     const enteredRoomEvent = new CustomEvent("enteredRoom", { details: { roomName } });
@@ -21,6 +23,10 @@ export default class VideoRoom {
   }
 
   exitRoom() {
+    const url = window.location.toString();
+    const cleanUrl = url.substring(0, url.indexOf('?'));
+    window.history.pushState('', '', cleanUrl);
+
     this.jitsi.dispose();
     const exitedRoomEvent = new CustomEvent("exitedRoom");
     this.dispatchEvent(exitedRoomEvent);

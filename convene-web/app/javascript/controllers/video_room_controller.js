@@ -12,5 +12,15 @@ export default class extends Controller {
     this.videoRoom.addEventListener('exitedRoom', () => {
       this.wrapperTarget.classList.remove('active-room');
     })
+
+    const activeRoomName = this.activeRoomName();
+    if (activeRoomName) {
+      this.videoRoom.enterRoom(activeRoomName)
+    }
+  }
+
+  activeRoomName() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('active_room');
   }
 }
