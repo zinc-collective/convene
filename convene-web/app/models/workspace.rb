@@ -16,6 +16,7 @@ class Workspace < ApplicationRecord
 
   # FriendlyId's does the legwork to make the slug uri-friendly
   extend FriendlyId
+
   friendly_id :name, use: :slugged
 
   # Joins People to workspaces for permissioning and
@@ -27,4 +28,20 @@ class Workspace < ApplicationRecord
 
   # The Rooms within this Workspace
   has_many :rooms, inverse_of: :workspace
+
+  # A Workspace's Access Level indicates what a participant must know in order to gain access.
+  # `unlocked` The participant does not need to know anything to gain access.
+  # `locked` Participants must know the Workspace's `access_code` to gain access.
+  attribute :access_level, :string
+
+  # A room's Access Code is a "secret" that, when known, grants access to the room.
+  attribute :access_code, :string
+
+  def unlocked?
+    access_level&.to_sym != :locked
+  end
+
+  def locked?
+    access_level&.to_sym == :locked
+  end
 end
