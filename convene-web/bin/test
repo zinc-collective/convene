@@ -1,1 +1,3 @@
 #!/bin/bash
+
+bin/rake
