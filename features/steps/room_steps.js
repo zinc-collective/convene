@@ -24,3 +24,8 @@ Then("the {actor} is not placed in the {room}", function (actor, room) {
   // Write code here that turns the phrase above into concrete actions
   return "pending";
 });
+
+Then('the {workspace} has a {room}', function (workspace, room) {
+  // Write code here that turns the phrase above into concrete actions
+  return 'pending';
+});

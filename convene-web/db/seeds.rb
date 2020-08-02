@@ -22,11 +22,8 @@ zincs_workspace.members << tom
 zincs_workspace.members << bene
 
 
-
-
-
 ada = zincs_workspace.rooms.create(name: 'Ada', access_level: :unlocked, publicity_level: :listed)
 ttz = zincs_workspace.rooms.create(name: 'Talk to Zee', access_level: :unlocked, publicity_level: :unlisted)
 ttz.owners << zee
-convene = zincs_workspace.rooms.create(name: 'Convene Demo', access_level: :locked, access_code: "gather-tango", publicity_level: :listed)
-convene.owners << bene
+
+DemoWorkspace.prepare
