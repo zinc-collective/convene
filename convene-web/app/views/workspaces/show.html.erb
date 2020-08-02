@@ -9,7 +9,7 @@
 
 <div class="p-6">
   <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <% @workspace.rooms.each do |room| %>
+    <% @workspace.rooms.accessable_by.each do |room| %>
       <%= render partial: 'workspaces/room_card', locals: { room: room } %>
     <% end %>
   </ul>

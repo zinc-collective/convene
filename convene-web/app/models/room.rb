@@ -34,4 +34,14 @@ class Room < ApplicationRecord
 
   # The People who own the room
   has_many :owners, through: :room_ownerships
+
+  scope :listed,   -> { where(publicity_level: :listed) }
+  scope :unlisted, -> { where(publicity_level: :unlisted) }
+
+  scope :owned_by,      -> (person) { joins(:owners).where(room_ownerships: { owner: person }) }
+  scope :accessable_by, -> (person = nil) {
+    listed
+    # TODO: Uncomment below when we implement https://github.com/zinc-collective/convene/issues/39
+    # owned_by(person).union(self.listed)
+  }
 end
