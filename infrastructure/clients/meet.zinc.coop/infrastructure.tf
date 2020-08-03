@@ -42,18 +42,18 @@ variable "vultr_snapshot_id" {
 }
 
 resource "vultr_ssh_key" "my_ssh_key" {
-  name = "my-ssh-key"
+  name    = "my-ssh-key"
   ssh_key = var.public_key
 }
 
 # Create a Vultr server
 resource "vultr_server" "convene_vultr_video" {
-  snapshot_id = var.vultr_snapshot_id
-  region_id = "12"
-  plan_id = "201"
-  label = "meet.zinc.coop"
+  snapshot_id       = var.vultr_snapshot_id
+  region_id         = "12"
+  plan_id           = "201"
+  label             = "meet.zinc.coop"
   firewall_group_id = vultr_firewall_group.convene_vultr_firewall_group.id
-  ssh_key_ids = [vultr_ssh_key.my_ssh_key.id]
+  ssh_key_ids       = [vultr_ssh_key.my_ssh_key.id]
 }
 
 # Create Vultr firewall group
@@ -63,28 +63,28 @@ resource "vultr_firewall_group" "convene_vultr_firewall_group" {
 
 resource "vultr_firewall_rule" "allow_tls_convene_vultr_firewall_rule" {
   firewall_group_id = vultr_firewall_group.convene_vultr_firewall_group.id
-  protocol = "tcp"
-  network = "0.0.0.0/0"
-  from_port = "443"
+  protocol          = "tcp"
+  network           = "0.0.0.0/0"
+  from_port         = "443"
 }
 
 resource "vultr_firewall_rule" "allow_ssh_convene_vultr_firewall_rule" {
   firewall_group_id = vultr_firewall_group.convene_vultr_firewall_group.id
-  protocol = "tcp"
-  network = "0.0.0.0/0"
-  from_port = "22"
+  protocol          = "tcp"
+  network           = "0.0.0.0/0"
+  from_port         = "22"
 }
 
 resource "vultr_firewall_rule" "allow_http_convene_vultr_firewall_rule" {
   firewall_group_id = vultr_firewall_group.convene_vultr_firewall_group.id
-  protocol = "tcp"
-  network = "0.0.0.0/0"
-  from_port = "80"
+  protocol          = "tcp"
+  network           = "0.0.0.0/0"
+  from_port         = "80"
 }
 
 resource "vultr_firewall_rule" "allow_jitsi_video_convene_vultr_firewall_rule" {
   firewall_group_id = vultr_firewall_group.convene_vultr_firewall_group.id
-  protocol = "udp"
-  network = "0.0.0.0/0"
-  from_port = "10000"
+  protocol          = "udp"
+  network           = "0.0.0.0/0"
+  from_port         = "10000"
 }
