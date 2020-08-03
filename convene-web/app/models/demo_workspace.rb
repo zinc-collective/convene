@@ -26,14 +26,13 @@ class DemoWorkspace
     # Creates the Convene Demo Workspace and Zinc Client if necessary
     def find_or_create_workspace!
       workspace = client.workspaces.find_or_create_by!(name: 'Convene Demo')
-      workspace.update!(jitsi_meet_domain: 'meet.zinc.coop', access_level: :unlocked)
-      add_demo_rooms
+      workspace.update!(jitsi_meet_domain: 'meet.zinc.coop',
+                        access_level: :unlocked)
+      add_demo_rooms(workspace)
       workspace
     end
 
-    private def add_demo_rooms
-      workspace = Workspace.find_by!(name: 'Convene Demo')
-
+    private def add_demo_rooms(workspace)
       DEMO_ROOMS.each do |name|
         workspace.rooms.find_or_create_by!(name: name)
       end
@@ -41,7 +40,7 @@ class DemoWorkspace
     end
 
     private def client
-      @_client ||= Client.find_or_create_by!(name: 'Zinc')
+      @_client ||= client_repository.find_or_create_by!(name: 'Zinc')
     end
   end
 end
