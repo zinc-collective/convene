@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :workspaces
   constraints BrandedDomain.new(Workspace) do
     root 'workspaces#show'
-    get "/:id", to: 'rooms#show'
+    get "/:id", to: 'rooms#show', as: :room
   end
 end

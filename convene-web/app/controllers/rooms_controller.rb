@@ -1,5 +1,9 @@
 class RoomsController < ApplicationController
   def show
-    @room = current_workspace.rooms.friendly.find(params[:id])
+    current_room
+  end
+
+  private def current_room
+    @current_room ||= current_workspace.rooms.friendly.accessable_by(current_person).find(params[:id])
   end
 end
