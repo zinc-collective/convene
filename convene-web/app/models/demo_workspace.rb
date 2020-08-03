@@ -35,7 +35,7 @@ class DemoWorkspace
 
     private def add_demo_rooms(workspace)
       DEMO_ROOMS.each do |name|
-        workspace.rooms.find_or_create_by!(name: name)
+        workspace.rooms.find_or_create_by!(name: name, publicity_level: 'listed')
       end
       workspace
     end

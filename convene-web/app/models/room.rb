@@ -28,6 +28,15 @@ class Room < ApplicationRecord
   # `listed` - The room is discoverable by anyone in the workspace lobby.
   # `unlisted` - The room is only visible to it's owners and people who have been in it before.
   attribute :publicity_level
+  validates :publicity_level, presence: true, inclusion: { in: ['listed', 'unlisted', :listed, :unlisted] }
+
+  def listed?
+    publicity_level&.to_sym == :listed
+  end
+
+  def unlisted?
+    publicity_level&.to_sym == :unlisted
+  end
 
   # Links People to the room for permissioning
   has_many :room_ownerships, inverse_of: :room

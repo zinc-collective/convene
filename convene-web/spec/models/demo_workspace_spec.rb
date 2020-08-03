@@ -14,9 +14,14 @@ RSpec.describe DemoWorkspace, type: :model do
         expect(demo_workspace.branded_domain).to eql("convene-demo.zinc.coop")
 
         expect(demo_workspace.rooms.find_by(name: "Zee's Desk")).to be_present
+        expect(demo_workspace.rooms.find_by(name: "Zee's Desk")).to be_listed
         expect(demo_workspace.rooms.find_by(name: "Vivek's Desk")).to be_present
+        expect(demo_workspace.rooms.find_by(name: "Vivek's Desk")).to be_listed
         expect(demo_workspace.rooms.find_by(name: "Water Cooler")).to be_present
+        expect(demo_workspace.rooms.find_by(name: "Water Cooler")).to be_listed
+
         expect(demo_workspace.rooms.find_by(name: "The Ada Lovelace Room")).to be_present
+        expect(demo_workspace.rooms.find_by(name: "The Ada Lovelace Room")).to be_listed
       end
     end
 
