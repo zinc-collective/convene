@@ -62,7 +62,7 @@ export default class VideoRoom {
       roomName: this.roomName,
       parentNode: wrapper,
       interfaceConfigOverwrite: {
-        TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'tileview', 'hangup'],
+        TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'tileview'],
         DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
         DISABLE_PRESENCE_STATUS: true,
         MOBILE_APP_PROMO: false,
