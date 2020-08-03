@@ -20,13 +20,22 @@ provider "cloudflare" {
   api_key = var.cloudflare_api_key
 }
 
-# Create a record
+# Create a DNS record for the Jitsi Meet Host
 resource "cloudflare_record" "meet" {
   zone_id = var.cloudflare_zone_id
   name    = "meet"
   value   = vultr_server.convene_vultr_video.main_ip
   type    = "A"
   ttl     = 1
+}
+
+# Create a DNS Record for the convene-web instance deployed to Heroku
+resource "cloudflare_record" "convene" {
+  zone_id = var.cloudflare_zone_id
+  name    = "convene"
+  value   = "concave-cougar-3i77opu3gndyc7goxubexjnz.herokudns.com"
+  type    = "CNAME"
+  ttl    = 1
 }
 
 variable "vultr_api_key" {
