@@ -22,9 +22,9 @@ zincs_workspace.members << zee
 zincs_workspace.members << tom
 zincs_workspace.members << bene
 
-ada = zincs_workspace.rooms.find_or_create_by!(name: 'Ada')
+ada = zincs_workspace.rooms.find_or_initialize_by(name: 'Ada')
 ada.update!(access_level: :unlocked, publicity_level: :listed)
-ttz = zincs_workspace.rooms.find_or_create_by!(name: 'Talk to Zee')
+ttz = zincs_workspace.rooms.find_or_initialize_by(name: 'Talk to Zee')
 ttz.update!(access_level: :unlocked, publicity_level: :unlisted)
 ttz.owners << zee
 
