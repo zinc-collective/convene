@@ -21,7 +21,6 @@ export default class VideoRoom {
   }
 
   exitRoom() {
-    this.jitsi.dispose();
     const exitedRoomEvent = new CustomEvent("exitedRoom");
     this.dispatchEvent(exitedRoomEvent);
   }
