@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
   helper_method def current_workspace
     workspace_repository = Workspace.includes(:rooms)
     @current_workspace ||=
-      BrandedDomain.new(workspace_repository).workspace_for_request(request) ||
-      workspace_repository.friendly.find(params[:id])
+      if params[:workspace_id]
+        workspace_repository.friendly.find(params[:workspace_id])
+      else
+        BrandedDomain.new(workspace_repository).workspace_for_request(request) ||
+        workspace_repository.friendly.find(params[:id])
+      end
   end
 end
