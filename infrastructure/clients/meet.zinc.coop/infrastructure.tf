@@ -30,10 +30,19 @@ resource "cloudflare_record" "meet" {
 }
 
 # Create a DNS Record for the convene-web instance deployed to Heroku
+
 resource "cloudflare_record" "convene" {
   zone_id = var.cloudflare_zone_id
   name    = "convene"
   value   = "concave-cougar-3i77opu3gndyc7goxubexjnz.herokudns.com"
+  type    = "CNAME"
+  ttl    = 1
+}
+
+resource "cloudflare_record" "convene-demo" {
+  zone_id = var.cloudflare_zone_id
+  name    = "convene-demo"
+  value   = "immense-mouse-pxnyvs9k482ckrqx11jrzf6a.herokudns.com"
   type    = "CNAME"
   ttl    = 1
 }
