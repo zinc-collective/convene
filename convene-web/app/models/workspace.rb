@@ -4,11 +4,16 @@ class Workspace < ApplicationRecord
   # Which client owns the workspace
   belongs_to :client
 
+  # The fully-qualified domain to enter the workspace
+  attribute :branded_domain, :string
+  validates :branded_domain, uniqueness: true
+
   # The domain we expect jitsi meet to be running on
   attribute :jitsi_meet_domain, :string
 
   # The human-friendly name for the workspace
   attribute :name, :string
+  validates :name, presence: true, uniqueness: true
 
   # The URI-friendly name for the workspace
   attribute :slug, :string
