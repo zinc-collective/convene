@@ -42,6 +42,7 @@ export default class VideoRoom {
         APP_NAME: 'Convene',
         DISABLE_RINGING: true,
         SETTINGS_SECTIONS: [],
+        DEFAULT_REMOTE_DISPLAY_NAME: 'Participants',
       },
       configOverwrite: {
         disableDeepLinking: true,
