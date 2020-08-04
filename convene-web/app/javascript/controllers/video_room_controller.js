@@ -9,8 +9,7 @@ export default class extends Controller {
     this.videoRoom.addEventListener('enteredRoom', () => {
       this.wrapperTarget.classList.add('active-room');
     });
-    this.videoRoom.addEventListener('exitedRoom', () => {
-      this.wrapperTarget.classList.remove('active-room');
-    })
+
+    this.videoRoom.enterRoom(this.data.get('name'));
   }
 }
