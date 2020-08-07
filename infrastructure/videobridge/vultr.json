@@ -1,7 +1,7 @@
 {
   "variables": {
     "vultr_api_key": "{{env `VULTR_API_KEY`}}",
-    "client_domain": "{{env `CLIENT_DOMAIN`}}",
+    "videobridge_domain": "{{env `VIDEOBRIDGE_DOMAIN`}}",
     "instance_type": "201",
     "region": "{{env `REGION`}}"
   },
@@ -9,7 +9,7 @@
     {
       "type": "vultr",
       "api_key": "{{user `vultr_api_key`}}",
-      "snapshot_description": "convene-jitsi-{{user `client_domain`}} {{timestamp}}",
+      "snapshot_description": "{{user `videobridge_domain`}} {{timestamp}}",
       "region_id": "{{user `region`}}",
       "plan_id": "{{user `instance_type`}}",
       "os_id": "387",
@@ -19,10 +19,10 @@
   ],
   "provisioners": [{
     "environment_vars": [
-      "CLIENT_DOMAIN={{ user `client_domain` }}"
+      "VIDEOBRIDGE_DOMAIN={{ user `videobridge_domain` }}"
     ],
     "type": "shell",
-    "script": "jitsi/install"
+    "script": "videobridge/install"
   },
   {
     "type": "ansible",

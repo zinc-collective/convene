@@ -4,32 +4,32 @@ Feature: Video Workspaces
   I want a Video Workspace
 
   Scenario: Operator Builds an 8 person Video Workspace on AWS
-    When an Operator runs the `jitsi/build` command with:
-      | arguments                        |
-      | --region=us-west-1               |
-      | --provider=aws                   |
-      | --client-domain={{clientDomain}} |
-    Then a convene-jitsi-{{clientDomain}} is available within the us-west-1 region
+    When an Operator runs the `videobridge/build` command with:
+      | arguments           |
+      | --region=us-west-1  |
+      | --provider=aws      |
+      | --client={{client}} |
+    Then a convene-videobridge-{{client}} AMI is available within the us-west-1 region
 
   Scenario: Operator Provisions an 8 person Video Workspace on AWS
-    Given an Operator has ran `jitsi/build` for {{clientDomain}}
-    When an Operator runs the `jitsi/provision` command with:
-      | arguments                        |
-      | --client-domain={{clientDomain}} |
-    Then a JITSI meet instance is available at https://{{clientDomain}}
+    Given an Operator has ran `videobridge/build` for {{client}}
+    When an Operator runs the `videobridge/provision` command with:
+      | arguments           |
+      | --client={{client}} |
+    Then a JITSI meet instance is available at https://convene-videobridge-{{client}}.zinc.coop
 
   Scenario: Operator Builds an 8 person Video Workspace on Vultr
-    When an Operator runs the `jitsi/build` command with:
-      | arguments                        |
-      | --region=12                      |
-      | --provider=vultr                 |
-      | --client-domain={{clientDomain}} |
-    Then a convene-jitsi-{{clientDomain}} is available within region 12 (Silcon Valley)
+    When an Operator runs the `videobridge/build` command with:
+      | arguments           |
+      | --region=12         |
+      | --provider=vultr    |
+      | --client={{client}} |
+    Then a convene-videobridge-{{client}} is available within region 12 (Silcon Valley)
 
   Scenario: Operator Provisions an 8 person Video Workspace on Vultr and specifiy ssh username
-    Given an Operator has ran `jitsi/build` for {{clientDomain}}
-    When an Operator runs the `jitsi/provision` command with:
-      | arguments                        |
-      | --client-domain={{clientDomain}} |
-      | --ssh-username=root              |
-    Then a JITSI meet instance is available at https://{{clientDomain}}
+    Given an Operator has ran `videobridge/build` for {{client}}
+    When an Operator runs the `videobridge/provision` command with:
+      | arguments           |
+      | --client={{client}} |
+      | --ssh-username=root |
+    Then a JITSI meet instance is available at https://convene-videobridge-{{client}}.zinc.coop

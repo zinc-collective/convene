@@ -3,8 +3,12 @@ SSH_USERNAME='ubuntu'
 for i in "$@"
 do
 case $i in
-    --client-domain=*)
-    CLIENT_DOMAIN="${i#*=}"
+    --client=*)
+    CLIENT="${i#*=}"
+    shift
+    ;;
+    --videobridge-domain=*)
+    VIDEOBRIDGE_DOMAIN="${i#*=}"
     shift
     ;;
     --flush-dns-cache)
@@ -18,10 +22,15 @@ case $i in
 esac
 done
 
+if [ -z ${VIDEOBRIDGE_DOMAIN+x} ];
+then
+  VIDEOBRIDGE_DOMAIN="convene-videobridge-$CLIENT.zinc.coop"
+fi
+echo $VIDEOBRIDGE_DOMAIN
 
 # TODO: Figure out how to share the secrets safely and the terraform.tstate
 # (push/pull from private bucket? Spin up a consul instance?)
-(cd clients/$CLIENT_DOMAIN && terraform init &&
+(cd clients/$CLIENT && terraform init &&
     terraform apply -var-file public.tfvars -var-file secrets.tfvars)
 
 # Push the certbot install script that works for Ubuntu 20.04 to the server
@@ -29,6 +38,6 @@ if [ $FLUSH_DNS_CACHE ]; then
     echo "Flushing DNS cache"
     sudo killall -HUP mDNSResponder
 fi
-echo $CLIENT_DOMAIN
-scp jitsi/install-letsencrypt-cert.sh $SSH_USERNAME@$CLIENT_DOMAIN:
-ssh -t $SSH_USERNAME@$CLIENT_DOMAIN 'sudo ./install-letsencrypt-cert.sh'
+echo $VIDEOBRIDGE_DOMAIN
+scp videobridge/install-letsencrypt-cert.sh $SSH_USERNAME@$VIDEOBRIDGE_DOMAIN:
+ssh -t $SSH_USERNAME@$VIDEOBRIDGE_DOMAIN 'sudo ./install-letsencrypt-cert.sh'

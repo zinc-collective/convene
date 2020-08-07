@@ -26,7 +26,7 @@ class DemoWorkspace
     # Creates the Convene Demo Workspace and Zinc Client if necessary
     def find_or_create_workspace!
       workspace = client.workspaces.find_or_create_by!(name: 'Convene Demo')
-      workspace.update!(jitsi_meet_domain: 'meet.zinc.coop',
+      workspace.update!(jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
                         branded_domain: 'convene-demo.zinc.coop',
                         access_level: :unlocked)
       add_demo_rooms(workspace)

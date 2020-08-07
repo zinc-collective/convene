@@ -16,7 +16,7 @@ zincs_workspace = zinc.workspaces
                       .find_or_create_by!(name: 'Zinc')
 zincs_workspace.update!(access_level: :unlocked,
                         branded_domain: 'meet.zinc.local',
-                        jitsi_meet_domain: 'meet.zinc.coop')
+                        jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop')
 
 zincs_workspace.members << zee
 zincs_workspace.members << tom
