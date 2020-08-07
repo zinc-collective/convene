@@ -1,0 +1,38 @@
+#!/bin/bash
+
+for i in "$@"
+do
+case $i in
+    --client=*)
+    CLIENT="${i#*=}"
+    shift
+    ;;
+    --videobridge-domain=*)
+    VIDEOBRIDGE_DOMAIN="${i#*=}"
+    shift
+    ;;
+    --region=*)
+    REGION="${i#*=}"
+    shift
+    ;;
+    --provider=*)
+    PROVIDER="${i#*=}"
+    shift
+    ;;
+esac
+done
+
+
+if [ -z ${VIDEOBRIDGE_DOMAIN+x} ];
+then
+  VIDEOBRIDGE_DOMAIN="convene-videobridge-$CLIENT.zinc.coop"
+fi
+echo $VIDEOBRIDGE_DOMAIN
+
+# Automated: Build AMI
+packer build \
+  -var "videobridge_domain=${VIDEOBRIDGE_DOMAIN}" \
+  -var "region=${REGION}"\
+  videobridge/${PROVIDER}.json
+
+

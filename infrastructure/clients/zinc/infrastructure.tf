@@ -14,23 +14,20 @@ variable "cloudflare_zone_id" {
   type = string
 }
 
+
+variable "vultr_api_key" {
+  type = string
+}
+
 provider "cloudflare" {
   version = "~> 2.0"
   email   = var.cloudflare_email
   api_key = var.cloudflare_api_key
 }
 
-# Create a DNS record for the Jitsi Meet Host
-resource "cloudflare_record" "meet" {
-  zone_id = var.cloudflare_zone_id
-  name    = "meet"
-  value   = vultr_server.convene_vultr_video.main_ip
-  type    = "A"
-  ttl     = 1
-}
+
 
 # Create a DNS Record for the convene-web instance deployed to Heroku
-
 resource "cloudflare_record" "convene" {
   zone_id = var.cloudflare_zone_id
   name    = "convene"
@@ -39,16 +36,22 @@ resource "cloudflare_record" "convene" {
   ttl    = 1
 }
 
+# Create a branded-domain for the Zinc workspace
+resource "cloudflare_record" "meet" {
+  zone_id = var.cloudflare_zone_id
+  name    = "meet"
+  value   = "quiet-shark-e5n5v9yt13haqkprrhhjdidx.herokudns.com"
+  type    = "CNAME"
+  ttl    = 1
+}
+
+# Create a branded-domain for the Convene-demo workspace
 resource "cloudflare_record" "convene-demo" {
   zone_id = var.cloudflare_zone_id
   name    = "convene-demo"
   value   = "immense-mouse-pxnyvs9k482ckrqx11jrzf6a.herokudns.com"
   type    = "CNAME"
   ttl    = 1
-}
-
-variable "vultr_api_key" {
-  type = string
 }
 
 provider "vultr" {
@@ -64,14 +67,23 @@ resource "vultr_ssh_key" "my_ssh_key" {
   ssh_key = var.public_key
 }
 
-# Create a Vultr server
+# Create a Vultr server for the videobridge
 resource "vultr_server" "convene_vultr_video" {
   snapshot_id       = var.vultr_snapshot_id
   region_id         = "12"
   plan_id           = "201"
-  label             = "meet.zinc.coop"
+  label             = "convene-videobridge-zinc.zinc.coop"
   firewall_group_id = vultr_firewall_group.convene_vultr_firewall_group.id
   ssh_key_ids       = [vultr_ssh_key.my_ssh_key.id]
+}
+
+# Create a DNS record for the videobridge
+resource "cloudflare_record" "convene-videobridge-zinc" {
+  zone_id = var.cloudflare_zone_id
+  name    = "convene-videobridge-zinc"
+  value   = vultr_server.convene_vultr_video.main_ip
+  type    = "A"
+  ttl     = 1
 }
 
 # Create Vultr firewall group
