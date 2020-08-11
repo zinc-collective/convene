@@ -4,14 +4,9 @@
   data-target="video-room.wrapper"
   data-video-room-video-host="<%= current_workspace.jitsi_meet_domain %>"
   data-video-room-name="<%= @current_room.slug %>"
+  data-video-room-workspace-path="<%= end_call_path(current_workspace) %>"
   class="bg-gray-800"
 >
-</div>
-
-<div class="px-6 pt-3">
-  <%= link_to end_call_path(current_workspace), { class: "inline-flex items-center px-12 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150" } do %>
-    End call
-  <% end %>
 </div>
 
 <div class="px-6 pt-3">
