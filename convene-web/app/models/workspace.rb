@@ -4,7 +4,10 @@ class Workspace < ApplicationRecord
   # Which client owns the workspace
   belongs_to :client
 
-  # The fully-qualified domain to enter the workspace
+  # The fully-qualified domain to enter the workspace.
+  # Workspaces without a branded_domain are still accessible via their slug.
+  # The branded_domain must be unique to ensure we don't accidentally place
+  # a visitor into the wrong workspace.
   attribute :branded_domain, :string
   validates :branded_domain, uniqueness: true, allow_nil: true
 
