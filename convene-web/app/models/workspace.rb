@@ -6,7 +6,7 @@ class Workspace < ApplicationRecord
 
   # The fully-qualified domain to enter the workspace
   attribute :branded_domain, :string
-  validates :branded_domain, uniqueness: true
+  validates :branded_domain, uniqueness: true, allow_nil: true
 
   # The domain we expect jitsi meet to be running on
   attribute :jitsi_meet_domain, :string
