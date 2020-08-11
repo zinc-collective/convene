@@ -48,9 +48,5 @@ class Room < ApplicationRecord
   scope :unlisted, -> { where(publicity_level: :unlisted) }
 
   scope :owned_by,      -> (person) { joins(:owners).where(room_ownerships: { owner: person }) }
-  scope :accessable_by, -> (person = nil) {
-    listed
-    # TODO: Uncomment below when we implement https://github.com/zinc-collective/convene/issues/39
-    # union(self.owned_by(person)).union(self.listed)
-  }
+  scope :accessable_by, -> (person = nil) { union(self.owned_by(person)).union(self.listed) }
 end
