@@ -16,5 +16,7 @@ class ApplicationController < ActionController::Base
         BrandedDomain.new(workspace_repository).workspace_for_request(request) ||
         workspace_repository.friendly.find(params[:id])
       end
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 end
