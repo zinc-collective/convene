@@ -24,6 +24,9 @@ echo jitsi-meet-web-config    jitsi-meet/cert-path-key    string    /etc/ssl/$VI
 
 sudo apt-get -y install jitsi-meet
 sudo rm /usr/share/jitsi-meet/images/watermark.png
+# Change Jitsi Meet branding to Convene
+# Ref: https://community.jitsi.org/t/app-name-doesnt-have-effect/71648/2
+sudo sed -i "s/Jitsi Meet/Convene/" /usr/share/jitsi-meet/interface_config.js
 
 # Restart instance every PST midnight
 sudo crontab -l > mycron
