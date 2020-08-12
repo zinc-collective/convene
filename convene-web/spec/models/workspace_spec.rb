@@ -7,6 +7,6 @@ RSpec.describe Workspace, type: :model do
   end
 
   describe "#branded_domain" do
-    it { is_expected.to validate_uniqueness_of(:branded_domain) }
+    it { is_expected.to validate_uniqueness_of(:branded_domain).allow_nil }
   end
 end
