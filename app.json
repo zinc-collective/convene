@@ -1,0 +1,32 @@
+{
+  "name": "Convene Web Heroku Review App Configuration",
+  "env": {
+    "APP_BASE": {
+      "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
+      "value": "convene-web"
+    },
+    "SYSTEM_TEST": {
+      "description": "Seed system test data",
+      "value": "true"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/lstoll/heroku-buildpack-monorepo"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-ruby"
+    }
+  ],
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev",
+      "options": {
+        "version": "12"
+      }
+    }
+  ],
+  "scripts": {
+    "postdeploy": "bundle exec rails db:seed"
+  }
+}
