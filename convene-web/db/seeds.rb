@@ -29,3 +29,4 @@ ttz.update!(access_level: :unlocked, publicity_level: :unlisted)
 ttz.owners << zee
 
 DemoWorkspace.prepare
+puts 'test review app'
