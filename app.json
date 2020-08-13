@@ -4,6 +4,10 @@
     "APP_BASE": {
       "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
       "value": "convene-web"
+    },
+    "DEMO_ENABLED": {
+      "description": "Enable Demo",
+      "value": "true"
     }
   },
   "buildpacks": [
