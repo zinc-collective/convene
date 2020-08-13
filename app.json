@@ -4,6 +4,10 @@
     "APP_BASE": {
       "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
       "value": "convene-web"
+    },
+    "SYSTEM_TEST": {
+      "description": "Seed system test data",
+      "value": "true"
     }
   },
   "buildpacks": [
