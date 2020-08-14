@@ -9,9 +9,9 @@ Feature: Entering Rooms
 
   @built
   Scenario: Entering Room via Room Picker from Workspace Dashboard
-    Given I am on a Workspace Dashboard
-    When I tap the Room in the Room Picker
-    Then I am in the Room
+    Given I am on a "System Test" Workspace Dashboard
+    When I tap the "Listed Room 1" Room in the Room Picker
+    Then I am in the "Listed Room 1" Room
 
   @built @unimplemented-steps
   Scenario: Entering Room via Room Picker from another Room

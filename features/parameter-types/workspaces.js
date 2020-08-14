@@ -5,12 +5,13 @@ const { defineParameterType } = require("cucumber");
 // isolation.
 defineParameterType({
   name: "workspace",
-  regexp: /("[^"]*" )?Workspace/,
+  regexp: /"([^"]*)" ?Workspace/,
   transformer: (workspace) => new Workspace(workspace),
 });
 
 class Workspace {
-  constructor(workspace) {
-    this.workspace = workspace;
+  constructor(workspaceName) {
+    this.name = workspaceName;
+    this.slug = workspaceName.replace(/\s+/g, '-').toLowerCase();
   }
 }
