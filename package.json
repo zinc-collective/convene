@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "cucumber": "^6.0.5"
+    "cucumber": "^6.0.5",
+    "geckodriver": "^1.20.0",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   }
 }
