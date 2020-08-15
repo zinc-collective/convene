@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("cucumber");
 
-Given('I am on a {workspace} Dashboard', async function (workspace) {
+Given('the {actor} is on the {workspace} Dashboard', async function (actor, workspace) {
   await this.driver.get(`http://localhost:3000/workspaces/${workspace.slug}`);
 });
 
