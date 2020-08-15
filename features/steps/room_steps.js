@@ -17,10 +17,10 @@ When("a {actor} provides the correct {room} Key", function (actor, room) {
   return "pending";
 });
 
-When('the {actor} taps the {room} in the {room} Picker', async function (actor, room, room2) {
-  // TODO: How to find a card with a specific room name then click enter room?
-  const roomCard = this.driver.findElement(By.partialLinkText('Enter Room'))
-  await roomCard.click()
+When('the {actor} taps the {room} in the Room Picker', async function (actor, room) {
+  const roomCard = this.driver.findElement(By.css(`[name='${room.name}']`))
+  const enterRoomLink = roomCard.findElement(By.linkText("Enter Room"))
+  await enterRoomLink.click()
 });
 
 Then("the {actor} is placed in the {room}", async function (actor, room) {
