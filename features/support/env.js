@@ -1,4 +1,4 @@
-const { setWorldConstructor, After } = require('cucumber');
+const { setWorldConstructor, After, setDefaultTimeout } = require('cucumber');
 const { Builder } = require('selenium-webdriver');
 
 class CustomWorld {
@@ -12,3 +12,5 @@ setWorldConstructor(CustomWorld);
 After(function() {
   this.driver.quit();
 });
+
+setDefaultTimeout(10 * 1000);
