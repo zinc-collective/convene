@@ -36,12 +36,17 @@ class SystemTestWorkspace
     end
 
     def find_or_create_workspace!
-      workspace = client.workspaces.find_or_create_by!(name: 'System Test')
+      workspace = client.workspaces.find_or_create_by!(name: 'System Test Branded Domain')
       workspace.update!(jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
-                        branded_domain: "#{ENV.fetch('HEROKU_APP_NAME')}.herokuapp.com",
+                        branded_domain: heroku_app_convene_domain,
                         access_level: :unlocked)
       add_demo_rooms(workspace)
-      workspace
+
+      workspace = client.workspaces.find_or_create_by!(name: 'System Test')
+      workspace.update!(jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
+                        branded_domain: nil,
+                        access_level: :unlocked)
+      add_demo_rooms(workspace)
     end
 
     private def add_demo_rooms(workspace)
@@ -53,6 +58,10 @@ class SystemTestWorkspace
 
     private def client
       @_client ||= client_repository.find_or_create_by!(name: 'Zinc')
+    end
+
+    private def heroku_app_convene_domain
+      "#{ENV.fetch('HEROKU_APP_NAME', 'convene-pr-xxx')}.herokuapp.com"
     end
   end
 end

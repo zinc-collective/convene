@@ -4,13 +4,13 @@ const { defineParameterType } = require("cucumber");
 // steps that mention `Room` in isolation.
 defineParameterType({
   name: "room",
-  regexp: /("[^"]*" )?Room/,
+  regexp: /"([^"]*)" ?Room/,
   transformer: (room) => new Room(room),
 });
 
 class Room {
-  constructor(room) {
-    this.room = room;
+  constructor(roomName) {
+    this.name = roomName;
   }
 }
 
