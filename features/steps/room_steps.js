@@ -1,6 +1,4 @@
 const { Given, When, Then } = require("cucumber");
-const { By, until } = require('selenium-webdriver');
-const WorkspacePage = require("../page-objects/WorkspacePage");
 const assert = require('assert').strict;
 
 Given("a Workspace with a {accessLevel} {room}", function (accessLevel, room) {
@@ -19,15 +17,12 @@ When("a {actor} provides the correct {room} Key", function (actor, room) {
 });
 
 When('the {actor} taps the {room} in the Room Picker', async function (actor, room) {
-  const workspacePage = new WorkspacePage(this.driver)
-  const roomCard = workspacePage.findRoomCard(room);
-  await workspacePage.enterRoom(roomCard);
+  await this.workspace.enterRoom(room);
 });
 
 Then("the {actor} is placed in the {room}", async function (actor, room) {
-  await this.driver.wait(until.elementLocated(By.css("[name='jitsiConferenceFrame0']")));
-  const jitsiIframe = await this.driver.findElements(By.css("[name='jitsiConferenceFrame0']"))
-  assert.equal(jitsiIframe.length, 1, 'Jitsi iframe not found');
+  const videoPanel = await this.workspace.videoPanel();
+  assert(await videoPanel.isDisplayed());
 });
 
 Then("the {actor} is not placed in the {room}", function (actor, room) {

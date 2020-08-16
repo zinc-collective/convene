@@ -1,5 +1,5 @@
 const Page = require("./Page");
-const { By } = require('selenium-webdriver');
+const { By, until } = require('selenium-webdriver');
 
 class WorkspacePage extends Page {
   constructor(driver) {
@@ -10,12 +10,18 @@ class WorkspacePage extends Page {
     this.driver.get(`${this.baseUrl}/workspaces/${workspace.slug}`);
   }
 
-  findRoomCard(room) {
-    return this.driver.findElement(By.css(`[name='${room.name}']`))
+  enterRoom(room) {
+    const roomCard = this.findRoomCard(room);
+    roomCard.findElement(By.linkText("Enter Room")).click();
   }
 
-  enterRoom(roomCard) {
-    roomCard.findElement(By.linkText("Enter Room")).click();
+  findRoomCard(room) {
+    return this.driver.findElement(By.id(room.name))
+  }
+
+  async videoPanel() {
+    await this.driver.wait(until.elementLocated(By.css("[name='jitsiConferenceFrame0']")));
+    return await this.driver.findElement(By.css("[name='jitsiConferenceFrame0']"));
   }
 }
 

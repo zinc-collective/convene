@@ -7,6 +7,9 @@ Feature: Entering Rooms
   Most frequently, we expect people to enter a Room from their Workspace
   dashboard or by leaving one Room to enter another.
 
+  However, we also want to support Reople entering a Room via
+  the Room's full URI or from a short URI when a Space has a Branded Domain.
+
   @built
   Scenario: Entering Room via Room Picker from Workspace Dashboard
     Given the Workspace Member is on the "System Test" Workspace Dashboard
@@ -18,9 +21,6 @@ Feature: Entering Rooms
     Given I am in a Room
     When I tap a different Room in the Room Picker
     Then I am in the Room
-
-  # However, we also want to support Reople entering a Room via
-  # the Room's full URI or from a short URI when a Space has a Branded Domain.
 
   @built @unimplemented-steps
   Scenario: Entering Room via Slug on a Branded Domain

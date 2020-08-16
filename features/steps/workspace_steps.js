@@ -2,7 +2,8 @@ const { Given, When, Then } = require("cucumber");
 const WorkspacePage = require("../page-objects/WorkspacePage");
 
 Given('the {actor} is on the {workspace} Dashboard', async function (actor, workspace) {
-  await new WorkspacePage(this.driver).enter(workspace);
+  this.workspace = new WorkspacePage(this.driver);
+  await this.workspace.enter(workspace);
 });
 
 Then('the {workspace} is available at the {string} domain', function (workspace, string) {
