@@ -14,7 +14,5 @@ jobs:
 
       - name: System Test convene-web
         env:
-          DEPLOYMENT_STATUS: ${{ github.event.deployment_status.description }}
-          GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
-          TARGET_URL: ${{ github.event.deployment_status.target_url }}
-        run: echo $DEPLOYMENT_STATUS
+          TARGET_URL: ${{ github.event.deployment_status.target_url | aws -F/ '{print $5}' }}
+        run: echo $TARGET_URL
