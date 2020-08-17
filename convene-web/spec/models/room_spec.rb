@@ -1,6 +1,19 @@
 require "rails_helper"
 
 RSpec.describe Room, type: :model do
+  describe ".slug" do
+    it "creates unique slugs by workspace scope" do
+      client = Client.create(name: "test")
+      workspace_1 = client.workspaces.create(name: "workspace1")
+      workspace_2 = client.workspaces.create(name: "workspace2")
+      workspace_1_room = workspace_1.rooms.create(name: 'room1', publicity_level: :listed)
+      workspace_2_room = workspace_2.rooms.create(name: 'room1', publicity_level: :listed)
+
+      expect(workspace_1_room.slug).to eq 'room1'
+      expect(workspace_2_room.slug).to eq 'room1'
+    end
+  end
+
   describe ".listed" do
     it "does not include rooms whose publicity level is unlisted" do
       client = Client.create(name: "test")

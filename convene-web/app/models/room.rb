@@ -12,7 +12,7 @@ class Room < ApplicationRecord
 
   # FriendlyId's does the legwork to make the slug uri-friendly
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: :scoped, scope: :workspace
 
   # A Room's Access Level indicates what a participant must know in order to gain access to the room.
   # `unlocked` indicates that the participant does not need to know anything to gain access.

@@ -10,18 +10,23 @@ class WorkspacePage extends Page {
     this.driver.get(`${this.baseUrl}/workspaces/${workspace.slug}`);
   }
 
-  enterRoom(room) {
-    const roomCard = this.findRoomCard(room);
+  enterRoomThruUrl(workspace, room) {
+    this.driver.get(`${this.baseUrl}/workspaces/${workspace.slug}/rooms/${room.slug}`);
+  }
+
+  async enterRoom(room) {
+    const roomCard = await this.findRoomCard(room);
     roomCard.findElement(By.linkText("Enter Room")).click();
   }
 
-  findRoomCard(room) {
-    return this.driver.findElement(By.id(room.name))
+  async findRoomCard(room) {
+    await this.driver.wait(until.elementLocated(By.id(room.name)));
+    return await this.driver.findElement(By.id(room.name));
   }
 
   async videoPanel() {
-    await this.driver.wait(until.elementLocated(By.css("[name='jitsiConferenceFrame0']")));
-    return await this.driver.findElement(By.css("[name='jitsiConferenceFrame0']"));
+    await this.driver.wait(until.elementLocated(By.css("[name*='jitsiConferenceFrame']")));
+    return await this.driver.findElement(By.css("[name*='jitsiConferenceFrame']"));
   }
 }
 
