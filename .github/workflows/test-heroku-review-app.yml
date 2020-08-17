@@ -14,5 +14,7 @@ jobs:
 
       - name: System Test convene-web
         env:
-          TARGET_URL: ${{ github.event.deployment_status.target_url | aws -F/ '{print $5}' }}
-        run: echo $TARGET_URL
+          TARGET_URL: ${{ github.event.deployment_status.target_url }}
+        run: |
+          echo running test against $TARGET_URL
+          APP_URL=$( echo $TARGET_URL | awk -F/ '{print "https://"$5".herokuapp.com"}' ) npm test
