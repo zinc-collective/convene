@@ -1,0 +1,11 @@
+name: Test Heroku Review App
+on:
+  deployment_status
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Test
+      run: echo 'review app deployed'
