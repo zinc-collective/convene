@@ -11,6 +11,7 @@ defineParameterType({
 class Room {
   constructor(roomName) {
     this.name = roomName;
+    this.slug = roomName.replace(/\s+/g, '-').toLowerCase();
   }
 }
 

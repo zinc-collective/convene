@@ -16,11 +16,11 @@ Feature: Entering Rooms
     When the Workspace Member taps the "Listed Room 1" Room in the Room Picker
     Then the Workspace Member is placed in the "Listed Room 1" Room
 
-  @built @unimplemented-steps
+  @built
   Scenario: Entering Room via Room Picker from another Room
-    Given I am in a Room
-    When I tap a different Room in the Room Picker
-    Then I am in the Room
+    Given the Workspace Member is in the "System Test" Workspace and in the "Listed Room 1" Room
+    When the Workspace Member taps the "Listed Room 2" Room in the Room Picker
+    Then the Workspace Member is placed in the "Listed Room 2" Room
 
   @built @unimplemented-steps
   Scenario: Entering Room via Slug on a Branded Domain
@@ -28,7 +28,7 @@ Feature: Entering Rooms
     When I visit a Room's using a slug on their Branded Domain
     Then I am in the Room
 
-  @built @unimplemented-steps
+  @built
   Scenario: Entering Room via Room full URL
-    When I visit a Room's full URL
-    Then I am in the Room
+    When the Workspace Member visit the "System Test" Workspace, "Listed Room 1" Room full URL
+    Then the Workspace Member is placed in the "Listed Room 1" Room
