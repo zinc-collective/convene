@@ -1,4 +1,4 @@
-# Convene-web changes
+# Convene::Web Changelog
 
 HEAD
 --------
