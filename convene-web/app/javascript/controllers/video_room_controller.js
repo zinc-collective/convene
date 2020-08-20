@@ -15,4 +15,8 @@ export default class extends Controller {
 
     this.videoRoom.enterRoom(this.data.get('name'));
   }
+
+  disconnect() {
+    this.videoRoom.exitRoom();
+  }
 }

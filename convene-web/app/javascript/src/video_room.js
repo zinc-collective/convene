@@ -15,10 +15,9 @@ export default class VideoRoom {
     this.dispatchEvent(enteredRoomEvent);
   }
 
-  exitRoom() {
+  exitRoom(dispatchEvent) {
     this.jitsi.dispose();
-    const exitedRoomEvent = new CustomEvent("exitedRoom");
-    this.dispatchEvent(exitedRoomEvent);
+    if (dispatchEvent) this.dispatchEvent(new CustomEvent("exitedRoom"));
   }
 
   addEventListener(type, listener, option) {
@@ -33,7 +32,7 @@ export default class VideoRoom {
     if (!this.roomName) return;
     this.jitsi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
 
-    this.jitsi.on('videoConferenceLeft', () => this.exitRoom() );
+    this.jitsi.on('videoConferenceLeft', () => this.exitRoom(true) );
   }
 
   jitsiApiOption() {

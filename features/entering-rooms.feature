@@ -32,3 +32,11 @@ Feature: Entering Rooms
   Scenario: Entering Room via Room full URL
     When the Workspace Member visit the "System Test" Workspace, "Listed Room 1" Room full URL
     Then the Workspace Member is placed in the "Listed Room 1" Room
+
+  @built @unimplemented-steps
+  Scenario: Entering Room via back button
+    Given the Workspace Member is in the "System Test" Workspace and in the "Listed Room 1" Room
+    When the Workspace Member taps the "Listed Room 2" Room in the Room Picker
+    And the Workspace Member is placed in the "Listed Room 2" Room
+    And the Workspace Member hit the back button
+    Then the Workspace Member is placed in the "Listed Room 1" Room

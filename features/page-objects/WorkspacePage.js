@@ -1,5 +1,6 @@
 const Page = require("./Page");
 const { By, until } = require('selenium-webdriver');
+const assert = require('assert').strict;
 
 class WorkspacePage extends Page {
   constructor(driver) {
@@ -25,8 +26,11 @@ class WorkspacePage extends Page {
   }
 
   async videoPanel() {
-    await this.driver.wait(until.elementLocated(By.css("[name*='jitsiConferenceFrame']")));
-    return await this.driver.findElement(By.css("[name*='jitsiConferenceFrame']"));
+    const jitsiConferenceFrame = By.css("[name*='jitsiConferenceFrame']")
+    await this.driver.wait(until.elementLocated(jitsiConferenceFrame));
+    const videoPanels = await this.driver.findElements(jitsiConferenceFrame);
+    assert.equal(videoPanels.length, 1, `${videoPanels.length} was found.`)
+    return await this.driver.findElement(jitsiConferenceFrame);
   }
 }
 
