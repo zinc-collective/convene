@@ -1,3 +1,6 @@
-# Convene changes
+# Changes 
 
-[Convene-web Changes](convene-web/CHANGELOG.md) | [Convene infrastructure Changes](infrastructure/CHANGELOG.md)
+Each module has it's own Changelog:
+
+- [Convene::Web](convene-web/CHANGELOG.md)
+- [Convene::Infrastructure](infrastructure/CHANGELOG.md)
