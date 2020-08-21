@@ -2,16 +2,17 @@ const Page = require("./Page");
 const { By, until } = require('selenium-webdriver');
 
 class WorkspacePage extends Page {
-  constructor(driver) {
+  constructor(driver, workspace) {
     super(driver);
+    this.workspace = workspace;
   }
 
-  enter(workspace) {
-    this.driver.get(`${this.baseUrl}/workspaces/${workspace.slug}`);
+  enter() {
+    this.driver.get(`${this.baseUrl}/workspaces/${this.workspace.slug}`);
   }
 
-  enterRoomThruUrl(workspace, room) {
-    this.driver.get(`${this.baseUrl}/workspaces/${workspace.slug}/rooms/${room.slug}`);
+  enterRoomThruUrl(room) {
+    this.driver.get(`${this.baseUrl}/workspaces/${this.workspace.slug}/rooms/${room.slug}`);
   }
 
   async enterRoom(room) {
