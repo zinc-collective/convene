@@ -3,7 +3,7 @@ on:
   deployment_status
 
 jobs:
-  get_heroku_data:
+  system_test_heroku_review_app:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,8 +14,8 @@ jobs:
           TARGET_URL: ${{ github.event.deployment_status.target_url }}
         run: |
           echo TARGET_URL: $TARGET_URL
-          echo setting SUBDOMAIN
           SUBDOMAIN=$( echo $TARGET_URL | awk -F/ '{print $5}' )
+          echo setting SUBDOMAIN: $SUBDOMAIN
           echo "::set-env name=SUBDOMAIN::"$SUBDOMAIN""
 
       - name: Install dependencies
@@ -23,7 +23,8 @@ jobs:
 
       - name: System Test convene-web
         run: |
-          firefox --version
-          which firefox
           echo Running system test with APP_URL and CUSTOM_DOMAIN, SUBDOMAIN=$SUBDOMAIN
-          APP_URL="https://"$SUBDOMAIN".herokuapp.com" CUSTOM_DOMAIN="https://"$SUBDOMAIN".zinc.coop" npm test
+          APP_URL="https://"$SUBDOMAIN".herokuapp.com"
+          # To warm up Heroku review app
+          curl $APP_URL 1> /dev/null
+          APP_URL=$APP_URL CUSTOM_DOMAIN="https://"$SUBDOMAIN".zinc.coop" npm test

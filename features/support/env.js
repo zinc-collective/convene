@@ -18,4 +18,4 @@ After(function() {
   this.driver.quit();
 });
 
-setDefaultTimeout(10 * 1000);
+setDefaultTimeout(10 * 2000);
