@@ -61,7 +61,7 @@ class SystemTestWorkspace
     end
 
     private def heroku_app_convene_domain
-      "#{ENV.fetch('HEROKU_APP_NAME', 'convene-pr-xxx')}.herokuapp.com"
+      "#{ENV.fetch('HEROKU_APP_NAME', 'convene-pr-xxx')}.zinc.coop"
     end
   end
 end
