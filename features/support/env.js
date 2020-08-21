@@ -1,9 +1,14 @@
 const { setWorldConstructor, After, setDefaultTimeout } = require('cucumber');
-const { Builder, logging } = require('selenium-webdriver');
+const { Builder } = require('selenium-webdriver');
+const firefox = require('selenium-webdriver/firefox');
 
 class CustomWorld {
   constructor() {
-    this.driver = new Builder().forBrowser('firefox').build();
+    this.driver = new Builder()
+      .forBrowser('firefox')
+      .setFirefoxOptions(
+        new firefox.Options().headless()
+      ).build();
   }
 }
 
@@ -14,5 +19,3 @@ After(function() {
 });
 
 setDefaultTimeout(10 * 1000);
-
-new logging.Preferences().setLevel(logging.Type.BROWSER, logging.Level.DEBUG);
