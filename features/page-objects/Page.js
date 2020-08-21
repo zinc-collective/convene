@@ -1,6 +1,6 @@
 class Page {
-  constructor(driver, baseUrl = 'http://localhost:3000') {
-    this.baseUrl = baseUrl;
+  constructor(driver) {
+    this.baseUrl = process.env.APP_URL ? process.env.APP_URL : 'http://localhost:3000';
     this.driver = driver;
   }
 }
