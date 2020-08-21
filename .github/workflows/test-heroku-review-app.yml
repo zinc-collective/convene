@@ -18,6 +18,7 @@ jobs:
           echo setting SUBDOMAIN: $SUBDOMAIN
           echo "::set-env name=SUBDOMAIN::"$SUBDOMAIN""
 
+
       - name: Install dependencies
         run: npm i
 
