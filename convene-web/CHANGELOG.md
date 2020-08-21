@@ -3,7 +3,7 @@
 HEAD
 --------
 ### Added
-- [Screen Sharing] (https://github.com/zinc-collective/convene/issues/91)
+- [Screen Sharing](https://github.com/zinc-collective/convene/issues/91)
 Video fills the screens View Height, making it easier to read text when screen sharing.
 
 - [Discovering Rooms](https://github.com/zinc-collective/convene/issues/39)
