@@ -3,18 +3,26 @@ on:
   deployment_status
 
 jobs:
-  build:
+  get_heroku_data:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+      - name: Set Subdomain
+        id: set_subdomain
+        env:
+          TARGET_URL: ${{ github.event.deployment_status.target_url }}
+        run: |
+          echo TARGET_URL: $TARGET_URL
+          echo setting SUBDOMAIN
+          SUBDOMAIN=$( echo $TARGET_URL | awk -F/ '{print $5}' )
+          echo "::set-env name=SUBDOMAIN::"$SUBDOMAIN""
 
       - name: Install dependencies
         run: npm i
 
       - name: System Test convene-web
-        env:
-          TARGET_URL: ${{ github.event.deployment_status.target_url }}
         run: |
-          echo running test against $TARGET_URL
-          APP_URL=$( echo $TARGET_URL | awk -F/ '{print "https://"$5".herokuapp.com"}' ) npm test
+          firefox --version
+          echo Running system test with APP_URL and CUSTOM_DOMAIN, SUBDOMAIN=$SUBDOMAIN
+          APP_URL="https://"$SUBDOMAIN".herokuapp.com" CUSTOM_DOMAIN="https://"$SUBDOMAIN".zinc.coop" npm test
