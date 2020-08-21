@@ -24,5 +24,6 @@ jobs:
       - name: System Test convene-web
         run: |
           firefox --version
+          which firefox
           echo Running system test with APP_URL and CUSTOM_DOMAIN, SUBDOMAIN=$SUBDOMAIN
           APP_URL="https://"$SUBDOMAIN".herokuapp.com" CUSTOM_DOMAIN="https://"$SUBDOMAIN".zinc.coop" npm test
