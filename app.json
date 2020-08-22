@@ -22,15 +22,17 @@
     {
       "plan": "heroku-postgresql:hobby-dev",
       "options": {
-        "verison": "12"
+        "version": "12"
       }
     }
   ],
   "environments": {
     "review": {
-      "APP_BASE": {
-        "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
-        "value": "convene-web"
+      "formation": {
+        "web": {
+          "quantity": 1,
+          "size": "hobby"
+        }
       },
       "env": {
         "SYSTEM_TEST": {
