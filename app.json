@@ -1,12 +1,12 @@
 {
-  "name": "Convene Web Heroku Review App Configuration",
+  "name": "Convene Web",
   "env": {
     "APP_BASE": {
       "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
       "value": "convene-web"
     },
-    "SYSTEM_TEST": {
-      "description": "Seed system test data",
+    "DEMO_ENABLED": {
+      "description": "Seed demo workspace data",
       "value": "true"
     }
   },
@@ -22,11 +22,30 @@
     {
       "plan": "heroku-postgresql:hobby-dev",
       "options": {
-        "version": "12"
+        "verison": "12"
       }
     }
   ],
-  "scripts": {
-    "postdeploy": "bundle exec rails db:seed"
+  "environments": {
+    "review": {
+      "APP_BASE": {
+        "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
+        "value": "convene-web"
+      },
+      "env": {
+        "SYSTEM_TEST": {
+          "description": "Seed system test data",
+          "value": "true"
+        }
+      },
+      "addons": [
+        {
+          "plan": "heroku-postgresql:hobby-dev",
+          "options": {
+            "verison": "12"
+          }
+        }
+      ]
+    }
   }
 }
