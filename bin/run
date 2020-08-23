@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Runs the application locally
+(cd convene-web && bin/run)

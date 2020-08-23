@@ -21,6 +21,12 @@ or organizational use.
 
 [open core model]: (https://en.wikipedia.org/wiki/Open-core_model)
 
+## Developing Convene
+
+Once you have installed the appropriate `ruby` and `node` and `postgresql` versions run `bin/setup`. See [Convene::Web/README.md "Configuring your Development Machine"] for more information.
+
+[Convene::Web/README.md "Configuring your Development Machine"]:./convene-web/README.md#configuring-your-development-machine
+
 ## Using Convene
 
 Convene is [pre-alpha software], so while we intend to provide interfaces that

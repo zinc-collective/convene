@@ -21,6 +21,9 @@ First, ensure your development environment has:
 Then, run `bin/setup` to install Ruby and Node dependencies and set up the
 database.
 
+Once you have completed setup; run `bin/run`. You now should be able to open
+http://localhost:3000/workspaces/system-test and see Convene.
+
 Finally, run `bin/test` to ensure that your development environment is
 configured correctly.
 

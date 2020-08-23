@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+# Conditionally assign PORT so that it can be overridden
+# https://stackoverflow.com/questions/2440947/how-to-build-a-conditional-assignment-in-bash
+: ${PORT:=3000}
+echo $PORT
+bin/rails s -p $PORT
