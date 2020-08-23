@@ -1,0 +1,64 @@
+name: Test
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ development ]
+
+jobs:
+  convene-web-test:
+    runs-on: ubuntu-latest
+
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PORT: 80
+      SYSTEM_TEST: true
+      APP_URL: http://localhost
+      CUSTOM_DOMAIN: http://system-test.zinc.local
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Ruby 2.7
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+
+    - name: Increase the amount of inotify watchers
+      run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+    - name: Allow Ruby process to access port 80
+      run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
+
+    - name: Setup CI database.yml
+      run: cd convene-web && cp config/database.yml.github-actions config/database.yml
+
+    - name: Setup environment
+      run: bin/setup
+
+    - name: Start Rails server
+      run: bin/run &
+
+    - name: Test convene-web
+      uses: nick-invision/retry@v1
+      with:
+        timeout_minutes: 1
+        max_attempts: 3
+        command: |
+          sudo sh -c "echo '127.0.0.1 system-test.zinc.local' >> /etc/hosts"
+          # To trigger asset compile in development mode
+          # TODO: Start server in production mode
+          curl system-test.zinc.local 1> /dev/null
+          bin/test
