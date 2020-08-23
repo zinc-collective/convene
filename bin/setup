@@ -1,3 +1,7 @@
 #!/bin/bash
 
-npm i
+# Installs environment dependencies such as packages and
+# prepares the application by running setup scripts in
+# each module
+npm install
+(cd convene-web && bin/setup)
