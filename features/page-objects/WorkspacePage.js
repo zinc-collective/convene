@@ -21,8 +21,11 @@ class WorkspacePage extends Page {
     roomCard.findElement(By.linkText("Enter Room")).click();
   }
 
-  async findRoomCard(room) {
-    await this.driver.wait(until.elementLocated(By.id(room.name)));
+  async findRoomCard(room, wait = true) {
+    if(wait) {
+      await this.driver.wait(until.elementLocated(By.id(room.name)));
+    }
+
     return await this.driver.findElement(By.id(room.name));
   }
 
