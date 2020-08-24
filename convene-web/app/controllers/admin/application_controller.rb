@@ -16,5 +16,9 @@ module Admin
       params[:per_page] || 20
     end
 
+    def find_resource(param)
+      resources = scoped_resource.respond_to?(:friendly) ? scoped_resource.friendly : scoped_resource
+      resources.find(param)
+    end
   end
 end

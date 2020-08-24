@@ -8,14 +8,6 @@ module Admin
     #   send_foo_updated_email(requested_resource)
     # end
 
-    # Override this method to specify custom lookup behavior.
-    # This will be used to set the resource for the `show`, `edit`, and `update`
-    # actions.
-    #
-    # def find_resource(param)
-    #   Foo.find_by!(slug: param)
-    # end
-
     # The result of this lookup will be available as `requested_resource`
 
     # Override this if you have certain roles that require a subset
