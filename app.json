@@ -8,6 +8,14 @@
     "DEMO_ENABLED": {
       "description": "Seed demo workspace data",
       "value": "true"
+    },
+    "ADMIN_USERNAME": {
+      "description": "Username for administrator",
+      "value": "admin"
+    },
+    "ADMIN_PASSWORD": {
+      "description": "Password to access the admin panel",
+      "generator": "secret"
     }
   },
   "buildpacks": [
