@@ -1,0 +1,6 @@
+.input {
+  @apply bg-white border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal;
+}
+.input:focus {
+  @apply outline-none shadow-outline;
+}

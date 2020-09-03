@@ -19,3 +19,4 @@ require("channels")
 import "controllers"
 
 require('../src/application.scss')
+require("@fortawesome/fontawesome-free/css/all.css")

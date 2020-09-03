@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ConveneWeb</title>
+    <title><%= "#{current_workspace.name} - #{@current_room.name}" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,7 +14,6 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
     <%= yield %>
   </body>
 </html>

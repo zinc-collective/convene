@@ -1,0 +1,13 @@
+.header {
+  .item-container {
+    @apply flex items-center justify-between px-4 py-3 bg-blue-500;
+
+    .item-title {
+      @apply text-white font-bold;
+
+      .item-subtitle {
+        @apply font-hairline;
+      }
+    }
+  }
+}
