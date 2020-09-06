@@ -18,32 +18,13 @@ Feature: Locking Rooms
   The following scenarios illustrate how these permissions play out
   based upon who is accessing rooms with which access level.
 
-  Scenario: Workspace Admin who knows Room Key enters Locked Room
+  Scenario: Entering a Locked Room
     Given a Workspace with a Locked Room
-    When a Workspace Admin provides the correct Room Key
-    Then the Workspace Admin is placed in the Room
-
-  Scenario: Workspace Admin who does not know Room Key cannot enter Locked Room
-    Given a Workspace with a Locked Room
-    When a Workspace Admin provides the wrong Room Key
-    Then the Workspace Admin is not placed in the Room
-
-  Scenario: Workspace Member who knows the Room Key enters Locked Room
-    Given a Workspace with a Locked Room
-    When a Workspace Member provides the correct Room Key
-    Then the Workspace Member is placed in the Room
-
-  Scenario: Workspace Member who does not know the Room Key cannot enter Locked Room
-    Given a Workspace with a Locked Room
-    When a Workspace Member provides the wrong Room Key
-    Then the Workspace Member is not placed in the Room
-
-  Scenario: Guest who knows Room Key enters Locked Room
-    Given a Workspace with a Locked Room
-    When a Guest provides the correct Room Key
-    Then the Guest is placed in the Room
-
-  Scenario: Guest who does not know Room Key cannot enter Locked Room
-    Given a Workspace with a Locked Room
-    When a Guest provides the wrong Room Key
-    Then the Guest is not placed in the Room
+    Then a Workspace Member may enter the room after providing the correct Room Key
+    And a Workspace Member may not enter the room after providing the wrong Room Key
+    And a Guest may enter the room after providing the correct Room Key
+    And a Guest may not enter the room after providing the wrong Room Key
+    # We're not sure if this is actually a good idea, we should check with
+    # design / product to make sure that it makes sense for admins to be able
+    # to barge in like a grumpy parent on prom night.
+    And a Workspace Admin may enter the room without providing a Room Key
