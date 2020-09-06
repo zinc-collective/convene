@@ -16,7 +16,10 @@ First, ensure your development environment has:
 
 1. Ruby (See [.ruby-version](./.ruby-version) for version)
 1. Node (See [.nvmrc](./.nvmrc) for version)
-1. [PostgreSQL 12](https://www.postgresql.org/download/)
+1. [PostgreSQL 12]. (Note: For people using [Docker], a [docker-compose.yml]
+   file has been included for convenience.)
+1. Copy `[.env.example]` to `.env` and make any changes: `cp .env.example
+   .env`
 
 Then, run `bin/setup` to install Ruby and Node dependencies and set up the
 database.
@@ -26,6 +29,11 @@ http://localhost:3000/workspaces/system-test and see Convene.
 
 Finally, run `bin/test` to ensure that your development environment is
 configured correctly.
+
+[PostgreSQL 12]: https://www.postgresql.org/download/
+[Docker]: https://www.docker.com
+[docker-compose.yml]: ../docker-compose.yml
+[.env.example]: ./.env.example
 
 ### Testing Convene Web
 
