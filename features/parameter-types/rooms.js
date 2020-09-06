@@ -17,13 +17,14 @@ defineParameterType({
   // In the meantime, adding a capture-group around "Room" ensures that the Room
   // class has a string provided to it.
   regexp: /("[^"]*" )?(Room)/,
-  transformer: (roomName) => new Room(roomName),
+  transformer: (roomName) => new Room(roomName.trim().replace(/"/g, "")),
 });
 
+const slugify = (str) => str.replace(/\s+/g, "-").toLowerCase();
 class Room {
   constructor(roomName) {
     this.name = roomName;
-    this.slug = roomName.replace(/\s+/g, '-').toLowerCase();
+    this.slug = slugify(roomName);
   }
 }
 
@@ -55,8 +56,7 @@ class PublicityLevel {
   }
 }
 
-
 defineParameterType({
   name: "roomKey",
-  regexp: /(a |the )?(correct |wrong )?Room Key/
+  regexp: /(a |the )?(correct |wrong )?Room Key/,
 });
