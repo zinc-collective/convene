@@ -4,14 +4,27 @@ const { defineParameterType } = require("cucumber");
 // steps that mention `Room` in isolation.
 defineParameterType({
   name: "room",
-  regexp: /"([^"]*)" ?Room/,
-  transformer: (room) => new Room(room),
+  // To make the Room Name optional, we had to capture two things, otherwise
+  // Cucumber will discard the "room" value. This appears to be because the
+  // `Group` class assumes that if there are capture-groups in a parameterType,
+  // the rest of the match should be discarded.
+  // See: https://github.com/cucumber/cucumber/blob/5a3a3167958c45d708228d953a1d5b0f5625a633/cucumber-expressions/javascript/src/Group.ts#L11
+  //
+  // There are probably multiple ways to work around this. For example, instead of
+  // adding a capture group, we could check if roomName is undefined in the Room
+  // class, and default it to 'Room' or something.
+  //
+  // In the meantime, adding a capture-group around "Room" ensures that the Room
+  // class has a string provided to it.
+  regexp: /("[^"]*" )?(Room)/,
+  transformer: (roomName) => new Room(roomName.trim().replace(/"/g, "")),
 });
 
+const slugify = (str) => str.replace(/\s+/g, "-").toLowerCase();
 class Room {
   constructor(roomName) {
     this.name = roomName;
-    this.slug = roomName.replace(/\s+/g, '-').toLowerCase();
+    this.slug = slugify(roomName);
   }
 }
 
@@ -20,7 +33,7 @@ class Room {
 // See: https://github.com/zinc-collective/convene/issues/41
 defineParameterType({
   name: "accessLevel",
-  regexp: /(Unlocked|Internal|Locked)/,
+  regexp: /(an |a )?(Unlocked|Internal|Locked)/,
   transformer: (level) => new AccessLevel(level),
 });
 
@@ -42,3 +55,8 @@ class PublicityLevel {
     this.level = level;
   }
 }
+
+defineParameterType({
+  name: "roomKey",
+  regexp: /(a |the )?(correct |wrong )?Room Key/,
+});

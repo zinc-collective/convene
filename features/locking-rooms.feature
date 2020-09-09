@@ -1,4 +1,3 @@
-@wip
 Feature: Locking Rooms
   In order to maintain control over who may participate in a conversation
   As a Workspace Member
@@ -9,7 +8,7 @@ Feature: Locking Rooms
 
   1. Unlocked, which grants access to anyone.
   2. Internal, which grants access to any Workspace Member.
-  3. Locked, which grants access only to people who know the Room's Access Key.
+  3. Locked, which grants access only to people who know the Room's Key.
 
   Design and discussion of the room access model may be found on GitHub at
   https://github.com/zinc-collective/convene/issues/12
@@ -18,32 +17,52 @@ Feature: Locking Rooms
   The following scenarios illustrate how these permissions play out
   based upon who is accessing rooms with which access level.
 
-  Scenario: Workspace Admin who knows Room Key enters Locked Room
+  # Wireframe:
+  # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/04ee266e-931b-4bde-bcf9-af94c7ac444e
+  @wip
+  Scenario: Entering a Locked Room
     Given a Workspace with a Locked Room
-    When a Workspace Admin provides the correct Room Key
-    Then the Workspace Admin is placed in the Room
+    Then a Workspace Member may enter the Room after providing the correct Room Key
+    And a Workspace Member may not enter the Room after providing the wrong Room Key
+    And a Guest may enter the Room after providing the correct Room Key
+    And a Guest may not enter the Room after providing the wrong Room Key
+    # We're not sure if this is actually a good idea, we should check with
+    # design / product to make sure that it makes sense for admins to be able
+    # to barge in like a grumpy parent on prom night.
+    And a Workspace Admin may enter the Room without providing a Room Key
 
-  Scenario: Workspace Admin who does not know Room Key cannot enter Locked Room
-    Given a Workspace with a Locked Room
-    When a Workspace Admin provides the wrong Room Key
-    Then the Workspace Admin is not placed in the Room
+  # TODO: We should check with Colombene and Vivek re: "Is there `Invitation` feature?"
+  @unstarted
+  Scenario: Locking an Unlocked Room when Inviting People
+    Given a Workspace with an Unlocked Room
+    When a Workspace Member locks the Room with a Room Key while Inviting People
+    Then the Room is Locked
 
-  Scenario: Workspace Member who knows the Room Key enters Locked Room
-    Given a Workspace with a Locked Room
-    When a Workspace Member provides the correct Room Key
-    Then the Workspace Member is placed in the Room
 
-  Scenario: Workspace Member who does not know the Room Key cannot enter Locked Room
-    Given a Workspace with a Locked Room
-    When a Workspace Member provides the wrong Room Key
-    Then the Workspace Member is not placed in the Room
+  # Wireframe:
+  # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/847810bf-5d62-4131-a70d-d9efdfadb334
+  @wip
+  Scenario: Locking an Unlocked Room
+    Given a Workspace with an Unlocked Room
+    When a Workspace Member locks the Room with a Room Key
+    Then the Room is Locked
 
-  Scenario: Guest who knows Room Key enters Locked Room
-    Given a Workspace with a Locked Room
-    When a Guest provides the correct Room Key
-    Then the Guest is placed in the Room
+  # This is a "sad path" scenario, that we expect to delete once we
+  # have proven it out; since it's unlikely to be necessary to continuously check
+  # at the user-level; when we can rely on ActiveRecord validations and consistent
+  # usage of form builders that expose error information.
+  @wip
+  Scenario: Locking an Unlocked Room without setting a Room Key
+    Given a Workspace with an Unlocked Room
+    When a Workspace Member locks the Room without a Room Key
+    Then the Workspace Member is informed they need to set a Room Key when they are locking a Room
+    And the Room is Unlocked
 
-  Scenario: Guest who does not know Room Key cannot enter Locked Room
-    Given a Workspace with a Locked Room
-    When a Guest provides the wrong Room Key
-    Then the Guest is not placed in the Room
+
+  # Wireframe:
+  # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/847810bf-5d62-4131-a70d-d9efdfadb334
+  @wip
+  Scenario: Unlocking a Locked Room
+  Given a Workspace with a Locked Room
+  When a Workspace Member unlocks the Room with the correct Room Key
+  Then the Room is Unlocked
