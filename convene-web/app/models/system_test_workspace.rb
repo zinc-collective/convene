@@ -20,6 +20,12 @@ class SystemTestWorkspace
         publicity_level: :listed,
       },
       {
+        name: "Listed Locked Room 1",
+        publicity_level: :listed,
+        access_level: :locked,
+        access_code: :secret,
+      },
+      {
         name: "Unlisted Room 1",
         publicity_level: :unlisted,
       },
@@ -50,8 +56,9 @@ class SystemTestWorkspace
     end
 
     private def add_demo_rooms(workspace)
-      DEMO_ROOMS.each do |room|
-        workspace.rooms.find_or_create_by!(name: room[:name], publicity_level: room[:publicity_level])
+      DEMO_ROOMS.each do |room_properties|
+        room = workspace.rooms.find_or_initialize_by(name: room_properties[:name])
+        room.update!(room_properties.except(:name))
       end
       workspace
     end

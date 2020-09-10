@@ -45,4 +45,22 @@ RSpec.describe Room, type: :model do
       it { is_expected.not_to be_listed }
     end
   end
+
+  describe "#enterable?" do
+    subject(:room) { Room.new(access_code: room_access_code, access_level: access_level) }
+    let(:room_access_code) { nil }
+
+    context "unlocked room" do
+      let(:access_level) { 'unlocked' }
+      it { is_expected.to be_enterable(nil) }
+      it { is_expected.to be_enterable('secret') }
+    end
+
+    context "locked room" do
+      let(:access_level) { 'locked' }
+      let(:room_access_code) { 'secret' }
+      it { is_expected.to_not be_enterable(nil) }
+      it { is_expected.to be_enterable('secret') }
+    end
+  end
 end

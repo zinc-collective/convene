@@ -1,11 +1,12 @@
 class RoomsController < ApplicationController
   before_action :set_current_room
 
-  def waiting_room
-  end
-
   def show
-    render layout: "video_room"
+    if @current_room.enterable?(params[:access_code])
+      render layout: "video_room"
+    else
+      render 'waiting_room'
+    end
   end
 
   private def set_current_room

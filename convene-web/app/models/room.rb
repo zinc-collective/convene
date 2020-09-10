@@ -49,4 +49,9 @@ class Room < ApplicationRecord
 
   scope :owned_by,      -> (person) { joins(:owners).where(room_ownerships: { owner: person }) }
   scope :accessable_by, -> (person = nil) { union(self.owned_by(person)).union(self.listed) }
+
+  def enterable?(access_code)
+    return true if access_level == 'unlocked'
+    self.access_code == access_code
+  end
 end
