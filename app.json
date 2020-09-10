@@ -46,6 +46,14 @@
         "SYSTEM_TEST": {
           "description": "Seed system test data",
           "value": "true"
+        },
+        "ADMIN_USERNAME": {
+          "description": "Username for administrator",
+          "value": "admin"
+        },
+        "ADMIN_PASSWORD": {
+          "description": "Password to access the admin panel",
+          "generator": "secret"
         }
       },
       "addons": [
