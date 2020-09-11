@@ -6,7 +6,7 @@
     </div>
   </div>
     <%= form_tag(workspace_room_path(current_room.workspace, current_room), method: :get, class: "m-auto flex flex-col") do %>
-      <%= password_field_tag('access_code', nil, placeholder: "Access Code", class: "mt-4") %>
+      <%= password_field_tag('access_code', nil, placeholder: "Access Code", class: "mt-4", autofocus: true) %>
       <%= submit_tag("Submit", class: "button button-blue mt-4") %>
     <% end %>
 </div>

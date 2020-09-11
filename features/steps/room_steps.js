@@ -45,14 +45,15 @@ Then('a {actor} may enter the Room without providing {roomKey}', function (actor
   return 'pending';
 });
 
-Then('a {actor} may not enter the {room} after providing {roomKey}', function (actor, room, roomKey) {
-  // Write code here that turns the phrase above into concrete actions
+Then('a {actor} may not enter the {room} after providing {roomKey}', async function (actor, room, roomKey) {
+  // await this.workspace.enterRoomWithAccessCode(room, 'wrongAccessCode');
   return 'pending';
 });
 
-Then('a {actor} may enter the {room} after providing {roomKey}', function (actor, room, roomKey) {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+Then('a {actor} may enter the {room} after providing {roomKey}', async function (actor, room, roomKey) {
+  await this.workspace.enterRoomWithAccessCode(room, 'secret');
+  const videoPanel = await this.workspace.videoPanel();
+  assert(await videoPanel.isDisplayed());
 });
 
 Then('the {workspace} has a {room}', function (workspace, room) {

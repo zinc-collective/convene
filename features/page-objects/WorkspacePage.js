@@ -21,6 +21,18 @@ class WorkspacePage extends Page {
     roomCard.findElement(By.linkText("Enter Room")).click();
   }
 
+  async enterRoomWithAccessCode(room, accessCode) {
+    await this.enterRoom(room);
+
+    const placeholderSelector = By.css("[placeholder='Access Code']");
+    await this.driver.wait(until.elementLocated(placeholderSelector));
+    const accessCodeInput = await this.driver.findElement(placeholderSelector);
+    accessCodeInput.sendKeys(accessCode);
+
+    const submitInput = await this.driver.findElement(By.css("[value='Submit']"));
+    submitInput.click();
+  }
+
   async findRoomCard(room, wait = true) {
     if(wait) {
       await this.driver.wait(until.elementLocated(By.id(room.name)));
