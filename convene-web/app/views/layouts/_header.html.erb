@@ -1,12 +1,9 @@
   <header class="header">
-    <div class="item-container">
-      <div class="item-title text-2xl">
-        <%= current_workspace.client.name %>
-      </div>
-      <div class="item-title text-sm">
-        <div><%= current_workspace.name %></div>
-        <div class="item-subtitle">video meeting spaces</div>
+    <div class="items-container">
+      <h1><%= current_workspace.client.name %></h1>
+      <div>
+        <h3><%= current_workspace.name %></h3>
+        <h3 class="font-hairline">video meeting spaces</h3>
       </div>
     </div>
   </header>
-  

@@ -1,9 +1,9 @@
-.btn {
+.button {
   @apply font-bold py-2 px-4 rounded;
 }
-.btn-blue {
+.button-blue {
   @apply bg-blue-500 text-white;
 }
-.btn-blue:hover {
+.button-blue:hover {
   @apply bg-blue-700;
 }

@@ -6,7 +6,8 @@
       <i class="fas fa-user ml-4"></i>
     </div>
   </div>
-    <%= form_tag(workspace_room_path(room.workspace, room), method: :get, class: "m-auto flex flex-col") %>
-    <%= password_field_tag('access_code', nil, placeholder: "Access Code", class: "input mt-4") %>
-    <%= submit_tag("Submit", class: "btn btn-blue mt-4") %>
+    <%= form_tag(workspace_room_path(room.workspace, room), method: :get, class: "m-auto flex flex-col") do %>
+      <%= password_field_tag('access_code', nil, placeholder: "Access Code", class: "mt-4") %>
+      <%= submit_tag("Submit", class: "button button-blue mt-4") %>
+    <% end %>
 </div>
