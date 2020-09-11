@@ -19,25 +19,17 @@ Feature: Locking Rooms
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/04ee266e-931b-4bde-bcf9-af94c7ac444e
-  @built @unimplemented-steps
-  Scenario: Workspace Member entering a Locked Room
-    Given the Workspace Member is on the "System Test" Workspace Dashboard
-    Then a Workspace Member may enter the "Listed Locked Room 1" Room after providing the correct Room Key
-    And a Workspace Member may not enter the "Listed Locked Room 1" Room after providing the wrong Room Key
-
   @wip
-  Scenario: Guest entering a Locked Room
-    Given the Guest is on the "System Test" Workspace Dashboard
-    And a Guest may enter the "Listed Locked Room 1" after providing the correct Room Key
-    And a Guest may not enter the "Listed Locked Room 1" after providing the wrong Room Key
-
-  @wip
-  Scenario: Workspace Admin entering a Locked Room
+  Scenario: Entering a Locked Room
+    Given a Workspace with a Locked Room
+    Then a Workspace Member may enter the Room after providing the correct Room Key
+    And a Workspace Member may not enter the Room after providing the wrong Room Key
+    And a Guest may enter the Room after providing the correct Room Key
+    And a Guest may not enter the Room after providing the wrong Room Key
     # We're not sure if this is actually a good idea, we should check with
     # design / product to make sure that it makes sense for admins to be able
     # to barge in like a grumpy parent on prom night.
-    Given the Workspace Admin is on the "System Test" Workspace Dashboard
-    And a Workspace Admin may enter the "Listed Locked Room 1" without providing a Room Key
+    And a Workspace Admin may enter the Room without providing a Room Key
 
   # TODO: We should check with Colombene and Vivek re: "Is there `Invitation` feature?"
   @unstarted

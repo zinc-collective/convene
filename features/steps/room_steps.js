@@ -46,7 +46,7 @@ Then('a {actor} may enter the Room without providing {roomKey}', function (actor
 });
 
 Then('a {actor} may not enter the {room} after providing {roomKey}', async function (actor, room, roomKey) {
-  // await this.workspace.enterRoomWithAccessCode(room, 'wrongAccessCode');
+  // Write code here that turns the phrase above into concrete actions
   return 'pending';
 });
 
