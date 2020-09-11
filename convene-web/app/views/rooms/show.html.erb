@@ -3,7 +3,7 @@
   data-controller="video-room"
   data-target="video-room.wrapper"
   data-video-room-video-host="<%= current_workspace.jitsi_meet_domain %>"
-  data-video-room-name="<%= video_room_name(current_workspace, @current_room) %>"
+  data-video-room-name="<%= video_room_name(current_workspace, current_room) %>"
   data-video-room-workspace-path="<%= end_call_path(current_workspace) %>"
   class="bg-gray-800"
 >

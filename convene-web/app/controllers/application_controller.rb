@@ -19,4 +19,15 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     nil
   end
+
+  # Retrieves the room based upon the current_workspace and params
+  # @returns [nil, Room]
+  helper_method def current_room
+    @current_room ||=
+      current_workspace.rooms.friendly.find(
+        params[:id] || params[:room_id]
+      )
+  rescue ActiveRecord::RecordNotFound
+    nil
+  end
 end
