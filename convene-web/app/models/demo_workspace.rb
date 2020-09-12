@@ -15,7 +15,30 @@ class DemoWorkspace
     # These are the Rooms we expect the DemoWorkspace to have by default.
     # Our customer team leverages them for their demonstrations of Convene's
     # feature set.
-    DEMO_ROOMS = ["Zee's Desk", "Vivek's Desk", 'Water Cooler', 'The Ada Lovelace Room'].freeze
+    DEMO_ROOMS = [
+      {
+        name: "Zee's Desk",
+        publicity_level: :listed,
+      },
+      {
+        name: "Vivek's Desk",
+        publicity_level: :listed,
+      },
+      {
+        name: "Water Cooler",
+        publicity_level: :listed,
+      },
+      {
+        name: "The Ada Lovelace Room",
+        publicity_level: :listed,
+      },
+      {
+        name: "Locked Room",
+        publicity_level: :listed,
+        access_level: :locked,
+        access_code: :friends,
+      },
+    ].freeze
 
     # @param [ActiveRecord::Relation<Client>] client_repository Where to ensure there
     #  is a Zinc Client with the Convene Demo workspace
@@ -34,8 +57,9 @@ class DemoWorkspace
     end
 
     private def add_demo_rooms(workspace)
-      DEMO_ROOMS.each do |name|
-        workspace.rooms.find_or_create_by!(name: name, publicity_level: 'listed')
+      DEMO_ROOMS.each do |room_properties|
+        room = workspace.rooms.find_or_initialize_by(name: room_properties[:name])
+        room.update!(room_properties.except(:name))
       end
       workspace
     end
