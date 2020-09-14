@@ -1,6 +1,11 @@
 # Convene
 
-Space to (play || work || grow || be).
+* [Developing Convene](#developing-convene)
+* [Architecture](#architecture)
+* [Design](#design)
+
+Convene is a video conferencing software that provides secure, affordable, and private digital meeting spaces. 
+Spaces where anyone can (play || work || grow || be).
 
 ## Purpose
 
