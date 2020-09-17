@@ -2,10 +2,6 @@
   .top-menu { display: none }
 <% end %>
 
-<% content_for :head do %>
-  <title><%= "#{current_workspace.name} - #{current_room.name}" %></title>
-<% end %>
-
 <div
   id="meet"
   data-controller="video-room"
