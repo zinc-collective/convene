@@ -8,13 +8,14 @@
 
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style><%= yield :stylesheets %></style>
     <% if current_workspace&.jitsi_meet_domain %>
       <script defer src='https://<%= current_workspace.jitsi_meet_domain %>/external_api.js'></script>
     <% end %>
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
+    <%= render 'layouts/top_menu' %>
     <%= yield %>
   </body>
 </html>

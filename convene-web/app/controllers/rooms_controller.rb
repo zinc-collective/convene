@@ -1,9 +1,9 @@
 class RoomsController < ApplicationController
   def show
     if current_room.enterable?(params[:access_code])
-      render layout: "video_room"
+      render :show
     else
-      render 'waiting_room'
+      render :waiting_room
     end
   end
 end
