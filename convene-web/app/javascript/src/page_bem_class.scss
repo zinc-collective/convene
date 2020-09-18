@@ -1,0 +1,7 @@
+.app {
+  &--no-top-menu {
+    .top-menu {
+      display: none;
+    }
+  }
+}
