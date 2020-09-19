@@ -1,6 +1,6 @@
 .app {
-  &--no-top-menu {
-    .top-menu {
+  &--no-header {
+    .header {
       display: none;
     }
   }
