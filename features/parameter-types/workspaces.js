@@ -15,3 +15,5 @@ class Workspace {
     this.slug = workspaceName.replace(/\s+/g, '-').toLowerCase();
   }
 }
+
+module.exports = Workspace;

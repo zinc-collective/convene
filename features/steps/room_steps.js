@@ -1,9 +1,15 @@
 const { Given, When, Then } = require("cucumber");
+const WorkspacePage = require("../page-objects/WorkspacePage");
+const Workspace = require("../parameter-types/workspaces");
+const Room = require("../parameter-types/rooms");
 const assert = require('assert').strict;
 
-Given("a Workspace with {accessLevel} {room}", function (accessLevel, room) {
-  // Write code here that turns the phrase above into concrete actions
-  return "pending";
+Given("a Workspace with {accessLevel} {room}", async function (accessLevel, room) {
+  const workspace = new Workspace("System Test");
+  this.workspace = new WorkspacePage(this.driver, workspace);
+  await this.workspace.enter();
+  const lockedRooms = await this.workspace.roomCardsWhere({ accessLevel });
+  assert(lockedRooms.length > 0);
 });
 
 Given('a Workspace with an {publicityLevel} Room', function (publicityLevel) {
@@ -45,13 +51,17 @@ Then('a {actor} may enter the Room without providing {roomKey}', function (actor
   return 'pending';
 });
 
-Then('a {actor} may not enter the {room} after providing {roomKey}', async function (actor, room, roomKey) {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+Then('a {actor} may not enter {accessLevel} {room} after providing {roomKey}', async function (actor, accessLevel, room, roomKey) {
+  const lockedRoom = new Room(`Listed ${accessLevel.level} Room 1`);
+  await this.workspace.enterRoomWithAccessCode(lockedRoom, 'wrong key');
+  // TODO: Assert error message, assert videoPanel don't exist without waiting for timeout
+  const videoPanel = await this.workspace.videoPanel();
+  assert.fail(await videoPanel.isDisplayed());
 });
 
-Then('a {actor} may enter the {room} after providing {roomKey}', async function (actor, room, roomKey) {
-  await this.workspace.enterRoomWithAccessCode(room, 'secret');
+Then('a {actor} may enter {accessLevel} {room} after providing {roomKey}', async function (actor, accessLevel, room, roomKey) {
+  const lockedRoom = new Room(`Listed ${accessLevel.level} Room 1`);
+  await this.workspace.enterRoomWithAccessCode(lockedRoom, 'secret');
   const videoPanel = await this.workspace.videoPanel();
   assert(await videoPanel.isDisplayed());
 });

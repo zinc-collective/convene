@@ -19,13 +19,13 @@ Feature: Locking Rooms
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/04ee266e-931b-4bde-bcf9-af94c7ac444e
-  @built @unimplemented-steps
+  @built
   Scenario: Entering a Locked Room
     Given a Workspace with a Locked Room
-    Then a Workspace Member may enter the Room after providing the correct Room Key
-    And a Workspace Member may not enter the Room after providing the wrong Room Key
-    And a Guest may enter the Room after providing the correct Room Key
-    And a Guest may not enter the Room after providing the wrong Room Key
+    Then a Workspace Member may enter the Locked Room after providing the correct Room Key
+    And a Workspace Member may not enter the Locked Room after providing the wrong Room Key
+    And a Guest may enter the Locked Room after providing the correct Room Key
+    And a Guest may not enter the Locked Room after providing the wrong Room Key
 
   # TODO: We should check with Colombene and Vivek re: "Is there `Invitation` feature?"
   @unstarted

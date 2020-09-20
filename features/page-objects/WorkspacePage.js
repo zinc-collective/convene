@@ -48,6 +48,11 @@ class WorkspacePage extends Page {
     assert.equal(videoPanels.length, 1, `${videoPanels.length} was found.`)
     return await this.driver.findElement(jitsiConferenceFrame);
   }
+
+  roomCardsWhere({ accessLevel }) {
+    const selector = `.--${accessLevel.level.toLowerCase()}`
+    return this.driver.findElements(By.css(`.--${accessLevel.level.toLowerCase()}`));
+  }
 }
 
 module.exports = WorkspacePage;
