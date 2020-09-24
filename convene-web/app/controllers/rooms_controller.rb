@@ -1,9 +1,9 @@
 class RoomsController < ApplicationController
   def show
-    if current_room.enterable?(params[:access_code])
+    if current_room.enterable?(session[:access_code])
       render :show
     else
-      render :waiting_room
+      redirect_to workspace_room_waiting_room_path(current_workspace, current_room)
     end
   end
 

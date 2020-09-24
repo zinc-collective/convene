@@ -4,3 +4,21 @@ input {
 input:focus {
   @apply outline-none shadow-outline;
 }
+.access-code-form {
+  @apply m-auto flex flex-col;
+}
+.access-code-form__input {
+  @apply mt-4;
+}
+.access-code-form__input--error {
+  @apply border border-red-500;
+}
+.access-code-form__message {
+  @apply hidden;
+}
+.access-code-form__error-message {
+  @apply text-xs italic font-hairline text-red-500;
+}
+.access-code-form__submit {
+  @apply mt-4;
+}
