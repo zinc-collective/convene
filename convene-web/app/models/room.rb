@@ -52,6 +52,8 @@ class Room < ApplicationRecord
 
   def enterable?(access_code)
     return true if access_level == 'unlocked'
-    self.access_code == access_code
+    can_enter = self.access_code == access_code
+    errors[:base] << "Invalid access code" if access_code
+    can_enter
   end
 end
