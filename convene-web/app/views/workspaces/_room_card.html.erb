@@ -3,7 +3,12 @@
     <div class="flex-1 truncate">
       <div class="flex items-center space-x-3">
         <h3 class="text-gray-900 text-sm leading-5 font-medium truncate"><%= room.name %></h3>
-        <span class="flex-shrink-0 inline-block px-2 py-0.5 text-teal-800 text-xs leading-4 font-medium bg-teal-100 rounded-full">Available</span>
+        <%- if room.locked? %>
+          <i class="fas fa-lock"></i>
+        <%- end %>
+        <%- if room.locked? && room.enterable?(current_access_code) %>
+          <i class="fas fa-key"></i>
+        <%- end %>
       </div>
     </div>
   </div>
