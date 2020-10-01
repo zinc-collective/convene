@@ -1,4 +1,4 @@
-@unimplemented
+@unstarted
 Feature: Identification
   In order to assert my personal rights within a Space
   I want to Identify myself
@@ -11,8 +11,8 @@ Feature: Identification
 
   Scenario: Identifying Via Email
     When a Guest requests to Identify themselves via Email
-    Then the Guest can Identify themselves by entering a code sent to their Email
-    And the Guest can Identify themselves by following a link sent to their Email
+    Then the Guest can Identify themselves by entering the code sent to their Email
+    And the Guest can Identify themselves by following the link sent to their Email
 
   Scenario: Identifying People with Multiple Email Addresses
     Given an Identified User adds an additional Email Address
@@ -21,9 +21,9 @@ Feature: Identification
 
   Scenario: Email Identification Code Times Out
     Given a Guest reuqests to Identify themselves via Email
-    When I wait a an hour
-    Then I am not identified within the space when I enter the code
-    Then I am not identified within the space when I follow the link
+    When the Guest waits a an hour
+    Then the Guest can not Identify themselves by entering the code sent to their Email
+    And the Guest can not Identify themselves by following the link sent to their Email
 
   Scenario: Inactivity Sign Out
     Given an Identified User has been Inactive for 7 days
