@@ -41,6 +41,11 @@ Feature: Membership and Ownership
     When the Invited Person accepts their Invitation
     Then the Invited Person is an Owner
 
+  Scenario: Email Invitation Code Times out
+    Given a Owner Invited someone to be a Member
+    When the Invited Person waits for 30 days
+    Then the Invited Person can not accept invitation
+
   # We need to think this through.
   # Allowing Owners to remove other Owners may result in Peril
   # Scenario: Removing an Owner
