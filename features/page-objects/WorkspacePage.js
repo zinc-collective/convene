@@ -22,14 +22,16 @@ class WorkspacePage extends Page {
   }
 
   async enterRoomWithAccessCode(room, accessCode) {
+    this.driver.manage().deleteAllCookies();
+    this.enter();
     await this.enterRoom(room);
 
-    const placeholderSelector = By.css("[placeholder='Access Code']");
-    await this.driver.wait(until.elementLocated(placeholderSelector));
-    const accessCodeInput = await this.driver.findElement(placeholderSelector);
+    const inputSelector = By.css("[id='waiting_room_access_code']");
+    await this.driver.wait(until.elementLocated(inputSelector));
+    const accessCodeInput = await this.driver.findElement(inputSelector);
     accessCodeInput.sendKeys(accessCode);
 
-    const submitInput = await this.driver.findElement(By.css("[value='Submit']"));
+    const submitInput = await this.driver.findElement(By.css("[type='submit']"));
     submitInput.click();
   }
 

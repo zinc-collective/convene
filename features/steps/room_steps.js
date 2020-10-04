@@ -4,6 +4,8 @@ const Workspace = require("../parameter-types/workspaces");
 const Room = require("../parameter-types/rooms");
 const assert = require('assert').strict;
 
+const { By, until } = require('selenium-webdriver');
+
 Given("a Workspace with {accessLevel} {room}", async function (accessLevel, room) {
   const workspace = new Workspace("System Test");
   this.workspace = new WorkspacePage(this.driver, workspace);
@@ -54,9 +56,11 @@ Then('a {actor} may enter the Room without providing {roomKey}', function (actor
 Then('a {actor} may not enter {accessLevel} {room} after providing {roomKey}', async function (actor, accessLevel, room, roomKey) {
   const lockedRoom = new Room(`Listed ${accessLevel.level} Room 1`);
   await this.workspace.enterRoomWithAccessCode(lockedRoom, 'wrong key');
-  // TODO: Assert error message, assert videoPanel don't exist without waiting for timeout
-  const videoPanel = await this.workspace.videoPanel();
-  assert.fail(await videoPanel.isDisplayed());
+
+  // TODO: Encapsulate checking error messages
+  const error = By.css("[class='access-code-form__error-message']")
+  const errorMsg = await this.driver.wait(until.elementLocated(error));
+  assert.equal(await errorMsg.isDisplayed(), true)
 });
 
 Then('a {actor} may enter {accessLevel} {room} after providing {roomKey}', async function (actor, accessLevel, room, roomKey) {
