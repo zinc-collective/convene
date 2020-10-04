@@ -19,7 +19,7 @@ Feature: Locking Rooms
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/04ee266e-931b-4bde-bcf9-af94c7ac444e
-  @built
+  @wip
   Scenario: Entering a Locked Room
     Given a Workspace with a Locked Room
     Then a Workspace Member may enter the Locked Room after providing the correct Room Key
@@ -37,7 +37,7 @@ Feature: Locking Rooms
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/847810bf-5d62-4131-a70d-d9efdfadb334
-  @wip
+  @unstarted
   Scenario: Locking an Unlocked Room
     Given a Workspace with an Unlocked Room
     When a Workspace Member locks the Room with a Room Key
@@ -47,7 +47,7 @@ Feature: Locking Rooms
   # have proven it out; since it's unlikely to be necessary to continuously check
   # at the user-level; when we can rely on ActiveRecord validations and consistent
   # usage of form builders that expose error information.
-  @wip
+  @unstarted
   Scenario: Locking an Unlocked Room without setting a Room Key
     Given a Workspace with an Unlocked Room
     When a Workspace Member locks the Room without a Room Key
@@ -57,7 +57,7 @@ Feature: Locking Rooms
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/847810bf-5d62-4131-a70d-d9efdfadb334
-  @wip
+  @unstarted
   Scenario: Unlocking a Locked Room
   Given a Workspace with a Locked Room
   When a Workspace Member unlocks the Room with the correct Room Key
