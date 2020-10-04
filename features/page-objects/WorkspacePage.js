@@ -52,7 +52,6 @@ class WorkspacePage extends Page {
   }
 
   roomCardsWhere({ accessLevel }) {
-    const selector = `.--${accessLevel.level.toLowerCase()}`
     return this.driver.findElements(By.css(`.--${accessLevel.level.toLowerCase()}`));
   }
 }
