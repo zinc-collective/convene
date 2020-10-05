@@ -19,7 +19,7 @@ Feature: Locking Rooms
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/04ee266e-931b-4bde-bcf9-af94c7ac444e
-  @wip
+  @built
   Scenario: Entering a Locked Room
     Given a Workspace with a Locked Room
     Then a Workspace Member may enter the Locked Room after providing the correct Room Key
