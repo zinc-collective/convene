@@ -33,8 +33,8 @@ class Room {
 // See: https://github.com/zinc-collective/convene/issues/41
 defineParameterType({
   name: "accessLevel",
-  regexp: /(an |a )?(Unlocked|Internal|Locked)/,
-  transformer: (level) => new AccessLevel(level),
+  regexp: /(an |a |the )?(Unlocked|Internal|Locked)/,
+  transformer: (_, level) => new AccessLevel(level),
 });
 
 class AccessLevel {
@@ -60,3 +60,5 @@ defineParameterType({
   name: "roomKey",
   regexp: /(a |the )?(correct |wrong )?Room Key/,
 });
+
+module.exports = Room;

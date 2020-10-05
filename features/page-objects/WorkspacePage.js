@@ -22,14 +22,16 @@ class WorkspacePage extends Page {
   }
 
   async enterRoomWithAccessCode(room, accessCode) {
+    this.driver.manage().deleteAllCookies();
+    this.enter();
     await this.enterRoom(room);
 
-    const placeholderSelector = By.css("[placeholder='Access Code']");
-    await this.driver.wait(until.elementLocated(placeholderSelector));
-    const accessCodeInput = await this.driver.findElement(placeholderSelector);
+    const inputSelector = By.css("[id='waiting_room_access_code']");
+    await this.driver.wait(until.elementLocated(inputSelector));
+    const accessCodeInput = await this.driver.findElement(inputSelector);
     accessCodeInput.sendKeys(accessCode);
 
-    const submitInput = await this.driver.findElement(By.css("[value='Submit']"));
+    const submitInput = await this.driver.findElement(By.css("[type='submit']"));
     submitInput.click();
   }
 
@@ -47,6 +49,10 @@ class WorkspacePage extends Page {
     const videoPanels = await this.driver.findElements(jitsiConferenceFrame);
     assert.equal(videoPanels.length, 1, `${videoPanels.length} was found.`)
     return await this.driver.findElement(jitsiConferenceFrame);
+  }
+
+  roomCardsWhere({ accessLevel }) {
+    return this.driver.findElements(By.css(`.--${accessLevel.level.toLowerCase()}`));
   }
 }
 
