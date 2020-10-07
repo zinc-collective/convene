@@ -1,4 +1,4 @@
-<div class="room-card">
+<div class="room-card <%= "--#{room.access_level}" %>" id="<%= room.name %>">
   <header>
     <h3><%= room.name %></h3>
     <%- if room.locked? %>
