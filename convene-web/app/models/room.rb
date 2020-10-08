@@ -19,8 +19,7 @@ class Room < ApplicationRecord
   # `locked` indicates that only participants who know the rrooms `access_code` may access the room.
   # `internal` indicates that only participants who are Workspace Members _or_ know the Workspaces `access_code` may
   # access the room.
-  # TODO Return :unlocked by default, add database non null
-  attribute :access_level, :string
+  attribute :access_level, :string, default: 'unlocked'
 
   # A room's Access Code is a "secret" that, when known, grants access to the room.
   attribute :access_code, :string
@@ -37,6 +36,10 @@ class Room < ApplicationRecord
 
   def unlisted?
     publicity_level&.to_sym == :unlisted
+  end
+
+  def locked?
+    access_level&.to_sym == :locked
   end
 
   # Links People to the room for permissioning

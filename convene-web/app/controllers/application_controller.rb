@@ -37,4 +37,8 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     nil
   end
+
+  helper_method def current_access_code
+    session[:access_code]
+  end
 end
