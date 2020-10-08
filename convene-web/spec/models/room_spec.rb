@@ -63,4 +63,16 @@ RSpec.describe Room, type: :model do
       it { is_expected.to be_enterable('secret') }
     end
   end
+
+  describe "#access_code" do
+    context "when the Room is Locked" do
+      subject(:room) { Room.new(access_level: "locked") }
+      it { is_expected.to validate_presence_of(:access_code) }
+    end
+
+    context "when the Room is Unlocked" do
+      subject(:room) { Room.new(access_level: "unlocked") }
+      it { is_expected.not_to validate_presence_of(:access_code) }
+    end
+  end
 end
