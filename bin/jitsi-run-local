@@ -4,11 +4,23 @@
 
 set -e
 
-if [[ "$(docker-machine status)" != "Running" ]]; then
-  echo "There doesn't seem to be a running default Docker machine."
-  echo "Please make sure that 'docker-machine status' returns 'Running' and try again."
-  exit 1
+echo "${DOCKER_HOST}"
+if [[ -n "${DOCKER_HOST}" ]]; then
+echo "WAAAAA"
+  # Example DOCKER_HOSTs that work: `tcp://192.168.0.1:2375`
+  # Example DOCKER_HOSTs that do not work: `192.168.0.1`, `tcp://192.168.0.1`
+  # TODO: Probably could make this more resilient?
+  DOCKER_HOST_AND_PORT=$(echo $DOCKER_HOST | cut -d / -f 3)
+  nc -z $(echo $DOCKER_HOST_AND_PORT | cut -d : -f 1) $(echo $DOCKER_HOST_AND_PORT | cut -d : -f 2)
+
+else
+echo "BAAAA"
 fi
+#if [[ "$(docker-machine status)" != "Running" ]]; then
+#  echo "There doesn't seem to be a running default Docker machine."
+#  echo "Please make sure that 'docker-machine status' returns 'Running' and try again."
+#  exit 1
+#fi
 
 # This hostname should match what is set as the local hostname when setting up the Docker image.
 # See the HOSTNAME variable in infrastructure/dev/install-jitsi-meet.sh
