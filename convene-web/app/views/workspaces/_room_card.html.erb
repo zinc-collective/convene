@@ -2,17 +2,16 @@
   <header>
     <h3><%= room.name %></h3>
     <%- if room.locked? %>
-      <i class="fas fa-lock"></i>
+      <span class="fas fa-lock"></span>
     <%- end %>
     <%- if room.locked? && room.enterable?(current_access_code) %>
-      <i class="ml-2 fas fa-key"></i>
+      <span class="ml-2 fas fa-key"></span>
     <%- end %>
   </header>
   <footer>
     <div class="room-door_enter">
       <%= link_to workspace_room_path(room.workspace, room) do %>
-        <i class="fas fa-phone-alt"></i>
-        <span>Enter Room</span>
+        <span class="icon-solid phone-alt-icon">Enter Room</span>
       <% end %>
     </div>
   </footer>
