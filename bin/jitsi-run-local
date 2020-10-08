@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Script to start a local dockerized Jitsi infrastructure chain, running on the default Docker machine.
+
+set -e
+
+if [[ "$(docker-machine status)" != "Running" ]]; then
+  echo "There doesn't seem to be a running default Docker machine."
+  echo "Please make sure that 'docker-machine status' returns 'Running' and try again."
+  exit 1
+fi
+
+# This hostname should match what is set as the local hostname when setting up the Docker image.
+# See the HOSTNAME variable in infrastructure/dev/install-jitsi-meet.sh
+DOCKER_HOSTNAME=jitsi
+IMAGE_TAG=jitsilocal
+
+# We assume this script is being called from the root of the repo, as bin/run-local-jitsi
+cd infrastructure/dev
+
+if [[ "$(docker images -q $IMAGE_TAG 2> /dev/null)" == "" ]]; then
+  echo "Couldn't find Docker image named $IMAGE_TAG. Building a new one."
+  docker build -f jitsi-meet.Dockerfile . --tag $IMAGE_TAG
+fi
+
+docker run -d -p 80:80 -p 443:443 -p 8080:8080 --hostname $DOCKER_HOSTNAME --name jitsi_local $IMAGE_TAG
+
+DOCKER_IP=`docker-machine ip`
+echo "Jitsi services are now running on your docker-machine"
+echo "To verify your installation, open the Jitsi Meet web UI at https://$DOCKER_IP"
+echo "To access Jitsi without having to use the Docker IP, you can add the following line to your /etc/hosts: echo "$DOCKER_IP jitsi"
