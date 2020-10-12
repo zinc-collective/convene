@@ -35,5 +35,3 @@ debconf-get-selections | grep jitsi
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get update && apt-get install -y jitsi-meet
-
-# for service in jicofo jitsi-videobridge2 prosody nginx ; do service $service start ; done

@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Script to start a local dockerized Jitsi infrastructure chain, running on the default Docker machine.
+# Script assumes that it is being called from the root of the repo, as bin/jitsi-local-run
+
+set -e
+
+if [[ -z "${DOCKER_HOST}" ]]; then
+  echo "Couldn't find a DOCKER_HOST env variable. This script depends on a running Docker machine."
+  echo "Please start Docker and set up your environment, and try this script again."
+  exit 1
+fi
+
+# Example DOCKER_HOSTs that work: `tcp://192.168.0.1:2375`
+# Example DOCKER_HOSTs that do not work: `192.168.0.1`, `tcp://192.168.0.1`
+DOCKER_HOST_AND_PORT=$(echo $DOCKER_HOST | cut -d / -f 3)
+DOCKER_HOST_IP=$(echo $DOCKER_HOST_AND_PORT | cut -d : -f 1)
+DOCKER_HOST_PORT=$(echo $DOCKER_HOST_AND_PORT | cut -d : -f 2)
+
+echo "Attempting to verify that a docker machine is running at ${DOCKER_HOST_IP}:${DOCKER_HOST_PORT}"
+nc -z $DOCKER_HOST_IP $DOCKER_HOST_PORT
+
+# This hostname should match what is set as the local hostname when setting up the Docker image.
+# See the HOSTNAME variable in infrastructure/dev/install-jitsi-meet.sh
+CONTAINER_HOSTNAME=jitsi
+IMAGE_TAG=jitsi_local
+
+if [[ "$(docker images -q $IMAGE_TAG 2> /dev/null)" == "" ]]; then
+  echo "Couldn't find Docker image named $IMAGE_TAG. Building a new one."
+  cd infrastructure/dev && docker build -f jitsi-meet.Dockerfile . --tag $IMAGE_TAG
+fi
+
+echo "Starting Docker container..."
+docker run -d -p 80:80 -p 443:443 -p 8080:8080 --hostname $CONTAINER_HOSTNAME $IMAGE_TAG
+
+echo "Jitsi services are now running in a Docker container."
+echo "Add the following line to your /etc/hosts: $DOCKER_HOST_IP $CONTAINER_HOSTNAME"
+echo "Then, to verify your installation, open the Jitsi Meet web UI at https://$CONTAINER_HOSTNAME"
