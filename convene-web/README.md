@@ -1,9 +1,10 @@
 # Convene Web <!-- omit in toc -->
 
 - [Contributing](#contributing)
-- [Configuring your Development Machine](#configuring-your-development-machine)
+- [System Overview](#system-overview)
+- [Configuring Your Development Machine](#configuring-your-development-machine)
 - [Testing Convene Web](#testing-convene-web)
-- [Running Jitsi Meet locally](#running-jitsi-meet-locally)
+- [Running Jitsi Meet Locally](#running-jitsi-meet-locally)
 
 The Convene Web project provides a human and computer interface for managing of
 Workspaces, Rooms, and Team Members.
@@ -15,7 +16,23 @@ The User Interface is written in [Stimulus](https://stimulusjs.org/).
 See [Convene's Contributing Guide](../CONTRIBUTING.md) for an overview of
 contributing to Zinc projects.
 
-## Configuring your Development Machine
+## System Overview
+
+The central piece to Convene is `convene-web`, a Ruby on Rails server that is responsible for:
+* serving the Convene UI
+* managing users, workspaces, rooms, permissions, etc
+
+The Convene UI is based on Rails standard templating system, with heavy use of:
+* [Stimulus JS](https://stimulusjs.org/)
+   * the entry point for our JavaScript is in `app/javascript/controllers/index.js`,
+     which loads all `app/javascript/*_controllers.js` files
+* [Tailwind CSS](https://tailwindcss.com/) to help speed up making good-looking UIs
+
+Jitsi is Convene's video call infrastructure. The
+[video_room_controller.js](./app/javascript/controllers/video_room_controller.js) is the entry point
+where we load a Jisti video call iframe into Convene's UI.
+
+## Configuring Your Development Machine
 
 First, ensure your development environment has:
 
@@ -69,7 +86,7 @@ can be executed without a database should `require "spec_helper"`.
 [rspec]: https://rspec.info/
 [cucumber]: https://cucumber.io/
 
-## Running Jitsi Meet locally
+## Running Jitsi Meet Locally
 
 Typically we develop Convene against a test Jitsi instance in the cloud. For the
 situations when you'd rather run Jitsi locally (e.g to work on Jitsi configuration
