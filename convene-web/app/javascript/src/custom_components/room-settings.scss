@@ -36,6 +36,10 @@
     footer {
       @apply mt-5 flex flex-row-reverse;
 
+      a {
+        @apply inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md bg-white transition ease-in-out duration-150
+      }
+
       input[type=submit] {
         @apply inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-blue-700 bg-blue-100 transition ease-in-out duration-150;
         &:hover {
