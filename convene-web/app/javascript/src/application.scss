@@ -1,8 +1,2 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-
-// All extract components must be placed between tailwindcss/components & tailwindcss/utilities to avoid being overwriting utilites
 @import "./custom_components";
 @import "./page_bem_class";
-
-@import "tailwindcss/utilities";
