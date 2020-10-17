@@ -1,13 +1,15 @@
-.header {
-  .items-container {
-    @apply flex items-center justify-between px-4 py-3 bg-blue-500 text-white font-bold;
+@layer components {
+  .header {
+    .items-container {
+      @apply flex items-center justify-between px-4 py-3 bg-blue-500 text-white font-bold;
 
-    h1 {
-      @apply text-2xl;
-    }
+      h1 {
+        @apply text-2xl;
+      }
 
-    h3 {
-      @apply text-sm;
+      h3 {
+        @apply text-sm;
+      }
     }
   }
 }

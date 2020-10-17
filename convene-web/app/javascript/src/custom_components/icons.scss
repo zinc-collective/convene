@@ -1,7 +1,9 @@
-.icon-solid::before {
-  font-family: "Font Awesome 5 Free"; font-weight: 900;
-  @apply mr-2;
-}
-.phone-alt-icon::before {
-  content: "\f879";
+@layer components {
+  .icon-solid::before {
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
+    @apply mr-2;
+  }
+  .phone-alt-icon::before {
+    content: "\f879";
+  }
 }
