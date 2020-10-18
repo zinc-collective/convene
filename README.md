@@ -1,6 +1,19 @@
-# Convene
+# Convene <!-- omit in toc -->
 
-Space to (play || work || grow || be).
+Convene is a video conferencing software that provides secure, affordable, and private digital meeting spaces.
+Spaces where anyone can (play || work || grow || be ). 🎲 👩‍💻 🌱 🛋️
+
+- [Purpose](#purpose)
+  - [The Circle of Stewards](#the-circle-of-stewards)
+  - [Budget](#budget)
+  - [Objectives](#objectives)
+- [Using Convene](#using-convene)
+  - [Purchasing Convene](#purchasing-convene)
+  - [Help and Support](#help-and-support)
+- [Developing Convene](#developing-convene)
+  - [Architecture](#architecture)
+  - [Developer setup and documentation](#developer-setup-and-documentation)
+- [Design](#design)
 
 ## Purpose
 
@@ -46,12 +59,6 @@ Convene is driving towards:
 
 We're still figuring out how to make that happen, but that's our guiding light.
 
-## Developing Convene
-
-Once you have installed the appropriate `ruby` and `node` and `postgresql` versions run `bin/setup`. See [Convene::Web/README.md "Configuring your Development Machine"] for more information.
-
-[Convene::Web/README.md "Configuring your Development Machine"]:./convene-web/README.md#configuring-your-development-machine
-
 ## Using Convene
 
 Convene is [pre-alpha software], so while we intend to provide interfaces that
@@ -89,7 +96,9 @@ Paid support is available for \$135 USD per hour<sup>[1][footnote-1]</sup>.
 [prosperity public license]: https://prosperitylicense.com/
 [issue-tracker]: https://github.com/zinc-collective/convene/issues
 
-## Architecture
+## Developing Convene
+
+### Architecture
 
 At present, Convene is split into three modules:
 
@@ -98,13 +107,23 @@ At present, Convene is split into three modules:
 - `web` which provides the human interface for Convene.
 - `api` which stores data long-term and provides a programmatic interface.
 
+### Developer setup and documentation
+
+Much of Convene development happens in `convene-web`. The
+[`README`](./convene-web/README.md) in that directory contains more
+documentation on how to work on Convene.
+
+To set up your development environment you'll need `ruby`, `node` and `postgresql`. See [Convene::Web/README.md "Configuring your Development Machine"] for more information.
+
+[Convene::Web/README.md "Configuring your Development Machine"]:./convene-web/README.md#configuring-your-development-machine
+
 ## Design
 
 We have a set of [Personas](https://drive.google.com/open?id=1JwTh2uFTc6pxsXu3njEVKQrv-J5HWExhd1rgT-ravt4) that we use to guide our design and development. Designers who have agreed to protect the privacy of our clients may access our [Customer Research Interviews](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
 
-## Footnotes
+## Footnotes <!-- omit in toc -->
 
-### Paid Support
+### Paid Support <!-- omit in toc -->
 
 Our paid support rate is pegged to 3x [the San Francisco Living Wage for a
 couple with a single worker raising three children][san-francisco-living-wage].

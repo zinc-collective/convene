@@ -1,0 +1,17 @@
+<div class="bg-blue-100 min-h-screen flex items-center justify-between">
+  <div class="m-auto">
+    <div class="bg-blue-500 text-white font-extrabold px-8 py-4 rounded">
+      <%= current_room.name %>
+      <i class="fas fa-user ml-4"></i>
+    </div>
+  </div>
+
+    <%= form_with model: waiting_room, url: workspace_room_waiting_room_path(waiting_room.workspace, waiting_room.room), class: "access-code-form", local: true do |form| %>
+      <%= form.label :access_code %>
+      <%= form.password_field :access_code, class: "access-code-form__input" %>
+      <%- if waiting_room.errors[:access_code].present? %>
+        <p class="access-code-form__error-message"><%= waiting_room.errors[:access_code].join(', ') %></p>
+      <%- end %>
+      <%= form.submit class: "access-code-form__submit button button-blue" %>
+    <% end %>
+</div>

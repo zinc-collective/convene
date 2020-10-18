@@ -1,6 +1,26 @@
-input {
-  @apply bg-white border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal;
-}
-input:focus {
-  @apply outline-none shadow-outline;
+@layer components {
+  input {
+    @apply bg-white border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal;
+  }
+  input:focus {
+    @apply outline-none shadow-outline;
+  }
+  .access-code-form {
+    @apply m-auto flex flex-col;
+  }
+  .access-code-form__input {
+    @apply mt-4;
+  }
+  .access-code-form__input--error {
+    @apply border border-red-500;
+  }
+  .access-code-form__message {
+    @apply hidden;
+  }
+  .access-code-form__error-message {
+    @apply text-xs italic font-hairline text-red-500;
+  }
+  .access-code-form__submit {
+    @apply mt-4;
+  }
 }

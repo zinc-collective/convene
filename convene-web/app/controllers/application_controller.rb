@@ -1,4 +1,11 @@
 class ApplicationController < ActionController::Base
+  # Referenced in application layout to display page title
+  # Override on a per-controller basis to display different title
+  # @returns [String]
+  helper_method def page_title
+    "ConveneWeb"
+  end
+
   # TODO: When we begin to implement authentication, we'll want this to return an actual Person
   # @returns [nil, Person] The Person for whom we are building a response
   helper_method def current_person
@@ -29,5 +36,9 @@ class ApplicationController < ActionController::Base
       )
   rescue ActiveRecord::RecordNotFound
     nil
+  end
+
+  helper_method def current_access_code
+    session[:access_code]
   end
 end

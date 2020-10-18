@@ -9,4 +9,4 @@
 # interface in development instead of localhost so that the application can be
 # visited in browser without doing port forwarding.
 : ${BINDING:=localhost}
-bin/rails s -p $PORT -b $BINDING
+bin/webpack-dev-server & bin/rails s -p $PORT -b $BINDING

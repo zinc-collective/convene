@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :workspaces do
-    resources :rooms
+    resources :rooms do
+      resource :waiting_room, only: [:show, :update]
+    end
   end
   constraints BrandedDomain.new(Workspace) do
     root 'workspaces#show'
