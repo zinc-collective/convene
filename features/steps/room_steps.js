@@ -24,9 +24,11 @@ When("a {actor} unlocks the {room} with {roomKey}", function (actor, room) {
   return "pending";
 });
 
-When("a {actor} locks the {room} with {roomKey}", function (actor, room) {
-  // Write code here that turns the phrase above into concrete actions
-  return "pending";
+When("a {actor} locks the {room} with {roomKey}", async function (actor, room, roomKey) {
+  room.name = "Listed Room 1";
+  roomKey = "access code";
+  const roomSettingPage = await this.workspace.enterConfigureRoom(room);
+  await roomSettingPage.lock(roomKey);
 });
 
 When('a {actor} locks the {room} without {roomKey}', function (actor, room, roomKey) {
@@ -93,10 +95,23 @@ Then('the {actor} does not see the {room}\'s Door', function (actor, room) {
   });
 });
 
-Then('the Room is {accessLevel}', function (accessLevel) {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+Then('the Room is {accessLevel}', async function (accessLevel) {
+  if (accessLevel === 'Locked') {
+    const roomCard = new RoomCard(await this.workspace.findRoomCard('Listed Room 1'));
+    assert(roomCard.isLocked());
+  }
 });
+
+class RoomCard {
+  constructor(element) {
+    this.webElement = element;
+  }
+
+  async isLocked() {
+    const lockLogo = await this.webElement.findElement(By.className('fa-lock'));
+    lockLogo.isDisplayed();
+  }
+}
 
 Then('the {actor} is informed they need to set {roomKey} when they are locking a {room}', function (actor, roomKey, room) {
   // Write code here that turns the phrase above into concrete actions
