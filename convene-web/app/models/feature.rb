@@ -7,6 +7,7 @@ class Feature
     feature = feature.to_sym if feature.respond_to?(:to_sym)
     return true if feature == :demo && ENV['DEMO_ENABLED']
     return true if feature == :system_test && ENV['SYSTEM_TEST']
+    return true if feature == :configure_room && ENV['CONFIGURE_ROOM']
 
     false
   end

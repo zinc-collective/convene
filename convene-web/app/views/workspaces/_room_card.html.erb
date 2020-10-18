@@ -15,10 +15,12 @@
       <% end %>
     </div>
 
-    <div class="room-door_configure">
-      <%= link_to edit_workspace_room_path(room.workspace, room) do %>
-        <span class="icon-solid configure-icon">Configure Room</span>
-      <% end %>
-    </div>
+    <%- if Feature.enabled?(:configure_room) %>
+      <div class="room-door_configure">
+        <%= link_to edit_workspace_room_path(room.workspace, room) do %>
+          <span class="icon-solid configure-icon">Configure Room</span>
+        <% end %>
+      </div>
+    <% end %>
   </footer>
 </div>
