@@ -1,8 +1,11 @@
-.room-setting-container {
-  @apply p-6 bg-blue-200 flex flex-col h-screen;
+.room-setting {
+  @apply p-4 bg-blue-200 flex flex-col h-screen;
 
-  .setting-card {
-    @apply bg-white shadow rounded-lg m-5 p-5;
+  .room-setting__setting-card {
+    @apply bg-white shadow rounded-lg mt-4 p-4;
+    @screen sm {
+      @apply m-4;
+    }
 
     legend {
       @apply text-lg leading-6 font-medium text-gray-900;
@@ -12,7 +15,7 @@
       @apply self-center block text-sm font-medium leading-5 text-gray-700;
     }
 
-    .form-element-container {
+    .room-setting__form-element-container {
       @apply mt-6 text-right;
       @screen sm {
         @apply mt-5 grid grid-cols-3 gap-4 items-start pt-5;
