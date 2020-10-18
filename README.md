@@ -4,9 +4,8 @@ Convene is a video conferencing software that provides secure, affordable, and p
 Spaces where anyone can (play || work || grow || be ). 🎲 👩‍💻 🌱 🛋️
 
 - [Purpose](#purpose)
-  - [The Circle of Stewards](#the-circle-of-stewards)
-  - [Budget](#budget)
   - [Objectives](#objectives)
+  - [Budget](#budget)
 - [Using Convene](#using-convene)
   - [Purchasing Convene](#purchasing-convene)
   - [Help and Support](#help-and-support)
@@ -14,6 +13,7 @@ Spaces where anyone can (play || work || grow || be ). 🎲 👩‍💻 🌱 �
   - [Architecture](#architecture)
   - [Developer setup and documentation](#developer-setup-and-documentation)
 - [Design](#design)
+- [About The Zinc Collective](#the-zinc-collective)
 
 ## Purpose
 
@@ -28,27 +28,6 @@ We provide the infrastructure.
 
 You provide the purpose.
 
-Convene is _Community Owned_. Passport Holders vote on _Resident
-Representatives_.  _Maintainers and Contributors_ vote on _Worker
-Representatives_. Representatives sit in the [Circle of Stewards], and guide the
-[Budget] and set [Objectives].
-
-
-[Circle of Stewards]: #the-circle-of-stewards
-[Budget]: #budget
-[Objectives]: #objectives
-### The Circle of Stewards
-
-The Circle of Stewards is balanced 1 to 1 between Community Representatives and
-Worker Representatives. This ensures that consensus must be reached between the
-people using and the people building Convene.
-
-### Budget
-
-At present, Convene allocates 33% of revenue towards infrastructure, 33%
-towards operations, and 33% towards paying contributors and maintainers through
-[Patronage Payouts].
-
 ### Objectives
 
 Convene is driving towards:
@@ -58,6 +37,12 @@ Convene is driving towards:
 3. Co-creating a better future.
 
 We're still figuring out how to make that happen, but that's our guiding light.
+
+### Budget
+
+At present, Convene allocates 33% of revenue towards infrastructure, 33%
+towards operations, and 33% towards paying contributors and maintainers through
+[Patronage Payouts].
 
 ## Using Convene
 
@@ -113,13 +98,41 @@ Much of Convene development happens in `convene-web`. The
 [`README`](./convene-web/README.md) in that directory contains more
 documentation on how to work on Convene.
 
-To set up your development environment you'll need `ruby`, `node` and `postgresql`. See [Convene::Web/README.md "Configuring your Development Machine"] for more information.
+To set up your development environment you'll need `ruby`, `node` and `postgresql`. 
+See [Convene::Web/README.md "Configuring your Development Machine"] for more information.
 
 [Convene::Web/README.md "Configuring your Development Machine"]:./convene-web/README.md#configuring-your-development-machine
 
 ## Design
 
-We have a set of [Personas](https://drive.google.com/open?id=1JwTh2uFTc6pxsXu3njEVKQrv-J5HWExhd1rgT-ravt4) that we use to guide our design and development. Designers who have agreed to protect the privacy of our clients may access our [Customer Research Interviews](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
+We have a set of [Personas](https://drive.google.com/open?id=1JwTh2uFTc6pxsXu3njEVKQrv-J5HWExhd1rgT-ravt4) that we use to guide our design and development. 
+Designers who have agreed to protect the privacy of our clients may access our [Customer Research Interviews](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
+
+## About The Zinc Collective
+
+Convene is _Community Owned_ and one of many [exciting projects](https://www.zinc.coop/product-and-services/) 
+maintained by a dedicated community of volunteer Contributors and Maintainers.
+We are part of The Zinc Collective, a digital product and services cooperative.
+
+We have a [Pledge and Code of Conduct](https://www.zinc.coop/code-of-conduct/). 
+And anyone can become a [contributor](https://www.zinc.coop/contributing/) and/or [maintainer](https://www.zinc.coop/maintaining/).
+
+### How we Organize  <!-- omit in toc -->
+
+* _Passport Holders_ vote on _Resident Representatives_.
+* _Maintainers and Contributors_ vote on _Worker
+Representatives_. 
+* Representatives sit in the [Circle of Stewards], and guide the [Budget] and set [Objectives].
+
+[Circle of Stewards]: #the-circle-of-stewards
+[Budget]: #budget
+[Objectives]: #objectives
+
+### The Circle of Stewards  <!-- omit in toc -->
+
+The Circle of Stewards is balanced 1 to 1 between Community Representatives and
+Worker Representatives. This ensures that consensus must be reached between the
+people using and the people building Convene.
 
 ## Footnotes <!-- omit in toc -->
 
