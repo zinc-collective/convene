@@ -12,25 +12,26 @@
 
 
     footer {
-      @apply w-full flex items-center justify-center border-t border-gray-200;
+      @apply w-full flex flex-col items-center justify-center border-t border-gray-200;
 
       .room-door_enter, .room-door_configure {
-        @apply flex justify-center text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-br-lg transition ease-in-out duration-150;
+        @apply flex justify-center text-sm leading-5 text-gray-700 font-medium transition ease-in-out duration-150;
         a {
           @apply flex-1 inline-flex items-center justify-center py-4;
         }
         span {
           @apply pl-4;
         }
+
+        &:focus {
+          @apply outline-none shadow-outline-blue border-blue-300 z-10;
+        }
+
+        &:hover {
+          @apply text-gray-500;
+        }
       }
 
-      .room-door_enter:focus {
-        @apply outline-none shadow-outline-blue border-blue-300 z-10;
-      }
-
-      .room-door_enter:hover {
-        @apply text-gray-500;
-      }
     }
   }
 }
