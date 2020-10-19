@@ -19,7 +19,7 @@
         </div>
       </fieldset>
       <footer>
-        <%= link_to 'Cancel', :back %>
+        <%= link_to 'Cancel', workspace_path(room.workspace) %>
         <%= room_form.submit %>
       </footer>
     <% end %>

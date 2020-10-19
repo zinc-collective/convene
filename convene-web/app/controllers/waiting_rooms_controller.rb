@@ -1,11 +1,12 @@
 class WaitingRoomsController < ApplicationController
   def show
+    waiting_room.redirect_url = params[:redirect_url]
   end
 
   def update
-    if waiting_room.update(params.require(:waiting_room).permit(:access_code))
+    if waiting_room.update(params.require(:waiting_room).permit(:access_code, :redirect_url))
       session[current_room.id] = { access_code: waiting_room.access_code }
-      redirect_to workspace_room_path(waiting_room.workspace, waiting_room.room)
+      redirect_to waiting_room.redirect_url
     else
       render :show
     end
