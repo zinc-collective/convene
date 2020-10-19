@@ -4,7 +4,7 @@
     <%- if room.locked? %>
       <span class="fas fa-lock"></span>
     <%- end %>
-    <%- if room.locked? && room.enterable?(current_access_code) %>
+    <%- if room.locked? && room.enterable?(current_access_code(room)) %>
       <span class="ml-2 fas fa-key"></span>
     <%- end %>
   </header>

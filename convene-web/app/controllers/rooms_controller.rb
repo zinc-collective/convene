@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
   end
 
   private def check_room_enterable
-    if !room.enterable?(session[:access_code])
+    if !room.enterable?(current_access_code(room))
       redirect_to workspace_room_waiting_room_path(current_workspace, current_room)
     end
   end

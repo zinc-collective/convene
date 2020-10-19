@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     nil
   end
 
-  helper_method def current_access_code
-    session[:access_code]
+  helper_method def current_access_code(room)
+    session.dig(room.id, 'access_code')
   end
 end
