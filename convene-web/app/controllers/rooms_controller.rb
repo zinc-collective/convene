@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
 
   def update
     if room.update(room_params)
-      redirect_to workspace_room_path(room.workspace, room)
+      redirect_to workspace_path(room.workspace)
     else
       render :edit
     end
