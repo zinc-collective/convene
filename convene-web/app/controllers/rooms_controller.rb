@@ -1,16 +1,11 @@
 class RoomsController < ApplicationController
+  before_action :check_room_enterable
+
   def show
-    if room.enterable?(session[:access_code])
-      render :show
-    else
-      redirect_to workspace_room_waiting_room_path(current_workspace, current_room)
-    end
   end
 
   def edit
-
   end
-
 
   def update
     if room.update(room_params)
@@ -30,5 +25,11 @@ class RoomsController < ApplicationController
 
   helper_method def room
     current_room
+  end
+
+  private def check_room_enterable
+    if !room.enterable?(session[:access_code])
+      redirect_to workspace_room_waiting_room_path(current_workspace, current_room)
+    end
   end
 end
