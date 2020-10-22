@@ -1,28 +1,25 @@
-<div class="room-setting">
+<div class="room-edit">
   <h2>Configure <%= room.name %></h2>
 
-  <div class="room-setting__setting-card">
-    <%= form_with model: room, url: workspace_room_path(room.workspace, room), local: true do |room_form| %>
-      <fieldset>
-        <legend>Privacy and Security</legend>
-        <div class="room-setting__form-element-container">
-          <%= room_form.label :access_level %>
-          <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" } %>
-        </div>
+  <%= form_with model: room, url: workspace_room_path(room.workspace, room), local: true do |room_form| %>
+    <fieldset>
+      <legend>Privacy and Security</legend>
+      <div class="form-element">
+        <%= room_form.label :access_level %>
+        <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" } %>
+      </div>
 
-        <div class="room-setting__form-element-container">
-          <%= room_form.label :access_code %>
-          <%= room_form.text_field :access_code %>
-          <%- if room.errors[:access_code].present? %>
-            <p class="text-center access-code-form__error-message"><%= room.errors[:access_code].join(', ') %></p>
-          <%- end %>
-        </div>
-      </fieldset>
-      <footer>
-        <%= link_to 'Cancel', workspace_path(room.workspace) %>
-        <%= room_form.submit %>
-      </footer>
-    <% end %>
-  </div>
-
+      <div class="form-element">
+        <%= room_form.label :access_code %>
+        <%= room_form.text_field :access_code %>
+        <%- if room.errors[:access_code].present? %>
+          <p class="error-message"><%= room.errors[:access_code].join(', ') %></p>
+        <%- end %>
+      </div>
+    </fieldset>
+    <footer>
+      <%= link_to 'Cancel', workspace_path(room.workspace) %>
+      <%= room_form.submit %>
+    </footer>
+  <% end %>
 </div>

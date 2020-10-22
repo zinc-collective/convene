@@ -1,10 +1,31 @@
 @layer components {
+  legend {
+    @apply text-lg leading-6 font-medium text-gray-900;
+  }
+  label, input, select {
+    @apply block w-full;
+  }
+  label {
+    @apply text-sm font-medium leading-5 text-gray-700 mt-4;
+  }
+  input, select {
+    @apply mt-1 py-2 px-4
+      rounded-lg border border-gray-300 bg-white
+      transition duration-150 ease-in-out;
+    @screen sm {
+      @apply text-sm leading-5;
+    }
+  }
   input {
-    @apply bg-white border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal;
+    @apply appearance-none;
   }
   input:focus {
     @apply outline-none shadow-outline;
   }
+  .error-message {
+    @apply mt-1 px-4 italic text-red-500;
+  }
+
   .access-code-form {
     @apply m-auto flex flex-col;
   }
@@ -20,7 +41,34 @@
   .access-code-form__error-message {
     @apply text-xs italic font-hairline text-red-500;
   }
+
   .access-code-form__submit {
     @apply mt-4;
+  }
+
+  footer {
+    @apply mt-5 flex flex-row-reverse justify-evenly;
+
+    a {
+      @apply inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md bg-white transition ease-in-out duration-150
+    }
+
+    input[type=submit] {
+      @apply w-auto px-4 py-2 inline-flex items-center border
+        border-transparent font-medium rounded-md text-blue-700 bg-blue-100
+        transition ease-in-out duration-150;
+      &:hover {
+        @apply bg-blue-50;
+      }
+      &:active {
+        @apply bg-blue-200;
+      }
+      &:focus {
+        @apply outline-none border-blue-300 shadow-outline-blue;
+      }
+      @screen sm {
+        @apply text-sm leading-5;
+      }
+    }
   }
 }
