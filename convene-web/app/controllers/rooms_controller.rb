@@ -1,6 +1,5 @@
 class RoomsController < ApplicationController
-  before_action -> { check_room_enterable(workspace_room_path(room.workspace, room)) }, only: :show
-  before_action -> { check_room_enterable(edit_workspace_room_path(room.workspace, room)) }, only: [:edit, :update]
+  before_action :authorize
 
   def show
   end
@@ -28,9 +27,14 @@ class RoomsController < ApplicationController
     current_room
   end
 
-  private def check_room_enterable(redirect_url)
+  private def authorize
     if !room.enterable?(current_access_code(room))
-      redirect_to workspace_room_waiting_room_path(current_workspace, current_room, redirect_url: redirect_url)
+      redirect_to workspace_room_waiting_room_path(current_workspace, current_room, redirect_url: after_authorization_redirect_url)
     end
+  end
+
+  private def after_authorization_redirect_url
+    return edit_workspace_room_path(room.workspace, room) if [:edit, :update].include?(action_name)
+    workspace_room_path(room.workspace, room)
   end
 end
