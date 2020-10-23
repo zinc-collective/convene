@@ -23,6 +23,7 @@ class Room < ApplicationRecord
 
   # A room's Access Code is a "secret" that, when known, grants access to the room.
   attribute :access_code, :string
+  validates :access_code, presence: { if: :locked? }
 
   # A Room's Publicity Level indicates how visible the room is.
   # `listed` - The room is discoverable by anyone in the workspace lobby.

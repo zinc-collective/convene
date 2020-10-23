@@ -4,7 +4,7 @@
     <%- if room.locked? %>
       <span class="fas fa-lock"></span>
     <%- end %>
-    <%- if room.locked? && room.enterable?(current_access_code) %>
+    <%- if room.locked? && room.enterable?(current_access_code(room)) %>
       <span class="ml-2 fas fa-key"></span>
     <%- end %>
   </header>
@@ -14,5 +14,13 @@
         <span class="icon-solid phone-alt-icon">Enter Room</span>
       <% end %>
     </div>
+
+    <%- if Feature.enabled?(:configure_room) %>
+      <div class="room-door_configure">
+        <%= link_to edit_workspace_room_path(room.workspace, room) do %>
+          <span class="icon-solid configure-icon">Configure Room</span>
+        <% end %>
+      </div>
+    <% end %>
   </footer>
 </div>

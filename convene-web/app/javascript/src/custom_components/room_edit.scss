@@ -1,0 +1,10 @@
+.room-edit {
+  @apply p-4 bg-blue-200 flex flex-col h-screen;
+
+  form {
+    @apply bg-white shadow rounded-lg mt-4 p-4;
+    @screen sm {
+      @apply m-4;
+    }
+  }
+}

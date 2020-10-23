@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :workspaces do
-    resources :rooms do
+    resources :rooms, only: [:show, :edit, :update] do
       resource :waiting_room, only: [:show, :update]
     end
   end
