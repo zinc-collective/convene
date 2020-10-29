@@ -4,7 +4,6 @@
 - [System Overview](#system-overview)
 - [Configuring Your Development Machine](#configuring-your-development-machine)
 - [Testing Convene Web](#testing-convene-web)
-- [Running Jitsi Meet Locally](#running-jitsi-meet-locally)
 
 The Convene Web project provides a human and computer interface for managing of
 Workspaces, Rooms, and Team Members.
@@ -30,7 +29,10 @@ The Convene UI is based on Rails standard templating system, with heavy use of:
 
 Jitsi is Convene's video call infrastructure. The
 [video_room_controller.js](./app/javascript/controllers/video_room_controller.js) is the entry point
-where we load a Jisti video call iframe into Convene's UI.
+where we load a Jitsi video call iframe into Convene's UI.
+
+If you want to run Jitsi locally, see the configuration provided in
+[`infrastructure/jitsi-meet-local`](../infrastructure/jitsi-meet-local/README.md).
 
 ## Configuring Your Development Machine
 
@@ -85,22 +87,3 @@ can be executed without a database should `require "spec_helper"`.
 
 [rspec]: https://rspec.info/
 [cucumber]: https://cucumber.io/
-
-## Running Jitsi Meet Locally
-
-Typically we develop Convene against a test Jitsi instance in the cloud. For the
-situations when you'd rather run Jitsi locally (e.g to work on Jitsi configuration
-or debugging), we provide a Dockerized setup for running Jitsi on your dev machine.
-
-You will need a running Docker engine. See the official Docker documentation
-for instructions for your specific platform: https://docs.docker.com/engine/install/
-
-To build and run a local container with Jitsi, run:
-```
-$ bin/jitsi-local-run
-```
-
-This setup uses a self-signed certificate, so when accessing your local
-https://jitsi you will need to bypass your browser's security warnings.
-
-For more details on how this local Jitsi setup works, see `infrastructure/dev`.

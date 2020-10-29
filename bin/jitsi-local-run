@@ -24,14 +24,15 @@ nc -z $DOCKER_HOST_IP $DOCKER_HOST_PORT
 # See the HOSTNAME variable in infrastructure/dev/install-jitsi-meet.sh
 CONTAINER_HOSTNAME=jitsi
 IMAGE_TAG=jitsi_local
+CONTAINER_NAME=jitsi_local
 
 if [[ "$(docker images -q $IMAGE_TAG 2> /dev/null)" == "" ]]; then
   echo "Couldn't find Docker image named $IMAGE_TAG. Building a new one."
-  cd infrastructure/dev && docker build -f jitsi-meet.Dockerfile . --tag $IMAGE_TAG
+  cd infrastructure/jitsi-meet-local && docker build -f jitsi-meet.Dockerfile . --tag $IMAGE_TAG
 fi
 
 echo "Starting Docker container..."
-docker run -d -p 80:80 -p 443:443 -p 8080:8080 --hostname $CONTAINER_HOSTNAME $IMAGE_TAG
+docker run -d -p 80:80 -p 443:443 -p 8080:8080 --hostname $CONTAINER_HOSTNAME --name $CONTAINER_NAME $IMAGE_TAG
 
 echo "Jitsi services are now running in a Docker container."
 echo "Add the following line to your /etc/hosts: $DOCKER_HOST_IP $CONTAINER_HOSTNAME"
