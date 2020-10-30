@@ -34,7 +34,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.1 # If we can move .ruby-version to root, then we don't need to specifiy here.
+        ruby-version: 2.7.1 # If we can move .ruby-version to root, then we don't need to specify here.
         bundler-cache: true
 
     - name: Increase the amount of inotify watchers
