@@ -31,10 +31,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Ruby 2.7
-      uses: actions/setup-ruby@v1
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7
+        ruby-version: 2.7.1 # If we can move .ruby-version to root, then we don't need to specify here.
+        bundler-cache: true
 
     - name: Increase the amount of inotify watchers
       run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
