@@ -23,6 +23,9 @@
     input:focus {
       @apply outline-none shadow-outline;
     }
+    input:disabled {
+      @apply bg-gray-200;
+    }
     .error-message {
       @apply mt-1 px-4 italic text-red-500;
     }

@@ -1,4 +1,4 @@
-<div class="room-edit">
+<div class="room-edit" data-controller="room-edit-form">
   <h2>Configure <%= room.name %></h2>
 
   <%= form_with model: room, url: workspace_room_path(room.workspace, room), local: true do |room_form| %>
@@ -6,12 +6,12 @@
       <legend>Privacy and Security</legend>
       <div class="form-element">
         <%= room_form.label :access_level %>
-        <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" } %>
+        <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" }, "data-action": "room-edit-form#accessLevelToggle" %>
       </div>
 
       <div class="form-element">
         <%= room_form.label :access_code %>
-        <%= room_form.text_field :access_code %>
+        <%= room_form.text_field :access_code, "data-target": "room-edit-form.accessCode", disabled: !room.locked? %>
         <%- if room.errors[:access_code].present? %>
           <p class="error-message"><%= room.errors[:access_code].join(', ') %></p>
         <%- end %>
