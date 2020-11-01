@@ -6,9 +6,14 @@ class CustomWorld {
   constructor() {
     this.driver = new Builder()
       .forBrowser('firefox')
-      .setFirefoxOptions(
-        new firefox.Options().headless()
-      ).build();
+      .setFirefoxOptions(this.firefoxOption())
+      .build();
+  }
+
+  firefoxOption() {
+    // GitHub Actions set CI to true
+    // Ref: https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
+    return process.env.CI ? new firefox.Options().headless() : new firefox.Options()
   }
 }
 
