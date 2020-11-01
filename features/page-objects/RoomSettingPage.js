@@ -1,6 +1,4 @@
 const Page = require("./Page");
-const { By, until } = require('selenium-webdriver');
-const assert = require('assert').strict;
 
 class RoomSettingPage extends Page {
   constructor(driver, room) {
@@ -15,21 +13,15 @@ class RoomSettingPage extends Page {
   }
 
   async setAccessLevel(accessLevel) {
-    const selectSelector = By.id('room_access_level');
-    await this.driver.wait(until.elementLocated(selectSelector));
-    const accessLevelSelect = await this.driver.findElement(selectSelector);
+    const accessLevelSelect = await this.findByCss("[id='room_access_level']");
     accessLevelSelect.click();
 
-    const accessLevelSelector = By.css(`[value=${accessLevel}]`);
-    await this.driver.wait(until.elementsLocated(accessLevelSelector));
-    const accessLevelOption = await this.driver.findElement(accessLevelSelector)
+    const accessLevelOption = await this.findByCss(`[value=${accessLevel}]`);
     accessLevelOption.click();
   }
 
   async setAccessCode(accessCode) {
-    const inputSelector = By.css("[id='room_access_code']");
-    await this.driver.wait(until.elementLocated(inputSelector));
-    const accessCodeInput = await this.driver.findElement(inputSelector);
+    const accessCodeInput = await this.findByCss("[id='room_access_code']");
     accessCodeInput.sendKeys(accessCode);
   }
 
