@@ -58,7 +58,8 @@ class WorkspacePage extends Page {
 
   async enterConfigureRoom(room) {
     const roomCard = await this.findRoomCard(room);
-    await roomCard.findElement(By.linkText("Configure Room")).click();
+    const linkText = await roomCard.findElement(By.linkText("Configure Room"));
+    await linkText.click();
     return new RoomSettingPage(this.driver, room);
   }
 }
