@@ -2,6 +2,7 @@ const { Given, When, Then } = require("cucumber");
 const WorkspacePage = require("../page-objects/WorkspacePage");
 const Workspace = require("../parameter-types/workspaces");
 const Room = require("../parameter-types/rooms");
+const RoomCard = require("../page-objects/page-elements/RoomCard");
 const assert = require('assert').strict;
 
 const { By, until } = require('selenium-webdriver');
@@ -95,24 +96,16 @@ Then('the {actor} does not see the {room}\'s Door', function (actor, room) {
   });
 });
 
-Then('the Room is {accessLevel}', async function (accessLevel) {
-  if (accessLevel === 'Locked') {
-    const roomCard = new RoomCard(await this.workspace.findRoomCard('Listed Room 1'));
+Then('the Room {accessLevel}', async function (accessLevel) {
+  if (accessLevel.level === 'Locked') {
+    const room = new Room('Listed Room 1')
+    const roomCard = new RoomCard(this.driver, await this.workspace.findRoomCard(room))
     assert(roomCard.isLocked());
+
+    const page = await roomCard.enterRoom();
+    assert(await page.isWaitingRoom());
   }
 });
-
-// TODO: Move this into its own file and expand isLocked to also test if actor is redirected to waiting room
-class RoomCard {
-  constructor(element) {
-    this.webElement = element;
-  }
-
-  async isLocked() {
-    const lockLogo = await this.webElement.findElement(By.className('fa-lock'));
-    lockLogo.isDisplayed();
-  }
-}
 
 Then('the {actor} is informed they need to set {roomKey} when they are locking a {room}', function (actor, roomKey, room) {
   // Write code here that turns the phrase above into concrete actions
