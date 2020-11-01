@@ -102,6 +102,7 @@ Then('the Room is {accessLevel}', async function (accessLevel) {
   }
 });
 
+// TODO: Move this into its own file and expand isLocked to also test if actor is redirected to waiting room
 class RoomCard {
   constructor(element) {
     this.webElement = element;
