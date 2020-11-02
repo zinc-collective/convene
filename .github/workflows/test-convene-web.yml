@@ -60,3 +60,8 @@ jobs:
         curl system-test.zinc.local 1> /dev/null
         bin/test
         npm run test_report
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Feature test report
+        path: features/test_reports/cucumber_report.html
