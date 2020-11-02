@@ -1,6 +1,6 @@
 var reporter = require('cucumber-html-reporter');
 
-var options = {
+var cucumberReporteroptions = {
   theme: 'simple',
   jsonFile: 'features/test_reports/cucumber_report.json',
   output: 'features/test_reports/cucumber_report.html',
@@ -10,4 +10,11 @@ var options = {
   ignoreBadJsonFile: false,
 };
 
-reporter.generate(options);
+try {
+  reporter.generate(cucumberReporteroptions);
+} catch (err) {
+  if (err) {
+    console.log("Failed to save cucumber test results to json file.");
+    console.log(err);
+  }
+}

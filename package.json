@@ -6,7 +6,6 @@
   "scripts": {
     "test": "cucumber-js --format node_modules/cucumber-pretty --tags 'not @unscheduled and not @wip and not @unimplemented-steps and not @unstarted'",
     "test_report": "cucumber-js --dry-run --format json:features/test_reports/cucumber_report.json"
-
   },
   "repository": {
     "type": "git",
