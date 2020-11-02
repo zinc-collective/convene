@@ -53,14 +53,10 @@ jobs:
       run: bin/run &
 
     - name: Test convene-web
-      uses: nick-invision/retry@v1
-      with:
-        timeout_minutes: 1
-        max_attempts: 3
-        command: |
-          sudo sh -c "echo '127.0.0.1 system-test.zinc.local' >> /etc/hosts"
-          # To trigger asset compile in development mode
-          # TODO: Start server in production mode
-          curl system-test.zinc.local 1> /dev/null
-          bin/test
-          npm run test_report
+      run: |
+        sudo sh -c "echo '127.0.0.1 system-test.zinc.local' >> /etc/hosts"
+        # To trigger asset compile in development mode
+        # TODO: Start server in production mode
+        curl system-test.zinc.local 1> /dev/null
+        bin/test
+        npm run test_report
