@@ -11,10 +11,3 @@ var cucumberReporteroptions = {
 };
 
 reporter.generate(cucumberReporteroptions);
-
-process.on('unhandledRejection', (err, p) => {
-  console.log('An unhandledRejection occurred');
-  console.log(`Rejected Promise: ${p}`);
-  console.log(`Rejection: ${err}`);
-  process.exit(0);
-});
