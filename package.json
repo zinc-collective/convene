@@ -4,7 +4,9 @@
   "description": "Community owned tools that bring people together, both online and off",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js --format node_modules/cucumber-pretty --tags 'not @unscheduled and not @wip and not @unimplemented-steps and not @unstarted'"
+    "test": "cucumber-js --format node_modules/cucumber-pretty --tags 'not @unscheduled and not @wip and not @unimplemented-steps and not @unstarted'",
+    "test_report": "cucumber-js --dry-run --format json:features/test_reports/cucumber_report.json"
+
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
     "cucumber": "^6.0.5",
+    "cucumber-html-reporter": "^5.2.0",
     "cucumber-pretty": "^6.0.0",
     "geckodriver": "^1.20.0",
     "selenium-webdriver": "^4.0.0-alpha.7"

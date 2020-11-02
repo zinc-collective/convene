@@ -23,7 +23,6 @@ setWorldConstructor(CustomWorld);
 After(function(testCase) {
   if (testCase.result.status == Status.FAILED) {
     return this.driver.takeScreenshot().then( screenShot => {
-      console.log('screenshot', screenShot)
       this.attach(screenShot, 'image/png');
       this.driver.quit()
     });

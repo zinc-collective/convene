@@ -15,3 +15,5 @@ convene-web/public/packs/
 *credentials.yml.enc
 *.log*
 *log/
+
+cucumber_report.html
