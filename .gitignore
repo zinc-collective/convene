@@ -16,4 +16,5 @@ convene-web/public/packs/
 *.log*
 *log/
 
-cucumber_report.html
+features/test_reports/cucumber_report.html
+features/test_reports/cucumber_report.json

@@ -10,11 +10,11 @@ var cucumberReporteroptions = {
   ignoreBadJsonFile: false,
 };
 
-try {
-  reporter.generate(cucumberReporteroptions);
-} catch (err) {
-  if (err) {
-    console.log("Failed to save cucumber test results to json file.");
-    console.log(err);
-  }
-}
+reporter.generate(cucumberReporteroptions);
+
+process.on('unhandledRejection', (err, p) => {
+  console.log('An unhandledRejection occurred');
+  console.log(`Rejected Promise: ${p}`);
+  console.log(`Rejection: ${err}`);
+  process.exit(0);
+});
