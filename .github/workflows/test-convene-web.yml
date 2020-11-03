@@ -13,7 +13,6 @@ jobs:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PORT: 80
-      SYSTEM_TEST: true
       APP_URL: http://localhost
       CUSTOM_DOMAIN: http://system-test.zinc.local
 
@@ -45,6 +44,9 @@ jobs:
 
     - name: Setup CI database.yml
       run: cd convene-web && cp config/database.yml.github-actions config/database.yml
+
+    - name: Use Development mode env
+      run: cd convene-web && cp .env.example .env
 
     - name: Setup environment
       run: bin/setup
