@@ -1,4 +1,5 @@
-const { setWorldConstructor, After, setDefaultTimeout } = require('cucumber');
+const fs = require('fs');
+const { setWorldConstructor, After, setDefaultTimeout, Status } = require('cucumber');
 const { Builder } = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 
@@ -19,7 +20,18 @@ class CustomWorld {
 
 setWorldConstructor(CustomWorld);
 
-After(function() {
+After(function(testCase) {
+  if (testCase.result.status == Status.FAILED) {
+    return this.driver.takeScreenshot().then( screenShot => {
+      const filePath = `features/test_reports/${testCase.pickle.name.split(' ').join('_')}.png`;
+      fs.writeFile(filePath, screenShot, { encoding: 'base64' }, err => {
+        if (err) console.log(err)
+        console.log("Screenshot created: ", filePath)
+      })
+      this.attach(screenShot, 'image/png');
+      this.driver.quit()
+    });
+  }
   this.driver.quit();
 });
 

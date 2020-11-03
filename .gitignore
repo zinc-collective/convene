@@ -1,3 +1,4 @@
+.DS_Store
 node_modules
 .terraform
 *.tfstate*
@@ -15,3 +16,5 @@ convene-web/public/packs/
 *credentials.yml.enc
 *.log*
 *log/
+
+features/test_reports/*.png
