@@ -28,8 +28,10 @@ After(function(testCase) {
         if (err) console.log(err)
         console.log("Screenshot created: ", filePath)
       })
-      this.attach(screenShot, 'image/png');
-      this.driver.quit()
+      // TODO: Uncomment this once figure out how to build test report
+      // this.attach(screenShot, 'image/png');
+      this.driver.quit();
+      process.exit(0);
     });
   }
   this.driver.quit();
