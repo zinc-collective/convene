@@ -27,11 +27,11 @@ After(function(testCase) {
       fs.writeFile(filePath, screenShot, { encoding: 'base64' }, err => {
         if (err) console.log(err)
         console.log("Screenshot created: ", filePath)
+        process.exit(0);
       })
       // TODO: Uncomment this once figure out how to build test report
       // this.attach(screenShot, 'image/png');
       this.driver.quit();
-      process.exit(0);
     });
   }
   this.driver.quit();
