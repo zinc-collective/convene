@@ -14,10 +14,14 @@ class SystemTestWorkspace
       {
         name: "Listed Room 1",
         publicity_level: :listed,
+        access_level: :unlocked,
+        access_code: nil,
       },
       {
         name: "Listed Room 2",
         publicity_level: :listed,
+        access_level: :unlocked,
+        access_code: nil,
       },
       {
         name: "Listed Locked Room 1",
@@ -28,10 +32,14 @@ class SystemTestWorkspace
       {
         name: "Unlisted Room 1",
         publicity_level: :unlisted,
+        access_level: :unlocked,
+        access_code: nil,
       },
       {
         name: "Unlisted Room 2",
         publicity_level: :unlisted,
+        access_level: :unlocked,
+        access_code: nil,
       },
     ].freeze
 

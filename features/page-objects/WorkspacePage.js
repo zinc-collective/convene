@@ -1,4 +1,5 @@
 const Page = require("./Page");
+const RoomSettingPage = require("./RoomSettingPage")
 const { By, until } = require('selenium-webdriver');
 const assert = require('assert').strict;
 
@@ -53,6 +54,13 @@ class WorkspacePage extends Page {
 
   roomCardsWhere({ accessLevel }) {
     return this.driver.findElements(By.css(`.--${accessLevel.level.toLowerCase()}`));
+  }
+
+  async enterConfigureRoom(room) {
+    const roomCard = await this.findRoomCard(room);
+    const linkText = await roomCard.findElement(By.linkText("Configure Room"));
+    await linkText.click();
+    return new RoomSettingPage(this.driver, room);
   }
 }
 
