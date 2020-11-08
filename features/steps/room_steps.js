@@ -2,6 +2,7 @@ const { Given, When, Then } = require("cucumber");
 const WorkspacePage = require("../page-objects/WorkspacePage");
 const Workspace = require("../parameter-types/workspaces");
 const Room = require("../parameter-types/rooms");
+const RoomCard = require("../page-objects/page-elements/RoomCard");
 const assert = require('assert').strict;
 
 const { By, until } = require('selenium-webdriver');
@@ -24,9 +25,11 @@ When("a {actor} unlocks the {room} with {roomKey}", function (actor, room) {
   return "pending";
 });
 
-When("a {actor} locks the {room} with {roomKey}", function (actor, room) {
-  // Write code here that turns the phrase above into concrete actions
-  return "pending";
+When("a {actor} locks the {room} with {roomKey}", async function (actor, room, roomKey) {
+  room.name = "Listed Room 1";
+  roomKey = "access code";
+  const roomSettingPage = await this.workspace.enterConfigureRoom(room);
+  await roomSettingPage.lock(roomKey);
 });
 
 When('a {actor} locks the {room} without {roomKey}', function (actor, room, roomKey) {
@@ -93,9 +96,15 @@ Then('the {actor} does not see the {room}\'s Door', function (actor, room) {
   });
 });
 
-Then('the Room is {accessLevel}', function (accessLevel) {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+Then('the Room {accessLevel}', async function (accessLevel) {
+  if (accessLevel.level === 'Locked') {
+    const room = new Room('Listed Room 1')
+    const roomCard = new RoomCard(this.driver, await this.workspace.findRoomCard(room))
+    assert(roomCard.isLocked());
+
+    const page = await roomCard.enterRoom();
+    assert(await page.isWaitingRoom());
+  }
 });
 
 Then('the {actor} is informed they need to set {roomKey} when they are locking a {room}', function (actor, roomKey, room) {
