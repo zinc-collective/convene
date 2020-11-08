@@ -11,6 +11,7 @@ Given("a Workspace with {accessLevel} {room}", async function (accessLevel, room
   this.workspace = new WorkspacePage(this.driver, workspace);
   await this.workspace.enter();
   const lockedRooms = await this.workspace.roomCardsWhere({ accessLevel });
+  throw 'error'
   assert(lockedRooms.length > 0);
 });
 
