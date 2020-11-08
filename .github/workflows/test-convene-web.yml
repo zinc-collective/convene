@@ -55,11 +55,7 @@ jobs:
       run: bin/run &
 
     - name: Test convene-web
-      uses: nick-invision/retry@v1
-      with:
-        timeout_minutes: 1
-        max_attempts: 3
-        command: |
+      run: |
           sudo sh -c "echo '127.0.0.1 system-test.zinc.local' >> /etc/hosts"
           # To trigger asset compile in development mode
           # TODO: Start server in production mode
@@ -67,6 +63,7 @@ jobs:
           bin/test
 
     - uses: actions/upload-artifact@v2
+      if: failure()
       with:
-        name: Feature test report
+        name: feature-test-failed-screenshot
         path: features/test_reports/*.png
