@@ -1,4 +1,6 @@
 const { defineParameterType } = require("cucumber");
+const concatRegExp = require('../utilities/concatRegExp');
+const FLEXIBLE_ARTICLE_ADJECTIVES = /(an |the |is |a )/;
 
 // This injects a Room class into steps with named rooms (i.e.) `the "Ada" Room` and
 // steps that mention `Room` in isolation.
@@ -33,7 +35,7 @@ class Room {
 // See: https://github.com/zinc-collective/convene/issues/41
 defineParameterType({
   name: "accessLevel",
-  regexp: /(an |a |the |is )?(Unlocked|Internal|Locked)/,
+  regexp: concatRegExp(FLEXIBLE_ARTICLE_ADJECTIVES, /(Unlocked|Internal|Locked)/),
   transformer: (_, level) => new AccessLevel(level),
 });
 
@@ -58,7 +60,7 @@ class PublicityLevel {
 
 defineParameterType({
   name: "roomKey",
-  regexp: /(a |the )?(correct |wrong )?Room Key/,
+  regexp: concatRegExp(FLEXIBLE_ARTICLE_ADJECTIVES, /(correct |wrong )?Room Key/)
 });
 
 module.exports = Room;

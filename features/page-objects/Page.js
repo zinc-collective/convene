@@ -9,7 +9,7 @@ class Page {
   async findByCss(cssSelector) {
     const selector = By.css(cssSelector);
     await this.driver.wait(until.elementLocated(selector));
-    return await this.driver.findElement(selector);
+    return this.driver.findElement(selector);
   }
 }
 
