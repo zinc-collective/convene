@@ -59,9 +59,11 @@ Finally, with the server still running (perhaps in a different terminal), run
 [docker-compose.yml]: ../docker-compose.yml
 [.env.example]: ./.env.example
 
-### Mailer Settings
+### Developing Mailers
 
 Set [SMTP_* environment variables to configure Action Mailer](.env.example).
+
+To preview mailers, visit http://localhost:3000/rails/mailers/
 
 ## Testing Convene Web
 
