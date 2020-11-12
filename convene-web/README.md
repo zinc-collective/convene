@@ -59,6 +59,10 @@ Finally, with the server still running (perhaps in a different terminal), run
 [docker-compose.yml]: ../docker-compose.yml
 [.env.example]: ./.env.example
 
+### Mailer Settings
+
+Set [SMTP_* environment variables to configure Action Mailer](.env.example).
+
 ## Testing Convene Web
 
 The Convene Web interface is tested in two ways:
