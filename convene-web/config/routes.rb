@@ -1,6 +1,8 @@
 
 
 Rails.application.routes.draw do
+  passwordless_for :people
+
   namespace :admin do
       resources :workspaces
       resources :clients

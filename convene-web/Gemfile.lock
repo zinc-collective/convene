@@ -139,6 +139,9 @@ GEM
     nio4r (2.5.3)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    passwordless (0.10.0)
+      bcrypt (~> 3.1.11)
+      rails (>= 5.1.4)
     pg (1.2.3)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -260,6 +263,7 @@ DEPENDENCIES
   friendly_id (~> 5.2.4)
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  passwordless
   pg (>= 0.18, < 2.0)
   pry-byebug
   puma (~> 4.1)
