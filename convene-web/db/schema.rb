@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_224355) do
+ActiveRecord::Schema.define(version: 2020_11_12_231331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2020_11_12_224355) do
 
   create_table "passwordless_sessions", force: :cascade do |t|
     t.string "authenticatable_type"
-    t.bigint "authenticatable_id"
     t.datetime "timeout_at", null: false
     t.datetime "expires_at", null: false
     t.datetime "claimed_at"
@@ -45,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_11_12_224355) do
     t.string "token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "authenticatable_id"
     t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
   end
 
