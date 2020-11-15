@@ -57,7 +57,7 @@ Feature: Locking Rooms
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/847810bf-5d62-4131-a70d-d9efdfadb334
-  @unstarted
+  @built
   Scenario: Unlocking a Locked Room
   Given a Workspace with a Locked Room
   When a Workspace Member unlocks the Room with the correct Room Key

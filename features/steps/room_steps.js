@@ -20,9 +20,11 @@ Given('a Workspace with an {publicityLevel} Room', function (publicityLevel) {
   return 'pending';
 });
 
-When("a {actor} unlocks the {room} with {roomKey}", function (actor, room) {
-  // Write code here that turns the phrase above into concrete actions
-  return "pending";
+When("a {actor} unlocks the {room} with {roomKey}", async function (actor, room, roomKey) {
+  room.name = "Listed Locked Room 1";
+  roomKey = "secret"
+  const roomSettingPage = await this.workspace.enterConfigureRoom(room, roomKey);
+  await roomSettingPage.unlock();
 });
 
 When("a {actor} locks the {room} with {roomKey}", async function (actor, room, roomKey) {
