@@ -6,6 +6,7 @@ const RoomCard = require("../page-objects/page-elements/RoomCard");
 const assert = require('assert').strict;
 
 const { By, until } = require('selenium-webdriver');
+const RoomSettingPage = require("../page-objects/RoomSettingPage");
 
 Given("a Workspace with {accessLevel} {room}", async function (accessLevel, room) {
   const workspace = new Workspace("System Test");
@@ -34,9 +35,10 @@ When("a {actor} locks the {room} with {roomKey}", async function (actor, room, r
   await roomSettingPage.lock(roomKey);
 });
 
-When('a {actor} locks the {room} without {roomKey}', function (actor, room, roomKey) {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+When('a {actor} locks the {room} without {roomKey}', async function (actor, room, roomKey) {
+  room.name = "Listed Room 2";
+  const roomSettingPage = await this.workspace.enterConfigureRoom(room);
+  await roomSettingPage.lock('');
 });
 
 When('the {actor} taps the {room} in the Room Picker', async function (actor, room) {
@@ -109,7 +111,7 @@ Then('the Room {accessLevel}', async function (accessLevel) {
   }
 });
 
-Then('the {actor} is informed they need to set {roomKey} when they are locking a {room}', function (actor, roomKey, room) {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending';
+Then('the {actor} is informed they need to set {roomKey} when they are locking a {room}', async function (actor, roomKey, room) {
+  const roomSettingPage = new RoomSettingPage(this.driver);
+  assert(await roomSettingPage.accessCodeError());
 });

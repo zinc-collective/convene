@@ -47,7 +47,7 @@ Feature: Locking Rooms
   # have proven it out; since it's unlikely to be necessary to continuously check
   # at the user-level; when we can rely on ActiveRecord validations and consistent
   # usage of form builders that expose error information.
-  @unstarted
+  @built
   Scenario: Locking an Unlocked Room without setting a Room Key
     Given a Workspace with an Unlocked Room
     When a Workspace Member locks the Room without a Room Key

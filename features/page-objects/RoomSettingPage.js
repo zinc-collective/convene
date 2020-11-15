@@ -43,6 +43,11 @@ class RoomSettingPage extends Page {
     const submitInput = await this.findByCss("[type='submit']");
     submitInput.click();
   }
+
+  async accessCodeError() {
+    const errorElement = await this.findByCss('.field_with_errors input[name="room[access_code]"]');
+    return errorElement.isDisplayed();
+  }
 }
 
 module.exports = RoomSettingPage;
