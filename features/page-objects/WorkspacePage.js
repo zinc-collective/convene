@@ -56,11 +56,12 @@ class WorkspacePage extends Page {
     return this.driver.findElements(By.css(`.--${accessLevel.level.toLowerCase()}`));
   }
 
-  async enterConfigureRoom(room) {
+  async enterConfigureRoom(room, roomKey) {
     const roomCard = await this.findRoomCard(room);
     const linkText = await roomCard.findElement(By.linkText("Configure Room"));
     await linkText.click();
-    return new RoomSettingPage(this.driver, room);
+
+    return new RoomSettingPage(this.driver, room, roomKey);
   }
 }
 
