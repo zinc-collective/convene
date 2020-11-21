@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     "ConveneWeb"
   end
 
-  include Passwordless::ControllerHelpers # <-- This!
+  include Passwordless::ControllerHelpers
 
   helper_method :current_person
 
@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
 
   def require_person!
     return if current_person
-    redirect_to sign_in_path, flash: { error: 'Login required' }
+    save_passwordless_redirect_location!(Person)
+    redirect_to people.sign_in_path, flash: { error: 'Login required' }
   end
 
   # Retrieves the workspace based upon the requests domain or params
