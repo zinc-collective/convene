@@ -1,6 +1,17 @@
 <header class="header">
   <div class="items-container">
-    <h1><%= current_workspace&.name %></h1>
+    <h1 class="workspace-title"><%= current_workspace&.name %></h1>
+
+    <div class="profile-menu self-end">
+      <figure class="avatar">
+        <img src="http://placekitten.com/150/150" alt="<%= current_person.name %>">
+        <figcaption><%= current_person.name %></figcaption>
+      </figure>
+      <ul class="action-list">
+        <li>Log Out</li>
+      </ul>
+    </div>
+
     <div>
       <h3>Convene</h3>
       <h3 class="font-hairline">video meeting spaces</h3>

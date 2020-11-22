@@ -1,0 +1,14 @@
+@layer components {
+  .profile-menu {
+    @apply mr-6;
+    img {
+      @apply rounded-full h-20
+    }
+    figcaption {
+      @apply text-center
+    }
+    .action-list {
+      @apply hidden
+    }
+  }
+}
