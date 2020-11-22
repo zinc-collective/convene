@@ -12,8 +12,9 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # @returns [Guest,Person] the authenticated user, or a Guest
   def current_person
-    @current_person ||= authenticate_by_session(Person)
+    @current_person ||= authenticate_by_session(Person) || Guest.new
   end
 
   def require_person!

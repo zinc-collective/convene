@@ -1,11 +1,11 @@
 @layer components {
   .header {
     .workspace-title {
-      @apply self-start;
+      @apply self-start flex-grow;
     }
 
     .items-container {
-      @apply flex items-center justify-between px-4 py-3 bg-blue-500 text-white font-bold self-end;
+      @apply flex justify-between px-4 py-3 bg-blue-500 text-white font-bold;
 
       h1 {
         @apply text-2xl;

@@ -1,14 +1,24 @@
 @layer components {
   .profile-menu {
-    @apply mr-6;
-    img {
-      @apply rounded-full h-20
+    @apply mr-6 flex flex-wrap h-full;
+    .avatar {
+      @apply h-full;
+      img {
+        @apply rounded-full h-8
+      }
+      figcaption {
+        @apply text-center text-xs font-hairline
+      }
     }
-    figcaption {
-      @apply text-center
-    }
+
     .action-list {
-      @apply hidden
+      @apply hidden bg-blue-500 h-screen w-screen;
+      left: 0;
+    }
+    &.--active {
+      .action-list {
+        @apply absolute block
+      }
     }
   }
 }
