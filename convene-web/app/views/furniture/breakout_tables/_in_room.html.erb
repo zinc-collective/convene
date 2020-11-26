@@ -1,0 +1,5 @@
+<h3>Tables</h3>
+<%- furniture.tables.each do |table| %>
+  <%= link_to table.name,
+              workspace_room_furniture_table_path(room.workspace, room, table) %>
+<%- end %>

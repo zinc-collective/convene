@@ -10,7 +10,7 @@ class Room < ApplicationRecord
   attribute :slug, :string
   validates :slug, uniqueness: { scope: :workspace_id }
 
-  # FriendlyId's does the legwork to make the slug uri-friendly
+  # FriendlyId does the legwork to make the slug uri-friendly
   extend FriendlyId
   friendly_id :name, use: :scoped, scope: :workspace
 
@@ -25,11 +25,18 @@ class Room < ApplicationRecord
   attribute :access_code, :string
   validates :access_code, presence: { if: :locked? }
 
+  def locked?
+    access_level&.to_sym == :locked
+  end
+
   # A Room's Publicity Level indicates how visible the room is.
   # `listed` - The room is discoverable by anyone in the workspace lobby.
   # `unlisted` - The room is only visible to it's owners and people who have been in it before.
   attribute :publicity_level
   validates :publicity_level, presence: true, inclusion: { in: ['listed', 'unlisted', :listed, :unlisted] }
+
+  scope :listed,   -> { where(publicity_level: :listed) }
+  scope :unlisted, -> { where(publicity_level: :unlisted) }
 
   def listed?
     publicity_level&.to_sym == :listed
@@ -39,26 +46,30 @@ class Room < ApplicationRecord
     publicity_level&.to_sym == :unlisted
   end
 
-  def locked?
-    access_level&.to_sym == :locked
-  end
-
   # Links People to the room for permissioning
   has_many :room_ownerships, inverse_of: :room
 
   # The People who own the room
   has_many :owners, through: :room_ownerships
 
-  scope :listed,   -> { where(publicity_level: :listed) }
-  scope :unlisted, -> { where(publicity_level: :unlisted) }
+  scope :owned_by,      ->(person) { joins(:owners).where(room_ownerships: { owner: person }) }
+  scope :accessable_by, ->(person = nil) { union(owned_by(person)).union(listed) }
 
-  scope :owned_by,      -> (person) { joins(:owners).where(room_ownerships: { owner: person }) }
-  scope :accessable_by, -> (person = nil) { union(self.owned_by(person)).union(self.listed) }
+  has_many :furniture_placements
+
+  def full_slug
+    "#{workspace.slug}--#{slug}"
+  end
+
+  def video_host
+    workspace.jitsi_meet_domain
+  end
 
   def enterable?(access_code)
     return true if access_level == 'unlocked'
+
     can_enter = self.access_code == access_code
-    errors[:base] << "Invalid access code" if access_code
+    errors[:base] << 'Invalid access code' if access_code
     can_enter
   end
 end

@@ -9,38 +9,42 @@ class SystemTestWorkspace
 
   class Factory
     attr_accessor :client_repository
+
     # Expand this to include more room types for different test cases
     DEMO_ROOMS = [
       {
-        name: "Listed Room 1",
+        name: 'Listed Room 1',
         publicity_level: :listed,
         access_level: :unlocked,
         access_code: nil,
+        furniture_placements: {
+          tables: { names: %w[engineering design ops] }
+        }
       },
       {
-        name: "Listed Room 2",
+        name: 'Listed Room 2',
         publicity_level: :listed,
         access_level: :unlocked,
-        access_code: nil,
+        access_code: nil
       },
       {
-        name: "Listed Locked Room 1",
+        name: 'Listed Locked Room 1',
         publicity_level: :listed,
         access_level: :locked,
-        access_code: :secret,
+        access_code: :secret
       },
       {
-        name: "Unlisted Room 1",
+        name: 'Unlisted Room 1',
         publicity_level: :unlisted,
         access_level: :unlocked,
-        access_code: nil,
+        access_code: nil
       },
       {
-        name: "Unlisted Room 2",
+        name: 'Unlisted Room 2',
         publicity_level: :unlisted,
         access_level: :unlocked,
-        access_code: nil,
-      },
+        access_code: nil
+      }
     ].freeze
 
     # @param [ActiveRecord::Relation<Client>] client_repository Where to ensure there
@@ -66,7 +70,14 @@ class SystemTestWorkspace
     private def add_demo_rooms(workspace)
       DEMO_ROOMS.each do |room_properties|
         room = workspace.rooms.find_or_initialize_by(name: room_properties[:name])
-        room.update!(room_properties.except(:name))
+        room.update!(room_properties.except(:name, :furniture_placements))
+
+        furniture_placements = room_properties.fetch(:furniture_placements, {})
+        furniture_placements.each.with_index do |(furniture, settings), slot|
+          furniture_placement = room.furniture_placements
+                                    .find_or_initialize_by(name: furniture)
+          furniture_placement.update!(settings: settings, slot: slot)
+        end
       end
       workspace
     end
