@@ -22,17 +22,17 @@ Feature: Locked Rooms
   @built
   Scenario: Entering a Locked Room
     Given a Workspace with a Locked Room
-    Then a Workspace Member may enter the Locked Room after providing the correct Room Key
-    And a Workspace Member may not enter the Locked Room after providing the wrong Room Key
-    And a Guest may enter the Locked Room after providing the correct Room Key
-    And a Guest may not enter the Locked Room after providing the wrong Room Key
+    Then a Workspace Member may enter the Locked Room after providing the correct Access Code
+    And a Workspace Member may not enter the Locked Room after providing the wrong Access Code
+    And a Guest may enter the Locked Room after providing the correct Access Code
+    And a Guest may not enter the Locked Room after providing the wrong Access Code
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/847810bf-5d62-4131-a70d-d9efdfadb334
   @built
   Scenario: Locking an Unlocked Room
     Given a Workspace with an Unlocked Room
-    When a Workspace Member locks the Unlocked Room with a valid Room Key
+    When a Workspace Member locks the Unlocked Room with a valid Access Code
     Then the Room is Locked
 
   # This is a "sad path" scenario, that we expect to delete once we
@@ -40,10 +40,10 @@ Feature: Locked Rooms
   # at the user-level; when we can rely on ActiveRecord validations and consistent
   # usage of form builders that expose error information.
   @built
-  Scenario: Locking an Unlocked Room without setting a Room Key
+  Scenario: Locking an Unlocked Room without setting a Access Code
     Given a Workspace with an Unlocked Room
-    When a Workspace Member locks the Unlocked Room with an empty Room Key
-    Then the Workspace Member is informed they need to set a Room Key when they are locking a Room
+    When a Workspace Member locks the Unlocked Room with an empty Access Code
+    Then the Workspace Member is informed they need to set a Access Code when they are locking a Room
     And the Room is Unlocked
 
 
@@ -52,5 +52,5 @@ Feature: Locked Rooms
   @built
   Scenario: Unlocking a Locked Room
   Given a Workspace with a Locked Room
-  When a Workspace Member unlocks the Locked Room with the correct Room Key
+  When a Workspace Member unlocks the Locked Room with the correct Access Code
   Then the Room is Unlocked

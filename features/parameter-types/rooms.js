@@ -75,12 +75,12 @@ class PublicityLevel {
 }
 
 defineParameterType({
-  name: "roomKey",
-  regexp: concatRegExp(FLEXIBLE_ARTICLE_ADJECTIVES, /(correct |valid |wrong |empty )?Room Key/),
-  transformer: (_, validity="") => new RoomKey(validity.trim())
+  name: "accessCode",
+  regexp: concatRegExp(FLEXIBLE_ARTICLE_ADJECTIVES, /(correct |valid |wrong |empty )?Access Code/),
+  transformer: (_, validity="") => new AccessCode(validity.trim())
 });
 
-class RoomKey {
+class AccessCode {
   constructor(validity) {
     this.validity = validity
   }

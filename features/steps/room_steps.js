@@ -34,16 +34,16 @@ Given('a Workspace with an {publicityLevel} Room', function (publicityLevel) {
   return 'pending';
 });
 
-When("a {actor} unlocks {accessLevel} {room} with {roomKey}", async function (actor, accessLevel, room, roomKey) {
+When("a {actor} unlocks {accessLevel} {room} with {accessCode}", async function (actor, accessLevel, room, accessCode) {
   linkParameters({ room, accessLevel })
   const roomConfigurationPage = await this.workspace.enterConfigureRoom(room);
-  await roomConfigurationPage.unlock(roomKey);
+  await roomConfigurationPage.unlock(accessCode);
 });
 
-When("a {actor} locks {accessLevel} {room} with {roomKey}", async function (actor, accessLevel, room, roomKey) {
+When("a {actor} locks {accessLevel} {room} with {accessCode}", async function (actor, accessLevel, room, accessCode) {
   linkParameters({ room, accessLevel })
   const roomSettingPage = await this.workspace.enterConfigureRoom(room);
-  await roomSettingPage.lock(roomKey);
+  await roomSettingPage.lock(accessCode);
 });
 
 When('the {actor} taps the {room} in the Room Picker', async function (actor, room) {
@@ -60,14 +60,14 @@ Then("the {actor} is not placed in the {room}", function (actor, room) {
   return "pending";
 });
 
-Then('a {actor} may enter the Room without providing {roomKey}', function (actor, roomKey) {
+Then('a {actor} may enter the Room without providing {accessCode}', function (actor, accessCode) {
   // Write code here that turns the phrase above into concrete actions
   return 'pending';
 });
 
-Then('a {actor} may not enter {accessLevel} {room} after providing {roomKey}', async function (actor, accessLevel, room, roomKey) {
+Then('a {actor} may not enter {accessLevel} {room} after providing {accessCode}', async function (actor, accessLevel, room, accessCode) {
   linkParameters({ room, accessLevel })
-  await this.workspace.enterRoomWithAccessCode(room, roomKey);
+  await this.workspace.enterRoomWithAccessCode(room, accessCode);
 
   // TODO: Encapsulate checking error messages
   const error = By.css("[class='access-code-form__error-message']")
@@ -75,9 +75,10 @@ Then('a {actor} may not enter {accessLevel} {room} after providing {roomKey}', a
   assert.equal(await errorMsg.isDisplayed(), true)
 });
 
-Then('a {actor} may enter {accessLevel} {room} after providing {roomKey}', async function (actor, accessLevel, room, roomKey) {
-  linkParameters({ room, accessLevel })
-  await this.workspace.enterRoomWithAccessCode(room, roomKey);
+Then('a {actor} may enter {accessLevel} {room} after providing {accessCode}', async function (actor, accessLevel, room, accessCode) {
+  console.log({ accessLevel, room })
+  linkParameters({ room, accessLevel, accessCode })
+  await this.workspace.enterRoomWithAccessCode(room, accessCode);
 
   const videoPanel = await this.workspace.videoPanel();
   assert(await videoPanel.isDisplayed());
@@ -117,7 +118,7 @@ Then('the Room {accessLevel}', async function (accessLevel) {
   }
 });
 
-Then('the {actor} is informed they need to set {roomKey} when they are locking a {room}', async function (actor, roomKey, room) {
+Then('the {actor} is informed they need to set {accessCode} when they are locking a {room}', async function (actor, accessCode, room) {
   const roomSettingPage = new RoomSettingPage(this.driver);
   assert(await roomSettingPage.accessCodeError());
 });

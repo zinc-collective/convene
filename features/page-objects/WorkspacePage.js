@@ -30,7 +30,7 @@ class WorkspacePage extends Page {
     const inputSelector = By.css("[id='waiting_room_access_code']");
     await this.driver.wait(until.elementLocated(inputSelector));
     const accessCodeInput = await this.driver.findElement(inputSelector);
-    accessCodeInput.sendKeys(accessCode);
+    accessCodeInput.sendKeys(accessCode.value);
 
     const submitInput = await this.driver.findElement(By.css("[type='submit']"));
     submitInput.click();
