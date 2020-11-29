@@ -1,4 +1,4 @@
-Feature: Locking Rooms
+Feature: Locked Rooms
   In order to maintain control over who may participate in a conversation
   As a Workspace Member
   I would like to be able to lock Rooms
@@ -26,14 +26,6 @@ Feature: Locking Rooms
     And a Workspace Member may not enter the Locked Room after providing the wrong Room Key
     And a Guest may enter the Locked Room after providing the correct Room Key
     And a Guest may not enter the Locked Room after providing the wrong Room Key
-
-  # TODO: We should check with Colombene and Vivek re: "Is there `Invitation` feature?"
-  @unstarted
-  Scenario: Locking an Unlocked Room when Inviting People
-    Given a Workspace with an Unlocked Room
-    When a Workspace Member locks the Room with a Room Key while Inviting People
-    Then the Room is Locked
-
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/847810bf-5d62-4131-a70d-d9efdfadb334
