@@ -76,7 +76,6 @@ Then('a {actor} may not enter {accessLevel} {room} after providing {accessCode}'
 });
 
 Then('a {actor} may enter {accessLevel} {room} after providing {accessCode}', async function (actor, accessLevel, room, accessCode) {
-  console.log({ accessLevel, room })
   linkParameters({ room, accessLevel, accessCode })
   await this.workspace.enterRoomWithAccessCode(room, accessCode);
 
@@ -108,10 +107,11 @@ Then('the {actor} does not see the {room}\'s Door', function (actor, room) {
 });
 
 Then('the Room {accessLevel}', async function (accessLevel) {
+  const room = new Room("")
+  linkParameters({ room, accessLevel })
   if (accessLevel.level === 'Locked') {
-    const room = new Room('Listed Room 1')
-    const roomCard = new RoomCard(this.driver, await this.workspace.findRoomCard(room))
-    assert(roomCard.isLocked());
+    const roomCard = new RoomCard(this.driver, room)
+    assert(await roomCard.isLocked());
 
     const page = await roomCard.enterRoom();
     assert(await page.isWaitingRoom());

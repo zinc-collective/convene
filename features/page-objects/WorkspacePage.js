@@ -1,6 +1,7 @@
 const Page = require("./Page");
 const RoomSettingPage = require("./RoomSettingPage")
 const { By, until } = require('selenium-webdriver');
+const RoomCard = require("./page-elements/RoomCard");
 const assert = require('assert').strict;
 
 class WorkspacePage extends Page {
@@ -37,11 +38,8 @@ class WorkspacePage extends Page {
   }
 
   async findRoomCard(room, wait = true) {
-    if(wait) {
-      await this.driver.wait(until.elementLocated(room.cardLocator));
-    }
-
-    return await this.driver.findElement(room.cardLocator);
+    const roomCard = new RoomCard(this.driver, room)
+    return roomCard.element(wait)
   }
 
   async videoPanel() {

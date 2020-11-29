@@ -1,21 +1,28 @@
-const { By } = require('selenium-webdriver');
+const { By, until } = require('selenium-webdriver');
 
 const Page = require("../Page");
 const RoomPage = require("../RoomPage");
 
 class RoomCard extends Page {
-  constructor(driver, webElement) {
+  constructor(driver, room) {
     super(driver);
-    this.webElement = webElement;
+    this.room = room
+  }
+
+  async element(wait=true) {
+    if(wait) {
+      await this.driver.wait(until.elementLocated(this.room.cardLocator));
+    }
+    return this.driver.findElement(this.room.cardLocator);
   }
 
   async isLocked() {
-    const lockLogo = await this.webElement.findElement(By.className('fa-lock'));
-    lockLogo.isDisplayed();
+    const lockLogo = (await this.element()).findElement(By.className('fa-lock'));
+    return lockLogo.isDisplayed();
   }
 
   async enterRoom() {
-    await this.webElement.findElement(By.linkText("Enter Room")).click();
+    (await this.element()).findElement(By.linkText("Enter Room")).click();
     return new RoomPage(this.driver);
   }
 }
