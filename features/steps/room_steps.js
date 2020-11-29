@@ -8,12 +8,25 @@ const assert = require('assert').strict;
 const { By, until } = require('selenium-webdriver');
 const RoomSettingPage = require("../page-objects/RoomSettingPage");
 
+/**
+ * Merges extracted parameter types together for convenience within step definitions
+ */
+function linkParameters({ workspace = new Workspace("System Test"),
+                          accessLevel, room }) {
+  room.reinitialize({ accessLevel })
+  return {
+    workspace,
+    accessLevel,
+    room
+  }
+}
+
 Given("a Workspace with {accessLevel} {room}", async function (accessLevel, room) {
-  const workspace = new Workspace("System Test");
+  let { workspace } = linkParameters({ accessLevel, room })
   this.workspace = new WorkspacePage(this.driver, workspace);
   await this.workspace.enter();
-  const lockedRooms = await this.workspace.roomCardsWhere({ accessLevel });
-  assert(lockedRooms.length > 0);
+  const matchingRooms = await this.workspace.roomCardsWhere({ accessLevel });
+  assert(matchingRooms.length > 0);
 });
 
 Given('a Workspace with an {publicityLevel} Room', function (publicityLevel) {
@@ -21,24 +34,16 @@ Given('a Workspace with an {publicityLevel} Room', function (publicityLevel) {
   return 'pending';
 });
 
-When("a {actor} unlocks the {room} with {roomKey}", async function (actor, room, roomKey) {
-  room.name = "Listed Locked Room 1";
-  roomKey = "secret"
-  const roomSettingPage = await this.workspace.enterConfigureRoom(room, roomKey);
-  await roomSettingPage.unlock();
+When("a {actor} unlocks {accessLevel} {room} with {roomKey}", async function (actor, accessLevel, room, roomKey) {
+  linkParameters({ room, accessLevel })
+  const roomConfigurationPage = await this.workspace.enterConfigureRoom(room);
+  await roomConfigurationPage.unlock(roomKey);
 });
 
-When("a {actor} locks the {room} with {roomKey}", async function (actor, room, roomKey) {
-  room.name = "Listed Room 1";
-  roomKey = "access code";
+When("a {actor} locks {accessLevel} {room} with {roomKey}", async function (actor, accessLevel, room, roomKey) {
+  linkParameters({ room, accessLevel })
   const roomSettingPage = await this.workspace.enterConfigureRoom(room);
   await roomSettingPage.lock(roomKey);
-});
-
-When('a {actor} locks the {room} without {roomKey}', async function (actor, room, roomKey) {
-  room.name = "Listed Room 2";
-  const roomSettingPage = await this.workspace.enterConfigureRoom(room);
-  await roomSettingPage.lock('');
 });
 
 When('the {actor} taps the {room} in the Room Picker', async function (actor, room) {
@@ -61,8 +66,8 @@ Then('a {actor} may enter the Room without providing {roomKey}', function (actor
 });
 
 Then('a {actor} may not enter {accessLevel} {room} after providing {roomKey}', async function (actor, accessLevel, room, roomKey) {
-  const lockedRoom = new Room(`Listed ${accessLevel.level} Room 1`);
-  await this.workspace.enterRoomWithAccessCode(lockedRoom, 'wrong key');
+  linkParameters({ room, accessLevel })
+  await this.workspace.enterRoomWithAccessCode(room, roomKey);
 
   // TODO: Encapsulate checking error messages
   const error = By.css("[class='access-code-form__error-message']")
@@ -71,8 +76,9 @@ Then('a {actor} may not enter {accessLevel} {room} after providing {roomKey}', a
 });
 
 Then('a {actor} may enter {accessLevel} {room} after providing {roomKey}', async function (actor, accessLevel, room, roomKey) {
-  const lockedRoom = new Room(`Listed ${accessLevel.level} Room 1`);
-  await this.workspace.enterRoomWithAccessCode(lockedRoom, 'secret');
+  linkParameters({ room, accessLevel })
+  await this.workspace.enterRoomWithAccessCode(room, roomKey);
+
   const videoPanel = await this.workspace.videoPanel();
   assert(await videoPanel.isDisplayed());
 });

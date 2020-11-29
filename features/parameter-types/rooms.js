@@ -1,4 +1,5 @@
 const { defineParameterType } = require("cucumber");
+const { By } = require('selenium-webdriver');
 const concatRegExp = require('../utilities/concatRegExp');
 const FLEXIBLE_ARTICLE_ADJECTIVES = /(an |the |is |a )/;
 
@@ -28,6 +29,17 @@ class Room {
     this.name = roomName;
     this.slug = slugify(roomName);
   }
+
+  reinitialize({ accessLevel }) {
+    this.accessLevel = accessLevel
+  }
+
+  get cardLocator() {
+    if(this.accessLevel) {
+      return this.accessLevel.locator
+    }
+    return By.id(this.name)
+  }
 }
 
 // This matches steps based on the access control model
@@ -42,6 +54,10 @@ defineParameterType({
 class AccessLevel {
   constructor(level) {
     this.level = level;
+  }
+
+  get locator() {
+    return By.css(`.--${this.level.toLowerCase()}`)
   }
 }
 
@@ -60,7 +76,24 @@ class PublicityLevel {
 
 defineParameterType({
   name: "roomKey",
-  regexp: concatRegExp(FLEXIBLE_ARTICLE_ADJECTIVES, /(correct |wrong )?Room Key/)
+  regexp: concatRegExp(FLEXIBLE_ARTICLE_ADJECTIVES, /(correct |valid |wrong |empty )?Room Key/),
+  transformer: (_, validity="") => new RoomKey(validity.trim())
 });
+
+class RoomKey {
+  constructor(validity) {
+    this.validity = validity
+  }
+
+  get value() {
+    if(this.validity == "correct" || this.validity == "valid") {
+      return "secret"
+    } else if (this.validity == "empty") {
+      return ""
+    } else {
+      return "wrong"
+    }
+  }
+}
 
 module.exports = Room;

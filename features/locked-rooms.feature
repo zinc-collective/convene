@@ -32,7 +32,7 @@ Feature: Locked Rooms
   @built
   Scenario: Locking an Unlocked Room
     Given a Workspace with an Unlocked Room
-    When a Workspace Member locks the Room with a Room Key
+    When a Workspace Member locks the Unlocked Room with a valid Room Key
     Then the Room is Locked
 
   # This is a "sad path" scenario, that we expect to delete once we
@@ -42,7 +42,7 @@ Feature: Locked Rooms
   @built
   Scenario: Locking an Unlocked Room without setting a Room Key
     Given a Workspace with an Unlocked Room
-    When a Workspace Member locks the Room without a Room Key
+    When a Workspace Member locks the Unlocked Room with an empty Room Key
     Then the Workspace Member is informed they need to set a Room Key when they are locking a Room
     And the Room is Unlocked
 
@@ -52,5 +52,5 @@ Feature: Locked Rooms
   @built
   Scenario: Unlocking a Locked Room
   Given a Workspace with a Locked Room
-  When a Workspace Member unlocks the Room with the correct Room Key
+  When a Workspace Member unlocks the Locked Room with the correct Room Key
   Then the Room is Unlocked

@@ -1,10 +1,9 @@
 const Page = require("./Page");
 
 class RoomSettingPage extends Page {
-  constructor(driver, room, accessCode) {
+  constructor(driver, room) {
     super(driver);
     this.room = room;
-    this.accessCode = accessCode;
   }
 
   async lock(accessCode) {
@@ -13,17 +12,19 @@ class RoomSettingPage extends Page {
     await this.clickUpdateRoom();
   }
 
-  async unlock() {
-    await this.enterAccessCode()
+  async unlock(accessCode) {
+    await this.enterAccessCode(accessCode)
+
     await this.setAccessLevel('unlocked');
     await this.clickUpdateRoom();
   }
 
-  async enterAccessCode() {
+  async enterAccessCode(accessCode) {
     const accessCodeInput = await this.findByCss("[id='waiting_room_access_code']");
-    accessCodeInput.sendKeys(this.accessCode);
+    accessCodeInput.sendKeys(accessCode.value);
+
     const submitInput = await this.findByCss("[type='submit']");
-    submitInput.click();
+    return submitInput.click();
   }
 
   async setAccessLevel(accessLevel) {
@@ -36,12 +37,12 @@ class RoomSettingPage extends Page {
 
   async setAccessCode(accessCode) {
     const accessCodeInput = await this.findByCss("[id='room_access_code']");
-    accessCodeInput.sendKeys(accessCode);
+    accessCodeInput.sendKeys(accessCode.value);
   }
 
   async clickUpdateRoom() {
     const submitInput = await this.findByCss("[type='submit']");
-    submitInput.click();
+    return submitInput.click();
   }
 
   async accessCodeError() {

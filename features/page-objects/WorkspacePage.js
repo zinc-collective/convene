@@ -38,10 +38,10 @@ class WorkspacePage extends Page {
 
   async findRoomCard(room, wait = true) {
     if(wait) {
-      await this.driver.wait(until.elementLocated(By.id(room.name)));
+      await this.driver.wait(until.elementLocated(room.cardLocator));
     }
 
-    return await this.driver.findElement(By.id(room.name));
+    return await this.driver.findElement(room.cardLocator);
   }
 
   async videoPanel() {
@@ -53,15 +53,15 @@ class WorkspacePage extends Page {
   }
 
   roomCardsWhere({ accessLevel }) {
-    return this.driver.findElements(By.css(`.--${accessLevel.level.toLowerCase()}`));
+    return this.driver.findElements(accessLevel.locator);
   }
 
-  async enterConfigureRoom(room, roomKey) {
+  async enterConfigureRoom(room) {
     const roomCard = await this.findRoomCard(room);
     const linkText = await roomCard.findElement(By.linkText("Configure Room"));
     await linkText.click();
 
-    return new RoomSettingPage(this.driver, room, roomKey);
+    return new RoomSettingPage(this.driver, room);
   }
 }
 
