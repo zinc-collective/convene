@@ -8,4 +8,8 @@ class Person < ApplicationRecord
 
   # The Workspaces the Person is part of
   has_many :workspaces, through: :workspace_memberships
+
+  def self.fetch_resource_for_passwordless(email)
+    find_or_create_by(email: email)
+  end
 end
