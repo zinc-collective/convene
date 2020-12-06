@@ -20,7 +20,7 @@ Feature: Identification
     Then the Identified User may Identify themselves using that Email Address
 
   Scenario: Email Identification Code Times Out
-    Given a Guest reuqests to Identify themselves via Email
+    Given a Guest requests to Identify themselves via Email
     When the Guest waits for an hour
     Then the Guest can not Identify themselves by entering the code sent to their Email
     And the Guest can not Identify themselves by following the link sent to their Email

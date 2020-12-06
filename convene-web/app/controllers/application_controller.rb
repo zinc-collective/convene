@@ -6,10 +6,20 @@ class ApplicationController < ActionController::Base
     "ConveneWeb"
   end
 
-  # TODO: When we begin to implement authentication, we'll want this to return an actual Person
-  # @returns [nil, Person] The Person for whom we are building a response
-  helper_method def current_person
-    nil
+  include Passwordless::ControllerHelpers
+
+  helper_method :current_person
+
+  private
+
+  def current_person
+    @current_person ||= authenticate_by_session(Person)
+  end
+
+  def require_person!
+    return if current_person
+    save_passwordless_redirect_location!(Person)
+    redirect_to people.sign_in_path, flash: { error: 'Login required' }
   end
 
   # Retrieves the workspace based upon the requests domain or params
