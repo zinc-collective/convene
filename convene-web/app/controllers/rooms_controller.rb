@@ -20,7 +20,7 @@ class RoomsController < ApplicationController
   end
 
   helper_method def page_title
-    "#{current_workspace.name} - #{current_room.name}"
+    "[Convene] - #{current_room.name} - #{current_workspace.name}"
   end
 
   helper_method def room
