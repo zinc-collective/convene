@@ -14,15 +14,11 @@ class RoomSettingPage extends Page {
   }
 
   async unlock(accessCode) {
-    await this.enterAccessCode(accessCode)
+    const waitingRoom = new WaitingRoom(this.driver)
+    await waitingRoom.submitAccessCode(accessCode)
 
     await this.setAccessLevel('unlocked');
     await this.clickUpdateRoom();
-  }
-
-  async enterAccessCode(accessCode) {
-    const waitingRoom = new WaitingRoom(this.driver)
-    waitingRoom.submitAccessCode(accessCode)
   }
 
   async setAccessLevel(accessLevel) {
