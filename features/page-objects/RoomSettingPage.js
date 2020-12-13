@@ -1,4 +1,5 @@
 const Page = require("./Page");
+const WaitingRoom = require ("./WaitingRoom")
 
 class RoomSettingPage extends Page {
   constructor(driver, room) {
@@ -20,11 +21,8 @@ class RoomSettingPage extends Page {
   }
 
   async enterAccessCode(accessCode) {
-    const accessCodeInput = await this.findByCss("[id='waiting_room_access_code']");
-    accessCodeInput.sendKeys(accessCode.value);
-
-    const submitInput = await this.findByCss("[type='submit']");
-    return submitInput.click();
+    const waitingRoom = new WaitingRoom(this.driver)
+    waitingRoom.submitAccessCode(accessCode)
   }
 
   async setAccessLevel(accessLevel) {
