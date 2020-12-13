@@ -12,4 +12,9 @@ class Person < ApplicationRecord
   def self.fetch_resource_for_passwordless(email)
     find_or_create_by(email: email)
   end
+
+  def avatar_url
+    # TODO: Allow person to upload their image
+    "/avatar.png"
+  end
 end
