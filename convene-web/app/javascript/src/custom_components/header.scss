@@ -1,14 +1,24 @@
 @layer components {
   .header {
     .items-container {
-      @apply flex items-center justify-between px-4 py-3 bg-blue-500 text-white font-bold;
+      @apply flex items-center justify-between px-4 py-3 bg-blue-500 text-white;
 
       h1 {
-        @apply text-2xl;
+        @apply text-2xl font-bold;
+      }
+
+      .profile-menu-group {
+        @apply flex flex-row items-center relative;
+        figcaption {
+          @apply font-hairline text-center text-xs;
+        }
+        .profile-menu-dropdown-item {
+          @apply absolute bg-blue-600 px-4 py-1;
+        }
       }
 
       h3 {
-        @apply text-sm;
+        @apply text-sm font-bold;
       }
     }
   }

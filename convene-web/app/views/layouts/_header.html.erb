@@ -1,9 +1,38 @@
 <header class="header">
   <div class="items-container">
     <h1><%= current_workspace&.name %></h1>
-    <div>
-      <h3>Convene</h3>
-      <h3 class="font-hairline">video meeting spaces</h3>
+    <div class="profile-menu-group" data-controller="menu">
+
+      <%- if Feature.enabled?(:identification) %>
+        <div class="profile-menu">
+          <figure class="avatar">
+            <%= image_tag current_person.avatar_url, size: 30 %>
+            <figcaption><%= current_person.name %></figcaption>
+          </figure>
+
+          <%- if current_person.is_a? Person %>
+            <ul class="profile-menu-dropdown hidden" data-target="menu.items">
+              <li>
+                <%= link_to "Logout", people.sign_out_path, class: "profile-menu-dropdown-item" %>
+              </li>
+            </ul>
+          <%- elsif %>
+            <ul class="profile-menu-dropdown hidden" data-target="menu.items">
+              <li>
+                <%= link_to "Login", people.sign_in_path, class: "profile-menu-dropdown-item" %>
+              </li>
+            </ul>
+          <%- end %>
+
+        </div>
+
+        <%= button_tag "", type: "button", class: "icon-solid chevron-icon", "data-action": "click->menu#toggle click@window->menu#hide",  "data-target": "menu.button" %>
+      <%- end %>
+
+      <div>
+        <h3>Convene</h3>
+        <h3 class="font-hairline">video meeting spaces</h3>
+      </div>
     </div>
   </div>
 </header>
