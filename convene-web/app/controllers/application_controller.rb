@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
   # Override on a per-controller basis to display different title
   # @returns [String]
   helper_method def page_title
-    "ConveneWeb"
+    if current_workspace.present?
+      "Convene - #{current_workspace.name}"
+    else
+      'Convene - Video Meeting Spaces'
+    end
   end
 
   include Passwordless::ControllerHelpers
@@ -19,6 +23,7 @@ class ApplicationController < ActionController::Base
 
   def require_person!
     return if current_person
+
     save_passwordless_redirect_location!(Person)
     redirect_to people.sign_in_path, flash: { error: 'Login required' }
   end
