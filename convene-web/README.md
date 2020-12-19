@@ -21,10 +21,10 @@ The central piece to Convene is `convene-web`, a Ruby on Rails server that is re
 * serving the Convene UI
 * managing users, workspaces, rooms, permissions, etc
 
-This [living excel sheet](https://docs.google.com/spreadsheets/d/1BOBCT0yrgrbCuQFTx_hIQak0FSQjnjjFZVA3YksEv8s/edit#gid=622652343)
-gives a high level view of the personas and segments we are focusing on initially in our design of
+This [high level view of our design](https://docs.google.com/spreadsheets/d/1BOBCT0yrgrbCuQFTx_hIQak0FSQjnjjFZVA3YksEv8s/edit#gid=622652343)
+shows the personas and segments we are focusing on initially with
 Convene. It also includes our current vision of the types of workspaces, rooms and participants it
-serves and clarifies the design in privacy permissions.
+serves and clarifies the design of privacy permissions.
 
 The Convene UI is based on Rails standard templating system, with heavy use of:
 * [Stimulus JS](https://stimulusjs.org/)
