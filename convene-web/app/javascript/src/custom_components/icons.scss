@@ -1,17 +1,19 @@
 @layer components {
-  .icon-solid::before {
-    font-family: "Font Awesome 5 Free"; font-weight: 900;
-    @apply mr-2;
-  }
   .phone-alt-icon::before {
+    @apply mr-2;
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
     content: "\f879";
   }
 
   .configure-icon::before {
+    @apply mr-2;
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
     content: "\f7d9";
   }
 
-  .chevron-icon::before {
+  .navigation-toggle::before {
+    @apply mr-2;
+    font-family: "Font Awesome 5 Free"; font-weight: 900;
     content: "\f078"
   }
 }
