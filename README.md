@@ -105,7 +105,7 @@ See [Convene::Web/README.md "Configuring your Development Machine"] for more inf
 
 ## Design
 
-We have a set of [Personas](https://drive.google.com/open?id=1JwTh2uFTc6pxsXu3njEVKQrv-J5HWExhd1rgT-ravt4) that we use to guide our design and development. 
+We have a set of [Personas](https://docs.google.com/spreadsheets/d/1BOBCT0yrgrbCuQFTx_hIQak0FSQjnjjFZVA3YksEv8s/edit#gid=622652343) that we use to guide our design and development.
 Designers who have agreed to protect the privacy of our clients may access our [Customer Research Interviews](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
 
 ## About The Zinc Collective
