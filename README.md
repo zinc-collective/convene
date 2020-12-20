@@ -1,7 +1,7 @@
 # Convene <!-- omit in toc -->
 
 Convene is a video conferencing software that provides secure, affordable, and private digital meeting spaces.
-Spaces where anyone can (play || work || grow || be ). 🎲 👩‍💻 🌱 🛋️
+Spaces where anyone can (play || work || grow || be). 🎲 👩‍💻 🌱 🛋️
 
 - [Purpose](#purpose)
   - [Objectives](#objectives)
@@ -81,47 +81,24 @@ Paid support is available for \$135 USD per hour<sup>[1][footnote-1]</sup>.
 [prosperity public license]: https://prosperitylicense.com/
 [issue-tracker]: https://github.com/zinc-collective/convene/issues
 
-## Developing Convene
+## Contributing to Convene
 
-### Architecture
-
-At present, Convene is split into three modules:
-
-- `infrastructure`, which contains infrastructure management code for Packer,
-  Terraform and Ansible.
-- `web` which provides the human interface for Convene.
-- `api` which stores data long-term and provides a programmatic interface.
-
-### Developer setup and documentation
-
-Much of Convene development happens in `convene-web`. The
-[`README`](./convene-web/README.md) in that directory contains more
-documentation on how to work on Convene.
-
-To set up your development environment you'll need `ruby`, `node` and `postgresql`. 
-See [Convene::Web/README.md "Configuring your Development Machine"] for more information.
-
-[Convene::Web/README.md "Configuring your Development Machine"]:./convene-web/README.md#configuring-your-development-machine
-
-## Design
-
-We have a set of [Personas](https://docs.google.com/spreadsheets/d/1BOBCT0yrgrbCuQFTx_hIQak0FSQjnjjFZVA3YksEv8s/edit#gid=622652343) that we use to guide our design and development.
-Designers who have agreed to protect the privacy of our clients may access our [Customer Research Interviews](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
+We're always excited for new contributors! Read more in our [guide to contributing, located in CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## About The Zinc Collective
 
-Convene is _Community Owned_ and one of many [exciting projects](https://www.zinc.coop/product-and-services/) 
+Convene is _Community Owned_ and one of many [exciting projects](https://www.zinc.coop/product-and-services/)
 maintained by a dedicated community of volunteer Contributors and Maintainers.
 We are part of The Zinc Collective, a digital product and services cooperative.
 
-We have a [Pledge and Code of Conduct](https://www.zinc.coop/code-of-conduct/). 
+We have a [Pledge and Code of Conduct](https://www.zinc.coop/code-of-conduct/).
 And anyone can become a [contributor](https://www.zinc.coop/contributing/) and/or [maintainer](https://www.zinc.coop/maintaining/).
 
 ### How we Organize  <!-- omit in toc -->
 
 * _Passport Holders_ vote on _Resident Representatives_.
 * _Maintainers and Contributors_ vote on _Worker
-Representatives_. 
+Representatives_.
 * Representatives sit in the [Circle of Stewards], and guide the [Budget] and set [Objectives].
 
 [Circle of Stewards]: #the-circle-of-stewards
