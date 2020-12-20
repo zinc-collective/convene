@@ -4,6 +4,6 @@ class Guest
   end
 
   def avatar_url
-    "/avatar.png"
+    "/avatar.svg"
   end
 end

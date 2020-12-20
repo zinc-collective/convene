@@ -1,38 +1,31 @@
 <header class="header">
-  <div class="items-container">
+  <div class="space-menu">
     <h1><%= current_workspace&.name %></h1>
-    <div class="profile-menu-group" data-controller="menu">
 
-      <%- if Feature.enabled?(:identification) %>
-        <div class="profile-menu">
+    <%- if Feature.enabled?(:identification) %>
+      <div class="profile-menu" data-controller="menu">
+        <div>
           <figure class="avatar">
             <%= image_tag current_person.avatar_url, size: 30 %>
             <figcaption><%= current_person.name %></figcaption>
           </figure>
 
-          <%- if current_person.is_a? Person %>
-            <ul class="profile-menu-dropdown hidden" data-target="menu.items">
-              <li>
-                <%= link_to "Logout", people.sign_out_path, class: "profile-menu-dropdown-item" %>
-              </li>
-            </ul>
-          <%- elsif %>
-            <ul class="profile-menu-dropdown hidden" data-target="menu.items">
-              <li>
-                <%= link_to "Login", people.sign_in_path, class: "profile-menu-dropdown-item" %>
-              </li>
-            </ul>
-          <%- end %>
-
+          <nav class="--hidden" data-target="menu.items">
+            <%- if current_person.is_a? Person %>
+              <%= link_to "Logout", people.sign_out_path, class: "profile-menu-dropdown-item" %>
+            <%- else %>
+              <%= link_to "Login",  people.sign_in_path,  class: "profile-menu-dropdown-item" %>
+            <%- end %>
+          </nav>
         </div>
 
-        <%= button_tag "", type: "button", class: "icon-solid chevron-icon", "data-action": "click->menu#toggle click@window->menu#hide",  "data-target": "menu.button" %>
-      <%- end %>
-
-      <div>
-        <h3>Convene</h3>
-        <h3 class="font-hairline">video meeting spaces</h3>
+        <%= button_tag "", type: "button", class: "navigation-toggle", "data-action": "click->menu#toggle click@window->menu#hide",  "data-target": "menu.button", "aria-labelledby": "profile-menu-dropdown-button" %>
       </div>
+    <%- end %>
+
+    <div>
+      <h3>Convene</h3>
+      <h3 class="font-hairline">video meeting spaces</h3>
     </div>
   </div>
 </header>

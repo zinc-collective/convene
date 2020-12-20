@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = [ "button", "items" ]
 
   toggle() {
-    this.itemsTarget.classList.toggle("hidden")
+    this.itemsTarget.classList.toggle("--hidden")
   }
 
   hide(e) {
@@ -12,6 +12,6 @@ export default class extends Controller {
       e.preventDefault()
       return false
     }
-    this.itemsTarget.classList.add("hidden")
+    this.itemsTarget.classList.add("--hidden")
   }
 }
