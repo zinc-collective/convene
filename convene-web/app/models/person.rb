@@ -15,6 +15,6 @@ class Person < ApplicationRecord
 
   def avatar_url
     # TODO: Allow person to upload their image
-    "/avatar.png"
+    "/avatar.svg"
   end
 end
