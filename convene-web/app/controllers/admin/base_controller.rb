@@ -5,7 +5,7 @@
 # If you want to add pagination or other controller-level concerns,
 # you're free to overwrite the RESTful controller actions.
 module Admin
-  class ApplicationController < Administrate::ApplicationController
+  class BaseController < Administrate::ApplicationController
     include Configuration::Configurable
 
     http_basic_authenticate_with configuration.basic_auth
