@@ -6,8 +6,4 @@ module RoomsHelper
       workspace_path(workspace)
     end
   end
-
-  def video_room_name(workspace, room)
-    "#{workspace.slug}--#{room.slug}"
-  end
 end
