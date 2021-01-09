@@ -76,3 +76,16 @@
 .access-code-form__submit {
   @apply mt-4;
 }
+
+.identification-form {
+  @apply w-full;
+  @screen sm {
+    @apply w-1/2;
+  }
+}
+.identification-form__submit {
+  @apply mt-6;
+  @screen sm {
+    @apply w-2/5 mx-auto
+  }
+}
