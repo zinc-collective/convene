@@ -9,10 +9,10 @@ Spaces where anyone can (play || work || grow || be). 🎲 👩‍💻 🌱 🛋
 - [Using Convene](#using-convene)
   - [Purchasing Convene](#purchasing-convene)
   - [Help and Support](#help-and-support)
-- [Developing Convene](#developing-convene)
-  - [Architecture](#architecture)
-  - [Developer setup and documentation](#developer-setup-and-documentation)
-- [Design](#design)
+- [Developing Convene](CONTRIBUTING.md)
+  - [Architecture](CONTRIBUTING.md#11-architecture)
+  - [Developer setup and documentation](CONTRIBUTING.md#2-machine-setup)
+- [Design](CONTRIBUTING.md#12-design)
 - [About The Zinc Collective](#the-zinc-collective)
 
 ## Purpose
