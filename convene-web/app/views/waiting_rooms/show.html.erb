@@ -1,6 +1,6 @@
-<div class="bg-blue-100 min-h-screen flex items-center justify-between">
+<div class="min-h-screen flex items-center justify-between">
   <div class="m-auto">
-    <div class="bg-blue-500 text-white font-extrabold px-8 py-4 rounded">
+    <div class="bg-gray-500 text-white font-extrabold px-8 py-4 rounded">
       <%= current_room.name %>
       <i class="fas fa-user ml-4"></i>
     </div>
@@ -13,6 +13,6 @@
     <%- if waiting_room.errors[:access_code].present? %>
       <p class="access-code-form__error-message"><%= waiting_room.errors[:access_code].join(', ') %></p>
     <%- end %>
-    <%= form.submit class: "access-code-form__submit button button-blue" %>
+    <%= form.submit class: "access-code-form__submit button button-gray" %>
   <% end %>
 </div>
