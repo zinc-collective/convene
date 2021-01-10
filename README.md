@@ -13,7 +13,7 @@ Spaces where anyone can (play || work || grow || be). 🎲 👩‍💻 🌱 🛋
   - [Architecture](CONTRIBUTING.md#11-architecture)
   - [Developer setup and documentation](CONTRIBUTING.md#2-machine-setup)
 - [Design](CONTRIBUTING.md#12-design)
-- [About The Zinc Collective](#the-zinc-collective)
+- [About The Zinc Collective](#about-the-zinc-collective)
 
 ## Purpose
 
