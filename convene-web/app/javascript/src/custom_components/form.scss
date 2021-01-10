@@ -39,16 +39,16 @@
 
       input[type=submit] {
         @apply w-auto px-4 py-2 inline-flex items-center border
-          border-transparent font-medium rounded-md text-blue-700 bg-blue-100
+          border-transparent font-medium rounded-md text-gray-700 bg-gray-100
           transition ease-in-out duration-150;
         &:hover {
-          @apply bg-blue-50;
+          @apply bg-gray-50;
         }
         &:active {
-          @apply bg-blue-200;
+          @apply bg-gray-200;
         }
         &:focus {
-          @apply outline-none border-blue-300 shadow-outline-blue;
+          @apply outline-none border-gray-300 shadow-outline-gray;
         }
         @screen sm {
           @apply text-sm leading-5;
