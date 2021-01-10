@@ -45,6 +45,7 @@ First, ensure your development environment has:
 
 1. Ruby (See [.ruby-version](./.ruby-version) for version)
 1. Node (See [.nvmrc](./.nvmrc) for version)
+1. [Yarn]
 1. [PostgreSQL 12]. (Note: For people using [Docker], a [docker-compose.yml]
    file has been included for convenience.)
 1. Copy `convene-web/.env.example` to `convene-web/.env` and make any changes: `cp convene-web/.env.example
@@ -63,6 +64,7 @@ Finally, with the server still running (perhaps in a different terminal), run
 [Docker]: https://www.docker.com
 [docker-compose.yml]: ../docker-compose.yml
 [.env.example]: ./.env.example
+[Yarn]: https://yarnpkg.com/getting-started/install
 
 ### Developing Mailers
 
