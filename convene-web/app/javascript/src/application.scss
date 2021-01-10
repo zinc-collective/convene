@@ -1,5 +1,9 @@
 h2 {
   @apply text-xl font-medium text-gray-900;
 }
+.center-container {
+  @apply flex flex-col items-center justify-center px-4 pt-28;
+}
+
 @import "./custom_components";
 @import "./page_bem_class";

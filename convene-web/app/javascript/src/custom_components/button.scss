@@ -8,4 +8,10 @@
   .button-blue:hover {
     @apply bg-blue-700;
   }
+  .button-gray {
+    @apply bg-gray-500 text-white;
+  }
+  .button-gray:hover {
+    @apply bg-gray-700;
+  }
 }
