@@ -3,9 +3,9 @@
     @apply font-bold py-2 px-4 rounded;
   }
   .button-gray {
-    @apply bg-gray-500 text-white;
+    @apply bg-neutral-500 text-white;
   }
   .button-gray:hover {
-    @apply bg-gray-700;
+    @apply bg-neutral-700;
   }
 }

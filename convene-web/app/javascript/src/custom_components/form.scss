@@ -1,17 +1,17 @@
 @layer components {
   form {
     legend {
-      @apply text-lg leading-6 font-medium text-gray-900;
+      @apply text-lg leading-6 font-medium text-neutral-900;
     }
     label, input, select {
       @apply block w-full;
     }
     label {
-      @apply text-sm font-medium leading-5 text-gray-700 mt-4;
+      @apply text-sm font-medium leading-5 text-neutral-700 mt-4;
     }
     input, select {
       @apply mt-1 py-2 px-4
-        rounded-lg border border-gray-300 bg-white
+        rounded-lg border border-neutral-300 bg-white
         transition duration-150 ease-in-out;
       @screen sm {
         @apply text-sm leading-5;
@@ -24,7 +24,7 @@
       @apply outline-none shadow-outline;
     }
     input:disabled {
-      @apply bg-gray-200;
+      @apply bg-neutral-200;
     }
     .error-message {
       @apply mt-1 px-4 italic text-red-500;
@@ -39,16 +39,16 @@
 
       input[type=submit] {
         @apply w-auto px-4 py-2 inline-flex items-center border
-          border-transparent font-medium rounded-md text-gray-700 bg-gray-100
+          border-transparent font-medium rounded-md text-neutral-700 bg-neutral-100
           transition ease-in-out duration-150;
         &:hover {
-          @apply bg-gray-50;
+          @apply bg-neutral-100;
         }
         &:active {
-          @apply bg-gray-200;
+          @apply bg-neutral-200;
         }
         &:focus {
-          @apply outline-none border-gray-300 shadow-outline-gray;
+          @apply outline-none border-neutral-300 shadow-outline-gray;
         }
         @screen sm {
           @apply text-sm leading-5;

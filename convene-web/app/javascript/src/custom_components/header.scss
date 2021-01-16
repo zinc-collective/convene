@@ -1,7 +1,7 @@
 @layer components {
   .header {
     .space-menu {
-      @apply flex items-center justify-between px-4 py-3 bg-purple-900 text-white;
+      @apply flex items-center justify-between px-4 py-3 bg-primary-900 text-white;
 
       h1 {
         @apply text-2xl font-bold flex-grow;
@@ -13,7 +13,7 @@
           @apply font-hairline text-center text-xs;
         }
         nav {
-          @apply absolute bg-purple-600 px-4 py-1 shadow;
+          @apply absolute bg-primary-600 px-4 py-1 shadow;
         }
       }
 
