@@ -17,7 +17,9 @@
     <%= render 'layouts/header' %>
 
     <main>
+      <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; " %>
       <%= yield %>
+      <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; " %>
     </main>
 
   </body>
