@@ -18,8 +18,8 @@
       </div>
     </fieldset>
     <footer>
-      <%= link_to 'Cancel', workspace_path(room.workspace) %>
-      <%= room_form.submit %>
+      <%= room_form.submit class: "mr-5" %>
+      <%= link_to 'Cancel', workspace_path(room.workspace), class: "button --neutral" %>
     </footer>
   <% end %>
 </div>
