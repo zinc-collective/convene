@@ -13,6 +13,8 @@
     <%- if waiting_room.errors[:access_code].present? %>
       <p class="access-code-form__error-message"><%= waiting_room.errors[:access_code].join(', ') %></p>
     <%- end %>
-    <%= form.submit class: "access-code-form__submit button button-neutral" %>
+    <footer>
+      <%= form.submit class: "--neutral" %>
+    </footer>
   <% end %>
 </div>

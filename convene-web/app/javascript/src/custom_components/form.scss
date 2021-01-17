@@ -9,8 +9,8 @@
     label {
       @apply text-sm font-medium leading-5 text-neutral-700 mt-4;
     }
-    input, select {
-      @apply mt-1 py-2 px-4
+    input[type="text"], input[type="email"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], select {
+      @apply py-2 px-4
         rounded-lg border border-neutral-300 bg-white
         transition duration-150 ease-in-out;
       @screen sm {
@@ -31,27 +31,16 @@
     }
 
     footer {
-      @apply mt-5 flex flex-row-reverse justify-evenly;
-
-      a {
-        @apply inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md bg-white transition ease-in-out duration-150
+      @apply flex flex-col justify-evenly;
+      @screen sm {
+        @apply flex-row;
       }
 
-      input[type=submit] {
-        @apply w-auto px-4 py-2 inline-flex items-center border
-          border-transparent font-medium rounded-md text-neutral-700 bg-neutral-100
-          transition ease-in-out duration-150;
-        &:hover {
-          @apply bg-neutral-100;
-        }
-        &:active {
-          @apply bg-neutral-200;
-        }
-        &:focus {
-          @apply outline-none border-neutral-300 shadow-outline-gray;
-        }
+
+      input[type=submit], a {
+        @apply flex-1 items-center mt-4 ;
         @screen sm {
-          @apply text-sm leading-5;
+          @apply leading-5;
         }
       }
     }
@@ -81,11 +70,5 @@
   @apply w-full;
   @screen sm {
     @apply w-1/2;
-  }
-}
-.identification-form__submit {
-  @apply mt-6;
-  @screen sm {
-    @apply w-2/5 mx-auto
   }
 }

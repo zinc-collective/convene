@@ -1,11 +1,26 @@
 @layer components {
-  .button {
-    @apply font-bold py-2 px-4 rounded;
-  }
-  .button-neutral {
-    @apply bg-neutral-500 text-white;
-  }
-  .button-neutral:hover {
-    @apply bg-neutral-700;
+  input[type=submit], .button {
+    @apply font-bold py-2 px-4 rounded bg-primary-500 text-white text-center
+           transition ease-in-out duration-150;
+
+    &:hover {
+      @apply bg-primary-700;
+    }
+    &:active {
+      @apply bg-primary-200;
+    }
+
+    &.--neutral {
+      @apply bg-neutral-500;
+      &:hover {
+        @apply bg-neutral-700;
+      }
+      &:active {
+        @apply bg-neutral-200;
+      }
+      &:focus {
+        @apply outline-none border-neutral-300 shadow-outline-gray;
+      }
+    }
   }
 }
