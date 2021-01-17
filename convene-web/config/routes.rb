@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :guides, only: %i[index show]
+
   constraints BrandedDomain.new(Workspace) do
     root 'workspaces#show'
     get '/:id', to: 'rooms#show'

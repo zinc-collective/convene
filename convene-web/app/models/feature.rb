@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # An internal Microlibrary for feature flagging to help avoid
 # sprinkling `ENV` calls throughout the codebase.
 class Feature

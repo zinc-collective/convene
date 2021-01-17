@@ -56,3 +56,11 @@ en:
     mailer:
       subject: "Your magic link ✨"
       magic_link: "Here's your link: %{link}"
+  home:
+    title: "Home"
+  guides:
+    title: "Guides"
+    call_to_action: "Learn How"
+    locked_rooms:
+      title: "Locked Rooms"
+      value_proposition: "Get some privacy, require a passcode to enter a room."
