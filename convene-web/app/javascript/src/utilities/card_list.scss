@@ -1,0 +1,11 @@
+@layer components {
+  .card-list {
+    @apply mt-3 grid grid-cols-1 gap-5;
+    @screen sm {
+      @apply gap-6 grid-cols-2;
+    }
+    @screen lg {
+      @apply grid-cols-4;
+    }
+  }
+}

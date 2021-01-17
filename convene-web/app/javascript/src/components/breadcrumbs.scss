@@ -1,0 +1,7 @@
+@layer components {
+  .breadcrumbs {
+    a {
+      @apply underline;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@layer components {
+  .guide-summary {
+    @apply card;
+    header {
+      @apply card__header;
+    }
+
+    footer {
+      @apply card__footer;
+    }
+  }
+}

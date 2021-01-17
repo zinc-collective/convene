@@ -1,7 +1,5 @@
-<div class="workspace-container">
-  <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+<div class="workspace-container card-list">
   <% @workspace.rooms.accessable_by(current_person).each do |room| %>
-      <%= render partial: 'workspaces/room_card', locals: { room: room } %>
-    <% end %>
-  </ul>
+    <%= render partial: 'workspaces/room_card', locals: { room: room } %>
+  <% end %>
 </div>

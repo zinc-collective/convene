@@ -19,5 +19,4 @@ require("channels")
 import "controllers"
 
 require('../src/application.scss')
-require('../src/tailwind.scss')
 require("@fortawesome/fontawesome-free/css/all.css")
