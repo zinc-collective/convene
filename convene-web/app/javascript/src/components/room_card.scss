@@ -1,10 +1,9 @@
 @layer components {
   .room-card {
-    @apply grid grid-cols-1 grid-rows-2 grid-flow-col shadow rounded-lg;
+    @apply card;
 
     header {
-      @apply w-full flex items-center;
-
+      @apply card__header flex;
       h3 {
         @apply text-neutral-900 text-sm leading-5 font-medium truncate pl-8 mr-4;
       }
@@ -12,7 +11,7 @@
 
 
     footer {
-      @apply w-full flex flex-col items-center justify-center border-t border-neutral-200;
+      @apply card__footer;
 
       .room-door_enter, .room-door_configure {
         @apply flex justify-center text-sm leading-5 text-neutral-700 font-medium transition ease-in-out duration-150;
