@@ -1,17 +1,5 @@
-html {
-  background: rgb(200,200,200);
-  background: linear-gradient(0deg, rgba(200,200,200,1) 0%, rgba(255,255,255,1) 100%);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  min-height: 100%;
-}
-h2 {
-  @apply text-xl font-medium text-neutral-900;
-}
-.center-container {
-  @apply flex flex-col items-center justify-center px-4 pt-28;
-}
+@import "./base/layout";
+@import "./base/typography";
 
-@import "./custom_components";
-@import "./page_bem_class";
+@import "./utilities";
+@import "./components";

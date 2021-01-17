@@ -1,0 +1,25 @@
+@layer base {
+  .app {
+    &--no-header {
+      .header {
+        display: none;
+      }
+    }
+  }
+
+  html {
+    background: rgb(200, 200, 200);
+    background: linear-gradient(
+      0deg,
+      rgba(200, 200, 200, 1) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    @apply min-h-screen;
+  }
+
+  main {
+    @apply mx-5;
+  }
+}
