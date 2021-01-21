@@ -8,8 +8,8 @@ class PersonDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    workspace_memberships: Field::HasMany,
-    workspaces: Field::HasMany,
+    space_memberships: Field::HasMany,
+    spaces: Field::HasMany,
     id: Field::String.with_options(searchable: false),
     name: Field::String,
     email: Field::String,
@@ -23,8 +23,8 @@ class PersonDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  workspace_memberships
-  workspaces
+  space_memberships
+  spaces
   id
   name
   ].freeze
@@ -32,8 +32,8 @@ class PersonDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  workspace_memberships
-  workspaces
+  space_memberships
+  spaces
   id
   name
   email
@@ -45,8 +45,8 @@ class PersonDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  workspace_memberships
-  workspaces
+  space_memberships
+  spaces
   name
   email
   ].freeze

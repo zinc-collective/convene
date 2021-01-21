@@ -6,33 +6,33 @@ Feature: Space membership
 
   @unstarted @andromeda
   Scenario: Inviting Guests
-    When a Workspace Admin invites a Guest to be a Workspace Member via Email
-    Then the Guest receives a Workspace Invitation Email
+    When a Space Admin invites a Guest to be a Space Member via Email
+    Then the Guest receives a Space Invitation Email
 
   @unstarted @andromeda
-  Scenario: Guest Accepts Workspace Invitation Email
-    Given a Guest has received a Workspace Invitation Email
+  Scenario: Guest Accepts Space Invitation Email
+    Given a Guest has received a Space Invitation Email
     When the Guest accepts the invitation
-    Then the Guest becomes a Workspace Member
-    And the Workspace Member is logged in
+    Then the Guest becomes a Space Member
+    And the Space Member is logged in
 
   @unstarted @andromeda
   Scenario: Removing Space Members
-    Given a Workspace with multiple Workspace Members
-    When the Workspace Admin removes a Workspace Member
-    Then that Workspace Member receives a Workspace Membership Revoked Email
-    And the Workspace Member can still log in
-    And the Workspace Member is not a member of that Workspace
+    Given a Space with multiple Space Members
+    When the Space Admin removes a Space Member
+    Then that Space Member receives a Space Membership Revoked Email
+    And the Space Member can still log in
+    And the Space Member is not a member of that Space
 
   # Add noun for a person who has a convene account but is not a Members this particular space
   @unstarted @andromeda
   Scenario: Inviting Space Members who already have a convene account
 
   @unstarted
-  Scenario: Workspace Admin Knows When A Workspace Invitation Email Bounces
+  Scenario: Space Admin Knows When A Space Invitation Email Bounces
 
   @unstarted
-  Scenario: Guest Accepts The Same Workspace Invitation Email Multiple Times
+  Scenario: Guest Accepts The Same Space Invitation Email Multiple Times
 
   @unstarted
-  Scenario: Workspace Invitation Expires
+  Scenario: Space Invitation Expires

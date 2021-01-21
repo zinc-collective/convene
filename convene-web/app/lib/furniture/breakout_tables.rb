@@ -27,7 +27,7 @@ module Furniture
 
     class Controller < Furniture::BaseController
       def page_title
-        "#{room.workspace.name}, #{room.name}, #{table.name}"
+        "#{room.space.name}, #{room.name}, #{table.name}"
       end
 
       helper_method def table
@@ -36,7 +36,7 @@ module Furniture
       end
 
       helper_method def room
-        @room ||= current_workspace.rooms.friendly.find(params[:room_id])
+        @room ||= current_space.rooms.friendly.find(params[:room_id])
       end
     end
 
@@ -49,7 +49,7 @@ module Furniture
       # @return [FurniturePlacement]
       attr_accessor :placement
 
-      delegate :room, :workspace, to: :placement
+      delegate :room, :space, to: :placement
       delegate :video_host, to: :room
 
       def full_slug

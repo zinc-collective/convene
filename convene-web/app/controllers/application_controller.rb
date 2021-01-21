@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # Override on a per-controller basis to display different title
   # @returns [String]
   helper_method def page_title
-    if current_workspace.present?
-      "Convene - #{current_workspace.name}"
+    if current_space.present?
+      "Convene - #{current_space.name}"
     else
       'Convene - Video Meeting Spaces'
     end
@@ -28,26 +28,26 @@ class ApplicationController < ActionController::Base
     redirect_to people.sign_in_path, flash: { error: 'Login required' }
   end
 
-  # Retrieves the workspace based upon the requests domain or params
-  # @returns [nil, Workspace]
-  helper_method def current_workspace
-    workspace_repository = Workspace.includes(:rooms)
-    @current_workspace ||=
-      if params[:workspace_id]
-        workspace_repository.friendly.find(params[:workspace_id])
+  # Retrieves the space based upon the requests domain or params
+  # @returns [nil, Space]
+  helper_method def current_space
+    space_repository = Space.includes(:rooms)
+    @current_space ||=
+      if params[:space_id]
+        space_repository.friendly.find(params[:space_id])
       else
-        BrandedDomain.new(workspace_repository).workspace_for_request(request) ||
-        workspace_repository.friendly.find(params[:id])
+        BrandedDomain.new(space_repository).space_for_request(request) ||
+        space_repository.friendly.find(params[:id])
       end
   rescue ActiveRecord::RecordNotFound
     nil
   end
 
-  # Retrieves the room based upon the current_workspace and params
+  # Retrieves the room based upon the current_space and params
   # @returns [nil, Room]
   helper_method def current_room
     @current_room ||=
-      current_workspace.rooms.friendly.find(
+      current_space.rooms.friendly.find(
         params[:id] || params[:room_id]
       )
   rescue ActiveRecord::RecordNotFound

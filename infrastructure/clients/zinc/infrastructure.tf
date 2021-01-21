@@ -36,7 +36,7 @@ resource "cloudflare_record" "convene" {
   ttl    = 1
 }
 
-# Create a branded-domain for the Zinc workspace
+# Create a branded-domain for the Zinc Space
 resource "cloudflare_record" "meet" {
   zone_id = var.cloudflare_zone_id
   name    = "meet"
@@ -45,7 +45,7 @@ resource "cloudflare_record" "meet" {
   ttl    = 1
 }
 
-# Create a branded-domain for the Convene-demo workspace
+# Create a branded-domain for the Convene-demo space
 resource "cloudflare_record" "convene-demo" {
   zone_id = var.cloudflare_zone_id
   name    = "convene-demo"

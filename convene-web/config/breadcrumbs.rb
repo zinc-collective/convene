@@ -1,7 +1,7 @@
 # @see https://github.com/kzkn/gretel
 crumb :root do
-  if current_workspace.present?
-    link current_workspace.name, workspace_path(current_workspace)
+  if current_space.present?
+    link current_space.name, space_path(current_space)
   else
     link t('home.title'), root_path
   end

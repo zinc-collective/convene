@@ -1,6 +1,6 @@
-const WorkspacePage = require("./WorkspacePage");
+const SpacePage = require("./SpacePage");
 
-class CustomDomainWorkspacePage extends WorkspacePage {
+class CustomDomainSpacePage extends SpacePage {
   constructor(driver, customDomain) {
     this.customDomain = customDomain;
     super(driver);
@@ -15,4 +15,4 @@ class CustomDomainWorkspacePage extends WorkspacePage {
   }
 }
 
-module.exports = CustomDomainWorkspacePage;
+module.exports = CustomDomainSpacePage;

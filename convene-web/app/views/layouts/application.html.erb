@@ -8,8 +8,8 @@
 
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <% if current_workspace&.jitsi_meet_domain %>
-      <script defer src='https://<%= current_workspace.jitsi_meet_domain %>/external_api.js'></script>
+    <% if current_space&.jitsi_meet_domain %>
+      <script defer src='https://<%= current_space.jitsi_meet_domain %>/external_api.js'></script>
     <% end %>
   </head>
 

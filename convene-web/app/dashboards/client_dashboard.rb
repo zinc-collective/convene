@@ -11,7 +11,7 @@ class ClientDashboard < Administrate::BaseDashboard
     slug: Field::String,
     name: Field::String,
     id: Field::String.with_options(searchable: false),
-    workspaces: Field::HasMany,
+    spaces: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -34,7 +34,7 @@ class ClientDashboard < Administrate::BaseDashboard
     name
     id
 
-    workspaces
+    spaces
     created_at
     updated_at
   ].freeze
@@ -45,7 +45,7 @@ class ClientDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     slug
     name
-    workspaces
+    spaces
   ].freeze
 
   # COLLECTION_FILTERS

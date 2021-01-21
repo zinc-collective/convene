@@ -1,24 +1,24 @@
-# A Workspace is a collection of infrastructure resources
+# A Space is a collection of infrastructure resources
 # for collaboration
-class Workspace < ApplicationRecord
-  # Which client owns the workspace
+class Space < ApplicationRecord
+  # Which client owns the space
   belongs_to :client
 
-  # The fully-qualified domain to enter the workspace.
-  # Workspaces without a branded_domain are still accessible via their slug.
+  # The fully-qualified domain to enter the space.
+  # Spaces without a branded_domain are still accessible via their slug.
   # The branded_domain must be unique to ensure we don't accidentally place
-  # a visitor into the wrong workspace.
+  # a visitor into the wrong space.
   attribute :branded_domain, :string
   validates :branded_domain, uniqueness: true, allow_nil: true
 
   # The domain we expect jitsi meet to be running on
   attribute :jitsi_meet_domain, :string
 
-  # The human-friendly name for the workspace
+  # The human-friendly name for the space
   attribute :name, :string
   validates :name, presence: true, uniqueness: true
 
-  # The URI-friendly name for the workspace
+  # The URI-friendly name for the space
   attribute :slug, :string
   validates :slug, uniqueness: true
 
@@ -27,19 +27,19 @@ class Workspace < ApplicationRecord
 
   friendly_id :name, use: :slugged
 
-  # Joins People to workspaces for permissioning and
+  # Joins People to spaces for permissioning and
   # other purposes
-  has_many :workspace_memberships, inverse_of: :workspace
+  has_many :space_memberships, inverse_of: :space
 
-  # The People with permissions for the Workspace
-  has_many :members, through: :workspace_memberships
+  # The People with permissions for the Space
+  has_many :members, through: :space_memberships
 
-  # The Rooms within this Workspace
-  has_many :rooms, inverse_of: :workspace
+  # The Rooms within this Space
+  has_many :rooms, inverse_of: :space
 
-  # A Workspace's Access Level indicates what a participant must know in order to gain access.
+  # A Space's Access Level indicates what a participant must know in order to gain access.
   # `unlocked` The participant does not need to know anything to gain access.
-  # `locked` Participants must know the Workspace's `access_code` to gain access.
+  # `locked` Participants must know the Space's `access_code` to gain access.
   attribute :access_level, :string
 
   # A room's Access Code is a "secret" that, when known, grants access to the room.

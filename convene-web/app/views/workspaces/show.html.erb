@@ -1,5 +1,0 @@
-<div class="workspace-container card-list">
-  <% @workspace.rooms.accessable_by(current_person).each do |room| %>
-    <%= render partial: 'workspaces/room_card', locals: { room: room } %>
-  <% end %>
-</div>

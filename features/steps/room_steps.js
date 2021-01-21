@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("cucumber");
-const WorkspacePage = require("../page-objects/WorkspacePage");
-const Workspace = require("../parameter-types/workspaces");
+const SpacePage = require("../page-objects/SpacePage");
+const Space = require("../parameter-types/spaces");
 const Room = require("../parameter-types/rooms");
 const RoomCard = require("../page-objects/page-elements/RoomCard");
 const assert = require('assert').strict;
@@ -11,47 +11,47 @@ const RoomSettingPage = require("../page-objects/RoomSettingPage");
 /**
  * Merges extracted parameter types together for convenience within step definitions
  */
-function linkParameters({ workspace = new Workspace("System Test"),
+function linkParameters({ space = new Space("System Test"),
                           accessLevel, room }) {
   room.reinitialize({ accessLevel })
   return {
-    workspace,
+    space,
     accessLevel,
     room
   }
 }
 
-Given("a Workspace with {accessLevel} {room}", async function (accessLevel, room) {
-  let { workspace } = linkParameters({ accessLevel, room })
-  this.workspace = new WorkspacePage(this.driver, workspace);
-  await this.workspace.enter();
-  const matchingRooms = await this.workspace.roomCardsWhere({ accessLevel });
+Given("a Space with {accessLevel} {room}", async function (accessLevel, room) {
+  let { space } = linkParameters({ accessLevel, room })
+  this.space = new SpacePage(this.driver, space);
+  await this.space.enter();
+  const matchingRooms = await this.space.roomCardsWhere({ accessLevel });
   assert(matchingRooms.length > 0);
 });
 
-Given('a Workspace with an {publicityLevel} Room', function (publicityLevel) {
+Given('a Space with an {publicityLevel} Room', function (publicityLevel) {
   // Write code here that turns the phrase above into concrete actions
   return 'pending';
 });
 
 When("a {actor} unlocks {accessLevel} {room} with {accessCode}", async function (actor, accessLevel, room, accessCode) {
   linkParameters({ room, accessLevel })
-  const roomConfigurationPage = await this.workspace.enterConfigureRoom(room);
+  const roomConfigurationPage = await this.space.enterConfigureRoom(room);
   await roomConfigurationPage.unlock(accessCode);
 });
 
 When("a {actor} locks {accessLevel} {room} with {accessCode}", async function (actor, accessLevel, room, accessCode) {
   linkParameters({ room, accessLevel })
-  const roomSettingPage = await this.workspace.enterConfigureRoom(room);
+  const roomSettingPage = await this.space.enterConfigureRoom(room);
   await roomSettingPage.lock(accessCode);
 });
 
 When('the {actor} taps the {room} in the Room Picker', async function (actor, room) {
-  await this.workspace.enterRoom(room);
+  await this.space.enterRoom(room);
 });
 
 Then("the {actor} is placed in the {room}", async function (actor, room) {
-  const videoPanel = await this.workspace.videoPanel();
+  const videoPanel = await this.space.videoPanel();
   assert(await videoPanel.isDisplayed());
 });
 
@@ -67,7 +67,7 @@ Then('a {actor} may enter the Room without providing {accessCode}', function (ac
 
 Then('a {actor} may not enter {accessLevel} {room} after providing {accessCode}', async function (actor, accessLevel, room, accessCode) {
   linkParameters({ room, accessLevel })
-  await this.workspace.enterRoomWithAccessCode(room, accessCode);
+  await this.space.enterRoomWithAccessCode(room, accessCode);
 
   // TODO: Encapsulate checking error messages
   const error = By.css("[class='access-code-form__error-message']")
@@ -77,13 +77,13 @@ Then('a {actor} may not enter {accessLevel} {room} after providing {accessCode}'
 
 Then('a {actor} may enter {accessLevel} {room} after providing {accessCode}', async function (actor, accessLevel, room, accessCode) {
   linkParameters({ room, accessLevel, accessCode })
-  await this.workspace.enterRoomWithAccessCode(room, accessCode);
+  await this.space.enterRoomWithAccessCode(room, accessCode);
 
-  const videoPanel = await this.workspace.videoPanel();
+  const videoPanel = await this.space.videoPanel();
   assert(await videoPanel.isDisplayed());
 });
 
-Then('the {workspace} has a {room}', function (workspace, room) {
+Then('the {space} has a {room}', function (space, room) {
   // Write code here that turns the phrase above into concrete actions
   return 'pending';
 });
@@ -98,7 +98,7 @@ Then('the {actor} does not see the {room}\'s Door', function (actor, room) {
   //
   // TODO: Figure out a way to do this that doesn't require changing the
   //       find methods on our page objects!
-  return this.workspace.findRoomCard(room, false).then((ok) => {
+  return this.space.findRoomCard(room, false).then((ok) => {
     throw `We found a door for ${room.name} that we did not want to find`
   }).catch((e) => {
     if(e.name === 'NoSuchElementError') { return true }

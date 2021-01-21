@@ -3,8 +3,8 @@ class WaitingRoom
 
   attr_accessor :room, :access_code, :redirect_url
 
-  def workspace
-    room.workspace
+  def space
+    room.space
   end
 
   def persisted?

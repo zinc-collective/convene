@@ -1,12 +1,12 @@
-Feature: Workspace Reliability
-  In order to feel confident that my Workspace will be available whenever I need it
+Feature: Space Reliability
+  In order to feel confident that my Space will be available whenever I need it
   I want a robust set of structures to ensure reliability
 
 
   Scenario: Nightly restarts
-    Given a Client Workspace is provisioned
+    Given a Client Space is provisioned
     When it becomes Midnight in the Client's timezone
-    Then the Client Workspace is rebooted
+    Then the Client Space is rebooted
 
   Scenario: Multiple Operators may log in to Provisioned Convene Instances
     Given a running Convene instance that was launched from a packer image with the following ssh authorized keys:

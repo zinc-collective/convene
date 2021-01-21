@@ -6,7 +6,7 @@
       "value": "convene-web"
     },
     "DEMO_ENABLED": {
-      "description": "Seed demo workspace data",
+      "description": "Seed demo data",
       "value": "true"
     },
     "ADMIN_USERNAME": {

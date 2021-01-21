@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_010740) do
+ActiveRecord::Schema.define(version: 2021_01_21_054204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -81,20 +81,20 @@ ActiveRecord::Schema.define(version: 2020_12_24_010740) do
     t.string "publicity_level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "workspace_id"
-    t.index ["slug", "workspace_id"], name: "index_rooms_on_slug_and_workspace_id", unique: true
-    t.index ["workspace_id"], name: "index_rooms_on_workspace_id"
+    t.uuid "space_id"
+    t.index ["slug", "space_id"], name: "index_rooms_on_slug_and_space_id", unique: true
+    t.index ["space_id"], name: "index_rooms_on_space_id"
   end
 
-  create_table "workspace_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "space_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id"
-    t.uuid "workspace_id"
+    t.uuid "space_id"
     t.string "access_code"
-    t.index ["member_id"], name: "index_workspace_memberships_on_member_id"
-    t.index ["workspace_id"], name: "index_workspace_memberships_on_workspace_id"
+    t.index ["member_id"], name: "index_space_memberships_on_member_id"
+    t.index ["space_id"], name: "index_space_memberships_on_space_id"
   end
 
-  create_table "workspaces", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "spaces", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "client_id"
     t.string "jitsi_meet_domain"
     t.string "name"
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 2020_12_24_010740) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "branded_domain"
-    t.index ["client_id"], name: "index_workspaces_on_client_id"
-    t.index ["slug", "client_id"], name: "index_workspaces_on_slug_and_client_id", unique: true
+    t.index ["client_id"], name: "index_spaces_on_client_id"
+    t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
   end
 
 end
