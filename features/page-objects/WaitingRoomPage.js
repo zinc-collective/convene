@@ -1,10 +1,6 @@
 const Page = require("./Page")
 
 class WaitingRoomPage extends Page {
-  constructor(driver) {
-    super(driver);
-  }
-
   async submitAccessCode(accessCode) {
     const accessCodeInput = await this.findByCss("[id='waiting_room_access_code']");
     if ( accessCodeInput.isDisplayed() ) {
