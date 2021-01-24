@@ -45,7 +45,7 @@ Feature: Identification
   Scenario: Identity Verification Via Emailed Link
     Given a Guest has Identified themselves using an Email Address
     When the Guest opens the Identification Verification Link emailed to them
-    Then the Guest is Verified as the Owner of that Email Addresses
+    Then the Guest is Verified as the Owner of that Email Address
     And the Guest has become Authenticated
 
 
