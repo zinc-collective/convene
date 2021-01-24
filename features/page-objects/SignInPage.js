@@ -1,8 +1,9 @@
 const Page = require("./Page")
 
 class SignInPage extends Page {
-  enter() {
-    return this.driver.get(`${this.baseUrl}/people/sign_in`);
+  async enter() {
+    await this.driver.get(`${this.baseUrl}/people/sign_in`);
+    return this;
   }
 
   async submitEmail(email) {

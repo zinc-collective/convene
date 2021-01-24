@@ -1,10 +1,11 @@
 const { Given, When, Then } = require("cucumber");
 const SignInPage = require("../page-objects/SignInPage");
 
-Given('a {actor} has Identified themselves using an Email Address', async function (actor) {
+Given('a {actor} has Identified themselves using an Email Address', function (actor) {
     const signInPage = new SignInPage(this.driver);
-    await signInPage.enter();
-    await signInPage.submitEmail("test@example.com");
+    return signInPage
+            .enter()
+            .then((page) => page.submitEmail('email@example.com'));
  });
 
  When('the {actor} opens the Identification Verification Link emailed to them', function (actor) {
@@ -21,5 +22,3 @@ Given('a {actor} has Identified themselves using an Email Address', async functi
    // Write code here that turns the phrase above into concrete actions
    return 'pending';
  });
-
-
