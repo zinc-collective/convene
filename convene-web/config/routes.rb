@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     end
   end
 
+  match '/workspaces/*path', to: redirect('/spaces/%{path}'), via: [:GET]
+
   resources :guides, only: %i[index show]
 
   constraints BrandedDomain.new(Space) do
