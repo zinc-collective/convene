@@ -6,7 +6,7 @@
 - [Testing Convene Web](#testing-convene-web)
 
 The Convene Web project provides a human and computer interface for managing of
-Workspaces, Rooms, and Team Members.
+Spaces, Rooms, and Team Members.
 
 The User Interface is written in [Stimulus](https://stimulusjs.org/).
 
@@ -19,11 +19,11 @@ contributing to Zinc projects.
 
 The central piece to Convene is `convene-web`, a Ruby on Rails server that is responsible for:
 * serving the Convene UI
-* managing users, workspaces, rooms, permissions, etc
+* managing users, spaces, rooms, permissions, etc
 
 This [high level view of our design](https://docs.google.com/spreadsheets/d/1BOBCT0yrgrbCuQFTx_hIQak0FSQjnjjFZVA3YksEv8s/edit#gid=622652343)
 shows the personas and segments we are focusing on initially with
-Convene. It also includes our current vision of the types of workspaces, rooms and participants it
+Convene. It also includes our current vision of the types of spaces, rooms and participants it
 serves and clarifies the design of privacy permissions.
 
 The Convene UI is based on Rails standard templating system, with heavy use of:
@@ -55,7 +55,7 @@ Then, run `bin/setup` to install Ruby and Node dependencies and set up the
 database.
 
 Once you have completed setup; run `bin/run`. You now should be able to open
-http://localhost:3000/workspaces/system-test and see Convene.
+http://localhost:3000/spaces/system-test and see Convene.
 
 Finally, with the server still running (perhaps in a different terminal), run
 `bin/test` to ensure that your development environment is configured correctly.

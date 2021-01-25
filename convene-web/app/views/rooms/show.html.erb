@@ -8,7 +8,7 @@
   data-target="video-room.wrapper"
   data-video-room-video-host="<%= room.video_host %>"
   data-video-room-name="<%= room.full_slug %>"
-  data-video-room-workspace-path="<%= workspace_path(room.workspace) %>"
+  data-video-room-space-path="<%= space_path(room.space) %>"
   class="bg-neutral-800"
 >
 </div>
@@ -23,8 +23,8 @@
 
 <div class="px-6 pt-3">
   <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <% current_workspace.rooms.accessable_by(current_person).each do |room| %>
-      <%= render partial: 'workspaces/room_card', locals: { room: room } %>
+    <% current_space.rooms.accessable_by(current_person).each do |room| %>
+      <%= render partial: 'spaces/room_card', locals: { room: room } %>
     <% end %>
   </ul>
 </div>

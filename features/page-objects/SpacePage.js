@@ -4,18 +4,18 @@ const { By, until } = require('selenium-webdriver');
 const RoomCard = require("./page-elements/RoomCard");
 const assert = require('assert').strict;
 
-class WorkspacePage extends Page {
-  constructor(driver, workspace) {
+class SpacePage extends Page {
+  constructor(driver, space) {
     super(driver);
-    this.workspace = workspace;
+    this.space = space;
   }
 
   enter() {
-    this.driver.get(`${this.baseUrl}/workspaces/${this.workspace.slug}`);
+    this.driver.get(`${this.baseUrl}/spaces/${this.space.slug}`);
   }
 
   enterRoomThruUrl(room) {
-    this.driver.get(`${this.baseUrl}/workspaces/${this.workspace.slug}/rooms/${room.slug}`);
+    this.driver.get(`${this.baseUrl}/spaces/${this.space.slug}/rooms/${room.slug}`);
   }
 
   async enterRoom(room) {
@@ -63,4 +63,4 @@ class WorkspacePage extends Page {
   }
 }
 
-module.exports = WorkspacePage;
+module.exports = SpacePage;

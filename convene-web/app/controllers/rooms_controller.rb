@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
 
   def update
     if room.update(room_params)
-      redirect_to workspace_path(room.workspace)
+      redirect_to space_path(room.space)
     else
       render :edit
     end
@@ -20,7 +20,7 @@ class RoomsController < ApplicationController
   end
 
   helper_method def page_title
-    "[Convene] - #{current_room.name} - #{current_workspace.name}"
+    "[Convene] - #{current_room.name} - #{current_space.name}"
   end
 
   helper_method def room
@@ -30,13 +30,13 @@ class RoomsController < ApplicationController
   # TODO: Unit test authorize and redirect url, consider adding Pundit policy object
   private def authorize
     if !room.enterable?(current_access_code(room))
-      redirect_to workspace_room_waiting_room_path(current_workspace, current_room, redirect_url: after_authorization_redirect_url)
+      redirect_to space_room_waiting_room_path(current_space, current_room, redirect_url: after_authorization_redirect_url)
     end
   end
 
   # TODO: Unit test authorize and redirect url
   private def after_authorization_redirect_url
-    return edit_workspace_room_path(room.workspace, room) if [:edit, :update].include?(action_name.to_sym)
-    workspace_room_path(room.workspace, room)
+    return edit_space_room_path(room.space, room) if [:edit, :update].include?(action_name.to_sym)
+    space_room_path(room.space, room)
   end
 end

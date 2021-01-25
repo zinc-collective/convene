@@ -1,6 +1,6 @@
 <header class="header">
   <div class="space-menu">
-    <h1><%= current_workspace&.name %></h1>
+    <h1><%= current_space&.name %></h1>
 
     <%- if Feature.enabled?(:identification) %>
       <div class="profile-menu" data-controller="menu">

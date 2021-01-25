@@ -32,7 +32,7 @@ export default class VideoRoom {
     if (!this.roomName) return;
     this.jitsi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
 
-    // Exit room without dispatching event when user refresh to prevent replacing to workspace url
+    // Exit room without dispatching event when user refresh to prevent replacing to space url
     this.parentNode.addEventListener('beforeunload', () => this.exitRoom(false));
     this.jitsi.on('readyToClose', () => this.exitRoom(true));
   }

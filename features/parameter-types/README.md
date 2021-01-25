@@ -25,9 +25,9 @@ The core nouns in Convene are:
 
 1. [Actors], the person or program performing a Step.
 2. [Rooms], where people congregate to work together.
-3. [Workspaces], which group Rooms and People for access and discoverability
+3. [Spaces], which group Rooms and People for access and discoverability
    purposes.
 
 [actors]: ./actors.js
 [rooms]: ./rooms.js
-[workspaces]: ./workspaces.js
+[spaces]: ./spaces.js

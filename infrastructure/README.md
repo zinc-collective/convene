@@ -16,17 +16,17 @@ interoperability between infrastructure providers.
 
 Please ensure all three are installed and run from your command line.
 
-### Creating Your Own Convene Workspace
+### Creating Your Own Convene Space
 
-There are two steps to creating a Convene Video Workspace:
+There are two steps to creating a Convene Video Space:
 
-1. [Building a Workspace's Blueprint](#building-a-workspaces-blueprint)
-1. [Provisioning a Workspace from the Blueprint](#provisioning-a-workspace-from-the-blueprint)
+1. [Building a Space's Blueprint](#building-a-spaces-blueprint)
+1. [Provisioning a Space from the Blueprint](#provisioning-a-space-from-the-blueprint)
 
-Every Convene Video Workspace has a _Blueprint_. Blueprints define:
+Every Convene Video Space has a _Blueprint_. Blueprints define:
 
-1. The Infrastructure provider(s) your Workspace will run on.
-2. The Workspace's security, reliability, and performance configuration
+1. The Infrastructure provider(s) your Space will run on.
+2. The Space's security, reliability, and performance configuration
    specification.
 3. The [golden image(s)] that will be placed within the Infrastructure provider
    when provisioned.
@@ -50,19 +50,19 @@ There are example Blueprints for:
 [vultr]: https://www.vultr.com/
 [golden image(s)]: https://www.quora.com/What-is-golden-image
 
-#### Building a Workspace's Blueprint
+#### Building a Space's Blueprint
 
-For step-by-step instructions for building a Workspace, see the "Operator
-builds..." scenarios in [`features/video-workspaces.feature`].
+For step-by-step instructions for building a Space, see the "Operator
+builds..." scenarios in [`features/video-spaces.feature`].
 
 A visual overview of what happens when an Operator builds a Blueprint is as
 follows:
 
-![Operator Builds a Convene Workspace](./docs/operator-builds-a-convene-workspace.png)
+![Operator Builds a Convene Space](./docs/operator-builds-a-convene-space.png)
 
-[`features/video-workspaces.feature`]: ./features/video-workspaces.feature
+[`features/video-spaces.feature`]: ./features/video-spaces.feature
 
-#### Provisioning a Workspace from the Blueprint
+#### Provisioning a Space from the Blueprint
 
-For step-by-step instructions for building a Workspace, see the "Operator
-Provisions..." scenarios in [`features/video-workspaces.feature`].
+For step-by-step instructions for building a Space, see the "Operator
+Provisions..." scenarios in [`features/video-spaces.feature`].

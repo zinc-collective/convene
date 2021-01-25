@@ -4,7 +4,7 @@ const { defineParameterType } = require("cucumber");
 // interacts with Convene.
 defineParameterType({
   name: "actor",
-  regexp: /(Guest|Workspace Member|Workspace Admin)/,
+  regexp: /(Guest|Space Member|Space Admin)/,
   transformer: (type) => new Actor(type)
 });
 

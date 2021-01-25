@@ -10,14 +10,14 @@
   </header>
   <footer>
     <div class="room-door_enter">
-      <%= link_to workspace_room_path(room.workspace, room) do %>
+      <%= link_to space_room_path(room.space, room) do %>
         <span class="phone-alt-icon">Enter Room</span>
       <% end %>
     </div>
 
     <%- if Feature.enabled?(:configure_room) %>
       <div class="room-door_configure">
-        <%= link_to edit_workspace_room_path(room.workspace, room) do %>
+        <%= link_to edit_space_room_path(room.space, room) do %>
           <span class="configure-icon">Configure Room</span>
         <% end %>
       </div>

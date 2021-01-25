@@ -13,7 +13,7 @@ RSpec.describe FurniturePlacement do
       .scoped_to(:room_id)
   }
 
-  it { is_expected.to delegate_method(:workspace).to(:room) }
+  it { is_expected.to delegate_method(:space).to(:room) }
 
   describe '#furniture' do
     it 'returns the configured piece of furniture' do

@@ -2,18 +2,18 @@ Rails.application.routes.draw do
   passwordless_for :people
 
   namespace :admin do
-    resources :workspaces
+    resources :spaces
     resources :clients
     resources :people
-    resources :workspace_memberships
+    resources :space_memberships
     resources :room_ownerships
     resources :rooms
 
-    root to: 'workspaces#index'
+    root to: 'spaces#index'
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :workspaces do
+  resources :spaces do
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]
       namespace :furniture do
@@ -22,10 +22,12 @@ Rails.application.routes.draw do
     end
   end
 
+  match '/workspaces/*path', to: redirect('/spaces/%{path}'), via: [:GET]
+
   resources :guides, only: %i[index show]
 
-  constraints BrandedDomain.new(Workspace) do
-    root 'workspaces#show'
+  constraints BrandedDomain.new(Space) do
+    root 'spaces#show'
     get '/:id', to: 'rooms#show'
   end
 end

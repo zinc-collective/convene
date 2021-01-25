@@ -1,7 +1,7 @@
 # {Furniture} placed in a {Room} allows it to be used
 class FurniturePlacement < ApplicationRecord
   belongs_to :room
-  delegate :workspace, to: :room
+  delegate :space, to: :room
 
   attribute :name, :string
   validates :name, uniqueness: { scope: :room_id }

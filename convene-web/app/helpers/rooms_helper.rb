@@ -1,9 +1,9 @@
 module RoomsHelper
-  def end_call_path(workspace)
-    if workspace.branded_domain.present?
-      "https://#{workspace.branded_domain}/"
+  def end_call_path(space)
+    if space.branded_domain.present?
+      "https://#{space.branded_domain}/"
     else
-      workspace_path(workspace)
+      space_path(space)
     end
   end
 end

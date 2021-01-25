@@ -1,4 +1,4 @@
-# An organization or person paying for Convene to manage their virtual workspaces
+# An organization or person paying for Convene to manage their virtual spaces
 class Client < ApplicationRecord
   # Human friendly description of the Client
   attribute :name, :string
@@ -11,6 +11,6 @@ class Client < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  # The workspaces the client owns
-  has_many :workspaces, inverse_of: :client
+  # The spaces the client owns
+  has_many :spaces, inverse_of: :client
 end

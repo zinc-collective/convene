@@ -9,9 +9,9 @@ Feature: Demoing Convene
   Scenario: Customer Team Member May Perform Demo
     Given a fresh Convene deployment
     When I visit the fresh Convene deployment
-    Then there is a "Convene Demo" Workspace
-    And the "Convene Demo" Workspace has a "Vivek's Desk" Room
-    And the "Convene Demo" Workspace has a "Zee's Desk" Room
-    And the "Convene Demo" Workspace has a "Water Cooler" Room
-    And the "Convene Demo" Workspace has a "The Ada Lovelace Room" Room
-    And the "Convene Demo" Workspace is available at the "convene-demo.zinc.coop" domain
+    Then there is a "Convene Demo" Space
+    And the "Convene Demo" Space has a "Vivek's Desk" Room
+    And the "Convene Demo" Space has a "Zee's Desk" Room
+    And the "Convene Demo" Space has a "Water Cooler" Room
+    And the "Convene Demo" Space has a "The Ada Lovelace Room" Room
+    And the "Convene Demo" Space is available at the "convene-demo.zinc.coop" domain
