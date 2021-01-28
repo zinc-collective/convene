@@ -9,7 +9,8 @@ class SystemTestSpace
       branded_domain: 'system-test.zinc.local'
     )).find_or_create!
 
-    Blueprint.new(space: DEFAULT_SPACE_CONFIG.merge(name: "System Test"))
+    Blueprint.new(client: "System Test",
+                  space: DEFAULT_SPACE_CONFIG.merge(name: "System Test"))
       .find_or_create!
   end
 

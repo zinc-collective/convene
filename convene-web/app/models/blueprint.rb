@@ -21,6 +21,10 @@ class Blueprint
       end
     end
 
+    space_attributes.fetch(:members, []).each do |person|
+      space.members << person
+    end
+
     space
   end
 

@@ -10,23 +10,31 @@ zee = Person.find_or_create_by!(email: 'zee@example.com', name: 'Zee')
 tom = Person.find_or_create_by!(email: 'tom@example.com', name: 'Tom')
 bene = Person.find_or_create_by!(email: 'bene@example.com', name: 'Bene')
 
-zinc = Client.find_or_create_by!(name: 'Zinc')
-
-zincs_space = zinc.spaces
-                      .find_or_create_by!(name: 'Zinc')
-zincs_space.update!(access_level: :unlocked,
-                        branded_domain: 'meet.zinc.local',
-                        jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop')
-
-zincs_space.members << zee
-zincs_space.members << tom
-zincs_space.members << bene
-
-ada = zincs_space.rooms.find_or_initialize_by(name: 'Ada')
-ada.update!(access_level: :unlocked, publicity_level: :listed)
-ttz = zincs_space.rooms.find_or_initialize_by(name: 'Talk to Zee')
-ttz.update!(access_level: :unlocked, publicity_level: :unlisted)
-ttz.owners << zee
+Blueprint.new(client: {
+  name: "Zinc",
+  space: {
+    members: [zee, tom, bene],
+    name: "Zinc", branded_domain: 'meet.zinc.local',
+    access_level: :unlocked,
+    jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
+    rooms: [{
+      name: "Ada",
+      access_level: :unlocked,
+      publicity_level: :listed,
+      furniture_placements: {
+        comlink: {}
+      }
+    },
+    {
+      name: "Talk to Zee",
+      access_level: :unlocked,
+      publicity_level: :unlisted,
+      furniture_placements: {
+        comlink: {}
+      }
+    }]
+  }
+}).find_or_create!
 
 DemoSpace.prepare
 SystemTestSpace.prepare
