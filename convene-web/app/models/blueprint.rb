@@ -1,4 +1,4 @@
-# Used to assemble Spaces
+# Assembles Spaces idempotently
 class Blueprint
   attr_accessor :attributes
 
@@ -7,17 +7,17 @@ class Blueprint
   end
 
   def find_or_create!
-    space = client.spaces.find_or_create_by!(space_attrs[:name])
-    space.update!(space_attrs.except(:name))
+    space = client.spaces.find_or_initialize_by(name: space_attributes[:name])
+    space.update!(space_attributes.except(:name, :rooms, :members))
 
-    room_attrs.each do |room_attrs|
-      room = space.rooms.find_or_initialize_by(name: room_attrs[:name])
-      room.update!(room_attrs.except(:name))
-      furniture_placements = room_attrs.fetch(:furniture_placements, {})
+    space_attributes.fetch(:rooms, []).each do |room_attributes|
+      room = space.rooms.find_or_initialize_by(name: room_attributes[:name])
+      room.update!(room_attributes.except(:name, :furniture_placements))
+      furniture_placements = room_attributes.fetch(:furniture_placements, {})
       furniture_placements.each.with_index do |(furniture, settings), slot|
         furniture_placement = room.furniture_placements
-                                  .find_or_initialize_by(name: furniture)
-        furniture_placement.update!(settings: settings, slot: slot)
+                                  .find_or_initialize_by(slot: slot)
+        furniture_placement.update!(settings: settings, name: furniture)
       end
     end
 
@@ -29,18 +29,18 @@ class Blueprint
   end
 
   private def space
-    @_space ||= client.spaces.find_or_create_by!(space_attrs[:name])
+    @_space ||= client.spaces.find_or_create_by!(space_attributes[:name])
   end
 
   private def client
-      @_client ||= Client.find_or_create_by!(name: client_attrs[:name])
+      @_client ||= Client.find_or_create_by!(name: client_attributes[:name])
   end
 
-  private def client_attrs
+  private def client_attributes
     attributes[:client]
   end
 
-  private def space_attrs
-    client_attrs[:space]
+  private def space_attributes
+    client_attributes[:space]
   end
 end

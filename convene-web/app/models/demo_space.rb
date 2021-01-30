@@ -4,28 +4,28 @@ class DemoSpace
       name: "Zee's Desk",
       publicity_level: :listed,
       furniture_placements: {
-        comlink: {}
+        videobridge_jitsi: {}
       }
     },
     {
       name: "Vivek's Desk",
       publicity_level: :listed,
       furniture_placements: {
-        comlink: {}
+        videobridge_jitsi: {}
       }
     },
     {
       name: "Water Cooler",
       publicity_level: :listed,
       furniture_placements: {
-        comlink: {}
+        videobridge_jitsi: {}
       }
     },
     {
       name: "The Ada Lovelace Room",
       publicity_level: :listed,
       furniture_placements: {
-        comlink: {}
+        videobridge_jitsi: {}
       }
     },
     {
@@ -34,7 +34,7 @@ class DemoSpace
       access_level: :locked,
       access_code: :friends,
       furniture_placements: {
-        comlink: {}
+        videobridge_jitsi: {}
       }
     },
   ].freeze
