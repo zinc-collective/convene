@@ -1,6 +1,5 @@
 module Furniture
   REGISTRY = {
-    tables: Furniture::BreakoutTables,
     breakout_tables: Furniture::BreakoutTables,
     videobridge_jitsi: Furniture::VideobridgeJitsi,
   }

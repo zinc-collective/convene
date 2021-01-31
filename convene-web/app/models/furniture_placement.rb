@@ -13,8 +13,6 @@ class FurniturePlacement < ApplicationRecord
   attribute :slot, :integer
   validates :slot, presence: true, uniqueness: { scope: :room_id }
 
-  # TODO: Furniture probably wants to have a Registry that finds and
-  # instantiates the appropriate furniture class for the placement.
   def furniture
     @furniture ||= Furniture.from_placement(self)
   end
