@@ -16,6 +16,6 @@ class FurniturePlacement < ApplicationRecord
   # TODO: Furniture probably wants to have a Registry that finds and
   # instantiates the appropriate furniture class for the placement.
   def furniture
-    @furniture ||= Furniture::BreakoutTables.new(self)
+    @furniture ||= Furniture.from_placement(self)
   end
 end
