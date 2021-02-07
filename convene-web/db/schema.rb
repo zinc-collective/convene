@@ -58,6 +58,12 @@ ActiveRecord::Schema.define(version: 2021_07_10_224638) do
     t.index ["room_id"], name: "index_furniture_placements_on_room_id"
   end
 
+  create_table "invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "space_id"
+    t.index ["space_id"], name: "index_invitations_on_space_id"
+  end
+
+
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "email", null: false

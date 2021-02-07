@@ -20,7 +20,9 @@ Rails.application.routes.draw do
 
   resource :me, only: %i[show], controller: 'me'
 
-  match '/workspaces/*path', to: redirect('/spaces/%<path>'), via: [:GET]
+  resources :space_memberships
+
+  match '/workspaces/*path', to: redirect('/spaces/%{path}'), via: [:GET]
 
   resources :guides, only: %i[index show]
 

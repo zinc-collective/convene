@@ -2,6 +2,18 @@
 
 <fieldset>
   <header>
+    <h3>Space Configuration</h3>
+  </header>
+
+  <div>
+    <%= form_with model: @space do |form| %>
+      <%= form.text_field :name %>
+    <% end %>
+  </div>
+</fieldset>
+
+<fieldset>
+  <header>
     <h3>Rooms</h3>
   </header>
 

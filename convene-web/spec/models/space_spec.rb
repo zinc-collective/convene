@@ -3,6 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Space, type: :model do
+  it { is_expected.to have_many(:rooms) }
+  it { is_expected.to belong_to(:entrance).class_name('Room').optional(true).dependent(false) }
+  it { is_expected.to have_many(:invitations) }
+
   describe '#name' do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_uniqueness_of(:name) }
@@ -19,7 +23,4 @@ RSpec.describe Space, type: :model do
 
     it { is_expected.to eql(Space.friendly.find('convene')) }
   end
-
-  it { is_expected.to have_many(:rooms) }
-  it { is_expected.to belong_to(:entrance).class_name('Room').optional(true).dependent(false) }
 end
