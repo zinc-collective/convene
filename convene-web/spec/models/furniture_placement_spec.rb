@@ -18,7 +18,7 @@ RSpec.describe FurniturePlacement do
   describe '#furniture' do
     it 'returns the configured piece of furniture' do
       furniture_placement = FurniturePlacement
-                            .new(name: :tables, settings: { names: %w[a b] })
+                            .new(name: :breakout_tables, settings: { names: %w[a b] })
 
       expect(furniture_placement.furniture).to be_a(Furniture::BreakoutTables)
       expect(furniture_placement.furniture.placement).to eql(furniture_placement)

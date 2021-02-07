@@ -31,7 +31,7 @@ module Furniture
       end
 
       helper_method def table
-        @table ||= room.furniture_placements.find_by!(name: :tables)
+        @table ||= room.furniture_placements.find_by!(name: :breakout_tables)
           &.furniture&.find_table(params[:id])
       end
 
