@@ -17,15 +17,15 @@ Feature: Furniture
 
 # Scenarios for maninulating and adding Furniture.
 
-@unimplemented
+@unstarted
 Scenario: Space Member adds Furniture to Room
 
-@unimplemented
+@unstarted
 Scenario: Space Member configures Furniture in Room
 
-@unimplemented
+@unstarted
 Scenario: Space Member removes Furniture from Room
 
-@unimplemented
+@unstarted
 Scenario: Space Member reorders Furniture in Room (maybe configure Rooms?)
 

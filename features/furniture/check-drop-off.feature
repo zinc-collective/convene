@@ -32,7 +32,7 @@ Feature: Electronic Check Drop Box
     Given a Space with a Room with Check Drop Off Furniture fully configured
 
   # For valid link credentials data, see https://plaid.com/docs/auth/coverage/testing/#testing-the-link-flow
-  @unimplemented
+  @unstarted
   Scenario: Dropping off an Electronic Check with a Valid Bank Account
     Given a Guest begins the Check Deposit Workflow with the following data:
       | check_amount          | $1000                     |
@@ -49,7 +49,7 @@ Feature: Electronic Check Drop Box
       """
     And the Guest receives an Email letting them know that their Check is Pending Deposit
 
-  @unimplemented
+  @unstarted
   Scenario: Depositing Pending Checks from the Check Drop Box
     Given there are Pending Checks in the Check Drop Box
     When a Space Owner downloads the Pending Checks
