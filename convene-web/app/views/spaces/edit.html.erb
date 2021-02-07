@@ -1,0 +1,12 @@
+<%= form_with model: @space do |form| %>
+<%= form.text_field :name %>
+<% end %>
+
+<%- @space.members.each do |member| %>
+  <%= member.name %>
+  <%= member.email %>
+<%- end %>
+
+<%= form_with model: @space.space_memberships.new do |member_form| %>
+
+<% end %>

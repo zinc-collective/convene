@@ -34,6 +34,9 @@ class Space < ApplicationRecord
   # The People with permissions for the Space
   has_many :members, through: :space_memberships
 
+  # Inviting new members
+  has_many :invitations
+
   # The Rooms within this Space
   has_many :rooms, inverse_of: :space
 
