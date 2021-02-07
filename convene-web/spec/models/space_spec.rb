@@ -9,4 +9,6 @@ RSpec.describe Space, type: :model do
   describe "#branded_domain" do
     it { is_expected.to validate_uniqueness_of(:branded_domain).allow_nil }
   end
+
+  it { is_expected.to have_many(:invitations) }
 end
