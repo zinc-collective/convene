@@ -1,2 +1,2 @@
-release:  bin/rake release:after_build
+release:  bin/rake db:prepare && bin/rake release:after_build
 web:      bundle exec puma -C config/puma.rb
