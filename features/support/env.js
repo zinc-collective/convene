@@ -2,6 +2,7 @@ const fse = require('fs-extra');
 const { setWorldConstructor, After, setDefaultTimeout, Status } = require('cucumber');
 const { Builder } = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
+const MailDev = require('maildev');
 
 class CustomWorld {
   constructor() {
@@ -9,6 +10,9 @@ class CustomWorld {
       .forBrowser('firefox')
       .setFirefoxOptions(this.firefoxOption())
       .build();
+    // Figure out how to do this globally, now it's per world
+    const this.maildev = new MailDev();
+    this.maildev.listen()
   }
 
   firefoxOption() {
@@ -21,6 +25,7 @@ class CustomWorld {
 setWorldConstructor(CustomWorld);
 
 After(function(testCase) {
+  this.maildev.close();
   if (testCase.result.status == Status.FAILED) {
     return this.driver.takeScreenshot().then( screenShot => {
       const filePath = `features/test_reports/${testCase.pickle.name.split(' ').join('_')}.png`;

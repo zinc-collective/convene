@@ -49,7 +49,7 @@ Feature: Identification
     And the Guest has become Authenticated
 
 
-  @built @unimplemented-steps
+  @built
   Scenario: Authentication is lost on Sign-out
     Given an Authenticated Session
     When the Authenticated Person Signs Out
