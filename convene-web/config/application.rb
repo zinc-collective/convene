@@ -31,5 +31,7 @@ module ConveneWeb
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.session_store :cookie_store, expire_after: 7.days
   end
 end
