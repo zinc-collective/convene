@@ -64,6 +64,12 @@ Feature: Identification
   # @unstarted
   # And the Guest can not Identify themselves by entering the code sent to their Email
 
+  @built @unimplemented-steps
+  Scenario: Authentication times out
+    Given an Authenticated Person who has not signed in for 7 days
+    When the Authenticated Person visits Convene
+    Then the Authenticated Person is treated as a Guest
+
   @unimplemented-steps
   Scenario: Authentication times out due to inactivity
     Given an Authenticated Person who has been Inactive for 7 days
