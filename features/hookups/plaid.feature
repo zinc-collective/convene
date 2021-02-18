@@ -1,6 +1,6 @@
 Feature: Hookups: Plaid
-  In order to support interactions with Space Members Financial Institutions
-  I want to Hookup Plaid to my Space
+  In order to support interactions with Financial Institutions for Space Members
+  I want a Plaid Hookup
 
   @unstarted @milestone-a
   Scenario: Configuring the Plaid Hookup

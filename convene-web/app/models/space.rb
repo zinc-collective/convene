@@ -13,9 +13,6 @@ class Space < ApplicationRecord
   attribute :branded_domain, :string
   validates :branded_domain, uniqueness: true, allow_nil: true
 
-  # The domain we expect jitsi meet to be running on
-  attribute :jitsi_meet_domain, :string
-
   # The human-friendly name for the space
   attribute :name, :string
   validates :name, presence: true, uniqueness: true
@@ -55,5 +52,18 @@ class Space < ApplicationRecord
 
   def locked?
     access_level&.to_sym == :locked
+  end
+
+  # @see {Hookups}
+  has_many :space_hookups
+
+  def jitsi_meet_domain
+    hookups.find { |h| h.is_a?(Hookups::JitsiHookup) }.meet_domain
+  end
+
+  def hookups
+    space_hookups.lazy.map do |space_hookup|
+      Hookups.from_space_hookup(space_hookup)
+    end
   end
 end
