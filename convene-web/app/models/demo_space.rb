@@ -38,6 +38,14 @@ class DemoSpace
       }
     }
   ].freeze
+
+  SPACE_HOOKUPS = [
+    { hookup_slug: :plaid, name: 'Plaid', configuration: {} },
+    { hookup_slug: :jitsi, name: 'Jitsi', configuration:
+      { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
+  ].freeze
+
+  # @return [Space]
   def self.prepare
     return unless Feature.enabled?(:demo)
 
@@ -45,11 +53,10 @@ class DemoSpace
                     name: 'Zinc',
                     space: {
                       name: 'Convene Demo',
-                      jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
+                      space_hookups: SPACE_HOOKUPS,
                       branded_domain: 'convene-demo.zinc.coop',
                       members: [{ email: 'zee@zinc.coop' },
                                 { email: 'vivek@zinc.coop' }],
-                      access_level: :unlocked,
                       rooms: DEMO_ROOMS
                     }
                   }).find_or_create!

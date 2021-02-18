@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
+# Default controller for new resources; ensures requests fulfill authentication
+# and authorization requirements, as well as exposes common helper methods.
+#
+# @see Admin::BaseController for exposing Operator-specific actions and views
 class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found

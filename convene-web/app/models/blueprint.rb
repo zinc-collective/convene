@@ -19,6 +19,7 @@ class Blueprint
 
     set_rooms
     set_members
+    set_space_hookups
     set_entrance
     space
   end
@@ -41,6 +42,15 @@ class Blueprint
       furniture_placement
         .update!(settings: furniture_placement.settings.merge(settings),
                  furniture_kind: furniture)
+    end
+  end
+
+  def set_space_hookups
+    space_attributes.fetch(:space_hookups, []).each do |space_hookup_attributes|
+      space_hookup = space.space_hookups
+                          .find_or_initialize_by(name: space_hookup_attributes[:name])
+
+      space_hookup.update!(space_hookup_attributes.except(:name))
     end
   end
 
@@ -82,11 +92,17 @@ class Blueprint
     client: {
       name: 'Zinc',
       space: {
-        jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
         members: [{ email: 'zee@zinc.coop' }, { email: 'cheryl@zinc.coop' }],
         name: 'Zinc', branded_domain: 'meet.zinc.coop',
         access_level: :unlocked,
         entrance: 'lobby',
+        space_hookups: [
+          { hookup_slug: :plaid, name: 'Plaid', configuration: {} },
+          {
+            hookup_slug: :jitsi, name: 'Jitsi', configuration:
+            { meet_domain: 'convene-videobridge-zinc.zinc.coop' }
+          }
+        ],
         rooms: [{
           name: 'Lobby',
           access_level: :unlocked,
