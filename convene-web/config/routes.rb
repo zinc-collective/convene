@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :space_memberships do
+  resources :invitations, only: [:create, :destroy] do
   end
 
   match '/workspaces/*path', to: redirect('/spaces/%{path}'), via: [:GET]
