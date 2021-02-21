@@ -14,15 +14,13 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :spaces do
+    resources :invitations, only: [:create, :destroy]
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]
       namespace :furniture do
         Furniture.append_routes(self)
       end
     end
-  end
-
-  resources :space_memberships do
   end
 
   match '/workspaces/*path', to: redirect('/spaces/%{path}'), via: [:GET]
