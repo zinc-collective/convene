@@ -11,7 +11,7 @@ class CustomWorld {
       .setFirefoxOptions(this.firefoxOption())
       .build();
     // Figure out how to do this globally, now it's per world
-    const this.maildev = new MailDev();
+    this.maildev = new MailDev();
     this.maildev.listen()
   }
 

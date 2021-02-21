@@ -5,9 +5,10 @@ if ENV["SMTP_ADDRESS"]
     port: ENV["SMTP_PORT"].to_i,
     user_name: ENV["SMTP_USERNAME"],
     password: ENV["SMTP_PASSWORD"],
-    authentication: ENV["SMTP_AUTHENTICATION"].to_sym,
-    tls: true
-  }
+    authentication: ENV["SMTP_AUTHENTICATION"]&.to_sym,
+    tls: ENV.fetch("SMTP_ENABLE_TLS", true) != "false",
+    enable_starttls_auto: ENV.fetch("SMTP_ENABLE_TLS", true) != "false"
+  }.compact
 
   ActionMailer::Base.delivery_method = :smtp
 end

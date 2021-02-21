@@ -15,6 +15,10 @@ jobs:
       PORT: 80
       APP_URL: http://localhost
       CUSTOM_DOMAIN: http://system-test.zinc.local
+      # Connect to locally-running Maildev for tests
+      SMTP_PORT: 1025
+      SMTP_DOMAIN: localhost
+      SMTP_ENABLE_TLS: false
 
     services:
       postgres:
