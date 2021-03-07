@@ -22,7 +22,7 @@ Blueprint.new(client: {
       access_level: :unlocked,
       publicity_level: :listed,
       furniture_placements: {
-        videobridge_jitsi: {}
+        videobridge_by_jitsi: {}
       }
     },
     {
@@ -30,7 +30,7 @@ Blueprint.new(client: {
       access_level: :unlocked,
       publicity_level: :unlisted,
       furniture_placements: {
-        videobridge_jitsi: {}
+        videobridge_by_jitsi: {}
       }
     }]
   }

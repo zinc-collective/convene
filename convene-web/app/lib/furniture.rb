@@ -1,8 +1,15 @@
 module Furniture
   REGISTRY = {
-    breakout_tables: Furniture::BreakoutTables,
-    videobridge_jitsi: Furniture::VideobridgeJitsi,
+    breakout_tables_by_jitsi: Furniture::BreakoutTablesByJitsi,
+    videobridge_by_jitsi: Furniture::VideobridgeByJitsi,
   }
+
+  # Allows Furniture to expose their controllers
+  def self.append_routes(routing_context)
+    REGISTRY.values.each do |furniture|
+      furniture.append_routes(routing_context) if furniture.respond_to?(:append_routes)
+    end
+  end
 
   def self.from_placement(placement)
     REGISTRY[placement.name.to_sym].new(placement)

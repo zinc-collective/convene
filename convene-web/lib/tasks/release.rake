@@ -6,10 +6,10 @@ namespace :release do
 
     # Create a FurniturePlacement in Slot 1 for the Jitsi Videobridge!
     Room.all.each do |room|
-      room.furniture_placements.find_or_create_by!(name: 'videobridge_jitsi', slot: 0)
+      room.furniture_placements.find_or_create_by!(name: 'videobridge_by_jitsi', slot: 0)
     end
 
-    # Renames our furniture placements from tables to breakout_tables
-    FurniturePlacement.all.where(name: 'tables').update_all(name: 'breakout_tables')
+    # Renames our furniture placements from tables to breakout_tables_by_jitsi
+    FurniturePlacement.all.where(name: 'tables').update_all(name: 'breakout_tables_by_jitsi')
   end
 end
