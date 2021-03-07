@@ -11,7 +11,7 @@ class MailServer {
     return axios.delete("http://localhost:1080/email/all")
       .then(res => {
         if (res.status === 200) {
-          console.log("Emails deleted")
+          return true
         }
       }).catch(err => console.log(err))
   }
