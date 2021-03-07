@@ -13,7 +13,7 @@ jobs:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PORT: 80
-      APP_URL: http://localhost
+      APP_ROOT_URL: http://localhost
       CUSTOM_DOMAIN: http://system-test.zinc.local
       # Connect to locally-running Maildev for tests
       SMTP_PORT: 1025
