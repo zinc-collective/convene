@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]
       namespace :furniture do
-        resources :breakout_tables, only: [:show], controller: 'breakout_tables/'
+        Furniture.append_routes(self)
       end
     end
   end
