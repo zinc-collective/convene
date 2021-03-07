@@ -1,9 +1,10 @@
 class Guest
-  def name
-    "Guest"
-  end
+  include ActiveModel::Model
+  attr_accessor :name, :email, :avatar_url
 
-  def avatar_url
-    "/avatar.svg"
+  def initialize(name: "Guest", email: "guest@example.com", avatar_url: "/avatar.svg")
+    @name       = name
+    @email      = email
+    @avatar_url = avatar_url
   end
 end

@@ -10,6 +10,13 @@ class SpacePage extends Page {
     this.space = space;
   }
 
+  async logout() {
+    const navToggle = await this.findByCss(".navigation-toggle")
+    navToggle.click()
+    const logoutLink = await this.findByCss("#logout")
+    logoutLink.click()
+  }
+
   enter() {
     this.driver.get(`${this.baseUrl}/spaces/${this.space.slug}`);
   }

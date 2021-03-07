@@ -16,7 +16,7 @@ class MePage extends Page {
   }
 
   async email() {
-   return (await this.person()).email;
+    return (await this.person()).email;
   }
 
   async id() {
