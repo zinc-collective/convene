@@ -41,7 +41,7 @@ Feature: Identification
   # An Emailed Link is a _Possession_ Verification Factor that demonstrates the
   # person can at least _read_ the email address they are using to identiy
   # themselves.
-  @built @unimplemented-steps
+  @built
   Scenario: Identity Verification Via Emailed Link
     Given a Guest has Identified themselves using an Email Address
     When the Guest opens the Identification Verification Link emailed to them

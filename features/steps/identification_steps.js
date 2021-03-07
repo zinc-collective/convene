@@ -3,6 +3,7 @@ const getUrls = require("get-urls");
 const { Given, When, Then } = require("cucumber");
 const MePage = require("../page-objects/MePage");
 const SignInPage = require("../page-objects/SignInPage");
+const MailServer = require("../utilities/MailServer");
 
 Given(
   "a {actor} has Identified themselves using an Email Address",
@@ -20,8 +21,8 @@ Given("an Authenticated Session", function () {
 When(
   "the {actor} opens the Identification Verification Link emailed to them",
   function (actor) {
-    return this.maildev.getAllEmail((err, emails) => {
-      assert.ok(err == null);
+    const mailServer = new MailServer;
+    return mailServer.getAllEmails().then((emails) => {
       assert.equal(emails.length, 1);
       const magicLink = getUrls(emails[0].text).values().next().value;
       return this.driver.get(magicLink);

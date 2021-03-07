@@ -5,5 +5,8 @@
 # See: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
 set -e
 
+npm install maildev -g
+maildev &
+
 (cd convene-web && bin/test)
 npm run test
