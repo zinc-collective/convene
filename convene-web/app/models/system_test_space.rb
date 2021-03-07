@@ -26,8 +26,8 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
-          videobridge_jitsi: {},
-          breakout_tables: { names: %w[engineering design ops] }
+          videobridge_by_jitsi: {},
+          breakout_tables_by_jitsi: { names: %w[engineering design ops] }
         }
       },
       {
@@ -36,7 +36,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
-          videobridge_jitsi: {}
+          videobridge_by_jitsi: {}
         }
       },
       {
@@ -45,7 +45,7 @@ class SystemTestSpace
         access_level: :locked,
         access_code: :secret,
         furniture_placements: {
-          videobridge_jitsi: {}
+          videobridge_by_jitsi: {}
         }
       },
       {
@@ -54,7 +54,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
-          videobridge_jitsi: {}
+          videobridge_by_jitsi: {}
         }
       },
       {
@@ -63,7 +63,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
-          videobridge_jitsi: {}
+          videobridge_by_jitsi: {}
         }
       }
     ]

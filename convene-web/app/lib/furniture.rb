@@ -1,7 +1,7 @@
 module Furniture
   REGISTRY = {
-    breakout_tables: Furniture::BreakoutTablesByJitsi,
-    videobridge_jitsi: Furniture::VideobridgeByJitsi,
+    breakout_tables_by_jitsi: Furniture::BreakoutTablesByJitsi,
+    videobridge_by_jitsi: Furniture::VideobridgeByJitsi,
   }
 
   # Allows Furniture to expose their controllers

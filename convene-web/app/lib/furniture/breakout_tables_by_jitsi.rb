@@ -1,7 +1,7 @@
 module Furniture
   class BreakoutTablesByJitsi
     def self.append_routes(router)
-      router.resources :breakout_tables, only: [:show], controller: 'breakout_tables_by_jitsi/'
+      router.resources :breakout_tables_by_jitsi, only: [:show], controller: 'breakout_tables_by_jitsi_by_jitsi/'
     end
     include Placeable
 

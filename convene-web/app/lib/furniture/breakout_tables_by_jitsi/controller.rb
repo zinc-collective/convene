@@ -8,7 +8,7 @@ module Furniture
       def show; end
 
       helper_method def table
-        @table ||= room.furniture_placements.find_by!(name: :breakout_tables)
+        @table ||= room.furniture_placements.find_by!(name: :breakout_tables_by_jitsi)
           &.furniture&.find_table(params[:id])
       end
 
