@@ -52,10 +52,14 @@ jobs:
       run: cd convene-web && cp .env.example .env
 
     - name: Setup environment
-      run: bin/setup
+      run: |
+          sudo chown -R $USER /usr/local/lib/node_modules
+          sudo chown -R $USER /usr/local/bin/
+          bin/setup
 
     - name: Start Rails server
-      run: bin/run &
+      run: |
+          bin/run &
 
     - name: Test convene-web
       run: |
@@ -63,8 +67,6 @@ jobs:
           # To trigger asset compile in development mode
           # TODO: Start server in production mode
           curl system-test.zinc.local 1> /dev/null
-          sudo chown -R $USER /usr/local/lib/node_modules
-          sudo chown -R $USER /usr/local/bin/
           bin/test
 
     - uses: actions/upload-artifact@v2
