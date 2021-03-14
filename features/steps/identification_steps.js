@@ -1,5 +1,4 @@
 const assert = require("assert").strict;
-const getUrls = require("get-urls");
 const { Given, When, Then } = require("cucumber");
 const MePage = require("../page-objects/MePage");
 const SignInPage = require("../page-objects/SignInPage");
@@ -8,33 +7,30 @@ const Space = require("../parameter-types/spaces");
 const MailServer = require("../utilities/MailServer");
 
 Given(
-  "a {actor} has Identified themselves using an Email Address",
+  "an unauthenticated {actor} has requested to be identified via Email",
   function (actor) {
+    this.actor = actor;
     const signInPage = new SignInPage(this.driver);
-    return signInPage.submitEmail("email@example.com");
+    return signInPage.submitEmail(actor.email);
   }
 );
 
-Given("an Authenticated Session", function () {
+Given("a {actor} Authenticated Session", async function (actor) {
+  this.actor = actor;
   const signInPage = new SignInPage(this.driver);
-  signInPage.submitEmail("email@example.com");
+  await signInPage.submitEmail(this.actor.email);
+
   const mailServer = new MailServer;
-  return mailServer.getAllEmails().then((emails) => {
-    assert.equal(emails.length, 1);
-    const magicLink = getUrls(emails[0].text).values().next().value;
-    return this.driver.get(magicLink);
-  });
+  const magicLink = mailServer.getLastAuthenticationLink(this.actor);
+  return this.driver.get(magicLink);
 });
 
 When(
-  "the {actor} opens the Identification Verification Link emailed to them",
+  "the unauthenticated {actor} opens the Identification Verification Link emailed to them",
   function (actor) {
     const mailServer = new MailServer;
-    return mailServer.getAllEmails().then((emails) => {
-      assert.equal(emails.length, 1);
-      const magicLink = getUrls(emails[0].text).values().next().value;
-      return this.driver.get(magicLink);
-    });
+    const magicLink = mailServer.getLastAuthenticationLink(this.actor);
+    return this.driver.get(magicLink);
   }
 );
 
@@ -49,7 +45,7 @@ Then(
   async function (actor) {
     const mePage = new MePage(this.driver);
     await mePage.visit();
-    assert.strictEqual(await mePage.email(), "email@example.com");
+    assert.strictEqual(await mePage.email(), this.actor.email);
   }
 );
 

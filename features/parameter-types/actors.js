@@ -12,6 +12,6 @@ defineParameterType({
 class Actor {
   constructor(type) {
     this.type = type
-    this.email = `${type}@example.com`
+    this.email = `${type.replace(/\s/g, "+").toLowerCase()}@example.com`
   }
 }

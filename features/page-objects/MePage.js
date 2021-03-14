@@ -12,7 +12,7 @@ class MePage extends Page {
   async person() {
     const jsonEl = await this.findByCss("#json");
     const json = await jsonEl.getText();
-    return JSON.parse(json).person;
+    return JSON.parse(json).attributes;
   }
 
   async email() {

@@ -1,10 +1,9 @@
 class Guest
-  include ActiveModel::Model
-  attr_accessor :name, :email, :avatar_url
+  include ActiveModel::Attributes
+  include ActiveModel::Serialization
+  attribute :name, :string, default: "Guest"
+  # Wait, do we want an email on guest? It's not a real person; so having an email address seems misleading..
+  attribute :email, :string, default: "guest@example.com"
 
-  def initialize(name: "Guest", email: "guest@example.com", avatar_url: "/avatar.svg")
-    @name       = name
-    @email      = email
-    @avatar_url = avatar_url
-  end
+  attribute :avatar_url, :string, default: '/avatar.svg'
 end

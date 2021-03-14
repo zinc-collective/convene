@@ -22,8 +22,8 @@ class CustomWorld {
 setWorldConstructor(CustomWorld);
 
 After(function(testCase) {
-  const mailServer = new MailServer;
-  mailServer.deleteAllEmails();
+  // const mailServer = new MailServer;
+  // mailServer.deleteAllEmails();
 
   if (testCase.result.status == Status.FAILED) {
     return this.driver.takeScreenshot().then( screenShot => {
