@@ -12,9 +12,9 @@ class SpacePage extends Page {
 
   async logout() {
     const navToggle = await this.findByCss(".navigation-toggle")
-    navToggle.click()
+    await navToggle.click()
     const logoutLink = await this.findByCss("#logout")
-    logoutLink.click()
+    await logoutLink.click()
   }
 
   enter() {
@@ -27,7 +27,7 @@ class SpacePage extends Page {
 
   async enterRoom(room) {
     const roomCard = await this.findRoomCard(room);
-    roomCard.findElement(By.linkText("Enter Room")).click();
+    await roomCard.findElement(By.linkText("Enter Room")).click();
   }
 
   async enterRoomWithAccessCode(room, accessCode) {
@@ -41,7 +41,7 @@ class SpacePage extends Page {
     accessCodeInput.sendKeys(accessCode.value);
 
     const submitInput = await this.driver.findElement(By.css("[type='submit']"));
-    submitInput.click();
+    await submitInput.click();
   }
 
   async findRoomCard(room, wait = true) {
