@@ -22,9 +22,6 @@ class CustomWorld {
 setWorldConstructor(CustomWorld);
 
 After(function(testCase) {
-  // const mailServer = new MailServer;
-  // mailServer.deleteAllEmails();
-
   if (testCase.result.status == Status.FAILED) {
     return this.driver.takeScreenshot().then( screenShot => {
       const filePath = `features/test_reports/${testCase.pickle.name.split(' ').join('_')}.png`;
