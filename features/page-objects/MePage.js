@@ -1,4 +1,5 @@
 const Page = require("./Page");
+const _ = require("lodash");
 
 class MePage extends Page {
   constructor(driver) {
@@ -6,23 +7,19 @@ class MePage extends Page {
   }
 
   visit() {
-    return this.driver.get(`${this.baseUrl}/me.json`);
+    return this.driver.get(`${this.baseUrl}/me`);
   }
 
   async person() {
-    const jsonEl = await this.findByCss("#json");
-    const json = await jsonEl.getText();
-    return JSON.parse(json).attributes;
-  }
+    const idEl = await this.findByCss("main > ul.person > li.id");
+    const id = _.last((await idEl.getText()).split(": "));
+    const nameEl = await this.findByCss("main > ul.person > li.name");
+    const name = _.last((await nameEl.getText()).split(": "));
+    const emailEl = await this.findByCss("main > ul.person > li.email");
+    const email = _.last((await emailEl.getText()).split(": "));
 
-  async email() {
-    return (await this.person()).email;
+    return { id, name, email };
   }
-
-  async id() {
-    return (await this.person()).id;
-  }
-
 }
 
 module.exports = MePage;

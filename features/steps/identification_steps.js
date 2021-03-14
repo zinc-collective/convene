@@ -20,7 +20,7 @@ Given("a {actor} Authenticated Session", async function (actor) {
   const signInPage = new SignInPage(this.driver);
   await signInPage.submitEmail(this.actor.email);
 
-  const mailServer = new MailServer;
+  const mailServer = new MailServer();
   const magicLink = mailServer.getLastAuthenticationLink(this.actor);
   return this.driver.get(magicLink);
 });
@@ -28,7 +28,7 @@ Given("a {actor} Authenticated Session", async function (actor) {
 When(
   "the unauthenticated {actor} opens the Identification Verification Link emailed to them",
   function (actor) {
-    const mailServer = new MailServer;
+    const mailServer = new MailServer();
     const magicLink = mailServer.getLastAuthenticationLink(this.actor);
     return this.driver.get(magicLink);
   }
@@ -36,8 +36,8 @@ When(
 
 When("the Authenticated Person Signs Out", async function () {
   this.space = new SpacePage(this.driver, new Space("System Test"));
-  this.space.enter()
-  await this.space.logout()
+  this.space.enter();
+  await this.space.logout();
 });
 
 Then(
@@ -45,18 +45,21 @@ Then(
   async function (actor) {
     const mePage = new MePage(this.driver);
     await mePage.visit();
-    assert.strictEqual(await mePage.email(), this.actor.email);
+    const person = await mePage.person();
+    assert.strictEqual(await person.email, this.actor.email);
   }
 );
 
 Then("the {actor} has become Authenticated", async function (actor) {
   const mePage = new MePage(this.driver);
   await mePage.visit();
-  assert.ok(await mePage.id());
+  const person = await mePage.person();
+  assert.ok(await person.id);
 });
 
 Then("the Authenticated Person becomes a {actor}", async function (actor) {
   const mePage = new MePage(this.driver);
   await mePage.visit();
-  assert.strictEqual(await mePage.email(), `${actor.email}`);
+  const person = await mePage.person();
+  assert.strictEqual(await person.email, `${actor.email}`);
 });
