@@ -8,9 +8,10 @@ const MailServer = require("../utilities/MailServer");
 
 Given(
   "an unauthenticated {actor} has requested to be identified via Email",
-  function (actor) {
+  async function (actor) {
     this.actor = actor;
     const signInPage = new SignInPage(this.driver);
+    await signInPage.enter();
     return signInPage.submitEmail(actor.email);
   }
 );
@@ -18,6 +19,7 @@ Given(
 Given("a {actor} Authenticated Session", async function (actor) {
   this.actor = actor;
   const signInPage = new SignInPage(this.driver);
+  await signInPage.enter();
   await signInPage.submitEmail(this.actor.email);
 
   const mailServer = new MailServer();
