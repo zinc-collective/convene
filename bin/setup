@@ -4,4 +4,5 @@
 # prepares the application by running setup scripts in
 # each module
 npm install
+npm install maildev -g
 (cd convene-web && bin/setup)

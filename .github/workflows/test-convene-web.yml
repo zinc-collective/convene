@@ -13,8 +13,12 @@ jobs:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PORT: 80
-      APP_URL: http://localhost
+      APP_ROOT_URL: http://localhost
       CUSTOM_DOMAIN: http://system-test.zinc.local
+      # Connect to locally-running Maildev for tests
+      SMTP_PORT: 1025
+      SMTP_DOMAIN: localhost
+      SMTP_ENABLE_TLS: false
 
     services:
       postgres:
@@ -48,10 +52,14 @@ jobs:
       run: cd convene-web && cp .env.example .env
 
     - name: Setup environment
-      run: bin/setup
+      run: |
+          sudo chown -R $USER /usr/local/lib/node_modules
+          sudo chown -R $USER /usr/local/bin/
+          bin/setup
 
     - name: Start Rails server
-      run: bin/run &
+      run: |
+          bin/run &
 
     - name: Test convene-web
       run: |

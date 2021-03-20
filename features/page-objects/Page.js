@@ -1,8 +1,9 @@
-const { By, until } = require('selenium-webdriver');
+const appUrl = require("../lib/appUrl");
+const { By, until } = require("selenium-webdriver");
 
 class Page {
   constructor(driver) {
-    this.baseUrl = process.env.APP_URL ? process.env.APP_URL : 'http://localhost:3000';
+    this.baseUrl = appUrl();
     this.driver = driver;
   }
 

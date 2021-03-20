@@ -2,6 +2,7 @@ const fse = require('fs-extra');
 const { setWorldConstructor, After, setDefaultTimeout, Status } = require('cucumber');
 const { Builder } = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
+const MailServer = require('../utilities/MailServer');
 
 class CustomWorld {
   constructor() {
