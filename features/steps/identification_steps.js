@@ -4,7 +4,7 @@ const MePage = require("../page-objects/MePage");
 const SignInPage = require("../page-objects/SignInPage");
 const SpacePage = require("../page-objects/SpacePage");
 const Space = require("../parameter-types/spaces");
-const MailServer = require("../utilities/MailServer");
+const MailServer = require("../lib/MailServer");
 
 Given(
   "an unauthenticated {actor} has requested to be identified via Email",

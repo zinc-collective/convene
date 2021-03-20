@@ -1,6 +1,6 @@
 const { defineParameterType } = require("cucumber");
 const { By } = require('selenium-webdriver');
-const concatRegExp = require('../utilities/concatRegExp');
+const concatRegExp = require('../lib/concatRegExp');
 const FLEXIBLE_ARTICLE_ADJECTIVES = /(an |the |is |a )/;
 
 // This injects a Room class into steps with named rooms (i.e.) `the "Ada" Room` and
