@@ -12,7 +12,7 @@
 
           <nav class="--hidden" data-target="menu.items">
             <%- if current_person.is_a? Person %>
-              <%= link_to "Logout", people.sign_out_path, class: "profile-menu-dropdown-item", id: "logout" %>
+              <%= link_to "Logout", people.sign_out_path, class: "profile-menu-dropdown-item logout"  %>
             <%- else %>
               <%= link_to "Login",  people.sign_in_path,  class: "profile-menu-dropdown-item" %>
             <%- end %>

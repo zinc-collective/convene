@@ -1,6 +1,8 @@
-<%= tag.h1 "Me" %>
-<%= tag.ul class: "person" do %>
+<h1>Me</h1>
+<ul class="person">
   <% local_assigns[:person].attributes.each do |attr, value| %>
-    <%= tag.li "#{attr}: #{value}", class: attr %>
+    <li class=<%= attr %> >
+      <%= attr %>: <%=value %>
+    </li>
   <% end %>
-<% end %>
+</ul>

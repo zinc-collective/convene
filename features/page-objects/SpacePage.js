@@ -1,8 +1,8 @@
 const Page = require("./Page");
-const RoomSettingPage = require("./RoomSettingPage")
-const { By, until } = require('selenium-webdriver');
+const RoomSettingPage = require("./RoomSettingPage");
+const { By, until } = require("selenium-webdriver");
 const RoomCard = require("./page-elements/RoomCard");
-const assert = require('assert').strict;
+const assert = require("assert").strict;
 
 class SpacePage extends Page {
   constructor(driver, space) {
@@ -11,10 +11,11 @@ class SpacePage extends Page {
   }
 
   async logout() {
-    const navToggle = await this.findByCss(".navigation-toggle")
-    await navToggle.click()
-    const logoutLink = await this.findByCss("#logout")
-    await logoutLink.click()
+    const navToggle = await this.findByCss(".navigation-toggle");
+    await navToggle.click();
+    const logoutLink = await this.findByCss(".logout");
+    await logoutLink.click();
+    return true;
   }
 
   enter() {
@@ -22,7 +23,9 @@ class SpacePage extends Page {
   }
 
   enterRoomThruUrl(room) {
-    this.driver.get(`${this.baseUrl}/spaces/${this.space.slug}/rooms/${room.slug}`);
+    this.driver.get(
+      `${this.baseUrl}/spaces/${this.space.slug}/rooms/${room.slug}`
+    );
   }
 
   async enterRoom(room) {
@@ -40,20 +43,22 @@ class SpacePage extends Page {
     const accessCodeInput = await this.driver.findElement(inputSelector);
     accessCodeInput.sendKeys(accessCode.value);
 
-    const submitInput = await this.driver.findElement(By.css("[type='submit']"));
+    const submitInput = await this.driver.findElement(
+      By.css("[type='submit']")
+    );
     await submitInput.click();
   }
 
   async findRoomCard(room, wait = true) {
-    const roomCard = new RoomCard(this.driver, room)
-    return roomCard.element(wait)
+    const roomCard = new RoomCard(this.driver, room);
+    return roomCard.element(wait);
   }
 
   async videoPanel() {
-    const jitsiConferenceFrame = By.css("[name*='jitsiConferenceFrame']")
+    const jitsiConferenceFrame = By.css("[name*='jitsiConferenceFrame']");
     await this.driver.wait(until.elementLocated(jitsiConferenceFrame));
     const videoPanels = await this.driver.findElements(jitsiConferenceFrame);
-    assert.equal(videoPanels.length, 1, `${videoPanels.length} was found.`)
+    assert.equal(videoPanels.length, 1, `${videoPanels.length} was found.`);
     return await this.driver.findElement(jitsiConferenceFrame);
   }
 

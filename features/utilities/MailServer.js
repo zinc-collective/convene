@@ -9,25 +9,17 @@ class MailServer {
   }
 
   getLastEmail(actor) {
-    return this.getAllEmails().then(emails => {
-      return _.findLast(emails, email => email.headers.to === actor.email)
-    })
+    return this.getAllEmails().then((emails) => {
+      return _.findLast(emails, (email) => email.headers.to === actor.email);
+    });
   }
 
   getAllEmails() {
-    return axios.get("http://localhost:1080/email")
-      .then(res => res.data)
-      .catch(err => console.log(err))
-  }
-
-  deleteAllEmails() {
-    return axios.delete("http://localhost:1080/email/all")
-      .then(res => {
-        if (res.status === 200) {
-          return true
-        }
-      }).catch(err => console.log(err))
+    return axios
+      .get("http://localhost:1080/email")
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
   }
 }
 
-module.exports = MailServer
+module.exports = MailServer;
