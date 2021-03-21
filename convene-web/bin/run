@@ -10,7 +10,4 @@
 # visited in browser without doing port forwarding.
 : ${BINDING:=localhost}
 
-echo "******************************************************"
-echo "*** Starting Rails server at http://$BINDING:$PORT ***"
-echo "******************************************************"
-bin/webpack-dev-server & bin/rails s -p $PORT -b $BINDING
+overmind start -p $PORT

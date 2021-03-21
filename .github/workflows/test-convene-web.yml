@@ -34,6 +34,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install Overmind
+      run: |
+        sudo apt-get install tmux
+        sudo mkdir ~/bin/
+        sudo wget -O ~/bin/overmind https://github.com/DarthSim/overmind/releases/download/v2.2.1/overmind-v2.2.1-linux-386.gz
+        sudo chmod +x ~/bin/overmind
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -59,6 +66,7 @@ jobs:
 
     - name: Start Rails server
       run: |
+          export PATH=$PATH:~/bin
           bin/run &
 
     - name: Test convene-web

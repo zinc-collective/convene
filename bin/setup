@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Install overmind if not install, tmux is a dependencies of overmind
+if [ "$(uname)" == "Darwin" ]; then
+  brew ls --versions tmux || brew install tmux
+  brew ls --versions overmind || brew install overmind
+fi
+
 # Installs environment dependencies such as packages and
 # prepares the application by running setup scripts in
 # each module

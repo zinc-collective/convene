@@ -1,5 +1,4 @@
 #!/bin/bash
 
-maildev &
 # Runs the application locally
 (cd convene-web && bin/run)
