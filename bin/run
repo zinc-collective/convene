@@ -14,7 +14,7 @@
 echo "******************************************************"
 echo "*** Starting Rails server at http://$BINDING:$PORT ***"
 echo "******************************************************"
-if [[ "$BINDING" == "localhost" ]]; then
+if [ "$BINDING" == "localhost" ]; then
   overmind start -p $PORT
 else
   overmind start -s $BINDING:$PORT  -S "tcp"

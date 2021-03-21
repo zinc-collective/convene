@@ -1,10 +1,51 @@
 #!/bin/bash
 
-# Install overmind if not install, tmux is a dependencies of overmind
-if [ "$(uname)" == "Darwin" ]; then
-  brew ls --versions tmux || brew install tmux
-  brew ls --versions overmind || brew install overmind
+
+function setup_tmux {
+  output=$(command -v tmux)
+  if [ "$output" == "" ]; then
+    echo "Installing tmux"
+    install_tmux
+  else
+    echo "tmux installed, continue..."
+  fi
+}
+
+function setup_overmind {
+  output=$(command -v overmind)
+  if [ "$output" == "" ]; then
+    echo "Installing overmind"
+    install_overmind
+  else
+    echo "Overmind installed, continue..."
+  fi
+}
+
+function install_tmux {
+  if [ "$(uname)" == "Darwin" ]; then
+    brew install tmux
+  else
+    apt-get tmux
+  fi
+}
+
+function install_overmind {
+  if [ "$(uname)" == "Darwin" ]; then
+    brew install overmind
+  else
+    echo "Please setup Overmind to run this project."
+    echo "https://github.com/DarthSim/overmind#installation"
+  fi
+}
+
+if [ "$CI" == "true" ]; then
+  echo "Skipping Overmind setup in CI"
+else
+  echo "Setting up tmux and overmind"
+  setup_tmux
+  setup_overmind
 fi
+
 
 # Installs environment dependencies such as packages and
 # prepares the application by running setup scripts in
