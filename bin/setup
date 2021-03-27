@@ -22,7 +22,15 @@ function setup_package {
   fi
 }
 
+
 setup_package "hivemind"
+
+if test -f ".env"; then
+  echo "Found .env"
+else
+  echo "Copying .env.example to .env"
+  cp .env.example .env
+fi
 
 # Installs environment dependencies such as packages and
 # prepares the application by running setup scripts in
