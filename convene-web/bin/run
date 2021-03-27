@@ -1,1 +1,4 @@
+echo "******************************************************"
+echo "*** Open http://localhost:$PORT/spaces/system-test ***"
+echo "******************************************************"
 bin/puma -C config/puma.rb
