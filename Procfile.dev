@@ -1,3 +1,0 @@
-web: cd convene-web/ && bin/rails server -p $PORT
-assets: cd convene-web/ && bin/webpack-dev-server
-mail_server: maildev

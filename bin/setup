@@ -1,55 +1,32 @@
 #!/bin/bash
 
+function install_package {
+  echo "Attempting to install $1"
+  output=$(command -v brew)
+  if [ -n $output ]; then
+    echo "Installing $1 via homebrew"
+    brew install $1
+    return
+  fi
 
-function setup_tmux {
-  output=$(command -v tmux)
-  if [ "$output" == "" ]; then
-    echo "Installing tmux"
-    install_tmux
+  echo "We're not sure how to automatically install $1 on your machine"
+  echo "If you want help, reach out via chat or github!"
+}
+
+function setup_package {
+  output=$(command -v $1)
+  if [ -z $output ]; then
+    install_package $1
   else
-    echo "tmux installed, continue..."
+    echo "$1 installed, continuing..."
   fi
 }
 
-function setup_overmind {
-  output=$(command -v overmind)
-  if [ "$output" == "" ]; then
-    echo "Installing overmind"
-    install_overmind
-  else
-    echo "Overmind installed, continue..."
-  fi
-}
-
-function install_tmux {
-  if [ "$(uname)" == "Darwin" ]; then
-    brew install tmux
-  else
-    apt-get tmux
-  fi
-}
-
-function install_overmind {
-  if [ "$(uname)" == "Darwin" ]; then
-    brew install overmind
-  else
-    echo "Please setup Overmind to run this project."
-    echo "https://github.com/DarthSim/overmind#installation"
-  fi
-}
-
-if [ "$CI" == "true" ]; then
-  echo "Skipping Overmind setup in CI"
-else
-  echo "Setting up tmux and overmind"
-  setup_tmux
-  setup_overmind
-fi
-
+setup_package "hivemind"
 
 # Installs environment dependencies such as packages and
 # prepares the application by running setup scripts in
 # each module
-npm install
-npm install maildev -g
+yarn install
+yarn global add maildev
 (cd convene-web && bin/setup)
