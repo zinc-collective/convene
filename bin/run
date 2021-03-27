@@ -1,5 +1,6 @@
 #!/bin/bash
 
-maildev &
-# Runs the application locally
-(cd convene-web && bin/run)
+# Runs the application and supporting services locally
+hivemind
+
+

@@ -1,8 +1,41 @@
 #!/bin/bash
 
+function install_package {
+  echo "Attempting to install $1"
+  output=$(command -v brew)
+  if [ -n $output ]; then
+    echo "Installing $1 via homebrew"
+    brew install $1
+    return
+  fi
+
+  echo "We're not sure how to automatically install $1 on your machine"
+  echo "If you want help, reach out via chat or github!"
+}
+
+function setup_package {
+  output=$(command -v $1)
+  if [ -z $output ]; then
+    install_package $1
+  else
+    echo "$1 installed, continuing..."
+  fi
+}
+
+
+setup_package "hivemind"
+setup_package "yarn"
+
+if test -f ".env"; then
+  echo "Found .env, leaving it in place!"
+else
+  echo "Copying .env.example to .env"
+  cp .env.example .env
+fi
+
 # Installs environment dependencies such as packages and
 # prepares the application by running setup scripts in
 # each module
-npm install
-npm install maildev -g
+yarn install
+yarn global add maildev
 (cd convene-web && bin/setup)

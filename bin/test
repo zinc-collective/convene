@@ -6,4 +6,4 @@
 set -e
 
 (cd convene-web && bin/test)
-npm run test
+yarn run test
