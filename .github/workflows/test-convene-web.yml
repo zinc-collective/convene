@@ -19,6 +19,7 @@ jobs:
       SMTP_PORT: 1025
       SMTP_DOMAIN: localhost
       SMTP_ENABLE_TLS: false
+      BUNDLE_GEMFILE: convene-web/Gemfile
 
     services:
       postgres:
