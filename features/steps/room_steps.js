@@ -49,6 +49,7 @@ When(
 When(
   "a {actor} locks {accessLevel} {room} with {accessCode}",
   function (actor, accessLevel, room, accessCode) {
+    linkParameters({ accessLevel, room })
     return this.space
       .roomCard(room)
       .configure()
