@@ -9,6 +9,7 @@ class CustomWorld {
       .forBrowser('firefox')
       .setFirefoxOptions(this.firefoxOption())
       .build();
+    this.driver.manage().setTimeouts({ implicit: 500 });
   }
 
   firefoxOption() {
