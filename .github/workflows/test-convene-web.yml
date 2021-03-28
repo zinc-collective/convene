@@ -19,8 +19,6 @@ jobs:
       SMTP_PORT: 1025
       SMTP_DOMAIN: localhost
       SMTP_ENABLE_TLS: false
-      # Tell ruby/setup-ruby which Gemfile to use for caching.
-      BUNDLE_GEMFILE: convene-web/Gemfile
 
     services:
       postgres:
@@ -47,6 +45,8 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
+        # Use this directory for finding the Gemfile and other Ruby goodies.
+        working-directory: 'convene-web'
 
     - name: Increase the amount of inotify watchers
       run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
