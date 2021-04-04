@@ -7,8 +7,11 @@ class MarkdownTemplateHandler
   end
 
   def call(template, source)
-    html_source = CommonMarker.render_html(source, :DEFAULT)
-    erb.call(template, html_source)
+    erb.call(template, renderer.render(source))
+  end
+
+  private def renderer
+    @_renderer ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(with_toc_data: true))
   end
 end
 
