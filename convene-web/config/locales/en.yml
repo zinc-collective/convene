@@ -62,26 +62,26 @@ en:
     title: "Guides"
     call_to_action: "Learn How"
     spaces:
-      title: "Spaces"
+      title: "🏢 Spaces"
       value_proposition: "Lay out a Space of your own!"
     rooms:
-      title: "Rooms"
+      title: "🚪 Rooms"
       value_proposition: "Bring people and information together!"
     furniture:
-      title: "Furniture"
+      title: "🪑 Furniture"
       value_proposition: "Activities, Tools, and Toys for your Rooms!"
     neighborhoods:
-      title: "Neighborhoods"
+      title: "🏘 Neighborhoods"
       value_proposition: "You're not alone! Explore!"
-    hookups:
-      title: "Hookups"
-      value_proposition: "Connect your Space to other websites or online services!"
+    service_hookups:
+      title: "🔌 Service Hookups"
+      value_proposition: "Connect your Space or Account to other websites or online services!"
     people:
-      title: "People"
-      value_proposition: "Who are the kinds of people in a Space or Neighborhood?"
+      title: "🤹 People"
+      value_proposition: "What are the different roles people have in a Space or Neighborhood?"
     identification:
-      title: "Identify Yourself"
+      title: "🎫 Identify Yourself"
       value_proposition: "Build trust and connection between you and your Neighbors!"
     getting_around:
-      title: "Identify Yourself"
-      value_proposition: "Build trust and connection between you and your Neighbors!"
+      title: "🧭 Getting Around"
+      value_proposition: "Familiarize yourself with using Convene!"
