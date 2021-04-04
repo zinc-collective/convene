@@ -34,13 +34,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Overmind
-      run: |
-        sudo mkdir ~/bin/
-        sudo wget -O ~/bin/overmind.gz https://github.com/DarthSim/overmind/releases/download/v2.2.2/overmind-v2.2.2-linux-386.gz
-        sudo gunzip ~/bin/overmind.gz
-        sudo chmod +x ~/bin/overmind
-
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
