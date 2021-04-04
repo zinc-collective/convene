@@ -34,12 +34,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Hivemind
+    - name: Install Overmind
       run: |
         sudo mkdir ~/bin/
-        sudo wget -O ~/bin/hivemind.gz https://github.com/DarthSim/hivemind/releases/download/v1.0.6/hivemind-v1.0.6-linux-386.gz
-        sudo gunzip ~/bin/hivemind.gz
-        sudo chmod +x ~/bin/hivemind
+        sudo wget -O ~/bin/overmind.gz https://github.com/DarthSim/overmind/releases/download/v2.2.2/overmind-v2.2.2-linux-386.gz
+        sudo gunzip ~/bin/overmind.gz
+        sudo chmod +x ~/bin/overmind
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
