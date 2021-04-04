@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.7'
 # View Layer
 #
 # Allows us to render .markdown.erb files
-gem 'commonmarker'
+gem 'redcarpet'
 # Breadcrumbs!
 gem 'gretel'
 

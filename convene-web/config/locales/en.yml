@@ -48,7 +48,7 @@ en:
     sessions:
       create:
         session_expired: 'Your session has expired, please sign in again.'
-        email_sent_if_record_found: "Check your email for a link to log in automatically."
+        email_sent_if_record_found: "Check your email for a link to sign in automatically."
         token_claimed: "This link has already been used, try requesting the link again"
       new:
         email_label: 'Your Email'
@@ -61,6 +61,27 @@ en:
   guides:
     title: "Guides"
     call_to_action: "Learn How"
-    locked_rooms:
-      title: "Locked Rooms"
-      value_proposition: "Get some privacy, require a passcode to enter a room."
+    spaces:
+      title: "🏢 Spaces"
+      value_proposition: "Lay out a Space of your own!"
+    rooms:
+      title: "🚪 Rooms"
+      value_proposition: "Bring people and information together!"
+    furniture:
+      title: "🪑 Furniture"
+      value_proposition: "Activities, Tools, and Toys for your Rooms!"
+    neighborhoods:
+      title: "🏘 Neighborhoods"
+      value_proposition: "You're not alone! Explore!"
+    service_hookups:
+      title: "🔌 Service Hookups"
+      value_proposition: "Connect your Space or Account to other websites or online services!"
+    people:
+      title: "🤹 People"
+      value_proposition: "What are the different roles people have in a Space or Neighborhood?"
+    identification:
+      title: "🎫 Identify Yourself"
+      value_proposition: "Build trust and connection between you and your Neighbors!"
+    getting_around:
+      title: "🧭 Getting Around"
+      value_proposition: "Familiarize yourself with using Convene!"

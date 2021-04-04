@@ -21,7 +21,7 @@ Feature: Space membership
     Given a Space with multiple Space Members
     When the Space Admin removes a Space Member
     Then that Space Member receives a Space Membership Revoked Email
-    And the Space Member can still log in
+    And the Space Member can still sign in
     And the Space Member is not a member of that Space
 
   # Add noun for a person who has a convene account but is not a Members this particular space
