@@ -9,8 +9,16 @@ class Person < ApplicationRecord
   # The Spaces the Person is part of
   has_many :spaces, through: :space_memberships
 
+  has_many :identities
+
   def self.fetch_resource_for_passwordless(email)
     find_or_create_by(email: email)
+  end
+
+  # @param [Space]
+  # @return [Identity]
+  def identity_in(space)
+    identities.find_by!(space: space)
   end
 
   def avatar_url

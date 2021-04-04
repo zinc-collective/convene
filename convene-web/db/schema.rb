@@ -44,6 +44,18 @@ ActiveRecord::Schema.define(version: 2021_04_10_223506) do
     t.index ["room_id"], name: "index_furniture_placements_on_room_id"
   end
 
+  create_table "identities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "pronoun"
+    t.uuid "person_id"
+    t.uuid "space_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id", "space_id"], name: "index_identities_on_person_id_and_space_id", unique: true
+    t.index ["person_id"], name: "index_identities_on_person_id"
+    t.index ["space_id"], name: "index_identities_on_space_id"
+  end
+
   create_table "passwordless_sessions", force: :cascade do |t|
     t.string "authenticatable_type"
     t.datetime "timeout_at", null: false
@@ -108,4 +120,6 @@ ActiveRecord::Schema.define(version: 2021_04_10_223506) do
     t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
   end
 
+  add_foreign_key "identities", "people"
+  add_foreign_key "identities", "spaces"
 end
