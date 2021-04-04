@@ -87,9 +87,9 @@ jobs:
     - name: Test convene-web
       run: |
           sudo sh -c "echo '127.0.0.1 system-test.zinc.local' >> /etc/hosts"
-          # To trigger asset compile in development mode
+          # To wait for asset built
           # TODO: Start server in production mode
-          curl system-test.zinc.local 1> /dev/null
+          curl system-test.zinc.local:3035/packs/manifest.json 1> /dev/null
           bin/test
 
     - uses: actions/upload-artifact@v2
