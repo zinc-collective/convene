@@ -1,4 +1,8 @@
 #!/bin/bash
 
 # Runs the application and supporting services locally
-overmind start
+if [ -n "${PORT}" ]; then
+  overmind start -p $PORT
+else
+  overmind start
+fi
