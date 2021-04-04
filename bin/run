@@ -2,5 +2,3 @@
 
 # Runs the application and supporting services locally
 overmind start
-
-

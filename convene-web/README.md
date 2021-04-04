@@ -66,6 +66,10 @@ Finally, with the server still running (perhaps in a different terminal), run
 [.env.example]: ./.env.example
 [Yarn]: https://yarnpkg.com/getting-started/install
 
+### Debugger
+
+To run `pry` or `byebug`, run `bin/connect web`.
+
 ### Developing Mailers
 
 Set [SMTP_* environment variables to configure Action Mailer](.env.example).
