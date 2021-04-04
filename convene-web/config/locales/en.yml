@@ -61,6 +61,27 @@ en:
   guides:
     title: "Guides"
     call_to_action: "Learn How"
-    locked_rooms:
-      title: "Locked Rooms"
-      value_proposition: "Get some privacy, require a passcode to enter a room."
+    spaces:
+      title: "Spaces"
+      value_proposition: "Lay out a Space of your own!"
+    rooms:
+      title: "Rooms"
+      value_proposition: "Bring people and information together!"
+    furniture:
+      title: "Furniture"
+      value_proposition: "Activities, Tools, and Toys for your Rooms!"
+    neighborhoods:
+      title: "Neighborhoods"
+      value_proposition: "You're not alone! Explore!"
+    hookups:
+      title: "Hookups"
+      value_proposition: "Connect your Space to other websites or online services!"
+    people:
+      title: "People"
+      value_proposition: "Who are the kinds of people in a Space or Neighborhood?"
+    identification:
+      title: "Identify Yourself"
+      value_proposition: "Build trust and connection between you and your Neighbors!"
+    getting_around:
+      title: "Identify Yourself"
+      value_proposition: "Build trust and connection between you and your Neighbors!"

@@ -21,7 +21,7 @@ class Guide
   # TODO: There is probably a way to get an "ActiveRecord::Query"-like
   # interface without writing it ourselves.
   def self.all
-    %i[locked_rooms].lazy.map do |slug|
+    %i[neighborhoods people spaces rooms furniture getting_around identification].lazy.map do |slug|
       new(slug: slug)
     end
   end
