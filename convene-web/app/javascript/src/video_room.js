@@ -1,6 +1,7 @@
-import { EventTarget } from 'event-target-shim';
+import { EventTarget } from "event-target-shim";
+import Identify from "./identity";
 
-const eventBus = new EventTarget()
+const eventBus = new EventTarget();
 export default class VideoRoom {
   constructor(domain, parentNode) {
     this.domain = domain;
@@ -33,26 +34,43 @@ export default class VideoRoom {
     this.jitsi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
 
     // Exit room without dispatching event when user refresh to prevent replacing to space url
-    this.parentNode.addEventListener('beforeunload', () => this.exitRoom(false));
-    this.jitsi.on('readyToClose', () => this.exitRoom(true));
+    this.parentNode.addEventListener("beforeunload", () =>
+      this.exitRoom(false)
+    );
+    this.jitsi.on("readyToClose", () => this.exitRoom(true));
+  }
+
+  get displayName() {
+    const identify = new Identify();
+    return `${identify.personInfo.name} (${identify.personInfo.pronoun})`;
   }
 
   jitsiApiOption() {
+    const identify = new Identity();
     return {
       roomName: this.roomName,
       parentNode: this.parentNode,
       interfaceConfigOverwrite: {
-        TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'tileview', 'hangup'],
+        TOOLBAR_BUTTONS: [
+          "microphone",
+          "camera",
+          "desktop",
+          "tileview",
+          "hangup",
+        ],
         DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
         DISABLE_PRESENCE_STATUS: true,
         MOBILE_APP_PROMO: false,
-        APP_NAME: 'Convene',
+        APP_NAME: "Convene",
         DISABLE_RINGING: true,
         SETTINGS_SECTIONS: [],
-        DEFAULT_REMOTE_DISPLAY_NAME: 'Participants',
+        DEFAULT_REMOTE_DISPLAY_NAME: "Participants",
       },
       configOverwrite: {
         disableDeepLinking: true,
+      },
+      userInfo: {
+        displayName: identify.personInfo.name,
       },
     };
   }
