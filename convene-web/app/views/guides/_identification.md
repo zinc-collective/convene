@@ -8,19 +8,18 @@ Owner]. Until you identify yourself, you are a [Guest]. Some [Spaces] will have
 Owners].
 
 The first time you enter a [Neighborhood], identifying yourself is a two-step
-process: [Sign In](#sign-in) and
-[Set Up Your Profile](#set-up-your-profile).
+process: [Sign In] and [Set Up Your Profile].
 
-Once you've set up your Profile for a [Neighborhood], it will be used in
-all of that [Neighborhood's] [Spaces].
+Once you've set up your Profile for a [Neighborhood], it will be used in all of
+that [Neighborhood's] [Spaces].
 
 ### Sign In
 
-To switch from being a [Guest] to being a [Neighbor], [Space Member],
-or [Space Owner]; sign in using the [Personal Navigation Menu].
+To switch from being a [Guest] to a [Neighbor], [Space Member], or [Space Owner]
+use the [Personal Navigation Menu] to sign in.
 
-You'll be asked to provide your email address, and follow a link to confirm you
-are who you say you are.
+You'll be asked to provide your email address, and follow the link we email you
+to confirm you are the person who has access to that email address.
 
 ### Set Up Your Profile
 
@@ -30,7 +29,7 @@ Your _Profile_ is what other people know about you. This includes:
    nick-name, or even your full title; like "Dr. Cornelius Reginald The Third"
    or "Doc" or "Corny Reg" or... You get the picture.
 2. Your _Pronouns_, (optional) which is how people refer to you when you're not
-   around. Defaults to "they"
+   around. Defaults to "they."
 3. Your _Avatar_, (optional) so people can recognize you at a glance. This could
    be a real photo, a character, some art. The important part is picking one
    that is meaningful _to you_. Defaults to a randomly generated unique pattern.
@@ -46,20 +45,6 @@ that you start future visits to the space are as a [Guest].
 
 To sign out, use the [Personal Navigation Menu].
 
-[internal rooms]: ./rooms#internal-rooms
-[neighborhood]: ./neighborhoods
-[spaces]: ./spaces
-[space]: ./spaces
-[neighbors]: ./people#neighbors
-[neighbor]: ./people#neighbors
-[space members]: ./people#space-members
-[space member]: ./people#space-members
-[space owners]: ./people#space-owners
-[space owner]: ./people#space-owners
-[guests]: ./people#guests
-[guest]: ./people#guests
 [sign in]: #sign-in
 [sign out]: #sign-out
-[personal navigation menu]: ./getting_around#personal-navigation-menu
-[rooms]: ./rooms
-[furniture]: ./furniture
+[set up your profile]: #set-up-your-profile

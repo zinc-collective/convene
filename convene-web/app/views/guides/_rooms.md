@@ -22,8 +22,7 @@ Most [Rooms] have a specific purpose:
 - a front porch where you broadcast your stream-of-consciousness thoughts to the
   world and catch up with your neighbors and acquaintances.
 
-To tune each [Room] for its purpose, fill it with [Furniture] that facilitates
-activities or collect and share information.
+Place [Furniture] in each [Room] to suit its purpose using the [Room Configuration].
 
 [Rooms] may be added by [Space Owners] in [Space Configuration].
 
@@ -96,7 +95,7 @@ the [Access Code] has not changed since they last entered.
 #### Access Codes
 
 Access Codes are a shared secret between everyone who can enter a locked room.
-They can be changed by the [Space Owners]. A [Room][access code] can be added,
+They can be changed by the [Space Owners]. A [Room] [Access Code] can be added,
 changed, or removed as part of [Room Configuration].
 
 #### Some Caveats
@@ -106,27 +105,3 @@ changed, or removed as part of [Room Configuration].
    Room.
 2. Unlocking a Room also requires the Room's [Access Code]. If you forget it
    reach out to your [Operators], and they'll unlock it for you.
-
-[room]: #
-[rooms]: #
-[locked rooms]: #locked-rooms
-[locked room]: #locked-rooms
-[access codes]: #access-codes
-[access code]: #access-codes
-[room links]: #room-links
-[room link]: #room-links
-[space]: ./spaces
-[furniture]: ./furniture
-[operators]: ./people#operators
-[space owners]: ./people#space-owners
-[space owner]: ./people#space-owners
-[space members]: ./people#space-members
-[space member]: ./people#space-members
-[neighbors]: ./people#neighbors
-[neighbor]: ./people#neighbors
-[guests]: ./people#guests
-[guest]: ./people#guests
-[room directory]: ./getting_around#room-directory
-[room configuration]: ./getting_around#room-configuration
-[space configuration]: ./getting_around#space-configuration
-[share action]: ./getting_around#share-action

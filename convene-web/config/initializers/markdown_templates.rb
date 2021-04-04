@@ -7,11 +7,16 @@ class MarkdownTemplateHandler
   end
 
   def call(template, source)
-    erb.call(template, renderer.render(source))
+
+    erb.call(template, renderer.render([source, glossary].join("\n")))
   end
 
   private def renderer
     @_renderer ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(with_toc_data: true))
+  end
+
+  private def glossary
+    @glossary ||= File.read(Rails.root.join('app', 'views', 'guides', '_glossary.md'))
   end
 end
 

@@ -1,4 +1,3 @@
-
 - [Guests](#guests)
 - [Neighbors](#neighbors)
 - [Space Members](#space-members)
@@ -28,15 +27,6 @@ the [Space] going.
 
 ### Operators
 
-Operators are the people who maintain and manage the whole neighborhood. They make sure the servers have capacity for all the [Spaces], perform broader moderation responsibilities, and support the [Space Owners].
-
-
-
-[neighborhood]: ./neighborhoods
-[spaces]: ./spaces
-[space]: ./spaces
-[neighbors]: ./#neighbors
-[space members]: ./#space-members
-[space owners]: ./#space-owners
-[guest]: ./people#guests
-[guests]: ./people#guests
+Operators are the people who maintain and manage the whole [Neighborhood]. They
+make sure the servers have capacity for all the [Spaces], perform broader
+moderation responsibilities, and support the [Space Owners].
