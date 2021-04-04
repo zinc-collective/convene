@@ -34,13 +34,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Hivemind
-      run: |
-        sudo mkdir ~/bin/
-        sudo wget -O ~/bin/hivemind.gz https://github.com/DarthSim/hivemind/releases/download/v1.0.6/hivemind-v1.0.6-linux-386.gz
-        sudo gunzip ~/bin/hivemind.gz
-        sudo chmod +x ~/bin/hivemind
-
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:

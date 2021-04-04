@@ -23,7 +23,7 @@ function setup_package {
 }
 
 
-setup_package "hivemind"
+setup_package "overmind"
 setup_package "yarn"
 
 if test -f ".env"; then
