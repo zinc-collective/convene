@@ -12,9 +12,9 @@
 
           <nav class="--hidden" data-target="menu.items">
             <%- if current_person.is_a? Person %>
-              <%= link_to "Logout", people.sign_out_path, class: "profile-menu-dropdown-item logout"  %>
+              <%= link_to "Sign out", people.sign_out_path, class: "profile-menu-dropdown-item sign-out"  %>
             <%- else %>
-              <%= link_to "Login",  people.sign_in_path,  class: "profile-menu-dropdown-item" %>
+              <%= link_to "Sign in",  people.sign_in_path,  class: "profile-menu-dropdown-item" %>
             <%- end %>
           </nav>
         </div>

@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     return if current_person
 
     save_passwordless_redirect_location!(Person)
-    redirect_to people.sign_in_path, flash: { error: 'Login required' }
+    redirect_to people.sign_in_path, flash: { error: 'Sign in required' }
   end
 
   # Retrieves the space based upon the requests domain or params

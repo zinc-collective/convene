@@ -37,7 +37,7 @@ class PersonNavigationComponent extends Component {
    * @returns {Promise<Component>}
    */
   signOutLink() {
-    return this.component(".logout");
+    return this.component(".sign-out");
   }
 }
 
