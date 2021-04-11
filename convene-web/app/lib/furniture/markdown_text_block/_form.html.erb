@@ -1,0 +1,4 @@
+<%= form.fields_for(:furniture) do |furniture_fields| %>
+  <%=furniture_fields.label :content %>
+  <%= furniture_fields.text_area :content %>
+<%- end %>

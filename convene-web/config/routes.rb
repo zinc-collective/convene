@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :furniture_placements, only: [:update]
+
   resource :me, only: %i[show], controller: 'me'
 
   match '/workspaces/*path', to: redirect('/spaces/%{path}'), via: [:GET]

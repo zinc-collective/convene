@@ -16,7 +16,7 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:access_level, :access_code)
+    params.require(:room).permit(:access_level, :access_code, :name, :slug, :publicity_level)
   end
 
   helper_method def page_title
