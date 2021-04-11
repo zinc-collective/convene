@@ -4,13 +4,6 @@ class FurniturePlacement < ApplicationRecord
   delegate :space, to: :room
 
   attribute :furniture_kind, :string
-  def name
-    furniture_kind
-  end
-
-  def name=name
-    self.furniture_kind=name
-  end
 
   validates :furniture_kind, uniqueness: { scope: :room_id }
 

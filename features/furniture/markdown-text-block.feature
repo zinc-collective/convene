@@ -3,9 +3,9 @@ Feature: Furniture: Markdown Text Block
   I want a Markdown Text Block
 
 
-  Scenario Outline: Updating the Markdown Text Block
-    Given a Room with a Markdown Text Block
-    When an <actor> sets the following content:
+  @built @unimplemented-steps
+  Scenario: Viewing Markdown
+    Given a Room with a Markdown Text Block with the following Content:
       """
     ## Fancy Pants
 
@@ -13,16 +13,14 @@ Feature: Furniture: Markdown Text Block
 
     But not everyone has _fancy pants!_
 
+    [Like the GRINCH](https://google.com/)
+
     **FANCY PANTS** for _ALL_!
       """
     Then people in that Room see the following HTML:
-      | <h2>Fancy Pants</h2>                          |
-      | <p>Everyone has pants!</p>                    |
-      | <p>But not everyone has <em>fancy pants!</em> |
-      | <strong>FANCY PANTS</strong>                  |
-      | <em>ALL</em>                                  |
-
-    Examples:
-      | actor        |
-      | Space Owner  |
-      | Space Member |
+      | <h2>Fancy Pants</h2>                                    |
+      | <p>Everyone has pants!</p>                              |
+      | <p>But not everyone has <em>fancy pants!</em>           |
+      | <p><a href="https://google.com">Like the GRINCH</a></p> |
+      | <strong>FANCY PANTS</strong>                            |
+      | <em>ALL</em>                                            |
