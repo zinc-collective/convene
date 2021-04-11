@@ -28,12 +28,10 @@
     </div>
 
     <footer>
-      <%= room_form.submit class: "mr-5" %>
-      <%= link_to 'Cancel', space_path(room.space), class: "button --neutral" %>
+      <%= room_form.submit %>
     </footer>
   </fieldset>
 <% end %>
-
 
 <fieldset>
   <h3>Furniture</h3>
@@ -53,7 +51,7 @@
       </div>
       <footer>
         <%- if furniture_placement.furniture.attribute_names.present? %>
-          <%= furniture_placement_form.submit class: "mr-5" %>
+          <%= furniture_placement_form.submit %>
         <%- end %>
       </footer>
     <% end %>

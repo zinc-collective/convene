@@ -4,7 +4,6 @@ module Furniture
   # Renders some HTML in a {Room}.
   class MarkdownTextBlock
     include Placeable
-    attribute :content, :string
 
     def to_html
       MarkdownTextBlock.renderer.render(content)
@@ -12,13 +11,14 @@ module Furniture
 
     def content=(content)
       settings['content'] = content
-      _write_attribute('content', content)
     end
 
-    alias :text= :content=
-
     def content
-      settings['content'] || super
+      settings['content']
+    end
+
+    def attribute_names
+      super + ['content']
     end
 
     def self.renderer
