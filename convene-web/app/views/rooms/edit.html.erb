@@ -42,11 +42,8 @@
           <%= furniture_placement.furniture.model_name.human.titleize %>
         </h4>
       </header>
+
       <div>
-        <%- if furniture_placement.furniture_kind.blank? %>
-          <%= furniture_placement_form.select :furniture_kind,Furniture::REGISTRY.keys.map(&:to_s) %>
-        <% end %>
-        <%= furniture_placement_form.hidden_field(:slot) %>
         <%= render partial: furniture_placement.furniture.form_template, locals: { form: furniture_placement_form } %>
       </div>
       <footer>
