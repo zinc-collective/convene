@@ -1,6 +1,8 @@
 class FurniturePlacementsController < ApplicationController
   def update
     furniture_placement.update(furniture_placement_params)
+    flash[:notice] = "Updated #{furniture_placement.furniture.model_name.human.titleize}"
+
     redirect_to edit_space_room_path(furniture_placement.room.space, furniture_placement.room)
   end
 

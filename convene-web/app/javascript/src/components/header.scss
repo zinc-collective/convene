@@ -1,25 +1,30 @@
 @layer components {
   .header {
+    @apply flex items-center justify-between px-2 py-2 bg-primary-900 text-white;
     .space-menu {
-      @apply flex items-center justify-between px-4 py-3 bg-primary-900 text-white;
+      @apply flex-grow text-right px-4;
+    }
 
-      h1 {
-        @apply text-2xl font-bold flex-grow;
+    .profile-menu {
+      @apply flex flex-row items-center relative;
+      figcaption {
+        @apply font-hairline text-center text-xs;
       }
+      nav {
+        @apply absolute bg-primary-600 px-4 py-1 shadow;
+      }
+    }
+  }
 
-      .profile-menu {
-        @apply flex flex-row items-center relative;
-        figcaption {
-          @apply font-hairline text-center text-xs;
-        }
-        nav {
-          @apply absolute bg-primary-600 px-4 py-1 shadow;
-        }
-      }
+  .flash-message {
+    @apply px-4 py-4;
 
-      h3 {
-        @apply text-sm font-bold;
-      }
+    &.--notice {
+      @apply bg-primary-100 text-primary-900;
+    }
+
+    &.--error {
+      @apply bg-danger-100 text-danger-900;
     }
   }
 }

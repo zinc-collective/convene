@@ -1,12 +1,4 @@
 @layer base {
-  .app {
-    &--no-header {
-      .header {
-        display: none;
-      }
-    }
-  }
-
   html {
     background: rgb(200, 200, 200);
     background: linear-gradient(
@@ -20,6 +12,6 @@
   }
 
   main {
-    @apply mx-5;
+    @apply mx-2;
   }
 }

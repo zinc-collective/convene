@@ -36,21 +36,8 @@
 <fieldset>
   <h3>Furniture</h3>
   <%- room.furniture_placements.each do |furniture_placement| %>
-    <%= form_for(furniture_placement) do |furniture_placement_form| %>
-      <header>
-        <h4>
-          <%= furniture_placement.furniture.model_name.human.titleize %>
-        </h4>
-      </header>
-
-      <div>
-        <%= render partial: furniture_placement.furniture.form_template, locals: { form: furniture_placement_form } %>
-      </div>
-      <footer>
-        <%- if furniture_placement.furniture.attribute_names.present? %>
-          <%= furniture_placement_form.submit %>
-        <%- end %>
-      </footer>
+    <%= form_with(model: furniture_placement, url: space_room_furniture_placement_path(room.space, room, furniture_placement), local: true) do |furniture_placement_form| %>
+      <%= render partial: "furniture_placements/form", locals: { form: furniture_placement_form, furniture_placement: furniture_placement } %>
     <% end %>
   <% end %>
 </fieldset>

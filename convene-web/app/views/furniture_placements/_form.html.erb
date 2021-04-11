@@ -1,0 +1,14 @@
+<header>
+  <h4>
+    <%= furniture_placement.furniture.model_name.human.titleize %>
+  </h4>
+</header>
+
+<div>
+  <%= render partial: furniture_placement.furniture.form_template, locals: { form: form } %>
+</div>
+<footer>
+  <%- if furniture_placement.furniture.attribute_names.present? %>
+    <%= form.submit %>
+  <%- end %>
+</footer>
