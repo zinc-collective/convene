@@ -1,6 +1,14 @@
 @layer components {
   .header {
     @apply flex items-center justify-between px-2 py-2 bg-primary-900 text-white;
+    .branding {
+      .tagline {
+        @apply hidden;
+        @screen sm {
+          @apply inline;
+        }
+      }
+    }
     .space-menu {
       @apply flex-grow text-right px-4;
     }
