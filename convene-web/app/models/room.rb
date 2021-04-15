@@ -5,6 +5,7 @@ class Room < ApplicationRecord
 
   # Human-friendly description of the room.
   attribute :name, :string
+  validates :name, presence: true
 
   # URI-friendly description of the room.
   attribute :slug, :string
@@ -56,6 +57,7 @@ class Room < ApplicationRecord
   scope :accessable_by, ->(person = nil) { union(owned_by(person)).union(listed) }
 
   has_many :furniture_placements
+  accepts_nested_attributes_for :furniture_placements
 
   def full_slug
     "#{space.slug}--#{slug}"

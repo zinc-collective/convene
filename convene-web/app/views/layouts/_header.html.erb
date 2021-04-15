@@ -1,6 +1,12 @@
 <header class="header">
+  <div class="branding">
+    <h3>Convene<span class="tagline">: Space to Work, Play, or Simply Be</span></h3>
+  </div>
+
   <div class="space-menu">
     <h1><%= current_space&.name %></h1>
+  </div>
+
 
     <%- if Feature.enabled?(:identification) %>
       <div class="profile-menu" data-controller="menu">
@@ -22,10 +28,10 @@
         <%= button_tag "", type: "button", class: "navigation-toggle", "data-action": "click->menu#toggle click@window->menu#hide",  "data-target": "menu.button", "aria-labelledby": "profile-menu-dropdown-button" %>
       </div>
     <%- end %>
-
-    <div>
-      <h3>Convene</h3>
-      <h3 class="font-hairline">video meeting spaces</h3>
-    </div>
-  </div>
 </header>
+
+<%- flash.each do |kind, message| %>
+  <div class="flash-message --<%= kind %>">
+    <p><%= message %></p>
+  </div>
+<%- end %>

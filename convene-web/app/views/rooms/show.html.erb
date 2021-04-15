@@ -1,6 +1,4 @@
-<% content_for :page_bem_class do %>
-  app--no-header
-<% end %>
+<% breadcrumb :room, room %>
 
 <%- room.furniture_placements.each do |furniture_placement| %>
   <%= render partial: furniture_placement.furniture.in_room_template,

@@ -26,6 +26,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
+          markdown_text_block: { content: "# Welcome!" },
           videobridge_by_jitsi: {},
           breakout_tables_by_jitsi: { names: %w[engineering design ops] }
         }

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :spaces do
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]
+      resources :furniture_placements, only: [:update]
       namespace :furniture do
         Furniture.append_routes(self)
       end

@@ -15,3 +15,12 @@ crumb :guide do |guide|
   link t("guides.#{guide.slug}.title"), guide_path(guide)
   parent :guides
 end
+
+crumb :room do |room|
+  link room.name, space_room_path(room.space, room)
+end
+
+crumb :edit_room do |room|
+  link "Configure #{room.name}", edit_space_room_path(room.space, room)
+  parent :room, room
+end

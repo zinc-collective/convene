@@ -7,7 +7,6 @@ class MarkdownTemplateHandler
   end
 
   def call(template, source)
-
     erb.call(template, renderer.render([source, glossary].join("\n")))
   end
 

@@ -29,6 +29,10 @@
     // space to breathe at a break; while ensuring they don't "float away" from
     // whatever heading they fall under
     @apply mb-2;
+
+    &:last-of-type {
+      @apply mb-0;
+    }
   }
 
   ol,

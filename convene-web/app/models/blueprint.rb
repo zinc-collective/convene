@@ -17,7 +17,7 @@ class Blueprint
       furniture_placements.each.with_index do |(furniture, settings), slot|
         furniture_placement = room.furniture_placements
                                   .find_or_initialize_by(slot: slot)
-        furniture_placement.update!(settings: settings, name: furniture)
+        furniture_placement.update!(settings: settings, furniture_kind: furniture)
       end
     end
 

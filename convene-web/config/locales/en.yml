@@ -35,6 +35,8 @@ en:
       waiting_room:
         access_code: "Enter Access Code"
     submit:
+      update: "Save"
+      create: "Create"
       waiting_room:
         update: "Enter"
   activemodel:
