@@ -67,6 +67,11 @@ class SystemTestSpace
           videobridge_by_jitsi: {}
         }
       }
-    ]
+    ],
+    # members: [{
+    #   email: "member@example.com",
+    #   password: "password",
+
+    # }]
   }.freeze
 end

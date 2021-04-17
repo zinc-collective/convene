@@ -21,7 +21,10 @@ class Blueprint
       end
     end
 
-    space_attributes.fetch(:members, []).each do |person|
+    space_attributes.fetch(:members, []).each do |member_attribute|
+      person = Person.find_or_initialize_by(member_attribute[:email])
+      person.update!(member_attribute[:password])
+      profile = Profile.find_or_initialize_by
       space.members << person
     end
 
