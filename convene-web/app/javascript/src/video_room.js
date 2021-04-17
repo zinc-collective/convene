@@ -1,5 +1,5 @@
 import { EventTarget } from "event-target-shim";
-import Identify from "./identity";
+import Identity from "./identity";
 
 const eventBus = new EventTarget();
 export default class VideoRoom {
@@ -41,12 +41,12 @@ export default class VideoRoom {
   }
 
   get displayName() {
-    const identify = new Identify();
-    return `${identify.personInfo.name} (${identify.personInfo.pronoun})`;
+    const identity = new Identity();
+    return `${identity.personInfo.name} (${identity.personInfo.pronoun})`;
   }
 
   jitsiApiOption() {
-    const identify = new Identity();
+    const identity = new Identity();
     return {
       roomName: this.roomName,
       parentNode: this.parentNode,
@@ -70,7 +70,7 @@ export default class VideoRoom {
         disableDeepLinking: true,
       },
       userInfo: {
-        displayName: identify.personInfo.name,
+        displayName: identity.personInfo.name,
       },
     };
   }
