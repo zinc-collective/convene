@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "alexkrechik.cucumberautocomplete",
+    "ms-azuretools.vscode-docker",
+    "editorconfig.editorconfig",
+    "hashicorp.terraform",
+    "yzhang.markdown-all-in-one",
+    "esbenp.prettier-vscode",
+    "rebornix.ruby",
+    "castwide.solargraph",
+    "wingrunr21.vscode-ruby",
+    "valentjn.vscode-ltex"
+  ]
+}
