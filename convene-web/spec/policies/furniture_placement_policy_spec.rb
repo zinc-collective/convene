@@ -15,12 +15,8 @@ RSpec.describe FurniturePlacementPolicy do
   end
 
   permissions :update?, :edit? do
-    it "grants access if user is space member" do
-      expect(subject).to permit(member, furniture_placement)
-    end
-
-    it "denies access if user is not a space member" do
-      expect(subject).not_to permit(non_member, furniture_placement)
-    end
+    it { is_expected.to permit(member, furniture_placement) }
+    it { is_expected.not_to permit(non_member, furniture_placement) }
+    it { is_expected.not_to permit(nil, furniture_placement) }
   end
 end

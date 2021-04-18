@@ -11,6 +11,8 @@ class FurniturePlacementPolicy < ApplicationPolicy
   end
 
   def update?
+    return false unless person
+
     person.member_of?(furniture_placement.space)
   end
 
