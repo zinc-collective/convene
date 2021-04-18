@@ -27,7 +27,7 @@ class RoomsController < ApplicationController
     current_room
   end
 
-  # TODO: Unit test authorize and redirect url, consider adding Pundit policy object
+  # TODO: Unit test authorize and redirect url
   private def check_access_code
     authorize(room)
     if !room.enterable?(current_access_code(room))
