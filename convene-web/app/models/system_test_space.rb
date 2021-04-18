@@ -7,13 +7,18 @@ class SystemTestSpace
     Blueprint.new(client: { name: 'System Test',
                             space: DEFAULT_SPACE_CONFIG.merge(
                               name: 'System Test Branded Domain',
-                              branded_domain: 'system-test.zinc.local'
+                              branded_domain: 'system-test.zinc.local',
+                              members: members
                             ) }).find_or_create!
 
     Blueprint.new(client: { name: 'System Test',
                             space: DEFAULT_SPACE_CONFIG
-                              .merge(name: 'System Test') })
+                              .merge(name: 'System Test', members: members) })
              .find_or_create!
+  end
+
+  def self.members
+    [Person.find_or_create_by!(email: 'member@system-test.example.com')]
   end
 
   DEFAULT_SPACE_CONFIG = {

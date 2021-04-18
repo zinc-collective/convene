@@ -40,6 +40,12 @@
       <%= form_with(model: furniture_placement, url: space_room_furniture_placement_path(room.space, room, furniture_placement), local: true) do |furniture_placement_form| %>
         <%= render partial: "furniture_placements/form", locals: { form: furniture_placement_form, furniture_placement: furniture_placement } %>
       <% end %>
-    <% end %>
+    <%- elsif policy(furniture_placement).show? %>
+      <header>
+        <h4>
+          <%= furniture_placement.furniture.model_name.human.titleize %>
+        </h4>
+      </header>
+    <%- end %>
   <% end %>
 </fieldset>
