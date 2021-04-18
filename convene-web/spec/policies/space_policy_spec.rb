@@ -9,12 +9,8 @@ RSpec.describe SpacePolicy do
   let(:non_member) { create (:person) }
 
   permissions :update?, :edit? do
-    it "grants access if user is space member" do
-      expect(subject).to permit(member, space)
-    end
-
-    it "denies access if user is not a space member" do
-      expect(subject).not_to permit(non_member, space)
-    end
+    it { is_expected.to permit(member, space) }
+    it { is_expected.not_to permit(non_member, space) }
+    it { is_expected.not_to permit(nil, space) }
   end
 end

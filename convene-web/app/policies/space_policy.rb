@@ -7,6 +7,8 @@ class SpacePolicy < ApplicationPolicy
   end
 
   def update?
+    return false unless person
+
     person.member_of?(space)
   end
 
