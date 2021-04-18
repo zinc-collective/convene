@@ -18,6 +18,7 @@ class SystemTestSpace
 
   DEFAULT_SPACE_CONFIG = {
     jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
+    entrance: 'entrance-hall',
     access_level: :unlocked,
     rooms: [
       {
@@ -26,7 +27,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
-          markdown_text_block: { content: "# Welcome!" },
+          markdown_text_block: { content: '# Welcome!' },
           videobridge_by_jitsi: {},
           breakout_tables_by_jitsi: { names: %w[engineering design ops] }
         }
@@ -66,6 +67,14 @@ class SystemTestSpace
         furniture_placements: {
           videobridge_by_jitsi: {}
         }
+      },
+      {
+        name: 'Entrance Hall',
+        publicity_level: :unlisted,
+        furniture_placements: {
+          markdown_text_block: { content: '# Wooo!' }
+        }
+
       }
     ]
   }.freeze
