@@ -1,10 +1,5 @@
 class SpacePolicy < ApplicationPolicy
-  attr_reader :person, :space
-
-  def initialize(person, space)
-    @person = person
-    @space = space
-  end
+  alias space object
 
   def update?
     return false unless person

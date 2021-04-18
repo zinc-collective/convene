@@ -1,10 +1,5 @@
 class FurniturePlacementPolicy < ApplicationPolicy
-  attr_reader :person, :furniture_placement
-
-  def initialize(person, furniture_placement)
-    @person = person
-    @furniture_placement = furniture_placement
-  end
+  alias furniture_placement object
 
   def show?
     true
