@@ -22,9 +22,9 @@ function setup_package {
   fi
 }
 
-
 setup_package "overmind"
 setup_package "yarn"
+setup_package "shared-mime-info"
 
 if test -f ".env"; then
   echo "Found .env, leaving it in place!"
