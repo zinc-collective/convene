@@ -18,14 +18,13 @@ RSpec.describe Room, type: :model do
     it "does not include rooms whose publicity level is unlisted" do
       client = Client.create(name: "test")
       space = client.spaces.create(name: "space")
-      listed_room = space.rooms.create(publicity_level: :listed)
-      unlisted_room = space.rooms.create(publicity_level: :unlisted)
+      listed_room = space.rooms.create(publicity_level: :listed, name: "Listed Room")
+      unlisted_room = space.rooms.create(publicity_level: :unlisted, name: "Unlisted Room")
 
       aggregate_failures do
         expect(Room.listed).not_to include(unlisted_room)
         expect(Room.listed).to include(listed_room)
       end
-
     end
   end
 

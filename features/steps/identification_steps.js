@@ -1,24 +1,57 @@
+const assert = require("assert").strict;
 const { Given, When, Then } = require("cucumber");
-const SignInPage = require("../page-objects/SignInPage");
 
-Given('a {actor} has Identified themselves using an Email Address', function (actor) {
-    const signInPage = new SignInPage(this.driver);
-    return signInPage
-            .enter()
-            .then((page) => page.submitEmail('email@example.com'));
- });
+const { SignInPage, SpacePage, MePage } = require("../harness/Pages");
+const { Space, Actor } = require("../lib");
 
- When('the {actor} opens the Identification Verification Link emailed to them', function (actor) {
-   // Write code here that turns the phrase above into concrete actions
-   return 'pending';
- });
 
- Then('the {actor} is Verified as the Owner of that Email Address', function (actor) {
-   // Write code here that turns the phrase above into concrete actions
-   return 'pending';
- });
+Given(
+  "an unauthenticated {actor} has requested to be identified via Email",
+  async function (actor) {
+    this.actor = actor;
+    const signInPage = await new SignInPage(this.driver).visit();
+    return signInPage.submitEmail(actor.email);
+  }
+);
 
- Then('the {actor} has become Authenticated', function (actor) {
-   // Write code here that turns the phrase above into concrete actions
-   return 'pending';
- });
+Given("a {actor} Authenticated Session",
+/** @param {Actor} actor */
+function (actor) {
+  this.actor = actor;
+  return this.actor.signIn(this.driver)
+});
+
+When(
+  "the unauthenticated {actor} opens the Identification Verification Link emailed to them",
+  /** @param {Actor} actor */
+  function (actor) {
+    return actor.authenticationUrl().then((url) => this.driver.get(url))
+  }
+);
+
+When("the Authenticated Person Signs Out", function () {
+  return this.actor.signOut(this.driver)
+});
+
+Then(
+  "the {actor} is Verified as the Owner of that Email Address",
+  async function (actor) {
+    const mePage = new MePage(this.driver);
+    await mePage.visit();
+    const person = await mePage.person();
+    assert.strictEqual(await person.email, this.actor.email);
+  }
+);
+
+Then("the {actor} has become Authenticated", async function (actor) {
+  const mePage = new MePage(this.driver);
+  await mePage.visit();
+  const person = await mePage.person();
+  assert.ok(await person.id);
+});
+
+Then("the Authenticated Person becomes a {actor}", async function (actor) {
+  const mePage = await new MePage(this.driver).visit()
+  const person = await mePage.person();
+  assert.strictEqual(await person.email, `${actor.email}`);
+});

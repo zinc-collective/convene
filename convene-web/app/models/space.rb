@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A Space is a collection of infrastructure resources
 # for collaboration
 class Space < ApplicationRecord
@@ -39,6 +41,8 @@ class Space < ApplicationRecord
 
   # The Rooms within this Space
   has_many :rooms, inverse_of: :space
+
+  belongs_to :entrance, class_name: 'Room', optional: true
 
   # A Space's Access Level indicates what a participant must know in order to gain access.
   # `unlocked` The participant does not need to know anything to gain access.

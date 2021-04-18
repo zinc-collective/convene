@@ -1,0 +1,3 @@
+<%- if model.errors[field].present? %>
+<p class="error-message"><%= model.errors[field].join(', ') %></p>
+<%- end %>
