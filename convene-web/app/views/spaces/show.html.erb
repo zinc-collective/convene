@@ -4,7 +4,7 @@
   <% end %>
 </div>
 
-<%- space.entrance.furniture_placements.each do |furniture_placement| %>
+<%- space.entrance&.furniture_placements&.each do |furniture_placement| %>
   <%= render partial: furniture_placement.furniture.in_room_template,
              locals: { furniture: furniture_placement.furniture, room: space.entrance,
                        person: current_person } %>
