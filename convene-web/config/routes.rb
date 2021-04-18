@@ -17,11 +17,14 @@ Rails.application.routes.draw do
     resources :invitations, only: [:create, :destroy]
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]
+      resources :furniture_placements, only: [:update]
       namespace :furniture do
         Furniture.append_routes(self)
       end
     end
   end
+
+  resource :me, only: %i[show], controller: 'me'
 
   match '/workspaces/*path', to: redirect('/spaces/%{path}'), via: [:GET]
 

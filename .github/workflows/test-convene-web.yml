@@ -13,8 +13,12 @@ jobs:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       PORT: 80
-      APP_URL: http://localhost
+      APP_ROOT_URL: http://localhost
       CUSTOM_DOMAIN: http://system-test.zinc.local
+      # Connect to locally-running Maildev for tests
+      SMTP_PORT: 1025
+      SMTP_DOMAIN: localhost
+      SMTP_ENABLE_TLS: false
 
     services:
       postgres:
@@ -34,6 +38,8 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
+        # Use this directory for finding the Gemfile and other Ruby goodies.
+        working-directory: 'convene-web'
 
     - name: Increase the amount of inotify watchers
       run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -47,18 +53,36 @@ jobs:
     - name: Use Development mode env
       run: cd convene-web && cp .env.example .env
 
+    # Yarn caching steps borroed from https://github.com/actions/cache/blob/main/examples.md#node---yarn
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+
+    - uses: actions/cache@v2
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
     - name: Setup environment
-      run: bin/setup
+      run: |
+          sudo chown -R $USER /usr/local/lib/node_modules
+          sudo chown -R $USER /usr/local/bin/
+          bin/setup
 
     - name: Start Rails server
-      run: bin/run &
+      run: |
+          export PATH=$PATH:~/bin
+          bin/run &
 
     - name: Test convene-web
       run: |
           sudo sh -c "echo '127.0.0.1 system-test.zinc.local' >> /etc/hosts"
-          # To trigger asset compile in development mode
+          # To wait for asset built
           # TODO: Start server in production mode
-          curl system-test.zinc.local 1> /dev/null
+          curl system-test.zinc.local:3035/packs/manifest.json 1> /dev/null
           bin/test
 
     - uses: actions/upload-artifact@v2

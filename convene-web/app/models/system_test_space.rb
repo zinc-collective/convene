@@ -7,17 +7,23 @@ class SystemTestSpace
     Blueprint.new(client: { name: 'System Test',
                             space: DEFAULT_SPACE_CONFIG.merge(
                               name: 'System Test Branded Domain',
-                              branded_domain: 'system-test.zinc.local'
+                              branded_domain: 'system-test.zinc.local',
+                              members: members
                             ) }).find_or_create!
 
     Blueprint.new(client: { name: 'System Test',
                             space: DEFAULT_SPACE_CONFIG
-                              .merge(name: 'System Test') })
+                              .merge(name: 'System Test', members: members) })
              .find_or_create!
+  end
+
+  def self.members
+    [Person.find_or_create_by!(email: 'space-member@example.com')]
   end
 
   DEFAULT_SPACE_CONFIG = {
     jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
+    entrance: 'entrance-hall',
     access_level: :unlocked,
     rooms: [
       {
@@ -26,6 +32,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
+          markdown_text_block: { content: '# Welcome!' },
           videobridge_by_jitsi: {},
           breakout_tables_by_jitsi: { names: %w[engineering design ops] }
         }
@@ -65,6 +72,14 @@ class SystemTestSpace
         furniture_placements: {
           videobridge_by_jitsi: {}
         }
+      },
+      {
+        name: 'Entrance Hall',
+        publicity_level: :unlisted,
+        furniture_placements: {
+          markdown_text_block: { content: '# Wooo!' }
+        }
+
       }
     ]
   }.freeze

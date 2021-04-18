@@ -2,8 +2,12 @@
 
 - [Contributing](#contributing)
 - [System Overview](#system-overview)
+  - [Architecture overview diagram](#architecture-overview-diagram)
 - [Configuring Your Development Machine](#configuring-your-development-machine)
+  - [Debugger](#debugger)
+  - [Developing Mailers](#developing-mailers)
 - [Testing Convene Web](#testing-convene-web)
+  - [Overview of the `features` folder](#overview-of-the-features-folder)
 
 The Convene Web project provides a human and computer interface for managing of
 Spaces, Rooms, and Team Members.
@@ -39,6 +43,13 @@ where we load a Jitsi video call iframe into Convene's UI.
 If you want to run Jitsi locally, see the configuration provided in
 [`infrastructure/jitsi-meet-local`](../infrastructure/jitsi-meet-local/README.md).
 
+### Architecture overview diagram
+_Last updated: April 2021_
+
+![](../docs/convene-architecture-overview.jpg)
+
+Original on Miro:  https://miro.com/app/board/o9J_lLrbz1g=/
+
 ## Configuring Your Development Machine
 
 First, ensure your development environment has:
@@ -65,6 +76,10 @@ Finally, with the server still running (perhaps in a different terminal), run
 [docker-compose.yml]: ../docker-compose.yml
 [.env.example]: ./.env.example
 [Yarn]: https://yarnpkg.com/getting-started/install
+
+### Debugger
+
+To run `pry` or `byebug`, run `bin/connect web`.
 
 ### Developing Mailers
 
@@ -97,6 +112,13 @@ of having to spin up a working instance of the entire application.
 
 Tests that need database access should `require "rails_helper"`, and tests that
 can be executed without a database should `require "spec_helper"`.
+
+### Overview of the `features` folder
+_Last updated: April 2021_
+
+![](../docs/features-overview.jpg)
+
+Original on Miro:  https://miro.com/app/board/o9J_lLrbz1g=/
 
 [rspec]: https://rspec.info/
 [cucumber]: https://cucumber.io/

@@ -5,14 +5,22 @@ module Furniture
     # @return {FurniturePlacement}
     attr_accessor :placement
 
-    delegate :settings, to: :placement
+    def self.included(placeable)
+      placeable.include ActiveModel::Model
+      placeable.include ActiveModel::Attributes
+      placeable.include ActiveModel::AttributeAssignment
+    end
 
-    def initialize(placement)
-      self.placement = placement
+    def settings
+      placement.settings
     end
 
     def in_room_template
       "#{self.class.name.demodulize.underscore}/in_room"
+    end
+
+    def form_template
+      "#{self.class.name.demodulize.underscore}/form"
     end
   end
 end

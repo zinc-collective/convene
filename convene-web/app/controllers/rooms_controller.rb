@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :authorize
+  before_action :check_access_code
 
   def show
   end
@@ -16,7 +16,7 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:access_level, :access_code)
+    params.require(:room).permit(:access_level, :access_code, :name, :slug, :publicity_level)
   end
 
   helper_method def page_title
@@ -27,8 +27,9 @@ class RoomsController < ApplicationController
     current_room
   end
 
-  # TODO: Unit test authorize and redirect url, consider adding Pundit policy object
-  private def authorize
+  # TODO: Unit test authorize and redirect url
+  private def check_access_code
+    authorize(room)
     if !room.enterable?(current_access_code(room))
       redirect_to space_room_waiting_room_path(current_space, current_room, redirect_url: after_authorization_redirect_url)
     end

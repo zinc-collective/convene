@@ -82,5 +82,5 @@ If you use homebrew, install Firefox via: `brew install --cask firefox`
 ### 2.3. Infrastructure Setup and Documentation.
 
 Infrastructure engineers may want to look at the
-[`infrastructure` modules `README](./infrastructure/README.md); which includes
+[`infrastructure` module's `README`](./infrastructure/README.md), which includes
 how to configure your local machine or a virtual machine as a video bridge host.

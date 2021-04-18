@@ -1,25 +1,51 @@
-<div class="room-edit" data-controller="room-edit-form">
-  <h2>Configure <%= room.name %></h2>
+<% breadcrumb :edit_room, room %>
+<%= form_with model: room, url: space_room_path(room.space, room), data: { controller: "room-edit-form" }, local: true do |room_form| %>
+  <fieldset>
+    <div>
+      <%= room_form.label :name %>
+      <%= room_form.text_field :name %>
+      <%= render partial: "error", locals: { model: room, field: :name } %>
+    </div>
 
-  <%= form_with model: room, url: space_room_path(room.space, room), local: true do |room_form| %>
-    <fieldset>
-      <legend>Privacy and Security</legend>
-      <div class="form-element">
-        <%= room_form.label :access_level %>
-        <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" }, "data-action": "room-edit-form#accessLevelToggle" %>
-      </div>
+    <div>
+      <%= room_form.label :slug %>
+      <%= room_form.text_field :slug %>
+      <%= render partial: "error", locals: { model: room, field: :slug } %>
+    </div>
 
-      <div class="form-element">
-        <%= room_form.label :access_code %>
-        <%= room_form.text_field :access_code, "data-target": "room-edit-form.accessCode", disabled: !room.locked? %>
-        <%- if room.errors[:access_code].present? %>
-          <p class="error-message"><%= room.errors[:access_code].join(', ') %></p>
-        <%- end %>
-      </div>
-    </fieldset>
+    <h3>Privacy and Security</h3>
+
+    <div>
+      <%= room_form.label :access_level %>
+      <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" }, "data-action": "room-edit-form#accessLevelToggle" %>
+      <%= render partial: "error", locals: { model: room, field: :access_level } %>
+    </div>
+
+    <div>
+      <%= room_form.label :access_code %>
+      <%= room_form.text_field :access_code, "data-target": "room-edit-form.accessCode", disabled: !room.locked? %>
+      <%= render partial: "error", locals: { model: room, field: :access_code } %>
+    </div>
+
     <footer>
-      <%= room_form.submit class: "mr-5" %>
-      <%= link_to 'Cancel', space_path(room.space), class: "button --neutral" %>
+      <%= room_form.submit %>
     </footer>
+  </fieldset>
+<% end %>
+
+<fieldset>
+  <h3>Furniture</h3>
+  <%- room.furniture_placements.each do |furniture_placement| %>
+    <% if policy(furniture_placement).edit? %>
+      <%= form_with(model: furniture_placement, url: space_room_furniture_placement_path(room.space, room, furniture_placement), local: true) do |furniture_placement_form| %>
+        <%= render partial: "furniture_placements/form", locals: { form: furniture_placement_form, furniture_placement: furniture_placement } %>
+      <% end %>
+    <%- elsif policy(furniture_placement).show? %>
+      <header>
+        <h4>
+          <%= furniture_placement.furniture.model_name.human.titleize %>
+        </h4>
+      </header>
+    <%- end %>
   <% end %>
-</div>
+</fieldset>

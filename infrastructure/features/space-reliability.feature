@@ -8,7 +8,7 @@ Feature: Space Reliability
     When it becomes Midnight in the Client's timezone
     Then the Client Space is rebooted
 
-  Scenario: Multiple Operators may log in to Provisioned Convene Instances
+  Scenario: Multiple Operators may sign in to Provisioned Convene Instances
     Given a running Convene instance that was launched from a packer image with the following ssh authorized keys:
     | user | key |
     | zee  |  https://github.com/zspencer.keys |

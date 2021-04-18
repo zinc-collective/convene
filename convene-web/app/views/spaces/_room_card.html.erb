@@ -1,4 +1,4 @@
-<div class="room-card <%= "--#{room.access_level}" %>" id="<%= room.name %>">
+<div class="room-card <%= "--#{room.access_level} --#{room.slug}"%>">
   <header>
     <h3><%= room.name %></h3>
     <%- if room.locked? %>
@@ -15,7 +15,7 @@
       <% end %>
     </div>
 
-    <%- if Feature.enabled?(:configure_room) %>
+    <%- if Feature.enabled?(:configure_room) && policy(room).edit? %>
       <div class="room-door_configure">
         <%= link_to edit_space_room_path(room.space, room) do %>
           <span class="configure-icon">Configure Room</span>

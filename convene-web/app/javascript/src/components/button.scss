@@ -10,6 +10,12 @@
       @apply bg-primary-200;
     }
 
+    &:focus {
+      @apply outline-none border-neutral-300 shadow-outline-gray;
+    }
+
+
+
     &.--neutral {
       @apply bg-neutral-500;
       &:hover {
@@ -18,9 +24,7 @@
       &:active {
         @apply bg-neutral-200;
       }
-      &:focus {
-        @apply outline-none border-neutral-300 shadow-outline-gray;
-      }
+
     }
   }
 }

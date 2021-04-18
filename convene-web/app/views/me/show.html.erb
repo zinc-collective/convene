@@ -1,0 +1,8 @@
+<h1>Me</h1>
+<ul class="person">
+  <% local_assigns[:person].attributes.each do |attr, value| %>
+    <li class=<%= attr %> >
+      <%= attr %>: <%=value %>
+    </li>
+  <% end %>
+</ul>

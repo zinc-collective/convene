@@ -41,17 +41,17 @@ Feature: Identification
   # An Emailed Link is a _Possession_ Verification Factor that demonstrates the
   # person can at least _read_ the email address they are using to identiy
   # themselves.
-  @built @unimplemented-steps
+  @built
   Scenario: Identity Verification Via Emailed Link
-    Given a Guest has Identified themselves using an Email Address
-    When the Guest opens the Identification Verification Link emailed to them
-    Then the Guest is Verified as the Owner of that Email Address
-    And the Guest has become Authenticated
+    Given an unauthenticated Space Member has requested to be identified via Email
+    When the unauthenticated Space Member opens the Identification Verification Link emailed to them
+    Then the Space Member is Verified as the Owner of that Email Address
+    And the Space Member has become Authenticated
 
 
-  @built @unimplemented-steps
+  @built
   Scenario: Authentication is lost on Sign-out
-    Given an Authenticated Session
+    Given a Space Member Authenticated Session
     When the Authenticated Person Signs Out
     Then the Authenticated Person becomes a Guest
 
