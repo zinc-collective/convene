@@ -1,0 +1,2 @@
+class ApplicationPolicy
+end
