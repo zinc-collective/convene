@@ -37,8 +37,10 @@ Given("a Space with an {publicityLevel} Room", function (publicityLevel) {
 
 When(
   "a {actor} unlocks {accessLevel} {room} with {accessCode}",
-  function (actor, accessLevel, room, accessCode) {
+  async function (actor, accessLevel, room, accessCode) {
     const { space } = linkParameters({ room, accessLevel });
+    await actor.signIn(this.driver)
+
     return new SpacePage(this.driver, space)
       .visit()
       .then((spacePage) => spacePage.roomCard(room).configure())
@@ -48,11 +50,13 @@ When(
 
 When(
   "a {actor} locks {accessLevel} {room} with {accessCode}",
-  function (actor, accessLevel, room, accessCode) {
+  async function (actor, accessLevel, room, accessCode) {
     linkParameters({ accessLevel, room })
+    await actor.signIn(this.driver)
+
     return this.space
-      .roomCard(room)
-      .configure()
+      .visit()
+      .then((space) => space.roomCard(room).configure())
       .then((roomSettingsPage) => roomSettingsPage.lock(accessCode));
   }
 );

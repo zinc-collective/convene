@@ -18,7 +18,7 @@ class SystemTestSpace
   end
 
   def self.members
-    [Person.find_or_create_by!(email: 'member@system-test.example.com')]
+    [Person.find_or_create_by!(email: 'space-member@example.com')]
   end
 
   DEFAULT_SPACE_CONFIG = {
