@@ -9,4 +9,8 @@ class SpacePolicy < ApplicationPolicy
   def update?
     person.member_of?(space)
   end
+
+  def edit?
+    update?
+  end
 end
