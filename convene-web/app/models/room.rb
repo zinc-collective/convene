@@ -30,6 +30,14 @@ class Room < ApplicationRecord
     access_level&.to_sym == :locked
   end
 
+  def unlocked?
+    access_level&.to_sym == :unlocked
+  end
+
+  def internal?
+    access_level&.to_sym == :internal
+  end
+
   # A Room's Publicity Level indicates how visible the room is.
   # `listed` - The room is discoverable by anyone in the space lobby.
   # `unlisted` - The room is only visible to it's owners and people who have been in it before.

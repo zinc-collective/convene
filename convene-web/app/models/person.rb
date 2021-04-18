@@ -17,4 +17,8 @@ class Person < ApplicationRecord
     # TODO: Allow person to upload their image
     "/avatar.svg"
   end
+
+  def member_of?(space)
+    spaces.include?(space)
+  end
 end

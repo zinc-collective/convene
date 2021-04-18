@@ -15,7 +15,7 @@
       <% end %>
     </div>
 
-    <%- if Feature.enabled?(:configure_room) %>
+    <%- if Feature.enabled?(:configure_room) && policy(room).edit? %>
       <div class="room-door_configure">
         <%= link_to edit_space_room_path(room.space, room) do %>
           <span class="configure-icon">Configure Room</span>

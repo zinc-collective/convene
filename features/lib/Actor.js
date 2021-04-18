@@ -10,7 +10,7 @@ const Space = require("./Space");
 class Actor {
   constructor(type) {
     this.type = type;
-    this.email = `${type.replace(/\s/g, "+").toLowerCase()}@example.com`;
+    this.email = `${type.replace(/\s/g, "-").toLowerCase()}@example.com`;
   }
 
   /**
@@ -18,7 +18,6 @@ class Actor {
    * @param {ThenableWebDriver} driver
    * @returns {Promise<Actor>}
    */
-
   async signIn(driver) {
     const signInPage = new SignInPage(driver);
     await signInPage.visit().then((page) => page.submitEmail(this.email));

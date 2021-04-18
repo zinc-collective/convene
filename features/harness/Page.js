@@ -33,7 +33,7 @@ class Page {
    * Goes directly to the page, as defined in the path method.
    * @returns {Promise<Page>}
    */
-  async visit() {
+  visit() {
     return this.driver.get(`${this.baseUrl}${this.path()}`).then(() => this);
   }
 

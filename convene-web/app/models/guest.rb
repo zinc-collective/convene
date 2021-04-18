@@ -6,4 +6,8 @@ class Guest
   # TODO: Make feature test not dependent on email
   attribute :email, :string, default: "guest@example.com"
   attribute :avatar_url, :string, default: '/avatar.svg'
+
+  def member_of?(_space)
+    false
+  end
 end
