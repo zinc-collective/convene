@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+
   # Referenced in application layout to display page title
   # Override on a per-controller basis to display different title
   # @returns [String]
@@ -19,6 +21,11 @@ class ApplicationController < ActionController::Base
   # @returns [Guest, Person] the authenticated user, or a Guest
   def current_person
     @current_person ||= authenticate_by_session(Person) || Guest.new
+  end
+
+  # Helper for Pundit-assisted policy/permissions checks.
+  def pundit_user
+    current_person
   end
 
   def require_person!
