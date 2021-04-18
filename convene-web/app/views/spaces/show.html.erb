@@ -1,5 +1,11 @@
 <div class="space-container card-list">
-  <% @space.rooms.accessable_by(current_person).each do |room| %>
+  <% space.rooms.accessable_by(current_person).each do |room| %>
     <%= render partial: 'spaces/room_card', locals: { room: room } %>
   <% end %>
 </div>
+
+<%- space.entrance.furniture_placements.each do |furniture_placement| %>
+  <%= render partial: furniture_placement.furniture.in_room_template,
+             locals: { furniture: furniture_placement.furniture, room: space.entrance,
+                       person: current_person } %>
+<% end %>

@@ -8,7 +8,7 @@ class Blueprint
 
   def find_or_create!
     space = client.spaces.find_or_initialize_by(name: space_attributes[:name])
-    space.update!(space_attributes.except(:name, :rooms, :members))
+    space.update!(space_attributes.except(:name, :rooms, :members, :entrance))
 
     space_attributes.fetch(:rooms, []).each do |room_attributes|
       room = space.rooms.find_or_initialize_by(name: room_attributes[:name])
@@ -20,6 +20,8 @@ class Blueprint
         furniture_placement.update!(settings: settings, furniture_kind: furniture)
       end
     end
+
+    space.update(entrance: space.rooms.find_by!(slug: space_attributes[:entrance])) if space_attributes[:entrance]
 
     space_attributes.fetch(:members, []).each do |person|
       space.members << person
@@ -33,7 +35,7 @@ class Blueprint
   end
 
   private def client
-      @_client ||= Client.find_or_create_by!(name: client_attributes[:name])
+    @_client ||= Client.find_or_create_by!(name: client_attributes[:name])
   end
 
   private def client_attributes

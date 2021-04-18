@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @see https://github.com/kzkn/gretel
 crumb :root do
   if current_space.present?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_223506) do
+ActiveRecord::Schema.define(version: 2021_04_17_233343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -104,8 +104,10 @@ ActiveRecord::Schema.define(version: 2021_04_10_223506) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "branded_domain"
+    t.uuid "entrance_id"
     t.index ["client_id"], name: "index_spaces_on_client_id"
     t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
   end
 
+  add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
