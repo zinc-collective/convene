@@ -36,6 +36,7 @@ setup_package "yarn"
 brew install --cask firefox
 yarn global add maildev
 
+
 if test -f ".env"; then
   echo "Found .env, leaving it in place!"
 else
