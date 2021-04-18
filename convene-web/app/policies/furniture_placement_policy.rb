@@ -6,6 +6,10 @@ class FurniturePlacementPolicy < ApplicationPolicy
     @furniture_placement = furniture_placement
   end
 
+  def show?
+    true
+  end
+
   def update?
     person.member_of?(furniture_placement.space)
   end

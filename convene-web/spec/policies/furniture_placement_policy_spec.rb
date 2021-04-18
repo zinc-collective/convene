@@ -8,6 +8,12 @@ RSpec.describe FurniturePlacementPolicy do
   let(:member) { membership.member }
   let(:non_member) { create (:person) }
 
+  permissions :show? do
+    it { is_expected.to permit(nil, furniture_placement )}
+    it { is_expected.to permit(member, furniture_placement )}
+    it { is_expected.to permit(non_member, furniture_placement )}
+  end
+
   permissions :update?, :edit? do
     it "grants access if user is space member" do
       expect(subject).to permit(member, furniture_placement)
