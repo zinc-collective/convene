@@ -86,17 +86,6 @@ ActiveRecord::Schema.define(version: 2021_04_17_233343) do
     t.index ["space_id"], name: "index_rooms_on_space_id"
   end
 
-  create_table "space_hookups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "space_id"
-    t.string "name", null: false
-    t.string "hookup_slug", null: false
-    t.string "status", default: "unavailable", null: false
-    t.jsonb "configuration"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["space_id"], name: "index_space_hookups_on_space_id"
-  end
-
   create_table "space_memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id"
     t.uuid "space_id"
@@ -118,6 +107,17 @@ ActiveRecord::Schema.define(version: 2021_04_17_233343) do
     t.uuid "entrance_id"
     t.index ["client_id"], name: "index_spaces_on_client_id"
     t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
+  end
+
+  create_table "utility_hookups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "space_id"
+    t.string "name", null: false
+    t.string "utility_slug", null: false
+    t.string "status", default: "unavailable", null: false
+    t.jsonb "configuration"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["space_id"], name: "index_utility_hookups_on_space_id"
   end
 
   add_foreign_key "spaces", "rooms", column: "entrance_id"

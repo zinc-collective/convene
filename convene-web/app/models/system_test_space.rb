@@ -23,9 +23,9 @@ class SystemTestSpace
 
   DEFAULT_SPACE_CONFIG = {
     entrance: 'entrance-hall',
-    space_hookups: [
-      { hookup_slug: :plaid, name: 'Plaid', configuration: {} },
-      { hookup_slug: :jitsi, name: 'Jitsi', configuration:
+    utility_hookups: [
+      { utility_slug: :plaid, name: 'Plaid', configuration: {} },
+      { utility_slug: :jitsi, name: 'Jitsi', configuration:
         { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
     ],
     access_level: :unlocked,

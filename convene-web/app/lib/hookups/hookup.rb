@@ -5,15 +5,15 @@ module Hookups
   class Hookup
     include ActiveModel::Model
 
-    # @return [SpaceHookup]
-    attr_accessor :space_hookup
+    # @return [UtilityHookup]
+    attr_accessor :utility_hookup
 
     # @return [Space]
-    delegate :space, to: :space_hookup
+    delegate :space, to: :utility_hookup
 
     # @return [Hookups::Configuration]
     def configuration
-      @configuration ||= Configuration.new(data: space_hookup.configuration)
+      @configuration ||= Configuration.new(data: utility_hookup&.configuration)
     end
   end
 end
