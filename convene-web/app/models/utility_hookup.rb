@@ -2,7 +2,6 @@
 
 # Links a {Hookups::Hookup} to a {Space}
 class UtilityHookup < ApplicationRecord
-  # Which Space the Hookup is connected to.
   # @return [Space]
   belongs_to :space
 

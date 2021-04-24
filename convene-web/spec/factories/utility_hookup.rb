@@ -3,7 +3,7 @@ FactoryBot.define do
     trait :jitsi do
       sequence(:name) { |n| "Jitsi #{n}" }
       utility_slug { 'jitsi' }
-      configuration { { meet_domain: "http://meet.example.com" } }
+      configuration { { 'meet_domain' => 'http://meet.example.com' } }
     end
   end
 end
