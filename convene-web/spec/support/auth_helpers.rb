@@ -4,6 +4,7 @@ module AuthHelpers
   def sign_in(person)
     session = Passwordless::Session.create!(authenticatable: person, user_agent: "TestAgent", remote_addr: "unknown")
     get Passwordless::Engine.routes.url_helpers.token_sign_in_path(session.token)
+    follow_redirect!
   end
 end
 

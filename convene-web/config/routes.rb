@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   passwordless_for :people
 
+  root 'spaces#show'
+
   namespace :admin do
     resources :spaces
     resources :clients
@@ -30,7 +32,6 @@ Rails.application.routes.draw do
   resources :guides, only: %i[index show]
 
   constraints BrandedDomain.new(Space) do
-    root 'spaces#show'
     get '/:id', to: 'rooms#show'
   end
 end
