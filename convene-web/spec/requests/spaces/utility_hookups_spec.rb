@@ -3,11 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe '/spaces/:space_id/utility_hookups' do
-  def sign_in(person)
-    session = Passwordless::Session.create!(authenticatable: person, user_agent: "TestAgent", remote_addr: "unknown")
-    get Passwordless::Engine.routes.url_helpers.token_sign_in_path(session.token)
-  end
-
   let(:space) { FactoryBot.create(:space, :with_members) }
   let(:utility_hookup_attributes) { FactoryBot.attributes_for(:utility_hookup, :jitsi) }
   describe 'POST /spaces/:space_id/utility_hookups' do
