@@ -39,7 +39,6 @@ class ApplicationController < ActionController::Base
   # Retrieves the space based upon the requests domain or params
   # @returns [nil, Space]
   helper_method def current_space
-    space_repository = Space.includes(:rooms)
     @current_space ||=
       if params[:space_id]
         space_repository.friendly.find(params[:space_id])
@@ -48,7 +47,11 @@ class ApplicationController < ActionController::Base
         space_repository.friendly.find(params[:id])
       end
   rescue ActiveRecord::RecordNotFound
-    nil
+    @current_space ||= space_repository.default
+  end
+
+  def space_repository
+    Space.includes(:rooms, entrance: [:furniture_placements])
   end
 
   # Retrieves the room based upon the current_space and params

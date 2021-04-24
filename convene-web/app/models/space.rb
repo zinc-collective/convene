@@ -49,6 +49,8 @@ class Space < ApplicationRecord
   # A room's Access Code is a "secret" that, when known, grants access to the room.
   attribute :access_code, :string
 
+  scope :default, -> { friendly.find('convene') }
+
   def unlocked?
     access_level&.to_sym != :locked
   end

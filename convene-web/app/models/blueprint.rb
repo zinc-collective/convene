@@ -57,7 +57,7 @@ class Blueprint
                        .tap { |record| record.update!(member_attributes) }
                end
 
-      space.members << person
+      space.space_memberships.find_or_create_by(member: person)
     end
   end
 
@@ -107,6 +107,23 @@ class Blueprint
           publicity_level: :unlisted,
           furniture_placements: {
             videobridge_by_jitsi: {}
+          }
+        }]
+      }
+    }
+  }, {
+    client: {
+      name: 'Zinc',
+      space: {
+        name: 'Convene',
+        entrance: 'landing-page',
+        members: [{ email: 'zee@zinc.coop' }],
+        rooms: [{
+          name: 'Landing Page',
+          access_level: :unlocked,
+          publicity_level: :unlisted,
+          furniture_placements: {
+            markdown_text_block: {}
           }
         }]
       }

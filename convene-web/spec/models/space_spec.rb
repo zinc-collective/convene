@@ -10,6 +10,14 @@ RSpec.describe Space, type: :model do
     it { is_expected.to validate_uniqueness_of(:branded_domain).allow_nil }
   end
 
+  describe ".default" do
+    before { FactoryBot.create(:space, slug: 'convene')}
+
+    subject(:default) { described_class.default }
+
+    it { is_expected.to eql(Space.friendly.find('convene')) }
+  end
+
   it { is_expected.to have_many(:rooms) }
   it { is_expected.to belong_to(:entrance).class_name('Room').optional(true).dependent(false) }
 end
