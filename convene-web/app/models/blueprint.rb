@@ -9,10 +9,10 @@ class Blueprint
   end
 
   def find_or_create!
-    space.update!(space_attributes.except(:name, :rooms, :members, :entrance, :space_hookups))
+    space.update!(space_attributes.except(:name, :rooms, :members, :entrance, :utility_hookups))
 
     set_rooms
-    set_space_hookups
+    set_utility_hookups
     set_members
     set_entrance
     space
@@ -31,12 +31,12 @@ class Blueprint
     end
   end
 
-  private def set_space_hookups
-    space_attributes.fetch(:space_hookups, []).each do |space_hookup_attributes|
-      space_hookup = space.space_hookups
-                          .find_or_initialize_by(name: space_hookup_attributes[:name])
+  private def set_utility_hookups
+    space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
+      utility_hookup = space.utility_hookups
+                          .find_or_initialize_by(name: utility_hookup_attributes[:name])
 
-      space_hookup.update!(space_hookup_attributes.except(:name))
+      utility_hookup.update!(utility_hookup_attributes.except(:name))
     end
   end
 
@@ -72,10 +72,10 @@ class Blueprint
       client: {
         name: 'Zinc',
         space: {
-          space_hookups: [
-            { hookup_slug: :plaid, name: 'Plaid', configuration: {} },
+          utility_hookups: [
+            { utility_slug: :plaid, name: 'Plaid', configuration: {} },
             {
-              hookup_slug: :jitsi, name: 'Jitsi', configuration:
+              utility_slug: :jitsi, name: 'Jitsi', configuration:
               { meet_domain: 'convene-videobridge-zinc.zinc.coop' }
             }
           ],

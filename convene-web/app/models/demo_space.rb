@@ -39,9 +39,9 @@ class DemoSpace
     }
   ].freeze
 
-  SPACE_HOOKUPS = [
-    { hookup_slug: :plaid, name: 'Plaid', configuration: {} },
-    { hookup_slug: :jitsi, name: 'Jitsi', configuration:
+  UTILITY_HOOKUPS = [
+    { utility_slug: :plaid, name: 'Plaid', configuration: {} },
+    { utility_slug: :jitsi, name: 'Jitsi', configuration:
       { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
   ].freeze
 
@@ -54,7 +54,7 @@ class DemoSpace
                     name: 'Zinc',
                     space: {
                       name: 'Convene Demo',
-                      space_hookups: SPACE_HOOKUPS,
+                      utility_hookups: UTILITY_HOOKUPS,
                       branded_domain: 'convene-demo.zinc.coop',
                       access_level: :unlocked,
                       rooms: DEMO_ROOMS

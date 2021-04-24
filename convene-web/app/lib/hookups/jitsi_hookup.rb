@@ -8,4 +8,10 @@ module Hookups
       configuration.get(:meet_domain)
     end
   end
+
+  class JitsiHookupPolicy < ApplicationPolicy
+    def permitted_params
+      [:meet_domain]
+    end
+  end
 end

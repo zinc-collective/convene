@@ -55,15 +55,17 @@ class Space < ApplicationRecord
   end
 
   # @see {Hookups}
-  has_many :space_hookups
+  # @see {UtilityHookup}
+  # @returns {ActiveRecord::Relation<UtilityHookups>}
+  has_many :utility_hookups
 
   def jitsi_meet_domain
     hookups.find { |h| h.is_a?(Hookups::JitsiHookup) }.meet_domain
   end
 
   def hookups
-    space_hookups.lazy.map do |space_hookup|
-      Hookups.from_space_hookup(space_hookup)
+    utility_hookups.lazy.map do |utility_hookup|
+      Hookups.from_utility_hookup(utility_hookup)
     end
   end
 end
