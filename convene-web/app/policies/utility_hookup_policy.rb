@@ -11,6 +11,10 @@ class UtilityHookupPolicy < ApplicationPolicy
     person.member_of?(utility_hookup.space)
   end
 
+  def new?
+    create?
+  end
+
   def update?
     create?
   end
