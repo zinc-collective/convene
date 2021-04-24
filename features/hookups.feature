@@ -68,11 +68,11 @@ Feature: Hookups
       | Space Member | show, list  |
       | Guest        | show, list  |
 
-  # SpaceHookups are the model that connects a Space to a Hookup; and _are_
+  # A UtilityHookup is the model that connects a Space to a Hookup; and _are_
   # editable at runtime.
   @unstarted @andromeda
-  Scenario: SpaceHookup Permissions
-    Then SpaceHookup models have the following permissions:
+  Scenario: UtilityHookup Permissions
+    Then UtilityHookup models have the following permissions:
       | group        | permissions                               |
       | Operator     | create, show, list, edit, update, destroy |
       | Space Owner  | create, show, list, edit, update, destroy |
