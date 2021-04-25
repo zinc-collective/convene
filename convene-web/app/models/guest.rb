@@ -10,4 +10,8 @@ class Guest
   def member_of?(_space)
     false
   end
+
+  def spaces
+    []
+  end
 end

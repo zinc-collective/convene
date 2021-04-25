@@ -1,6 +1,18 @@
 class UtilityHookupPolicy < ApplicationPolicy
   alias utility_hookup object
 
+  class Scope
+    attr_accessor :person, :scope
+    def initialize(person, scope)
+      @person = person
+      @scope = scope
+    end
+
+    def resolve
+      @scope.where(space: @person.spaces)
+    end
+  end
+
   def show?
     true
   end
