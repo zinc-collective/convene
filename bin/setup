@@ -13,6 +13,15 @@ function install_package {
   echo "If you want help, reach out via chat or github!"
 }
 
+function setup_cli_tool {
+  output=$(command -v $1)
+  if [ -z $output ]; then
+    install_package $1
+  else
+    echo "$1 installed, continuing..."
+  fi
+}
+
 function setup_package {
   output=$(brew ls --versions $1)
   if [ -n $output ]; then
@@ -22,8 +31,8 @@ function setup_package {
   fi
 }
 
-setup_package "overmind"
-setup_package "yarn"
+setup_cli_tool "overmind"
+setup_cli_tool "yarn"
 setup_package "shared-mime-info"
 
 if test -f ".env"; then
