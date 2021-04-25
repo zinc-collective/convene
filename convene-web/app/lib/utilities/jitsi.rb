@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-module Hookups
+module Utilities
   # Provides Jitsi Video functionality to a {Space}
   # @see https://jitsi.org
-  class JitsiHookup < Hookup
+  class Jitsi < Utility
     def meet_domain
       configuration.get(:meet_domain)
     end
   end
 
-  class JitsiHookupPolicy < ApplicationPolicy
+  class JitsiPolicy < Utility::Policy
     def permitted_params
       [:meet_domain]
     end

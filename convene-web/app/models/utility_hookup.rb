@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Links a {Hookups::Hookup} to a {Space}
+# Links a {Utilities::Utility} to a {Space}
 class UtilityHookup < ApplicationRecord
   # @return [Space]
   belongs_to :space
@@ -14,8 +14,8 @@ class UtilityHookup < ApplicationRecord
     attributes[:name] ||= utility_slug.to_s.humanize
   end
 
-  # Which type of {Hookups::Hookup} is connected
-  # Should match one of the keys in {Hookups::REGISTRY}
+  # Which type of {Utilities::Utility} is connected
+  # Should match one of the keys in {Utilities::REGISTRY}
   # @return [String]
   attribute :utility_slug, :string
 
@@ -25,8 +25,8 @@ class UtilityHookup < ApplicationRecord
 
   attribute :configuration, :json, default: {}
 
-  # @return [Hookups::Hookup]
+  # @return [Utilities::Utility]
   def hookup
-    @hookup ||= Hookups.from_utility_hookup(self)
+    @hookup ||= Utilities.from_utility_hookup(self)
   end
 end
