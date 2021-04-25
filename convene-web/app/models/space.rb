@@ -62,7 +62,10 @@ class Space < ApplicationRecord
   has_many :utility_hookups
 
   def jitsi_meet_domain
-    hookups.find { |h| h.is_a?(Hookups::JitsiHookup) }.meet_domain
+    jitsi_hookup = utility_hookups.find_by(utility_slug: :jitsi)
+    return if jitsi_hookup.blank?
+
+    Hookups.from_utility_hookup(jitsi_hookup).meet_domain
   end
 
   def hookups
