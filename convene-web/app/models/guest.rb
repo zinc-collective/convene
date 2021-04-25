@@ -13,4 +13,8 @@ class Guest
   def authenticated?
     false
   end
+
+  def spaces
+    []
+  end
 end
