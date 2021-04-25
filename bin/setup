@@ -14,9 +14,16 @@ function install_package {
 }
 
 function setup_package {
-  output=$(command -v $1)
-  if [ -z $output ]; then
-    install_package $1
+  command_output=$(command -v $1)
+  brew_output=$(brew ls --versions $1)
+  if [ -z $command_output ]; then
+    echo "$1 command not detected, checking brew"
+    if [ -n $brew_output ]; then
+      echo "$1 not found, installing through Homebrew"
+      install_package $1
+    else
+      echo "$1 installed, continuing..."
+    fi
   else
     echo "$1 installed, continuing..."
   fi
