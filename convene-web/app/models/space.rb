@@ -54,7 +54,7 @@ class Space < ApplicationRecord
     access_level&.to_sym == :locked
   end
 
-  # @see {Hookups}
+  # @see {Utilities}
   # @see {UtilityHookup}
   # @returns {ActiveRecord::Relation<UtilityHookups>}
   has_many :utility_hookups
@@ -63,12 +63,12 @@ class Space < ApplicationRecord
     jitsi_hookup = utility_hookups.find_by(utility_slug: :jitsi)
     return if jitsi_hookup.blank?
 
-    Hookups.from_utility_hookup(jitsi_hookup).meet_domain
+    Utilities.from_utility_hookup(jitsi_hookup).meet_domain
   end
 
   def hookups
     utility_hookups.lazy.map do |utility_hookup|
-      Hookups.from_utility_hookup(utility_hookup)
+      Utilities.from_utility_hookup(utility_hookup)
     end
   end
 end

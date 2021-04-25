@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Hookups
+module Utilities
   # Provides Plaid functionality to a {Space}
   # @see https://plaid.com
-  class PlaidHookup < Hookup
+  class Plaid < Utility
   end
 end

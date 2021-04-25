@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Hookups
+module Utilities
   # Inherit from this for a particular hookups configuration requirements.
   class Configuration
     # @return [Hash]
