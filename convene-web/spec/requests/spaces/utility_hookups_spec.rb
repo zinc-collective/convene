@@ -42,7 +42,7 @@ RSpec.describe '/spaces/:space_id/utility_hookups' do
       it 'Updates the Utility Hookup' do
         expect { perform_request }.to(change { utility_hookup.reload.attributes })
 
-        expect(response).to redirect_to space_path(space)
+        expect(response).to redirect_to edit_space_path(space)
         expect(utility_hookup.utility_slug).to eql('jitsi')
         expect(utility_hookup.hookup.configuration.data).to eql(utility_hookup_attributes[:configuration])
       end
@@ -76,7 +76,7 @@ RSpec.describe '/spaces/:space_id/utility_hookups' do
       it 'Creates a Utility Hookup on the given space' do
         expect { perform_request }.to(change { space.utility_hookups.count }.by(1))
 
-        expect(response).to redirect_to space_path(space)
+        expect(response).to redirect_to edit_space_path(space)
         expect(space.utility_hookups.last.utility_slug).to eql('jitsi')
         expect(space.utility_hookups.last.hookup.configuration.data).to eql(utility_hookup_attributes[:configuration])
       end

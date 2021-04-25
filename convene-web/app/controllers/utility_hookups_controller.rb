@@ -1,12 +1,12 @@
 class UtilityHookupsController < ApplicationController
   def create
     utility_hookup.save
-    redirect_to space
+    redirect_to edit_space_path(space)
   end
 
   def update
     utility_hookup.update(utility_hookup_params)
-    redirect_to space
+    redirect_to edit_space_path(space)
   end
 
   helper_method def utility_hookup
