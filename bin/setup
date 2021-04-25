@@ -14,8 +14,8 @@ function install_package {
 }
 
 function setup_package {
-  output=$(command -v $1)
-  if [ -z $output ]; then
+  output=$(brew ls --versions $1)
+  if [ -n $output ]; then
     install_package $1
   else
     echo "$1 installed, continuing..."
