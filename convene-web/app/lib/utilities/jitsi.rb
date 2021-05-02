@@ -7,6 +7,14 @@ module Utilities
     def meet_domain
       configuration.get(:meet_domain)
     end
+
+    def meet_domain=value
+      configuration.set(:meet_domain, value)
+    end
+
+    def attribute_names
+      super + [:meet_domain]
+    end
   end
 
   class JitsiPolicy < Utility::Policy

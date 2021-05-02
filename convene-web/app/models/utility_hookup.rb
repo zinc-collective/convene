@@ -26,7 +26,11 @@ class UtilityHookup < ApplicationRecord
   attribute :configuration, :json, default: {}
 
   # @return [Utilities::Utility]
-  def hookup
-    @hookup ||= Utilities.from_utility_hookup(self)
+  def utility
+    @utility ||= Utilities.from_utility_hookup(self)
+  end
+
+  def utility_attributes=(attributes)
+    utility.attributes = attributes
   end
 end
