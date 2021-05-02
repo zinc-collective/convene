@@ -16,8 +16,4 @@ class Person < ApplicationRecord
   def member_of?(space)
     spaces.include?(space)
   end
-
-  def authenticated?
-    true
-  end
 end

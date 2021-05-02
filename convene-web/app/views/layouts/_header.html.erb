@@ -20,8 +20,6 @@
 
 <%- flash.each do |kind, message| %>
   <div class="flash-message --<%= kind %>">
-    <p>
-      <%= message %>
-    </p>
+    <p><%= message %></p>
   </div>
-  <%- end %>
+<%- end %>

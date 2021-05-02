@@ -1,12 +1,26 @@
 @layer components {
-  body > header {
-    @apply flex justify-between px-2 py-2 bg-primary-900 text-white place-items-end;
-
+  .header {
+    @apply flex items-center justify-between px-2 py-2 bg-primary-900 text-white;
+    .branding {
+      .tagline {
+        @apply hidden;
+        @screen sm {
+          @apply inline;
+        }
+      }
+    }
+    .space-menu {
+      @apply flex-grow text-right px-4;
+    }
 
     .profile-menu {
-      @apply flex flex-row relative;
-      :first-child { @apply pr-0; }
-      > * { @apply px-2 }
+      @apply flex flex-row items-center relative;
+      figcaption {
+        @apply font-hairline text-center text-xs;
+      }
+      nav {
+        @apply absolute bg-primary-600 px-4 py-1 shadow;
+      }
     }
   }
 

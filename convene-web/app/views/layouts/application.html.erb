@@ -17,15 +17,10 @@
     <%= render 'layouts/header' %>
 
     <main>
+      <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; " %>
       <%= yield %>
+      <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; " %>
     </main>
 
-
-    <footer>
-      <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; ", semantic: true, display_single_fragment: true %>
-      <div class="branding">
-        <h3>Convene<span class="tagline">: Space to Work, Play, or Simply Be</span></h3>
-      </div>
-    </footer>
   </body>
 </html>
