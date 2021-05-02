@@ -69,7 +69,7 @@ RSpec.describe '/spaces/:space_id/utility_hookups' do
 
       expect(response).to redirect_to edit_space_path(space)
       expect(utility_hookup.utility_slug).to eq(utility_hookup_attributes[:utility_slug])
-      expect(utility_hookup.utility.configuration.data).to eq(utility_hookup_attributes[:utility_attributes])
+      expect(utility_hookup.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
     end
   end
 
@@ -87,7 +87,7 @@ RSpec.describe '/spaces/:space_id/utility_hookups' do
 
       expect(response).to redirect_to edit_space_path(space)
       expect(space.utility_hookups.last.utility_slug).to eql('jitsi')
-      expect(space.utility_hookups.last.utility.configuration.data).to eq(utility_hookup_attributes[:utility_attributes])
+      expect(space.utility_hookups.last.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
     end
   end
 end

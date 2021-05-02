@@ -5,11 +5,11 @@ module Utilities
   # @see https://jitsi.org
   class Jitsi < Utility
     def meet_domain
-      configuration.get(:meet_domain)
+      configuration['meet_domain']
     end
 
-    def meet_domain=value
-      configuration.set(:meet_domain, value)
+    def meet_domain=(value)
+      configuration['meet_domain'] = value
     end
 
     def attribute_names

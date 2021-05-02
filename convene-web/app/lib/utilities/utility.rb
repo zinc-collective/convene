@@ -12,12 +12,7 @@ module Utilities
     attr_accessor :utility_hookup
 
     # @return [Space]
-    delegate :space, to: :utility_hookup
-
-    # @return [Utilities::Configuration]
-    def configuration
-      @configuration ||= Configuration.new(data: utility_hookup&.configuration)
-    end
+    delegate :space, :configuration, to: :utility_hookup
 
     def form_template
       "#{self.class.name.demodulize.underscore}/form"
