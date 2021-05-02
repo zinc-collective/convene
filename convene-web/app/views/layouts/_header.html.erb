@@ -1,37 +1,27 @@
-<header class="header">
-  <div class="branding">
-    <h3>Convene<span class="tagline">: Space to Work, Play, or Simply Be</span></h3>
-  </div>
-
-  <div class="space-menu">
-    <h1><%= current_space&.name %></h1>
-  </div>
+<header>
+  <%- if current_space.present? %>
+    <div>
+      <%= breadcrumbs container_tag: 'nav' , fragment_class: 'crumb' , separator: " &rsaquo; " , semantic: true, display_single_fragment: true %>
+    </div>
+  <%- end %>
 
 
-    <%- if Feature.enabled?(:identification) %>
-      <div class="profile-menu" data-controller="menu">
-        <div>
-          <figure class="avatar">
-            <%= image_tag current_person.avatar_url, size: 30 %>
-            <figcaption><%= current_person.name %></figcaption>
-          </figure>
 
-          <nav class="--hidden" data-target="menu.items">
-            <%- if current_person.is_a? Person %>
-              <%= link_to "Sign out", people.sign_out_path, class: "profile-menu-dropdown-item sign-out"  %>
-            <%- else %>
-              <%= link_to "Sign in",  people.sign_in_path,  class: "profile-menu-dropdown-item" %>
-            <%- end %>
-          </nav>
-        </div>
-
-        <%= button_tag "", type: "button", class: "navigation-toggle", "data-action": "click->menu#toggle click@window->menu#hide",  "data-target": "menu.button", "aria-labelledby": "profile-menu-dropdown-button" %>
-      </div>
-    <%- end %>
+  <%- if Feature.enabled?(:identification) %>
+    <nav aria-label="Menu" class="profile-menu">
+      <%- if current_person.authenticated? %>
+        <%= link_to "Sign out" , people.sign_out_path %>
+      <%- else %>
+        <%= link_to "Sign in" , people.sign_in_path %>
+      <%- end %>
+    </nav>
+  <%- end %>
 </header>
 
 <%- flash.each do |kind, message| %>
   <div class="flash-message --<%= kind %>">
-    <p><%= message %></p>
+    <p>
+      <%= message %>
+    </p>
   </div>
 <%- end %>
