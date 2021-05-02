@@ -1,22 +1,12 @@
-/**
- * Layout Components
- */
-@import "./components/header";
-@import "./components/footer";
-
-/**
- * Generic Components
- */
+@import "./components/breadcrumbs";
 @import "./components/button";
 @import "./components/form";
-
+@import "./components/guide_summary";
+@import "./components/header";
 @import "./components/icons";
 
-/**
- * App Specific Components
- */
 @import "./components/meeting_room";
-@import "./components/guide_summary";
+
 @import "./components/room_card";
 
 @import "./components/spaces";
