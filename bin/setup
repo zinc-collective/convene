@@ -29,9 +29,13 @@ function setup_package {
   fi
 }
 
+## SYSTEM LEVEL DEPENDENCIES ##
 setup_package "overmind"
 setup_package "yarn"
 setup_package "shared-mime-info"
+# Firefox web browser is used for interface testing.
+brew install --cask firefox
+yarn global add maildev
 
 if test -f ".env"; then
   echo "Found .env, leaving it in place!"
@@ -40,9 +44,9 @@ else
   cp .env.example .env
 fi
 
+## APPLICATION LEVEL DEPENDENCIES ##
 # Installs environment dependencies such as packages and
 # prepares the application by running setup scripts in
 # each module
 yarn install
-yarn global add maildev
 (cd convene-web && bin/setup)
