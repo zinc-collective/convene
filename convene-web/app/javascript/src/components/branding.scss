@@ -1,0 +1,10 @@
+@layer components {
+  .branding {
+    .tagline {
+      @apply hidden;
+      @screen sm {
+        @apply inline;
+      }
+    }
+  }
+}
