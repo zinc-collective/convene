@@ -10,9 +10,9 @@
   <%- if Feature.enabled?(:identification) %>
     <nav aria-label="Menu" class="profile-menu">
       <%- if current_person.authenticated? %>
-        <%= link_to "Sign out" , people.sign_out_path %>
+        <%= link_to "Sign out", people.sign_out_path, class: 'sign-out' %>
       <%- else %>
-        <%= link_to "Sign in" , people.sign_in_path %>
+        <%= link_to "Sign in", people.sign_in_path, class: "sign-in" %>
       <%- end %>
     </nav>
   <%- end %>
