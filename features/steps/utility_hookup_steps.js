@@ -10,7 +10,7 @@ When("a Space Owner adds a Hookup to their Space", async function () {
   this.space = new Space("System Test");
 
   const page = new SpaceEditPage(this.driver, this.space);
-  await page.visit().then((p) => p.addHookup("Jitsi Meet"));
+  await page.visit().then((p) => p.addUtilityHookup("Jitsi Meet"));
 });
 
 Then("the Space Owner can configure that Hookup for their Space", function () {

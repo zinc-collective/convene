@@ -1,6 +1,11 @@
+# frozen_string_literal: true
+
+# A Space that's accessible at both a branded domain and `/spaces/system-test/`:
+#  - http://system-test.zinc.local
+#  - http://localhost:3000/spaces/system-test/
 class SystemTestSpace
-  # Creates the system test space, but only on environments which are
-  # configured to include the system test space.
+  # Creates the system test space on environments that include it by default,
+  # such as review apps, test, and local dev environments.
   def self.prepare
     return unless Feature.enabled?(:system_test)
 
@@ -22,8 +27,12 @@ class SystemTestSpace
   end
 
   DEFAULT_SPACE_CONFIG = {
-    jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
     entrance: 'entrance-hall',
+    utility_hookups: [
+      { utility_slug: :plaid, name: 'Plaid', configuration: {} },
+      { utility_slug: :jitsi, name: 'Jitsi', configuration:
+        { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
+    ],
     access_level: :unlocked,
     rooms: [
       {

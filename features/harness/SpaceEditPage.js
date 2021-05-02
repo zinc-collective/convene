@@ -23,8 +23,8 @@ class SpaceEditPage extends Page {
    * @param {string} slug
    * @returns Promise<SpaceEditPage>
    */
-  addHookup(slug) {
-    return this.newHookupSelect()
+  addUtilityHookup(slug) {
+    return this.newUtilityHookupSelect()
       .select(name)
       .then(() => this.newHookupForm().submit())
       .then(() => this);
@@ -33,14 +33,14 @@ class SpaceEditPage extends Page {
   /**
    * @returns {Component}
    */
-  newHookupSelect() {
-    return this.newHookupForm().component('select')
+  newUtilityHookupSelect() {
+    return this.newUtilityHookupForm().component('select')
   }
 
   /**
    * @returns {Component}
    */
-  newHookupForm() {
+  newUtilityHookupForm() {
     return this.component(".new-hookup-form");
   }
 }
