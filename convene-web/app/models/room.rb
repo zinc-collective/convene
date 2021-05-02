@@ -79,7 +79,7 @@ class Room < ApplicationRecord
     return true if access_level == 'unlocked'
 
     can_enter = self.access_code == access_code
-    errors[:base] << 'Invalid access code' if access_code
+    errors.add(:base, 'Invalid access code') if access_code
     can_enter
   end
 end
