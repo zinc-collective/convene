@@ -88,7 +88,7 @@ Finally, with the server still running (perhaps in a different terminal), run
 
 [PostgreSQL 12]: https://www.postgresql.org/download/
 [Docker]: https://www.docker.com
-[docker-compose.yml]: ../docker-compose.yml
+[docker-compose.yml]: ./docker-compose.yml
 [.env.example]: ./.env.example
 [Yarn]: https://yarnpkg.com/getting-started/install
 
