@@ -3,8 +3,7 @@
   - [1.2. Design](#12-design)
 - [2. Machine Setup.](#2-machine-setup)
   - [2.1. Developer Setup and Documentation.](#21-developer-setup-and-documentation)
-  - [2.2. Testing Setup and Documentation.](#22-testing-setup-and-documentation)
-  - [2.3. Infrastructure Setup and Documentation.](#23-infrastructure-setup-and-documentation)
+  - [2.2. Infrastructure Setup and Documentation.](#22-infrastructure-setup-and-documentation)
 
 ## 1. Getting Oriented.
 
@@ -71,15 +70,7 @@ Machine"] for more information.
 [convene::web/readme.md "configuring your development machine"]:
   ./convene-web/README.md#configuring-your-development-machine
 
-### 2.2. Testing Setup and Documentation.
-
-We use Firefox web browser for interface testing.
-
-Make sure you have it installed and you can launch it from your terminal.
-
-If you use homebrew, install Firefox via: `brew install --cask firefox`
-
-### 2.3. Infrastructure Setup and Documentation.
+### 2.2. Infrastructure Setup and Documentation.
 
 Infrastructure engineers may want to look at the
 [`infrastructure` module's `README`](./infrastructure/README.md), which includes
