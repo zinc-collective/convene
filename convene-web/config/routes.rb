@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :spaces, only: %I[show edit update] do
-    resources :utility_hookups, only: %I[create update destroy]
+    resources :utility_hookups, only: %I[create edit update destroy index]
 
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]

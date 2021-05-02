@@ -6,7 +6,8 @@ module Utilities
   # @see features/utilities.feature
   class Utility
     include ActiveModel::Model
-
+    include ActiveModel::Attributes
+    include ActiveModel::AttributeAssignment
     # @return [UtilityHookup]
     attr_accessor :utility_hookup
 
@@ -16,6 +17,10 @@ module Utilities
     # @return [Utilities::Configuration]
     def configuration
       @configuration ||= Configuration.new(data: utility_hookup&.configuration)
+    end
+
+    def form_template
+      "#{self.class.name.demodulize.underscore}/form"
     end
 
     # Standard permissions for how Utilities can be managed.

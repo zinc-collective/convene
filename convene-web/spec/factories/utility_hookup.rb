@@ -4,7 +4,6 @@ FactoryBot.define do
     utility_slug { 'null' }
     trait :jitsi do
       utility_slug { 'jitsi' }
-      configuration { { 'meet_domain' => 'http://meet.example.com' } }
     end
   end
 end

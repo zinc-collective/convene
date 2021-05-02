@@ -1,0 +1,9 @@
+<% breadcrumb :edit_space, space %>
+<fieldset>
+  <h3>Utility Hookups</h3>
+  <%- space.utility_hookups.each do |utility_hookup| %>
+    <%- if policy(utility_hookup).edit? %>
+    <%= render partial: "utility_hookups/form", locals: { utility_hookup: utility_hookup } %>
+    <%- end %>
+  <%- end %>
+</fieldset>
