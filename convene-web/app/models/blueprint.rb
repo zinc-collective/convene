@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Assembles Spaces idempotently
 class Blueprint
   attr_accessor :attributes
@@ -9,16 +7,9 @@ class Blueprint
   end
 
   def find_or_create!
-    space.update!(space_attributes.except(:name, :rooms, :members, :entrance, :utility_hookups))
+    space = client.spaces.find_or_initialize_by(name: space_attributes[:name])
+    space.update!(space_attributes.except(:name, :rooms, :members, :entrance))
 
-    set_rooms
-    set_utility_hookups
-    set_members
-    set_entrance
-    space
-  end
-
-  private def set_rooms
     space_attributes.fetch(:rooms, []).each do |room_attributes|
       room = space.rooms.find_or_initialize_by(name: room_attributes[:name])
       room.update!(room_attributes.except(:name, :furniture_placements))
@@ -29,29 +20,18 @@ class Blueprint
         furniture_placement.update!(settings: settings, furniture_kind: furniture)
       end
     end
-  end
 
-  private def set_utility_hookups
-    space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
-      utility_hookup = space.utility_hookups
-                          .find_or_initialize_by(name: utility_hookup_attributes[:name])
-
-      utility_hookup.update!(utility_hookup_attributes.except(:name))
-    end
-  end
-
-  private def set_entrance
     space.update(entrance: space.rooms.find_by!(slug: space_attributes[:entrance])) if space_attributes[:entrance]
-  end
 
-  private def set_members
     space_attributes.fetch(:members, []).each do |person|
       space.members << person
     end
+
+    space
   end
 
   private def space
-    @_space ||= client.spaces.find_or_create_by!(name: space_attributes[:name])
+    @_space ||= client.spaces.find_or_create_by!(space_attributes[:name])
   end
 
   private def client
@@ -64,40 +44,5 @@ class Blueprint
 
   private def space_attributes
     client_attributes[:space]
-  end
-
-  # @todo migrate this to a configuration file!
-  def self.prepare_clients!
-    Blueprint.new(
-      client: {
-        name: 'Zinc',
-        space: {
-          utility_hookups: [
-            { utility_slug: :plaid, name: 'Plaid', configuration: {} },
-            {
-              utility_slug: :jitsi, name: 'Jitsi', configuration:
-              { meet_domain: 'convene-videobridge-zinc.zinc.coop' }
-            }
-          ],
-          name: 'Zinc', branded_domain: 'meet.zinc.local',
-          access_level: :unlocked,
-          rooms: [{
-            name: 'Ada',
-            access_level: :unlocked,
-            publicity_level: :listed,
-            furniture_placements: {
-              videobridge_by_jitsi: {}
-            }
-          }, {
-            name: 'Talk to Zee',
-            access_level: :unlocked,
-            publicity_level: :unlisted,
-            furniture_placements: {
-              videobridge_by_jitsi: {}
-            }
-          }]
-        }
-      }
-    ).find_or_create!
   end
 end

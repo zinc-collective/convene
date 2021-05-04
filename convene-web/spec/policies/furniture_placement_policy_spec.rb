@@ -6,7 +6,7 @@ RSpec.describe FurniturePlacementPolicy do
   let(:furniture_placement) { create(:furniture_placement) }
   let(:membership) { create(:space_membership, space: furniture_placement.space) }
   let(:member) { membership.member }
-  let(:non_member) { create(:person) }
+  let(:non_member) { create (:person) }
 
   permissions :show? do
     it { is_expected.to permit(nil, furniture_placement )}

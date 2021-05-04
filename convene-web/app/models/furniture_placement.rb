@@ -1,9 +1,4 @@
-# {Furniture} is placed in a {Room} so that it may be used by the folks who are
-# in the {Room}.
-#
-# {Furniture} is configured using the {#settings} attribute, which is structured
-# as JSON, so that {Furniture} can be tweaked and configured as appropriate for
-# it's particular use case.
+# {Furniture} placed in a {Room} allows it to be used
 class FurniturePlacement < ApplicationRecord
   belongs_to :room
   delegate :space, to: :room

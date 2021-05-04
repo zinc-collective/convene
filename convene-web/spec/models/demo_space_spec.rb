@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe DemoSpace, type: :model do
   describe ".prepare" do
     context "When the environment is set to enable demo" do
-      before { allow(Feature).to receive(:enabled?).with(:demo).and_return(true) }
+      before { allow(ENV).to receive(:[]).with('DEMO_ENABLED').and_return('true') }
 
       it "creates a space suitable for demoing Convene" do
         demo_space = DemoSpace.prepare
@@ -30,7 +30,7 @@ RSpec.describe DemoSpace, type: :model do
     end
 
     context "When the environment is set to disable demo" do
-      before { allow(Feature).to receive(:enabled?).with(:demo).and_return(false) }
+      before { allow(ENV).to receive(:[]).with('DEMO_ENABLED').and_return(nil) }
       it "does not create demo space" do
         expect do
           DemoSpace.prepare
