@@ -1,115 +1,93 @@
 # Convene <!-- omit in toc -->
 
-Convene is a video conferencing software that provides secure, affordable, and private digital meeting spaces.
-Spaces where anyone can (play || work || grow || be). 🎲 👩‍💻 🌱 🛋️
+Convene secure, affordable, always-available digital Spaces where anyone can
+(play || work || grow || be). 🎲 👩‍💻 🌱 🛋️
 
-- [Purpose](#purpose)
+- [Overview](#overview)
   - [Objectives](#objectives)
-  - [Budget](#budget)
 - [Using Convene](#using-convene)
-  - [Purchasing Convene](#purchasing-convene)
+  - [Purchasing a Convene Operator License.](#purchasing-a-convene-operator-license)
   - [Help and Support](#help-and-support)
-- [Developing Convene](CONTRIBUTING.md)
-  - [Architecture](CONTRIBUTING.md#11-architecture)
-  - [Developer setup and documentation](CONTRIBUTING.md#2-machine-setup)
-- [Design](CONTRIBUTING.md#12-design)
+- [Contributing to Convene](#contributing-to-convene)
 - [About The Zinc Collective](#about-the-zinc-collective)
 
-## Purpose
+## Overview
 
-Convene is the _Means of Connection_. It's space to co-conspire, to relax, or
-to push your limits. The premise behind Convene is simple:
+Convene serves as the _Means of Connection_. Create a Space to co-conspire,
+relax, learn, play, work, swap recipes, read books, or really anything!
 
-1. Define a _Space_, with _Rooms_.
-2. Gather _People_ in those _Rooms_.
-3. _Do things_ together.
+Convene provides the underlying infrastructure for a _Neighborhood of Spaces_.
+_Operators_ help _Clients_ design their _Spaces_ and keep the Neighborhood up
+and running. _Maintainers_ and _Contributors_ enhance Convene with:
 
-We provide the infrastructure.
+- _Furniture_, fun toys and powerful tools
+- _Utilities_, integrating external services like Stripe, Calendly, Jitsi, and
+  more.
 
-You provide the purpose.
+The Internet is for People, so why not put People in charge of their digital
+spaces?
 
 ### Objectives
 
-Convene is driving towards:
+To put it succinctly, Convene provides:
 
-1. Face-to-face connection
-2. For small groups
+1. Digital infrastructure, toys, and tooling
+2. For small groups and individuals
 3. Co-creating a better future.
 
-We're still figuring out how to make that happen, but that's our guiding light.
+We have two milestones in flight at any one time:
 
-### Budget
-
-At present, Convene allocates 33% of revenue towards infrastructure, 33%
-towards operations, and 33% towards paying contributors and maintainers through
-[Patronage Payouts].
+- Product Milestone:
+  [1.0 Andromeda](https://github.com/zinc-collective/convene/milestone/1)
+- Engineering Milestone:
+  [Cleanup!](https://github.com/zinc-collective/convene/milestone/3)
 
 ## Using Convene
 
-Convene is [pre-alpha software], so while we intend to provide interfaces that
-do not require a high degree of technical skill to operate, our current phase
-expects operators to be comfortable with infrastructure management techniques
-and tooling such as [Ansible], [Hashicorp's product line][hashicorp-products],
-or similar.
+[Zinc] maintains a Convene Neighborhood at https://convene.zinc.coop. For people
+who want to run their own Neighborhood of Spaces, consider purchasing a Convene
+Operator License.
 
-[ansible]: https://www.ansible.com/
-[hashicorp-products]: https://learn.hashicorp.com/
-[pre-alpha software]:
-  https://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-alpha
+### Purchasing a Convene Operator License.
 
-### Purchasing Convene
+Individuals and non-commercial organizations may run their own Convene
+deployment however they see fit without requiring payment.
 
-Convene is licensed under the [Prosperity Public License]. This provides
-generous usage rights to individuals and non-commercial organizations to use
-Convene however they see fit.
+However, if the person or organization engages in commerce, defined as taking
+currency in exchange for goods or services, then the organization must purchase
+a license to use Convene.
 
-If your organization engages in commerce, defined as taking currency in exchange
-for goods or services, then the organization must purchase a license to use
-Convene.
-
-Pricing is determined on a case-by-case basis, with an emphasis on mutually
-beneficial socioeconomic transactions.
+Pricing is determined on a case-by-case basis. Please reach out to
+[`hello@zinc.coop`](mailto:hello@zinc.coop) for licensing information.
 
 ### Help and Support
 
 Organizations and individuals who are comfortable relying on free Community
-Support are encouraged to [create issues in our public issue
-tracker][issue-tracker]. A maintainer will respond as they are available.
+Support are encouraged to [start a discussion][discussions]. Maintainers
+respond as they are available.
 
 Paid support is available for \$135 USD per hour<sup>[1][footnote-1]</sup>.
 
 [prosperity public license]: https://prosperitylicense.com/
 [issue-tracker]: https://github.com/zinc-collective/convene/issues
+[discussions]: https://github.com/zinc-collective/convene/discussions
 
 ## Contributing to Convene
 
-We're always excited for new contributors! Read more in our [guide to contributing, located in CONTRIBUTING.md](./CONTRIBUTING.md)
+We're always excited for new contributors! Read more in our
+[guide to contributing, located in CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## About The Zinc Collective
 
-Convene is _Community Owned_ and one of many [exciting projects](https://www.zinc.coop/product-and-services/)
-maintained by a dedicated community of volunteer Contributors and Maintainers.
-We are part of The Zinc Collective, a digital product and services cooperative.
+Convene is maintained by a dedicated community of volunteer Contributors and
+Maintainers known as the [Zinc Collective], a digital product and services
+cooperative.
 
 We have a [Pledge and Code of Conduct](https://www.zinc.coop/code-of-conduct/).
-And anyone can become a [contributor](https://www.zinc.coop/contributing/) and/or [maintainer](https://www.zinc.coop/maintaining/).
+And anyone can become a [contributor](https://www.zinc.coop/contributing/)
+and/or [maintainer](https://www.zinc.coop/maintaining/).
 
-### How we Organize  <!-- omit in toc -->
-
-* _Passport Holders_ vote on _Resident Representatives_.
-* _Maintainers and Contributors_ vote on _Worker
-Representatives_.
-* Representatives sit in the [Circle of Stewards], and guide the [Budget] and set [Objectives].
-
-[Circle of Stewards]: #the-circle-of-stewards
-[Budget]: #budget
-[Objectives]: #objectives
-
-### The Circle of Stewards  <!-- omit in toc -->
-
-The Circle of Stewards is balanced 1 to 1 between Community Representatives and
-Worker Representatives. This ensures that consensus must be reached between the
-people using and the people building Convene.
+[zinc collective]: https://www.zinc.coop/
 
 ## Footnotes <!-- omit in toc -->
 
