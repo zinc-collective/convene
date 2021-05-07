@@ -7,24 +7,20 @@ class SystemTestSpace
     Blueprint.new(client: { name: 'System Test',
                             space: DEFAULT_SPACE_CONFIG.merge(
                               name: 'System Test Branded Domain',
-                              branded_domain: 'system-test.zinc.local',
-                              members: members
+                              branded_domain: 'system-test.zinc.local'
                             ) }).find_or_create!
 
     Blueprint.new(client: { name: 'System Test',
                             space: DEFAULT_SPACE_CONFIG
-                              .merge(name: 'System Test', members: members) })
+                              .merge(name: 'System Test') })
              .find_or_create!
-  end
-
-  def self.members
-    [Person.find_or_create_by!(email: 'space-member@example.com')]
   end
 
   DEFAULT_SPACE_CONFIG = {
     jitsi_meet_domain: 'convene-videobridge-zinc.zinc.coop',
     entrance: 'entrance-hall',
     access_level: :unlocked,
+    members: [{ email: 'space-member@example.com' }],
     rooms: [
       {
         name: 'Listed Room 1',
