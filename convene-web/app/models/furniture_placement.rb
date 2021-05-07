@@ -7,7 +7,7 @@ class FurniturePlacement < ApplicationRecord
 
   validates :furniture_kind, uniqueness: { scope: :room_id }
 
-  attribute :settings, :json
+  attribute :settings, :json, default: {}
 
   def furniture_attributes=(attributes)
     furniture.attributes = attributes
