@@ -1,58 +1,39 @@
 Feature: Utilities
-  In order to leverage other services I already pay for
-  I want to hook them up to my Space
+# Utilities connect a Space to the broader Internet, and allow Furniture
+# within the Space to leverage other Services or Websites. A Space connects
+# to Utilities via a Utility Hookup; which can be used by Furniture or
+# general Convene features.
 
-  # Utilities are how we connect a Space to the broader Internet. A Space
-  # connects to Utilities via a Utility Hookup; which can be used by Furniture
-  # or general Convene features.
-  #
-  # Examples:
-  #  - A Stripe Utility, so Furniture that focuses on accepting payments or
-  #    managing billing or responding to payment events can take those actions
-  #  - A Jitsi Meet Utility, for Furniture that leverages JitsiMeet's APIs for
-  #    real-time video
-  #  - A Quickbooks Utility, so Furniture that wants to interact with the
-  #    Space Owners financials or send invoices can do that
-  #  - An AirTable Utility, for Furniture that wants to store data in AirTable
+# Examples:
+#  - A Stripe Utility, so Furniture that focuses on accepting payments or
+#    managing billing or responding to payment events can take those actions
+#  - A Jitsi Meet Utility, for Furniture that leverages JitsiMeet's APIs for
+#    real-time video
+#  - A Quickbooks Utility, so Furniture that wants to interact with the
+#    Space Owners financials or send invoices can do that
+#  - An AirTable Utility, for Furniture that wants to store data in AirTable
 
 
-  # While Utility Hookups can be added to a Space without constraint, they may
-  # have different requirements before being usable; such as requiring a
-  # payment, requiring the Space Owner to accept terms of service,
-  # authenticating with an upstream service provider, having API keys or other
-  # data entered, etc.
-  #
-  # The particular requirements for each Utility will be defined in that
-  # Utilities feature file.
-  @unstarted @andromeda
-  Scenario: Adding a Fully Configured Utility Hookup to a Space
-    When a Space Owner adds a fully configured Utility Hookup to their Space
-    Then the Space Owner can further configure that Utility Hookup
-    And that Utility Hookup can be used by Furniture in the Space
+# While Utility Hookups can be added to a Space without constraint, they may
+# have different requirements before being usable; such as requiring a
+# payment, requiring the Space Owner to accept terms of service,
+# authenticating with an upstream service provider, having API keys or other
+# data entered, etc.
+
+# The particular requirements for each Utility will be defined in that
+# Utilities feature file.
 
   @unstarted @andromeda
-  Scenario: Adding an Unconfigured Utility Hookup to a Space
+  Scenario: Adding a Utility Hookup to a Space
     When a Space Owner adds an unconfigured Utility Hookup to their Space
     Then the Space Owner can further configure that Utility Hookup
     And that Utility Hookup can not be used by Furniture in the Space
 
   @unstarted @andromeda
   Scenario: Configuring a Utility Hookup
-    Given an unconfigured Utility Hookup
+    Given an unconfigured Utility Hookup for a Space
     When the Space Owner configures that Utility Hookup
     Then that Utility Hookup can be used by Furniture in the Space
-
-  # I'm hopeful we can figure out a tight way to use this for checking
-  # permissions end-to-end.
-  @unstarted @andromeda
-  Scenario: Utility Hookup Permissions
-    Then "UtilityHookup" resources have the following permissions:
-      | group        | permissions                                    |
-      | Operator     | new, create, show, list, edit, update, destroy |
-      | Space Owner  | new, create, show, list, edit, update, destroy |
-      | Space Member | show, list                                     |
-      | Neighbor     | show, list                                     |
-      | Guest        | show, list                                     |
 
   # If a Utility Hookup is not used by any Furniture, it can be safely removed
   # from a Space.
@@ -68,9 +49,22 @@ Feature: Utilities
   #
   # See "Scenario: Removing an in-use Utlity Hookup" for future plans.
   @unstarted @andromeda
-  Scenario: Cannot remove an in-use Utility Hookup
+  Scenario: In-use Utility Hookups may not be removed
     Given a Utility Hookup with Furniture using it
     Then a Space Owner may not remove that Utility Hookup
+
+  # I'm hopeful we can figure out a tight way to use this for checking
+  # permissions end-to-end.
+  @unstarted @andromeda
+  Scenario: Only Operators and Space Owners may modify Utility Hookups
+    Then "UtilityHookup" resources have the following permissions:
+      | group        | permissions                                    |
+      | Operator     | new, create, show, list, edit, update, destroy |
+      | Space Owner  | new, create, show, list, edit, update, destroy |
+      | Space Member | show, list                                     |
+      | Neighbor     | show, list                                     |
+      | Guest        | show, list                                     |
+
 
   @unstarted  @milestone-b
   Scenario: Removing an in-use Utility Hookup
