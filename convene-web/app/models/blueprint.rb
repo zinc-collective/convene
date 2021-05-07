@@ -15,16 +15,10 @@ class Blueprint
   end
 
   def find_or_create!
-<<<<<<< HEAD
-    space.update!(space_attributes.except(:name, :rooms, :members, :entrance))
-
-    set_rooms
-=======
     space.update!(space_attributes.except(:name, :rooms, :members, :entrance, :utility_hookups))
 
     set_rooms
     set_utility_hookups
->>>>>>> Add request spec for creating a utility hookup
     set_members
     set_space_hookups
     set_entrance
@@ -41,7 +35,6 @@ class Blueprint
     end
   end
 
-<<<<<<< HEAD
   def add_furniture(room, room_attributes)
     furniture_placements = room_attributes.fetch(:furniture_placements, {})
     furniture_placements.each.with_index do |(furniture, settings), slot|
@@ -53,18 +46,10 @@ class Blueprint
     end
   end
 
-  def set_space_hookups
-    space_attributes.fetch(:space_hookups, []).each do |space_hookup_attributes|
-      space_hookup = space.space_hookups
-                          .find_or_initialize_by(name: space_hookup_attributes[:name])
-=======
-  private def set_utility_hookups
+  def set_utility_hookups
     space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
       utility_hookup = space.utility_hookups
                           .find_or_initialize_by(name: utility_hookup_attributes[:name])
->>>>>>> Add request spec for creating a utility hookup
-
-      utility_hookup.update!(utility_hookup_attributes.except(:name))
     end
   end
 
@@ -101,7 +86,7 @@ class Blueprint
     client_attributes[:space]
   end
 
-<<<<<<< HEAD
+
   # @todo migrate this to a private configuration file!
   CLIENTS = [{
     client: {
@@ -111,31 +96,15 @@ class Blueprint
         name: 'Zinc', branded_domain: 'meet.zinc.coop',
         access_level: :unlocked,
         entrance: 'lobby',
-        space_hookups: [
-          { hookup_slug: :plaid, name: 'Plaid', configuration: {} },
+        utility_hookups: [
+          { utility_slug: :plaid, name: 'Plaid', configuration: {} },
           {
-            hookup_slug: :jitsi, name: 'Jitsi', configuration:
+            utility_slug: :jitsi, name: 'Jitsi', configuration:
             { meet_domain: 'convene-videobridge-zinc.zinc.coop' }
           }
         ],
         rooms: [{
           name: 'Lobby',
-=======
-  # @todo migrate this to a configuration file!
-  def self.prepare_clients!
-    Blueprint.new(
-      client: {
-        name: 'Zinc',
-        space: {
-          utility_hookups: [
-            { utility_slug: :plaid, name: 'Plaid', configuration: {} },
-            {
-              utility_slug: :jitsi, name: 'Jitsi', configuration:
-              { meet_domain: 'convene-videobridge-zinc.zinc.coop' }
-            }
-          ],
-          name: 'Zinc', branded_domain: 'meet.zinc.local',
->>>>>>> Add request spec for creating a utility hookup
           access_level: :unlocked,
           publicity_level: :unlisted,
           furniture_placements: {
