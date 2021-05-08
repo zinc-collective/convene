@@ -48,12 +48,13 @@ class Blueprint
   def set_utility_hookups
     space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
       utility_hookup = space.utility_hookups
-                          .find_or_initialize_by(name: utility_hookup_attributes[:name])
+                            .find_or_initialize_by(name: utility_hookup_attributes[:name])
+      utility_hookup.update!(utility_hookup_attributes)
     end
   end
 
   def set_entrance
-    space.update(entrance: space.rooms.find_by!(slug: space_attributes[:entrance])) if space_attributes[:entrance]
+    space.update!(entrance: space.rooms.find_by!(slug: space_attributes[:entrance])) if space_attributes[:entrance]
   end
 
   def set_members
@@ -84,7 +85,6 @@ class Blueprint
   def space_attributes
     client_attributes[:space]
   end
-
 
   # @todo migrate this to a private configuration file!
   CLIENTS = [{
