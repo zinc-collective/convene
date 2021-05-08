@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  passwordless_for :people
-
   root 'spaces#show'
 
   namespace :admin do
@@ -14,10 +12,10 @@ Rails.application.routes.draw do
     root to: 'spaces#index'
   end
 
+  # get "/auth/:provider/callback", "sessions#create"
+  # post "/auth/:provider/callback", "sessions#create"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :spaces, only: %I[show edit update] do
-    resources :utility_hookups, only: %I[create edit update destroy index]
-
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]
       resources :furniture_placements, only: [:update]
@@ -25,6 +23,10 @@ Rails.application.routes.draw do
         Furniture.append_routes(self)
       end
     end
+
+    resources :sessions, only: [:new, :create, :delete]
+
+    resources :utility_hookups, only: %I[create edit update destroy index]
   end
 
   resource :me, only: %i[show], controller: 'me'
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
   resources :guides, only: %i[index show]
 
   constraints BrandedDomain.new(Space) do
-    get '/:id', to: 'rooms#show'
+    resources :sessions, only: [:new, :create, :delete]
+    # get '/:id', to: 'rooms#show'
   end
 end

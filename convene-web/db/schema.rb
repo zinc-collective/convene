@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_233343) do
+ActiveRecord::Schema.define(version: 2021_05_08_230639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -42,20 +42,6 @@ ActiveRecord::Schema.define(version: 2021_04_17_233343) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "room_id"
     t.index ["room_id"], name: "index_furniture_placements_on_room_id"
-  end
-
-  create_table "passwordless_sessions", force: :cascade do |t|
-    t.string "authenticatable_type"
-    t.datetime "timeout_at", null: false
-    t.datetime "expires_at", null: false
-    t.datetime "claimed_at"
-    t.text "user_agent", null: false
-    t.string "remote_addr", null: false
-    t.string "token", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.uuid "authenticatable_id"
-    t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -20,26 +20,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  include Passwordless::ControllerHelpers
-
   helper_method :current_person
 
   private
 
   # @returns [Guest, Person] the authenticated user, or a Guest
   def current_person
-    @current_person ||= authenticate_by_session(Person) || Guest.new
-  end
-
-  # Helper for Pundit-assisted policy/permissions checks.
-  def pundit_user
-    current_person
+    @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
   end
 
   def require_person!
-    return if current_person
+    return if current_person.authenticated?
 
-    save_passwordless_redirect_location!(Person)
     redirect_to people.sign_in_path, flash: { error: 'Sign in required' }
   end
 

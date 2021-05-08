@@ -52,8 +52,6 @@ gem 'pg', '~> 1.2'
 
 # User-facing features
 #
-# Allows logging in via magic links
-gem 'passwordless', '0.10.0'
 # Provides powerful administration features
 gem 'administrate', '0.16.0'
 
