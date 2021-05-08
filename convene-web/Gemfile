@@ -81,6 +81,7 @@ group :development, :test do
   # I hear you like tests.
   gem 'factory_bot_rails'
   gem 'ffaker'
+  gem 'rails-controller-testing'
 end
 
 group :development do

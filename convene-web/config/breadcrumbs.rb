@@ -9,6 +9,15 @@ crumb :root do
   end
 end
 
+crumb :edit_space do |space|
+  link 'Configure', edit_space_path(space)
+end
+
+crumb :utility_hookups do |space|
+  link 'Utility Hookups', space_utility_hookups_path(space)
+  parent :edit_space, space
+end
+
 crumb :guides do
   link t('guides.title'), guides_path
 end
