@@ -20,7 +20,6 @@ class Blueprint
     set_rooms
     set_utility_hookups
     set_members
-    set_space_hookups
     set_entrance
     space
   end
