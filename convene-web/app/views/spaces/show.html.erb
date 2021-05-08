@@ -1,3 +1,4 @@
+<% breadcrumb :root %>
 <div class="space-container card-list">
   <% space.rooms.accessable_by(current_person).each do |room| %>
     <%= render partial: 'spaces/room_card', locals: { room: room } %>

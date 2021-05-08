@@ -52,9 +52,9 @@ class ApplicationController < ActionController::Base
       else
         BrandedDomain.new(space_repository).space_for_request(request) ||
         space_repository.friendly.find(params[:id])
-      end.tap { |space| authorize(space) }
+      end.tap { |space| authorize(space, :show?) }
   rescue ActiveRecord::RecordNotFound
-    @current_space ||= space_repository.default.tap { |space| authorize(space) }
+    @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
   end
 
   def space_repository
