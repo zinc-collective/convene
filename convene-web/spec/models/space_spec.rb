@@ -22,10 +22,4 @@ RSpec.describe Space, type: :model do
 
   it { is_expected.to have_many(:rooms) }
   it { is_expected.to belong_to(:entrance).class_name('Room').optional(true).dependent(false) }
-
-  describe "#hookups=" do
-    it "idempotently adds space hookups as configured" do
-
-    end
-  end
 end
