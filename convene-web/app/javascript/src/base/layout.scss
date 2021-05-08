@@ -1,5 +1,5 @@
 @layer base {
-  html {
+  body {
     background: rgb(200, 200, 200);
     background: linear-gradient(
       0deg,
@@ -8,10 +8,13 @@
     );
     background-repeat: no-repeat;
     background-size: cover;
-    @apply min-h-screen;
+    @apply min-h-screen flex flex-col;
   }
 
   main {
-    @apply mx-2;
+    @apply mx-2 flex-1;
+    :last-child {
+      @apply mb-2;
+    }
   }
 }

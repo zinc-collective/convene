@@ -1,4 +1,12 @@
-@import "./components/breadcrumbs";
+/**
+ * Layout Components
+ */
+@import "./components/header";
+@import "./components/footer";
+
+/**
+ * Generic Components
+ */
 @import "./components/button";
 @import "./components/form";
 @import "./components/icons";
@@ -8,6 +16,7 @@
  */
 @import "./components/branding";
 @import "./components/guide_summary";
+
 @import "./components/meeting_room";
 @import "./components/room_card";
 @import "./components/spaces";

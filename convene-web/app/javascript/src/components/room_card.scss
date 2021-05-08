@@ -16,7 +16,7 @@
       .room-door_enter, .room-door_configure {
         @apply flex justify-center text-sm leading-5 text-neutral-700 font-medium transition ease-in-out duration-150;
         a {
-          @apply flex-1 inline-flex items-center justify-center py-4;
+          @apply flex-1 inline-flex items-center justify-center py-4 no-underline;
         }
         span {
           @apply pl-4;
