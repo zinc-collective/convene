@@ -67,10 +67,4 @@ class Space < ApplicationRecord
 
     Utilities.from_utility_hookup(jitsi_hookup).meet_domain
   end
-
-  def hookups
-    utility_hookups.lazy.map do |utility_hookup|
-      Utilities.from_utility_hookup(utility_hookup)
-    end
-  end
 end
