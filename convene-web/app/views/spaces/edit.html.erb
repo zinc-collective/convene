@@ -18,8 +18,8 @@
   </header>
 
   <div>
-    <%= form_with model: @space.invitations.new do |member_form| %>
-    <%- end %>
+    <%= form_with(model: [ @space, Invitation.new ]) do |invitation_form| %>
+    <% end %>
   </div>
 </fieldset>
 
