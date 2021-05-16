@@ -1,0 +1,6 @@
+
+<%= form.fields_for(:utility) do |utility_fields| %>
+  <%= utility_fields.label :meet_domain %>
+  <%= utility_fields.text_field :meet_domain %>
+  <%= render partial: "error", locals: { model: form.object, field: :meet_domain } %>
+<%- end %>

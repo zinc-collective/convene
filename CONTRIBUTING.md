@@ -3,8 +3,7 @@
   - [1.2. Design](#12-design)
 - [2. Machine Setup.](#2-machine-setup)
   - [2.1. Developer Setup and Documentation.](#21-developer-setup-and-documentation)
-  - [2.2. Testing Setup and Documentation.](#22-testing-setup-and-documentation)
-  - [2.3. Infrastructure Setup and Documentation.](#23-infrastructure-setup-and-documentation)
+  - [2.2. Infrastructure Setup and Documentation.](#22-infrastructure-setup-and-documentation)
 
 ## 1. Getting Oriented.
 
@@ -60,26 +59,39 @@ Designers who have agreed to protect the privacy of our clients may access our
 
 ### 2.1. Developer Setup and Documentation.
 
-Much of Convene development happens in `convene-web`. The
-[`README`](./convene-web/README.md) in that directory contains more
-documentation on how to work on Convene.
+Much of Convene development happens in `convene-web`.
 
 To set up your development environment you'll need `ruby`, `node` and
-`postgresql`. See [Convene::Web/README.md "Configuring your Development
-Machine"] for more information.
+`postgresql`. 
 
-[convene::web/readme.md "configuring your development machine"]:
-  ./convene-web/README.md#configuring-your-development-machine
+First, ensure your development environment has:
 
-### 2.2. Testing Setup and Documentation.
+1. Ruby (See [.ruby-version](./.ruby-version) for version)
+1. Node (See [.nvmrc](./.nvmrc) for version)
+1. [Yarn]
+1. [PostgreSQL 12]. (Note: For people using [Docker], a [docker-compose.yml]
+   file has been included for convenience.)
 
-We use Firefox web browser for interface testing.
+Then, run `bin/setup` to install Ruby and Node dependencies and set up the
+database.
 
-Make sure you have it installed and you can launch it from your terminal.
+Once setup completes, configure your local development environment.
+1. Open `convene-web/.env` and make any changes.
+1. Open `.env` and make any changes.
 
-If you use homebrew, install Firefox via: `brew install --cask firefox`
+Once you have completed configuration; run `bin/run`. You now should be able to open
+http://localhost:3000/spaces/system-test and see Convene.
 
-### 2.3. Infrastructure Setup and Documentation.
+Finally, with the server still running (perhaps in a different terminal), run
+`bin/test` to ensure that your development environment is configured correctly.
+
+[PostgreSQL 12]: https://www.postgresql.org/download/
+[Docker]: https://www.docker.com
+[docker-compose.yml]: ./docker-compose.yml
+[.env.example]: ./.env.example
+[Yarn]: https://yarnpkg.com/getting-started/install
+
+### 2.2. Infrastructure Setup and Documentation.
 
 Infrastructure engineers may want to look at the
 [`infrastructure` module's `README`](./infrastructure/README.md), which includes

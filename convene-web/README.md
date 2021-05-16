@@ -51,31 +51,7 @@ _Last updated: April 2021_
 Original on Miro:  https://miro.com/app/board/o9J_lLrbz1g=/
 
 ## Configuring Your Development Machine
-
-First, ensure your development environment has:
-
-1. Ruby (See [.ruby-version](./.ruby-version) for version)
-1. Node (See [.nvmrc](./.nvmrc) for version)
-1. [Yarn]
-1. [PostgreSQL 12]. (Note: For people using [Docker], a [docker-compose.yml]
-   file has been included for convenience.)
-1. Copy `convene-web/.env.example` to `convene-web/.env` and make any changes: `cp convene-web/.env.example
-   convene-web/.env`.
-
-Then, run `bin/setup` to install Ruby and Node dependencies and set up the
-database.
-
-Once you have completed setup; run `bin/run`. You now should be able to open
-http://localhost:3000/spaces/system-test and see Convene.
-
-Finally, with the server still running (perhaps in a different terminal), run
-`bin/test` to ensure that your development environment is configured correctly.
-
-[PostgreSQL 12]: https://www.postgresql.org/download/
-[Docker]: https://www.docker.com
-[docker-compose.yml]: ../docker-compose.yml
-[.env.example]: ./.env.example
-[Yarn]: https://yarnpkg.com/getting-started/install
+See [Developer setup and documentation](../CONTRIBUTING.md#2-machine-setup).
 
 ### Debugger
 

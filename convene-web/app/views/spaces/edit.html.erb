@@ -1,3 +1,5 @@
+<% breadcrumb :edit_space, space %>
+
 <%= form_with model: @space do |form| %>
 <%= form.text_field :name %>
 <% end %>
@@ -8,5 +10,13 @@
 <%- end %>
 
 <%= form_with model: @space.invitations.new do |member_form| %>
-
 <% end %>
+
+<fieldset>
+  <h3>Utility Hookups</h3>
+  <%- space.utility_hookups.each do |utility_hookup| %>
+    <%- if policy(utility_hookup).edit? %>
+      <%= render partial: "utility_hookups/form", locals: { utility_hookup: utility_hookup } %>
+    <%- end %>
+  <%- end %>
+</fieldset>

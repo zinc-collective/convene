@@ -13,12 +13,11 @@ class Person < ApplicationRecord
     find_or_create_by(email: email)
   end
 
-  def avatar_url
-    # TODO: Allow person to upload their image
-    "/avatar.svg"
-  end
-
   def member_of?(space)
     spaces.include?(space)
+  end
+
+  def authenticated?
+    true
   end
 end

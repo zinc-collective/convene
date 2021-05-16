@@ -14,7 +14,7 @@ module Furniture
     end
 
     def content
-      settings['content']
+      settings.fetch('content', '')
     end
 
     def attribute_names
