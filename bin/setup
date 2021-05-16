@@ -14,17 +14,28 @@ function install_package {
 }
 
 function setup_package {
-  output=$(command -v $1)
-  if [ -z $output ]; then
-    install_package $1
+  command_output=$(command -v $1)
+  brew_output=$(brew ls --versions $1)
+  if [ -z $command_output ]; then
+    echo "$1 command not detected, checking brew"
+    if [ -n $brew_output ]; then
+      echo "$1 not found, installing through Homebrew"
+      install_package $1
+    else
+      echo "$1 installed, continuing..."
+    fi
   else
     echo "$1 installed, continuing..."
   fi
 }
 
+## SYSTEM LEVEL DEPENDENCIES ##
 setup_package "overmind"
 setup_package "yarn"
 setup_package "shared-mime-info"
+# Firefox web browser is used for interface testing.
+brew install --cask firefox
+yarn global add maildev
 
 if test -f ".env"; then
   echo "Found .env, leaving it in place!"
@@ -33,9 +44,9 @@ else
   cp .env.example .env
 fi
 
+## APPLICATION LEVEL DEPENDENCIES ##
 # Installs environment dependencies such as packages and
 # prepares the application by running setup scripts in
 # each module
 yarn install
-yarn global add maildev
 (cd convene-web && bin/setup)

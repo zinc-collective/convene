@@ -5,8 +5,12 @@
       "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
       "value": "convene-web"
     },
-    "DEMO_ENABLED": {
+    "FEATURE_DEMO": {
       "description": "Seed demo data",
+      "value": "true"
+    },
+    "FEATURE_SYSTEM_TEST": {
+      "description": "Seed Test data",
       "value": "true"
     },
     "ADMIN_USERNAME": {

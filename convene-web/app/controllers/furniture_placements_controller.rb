@@ -1,5 +1,7 @@
 class FurniturePlacementsController < ApplicationController
   def update
+    authorize(furniture_placement)
+
     furniture_placement.update(furniture_placement_params)
     flash[:notice] = "Updated #{furniture_placement.furniture.model_name.human.titleize}"
 

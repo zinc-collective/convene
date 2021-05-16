@@ -1,8 +1,8 @@
 @layer components {
-  .phone-alt-icon::before {
+  .enter-room-icon::before {
     @apply mr-2;
     font-family: "Font Awesome 5 Free"; font-weight: 900;
-    content: "\f879";
+    content: "\f52b";
   }
 
   .configure-icon::before {

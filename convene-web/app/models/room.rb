@@ -41,7 +41,7 @@ class Room < ApplicationRecord
   # A Room's Publicity Level indicates how visible the room is.
   # `listed` - The room is discoverable by anyone in the space lobby.
   # `unlisted` - The room is only visible to it's owners and people who have been in it before.
-  attribute :publicity_level
+  attribute :publicity_level, :string
   validates :publicity_level, presence: true, inclusion: { in: ['listed', 'unlisted', :listed, :unlisted] }
 
   scope :listed,   -> { where(publicity_level: :listed) }
@@ -79,7 +79,7 @@ class Room < ApplicationRecord
     return true if access_level == 'unlocked'
 
     can_enter = self.access_code == access_code
-    errors[:base] << 'Invalid access code' if access_code
+    errors.add(:base, 'Invalid access code') if access_code
     can_enter
   end
 end

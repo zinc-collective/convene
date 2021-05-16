@@ -1,6 +1,13 @@
+# frozen_string_literal: true
+
+# Default controller for new resources; ensures requests fulfill authentication
+# and authorization requirements, as well as exposes common helper methods.
+#
+# @see Admin::BaseController for exposing Operator-specific actions and views
 class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found
+  prepend_view_path 'app/lib/utilities'
 
   # Referenced in application layout to display page title
   # Override on a per-controller basis to display different title
@@ -39,16 +46,19 @@ class ApplicationController < ActionController::Base
   # Retrieves the space based upon the requests domain or params
   # @returns [nil, Space]
   helper_method def current_space
-    space_repository = Space.includes(:rooms)
     @current_space ||=
       if params[:space_id]
         space_repository.friendly.find(params[:space_id])
       else
         BrandedDomain.new(space_repository).space_for_request(request) ||
         space_repository.friendly.find(params[:id])
-      end
+      end.tap { |space| authorize(space, :show?) }
   rescue ActiveRecord::RecordNotFound
-    nil
+    @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
+  end
+
+  def space_repository
+    Space.includes(:rooms, entrance: [:furniture_placements])
   end
 
   # Retrieves the room based upon the current_space and params

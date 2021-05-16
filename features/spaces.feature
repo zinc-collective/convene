@@ -13,3 +13,9 @@ Feature: Spaces
     Given a Space with a Room specified as its Entrance
     When Anyone visits the Space
     Then they see the Furniture in the Entrance Room
+
+  @built @unimplemented-steps
+  Scenario: Space without Entrances
+    Given a Space with no Entrance
+    When Anyone visits the Space
+    Then they only see the Rooms

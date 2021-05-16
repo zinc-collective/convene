@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
+# Exposes CRUD actions on the {Space} model.
 class SpacesController < ApplicationController
   def show; end
 
-  helper_method def space
-    @space ||= BrandedDomain.new(space_repository).space_for_request(request) ||
-               space_repository.friendly.find(params[:id])
+  def edit
   end
 
-  def space_repository
-    Space.includes(:rooms, entrance: [:furniture_placements])
+  helper_method def space
+    @space ||= current_space
   end
 
   def edit

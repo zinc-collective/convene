@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   passwordless_for :people
 
+  root 'spaces#show'
+
   namespace :admin do
     resources :spaces
     resources :clients
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :spaces do
+  resources :spaces, only: %I[show edit update] do
     resources :invitations, only: [:create, :destroy]
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
         Furniture.append_routes(self)
       end
     end
+    resources :utility_hookups, only: %I[create edit update destroy index]
   end
 
   resource :me, only: %i[show], controller: 'me'
@@ -31,7 +34,6 @@ Rails.application.routes.draw do
   resources :guides, only: %i[index show]
 
   constraints BrandedDomain.new(Space) do
-    root 'spaces#show'
     get '/:id', to: 'rooms#show'
   end
 end
