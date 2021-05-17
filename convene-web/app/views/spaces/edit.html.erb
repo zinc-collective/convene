@@ -9,7 +9,9 @@
   <%= member.email %>
 <%- end %>
 
-<%= form_with model: @space.invitations.new do |member_form| %>
+<h3>Invite A New Member</h3>
+
+<%= form_with(model: [ @space, Invitation.new ]) do |member_form| %>
 <% end %>
 
 <fieldset>
