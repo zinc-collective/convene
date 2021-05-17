@@ -44,9 +44,12 @@ gem 'gretel',  '~> 4.2'
 # @see https://github.com/GeorgeKaraszi/ActiveRecordExtended
 gem 'active_record_extended', '~> 2.0'
 # Slug-based model lookup
-gem 'friendly_id', '~> 5.2'
-# Support Active Model has_secure_password
-gem 'bcrypt', '~> 3.1'
+gem 'friendly_id', '~> 5.2.4'
+# Hashing / Encrypting data at rest
+gem 'bcrypt', '~> 3.1.7'
+gem 'lockbox', '0.6.4'
+gem 'rotp', '~> 6.2'
+
 # Use postgresql for data persistence
 gem 'pg', '~> 1.2'
 

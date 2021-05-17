@@ -42,6 +42,10 @@ en:
   activemodel:
     errors:
       models:
+        authenticated_session:
+          attributes:
+            one_time_password:
+              invalid_one_time_password: "The One Time Password you provided does not match."
         waiting_room:
           attributes:
             access_code:

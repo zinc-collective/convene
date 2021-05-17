@@ -10,11 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_230639) do
+ActiveRecord::Schema.define(version: 2021_05_17_015521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "authentication_methods", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "person_id"
+    t.string "method", null: false
+    t.string "value", null: false
+    t.datetime "confirmed_at"
+    t.text "one_time_password_secret_ciphertext"
+    t.string "encrypted_one_time_password_secret_iv"
+    t.datetime "last_one_time_password_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["method", "value"], name: "index_authentication_methods_on_method_and_value", unique: true
+    t.index ["person_id"], name: "index_authentication_methods_on_person_id"
+  end
 
   create_table "clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"

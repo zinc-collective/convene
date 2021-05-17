@@ -29,10 +29,8 @@ class ApplicationController < ActionController::Base
     @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
   end
 
-  def require_person!
-    return if current_person.authenticated?
-
-    redirect_to people.sign_in_path, flash: { error: 'Sign in required' }
+  def pundit_user
+    current_person
   end
 
   # Retrieves the space based upon the requests domain or params

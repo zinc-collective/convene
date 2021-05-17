@@ -1,0 +1,16 @@
+<%= form_with model: authenticated_session, url: space_authenticated_session_path(current_space), local: true do |form| %>
+  <fieldset>
+    <%- if !form.object.email_address.present? %>
+      <%= form.label :email_address %>
+      <%= form.email_field :email_address %>
+      <%= render partial: "error", locals: { model: form.object, field: :email_address } %>
+    <% else %>
+      <p>Check your email for a one-time password to complete the sign in process</p>
+      <%= form.hidden_field :email_address %>
+      <%= form.label :one_time_password %>
+      <%= form.text_field :one_time_password %>
+      <%= render partial: "error", locals: { model: form.object, field: :one_time_password } %>
+    <% end %>
+    <%= form.submit %>
+  </fieldset>
+<% end %>
