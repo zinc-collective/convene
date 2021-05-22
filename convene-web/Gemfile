@@ -15,12 +15,12 @@ gem 'rails', '~> 6.1'
 # Data Transport
 #
 # Use Puma as the app server
-gem 'puma'
+gem 'puma', '~> 5.3'
 
 # Browser Layer
 #
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+gem 'sass-rails', '~> 6.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -34,42 +34,42 @@ gem 'jbuilder', '~> 2.7'
 # View Layer
 #
 # Allows us to render .markdown.erb files
-gem 'redcarpet'
+gem 'redcarpet', '~> 3.5'
 # Breadcrumbs!
-gem 'gretel'
+gem 'gretel',  '~> 4.2'
 
 # Database Layer
 #
 # Postgres extensions for ActiveRecord
 # @see https://github.com/GeorgeKaraszi/ActiveRecordExtended
-gem 'active_record_extended'
+gem 'active_record_extended', '~> 2.0'
 # Slug-based model lookup
-gem 'friendly_id', '~> 5.2.4'
+gem 'friendly_id', '~> 5.2'
 # Support Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1'
 # Use postgresql for data persistence
-gem 'pg', '>= 0.18', '< 2.0'
+gem 'pg', '~> 1.2'
 
 # User-facing features
 #
 # Allows logging in via magic links
-gem 'passwordless'
+gem 'passwordless', '0.10.0'
 # Provides powerful administration features
-gem 'administrate'
+gem 'administrate', '0.16.0'
 
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', '~> 1.2021', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Performance Optimization
 #
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '~> 1.7', require: false
 
 # Permissions and policies
 #
-gem 'pundit'
+gem 'pundit', '~> 2.1'
 
 group :development, :test do
   gem 'pry-byebug', platforms: [:mri, :mingw, :x64_mingw]
