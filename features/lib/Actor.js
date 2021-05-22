@@ -18,8 +18,8 @@ class Actor {
    * @param {ThenableWebDriver} driver
    * @returns {Promise<Actor>}
    */
-  async signIn(driver) {
-    const signInPage = new SignInPage(driver);
+  async signIn(driver, space) {
+    const signInPage = new SignInPage(driver, space);
     await signInPage.visit().then((page) => page.submitEmail(this.email));
 
     return driver.get(await this.authenticationUrl()).then(() => this);
@@ -37,7 +37,6 @@ class Actor {
    */
   async authenticationUrl() {
     const email = await this.emailServer().lastEmailTo(this.email);
-
     return getUrls(email.text).values().next().value;
   }
 

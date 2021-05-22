@@ -18,7 +18,7 @@ RSpec.describe '/spaces/:space_id/utility_hookups' do
 
   let(:actor) { space_member }
 
-  before { sign_in(actor) }
+  before { sign_in(space, actor) }
 
   describe 'GET /spaces/:space_id/utility_hookups' do
     let(:changes) { nil }

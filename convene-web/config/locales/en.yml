@@ -50,6 +50,9 @@ en:
           attributes:
             access_code:
               incorrect: "Incorrect access code"
+    attributes:
+      authenticated_session:
+        contact_location: "Email Address"
   home:
     title: "Home"
   guides:

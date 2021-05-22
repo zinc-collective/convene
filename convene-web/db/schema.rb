@@ -18,15 +18,15 @@ ActiveRecord::Schema.define(version: 2021_05_17_015521) do
 
   create_table "authentication_methods", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "person_id"
-    t.string "method", null: false
-    t.string "value", null: false
+    t.string "contact_method", null: false
+    t.string "contact_location", null: false
     t.datetime "confirmed_at"
     t.text "one_time_password_secret_ciphertext"
     t.string "encrypted_one_time_password_secret_iv"
     t.datetime "last_one_time_password_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["method", "value"], name: "index_authentication_methods_on_method_and_value", unique: true
+    t.index ["contact_method", "contact_location"], name: "index_authentication_methods_on_contact_fields", unique: true
     t.index ["person_id"], name: "index_authentication_methods_on_person_id"
   end
 

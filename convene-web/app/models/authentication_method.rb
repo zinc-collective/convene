@@ -3,8 +3,8 @@
 class AuthenticationMethod < ApplicationRecord
   belongs_to :person, optional: true
 
-  attribute :method, :string
-  attribute :value, :string
+  attribute :contact_method, :string
+  attribute :contact_location, :string
   attribute :confirmed_at, :datetime
 
   encrypts :one_time_password_secret
@@ -18,7 +18,7 @@ class AuthenticationMethod < ApplicationRecord
   end
 
   def set_person
-    self.person ||= Person.find_or_create_by(email: value)
+    self.person ||= Person.find_or_create_by(email: contact_location)
   end
 
   def verify?(one_time_password)
@@ -33,9 +33,13 @@ class AuthenticationMethod < ApplicationRecord
     @totp ||= ROTP::TOTP.new(one_time_password_secret, interval: 2.hours.to_i)
   end
 
-  def send_one_time_password!
+  def bump_one_time_password!
     update!(last_one_time_password_at: Time.now)
-    AuthenticatedSessionMailer.one_time_password_email(self).deliver_now
+  end
+
+  def send_one_time_password!(space)
+    bump_one_time_password!
+    AuthenticatedSessionMailer.one_time_password_email(self, space).deliver_now
   end
 
   def confirm!

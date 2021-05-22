@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # post "/auth/:provider/callback", "sessions#create"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :spaces, only: %I[show edit update] do
-    resource :authenticated_session, only: %i[new create destroy]
+    resource :authenticated_session, only: %i[new create destroy show]
 
     resources :rooms, only: %i[show edit update] do
       resource :waiting_room, only: %i[show update]
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   resources :guides, only: %i[index show]
 
   constraints BrandedDomain.new(Space) do
-    resources :authenticated_sessions, only: %i[new create delete]
+    resources :authenticated_sessions, only: %i[new create delete show]
 
     get '/:id', to: 'rooms#show'
   end

@@ -1,8 +1,10 @@
+# Encapsulates interactions with {Rack::Session} and {AuthenticationMethod}
+# to support signing in and out of Convene.
 class AuthenticatedSession
   include ActiveModel::Model
   include ActiveModel::Validations
 
-  attr_accessor :session, :space, :email_address, :one_time_password
+  attr_accessor :session, :space, :contact_method, :contact_location, :one_time_password
 
   validate :verify_one_time_password
 
@@ -10,8 +12,14 @@ class AuthenticatedSession
     authentication_method.person
   end
 
+  # @return [AuthenticationMethod]
   def authentication_method
-    @authentication_method ||= AuthenticationMethod.find_or_initialize_by(method: :email, value: email_address)
+    @authentication_method ||= AuthenticationMethod
+      .find_or_initialize_by(contact_method: contact_method, contact_location: contact_location)
+  end
+
+  def authentication_method_id=(authentication_method_id)
+    @authentication_method = AuthenticationMethod.find(authentication_method_id)
   end
 
   def persisted?
@@ -26,7 +34,7 @@ class AuthenticatedSession
     return false unless valid?
 
     if one_time_password.nil?
-      authentication_method.send_one_time_password!
+      authentication_method.send_one_time_password!(space)
       return false
     elsif authentication_method.verify?(one_time_password)
       session[:person_id] = authentication_method.person.id

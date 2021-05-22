@@ -50,7 +50,7 @@ Feature: Identification
 
 
   @built
-  Scenario: Authentication is lost on Sign-out
+  Scenario: Authentication is lost on Sign out
     Given a Space Member Authenticated Session
     When the Authenticated Person Signs Out
     Then the Authenticated Person becomes a Guest
@@ -70,7 +70,7 @@ Feature: Identification
     When the Authenticated Person visits Convene
     Then the Authenticated Person is treated as a Guest
 
-  @unimplemented-steps
+  @built @unimplemented-steps
   Scenario: Authentication times out due to inactivity
     Given an Authenticated Person who has been Inactive for 7 days
     When the Authenticated Person visits Convene
@@ -79,7 +79,7 @@ Feature: Identification
   # An Emailed Code is a _Possession_ Verification Factor that demonstrates the
   # person can at least _read_ the email address they are using to identiy
   # themselves.
-  @unstarted
+  @built @unimplemented-steps
   Scenario: Identity Verification via Emailed Code
     Given a Guest has requested to Identify themselves via Email
     When the Guest provides the Identification Code emailed to them
