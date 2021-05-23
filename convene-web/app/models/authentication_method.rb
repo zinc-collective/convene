@@ -4,7 +4,10 @@ class AuthenticationMethod < ApplicationRecord
   belongs_to :person, optional: true
 
   attribute :contact_method, :string
+  validates :contact_method, presence: true
   attribute :contact_location, :string
+  validates :contact_location, presence: true
+
   attribute :confirmed_at, :datetime
 
   encrypts :one_time_password_secret
