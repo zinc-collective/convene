@@ -10,11 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_233343) do
+ActiveRecord::Schema.define(version: 2021_05_17_015521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "authentication_methods", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "person_id"
+    t.string "contact_method", null: false
+    t.string "contact_location", null: false
+    t.datetime "confirmed_at"
+    t.text "one_time_password_secret_ciphertext"
+    t.string "encrypted_one_time_password_secret_iv"
+    t.datetime "last_one_time_password_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contact_method", "contact_location"], name: "index_authentication_methods_on_contact_fields", unique: true
+    t.index ["person_id"], name: "index_authentication_methods_on_person_id"
+  end
 
   create_table "clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -42,20 +56,6 @@ ActiveRecord::Schema.define(version: 2021_04_17_233343) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "room_id"
     t.index ["room_id"], name: "index_furniture_placements_on_room_id"
-  end
-
-  create_table "passwordless_sessions", force: :cascade do |t|
-    t.string "authenticatable_type"
-    t.datetime "timeout_at", null: false
-    t.datetime "expires_at", null: false
-    t.datetime "claimed_at"
-    t.text "user_agent", null: false
-    t.string "remote_addr", null: false
-    t.string "token", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.uuid "authenticatable_id"
-    t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

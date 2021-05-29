@@ -1,20 +1,20 @@
 const Page = require("./Page");
 
 class SignInPage extends Page {
-  enter() {
-    return this.visit().then(() => this);
+  constructor(driver, space) {
+    super(driver);
+    this.space = space;
   }
 
   path() {
-    return "/people/sign_in";
+    return `/spaces/${this.space.slug}/authenticated_session/new`;
   }
 
-  async submitEmail(email) {
-    await this.component(".identification-form #passwordless_email").fillIn(
-      email
-    );
-    await this.component(".identification-form input[type=submit]").click();
-    return this;
+  submitEmail(email) {
+    return this.component("input[type=email]")
+      .fillIn(email)
+      .then(() => this.component("input[type=submit]").click())
+      .then(() => this);
   }
 }
 
