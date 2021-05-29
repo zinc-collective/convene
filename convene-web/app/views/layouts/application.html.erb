@@ -25,7 +25,7 @@
       <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; ", semantic: true, display_single_fragment: true %>
       <%- if policy(current_space).edit? %>
         <%= link_to edit_space_path(current_space) do %>
-        <span class="configure-icon" aria-role="img" aria-label="Configure"></span>
+        <span class="icon --configure" aria-role="img" aria-label="Configure"></span>
         <% end %>
       <% end %>
       <div class="branding">
