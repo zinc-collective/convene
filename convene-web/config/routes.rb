@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :spaces, only: %I[show edit update] do
     resource :authenticated_session, only: %i[new create destroy show]
 
-    resources :rooms, only: %i[show edit update] do
+    resources :rooms, only: %i[show edit update new create] do
       resource :waiting_room, only: %i[show update]
       resources :furniture_placements, only: [:update]
       namespace :furniture do

@@ -7,3 +7,23 @@
     <%- end %>
   <%- end %>
 </fieldset>
+
+
+<fieldset>
+  <h3>Rooms</h3>
+  <ul>
+    <%- space.rooms.each do |room| %>
+      <li>
+        <%= room.name %>
+        <%- if policy(room).edit? %>
+          <%= link_to edit_space_room_path(room.space, room) do %>
+            <span class="icon --configure"></span>Configure
+          <% end %>
+        <%- end %>
+        <%= link_to space_room_path(room.space, room) do %>
+          <span class="icon --enter"></span>Enter
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</fieldset>
