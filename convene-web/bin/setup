@@ -20,10 +20,10 @@ FileUtils.chdir APP_ROOT do
   puts '== Installing JavaScript dependencies =='
   system!('bin/yarn')
 
-  # puts "\n== Copying sample files =="
-  # unless File.exist?('config/database.yml')
-  #   FileUtils.cp 'config/database.yml.sample', 'config/database.yml'
-  # end
+  puts "\n== Copying sample files =="
+  unless File.exist?('.env.example')
+    FileUtils.cp '.env.example', '.env'
+  end
 
   puts "\n== Preparing development database =="
   system! 'bin/rails db:prepare'
@@ -39,6 +39,5 @@ FileUtils.chdir APP_ROOT do
   system! 'bin/rails log:clear tmp:clear'
 
   puts "\n== Restarting application server =="
-
   system! 'bin/rails restart'
 end
