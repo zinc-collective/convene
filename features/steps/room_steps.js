@@ -1,6 +1,6 @@
 const { Given, When, Then } = require("cucumber");
 
-const { SpacePage, RoomEditPage, RoomPage } = require("../harness/Pages");
+const { SpacePage, SpaceEditPage, RoomEditPage, RoomPage } = require("../harness/Pages");
 const { RoomCardComponent } = require("../harness/Components");
 const { Space, Room, Actor } = require("../lib");
 
@@ -41,9 +41,9 @@ When(
     const { space } = linkParameters({ room, accessLevel });
     await actor.signIn(this.driver, space)
 
-    return new SpacePage(this.driver, space)
+    return new SpaceEditPage(this.driver, space)
       .visit()
-      .then((spacePage) => spacePage.roomCard(room).configure())
+      .then((page) => page.roomCard(room).configure())
       .then((roomSettingsPage) => roomSettingsPage.unlock(accessCode));
   }
 );
@@ -54,9 +54,9 @@ When(
     const { space } = linkParameters({ accessLevel, room })
     await actor.signIn(this.driver, space)
 
-    return this.space
+    return new SpaceEditPage(this.driver, space)
       .visit()
-      .then((space) => space.roomCard(room).configure())
+      .then((page) => page.roomCard(room).configure())
       .then((roomSettingsPage) => roomSettingsPage.lock(accessCode));
   }
 );

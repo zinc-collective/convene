@@ -8,7 +8,11 @@ class AccessLevel {
    * @returns {By}
    */
   get locator() {
-    return By.css(`.--${this.level.toLowerCase()}`)
+    return By.css(`*${this.attributeSelector}`);
+  }
+
+  get attributeSelector() {
+    return `[data-access-level="${this.level.toLowerCase()}"]`
   }
 }
 

@@ -1,4 +1,4 @@
-<div class="room-card <%= "--#{room.access_level} --#{room.slug}"%>">
+<div data-access-level="<%= room.access_level %>" data-slug="<%= room.slug %>" data-model="room" data-id="<%= room.id%>" class="room-card">
   <header>
     <h3><%= room.name %></h3>
     <%- if room.locked? %>
