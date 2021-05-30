@@ -42,22 +42,17 @@ en:
   activemodel:
     errors:
       models:
+        authenticated_session:
+          attributes:
+            one_time_password:
+              invalid_one_time_password: "The One Time Password you provided does not match."
         waiting_room:
           attributes:
             access_code:
               incorrect: "Incorrect access code"
-  passwordless:
-    sessions:
-      create:
-        session_expired: 'Your session has expired, please sign in again.'
-        email_sent_if_record_found: "Check your email for a link to sign in automatically."
-        token_claimed: "This link has already been used, try requesting the link again"
-      new:
-        email_label: 'Your Email'
-        submit: 'Submit'
-    mailer:
-      subject: "Your magic link ✨"
-      magic_link: "Here's your link: %{link}"
+    attributes:
+      authenticated_session:
+        contact_location: "Email Address"
   home:
     title: "Home"
   guides:

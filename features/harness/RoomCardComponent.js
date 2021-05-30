@@ -24,13 +24,13 @@ class RoomCardComponent extends Component {
     if (this._selector && this._selector.value) {
       return this._selector;
     }
-    const selectorParts = [".room-card"];
+    const selectorParts = ["*[data-model='room']"];
     if (this.room.slug) {
-      selectorParts.push(`.--${this.room.slug}`);
+      selectorParts.push(`[data-slug="${this.room.slug}"]`);
     }
 
     if (this.room.accessLevel) {
-      selectorParts.push(this.room.accessLevel.locator.value);
+      selectorParts.push(this.room.accessLevel.attributeSelector);
     }
 
     return (this.selector = By.css(selectorParts.join("")));
@@ -100,7 +100,7 @@ class RoomCardComponent extends Component {
    * @returns {Component}
    */
   configureRoomButton() {
-    return this.component(".room-door_configure");
+    return this.component(".--configure");
   }
 }
 

@@ -66,6 +66,17 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
 
+    - name: Get brew cache path
+      id: brew-cache-path
+      run: echo "::set-output name=path::$(brew --cache)"
+
+    - name: Configure Homebrew cache
+      uses: actions/cache@v2
+      with:
+        path: ${{ steps.brew-cache-path.outputs.path }}
+        key: ${{ runner.os }}-brew-${{ hashFiles('bin/setup') }}
+        restore-keys: ${{ runner.os }}-brew-
+
     - name: Setup environment
       run: |
           sudo chown -R $USER /usr/local/lib/node_modules

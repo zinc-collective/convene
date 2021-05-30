@@ -1,0 +1,18 @@
+<%= form_with model: authenticated_session, url: space_authenticated_session_path(current_space), local: true do |form| %>
+  <fieldset>
+    <%- if form.object.contact_location.blank? %>
+      <%= form.hidden_field :contact_method, value: :email %>
+      <%= form.label :contact_location %>
+      <%= form.email_field :contact_location %>
+      <%= render partial: "error", locals: { model: form.object, field: :contact_location } %>
+    <% else %>
+      <p>Check your email for a one-time password to complete the sign in process</p>
+      <%= form.hidden_field :contact_method %>
+      <%= form.hidden_field :contact_location %>
+      <%= form.label :one_time_password %>
+      <%= form.text_field :one_time_password %>
+      <%= render partial: "error", locals: { model: form.object, field: :one_time_password } %>
+    <% end %>
+    <%= form.submit %>
+  </fieldset>
+<% end %>

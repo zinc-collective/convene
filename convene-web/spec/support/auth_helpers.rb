@@ -1,15 +1,18 @@
 module AuthHelpers
-  # Borrowed from https://github.com/mikker/passwordless/blob/master/lib/passwordless/test_helpers.rb, which
-  # is not released yet.
-  #
   # @return [nil]
-  def sign_in(person)
+  def sign_in(space, person)
     return if person.nil?
-    session = Passwordless::Session.create!(authenticatable: person, user_agent: "TestAgent", remote_addr: "unknown")
-    get Passwordless::Engine.routes.url_helpers.token_sign_in_path(session.token)
-  end
-end
 
-RSpec.configure do |config|
-  config.include AuthHelpers
+    authentication_method = person.authentication_methods
+      .create_with(contact_location: person.email)
+      .find_or_create_by(contact_method: :email)
+
+    authentication_method.bump_one_time_password!
+
+    post(space_authenticated_session_path(space),
+         params: { authenticated_session: {
+           authentication_method_id: authentication_method.id,
+           one_time_password: authentication_method.one_time_password
+         } })
+  end
 end

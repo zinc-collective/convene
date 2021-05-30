@@ -5,20 +5,16 @@
       "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
       "value": "convene-web"
     },
-    "FEATURE_DEMO": {
-      "description": "Seed demo data",
-      "value": "true"
-    },
-    "FEATURE_SYSTEM_TEST": {
-      "description": "Seed Test data",
-      "value": "true"
-    },
     "ADMIN_USERNAME": {
       "description": "Username for administrator",
       "value": "admin"
     },
     "ADMIN_PASSWORD": {
       "description": "Password to access the admin panel",
+      "generator": "secret"
+    },
+    "LOCKBOX_MASTER_KEY": {
+      "description": "Encrypts data within the database",
       "generator": "secret"
     }
   },
@@ -47,16 +43,28 @@
         }
       },
       "env": {
-        "SYSTEM_TEST": {
-          "description": "Seed system test data",
-          "value": "true"
-        },
         "ADMIN_USERNAME": {
           "description": "Username for administrator",
           "value": "admin"
         },
         "ADMIN_PASSWORD": {
           "description": "Password to access the admin panel",
+          "generator": "secret"
+        },
+        "FEATURE_DEMO": {
+          "description": "Seed demo data",
+          "value": "true"
+        },
+        "FEATURE_SYSTEM_TEST": {
+          "description": "Seed Test data",
+          "value": "true"
+        },
+        "FEATURE_IDENTIFICATION": {
+          "description": "Allow signing in",
+          "value": "true"
+        },
+        "LOCKBOX_MASTER_KEY": {
+          "description": "Encrypts data within the database",
           "generator": "secret"
         }
       },
