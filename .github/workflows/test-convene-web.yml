@@ -74,7 +74,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ${{ steps.brew-cache-path.outputs.path }}
-        key: ${{ runner.os }}-brew-${{ github.sha }}
+        key: ${{ runner.os }}-brew-${{ hashFiles('bin/setup') }}
         restore-keys: ${{ runner.os }}-brew-
 
     - name: Setup environment
