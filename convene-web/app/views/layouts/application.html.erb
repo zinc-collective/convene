@@ -22,12 +22,13 @@
 
 
     <footer>
-      <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; ", semantic: true, display_single_fragment: true %>
-      <%- if policy(current_space).edit? %>
-        <%= link_to edit_space_path(current_space) do %>
-        <span class="icon --configure" aria-role="img" aria-label="Configure"></span>
+      <div>
+        <%- if policy(current_space).edit? %>
+          <%= link_to "", edit_space_path(current_space), class: "icon --configure", aria_label: "Configure Space", role: "img" %>
         <% end %>
-      <% end %>
+        <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; ", semantic: true, display_single_fragment: true %>
+      </div>
+
       <div class="branding">
         <h3>Convene<span class="tagline">: Space to Work, Play, or Simply Be</span></h3>
       </div>

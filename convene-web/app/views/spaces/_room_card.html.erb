@@ -11,16 +11,8 @@
   <footer>
     <div class="room-door_enter">
       <%= link_to space_room_path(room.space, room) do %>
-        <span class="icon --enter">Enter Room</span>
+        <span class="icon --enter" role="img" aria-label="Enter <%= room.name %>">Enter Room</span>
       <% end %>
     </div>
-
-    <%- if Feature.enabled?(:configure_room) && policy(room).edit? %>
-      <div class="room-door_configure">
-        <%= link_to edit_space_room_path(room.space, room) do %>
-          <span class="icon --configure">Configure Room</span>
-        <% end %>
-      </div>
-    <% end %>
   </footer>
 </div>

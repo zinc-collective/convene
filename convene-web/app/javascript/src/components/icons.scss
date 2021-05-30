@@ -1,18 +1,18 @@
 @layer components {
   .icon {
     display: inline-block;
+    text-decoration: none;
+
+    &::before {
+      font-family: "Font Awesome 5 Free"; font-weight: 900;
+    }
 
     &.--enter::before {
-      @apply mr-2;
-      font-family: "Font Awesome 5 Free"; font-weight: 900;
       content: "\f52b";
-      text-underline: none;
     }
+
     &.--configure::before {
-      @apply mr-2;
-      font-family: "Font Awesome 5 Free"; font-weight: 900;
       content: "\f013 ";
-      text-underline: none;
     }
   }
 }

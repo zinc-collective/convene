@@ -1,4 +1,19 @@
 <% breadcrumb :edit_space, space %>
+
+<fieldset>
+  <h3>Rooms</h3>
+
+    <%- space.rooms.each do |room| %>
+      <%- if policy(room).edit? %>
+        <p>
+          <%= link_to edit_space_room_path(room.space, room) do %>
+            <span class="icon --configure" role="img" aria-label="Configure"></span><%= room.name %>
+          <% end %>
+        </p>
+      <%- end %>
+    <% end %>
+</fieldset>
+
 <fieldset>
   <h3>Utility Hookups</h3>
   <%- space.utility_hookups.each do |utility_hookup| %>
@@ -6,24 +21,4 @@
     <%= render partial: "utility_hookups/form", locals: { utility_hookup: utility_hookup } %>
     <%- end %>
   <%- end %>
-</fieldset>
-
-
-<fieldset>
-  <h3>Rooms</h3>
-  <ul>
-    <%- space.rooms.each do |room| %>
-      <li>
-        <%= room.name %>
-        <%- if policy(room).edit? %>
-          <%= link_to edit_space_room_path(room.space, room) do %>
-            <span class="icon --configure"></span>Configure
-          <% end %>
-        <%- end %>
-        <%= link_to space_room_path(room.space, room) do %>
-          <span class="icon --enter"></span>Enter
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
 </fieldset>
