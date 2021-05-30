@@ -32,7 +32,6 @@ function setup_package {
 ## SYSTEM LEVEL DEPENDENCIES ##
 setup_package "overmind"
 setup_package "yarn"
-setup_package "shared-mime-info"
 # Firefox web browser is used for interface testing.
 brew install --cask firefox
 yarn global add maildev
