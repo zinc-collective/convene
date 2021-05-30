@@ -73,7 +73,7 @@ jobs:
     - name: Configure Homebrew cache
       uses: actions/cache@v2
       with:
-        path: ${{ steps.brew-cache-path.outputs.path }}/overmind*
+        path: ${{ steps.brew-cache-path.outputs.path }}
         key: ${{ runner.os }}-brew-${{ github.sha }}
         restore-keys: ${{ runner.os }}-brew-
 
