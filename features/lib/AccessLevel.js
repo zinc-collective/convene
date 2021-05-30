@@ -11,6 +11,10 @@ class AccessLevel {
     return By.css(`*${this.attributeSelector}`);
   }
 
+  /**
+   *
+   * @returns {string}
+   */
   get attributeSelector() {
     return `[data-access-level="${this.level.toLowerCase()}"]`
   }

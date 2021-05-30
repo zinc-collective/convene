@@ -18,7 +18,7 @@ class Component {
   }
 
   /**
-   * @returns {Promise<Component>}
+   * @returns {Promise<this>}
    */
   click() {
     return this.el()
@@ -28,7 +28,7 @@ class Component {
 
   /**
    * @param {string} value
-   * @returns {Promise<Component>}
+   * @returns {Promise<this>}
    */
   fillIn(value) {
     return this.el()
@@ -39,7 +39,7 @@ class Component {
   /**
    *
    * @param {string} value
-   * @returns {Promise<Component>}
+   * @returns {Promise<this>}
    */
   select(value) {
     return this.click()
@@ -55,7 +55,7 @@ class Component {
   }
 
   /**
-   * @returns {Promise<Component>}
+   * @returns {Promise<this>}
    */
   submit() {
     return this.el()

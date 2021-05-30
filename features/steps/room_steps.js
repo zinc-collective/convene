@@ -44,7 +44,7 @@ When(
     return new SpaceEditPage(this.driver, space)
       .visit()
       .then((page) => page.roomCard(room).configure())
-      .then((roomSettingsPage) => roomSettingsPage.unlock(accessCode));
+      .then((page) => page.unlock(accessCode));
   }
 );
 
