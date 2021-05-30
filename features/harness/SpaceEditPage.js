@@ -1,6 +1,7 @@
 const { ThenableWebDriver } = require("selenium-webdriver");
 const Page = require('./Page');
-const Component = require("./Component");
+const Room = require('../lib/Room');
+const RoomCardComponent = require("./RoomCardComponent");
 
 class SpaceEditPage extends Page {
   /**
@@ -17,6 +18,14 @@ class SpaceEditPage extends Page {
    */
   path() {
     return `/spaces/${this.space.slug}/edit`;
+  }
+
+  /**
+   * @param {Room} room
+   * @returns {RoomCardComponent}
+   */
+  roomCard(room) {
+    return new RoomCardComponent(this.driver, room);
   }
 
   /**

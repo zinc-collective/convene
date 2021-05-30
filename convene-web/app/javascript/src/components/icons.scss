@@ -1,19 +1,18 @@
 @layer components {
-  .enter-room-icon::before {
-    @apply mr-2;
-    font-family: "Font Awesome 5 Free"; font-weight: 900;
-    content: "\f52b";
-  }
+  .icon {
+    display: inline-block;
+    text-decoration: none;
 
-  .configure-icon::before {
-    @apply mr-2;
-    font-family: "Font Awesome 5 Free"; font-weight: 900;
-    content: "\f7d9";
-  }
+    &::before {
+      font-family: "Font Awesome 5 Free"; font-weight: 900;
+    }
 
-  .navigation-toggle::before {
-    @apply mr-2;
-    font-family: "Font Awesome 5 Free"; font-weight: 900;
-    content: "\f078"
+    &.--enter::before {
+      content: "\f52b";
+    }
+
+    &.--configure::before {
+      content: "\f013 ";
+    }
   }
 }

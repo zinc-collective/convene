@@ -9,7 +9,7 @@ class RoomEditPage extends Page {
 
   /**
    * @param {AccessCode} accessCode
-   * @returns {Promise<RoomEditPage>}
+   * @returns {Promise<this>}
    */
   async lock(accessCode) {
     await this.accessLevel().select("locked");
@@ -19,6 +19,10 @@ class RoomEditPage extends Page {
     return this;
   }
 
+  /**
+   * @param {AccessCode} accessCode
+   * @returns {Promise<this>}
+   */
   async unlock(accessCode) {
     const waitingRoom = new WaitingRoomPage(this.driver);
     await waitingRoom.submitAccessCode(accessCode);

@@ -1,4 +1,19 @@
 <% breadcrumb :edit_space, space %>
+
+<fieldset>
+  <h3>Rooms</h3>
+
+    <%- space.rooms.each do |room| %>
+      <%- if policy(room).edit? %>
+        <p data-access-level="<%=room.access_level %>" data-slug="<%=room.slug%>" data-model="room" data-id="<%=room.id%>">
+          <%= link_to edit_space_room_path(room.space, room) do %>
+            <span class="icon --configure" role="img" aria-label="Configure"></span><%= room.name %>
+          <% end %>
+        </p>
+      <%- end %>
+    <% end %>
+</fieldset>
+
 <fieldset>
   <h3>Utility Hookups</h3>
   <%- space.utility_hookups.each do |utility_hookup| %>

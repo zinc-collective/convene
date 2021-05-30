@@ -1,7 +1,5 @@
 @layer components {
   .breadcrumbs {
-    a {
-      @apply underline;
-    }
+    display: inline-block;
   }
 }

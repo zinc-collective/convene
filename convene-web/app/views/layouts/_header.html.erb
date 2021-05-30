@@ -1,11 +1,5 @@
 <header>
-  <%- if current_space.present? %>
-    <div>
-      <%= breadcrumbs container_tag: 'nav' , fragment_class: 'crumb' , separator: " &rsaquo; " , semantic: true, display_single_fragment: true %>
-    </div>
-  <%- end %>
-
-
+  <%= render partial: "breadcrumbs" %>
 
   <%- if Feature.enabled?(:identification) %>
     <nav aria-label="Menu" class="profile-menu">

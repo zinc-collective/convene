@@ -10,7 +10,7 @@ crumb :root do
 end
 
 crumb :edit_space do |space|
-  link 'Configure', edit_space_path(space)
+  link 'Configure Space', edit_space_path(space)
 end
 
 crumb :utility_hookups do |space|
@@ -33,7 +33,7 @@ end
 
 crumb :edit_room do |room|
   link "Configure #{room.name}", edit_space_room_path(room.space, room)
-  parent :room, room
+  parent :edit_space, room.space
 end
 
 crumb :waiting_room do |waiting_room|
