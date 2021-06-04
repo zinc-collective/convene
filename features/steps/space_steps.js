@@ -1,5 +1,19 @@
 const { Given, When, Then } = require("cucumber");
-const { RoomPage, SpacePage } = require("../harness/Pages");
+const { RoomPage, SpacePage, SpaceEditPage } = require("../harness/Pages");
+
+const { linkParameters } = require("../lib");
+
+Given('a Space', function() {
+  // This space intentionally left blank... For now...
+  // TODO: Create a Space for each test instead of re-using the
+  //       System Test Space
+})
+
+Given('a Space with a Room', function() {
+  // This space intentionally left blank... For now...
+  // TODO: Create a Space for each test instead of re-using the
+  //       System Test Space
+})
 
 Given('the {actor} is on the {space} Dashboard', async function (actor, space) {
   this.space = new SpacePage(this.driver, space);
@@ -10,6 +24,12 @@ Given('the {actor} is in the {space} and in the {room}', function (actor, space,
   this.space = new SpacePage(this.driver, space);
   return this.space.visit()
                    .then((spacePage) => spacePage.roomCard(room).enter())
+});
+
+When('a {actor} adds a {room}', function (actor, room) {
+  const { space } = linkParameters({ actor, room })
+  const page = new SpaceEditPage(this.driver, space)
+  return page.visit().then((p) => p.createRoom({ room }))
 });
 
 When('the {actor} visit the {space}, {room} full URL', function (actor, space, room) {

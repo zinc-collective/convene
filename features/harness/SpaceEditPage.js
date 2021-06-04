@@ -2,6 +2,7 @@ const { ThenableWebDriver } = require("selenium-webdriver");
 const Page = require('./Page');
 const Room = require('../lib/Room');
 const RoomCardComponent = require("./RoomCardComponent");
+const RoomFormComponent = require("./RoomFormComponent");
 
 class SpaceEditPage extends Page {
   /**
@@ -26,6 +27,12 @@ class SpaceEditPage extends Page {
    */
   roomCard(room) {
     return new RoomCardComponent(this.driver, room);
+  }
+
+  createRoom({ room }) {
+    return new RoomFormComponent(this.driver)
+      .fillIn(room)
+      .then((c) => c.submit())
   }
 
   /**
