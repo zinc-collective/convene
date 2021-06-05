@@ -1,37 +1,6 @@
 <% breadcrumb :edit_room, room %>
-<%= form_with model: room, url: space_room_path(room.space, room), data: { controller: "room-edit-form" }, local: true do |room_form| %>
-  <fieldset>
-    <div>
-      <%= room_form.label :name %>
-      <%= room_form.text_field :name %>
-      <%= render partial: "error", locals: { model: room, field: :name } %>
-    </div>
 
-    <div>
-      <%= room_form.label :slug %>
-      <%= room_form.text_field :slug %>
-      <%= render partial: "error", locals: { model: room, field: :slug } %>
-    </div>
-
-    <h3>Privacy and Security</h3>
-
-    <div>
-      <%= room_form.label :access_level %>
-      <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" }, "data-action": "room-edit-form#accessLevelToggle" %>
-      <%= render partial: "error", locals: { model: room, field: :access_level } %>
-    </div>
-
-    <div>
-      <%= room_form.label :access_code %>
-      <%= room_form.text_field :access_code, "data-target": "room-edit-form.accessCode", disabled: !room.locked? %>
-      <%= render partial: "error", locals: { model: room, field: :access_code } %>
-    </div>
-
-    <footer>
-      <%= room_form.submit %>
-    </footer>
-  </fieldset>
-<% end %>
+<%= render partial: 'form', locals: { room: room } %>
 
 <fieldset>
   <h3>Furniture</h3>

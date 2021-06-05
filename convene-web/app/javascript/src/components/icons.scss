@@ -14,5 +14,9 @@
     &.--configure::before {
       content: "\f013 ";
     }
+
+    &.--add::before {
+      content: "\f0fe";
+    }
   }
 }

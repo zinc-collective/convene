@@ -7,6 +7,10 @@ class RoomsController < ApplicationController
   def edit
   end
 
+  def new
+    authorize(current_space)
+  end
+
   def update
     if room.update(room_params)
       redirect_to space_path(room.space)
@@ -20,15 +24,17 @@ class RoomsController < ApplicationController
   end
 
   helper_method def page_title
-    "[Convene] - #{current_room.name} - #{current_space.name}"
+    ["[Convene]", current_room&.name, current_space&.name].compact.join(" - ")
   end
 
   helper_method def room
-    current_room
+    current_room || Room.new(space: current_space)
   end
 
   # TODO: Unit test authorize and redirect url
   private def check_access_code
+    return unless room.persisted?
+
     authorize(room)
     if !room.enterable?(current_access_code(room))
       redirect_to space_room_waiting_room_path(current_space, current_room, redirect_url: after_authorization_redirect_url)

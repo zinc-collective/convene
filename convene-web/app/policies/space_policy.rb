@@ -14,4 +14,8 @@ class SpacePolicy < ApplicationPolicy
   def edit?
     update?
   end
+
+  def new?
+    update?
+  end
 end
