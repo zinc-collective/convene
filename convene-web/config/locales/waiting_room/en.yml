@@ -1,0 +1,15 @@
+en:
+  helpers:
+    label:
+      waiting_room:
+        access_code: 'Enter Access Code'
+    submit:
+      waiting_room:
+        update: 'Enter'
+  activemodel:
+    errors:
+      models:
+        waiting_room:
+          attributes:
+            access_code:
+                incorrect: "Incorrect access code"

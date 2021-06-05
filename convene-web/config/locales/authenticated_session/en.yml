@@ -1,0 +1,15 @@
+en:
+  helpers:
+    submit:
+      authenticated_session:
+        create: "Sign in"
+  activemodel:
+    errors:
+      models:
+        authenticated_session:
+          attributes:
+            one_time_password:
+              invalid_one_time_password: "The One Time Password you provided does not match."
+    attributes:
+      authenticated_session:
+        contact_location: "Email Address"

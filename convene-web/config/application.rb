@@ -35,5 +35,8 @@ module ConveneWeb
     # Allows us to place our views for pieces of furniture next to the furniture
     config.paths['app/views'].unshift(Rails.root.join('app', 'lib', 'furniture'))
     config.session_store :cookie_store, expire_after: 7.days
+
+
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
   end
 end

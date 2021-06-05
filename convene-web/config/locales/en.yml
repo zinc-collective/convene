@@ -31,28 +31,9 @@
 
 en:
   helpers:
-    label:
-      waiting_room:
-        access_code: "Enter Access Code"
     submit:
       update: "Save"
       create: "Create"
-      waiting_room:
-        update: "Enter"
-  activemodel:
-    errors:
-      models:
-        authenticated_session:
-          attributes:
-            one_time_password:
-              invalid_one_time_password: "The One Time Password you provided does not match."
-        waiting_room:
-          attributes:
-            access_code:
-              incorrect: "Incorrect access code"
-    attributes:
-      authenticated_session:
-        contact_location: "Email Address"
   home:
     title: "Home"
   guides:
