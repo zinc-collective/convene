@@ -21,7 +21,7 @@ FileUtils.chdir APP_ROOT do
   system!('bin/yarn')
 
   puts "\n== Copying sample files =="
-  unless File.exist?('.env.example')
+  unless File.exist?('.env')
     FileUtils.cp '.env.example', '.env'
   end
 
