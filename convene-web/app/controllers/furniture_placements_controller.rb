@@ -1,14 +1,19 @@
 class FurniturePlacementsController < ApplicationController
   def update
-    furniture_placement.update(furniture_placement_params)
-    flash[:notice] = "Updated #{furniture_placement.furniture.model_name.human.titleize}"
+    furniture_placement.update!(furniture_placement_params)
 
-    redirect_to edit_space_room_path(furniture_placement.room.space, furniture_placement.room)
+    redirect_to(
+      edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
+      notice: t('.success', name: furniture_placement.furniture.model_name.human )
+    )
   end
 
   def create
     furniture_placement.save!
-    redirect_to edit_space_room_path(furniture_placement.room.space, furniture_placement.room)
+    redirect_to(
+      edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
+      notice: t('.success', name: furniture_placement.furniture.model_name.human.titleize )
+    )
   end
 
   def furniture_placement

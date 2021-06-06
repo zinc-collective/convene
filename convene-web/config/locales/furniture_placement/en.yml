@@ -1,0 +1,10 @@
+en:
+  furniture_placements:
+    update:
+      success: Furniture '%{name}' successfully updated! 🎉
+    create:
+      success: Furniture '%{name}' successfully placed! 🎉
+  helpers:
+    submit:
+      furniture_placement:
+        create: Place Furniture
