@@ -1,14 +1,14 @@
-Feature: Rooms: Laying Out Furniture
+Feature: Rooms: Placing Furniture
   For Rooms to be tailored to their particular purpose, we allow people to add,
   remove, reorder, and otherwise change the Rooms Furniture.
 
-  @unbuilt @andromeda
+  @unstarted @andromeda
   Scenario: Adding Furniture
     Given a Space with an Empty Room
     When a Space Member adds a Text Block Furniture to that Room
     Then that Room has a Text Block in it
 
-  @unbuilt @andromeda
+  @unstarted @andromeda
   Scenario: Re-Ordering Furniture
     Given a Space with a Room with the following Furniture:
       | text block |
@@ -20,7 +20,7 @@ Feature: Rooms: Laying Out Furniture
       | text block |
       | text block |
 
-  @unbuilt @andromeda
+  @unstarted @andromeda
   Scenario: Removing Furniture
     Given a Space with a Room with the Following Furniture:
       | text block |
