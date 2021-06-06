@@ -8,15 +8,11 @@ class AuthenticatedSessionPolicy < ApplicationPolicy
     true
   end
 
-  alias create? new?
-
   def show?
     authenticated_session.person == person
   end
 
   alias update? show?
   alias destroy? show?
-  alias create? show?
-
-
+  alias create? new?
 end
