@@ -10,8 +10,6 @@ class FurniturePlacement < ApplicationRecord
 
   attribute :furniture_kind, :string
 
-  validates :furniture_kind, uniqueness: { scope: :room_id }
-
   attribute :settings, :json, default: {}
 
   def furniture_attributes=(attributes)
@@ -23,7 +21,14 @@ class FurniturePlacement < ApplicationRecord
   attribute :slot, :integer
   validates :slot, presence: true, uniqueness: { scope: :room_id }
 
+  before_validation :infer_slot
   def furniture
     @furniture ||= Furniture.from_placement(self)
+  end
+
+  def infer_slot
+    return if slot.present?
+
+    self.slot = room&.furniture_placements&.count || 0
   end
 end

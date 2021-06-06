@@ -4,6 +4,7 @@
 
 <fieldset>
   <h3>Furniture</h3>
+
   <%- room.furniture_placements.each do |furniture_placement| %>
     <% if policy(furniture_placement).edit? %>
       <%= form_with(model: furniture_placement, url: space_room_furniture_placement_path(room.space, room, furniture_placement), local: true) do |furniture_placement_form| %>
@@ -16,5 +17,18 @@
         </h4>
       </header>
     <%- end %>
-  <% end %>
+  <%- end %>
+
+
+  <%- new_furniture_placement = room.furniture_placements.new %>
+  <%- if policy(new_furniture_placement).new? %>
+    <%= form_with model: new_furniture_placement, url: space_room_furniture_placements_path(room.space, room, new_furniture_placement), local: true do | placement_form | %>
+      <%= placement_form.hidden_field :slot, value: room.furniture_placements.count %>
+      <%= placement_form.select :furniture_kind, Furniture::REGISTRY.keys %>
+      <footer>
+        <%= placement_form.submit %>
+      </footer>
+    <%- end %>
+  <%- end %>
+
 </fieldset>

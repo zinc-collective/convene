@@ -1,11 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe '/spaces/:space_slug/room/:room_slug/furniture_placements', type: :request do
-  let(:placement) { create(:furniture_placement) }
-  let(:space) { placement.room.space }
-  let(:placement_path) { "/spaces/#{space.slug}/rooms/#{placement.room.slug}/furniture_placements/#{placement.id}" }
+  let(:placement) { create(:furniture_placement, room: room) }
+  let(:room) { create(:room) }
+  let(:space) { room.space }
 
-  describe 'PATCH /spaces/:space_slug/room/:room_slug/furniture_placements/:id' do
+  describe 'POST /spaces/:space_slug/rooms/:room_slug/furniture_placements' do
+    let(:space_membership) { create(:space_membership, space: space) }
+    let!(:person) { space_membership.member }
+
+    before { sign_in(space, person) }
+    it "creates a furniture placement of the kind of furniture provided within the room" do
+      expect do
+        post "/spaces/#{space.slug}/rooms/#{room.slug}/furniture_placements/", params: { furniture_placement: { furniture_kind: :markdown_text_block } }
+      end.to change { room.furniture_placements.count }.by(1)
+
+      placement = room.furniture_placements.last
+      expect(placement.furniture).to be_a(Furniture::MarkdownTextBlock)
+      expect(placement.slot).to eql(0)
+      expect(response).to redirect_to(edit_space_room_path(space, room))
+    end
+  end
+  describe 'PATCH /spaces/:space_slug/rooms/:room_slug/furniture_placements/:id' do
+    let(:placement_path) { "/spaces/#{space.slug}/rooms/#{room.slug}/furniture_placements/#{placement.id}" }
+
     context 'when the person is a guest' do
       it 'does not allow updating placements' do
         patch placement_path, params: { furniture_placement: { furniture_attributes: { content: 'updated content' } } }

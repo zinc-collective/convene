@@ -14,7 +14,7 @@ RSpec.describe FurniturePlacementPolicy do
     it { is_expected.to permit(non_member, furniture_placement )}
   end
 
-  permissions :update?, :edit? do
+  permissions :update?, :edit?, :new?, :create? do
     it { is_expected.to permit(member, furniture_placement) }
     it { is_expected.not_to permit(non_member, furniture_placement) }
     it { is_expected.not_to permit(nil, furniture_placement) }

@@ -11,7 +11,7 @@ class FurniturePlacementPolicy < ApplicationPolicy
     person.member_of?(furniture_placement.space)
   end
 
-  def edit?
-    update?
-  end
+  alias edit? update?
+  alias new? update?
+  alias create? update?
 end

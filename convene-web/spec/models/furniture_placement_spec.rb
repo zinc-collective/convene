@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe FurniturePlacement do
   it { is_expected.to belong_to(:room) }
 
-  it { is_expected.to validate_presence_of(:slot) }
   it {
     is_expected.to validate_uniqueness_of(:slot)
       .scoped_to(:room_id)
