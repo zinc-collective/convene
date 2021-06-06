@@ -24,7 +24,7 @@
   <%- if policy(new_furniture_placement).new? %>
     <%= form_with model: new_furniture_placement, url: space_room_furniture_placements_path(room.space, room, new_furniture_placement), local: true do | placement_form | %>
       <%= placement_form.hidden_field :slot, value: room.furniture_placements.count %>
-      <%= placement_form.select :furniture_kind, Furniture::REGISTRY.keys %>
+      <%= placement_form.select :furniture_kind, Furniture::REGISTRY.keys.map { |k| [k.to_s.titleize, k] } %>
       <footer>
         <%= placement_form.submit %>
       </footer>
