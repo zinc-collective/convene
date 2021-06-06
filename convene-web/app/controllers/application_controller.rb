@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   helper_method def current_room
     @current_room ||=
       current_space.rooms.friendly.find(
-        params[:id] || params[:room_id]
+        params[:room_id] || params[:id]
       )
   rescue ActiveRecord::RecordNotFound
     nil

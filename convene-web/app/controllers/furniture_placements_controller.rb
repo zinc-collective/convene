@@ -1,7 +1,5 @@
 class FurniturePlacementsController < ApplicationController
   def update
-    authorize(furniture_placement)
-
     furniture_placement.update(furniture_placement_params)
     flash[:notice] = "Updated #{furniture_placement.furniture.model_name.human.titleize}"
 
@@ -9,7 +7,9 @@ class FurniturePlacementsController < ApplicationController
   end
 
   def furniture_placement
-    @furniture_placement ||= FurniturePlacement.find(params[:id])
+    @furniture_placement ||= policy_scope(FurniturePlacement).find_by(id: params[:id])
+    @furniture_placement ||= current_room.furniture_placements.new(furniture_placement_params)
+    @furniture_placement.tap { |fp| authorize(fp) }
   end
 
   def furniture_placement_params
@@ -18,6 +18,8 @@ class FurniturePlacementsController < ApplicationController
   end
 
   def furniture_params
-    furniture_placement.furniture.attribute_names
+    Furniture::REGISTRY.each_value.reduce([]) do |m, v|
+      m.concat(v.new.attribute_names)
+    end
   end
 end
