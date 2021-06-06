@@ -1,4 +1,7 @@
 class AuthenticatedSessionsController < ApplicationController
+  # Not a database-backed model, no need to policy-scope.
+  skip_after_action :verify_policy_scoped
+
   def create
     redirect_to current_space if authenticated_session.save
   end

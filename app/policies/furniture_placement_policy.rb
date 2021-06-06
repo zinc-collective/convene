@@ -1,14 +1,25 @@
 class FurniturePlacementPolicy < ApplicationPolicy
   alias furniture_placement object
+  delegate :space, to: :furniture_placement
+
+  class Scope
+    attr_accessor :person, :scope
+    def initialize(person, scope)
+      @person = person
+      @scope = scope
+    end
+
+    def resolve
+      @scope.joins(:room).where(room: { space: @person.spaces })
+    end
+  end
 
   def show?
     true
   end
 
   def update?
-    return false unless person
-
-    person.member_of?(furniture_placement.space)
+    person&.member_of?(furniture_placement.space)
   end
 
   alias edit? update?
