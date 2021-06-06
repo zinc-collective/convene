@@ -53,11 +53,6 @@ gem 'rotp', '~> 6.2'
 # Use postgresql for data persistence
 gem 'pg', '~> 1.2'
 
-# User-facing features
-#
-# Provides powerful administration features
-gem 'administrate', '0.16.0'
-
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
