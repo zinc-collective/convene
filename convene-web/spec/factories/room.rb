@@ -16,5 +16,9 @@ FactoryBot.define do
     trait :unlocked do
       access_level { :unlocked }
     end
+
+    trait :with_slug do
+      slug { name.parameterize }
+    end
   end
 end

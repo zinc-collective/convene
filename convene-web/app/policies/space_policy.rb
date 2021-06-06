@@ -11,11 +11,6 @@ class SpacePolicy < ApplicationPolicy
     person.member_of?(space)
   end
 
-  def edit?
-    update?
-  end
-
-  def new?
-    update?
-  end
+  alias new? update?
+  alias edit? update?
 end

@@ -37,7 +37,7 @@ RSpec.describe RoomPolicy do
     end
   end
 
-  permissions :create?, :update?, :edit?, :destroy? do
+  permissions :new?, :create?, :update?, :edit?, :destroy? do
     it { is_expected.not_to permit(nil, room) }
     it { is_expected.to permit(member, room) }
     it { is_expected.not_to permit(non_member, room) }

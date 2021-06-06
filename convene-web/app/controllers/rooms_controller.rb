@@ -8,7 +8,17 @@ class RoomsController < ApplicationController
   end
 
   def new
-    authorize(current_space)
+    authorize(room)
+  end
+
+  def create
+    authorize(room)
+    if room.save
+      flash[:notice] = t('.success', room_name: room.name)
+      redirect_to edit_space_room_path(room.space, room)
+    else
+      render :new
+    end
   end
 
   def update
@@ -20,6 +30,8 @@ class RoomsController < ApplicationController
   end
 
   def room_params
+    return {} unless params.key?(:room)
+
     params.require(:room).permit(:access_level, :access_code, :name, :slug, :publicity_level)
   end
 
@@ -28,7 +40,7 @@ class RoomsController < ApplicationController
   end
 
   helper_method def room
-    current_room || Room.new(space: current_space)
+    @room ||= current_room || current_space.rooms.new(room_params)
   end
 
   # TODO: Unit test authorize and redirect url

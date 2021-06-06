@@ -4,7 +4,7 @@ Feature: Rooms
 
 
   # Adding a Room is done through the Space Edit page
-  @unstarted @andromeda
+  @built @unimplemented-steps @andromeda
   Scenario: Adding a Room
     Given a Space
     When a Space Member adds a Room

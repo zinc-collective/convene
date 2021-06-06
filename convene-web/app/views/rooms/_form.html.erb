@@ -15,6 +15,12 @@
     <h3>Privacy and Security</h3>
 
     <div>
+     <%= room_form.label :publicity_level %>
+     <%= room_form.select :publicity_level, Room::PUBLICITY_LEVELS.map(&:to_s) %>
+     <%= render partial: "error", locals: { model: room, field: :publicity_level } %>
+    </div>
+
+    <div>
       <%= room_form.label :access_level %>
       <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" }, "data-action": "room-form#accessLevelToggle" %>
       <%= render partial: "error", locals: { model: room, field: :access_level } %>

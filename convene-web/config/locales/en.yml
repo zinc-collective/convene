@@ -32,7 +32,7 @@
 en:
   helpers:
     submit:
-      update: "Save"
+      update: "Save changes"
       create: "Create"
   home:
     title: "Home"

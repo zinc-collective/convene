@@ -1,0 +1,9 @@
+en:
+  rooms:
+    create:
+      success: Room '%{room_name}' successfully created! 🎉
+  helpers:
+    submit:
+      room:
+        create: Add Room
+        edit: Configure '%{room_name}'

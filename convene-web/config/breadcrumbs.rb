@@ -32,12 +32,12 @@ crumb :room do |room|
 end
 
 crumb :new_room do |room|
-  link "Add New Room", new_space_room_path(room.space)
+  link t('helpers.submit.room.create'), new_space_room_path(room.space)
   parent :edit_space, room.space
 end
 
 crumb :edit_room do |room|
-  link "Configure #{room.name}", edit_space_room_path(room.space, room)
+  link t('helpers.submit.room.edit', {room_name: room.name}), edit_space_room_path(room.space, room)
   parent :edit_space, room.space
 end
 
