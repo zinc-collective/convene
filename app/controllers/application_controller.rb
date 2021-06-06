@@ -4,6 +4,9 @@
 # and authorization requirements, as well as exposes common helper methods.
 class ApplicationController < ActionController::Base
   include Pundit
+  after_action :verify_authorized
+  after_action :verify_policy_scoped
+
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found
   prepend_view_path 'app/utilities'
   prepend_view_path 'app/furniture'
