@@ -15,7 +15,9 @@ class AuthenticatedSessionsController < ApplicationController
   end
 
   helper_method def authenticated_session
-    @authenticated_session ||= AuthenticatedSession.new(authenticated_session_params)
+    @authenticated_session ||= AuthenticatedSession.new(authenticated_session_params).tap do |authenticated_session|
+      authorize(authenticated_session)
+    end
   end
 
   def authenticated_session_params
