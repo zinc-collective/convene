@@ -33,6 +33,12 @@
     </div>
 
     <footer>
+      <%- if policy(room).destroy? %>
+        <%= room_form.button name: "_method", value: "delete", class: "--danger" do %>
+          <span class="icon --destroy"></span><%=t('.destroy')%>
+        <%- end %>
+      <%- end %>
+
       <%= room_form.submit %>
     </footer>
   </fieldset>

@@ -1,23 +1,27 @@
 <% breadcrumb :edit_space, space %>
 
 <fieldset>
-  <h3>Rooms</h3>
+  <header>
+    <h3>Rooms</h3>
+  </header>
 
+  <div>
     <%- space.rooms.each do |room| %>
       <%- if policy(room).edit? %>
-        <p data-access-level="<%=room.access_level %>" data-slug="<%=room.slug%>" data-model="room" data-id="<%=room.id%>">
+        <div data-access-level="<%=room.access_level %>" data-slug="<%=room.slug%>" data-model="room" data-id="<%=room.id%>">
           <%= link_to edit_space_room_path(room.space, room) do %>
             <span class="icon --configure" role="img" aria-label="Configure"></span><%= room.name %>
           <% end %>
-        </p>
+        </div>
       <%- end %>
     <% end %>
+  </div>
 
-    <p>
-      <%= link_to new_space_room_path(space) do %>
-        <span class="icon --add" role="img" aria-label="Add"></span>Add New Room
-      <% end %>
-    </p>
+  <footer>
+    <%= link_to new_space_room_path(space) do %>
+      <span class="icon --add" role="img" aria-label="Add"></span>Add New Room
+    <% end %>
+  </footer>
 </fieldset>
 
 <fieldset>

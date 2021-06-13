@@ -2,6 +2,8 @@ en:
   rooms:
     create:
       success: Room '%{room_name}' successfully created! 🎉
+    form:
+      destroy: "Remove Room"
   helpers:
     submit:
       room:
