@@ -1,4 +1,4 @@
-<%= form_with model: [:space, room], data: { controller: "room-form" }, local: true do |room_form| %>
+<%= form_with model: [room.space, room], data: { controller: "room-form" }, local: true do |room_form| %>
   <fieldset>
     <div>
       <%= room_form.label :name %>
