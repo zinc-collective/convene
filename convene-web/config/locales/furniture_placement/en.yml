@@ -4,6 +4,10 @@ en:
       success: Furniture '%{name}' successfully updated! 🎉
     create:
       success: Furniture '%{name}' successfully placed! 🎉
+    destroy:
+      success: Furniture '%{name}' successfully removed! 🎉
+    form:
+      destroy: "Remove Furniture"
   helpers:
     submit:
       furniture_placement:

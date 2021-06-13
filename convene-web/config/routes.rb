@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
     resources :rooms, only: %i[show edit update new create] do
       resource :waiting_room, only: %i[show update]
-      resources :furniture_placements, only: %i[create update]
+      resources :furniture_placements, only: %i[create update destroy]
       namespace :furniture do
         Furniture.append_routes(self)
       end

@@ -14,4 +14,5 @@ class FurniturePlacementPolicy < ApplicationPolicy
   alias edit? update?
   alias new? update?
   alias create? update?
+  alias destroy? update?
 end

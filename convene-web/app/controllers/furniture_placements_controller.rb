@@ -16,6 +16,14 @@ class FurniturePlacementsController < ApplicationController
     )
   end
 
+  def destroy
+    furniture_placement.destroy!
+    redirect_to(
+      edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
+      notice: t('.success', name: furniture_placement.furniture.model_name.human.titleize)
+    )
+  end
+
   def furniture_placement
     @furniture_placement ||= find_or_build.tap do |furniture_placement|
       authorize(furniture_placement)

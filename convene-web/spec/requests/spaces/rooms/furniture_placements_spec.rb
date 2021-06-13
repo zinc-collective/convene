@@ -44,4 +44,28 @@ RSpec.describe '/spaces/:space_slug/room/:room_slug/furniture_placements', type:
       end
     end
   end
+
+  describe 'DELETE /spaces/:space_slug/rooms/:room_slug/furniture_placements/:id' do
+    let(:placement_path) { "/spaces/#{space.slug}/rooms/#{room.slug}/furniture_placements/#{placement.id}" }
+    context 'when the person is a guest' do
+      it 'does not allow destroying placements' do
+        patch placement_path, params: { furniture_placement: { furniture_attributes: { content: 'updated content' } } }
+        expect(response).not_to have_http_status(:success)
+        expect(placement.reload).to be_present
+      end
+    end
+
+    context 'when the person is a space member' do
+      let(:space_membership) { create(:space_membership, space: space) }
+      let!(:person) { space_membership.member }
+
+      before { sign_in(space, person) }
+
+      it 'allows destroying a placement' do
+        delete placement_path
+        expect(response).to redirect_to(edit_space_room_path(space, room))
+        expect{ placement.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end

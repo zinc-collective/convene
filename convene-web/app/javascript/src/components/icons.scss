@@ -8,7 +8,7 @@
     }
 
     &.--enter::before {
-      content: "\f52b";
+      content: "\f52b ";
     }
 
     &.--configure::before {
@@ -16,7 +16,10 @@
     }
 
     &.--add::before {
-      content: "\f0fe";
+      content: "\f0fe ";
+    }
+    &.--destroy::before{
+      content: "🗑 ";
     }
   }
 }
