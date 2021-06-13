@@ -6,7 +6,7 @@ Feature: Space membership
 
   @unstarted @andromeda
   Scenario: Inviting Guests
-    When a Space Admin invites a Guest to be a Space Member via Email
+    When a Space Owner invites a Guest to be a Space Member via Email
     Then the Guest receives a Space Invitation Email
 
   @unstarted @andromeda
@@ -19,7 +19,7 @@ Feature: Space membership
   @unstarted @andromeda
   Scenario: Removing Space Members
     Given a Space with multiple Space Members
-    When the Space Admin removes a Space Member
+    When the Space Owner removes a Space Member
     Then that Space Member receives a Space Membership Revoked Email
     And the Space Member can still sign in
     And the Space Member is not a member of that Space
@@ -29,7 +29,7 @@ Feature: Space membership
   Scenario: Inviting Space Members who already have a convene account
 
   @unstarted
-  Scenario: Space Admin Knows When A Space Invitation Email Bounces
+  Scenario: Space Owner Knows When A Space Invitation Email Bounces
 
   @unstarted
   Scenario: Guest Accepts The Same Space Invitation Email Multiple Times
