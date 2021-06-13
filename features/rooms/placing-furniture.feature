@@ -2,7 +2,7 @@ Feature: Rooms: Placing Furniture
   For Rooms to be tailored to their particular purpose, we allow people to add,
   remove, reorder, and otherwise change the Rooms Furniture.
 
-  @unstarted @andromeda
+  @built @unimplemented-steps @andromeda
   Scenario: Adding Furniture
     Given a Space with an Empty Room
     When a Space Member adds a Text Block Furniture to that Room
