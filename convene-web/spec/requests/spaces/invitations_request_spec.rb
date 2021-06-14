@@ -4,7 +4,7 @@ RSpec.describe "/spaces/:space_id/invitations", type: :request do
   it "created and sends an invitation for a space" do
     client = Client.create!
     space = Space.create!(:client => client, :name => "bar")
-    mail = double(deliver_now: true)
+    mail = double(deliver_later: true)
     allow(SpaceInvitationMailer).to receive(:space_invitation_email).and_return(mail)
 
     post "/spaces/#{space.slug}/invitations", :params => { :invitation => {:name => "foobar", :email => "foobar@example.com"} }
@@ -16,9 +16,9 @@ RSpec.describe "/spaces/:space_id/invitations", type: :request do
 
     # TODO finish building logic to get below assertions to pass
     # generate mailer and views
-    expect(SpaceInvitationMailer).to have_received(:space_invitation_email).with(invitation)
-    expect(mail).to have_received(:deliver_now)
-    expect(invitation.status).to eq("sent")
+    expect(SpaceInvitationMailer).to have_received(:space_invitation_email)
+    expect(mail).to have_received(:deliver_later)
+    expect(invitation.status).to eq("pending")
   end
 
   # ------ #
