@@ -4,12 +4,15 @@
 # and authorization requirements, as well as exposes common helper methods.
 class ApplicationController < ActionController::Base
   include Pundit
+  after_action :verify_authorized
+  after_action :verify_policy_scoped
+
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found
   prepend_view_path 'app/lib/utilities'
 
   # Referenced in application layout to display page title
   # Override on a per-controller basis to display different title
-  # @returns [String]
+  # @return [String]
   helper_method def page_title
     if current_space.present?
       "Convene - #{current_space.name}"
@@ -22,7 +25,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # @returns [Guest, Person] the authenticated user, or a Guest
+  # @return [Guest, Person] the authenticated user, or a Guest
   def current_person
     @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
   end
@@ -32,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Retrieves the space based upon the requests domain or params
-  # @returns [nil, Space]
+  # @return [nil, Space]
   helper_method def current_space
     @current_space ||=
       if params[:space_id]
@@ -50,11 +53,11 @@ class ApplicationController < ActionController::Base
   end
 
   # Retrieves the room based upon the current_space and params
-  # @returns [nil, Room]
+  # @return [nil, Room]
   helper_method def current_room
     @current_room ||=
       current_space.rooms.friendly.find(
-        params[:id] || params[:room_id]
+        params[:room_id] || params[:id]
       )
   rescue ActiveRecord::RecordNotFound
     nil
