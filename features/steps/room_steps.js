@@ -95,7 +95,6 @@ Then(
       .then((spacePage) => spacePage.roomCard(room).enter(accessCode));
 
     assert(!(await roomPage.isWaitingRoom()));
-    assert(await roomPage.videoPanel().isDisplayed());
   }
 );
 
