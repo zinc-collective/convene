@@ -1,7 +1,10 @@
 const fse = require('fs-extra');
-const { setWorldConstructor, After, setDefaultTimeout, Status } = require('cucumber');
+const { setWorldConstructor, BeforeAll, After, setDefaultTimeout, Status } = require('cucumber');
+
+const appUrl = require('../lib/appUrl')
 const { Builder } = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
+
 
 class CustomWorld {
   constructor() {
@@ -9,7 +12,11 @@ class CustomWorld {
       .forBrowser('firefox')
       .setFirefoxOptions(this.firefoxOption())
       .build();
-    this.driver.manage().setTimeouts({ implicit: 500 });
+    this.driver.manage().setTimeouts({ implicit: 1000 });
+    /**
+     * Warm up Selenium + Webpack to prevent test flakes
+     */
+    this.driver.get(appUrl())
   }
 
   firefoxOption() {
@@ -35,4 +42,8 @@ After(function(testCase) {
   this.driver.quit();
 });
 
-setDefaultTimeout(10 * 2000);
+/**
+ * Sometimes booting Selenium or Webpack takes a while.
+ * This should reduce test failures from that.
+ */
+setDefaultTimeout(30000);
