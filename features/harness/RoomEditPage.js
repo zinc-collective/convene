@@ -52,7 +52,7 @@ class RoomEditPage extends Page {
    * @returns {Component}
    */
   submitButton() {
-    return this.component("[type='submit']")
+    return this.component("[data-controller='room-form'] [name='commit']")
   }
 
   /**

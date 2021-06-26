@@ -114,7 +114,8 @@ Then(
 
 Then("the Room {accessLevel}", async function (accessLevel) {
   const room = new Room("");
-  linkParameters({ room, accessLevel });
+  const { space } = linkParameters({ room, accessLevel });
+  await (new SpacePage(this.driver, space)).visit();
   if (accessLevel.level === "Locked") {
     const roomCard = new RoomCardComponent(this.driver, room);
     assert(await roomCard.isLocked());
