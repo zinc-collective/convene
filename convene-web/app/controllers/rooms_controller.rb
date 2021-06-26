@@ -8,11 +8,10 @@ class RoomsController < ApplicationController
   end
 
   def new
-    authorize(room)
+
   end
 
   def create
-    authorize(room)
     if room.save
       flash[:notice] = t('.success', room_name: room.name)
       redirect_to edit_space_room_path(room.space, room)
@@ -23,8 +22,17 @@ class RoomsController < ApplicationController
 
   def update
     if room.update(room_params)
-      redirect_to space_path(room.space)
+      redirect_to edit_space_path(room.space), notice: t('.success', room_name: room.name)
     else
+      render :edit
+    end
+  end
+
+  def destroy
+    if room.destroy
+      redirect_to edit_space_path(room.space), notice: t('.success', room_name: room.name)
+    else
+      flash[:alert] = t('.failure', room_name: room.name)
       render :edit
     end
   end
@@ -40,14 +48,15 @@ class RoomsController < ApplicationController
   end
 
   helper_method def room
-    @room ||= current_room || current_space.rooms.new(room_params)
+    @room ||= (current_room || current_space.rooms.new(room_params)).tap do |room|
+      authorize(room)
+    end
   end
 
   # TODO: Unit test authorize and redirect url
   private def check_access_code
     return unless room.persisted?
 
-    authorize(room)
     if !room.enterable?(current_access_code(room))
       redirect_to space_room_waiting_room_path(current_space, current_room, redirect_url: after_authorization_redirect_url)
     end

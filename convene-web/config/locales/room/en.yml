@@ -1,7 +1,12 @@
 en:
   rooms:
     create:
-      success: Room '%{room_name}' successfully created! 🎉
+      success: You've created Room '%{room_name}' successfully! 🎉
+    update:
+      success: You've updated Room '%{room_name}' successfully! 🎉
+    destroy:
+      success: You've removed Room '%{room_name}' successfully! 🎉
+      failure: We couldn't remove Room '%{room_name}'.
     form:
       destroy: "Remove Room"
   helpers:
