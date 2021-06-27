@@ -1,51 +1,30 @@
 <% breadcrumb :edit_room, room %>
-<%= form_with model: room, url: space_room_path(room.space, room), data: { controller: "room-edit-form" }, local: true do |room_form| %>
-  <fieldset>
-    <div>
-      <%= room_form.label :name %>
-      <%= room_form.text_field :name %>
-      <%= render partial: "error", locals: { model: room, field: :name } %>
-    </div>
 
-    <div>
-      <%= room_form.label :slug %>
-      <%= room_form.text_field :slug %>
-      <%= render partial: "error", locals: { model: room, field: :slug } %>
-    </div>
-
-    <h3>Privacy and Security</h3>
-
-    <div>
-      <%= room_form.label :access_level %>
-      <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" }, "data-action": "room-edit-form#accessLevelToggle" %>
-      <%= render partial: "error", locals: { model: room, field: :access_level } %>
-    </div>
-
-    <div>
-      <%= room_form.label :access_code %>
-      <%= room_form.text_field :access_code, "data-target": "room-edit-form.accessCode", disabled: !room.locked? %>
-      <%= render partial: "error", locals: { model: room, field: :access_code } %>
-    </div>
-
-    <footer>
-      <%= room_form.submit %>
-    </footer>
-  </fieldset>
-<% end %>
+<%= render partial: 'form', locals: { room: room } %>
 
 <fieldset>
-  <h3>Furniture</h3>
+  <h3>Existing Furniture</h3>
+  <%- if room.furniture_placements.empty? %>
+    <%= t('rooms.no_furniture_notice') %>
+  <%- end %>
+
   <%- room.furniture_placements.each do |furniture_placement| %>
-    <% if policy(furniture_placement).edit? %>
-      <%= form_with(model: furniture_placement, url: space_room_furniture_placement_path(room.space, room, furniture_placement), local: true) do |furniture_placement_form| %>
-        <%= render partial: "furniture_placements/form", locals: { form: furniture_placement_form, furniture_placement: furniture_placement } %>
-      <% end %>
-    <%- elsif policy(furniture_placement).show? %>
-      <header>
-        <h4>
-          <%= furniture_placement.furniture.model_name.human.titleize %>
-        </h4>
-      </header>
+    <section>
+      <%= render partial: "furniture_placements/form", locals: { furniture_placement: furniture_placement } %>
+    </section>
+  <%- end %>
+</fieldset>
+
+<fieldset>
+  <h3><%= t('rooms.place_furniture_heading') %></h3>
+  <%- new_furniture_placement = room.furniture_placements.new %>
+  <%- if policy(new_furniture_placement).new? %>
+    <%= form_with model: new_furniture_placement, url: space_room_furniture_placements_path(room.space, room, new_furniture_placement), local: true do | placement_form | %>
+      <%= placement_form.hidden_field :slot, value: room.furniture_placements.count %>
+      <%= placement_form.select :furniture_kind, Furniture::REGISTRY.keys.map { |k| [k.to_s.titleize, k] } %>
+      <footer>
+        <%= placement_form.submit %>
+      </footer>
     <%- end %>
-  <% end %>
+  <%- end %>
 </fieldset>

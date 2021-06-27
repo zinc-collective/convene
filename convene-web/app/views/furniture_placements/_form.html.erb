@@ -4,11 +4,21 @@
   </h4>
 </header>
 
-<div>
-  <%= render partial: furniture_placement.furniture.form_template, locals: { form: form } %>
-</div>
-<footer>
-  <%- if furniture_placement.furniture.attribute_names.present? %>
-    <%= form.submit %>
-  <%- end %>
-</footer>
+<%- if policy(furniture_placement).edit? %>
+  <%= form_with(model: [furniture_placement.room.space, furniture_placement.room, furniture_placement], local: true) do |form| %>
+    <div>
+      <%= render partial: furniture_placement.furniture.form_template, locals: { form: form } %>
+    </div>
+    <footer>
+      <%- if policy(furniture_placement).destroy? %>
+        <%= form.button name: "_method", value: "delete", class: "--danger" do %>
+          <%=t('.destroy')%>
+        <%- end %>
+      <%- end %>
+
+      <%- if furniture_placement.furniture.attribute_names.present? %>
+        <%= form.submit %>
+      <%- end %>
+    <%- end %>
+  </footer>
+<%- end %>

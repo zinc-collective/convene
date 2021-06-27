@@ -8,6 +8,7 @@
   }
 
   form {
+    @apply inline;
     div {
       @apply mb-2;
     }
@@ -31,6 +32,7 @@
       @apply py-2 px-4
         rounded-lg border border-neutral-300 bg-white
         transition duration-150 ease-in-out;
+
       @screen sm {
         @apply text-sm leading-5;
       }
@@ -57,16 +59,20 @@
     }
 
     footer {
-      @apply flex flex-col justify-evenly;
+      @apply flex flex-col justify-between;
+
       @screen sm {
         @apply flex-row;
       }
 
-      input[type="submit"],
-      a {
-        @apply flex-1 items-center mt-4;
+      > * {
+        @apply flex-1 self-end mt-4;
         @screen sm {
-          @apply leading-5;
+          @apply  mr-4;
+        }
+
+        &:last-child {
+          @apply mr-0;
         }
       }
     }

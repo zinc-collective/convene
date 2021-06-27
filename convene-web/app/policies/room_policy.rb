@@ -16,4 +16,5 @@ class RoomPolicy < ApplicationPolicy
   alias edit? create?
   alias update? create?
   alias destroy? create?
+  alias new? create?
 end

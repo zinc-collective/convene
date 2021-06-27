@@ -13,7 +13,7 @@
 
   main {
     @apply mx-2 flex-1;
-    :last-child {
+    > :last-child {
       @apply mb-2;
     }
   }

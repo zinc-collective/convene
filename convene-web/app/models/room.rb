@@ -41,8 +41,9 @@ class Room < ApplicationRecord
   # A Room's Publicity Level indicates how visible the room is.
   # `listed` - The room is discoverable by anyone in the space lobby.
   # `unlisted` - The room is only visible to it's owners and people who have been in it before.
+  PUBLICITY_LEVELS = [ :listed, :unlisted].freeze
   attribute :publicity_level, :string
-  validates :publicity_level, presence: true, inclusion: { in: ['listed', 'unlisted', :listed, :unlisted] }
+  validates :publicity_level, presence: true, inclusion: { in: PUBLICITY_LEVELS + PUBLICITY_LEVELS.map(&:to_s) }
 
   scope :listed,   -> { where(publicity_level: :listed) }
   scope :unlisted, -> { where(publicity_level: :unlisted) }

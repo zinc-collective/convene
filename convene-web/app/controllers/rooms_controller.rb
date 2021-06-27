@@ -7,29 +7,56 @@ class RoomsController < ApplicationController
   def edit
   end
 
+  def new
+
+  end
+
+  def create
+    if room.save
+      flash[:notice] = t('.success', room_name: room.name)
+      redirect_to edit_space_room_path(room.space, room)
+    else
+      render :new
+    end
+  end
+
   def update
     if room.update(room_params)
-      redirect_to space_path(room.space)
+      redirect_to edit_space_path(room.space), notice: t('.success', room_name: room.name)
     else
       render :edit
     end
   end
 
+  def destroy
+    if room.destroy
+      redirect_to edit_space_path(room.space), notice: t('.success', room_name: room.name)
+    else
+      flash[:alert] = t('.failure', room_name: room.name)
+      render :edit
+    end
+  end
+
   def room_params
+    return {} unless params.key?(:room)
+
     params.require(:room).permit(:access_level, :access_code, :name, :slug, :publicity_level)
   end
 
   helper_method def page_title
-    "[Convene] - #{current_room.name} - #{current_space.name}"
+    ["[Convene]", current_room&.name, current_space&.name].compact.join(" - ")
   end
 
   helper_method def room
-    current_room
+    @room ||= (current_room || current_space.rooms.new(room_params)).tap do |room|
+      authorize(room)
+    end
   end
 
   # TODO: Unit test authorize and redirect url
   private def check_access_code
-    authorize(room)
+    return unless room.persisted?
+
     if !room.enterable?(current_access_code(room))
       redirect_to space_room_waiting_room_path(current_space, current_room, redirect_url: after_authorization_redirect_url)
     end

@@ -2,26 +2,11 @@ const { Given, When, Then } = require("cucumber");
 
 const { SpacePage, SpaceEditPage, RoomEditPage, RoomPage } = require("../harness/Pages");
 const { RoomCardComponent } = require("../harness/Components");
-const { Space, Room, Actor } = require("../lib");
+const { Space, Room, Actor, linkParameters } = require("../lib");
 
 const assert = require("assert").strict;
 
-/**
- * Merges extracted parameter types together for convenience within step definitions
- */
-function linkParameters({
-  space = new Space("System Test"),
-  accessLevel,
-  room,
-}) {
-  room.space = space
-  room.reinitialize({ accessLevel });
-  return {
-    space,
-    accessLevel,
-    room,
-  };
-}
+
 
 Given("a Space with {accessLevel} {room}", async function (accessLevel, room) {
   let { space } = linkParameters({ accessLevel, room });
@@ -110,7 +95,6 @@ Then(
       .then((spacePage) => spacePage.roomCard(room).enter(accessCode));
 
     assert(!(await roomPage.isWaitingRoom()));
-    assert(await roomPage.videoPanel().isDisplayed());
   }
 );
 
@@ -129,7 +113,8 @@ Then(
 
 Then("the Room {accessLevel}", async function (accessLevel) {
   const room = new Room("");
-  linkParameters({ room, accessLevel });
+  const { space } = linkParameters({ room, accessLevel });
+  await (new SpacePage(this.driver, space)).visit();
   if (accessLevel.level === "Locked") {
     const roomCard = new RoomCardComponent(this.driver, room);
     assert(await roomCard.isLocked());

@@ -3,16 +3,20 @@
     display: inline-block;
     text-decoration: none;
 
-    &::before {
-      font-family: "Font Awesome 5 Free"; font-weight: 900;
-    }
-
     &.--enter::before {
-      content: "\f52b";
+      content: "🚪";
     }
 
     &.--configure::before {
-      content: "\f013 ";
+      content: "⚙️ ";
+    }
+
+    &.--add::before {
+      content: "➕";
+    }
+
+    &.--destroy::before{
+      content: "🗑 ";
     }
   }
 }

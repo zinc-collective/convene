@@ -1,7 +1,6 @@
 @layer components {
-  input[type=submit], .button {
-    @apply font-bold py-2 px-4 rounded bg-primary-500 text-white text-center
-           transition ease-in-out duration-150;
+  input[type=submit], button, .button {
+    @apply font-bold py-2 px-4 my-1 rounded bg-primary-500 text-white text-center transition ease-in-out duration-150;
 
     &:hover {
       @apply bg-primary-700;
@@ -14,7 +13,15 @@
       @apply outline-none border-neutral-300 shadow-outline-gray;
     }
 
-
+    &.--danger {
+      @apply bg-danger-500;
+      &:hover {
+        @apply bg-danger-700;
+      }
+      &:active {
+        @apply bg-danger-200;
+      }
+    }
 
     &.--neutral {
       @apply bg-neutral-500;

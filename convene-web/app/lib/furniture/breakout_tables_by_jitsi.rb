@@ -10,7 +10,7 @@ module Furniture
     end
 
     def tables
-      settings['names'].lazy.map do |name|
+      settings.fetch('names', []).lazy.map do |name|
         Table.new(name: name, placement: placement)
       end
     end
