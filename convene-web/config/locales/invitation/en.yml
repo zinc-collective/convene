@@ -5,3 +5,7 @@ en:
     create:
       success: You've invited '%{invitee_name} <%{invitee_email}>' successfully! 🎉
       failure: We couldn't invite '%{invitee_name} <%{invitee_email}>'. 🙀
+  helpers:
+    submit:
+      invitation:
+      create: Send Invitation 💌

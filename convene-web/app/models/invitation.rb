@@ -1,8 +1,13 @@
 class Invitation < ApplicationRecord
   belongs_to :space
 
+  belongs_to :invitor, class_name: :Person
+
+  default_scope -> { order(updated_at: :desc) }
+
   attribute :name, :string
   validates :name, presence: true
+
   attribute :email, :string
   validates :email, presence: true
 

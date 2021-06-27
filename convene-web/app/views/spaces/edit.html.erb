@@ -28,7 +28,7 @@
   <section>
     <h3><%= t('invitations.invited_members_heading') %></h3>
     <ul>
-      <%= @space.invitations.find_each do |invitation| %>
+      <%- space.invitations.each do |invitation| %>
         <li>
           <%= invitation.name %>
           &lt;<%= invitation.email %>&gt;

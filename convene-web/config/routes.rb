@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :spaces, only: %I[show edit update] do
     resource :authenticated_session, only: %i[new create destroy show]
 
-    resources :invitations, only: %i[create destroy]
+    resources :invitations, only: %i[create destroy] do
+      resource :rsvp, only: %i[show update]
+    end
 
     resources :rooms, only: %i[show edit update new create destroy] do
       resource :waiting_room, only: %i[show update]
