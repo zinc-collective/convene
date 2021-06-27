@@ -1,0 +1,7 @@
+en:
+  invitations:
+    invite_member_heading: Invite a Member
+    invited_members_heading: Invited Members
+    create:
+      success: You've invited '%{invitee_name} <%{invitee_email}>' successfully! 🎉
+      failure: We couldn't invite '%{invitee_name} <%{invitee_email}>'. 🙀

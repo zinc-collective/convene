@@ -1,9 +1,6 @@
 class SpaceInvitationMailer < ApplicationMailer
-  default from: "from@example.com"
-
-  def space_invitation_email(person)
-    @person = person
-    mail(to: @person.email)
+  def space_invitation_email(invitation)
+    @invitation = invitation
+    mail(to: @invitation.email)
   end
 end
-
