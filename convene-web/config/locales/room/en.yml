@@ -1,5 +1,7 @@
 en:
   rooms:
+    no_furniture_notice: 'No furniture yet! Deck out your space and add some Furniture! 🛋️'
+    place_furniture_heading: 'Add Furniture 🛋️'
     create:
       success: You've created Room '%{room_name}' successfully! 🎉
     update:
@@ -8,9 +10,9 @@ en:
       success: You've removed Room '%{room_name}' successfully! 🎉
       failure: We couldn't remove Room '%{room_name}'.
     form:
-      destroy: "Remove Room"
+      destroy: "Remove Room 🗑️"
   helpers:
     submit:
       room:
-        create: Add Room
-        edit: Configure '%{room_name}'
+        create: Add Room ➕
+        edit: ⚙️ Configure '%{room_name}'

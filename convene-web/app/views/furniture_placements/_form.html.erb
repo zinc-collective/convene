@@ -12,7 +12,7 @@
     <footer>
       <%- if policy(furniture_placement).destroy? %>
         <%= form.button name: "_method", value: "delete", class: "--danger" do %>
-          <span class="icon --destroy"></span><%=t('.destroy')%>
+          <%=t('.destroy')%>
         <%- end %>
       <%- end %>
 

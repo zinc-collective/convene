@@ -35,7 +35,7 @@
     <footer>
       <%- if policy(room).destroy? && room.persisted? %>
         <%= room_form.button name: "_method", value: "delete", class: "--danger" do %>
-          <span class="icon --destroy"></span><%=t('.destroy')%>
+          <%=t('.destroy')%>
         <%- end %>
       <%- end %>
 

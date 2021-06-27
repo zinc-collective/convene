@@ -14,6 +14,7 @@
     &.--add::before {
       content: "➕";
     }
+
     &.--destroy::before{
       content: "🗑 ";
     }

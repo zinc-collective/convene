@@ -7,8 +7,8 @@ en:
     destroy:
       success: Furniture '%{name}' successfully removed! 🎉
     form:
-      destroy: "Remove Furniture"
+      destroy: "Remove Furniture 🗑️"
   helpers:
     submit:
       furniture_placement:
-        create: Place Furniture
+        create: Add Furniture ➕

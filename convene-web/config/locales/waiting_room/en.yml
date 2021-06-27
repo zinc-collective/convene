@@ -2,10 +2,10 @@ en:
   helpers:
     label:
       waiting_room:
-        access_code: 'Enter Access Code'
+        access_code: 'Enter Access Code 🔑'
     submit:
       waiting_room:
-        update: 'Enter'
+        update: 'Enter 🚪'
   activemodel:
     errors:
       models:
