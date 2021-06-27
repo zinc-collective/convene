@@ -6,7 +6,7 @@
   </header>
 
   <div>
-    <%= form_with(model: [ @space, Invitation.new ], local: true) do |invitation_form| %>
+    <%= form_with(model: [ space, Invitation.new ], local: true) do |invitation_form| %>
       <div>
         <%= invitation_form.label :name %>
         <%= invitation_form.text_field :name %>

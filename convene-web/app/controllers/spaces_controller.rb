@@ -10,8 +10,4 @@ class SpacesController < ApplicationController
   helper_method def space
     @space ||= current_space
   end
-
-  def edit
-    @space = current_space
-  end
 end
