@@ -1,17 +1,6 @@
 Rails.application.routes.draw do
   root 'spaces#show'
 
-  namespace :admin do
-    resources :spaces
-    resources :clients
-    resources :people
-    resources :space_memberships
-    resources :room_ownerships
-    resources :rooms
-
-    root to: 'spaces#index'
-  end
-
   # get "/auth/:provider/callback", "sessions#create"
   # post "/auth/:provider/callback", "sessions#create"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
