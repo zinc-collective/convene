@@ -92,7 +92,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    gretel (4.2.0)
+    gretel (4.3.0)
       actionview (>= 5.1, < 7.0)
       railties (>= 5.1, < 7.0)
     i18n (1.8.10)
@@ -245,7 +245,7 @@ DEPENDENCIES
   factory_bot_rails
   ffaker
   friendly_id (~> 5.4.2)
-  gretel (~> 4.2)
+  gretel (~> 4.3)
   jbuilder (~> 2.7)
   listen (~> 3.2)
   lockbox (= 0.6.4)
