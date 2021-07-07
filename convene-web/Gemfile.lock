@@ -102,7 +102,7 @@ GEM
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    lockbox (0.6.4)
+    lockbox (0.6.5)
     loofah (2.10.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -248,7 +248,7 @@ DEPENDENCIES
   gretel (~> 4.2)
   jbuilder (~> 2.7)
   listen (~> 3.2)
-  lockbox (= 0.6.4)
+  lockbox (= 0.6.5)
   pg (~> 1.2)
   pry-byebug
   puma (~> 5.3)
