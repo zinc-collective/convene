@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_015521) do
+ActiveRecord::Schema.define(version: 2021_07_10_224638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -114,9 +114,9 @@ ActiveRecord::Schema.define(version: 2021_05_17_015521) do
     t.string "name", null: false
     t.string "utility_slug", null: false
     t.string "status", default: "unavailable", null: false
-    t.jsonb "configuration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "configuration_ciphertext"
     t.index ["space_id"], name: "index_utility_hookups_on_space_id"
   end
 

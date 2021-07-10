@@ -2,7 +2,7 @@ Feature: Utilities: Plaid
   In order to support interactions with Financial Institutions
   I want to leverage Plaid within my Space
 
-  @unstarted @milestone-a
+  @built @unimplemented-steps @milestone-a
   Scenario: Configuring the Plaid Utility
     Given a Space with a Plaid Utility Hookup
     When a Space Owner sets the following Configuration for that Utility Hookup
