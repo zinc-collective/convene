@@ -23,7 +23,12 @@ class UtilityHookup < ApplicationRecord
   attribute :status, :string, default: 'unavailable'
   validates :status, presence: true, inclusion: { in: %w[ready unavailable] }
 
-  attribute :configuration, :json, default: {}
+  attribute :old_configuration, :json, default: {}
+  encrypts :configuration, type: :json
+
+  after_initialize do
+    self.configuration ||= {}
+  end
 
   # @return [Utilities::Utility]
   def utility
@@ -31,6 +36,7 @@ class UtilityHookup < ApplicationRecord
   end
 
   def utility_attributes=(attributes)
+    self.configuration ||= {}
     utility.attributes = attributes
   end
 end

@@ -2,7 +2,7 @@
   <%= form.hidden_field :utility_slug %>
   <header>
     <h4>
-      <%= utility_hookup.utility.model_name.human.titleize %>
+      <%= utility_hookup.utility.display_name %>
     </h4>
   </header>
 
@@ -12,7 +12,7 @@
 
   <footer>
     <%- if utility_hookup.utility.attribute_names.present? %>
-      <%= form.submit %>
+      <%= form.submit "Save changes to #{utility_hookup.utility.display_name} ✔️" %>
     <%- end %>
   </footer>
 <%- end %>

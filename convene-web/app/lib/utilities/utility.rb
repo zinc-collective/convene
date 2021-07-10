@@ -18,6 +18,10 @@ module Utilities
       "#{self.class.name.demodulize.underscore}/form"
     end
 
+    def display_name
+      model_name.human.titleize
+    end
+
     # Standard permissions for how Utilities can be managed.
     # Can be overridden on a per-Utility basis.
     class Policy
