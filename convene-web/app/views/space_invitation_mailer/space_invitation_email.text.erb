@@ -1,0 +1,9 @@
+Hi <%= @invitation.name %>,
+
+You've been invited to <%= @invitation.space.name %> by <%= @invitation.invitor.name %>.
+
+You may RSVP to this invitation at <%= space_invitation_rsvp_url(@invitation.space, @invitation) %>.
+
+We hope to see you there! 🥳🎈🎉
+
+- The <%= @invitation.space.name %> Crew

@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # @returns [Guest, Person] the authenticated user, or a Guest
+  # @returns [Guest,Person] the authenticated user, or a Guest
   def current_person
     @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
   end

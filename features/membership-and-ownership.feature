@@ -1,4 +1,3 @@
-@unstarted
 Feature: Membership and Ownership
   In order to build a cohesive, multi-occupant Space
   I want to grant People Membership in my Space
@@ -17,34 +16,12 @@ Feature: Membership and Ownership
   Furniture may also expose different Features based upon Membership. For example,
   Members may be able to include Images in Chat, while Guests may not.
 
-  Scenario: Inviting a Member
-    When a Owner invites someone else to be a Member
-    Then the Invited Person is Emailed an Invitation to the Space
-
-  Scenario: Accepting Membership
-    Given a Owner Invited someone to be a Member
-    When the Invited Person accepts their Invitation
-    Then the Invited Person is a Member
-
+  @unstarted
   Scenario: Removing a Member
     Given a Space with additional Members
     When the Owner removes an additional Member
     Then the Person is no longer a Member of the Space
     And the Person receives an email informing them of their removal from the Space
-
-  Scenario: Inviting an Owner
-    When an Owner invites someone else to be an Owner
-    Then the Invited Person is Emailed an Invitation to the Space
-
-  Scenario: Accepting Ownership
-    Given an Owner Invited someone to be an Owner
-    When the Invited Person accepts their Invitation
-    Then the Invited Person is an Owner
-
-  Scenario: Email Invitation Code Times out
-    Given a Owner Invited someone to be a Member
-    When the Invited Person waits for 30 days
-    Then the Invited Person can not accept invitation
 
   # We need to think this through.
   # Allowing Owners to remove other Owners may result in Peril
