@@ -80,9 +80,10 @@ Once setup completes, configure your local development environment.
 1. Open `.env` and make any changes.
 
 Once you have completed configuration; run `bin/run`. You now should be able to open
-[http://localhost:3000/spaces/system-test] and see Convene.
+http://localhost:3000/spaces/system-test and see Convene.
 
-In a new terminal, run `bin/test` to ensure that your development environment is configured correctly and validate the app is functional.
+Finally, with the server still running (perhaps in a different terminal), run
+`bin/test` to ensure that your development environment is configured correctly.
 
 [PostgreSQL 12]: https://www.postgresql.org/download/
 [Docker]: https://www.docker.com
