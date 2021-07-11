@@ -1,15 +1,14 @@
 <header>
   <%= render partial: "breadcrumbs" %>
 
-  <%- if Feature.enabled?(:identification) %>
-    <nav aria-label="Menu" class="profile-menu">
-      <%- if current_person.authenticated? %>
-        <%= link_to "Sign out", space_authenticated_session_path(current_space), method: :delete, class: 'sign-out' %>
-      <%- else %>
-        <%= link_to "Sign in", new_space_authenticated_session_path(current_space), class: "sign-in" %>
-      <%- end %>
-    </nav>
-  <%- end %>
+
+  <nav aria-label="Menu" class="profile-menu">
+    <%- if current_person.authenticated? %>
+      <%= link_to "Sign out", space_authenticated_session_path(current_space), method: :delete, class: 'sign-out' %>
+    <%- else %>
+      <%= link_to "Sign in", new_space_authenticated_session_path(current_space), class: "sign-in" %>
+    <%- end %>
+  </nav>
 </header>
 
 <%- flash.each do |kind, message| %>
