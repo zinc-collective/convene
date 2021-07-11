@@ -8,4 +8,4 @@ en:
   helpers:
     submit:
       invitation:
-      create: Send Invitation 💌
+        create: Send Invitation 💌
