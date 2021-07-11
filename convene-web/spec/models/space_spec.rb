@@ -4,8 +4,12 @@ require 'rails_helper'
 
 RSpec.describe Space, type: :model do
   it { is_expected.to have_many(:rooms) }
-  it { is_expected.to belong_to(:entrance).class_name('Room').optional(true).dependent(false) }
-  it { is_expected.to have_many(:invitations) }
+  it do
+    is_expected.to belong_to(:entrance).class_name('Room')
+                                       .optional(true).dependent(false)
+  end
+
+  it { is_expected.to have_many(:invitations).inverse_of(:space) }
 
   describe '#name' do
     it { is_expected.to validate_presence_of(:name) }
@@ -16,8 +20,8 @@ RSpec.describe Space, type: :model do
     it { is_expected.to validate_uniqueness_of(:branded_domain).allow_nil }
   end
 
-  describe ".default" do
-    before { FactoryBot.create(:space, slug: 'convene')}
+  describe '.default' do
+    before { FactoryBot.create(:space, slug: 'convene') }
 
     subject(:default) { described_class.default }
 

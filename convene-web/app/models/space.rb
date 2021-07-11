@@ -34,7 +34,7 @@ class Space < ApplicationRecord
   has_many :members, through: :space_memberships
 
   # Inviting new members
-  has_many :invitations
+  has_many :invitations, inverse_of: :space
 
   # The Rooms within this Space
   has_many :rooms, inverse_of: :space
