@@ -1,7 +1,7 @@
 Feature: Spaces: Invitations
   Invitations allow Space Owners to bring additional people into the Space
 
-  @unstarted @andromeda
+  @built @unimplemented-steps @andromeda
   Scenario: Inviting new Members via Email
     When a Space Owner invites a new Space Member via Email
     Then an Invitation is sent to that Email
@@ -14,7 +14,7 @@ Feature: Spaces: Invitations
   # We create new Invitation(s) when inviting someone again,
   # so that we have a record of how many times someone was
   # invited.
-  @unstarted @andromeda
+  @built @unimplemented-steps @andromeda
   Scenario: Re-inviting before an Invitation Expires
     Given an Invitation was sent less than 14 days ago
     When a Space Owner re-invites that Invitation's contact info
@@ -24,10 +24,11 @@ Feature: Spaces: Invitations
     # duplicate Invitations.
     And the old Invitation can still be accepted
 
-  @unstarted @andromeda
+  @built @unimplemented-steps @andromeda
   Scenario: Re-inviting a Member after their Invitation Expires
     Given an Invitation was sent 15 days ago
     When a new Invitation is sent to that Invitation's contact info
+    And the old Invitation can not still be accepted
 
   @unstarted @andromeda
   Scenario: Accepting an Invitation as a Neighbor
