@@ -62,7 +62,7 @@ Designers who have agreed to protect the privacy of our clients may access our
 Much of Convene development happens in `convene-web`.
 
 To set up your development environment you'll need `ruby`, `node` and
-`postgresql`. 
+`postgresql`.
 
 First, ensure your development environment has:
 
@@ -80,10 +80,10 @@ Once setup completes, configure your local development environment.
 1. Open `.env` and make any changes.
 
 Once you have completed configuration; run `bin/run`. You now should be able to open
-http://localhost:3000/spaces/system-test and see Convene.
+[http://localhost:3000/spaces/system-test] and see Convene.
 
-Finally, with the server still running (perhaps in a different terminal), run
-`bin/test` to ensure that your development environment is configured correctly.
+In a new terminal, run `bin/test` to ensure that your development environment is
+configured correctly and validate the app is functional.
 
 [PostgreSQL 12]: https://www.postgresql.org/download/
 [Docker]: https://www.docker.com
