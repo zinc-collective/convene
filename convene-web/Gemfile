@@ -15,7 +15,7 @@ gem 'rails', '~> 6.1'
 # Data Transport
 #
 # Use Puma as the app server
-gem 'puma', '~> 5.3'
+gem 'puma', '~> 5.4'
 
 # Browser Layer
 #
