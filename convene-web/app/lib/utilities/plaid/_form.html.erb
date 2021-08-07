@@ -9,6 +9,6 @@
   <%= render partial: "error", locals: { model: utility_fields.object, field: :plaid_secret } %>
 
   <%= utility_fields.label :environment %>
-  <%= utility_fields.select :environment, ["Sandbox", "Development", "Production"], include_blank: true %>
+  <%= utility_fields.select :environment, ["Sandbox", "Development", "Production"].map { |x| [x, x.downcase] }, include_blank: true %>
   <%= render partial: "error", locals: { model: utility_fields.object, field: :environment } %>
 <%- end %>
