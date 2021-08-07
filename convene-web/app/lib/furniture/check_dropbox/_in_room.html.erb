@@ -3,5 +3,22 @@
 <div
   data-controller="check-dropbox"
   data-check-dropbox-link-token="<%= furniture.link_token(current_person) %>">
-  <button data-action="click->check-dropbox#createLink">Choose bank account</button>
+  <div>
+    <label>Paying From:
+      <span data-check-dropbox-target="payFrom">
+        <button
+        data-action="click->check-dropbox#createLink">Choose bank account
+        </button>
+      </span>
+    </label>
+  </div>
+
+  <div>
+    <label for="amount">Amount:</label>
+    <input type="textbox" />
+  </div>
+
+  <div>
+    <button data-check-dropbox-target="dropOffButton" disabled>Drop off Payment</button>
+  </div>
 </div>
