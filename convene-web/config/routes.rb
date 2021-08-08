@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :spaces, only: %I[show edit update] do
     resource :authenticated_session, only: %i[new create destroy show]
 
+    resources :invitations, only: %i[create destroy] do
+      resource :rsvp, only: %i[show update]
+    end
+
     resources :rooms, only: %i[show edit update new create destroy] do
       resource :waiting_room, only: %i[show update]
       resources :furniture_placements, only: %i[create update destroy]
@@ -20,7 +24,7 @@ Rails.application.routes.draw do
 
   resource :me, only: %i[show], controller: 'me'
 
-  match '/workspaces/*path', to: redirect('/spaces/%<path>'), via: [:GET]
+  match '/workspaces/*path', to: redirect('/spaces/%{path}'), via: [:GET]
 
   resources :guides, only: %i[index show]
 

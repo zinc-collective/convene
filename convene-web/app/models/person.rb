@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A representation of a human
 class Person < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }
@@ -10,6 +12,8 @@ class Person < ApplicationRecord
 
   # The Spaces the Person is part of
   has_many :spaces, through: :space_memberships
+
+  has_many :invitations, inverse_of: :invitor
 
   def member_of?(space)
     spaces.include?(space)
