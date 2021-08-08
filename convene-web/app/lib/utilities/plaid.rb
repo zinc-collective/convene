@@ -5,8 +5,8 @@ module Utilities
   # @see https://plaid.com
   class Plaid < Utility
     # @return [Plaid::PlaidApi]
-    def api_client
-      @api_client ||= ::Plaid::PlaidApi.new(
+    def plaid_client
+      @plaid_client ||= ::Plaid::PlaidApi.new(
         ::Plaid::ApiClient.new(plaid_configuration)
       )
     end

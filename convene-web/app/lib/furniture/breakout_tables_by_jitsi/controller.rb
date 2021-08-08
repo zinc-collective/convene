@@ -1,6 +1,6 @@
 module Furniture
   class BreakoutTablesByJitsi
-    class Controller < Furniture::BaseController
+    class Controller < Furniture::FurnitureController
       def page_title
         "#{room.space.name}, #{room.name}, #{table.name}"
       end
