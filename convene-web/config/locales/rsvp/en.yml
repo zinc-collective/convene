@@ -1,0 +1,7 @@
+en:
+  rsvps:
+    show:
+      header: "You've been invited to '%{space_name}'!"
+      summary: "You were invited to '%{space_name}' by %{invitor_name} on %{invitation_date}"
+      accept: "Join %{space_name}"
+      ignore: "Ignore this invitation"
