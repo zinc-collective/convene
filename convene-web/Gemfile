@@ -15,7 +15,7 @@ gem 'rails', '~> 6.1'
 # Data Transport
 #
 # Use Puma as the app server
-gem 'puma', '~> 5.3'
+gem 'puma', '~> 5.4'
 
 # Browser Layer
 #
@@ -67,12 +67,16 @@ gem 'bootsnap', '~> 1.7', require: false
 #
 gem 'pundit', '~> 2.1'
 
+# Utility hookup support
+#
+gem 'plaid', '14.0.0.beta.5'
+
 group :development, :test do
   gem 'pry-byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # Our preferred testing library for Ruby and Rails projects
   gem 'rspec-rails'
-  gem 'shoulda-matchers', '~> 4.0'
+  gem 'shoulda-matchers', '~> 5.0'
 
   # I hear you like tests.
   gem 'factory_bot_rails'
@@ -83,7 +87,7 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '~> 4.1'
-  gem 'listen', '~> 3.2'
+  gem 'listen', '~> 3.6'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

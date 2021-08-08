@@ -2,14 +2,14 @@
   "name": "convene_web",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.14.0",
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "@rails/actioncable": "^6.1.4",
     "@rails/activestorage": "^6.1.4",
     "@rails/ujs": "^6.1.4",
     "@rails/webpacker": "5.4.0",
-    "@tailwindcss/ui": "^0.4.0",
+    "@tailwindcss/ui": "^0.7.2",
     "event-target-shim": "^6.0.2",
-    "stimulus": "^1.1.1",
+    "stimulus": "^2.0.0",
     "tailwindcss": "^1.9.6",
     "turbolinks": "^5.2.0"
   },
