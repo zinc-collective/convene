@@ -19,11 +19,9 @@ module Furniture
       include ActiveModel::Attributes
       include ActiveModel::AttributeAssignment
 
-      attr_accessor :public_token
-      attr_accessor :access_token
-      attr_accessor :item_id
-
-      attr_accessor :furniture
+      # @return {ItemRecord}
+      attr_accessor :item_record
+      delegate :data, to: :item_record
 
       def public_token=public_token
         @public_token=public_token
@@ -31,13 +29,37 @@ module Furniture
         request = Plaid::ItemPublicTokenExchangeRequest.new(public_token: public_token)
         response = furniture.plaid_client.item_public_token_exchange(request)
         self.access_token = response.access_token
-        self.item_id = response.item_id
+        self.plaid_item_id = response.item_id
 
 
         public_token
       end
 
-      attr_accessor :payer_name
+      def plaid_item_id=(plaid_item_id)
+        data['plaid_item_id'] = plaid_item_id
+      end
+
+      def plaid_item_id
+        data['plaid_item_id']
+      end
+
+      def payer_name=(payer_name)
+        data['payer_name'] = payer_name
+      end
+
+      def payer_name
+        data['payer_name']
+      end
+
+      def payer_email=(payer_email)
+        data['payer_email'] = payer_email
+      end
+
+      def payer_email
+        data['payer_email']
+      end
+
+
       attr_accessor :payer_email
 
       attr_accessor :amount
