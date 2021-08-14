@@ -19,7 +19,7 @@ module Furniture
       include ActiveModel::Attributes
       include ActiveModel::AttributeAssignment
 
-      # @return {ItemRecord}
+      # @return [ItemRecord]
       attr_accessor :item_record
       delegate :data, to: :item_record
 
@@ -59,15 +59,25 @@ module Furniture
         data['payer_email']
       end
 
+      def amount=(amount)
+        data['amount'] = amount
+      end
 
-      attr_accessor :payer_email
+      def amount
+        data['amount']
+      end
 
-      attr_accessor :amount
-      attr_accessor :memo
+      def memo=(memo)
+        data['memo'] = memo
+      end
+
+      def memo
+        data['memo']
+      end
     end
 
     def checks
-      Check
+      placement.item_records.of_type(Check)
     end
 
     def link_token(person)

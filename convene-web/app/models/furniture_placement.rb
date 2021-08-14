@@ -8,6 +8,8 @@ class FurniturePlacement < ApplicationRecord
   belongs_to :room
   delegate :space, to: :room
 
+  has_many :item_records, as: :location
+
   attribute :furniture_kind, :string
 
   attribute :settings, :json, default: {}

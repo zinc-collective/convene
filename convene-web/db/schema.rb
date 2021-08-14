@@ -71,13 +71,13 @@ ActiveRecord::Schema.define(version: 2021_08_14_223027) do
     t.index ["space_id"], name: "index_invitations_on_space_id"
   end
 
-  create_table "item_record", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "item_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "location_type"
     t.uuid "location_id"
     t.jsonb "data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["location_type", "location_id"], name: "index_item_record_on_location"
+    t.index ["location_type", "location_id"], name: "index_item_records_on_location"
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

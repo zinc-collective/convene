@@ -5,4 +5,6 @@ class ItemRecord < ApplicationRecord
   # TODO: We may want to consider using StoreModel
   # or something
   attribute :data, :json, default: {}
+
+  scope :of_type, ->(type) { where("data->>'type' = ?", type.to_s) }
 end
