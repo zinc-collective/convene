@@ -33,7 +33,6 @@ module Furniture
         self.access_token = response.access_token
         self.item_id = response.item_id
 
-        byebug
 
         public_token
       end
