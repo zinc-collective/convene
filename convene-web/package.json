@@ -8,10 +8,13 @@
     "@rails/ujs": "^6.1.4",
     "@rails/webpacker": "5.4.0",
     "@tailwindcss/ui": "^0.7.2",
+    "@webpack-cli/serve": "^1.5.2",
     "event-target-shim": "^6.0.2",
     "stimulus": "^2.0.0",
     "tailwindcss": "^1.9.6",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.8.0"
   },
   "version": "0.1.0",
   "devDependencies": {
