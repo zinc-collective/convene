@@ -6,7 +6,7 @@
     "@rails/actioncable": "^6.1.4",
     "@rails/activestorage": "^6.1.4",
     "@rails/ujs": "^6.1.4",
-    "@rails/webpacker": "5.4.0",
+    "@rails/webpacker": "5.4.2",
     "@tailwindcss/ui": "^0.7.2",
     "event-target-shim": "^6.0.2",
     "stimulus": "^2.0.0",
