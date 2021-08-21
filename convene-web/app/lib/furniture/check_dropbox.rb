@@ -23,16 +23,17 @@ module Furniture
       attr_accessor :item_record
       delegate :data, to: :item_record
 
-      def public_token=public_token
-        @public_token=public_token
+      def public_token=(public_token)
+        @public_token = public_token
 
-        request = Plaid::ItemPublicTokenExchangeRequest.new(public_token: public_token)
+        request = Plaid::ItemPublicTokenExchangeRequest
+                  .new(public_token: self.public_token)
+
         response = furniture.plaid_client.item_public_token_exchange(request)
         self.access_token = response.access_token
         self.plaid_item_id = response.item_id
 
-
-        public_token
+        self.public_token
       end
 
       def plaid_item_id=(plaid_item_id)
@@ -81,7 +82,8 @@ module Furniture
     end
 
     def link_token(person)
-      response = plaid_client.link_token_create(plaid_link_token_request(person))
+      response = plaid_client
+                 .link_token_create(plaid_link_token_request(person))
       # TODO: error handling
       response.link_token
     end
@@ -96,13 +98,11 @@ module Furniture
 
     def plaid_link_token_request(person)
       Plaid::LinkTokenCreateRequest.new(
-        {
-          user: { client_user_id: person.id },
-          client_name: placement.space.name.to_s,
-          products: %w[auth identity],
-          country_codes: ['US'],
-          language: 'en'
-        }
+        user: { client_user_id: person.id },
+        client_name: placement.space.name.to_s,
+        products: %w[auth identity],
+        country_codes: ['US'],
+        language: 'en'
       )
     end
   end
