@@ -69,7 +69,7 @@ gem 'pundit', '~> 2.1'
 
 # Utility hookup support
 #
-gem 'plaid', '14.0.0.beta.5'
+gem 'plaid', '14.0.0'
 
 group :development, :test do
   gem 'pry-byebug', platforms: [:mri, :mingw, :x64_mingw]
