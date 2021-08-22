@@ -6,21 +6,21 @@ module Utilities
   class Plaid < Utility
     # @return [Plaid::PlaidApi]
     def plaid_client
-      @plaid_client ||= ::Plaid::PlaidApi.new(
-        ::Plaid::ApiClient.new(plaid_configuration)
+      @plaid_client ||= sdk::PlaidApi.new(
+        sdk::ApiClient.new(plaid_configuration)
       )
     end
 
     # @see https://plaid.com/docs/api/tokens/#itempublic_tokenexchange
     def exchange_public_token(public_token:)
-      request = ::Plaid::ItemPublicTokenExchangeRequest
+      request = sdk::ItemPublicTokenExchangeRequest
                 .new(public_token: public_token)
       plaid_client.item_public_token_exchange(request)
     end
 
     # @see https://plaid.com/docs/api/tokens/#linktokencreate
     def create_link_token(person:, space:)
-      request = ::Plaid::LinkTokenCreateRequest.new(
+      request = sdk::LinkTokenCreateRequest.new(
         user: { client_user_id: person.id },
         client_name: space.name.to_s,
         products: %w[auth identity],
@@ -34,9 +34,9 @@ module Utilities
     end
 
     def plaid_configuration
-      ::Plaid::Configuration.new do |configuration|
+      sdk::Configuration.new do |configuration|
         configuration.server_index =
-          ::Plaid::Configuration::Environment[environment]
+          sdk::Configuration::Environment[environment]
         configuration.api_key['PLAID-CLIENT-ID'] = client_id
         configuration.api_key['PLAID-SECRET'] = secret
         configuration.api_key['Plaid-Version'] = version
@@ -77,6 +77,13 @@ module Utilities
 
     def attribute_names
       super + %i[environment secret client_id version]
+    end
+
+    # I got sick of having to remember to prefix `Plaid` with `::` when
+    # referencing the official library.
+    # @returns [::Plaid]
+    def sdk
+      ::Plaid
     end
   end
 
