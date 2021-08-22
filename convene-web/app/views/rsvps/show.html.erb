@@ -7,8 +7,3 @@
   <%= rsvp_form.hidden_field :status, value: "accepted" %>
   <%= rsvp_form.submit t('.accept', space_name: rsvp.space.name) %>
 <%- end %>
-
-<%= form_with model: [rsvp.space, rsvp.invitation, rsvp] do |rsvp_form|%>
-<%= rsvp_form.hidden_field :status, value: "rejected" %>
-  <%= rsvp_form.submit t('.ignore', space_name: rsvp.space.name), class: '--neutral' %>
-<%- end %>
