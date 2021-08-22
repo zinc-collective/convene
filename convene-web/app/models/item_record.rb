@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
+# Persists {Item} data and connects them to their appropriate location in the
+# {Neighborhood}.
 class ItemRecord < ApplicationRecord
   # @return [Space, FurniturePlacement]
-  belongs_to :location, polymorphic: true
+  belongs_to :location, polymorphic: true, inverse_of: :item_records
   delegate :utilities, to: :location
 
-  # TODO: We may want to consider using StoreModel
-  # or something
+  # @todo pull this out to an {ActiveRecord::Type} that marshals and unmarshals
+  # the {Item}. Maybe StoreModel would work for this?
   attribute :data, :json, default: {}
 
   def item

@@ -11,12 +11,14 @@ module Utilities
       )
     end
 
+    # @see https://plaid.com/docs/api/tokens/#itempublic_tokenexchange
     def exchange_public_token(public_token:)
       request = ::Plaid::ItemPublicTokenExchangeRequest
                 .new(public_token: public_token)
       plaid_client.item_public_token_exchange(request)
     end
 
+    # @see https://plaid.com/docs/api/tokens/#linktokencreate
     def create_link_token(person:, space:)
       request = ::Plaid::LinkTokenCreateRequest.new(
         user: { client_user_id: person.id },
