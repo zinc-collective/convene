@@ -1,2 +1,3 @@
 release:  bin/rake db:prepare && bin/rake release:after_build
 web:      bin/run
+worker: bin/sidekiq -q default -q mailers
