@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Rsvp
   include ActiveModel::Model
 
@@ -5,10 +7,15 @@ class Rsvp
   delegate :space, to: :invitation
 
   def update(attributes)
-    invitation.update(status: attributes[:status])
-    person = Person.create(name: invitation.name, email: invitation.email)
-    person.space_memberships.create(space: invitation.space)
-    authentication_method = person.authentication_methods.create(contact_method: :email, contact_location: invitation.email)
+    person = Person.create_with(name: invitation.name).find_or_create_by(email: invitation.email)
+
+    authentication_method = person.authentication_methods.find_or_create_by(contact_method: :email, contact_location: invitation.email)
+
+    if person.previously_new_record?
+      invitation.update(status: attributes[:status])
+
+      person.space_memberships.create(space: invitation.space)
+    end
 
     authentication_method.send_one_time_password!(invitation.space)
   end
