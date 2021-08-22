@@ -20,6 +20,8 @@ class Rsvp
     authentication_method.send_one_time_password!(invitation.space)
   end
 
+  # Overload `persisted?` so the Rails url build won't try to pluralize rsvps.
+  # @todo - Do we want to switch to `resources` so we don't need this?
   def persisted?
     true
   end
