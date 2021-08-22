@@ -19,6 +19,8 @@ jobs:
       SMTP_PORT: 1025
       SMTP_DOMAIN: localhost
       SMTP_ENABLE_TLS: false
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
 
     services:
       postgres:
