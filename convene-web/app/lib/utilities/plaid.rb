@@ -11,6 +11,26 @@ module Utilities
       )
     end
 
+    def exchange_public_token(public_token:)
+      request = ::Plaid::ItemPublicTokenExchangeRequest
+                .new(public_token: public_token)
+      plaid_client.item_public_token_exchange(request)
+    end
+
+    def create_link_token(person:, space:)
+      request = ::Plaid::LinkTokenCreateRequest.new(
+        user: { client_user_id: person.id },
+        client_name: space.name.to_s,
+        products: %w[auth identity],
+        country_codes: ['US'],
+        language: 'en'
+      )
+      response = plaid_client
+                 .link_token_create(request)
+      # TODO: error handling
+      response.link_token
+    end
+
     def plaid_configuration
       ::Plaid::Configuration.new do |configuration|
         configuration.server_index =
@@ -26,7 +46,7 @@ module Utilities
     end
 
     def client_id=(client_id)
-      configuration['client_id']=client_id
+      configuration['client_id'] = client_id
     end
 
     def secret
@@ -34,7 +54,7 @@ module Utilities
     end
 
     def secret=(secret)
-      configuration['secret']=secret
+      configuration['secret'] = secret
     end
 
     def environment
@@ -54,13 +74,13 @@ module Utilities
     end
 
     def attribute_names
-      super + [:environment, :secret, :client_id, :version]
+      super + %i[environment secret client_id version]
     end
   end
 
   class PlaidPolicy < Utility::Policy
     def permitted_params
-      [:environment, :secret, :client_id, :version]
+      %i[environment secret client_id version]
     end
   end
 end

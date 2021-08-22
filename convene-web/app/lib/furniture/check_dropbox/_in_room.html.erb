@@ -2,8 +2,7 @@
 <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
 
 
-<% # TODO next: get this form working again %>
-<%= form_with model: [Furniture::CheckDropbox::Check], data: { controller: "check-dropbox", check_dropbox_link_token: furniture.link_token(current_person) }, url: space_room_furniture_check_dropbox_checks_path(space, room)  do |check_form|%>
+<%= form_with model: [room.space, room, furniture.checks.new], data: { controller: "check-dropbox", check_dropbox_link_token: furniture.link_token_for(current_person) } do |check_form|%>
   <div>
     <%= check_form.label :pay_from do %>
       <span data-check-dropbox-target="payFrom">

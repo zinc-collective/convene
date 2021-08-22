@@ -14,96 +14,12 @@ module Furniture
       end
     end
 
-    class Check
-      include ActiveModel::Model
-      include ActiveModel::Attributes
-      include ActiveModel::AttributeAssignment
-
-      # @return [ItemRecord]
-      attr_accessor :item_record
-      delegate :data, to: :item_record
-
-      def public_token=(public_token)
-        @public_token = public_token
-
-        request = Plaid::ItemPublicTokenExchangeRequest
-                  .new(public_token: self.public_token)
-
-        response = furniture.plaid_client.item_public_token_exchange(request)
-        self.access_token = response.access_token
-        self.plaid_item_id = response.item_id
-
-        self.public_token
-      end
-
-      def plaid_item_id=(plaid_item_id)
-        data['plaid_item_id'] = plaid_item_id
-      end
-
-      def plaid_item_id
-        data['plaid_item_id']
-      end
-
-      def payer_name=(payer_name)
-        data['payer_name'] = payer_name
-      end
-
-      def payer_name
-        data['payer_name']
-      end
-
-      def payer_email=(payer_email)
-        data['payer_email'] = payer_email
-      end
-
-      def payer_email
-        data['payer_email']
-      end
-
-      def amount=(amount)
-        data['amount'] = amount
-      end
-
-      def amount
-        data['amount']
-      end
-
-      def memo=(memo)
-        data['memo'] = memo
-      end
-
-      def memo
-        data['memo']
-      end
-    end
-
     def checks
-      placement.item_records.of_type(Check)
+      ItemAssociation.new(type: Check, location: placement)
     end
 
-    def link_token(person)
-      response = plaid_client
-                 .link_token_create(plaid_link_token_request(person))
-      # TODO: error handling
-      response.link_token
-    end
-
-    # @return [Utilities::Plaid]
-    def utility
-      placement.space.utility_hookups.where(name: 'Plaid').first&.utility
-    end
-    delegate :plaid_client, to: :utility
-
-    private
-
-    def plaid_link_token_request(person)
-      Plaid::LinkTokenCreateRequest.new(
-        user: { client_user_id: person.id },
-        client_name: placement.space.name.to_s,
-        products: %w[auth identity],
-        country_codes: ['US'],
-        language: 'en'
-      )
+    def link_token_for(person)
+      utilities.plaid.create_link_token(person: person, space: placement.space)
     end
   end
 end

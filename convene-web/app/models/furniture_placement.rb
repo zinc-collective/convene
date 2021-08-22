@@ -28,6 +28,10 @@ class FurniturePlacement < ApplicationRecord
     @furniture ||= Furniture.from_placement(self)
   end
 
+  def utilities
+    space.utility_hookups
+  end
+
   def infer_slot
     return if slot.present?
 
