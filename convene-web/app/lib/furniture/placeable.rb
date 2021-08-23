@@ -6,6 +6,8 @@ module Furniture
     # @return {FurniturePlacement}
     attr_accessor :placement
 
+    delegate :utilities, to: :placement
+
     def self.included(placeable)
       placeable.include ActiveModel::Model
       placeable.include ActiveModel::Attributes

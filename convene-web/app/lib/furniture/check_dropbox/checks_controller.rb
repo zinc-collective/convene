@@ -4,7 +4,7 @@ module Furniture
   class CheckDropbox
     class ChecksController < FurnitureController
       def create
-        furniture.checks.new({furniture: furniture}.merge(check_params))
+        furniture.checks.create(check_params)
       end
 
       private def check_params

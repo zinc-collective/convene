@@ -8,6 +8,8 @@ class FurniturePlacement < ApplicationRecord
   belongs_to :room
   delegate :space, to: :room
 
+  has_many :item_records, as: :location
+
   attribute :furniture_kind, :string
 
   attribute :settings, :json, default: {}
@@ -24,6 +26,10 @@ class FurniturePlacement < ApplicationRecord
   before_validation :infer_slot
   def furniture
     @furniture ||= Furniture.from_placement(self)
+  end
+
+  def utilities
+    space.utility_hookups
   end
 
   def infer_slot
