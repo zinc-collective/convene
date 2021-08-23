@@ -1,8 +1,10 @@
 # Convene::Web Changelog
 
-HEAD
---------
+## 1.0 - Andromeda
+
 ### Added
+- [Authentication](https://github.com/zinc-collective/convene/issues/118)
+  - Guests, Neighbors, and Space Members may sign in by entering their email address; they'll receive an email from Convene, with a link or one-time passcode they can use to complete the sign-in process.
 - [Screen Sharing](https://github.com/zinc-collective/convene/issues/91)
   - Video fills the screens View Height, making it easier to read text when screen sharing.
 
