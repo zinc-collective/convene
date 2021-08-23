@@ -24,12 +24,19 @@
       "options": {
         "version": "12"
       }
+    },
+    {
+      "plan": "heroku-redis:hobby-dev"
     }
   ],
   "environments": {
     "review": {
       "formation": {
         "web": {
+          "quantity": 1,
+          "size": "hobby"
+        },
+        "worker": {
           "quantity": 1,
           "size": "hobby"
         }
@@ -54,6 +61,9 @@
           "options": {
             "verison": "12"
           }
+        },
+        {
+          "plan": "heroku-redis:hobby-dev"
         }
       ]
     }

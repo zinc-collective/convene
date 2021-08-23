@@ -1,7 +1,20 @@
-RSpec.describe "/spaces/:space_id/invitations/:invitation_id/rsvp", type: :request do
-  # @todo We need to build the flow fo accepting an invitation out
-  describe "GET /spaces/:space_id/invitations/:invitation_id/rsvp" do
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :request do
+  let(:space) { invitation.space }
+  let(:neighbor) { create(:neighbor) }
+  let(:invitation) { create(:invitation) }
+  describe 'GET /spaces/:space_id/invitations/:invitation_id/rsvp' do
     context 'as a guest' do
+      it 'Does not require them to sign in' do
+        get space_invitation_rsvp_path(space, invitation)
+
+        expect(response).to be_ok
+        expect(response).to render_template(:show)
+        expect(assigns(:invitation)).to eql(invitation)
+      end
     end
 
     context 'as a neighbor' do
@@ -11,16 +24,76 @@ RSpec.describe "/spaces/:space_id/invitations/:invitation_id/rsvp", type: :reque
     end
   end
 
-  describe "PUT /spaces/:space_id/invitations/:invitation_id/rsvp" do
+  describe 'PUT /spaces/:space_id/invitations/:invitation_id/rsvp' do
     context 'as a guest' do
-      xit 'registers them when they accept the invitation' do
-        person = Person.find_by(email: invitation.email)
+      context 'whose email is unique within the system' do
+        it 'registers them when they accept the invitation' do
+          expect do
+            put space_invitation_rsvp_path(space, invitation),
+                params: { rsvp: { status: :accepted } }
+          end.to have_enqueued_mail(AuthenticatedSessionMailer, :one_time_password_email)
 
-        expect(invitation).to be_accepted
-        expect(one_time_password_email).to have_been_delivered
-        expect(response).to redirect_to(space_authenticated_session_path(invitation.space))
-        expect(person.space_memberships.find_by(space: space)).to be_present
-        expect(person.confirmed_at).to be_blank
+          person = Person.find_by!(email: invitation.email)
+
+          expect(invitation.reload).to be_accepted
+
+          expect(response).to redirect_to(
+            new_space_authenticated_session_path(space,
+                                                 params: {
+                                                   authenticated_session:
+                                                  {
+                                                    contact_method: :email,
+                                                    contact_location: person.email
+                                                  }
+                                                 })
+          )
+          expect(person.space_memberships
+              .find_by(space: space)).to be_present
+
+          authentication_method = person
+                                  .authentication_methods
+                                  .find_by!(contact_method: :email,
+                                            contact_location: invitation.email)
+
+          expect(authentication_method.confirmed_at).to be_blank
+        end
+      end
+    end
+
+    context 'whose email is already registered' do
+      let!(:neighbor) { create(:person, email: invitation.email) }
+      let!(:authentication_method) do
+        create(:authentication_method, person: neighbor)
+      end
+
+      it 'does not accept the invitation until they sign in' do
+        expect do
+          put space_invitation_rsvp_path(space, invitation),
+              params: { rsvp: { status: :accepted } }
+        end.to have_enqueued_mail(
+          AuthenticatedSessionMailer, :one_time_password_email
+        ).with(
+          args: [neighbor.authentication_methods.first, space]
+        )
+
+        expect(response).to redirect_to(
+          new_space_authenticated_session_path(space,
+                                               params: {
+                                                 authenticated_session:
+                                                {
+                                                  contact_method: :email,
+                                                  contact_location: neighbor.email
+                                                }
+                                               })
+        )
+
+        # @todo - can we assert there's a flash message?
+        # @todo - Maybe we want to require signing in when showing the
+        #         invitation if it's for a  person who is already registered?
+
+        expect(invitation.reload).not_to be_accepted
+        expect(neighbor.space_memberships
+          .find_by(space: space)).not_to be_present
       end
     end
   end

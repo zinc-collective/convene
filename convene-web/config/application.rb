@@ -36,6 +36,7 @@ module ConveneWeb
     config.paths['app/views'].unshift(Rails.root.join('app', 'lib', 'furniture'))
     config.session_store :cookie_store, expire_after: 7.days
 
+    config.active_job.queue_adapter = :sidekiq
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
   end

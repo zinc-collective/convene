@@ -71,6 +71,10 @@ gem 'pundit', '~> 2.1'
 #
 gem 'plaid', '14.0.0.beta.5'
 
+
+# Workers and Background Jobs
+gem 'sidekiq'
+
 group :development, :test do
   gem 'pry-byebug', platforms: [:mri, :mingw, :x64_mingw]
 

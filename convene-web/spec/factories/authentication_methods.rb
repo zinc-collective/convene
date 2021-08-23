@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :authentication_method do
     contact_method { :email }
-    sequence(:contact_location) { |n| "method-#{n}@example.com" }
+    contact_location { person.email }
+
+    association :person
   end
 end
