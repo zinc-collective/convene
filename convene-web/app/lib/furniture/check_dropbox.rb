@@ -9,7 +9,7 @@ module Furniture
     def self.append_routes(router)
       router.scope module: 'check_dropbox' do
         router.resource :check_dropbox, only: [:show] do
-          router.resources :checks, only: [:create]
+          router.resources :checks, only: [:create, :index]
         end
       end
     end

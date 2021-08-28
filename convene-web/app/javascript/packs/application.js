@@ -20,3 +20,7 @@ import "controllers"
 require('../src/tailwind.scss')
 require('../src/application.scss')
 require("@fortawesome/fontawesome-free/css/all.css")
+
+// Disable Turbo by default, and let us instead enable it on a per-element basis.
+import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false
