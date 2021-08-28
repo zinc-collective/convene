@@ -12,7 +12,6 @@
     "event-target-shim": "^6.0.2",
     "stimulus": "^2.0.0",
     "tailwindcss": "^1.9.6",
-    "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^4.8.0"
   },
