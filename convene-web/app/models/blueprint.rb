@@ -29,7 +29,7 @@ class Blueprint
   def set_rooms
     space_attributes.fetch(:rooms, []).each do |room_attributes|
       room = space.rooms.find_or_initialize_by(name: room_attributes[:name])
-      room.update!(room_attributes.except(:name, :furniture_placements))
+      room.update!(room_attributes.merge(room.attributes.compact).except(:name, :furniture_placements))
       add_furniture(room, room_attributes)
     end
   end
@@ -40,7 +40,7 @@ class Blueprint
       furniture_placement = room.furniture_placements
                                 .find_or_initialize_by(slot: slot)
       furniture_placement
-        .update!(settings: furniture_placement.settings.merge(settings),
+        .update!(settings: settings.merge(furniture_placement.settings.compact),
                  furniture_kind: furniture)
     end
   end
