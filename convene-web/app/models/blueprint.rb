@@ -49,7 +49,7 @@ class Blueprint
     space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
       utility_hookup = space.utility_hookups
                             .find_or_initialize_by(name: utility_hookup_attributes[:name])
-      utility_hookup.update!(utility_hookup_attributes)
+      utility_hookup.update!(utility_hookup_attributes.merge(utility_hookup.attributes.compact))
     end
   end
 
