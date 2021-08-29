@@ -3,6 +3,6 @@
     Your check for <%= @check.amount %> was successfully created! 💸
   </p>
   <p>
-    See your <%= link_to furniture %>
+    See <%= link_to "all checks", space_room_furniture_check_dropbox_checks_path(space, room) %>
   </p>
 </turbo-frame>

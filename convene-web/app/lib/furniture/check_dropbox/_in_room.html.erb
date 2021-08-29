@@ -2,27 +2,5 @@
 <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
 
 <turbo-frame id="check-dropbox" data-turbo="true">
-  <%= form_with model: [room.space, room, furniture.checks.new], data: { controller: "check-dropbox", check_dropbox_link_token: furniture.link_token_for(current_person) } do |check_form|%>
-    <div>
-      <%= check_form.label :pay_from do %>
-        <span data-check-dropbox-target="payFrom">
-          <button
-          data-action="click->check-dropbox#createLink">Choose bank account
-          </button>
-        </span>
-      <%- end %>
-      <%= check_form.hidden_field :public_token, data: { check_dropbox_target: "publicToken" } %>
-    </div>
-
-
-    <div>
-      <%= check_form.label :amount %>
-
-      <%= check_form.text_field :amount %>
-    </div>
-
-    <div>
-      <%= check_form.submit disabled: true, data: { check_dropbox_target: "dropOffButton" } %>
-    </div>
-  <%- end %>
+  <%= render "check_dropbox/checks/form", room: room, furniture: furniture %>
 </turbo-frame>

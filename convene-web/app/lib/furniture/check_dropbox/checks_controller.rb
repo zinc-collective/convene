@@ -25,8 +25,12 @@ module Furniture
         room.furniture_placements.find_by(furniture_kind: "check_dropbox").furniture
       end
 
-      private def room
+      helper_method def room
         current_space.rooms.friendly.find(params[:room_id])
+      end
+
+      helper_method def space
+        current_space
       end
     end
   end

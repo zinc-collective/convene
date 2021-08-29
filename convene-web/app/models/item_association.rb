@@ -2,6 +2,7 @@ class ItemAssociation
   attr_accessor :type, :location
 
   delegate :item_records, to: :location
+  delegate :size, to: :item_records
 
   def initialize(type:, location:)
     self.type = type
