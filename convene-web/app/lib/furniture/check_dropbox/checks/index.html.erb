@@ -1,0 +1,12 @@
+<turbo-frame id="check-dropbox">
+  <%= @checks.size %> checks deposited
+  <% @checks.each do |check| %>
+    <p>
+      Payer name: <%= check.payer_name %><br>
+      Payer email: <%= check.payer_email %><br/>
+      Amount: <%= check.amount %><br/>
+      Memo: <%= check.memo %>
+    </p>
+    <hr/>
+  <% end %>
+</turbo-frame>
