@@ -18,6 +18,7 @@ class UtilityHookup < ApplicationRecord
   # Should match one of the keys in {Utilities::REGISTRY}
   # @return [String]
   attribute :utility_slug, :string
+  validates :utility_slug, presence: true
 
   # @return [String]
   attribute :status, :string, default: 'unavailable'
