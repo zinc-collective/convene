@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe UtilityHookup, type: :model do
+  it { is_expected.to validate_presence_of(:utility_slug) }
+
   describe '.new' do
     it 'accepts nested attributes for the utility' do
       uh = UtilityHookup.new(utility_slug: :jitsi, utility_attributes: { meet_domain: 'asdf' })

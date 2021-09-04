@@ -29,7 +29,7 @@ class Blueprint
   def set_rooms
     space_attributes.fetch(:rooms, []).each do |room_attributes|
       room = space.rooms.find_or_initialize_by(name: room_attributes[:name])
-      room.update!(room_attributes.except(:name, :furniture_placements))
+      room.update!(merge_non_empty(room_attributes, room.attributes).except(:name, :furniture_placements))
       add_furniture(room, room_attributes)
     end
   end
@@ -40,7 +40,7 @@ class Blueprint
       furniture_placement = room.furniture_placements
                                 .find_or_initialize_by(slot: slot)
       furniture_placement
-        .update!(settings: furniture_placement.settings.merge(settings),
+        .update!(settings: merge_non_empty(settings, furniture_placement.settings),
                  furniture_kind: furniture)
     end
   end
@@ -49,7 +49,8 @@ class Blueprint
     space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
       utility_hookup = space.utility_hookups
                             .find_or_initialize_by(name: utility_hookup_attributes[:name])
-      utility_hookup.update!(utility_hookup_attributes)
+
+      utility_hookup.update!(merge_non_empty(utility_hookup_attributes, utility_hookup.attributes))
     end
   end
 
@@ -84,6 +85,21 @@ class Blueprint
 
   def space_attributes
     client_attributes[:space]
+  end
+
+  # Normally, merge will clobber keys with values if there is a key with a nil
+  # or empty value. However, we don't want to do that here.
+  # @example
+  #   new = {  a: "ah", b: { c: :d } }
+  #   original = { "a" => nil, "b" => {} }
+  #   merge_non_empty(new, original)
+  #   # => { "a" => "ah", "b": { c: :d }}
+  private def merge_non_empty(left, right)
+    right.delete_if do |_key, value|
+      value.blank?
+    end
+
+    left.with_indifferent_access.merge(right.with_indifferent_access)
   end
 
   # @todo migrate this to a private configuration file!
