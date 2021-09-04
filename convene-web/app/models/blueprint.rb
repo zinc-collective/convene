@@ -95,12 +95,9 @@ class Blueprint
   #   merge_non_empty(new, original)
   #   # => { "a" => "ah", "b": { c: :d }}
   private def merge_non_empty(left, right)
-    right = right.each_with_object({}) do |(k, v), r|
-      v = v.respond_to?(:compact) ? v.compact : v
-      next if v.blank?
-
-      r[k] = v
-    end.compact.with_indifferent_access
+    right.delete_if do |_key, value|
+      value.blank?
+    end
 
     left.with_indifferent_access.merge(right.with_indifferent_access)
   end
