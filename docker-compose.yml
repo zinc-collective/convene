@@ -5,9 +5,12 @@ services:
     image: postgres
     restart: always
     environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_PASSWORD: password
     ports:
       - 5432:5432
+    volumes:
+      - 'postgres_data:/var/lib/postgresql/data'
   redis:
     image: docker.io/bitnami/redis:6.2
     environment:
@@ -21,4 +24,6 @@ services:
 
 volumes:
   redis_data:
+    driver: local
+  postgres_data:
     driver: local
