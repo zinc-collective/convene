@@ -69,7 +69,7 @@ gem 'pundit', '~> 2.1'
 
 # Utility hookup support
 #
-gem 'plaid', '14.1.0'
+gem 'plaid', '14.2.0'
 
 
 # Workers and Background Jobs
