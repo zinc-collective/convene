@@ -1,4 +1,4 @@
-const { By } = require('selenium-webdriver');
+const { By } = require("selenium-webdriver");
 class AccessLevel {
   constructor(level) {
     this.level = level;
@@ -16,8 +16,12 @@ class AccessLevel {
    * @returns {string}
    */
   get attributeSelector() {
-    return `[data-access-level="${this.level.toLowerCase()}"]`
+    return `[data-access-level="${this.level.toLowerCase()}"]`;
+  }
+
+  isLocked() {
+    return this.level.toLowerCase() === "locked";
   }
 }
 
-module.exports = AccessLevel
+module.exports = AccessLevel;

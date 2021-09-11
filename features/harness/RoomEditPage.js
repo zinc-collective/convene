@@ -11,12 +11,11 @@ class RoomEditPage extends Page {
    * @param {AccessCode} accessCode
    * @returns {Promise<this>}
    */
-  async lock(accessCode) {
-    await this.accessLevel().select("locked");
-    await this.accessCode().fillIn(accessCode.value);
-    await this.submitButton().click();
-
-    return this;
+  lock(accessCode) {
+    return this.accessLevel().select("locked")
+      .then(() => this.accessCode().fillIn(accessCode.value))
+      .then(() => this.submitButton().click())
+      .finally(() => this)
   }
 
   /**

@@ -1,18 +1,54 @@
 const { Given, When, Then } = require("cucumber");
 
-const { SpacePage, SpaceEditPage, RoomEditPage, RoomPage } = require("../harness/Pages");
+const {
+  SpacePage,
+  SpaceEditPage,
+  RoomEditPage,
+  RoomPage,
+} = require("../harness/Pages");
 const { RoomCardComponent } = require("../harness/Components");
-const { Space, Room, Actor, linkParameters } = require("../lib");
+const {
+  Space,
+  Room,
+  Actor,
+  linkParameters,
+  AccessCode,
+  AccessLevel,
+} = require("../lib");
 
 const assert = require("assert").strict;
-
-
 
 Given("a Space with {accessLevel} {room}", async function (accessLevel, room) {
   let { space } = linkParameters({ accessLevel, room });
   this.space = await new SpacePage(this.driver, space).visit();
   const matchingRooms = await this.space.roomCardsWhere({ accessLevel });
-  assert(matchingRooms.length > 0);
+  if (!matchingRooms.length > 0) {
+    const spaceMember = new Actor("Space Member");
+    const page = await spaceMember
+      .signIn(this.driver, space)
+      .then(() => new SpaceEditPage(this.driver, space).visit());
+
+    // @todo Sprout an API for editing a Space so we don't need to do it via
+    //       the UI
+    if (accessLevel.isLocked()) {
+      room.reinitialize(new AccessLevel("unlocked"));
+      await page
+        .roomCard(room)
+        .configure()
+        .then((page) => page.lock(new AccessCode("valid")));
+    } else {
+      room.reinitialize(new AccessLevel("locked"));
+      await page
+        .roomCard(room)
+        .configure()
+        .then((page) => page.unlock(new AccessCode("valid")));
+    }
+
+    return this.space
+      .visit()
+      .then(() => this.space.roomCardsWhere({ accessLevel }))
+      .then((matchingRooms) => assert(matchingRooms.length > 0));
+  }
 });
 
 Given("a Space with an {publicityLevel} Room", function (publicityLevel) {
@@ -24,7 +60,7 @@ When(
   "a {actor} unlocks {accessLevel} {room} with {accessCode}",
   async function (actor, accessLevel, room, accessCode) {
     const { space } = linkParameters({ room, accessLevel });
-    await actor.signIn(this.driver, space)
+    await actor.signIn(this.driver, space);
 
     return new SpaceEditPage(this.driver, space)
       .visit()
@@ -36,8 +72,8 @@ When(
 When(
   "a {actor} locks {accessLevel} {room} with {accessCode}",
   async function (actor, accessLevel, room, accessCode) {
-    const { space } = linkParameters({ accessLevel, room })
-    await actor.signIn(this.driver, space)
+    const { space } = linkParameters({ accessLevel, room });
+    await actor.signIn(this.driver, space);
 
     return new SpaceEditPage(this.driver, space)
       .visit()
@@ -90,11 +126,12 @@ Then(
     linkParameters({ room, accessLevel, accessCode });
     await this.driver.manage().deleteAllCookies();
 
-    const roomPage = await this.space
+    const isWaitingRoom = await this.space
       .visit()
-      .then((spacePage) => spacePage.roomCard(room).enter(accessCode));
+      .then((spacePage) => spacePage.roomCard(room).enter(accessCode))
+      .then((roomPage) => roomPage.isWaitingRoom())
 
-    assert(!(await roomPage.isWaitingRoom()));
+    assert(!isWaitingRoom);
   }
 );
 
@@ -114,7 +151,7 @@ Then(
 Then("the Room {accessLevel}", async function (accessLevel) {
   const room = new Room("");
   const { space } = linkParameters({ room, accessLevel });
-  await (new SpacePage(this.driver, space)).visit();
+  await new SpacePage(this.driver, space).visit();
   if (accessLevel.level === "Locked") {
     const roomCard = new RoomCardComponent(this.driver, room);
     assert(await roomCard.isLocked());

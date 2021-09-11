@@ -32,6 +32,7 @@ class Component {
    */
   fillIn(value) {
     return this.el()
+      .then((el) => { el.clear(); return el;})
       .then((el) => el.sendKeys(value))
       .then(() => this);
   }
