@@ -13,8 +13,19 @@ class SignInPage extends Page {
   submitEmail(email) {
     return this.component("input[type=email]")
       .fillIn(email)
-      .then(() => this.component("input[type=submit]").click())
+      .then(() => this.submitButton().click())
       .then(() => this);
+  }
+
+  submitCode(code) {
+    return this.component('input[name="authenticated_session[one_time_password]"]')
+      .fillIn(code)
+      .then(() => this.submitButton().click())
+      .finally(() => this)
+  }
+
+  submitButton() {
+    return this.component("input[type=submit")
   }
 }
 

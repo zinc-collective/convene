@@ -77,13 +77,14 @@ Feature: Identification
     Then the Authenticated Person is treated as a Guest
 
   # An Emailed Code is a _Possession_ Verification Factor that demonstrates the
-  # person can at least _read_ the email address they are using to identiy
+  # person can at least _read_ the email address they are using to identify
   # themselves.
-  @built @unimplemented-steps
+  @built
   Scenario: Identity Verification via Emailed Code
-    Given a Guest has requested to Identify themselves via Email
-    When the Guest provides the Identification Code emailed to them
-    Then the Guest is Identified as themselves
+    Given an unauthenticated Space Member has requested to be identified via Email
+    When the unauthenticated Space Member provides the Identification Code emailed to them
+    Then the Space Member is Verified as the Owner of that Email Address
+    And the Space Member has become Authenticated
 
   @unstarted
   Scenario: People with Multiple Email Addresses
