@@ -18,8 +18,9 @@ that [Neighborhood's] [Spaces].
 To switch from being a [Guest] to a [Neighbor], [Space Member], or [Space Owner]
 use the [Personal Navigation Menu] to sign in.
 
-You'll be asked to provide your email address, and follow the link we email you
-to confirm you are the person who has access to that email address.
+You'll be asked to provide your email address. Once you submit your email, we will
+email you with a link and a one time password. You may either enter the one time
+password or follow the link to confirm you are the owner of that email address.
 
 ### Set Up Your Profile
 

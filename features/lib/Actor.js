@@ -41,6 +41,16 @@ class Actor {
   }
 
   /**
+   * The code a user can use to sign in
+   * @returns {Promise<string>}
+   */
+   async authenticationCode() {
+    const email = await this.emailServer().lastEmailTo(this.email);
+
+    return email.text.match(/password is (\d+)/)[1]
+  }
+
+  /**
    * @returns {Promise<MailServerEmail[]>}
    */
   emails() {

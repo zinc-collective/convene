@@ -31,6 +31,12 @@ When(
   }
 );
 
+When('the unauthenticated {actor} provides the Identification Code emailed to them', function (actor) {
+
+  return actor.authenticationCode()
+    .then((code) => new SignInPage(this.driver).submitCode(code))
+});
+
 When("the Authenticated Person Signs Out", function () {
   return this.actor.signOut(this.driver)
 });
