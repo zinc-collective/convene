@@ -17,4 +17,8 @@ class Item
   delegate :data, to: :item_record
   delegate :utilities, to: :item_record
   delegate :save, to: :item_record
+
+  def self.where(*arguments)
+    item_record.class.where(*arguments)
+  end
 end

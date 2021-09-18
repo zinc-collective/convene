@@ -19,6 +19,32 @@ module Furniture
         self.public_token
       end
 
+      READY_FOR_DEPOSIT = :ready_for_deposit
+      UNCLEARED = :uncleared
+      CLEARED = :cleared
+
+      STATES = [READY_FOR_DEPOSIT, UNCLEARED, CLEARED].freeze
+
+      def status
+        data['status']&.to_sym
+      end
+
+      def status=(status)
+        data['status']=status
+      end
+
+      def ready_for_deposit?
+        status.blank? || status == READY_FOR_DEPOSIT
+      end
+
+      def uncleared?
+        status == UNCLEARED
+      end
+
+      def cleared?
+        status == UNCLEARED
+      end
+
       attr_reader :public_token
 
       def plaid_item_id=(plaid_item_id)

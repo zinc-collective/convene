@@ -21,6 +21,7 @@ module Furniture
               .permit(:payer_name, :payer_email, :amount, :memo, :public_token)
       end
 
+      # @returns [CheckDropbox]
       helper_method def furniture
         room.furniture_placements.find_by(furniture_kind: "check_dropbox").furniture
       end

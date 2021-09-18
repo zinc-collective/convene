@@ -1,20 +1,24 @@
 class ItemAssociation
-  attr_accessor :type, :location
+  attr_accessor :type, :item_records
 
-  delegate :item_records, to: :location
   delegate :size, to: :item_records
 
-  def initialize(type:, location:)
+  def initialize(type:, item_records:)
     self.type = type
-    self.location = location
+    self.item_records = item_records
   end
 
   def new(attributes = {})
-    type.new({ item_record: location.item_records.new(type: type) }.merge(attributes))
+    type.new({ item_record: item_records.new(type: type) }.merge(attributes))
   end
 
   def create(attributes = {})
     new(attributes).tap(&:save)
+  end
+
+  def where(*args)
+    ItemAssociation.new(type: type,
+      item_records: item_records.where(*args))
   end
 
   def each(&block)

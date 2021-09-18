@@ -14,8 +14,9 @@ module Furniture
       end
     end
 
+    # @returns [ItemAssociation<Check>]
     def checks
-      ItemAssociation.new(type: Check, location: placement)
+      ItemAssociation.new(type: Check, item_records: placement.item_records)
     end
 
     def link_token_for(person)
