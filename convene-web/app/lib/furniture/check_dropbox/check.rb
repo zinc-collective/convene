@@ -29,6 +29,14 @@ module Furniture
         data['plaid_item_id']
       end
 
+      def account_number
+        utilities.plaid.account_number_for(access_token: access_token, item_id: plaid_item_id)
+      end
+
+      def routing_number
+        utilities.plaid.routing_number_for(access_token: access_token, item_id: plaid_item_id)
+      end
+
       def access_token=(access_token)
         data['access_token'] = access_token
       end

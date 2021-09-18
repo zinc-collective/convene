@@ -33,6 +33,18 @@ module Utilities
       response.link_token
     end
 
+    def account_number_for(access_token:, item_id:)
+      request = sdk::AuthGetRequest.new(access_token: access_token)
+      response = plaid_client.auth_get(request)
+      response.numbers.ach.find { |a| a.account_id = item_id }.account
+    end
+
+    def routing_number_for(access_token:, item_id:)
+      request = sdk::AuthGetRequest.new(access_token: access_token)
+      response = plaid_client.auth_get(request)
+      response.numbers.ach.find { |a| a.account_id = item_id }.account
+    end
+
     def plaid_configuration
       sdk::Configuration.new do |configuration|
         configuration.server_index =

@@ -3,4 +3,8 @@
 
 <turbo-frame id="check-dropbox" data-turbo="true">
   <%= render "check_dropbox/checks/form", room: room, furniture: furniture %>
+
+  <p>
+  See <%= link_to "all checks", space_room_furniture_check_dropbox_checks_path(room.space, room) %>
+  </p>
 </turbo-frame>
