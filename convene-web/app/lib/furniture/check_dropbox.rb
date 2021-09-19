@@ -9,14 +9,14 @@ module Furniture
     def self.append_routes(router)
       router.scope module: 'check_dropbox' do
         router.resource :check_dropbox, only: [:show] do
-          router.resources :checks, only: [:create, :index]
+          router.resources :checks, only: %i[create index]
         end
       end
     end
 
-    # @returns [ItemAssociation<Check>]
+    # @returns [ItemRepository<Check>]
     def checks
-      ItemAssociation.new(type: Check, item_records: placement.item_records)
+      ItemRepository.new(type: Check, item_records: placement.item_records)
     end
 
     def link_token_for(person)

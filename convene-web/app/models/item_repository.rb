@@ -1,4 +1,7 @@
-class ItemAssociation
+# An {ItemRepository} ensures that querying or creating
+# items is restricted to the location.
+
+class ItemRepository
   attr_accessor :type, :item_records
 
   delegate :size, to: :item_records
@@ -17,8 +20,7 @@ class ItemAssociation
   end
 
   def where(*args)
-    ItemAssociation.new(type: type,
-      item_records: item_records.where(*args))
+    ItemRepository.new(type: type, item_records: item_records.where(*args))
   end
 
   def each(&block)
