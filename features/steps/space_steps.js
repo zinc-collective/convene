@@ -3,16 +3,19 @@ const { RoomPage, SpacePage, SpaceEditPage } = require("../harness/Pages");
 
 const { linkParameters } = require("../lib");
 
-Given('a Space', function() {
-  // This space intentionally left blank... For now...
-  // TODO: Create a Space for each test instead of re-using the
-  //       System Test Space
+Given('{a} {space}', function(_, space) {
+  // @todo eventually let's hit an endpoint or create a Space with a factory
+  return true
 })
 
 Given('a Space with a Room', function() {
   // This space intentionally left blank... For now...
   // TODO: Create a Space for each test instead of re-using the
   //       System Test Space
+})
+
+Given('{a} {space} has {a} {actor}', function(_, space, _, actor) {
+  return true
 })
 
 Given('the {actor} is on the {space} Dashboard', async function (actor, space) {
