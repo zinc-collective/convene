@@ -1,7 +1,7 @@
 <% breadcrumb :edit_space, space %>
 
 <%- if Feature.enabled?(:invitation) %>
-  <fieldset>
+  <fieldset class="new-invitation-form">
     <header>
       <h3><%= t('invitations.invite_member_heading') %></h3>
     </header>

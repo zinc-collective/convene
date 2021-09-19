@@ -1,7 +1,6 @@
 class Invitation < ApplicationRecord
   belongs_to :space, inverse_of: :invitations
 
-
   belongs_to :invitor, class_name: :Person, inverse_of: :invitations
 
   default_scope -> { order(updated_at: :desc) }

@@ -1,8 +1,8 @@
 const { ThenableWebDriver } = require("selenium-webdriver");
-const Page = require('./Page');
-const Room = require('../lib/Room');
+const Page = require("./Page");
+const Room = require("../lib/Room");
 const RoomCardComponent = require("./RoomCardComponent");
-const RoomFormComponent = require("./RoomFormComponent");
+const Component = require("./Component");
 
 class SpaceEditPage extends Page {
   /**
@@ -32,12 +32,12 @@ class SpaceEditPage extends Page {
   createRoom({ room }) {
     return new RoomFormComponent(this.driver)
       .fillIn(room)
-      .then((c) => c.submit())
+      .then((c) => c.submit());
   }
 
   /**
    * @param {string} slug
-   * @returns Promise<SpaceEditPage>
+   * @returns {Promise<this>}
    */
   addUtilityHookup(slug) {
     return this.newUtilityHookupSelect()
@@ -50,7 +50,7 @@ class SpaceEditPage extends Page {
    * @returns {Component}
    */
   newUtilityHookupSelect() {
-    return this.newUtilityHookupForm().component('select')
+    return this.newUtilityHookupForm().component("select");
   }
 
   /**
@@ -58,6 +58,43 @@ class SpaceEditPage extends Page {
    */
   newUtilityHookupForm() {
     return this.component(".new-hookup-form");
+  }
+
+  /**
+   * @returns {Promise<this>}
+   */
+  invite({ name, email }) {
+    return this.visit()
+      .then(() =>
+        this.newInvitationForm()
+          .component('input[name="invitation[name]"]')
+          .fillIn(name)
+      )
+      .then(() =>
+        this.newInvitationForm()
+          .component('input[name="invitation[email]"]')
+          .fillIn(email)
+      )
+      .then(() =>
+        this.newInvitationForm().component('input[type="submit"]').click()
+      )
+      .finally(() => this);
+  }
+
+  /**
+   * @returns {Promise<this>}
+   */
+  inviteAll(invitations) {
+    return Promise.all(
+      invitations.map((invitation) => this.invite(invitation))
+    ).finally(() => this);
+  }
+
+  /**
+   * @returns {Component}
+   */
+  newInvitationForm() {
+    return this.component(".new-invitation-form");
   }
 }
 
