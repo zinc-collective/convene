@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "axios": "^0.21.2",
+    "axios": "^0.22.0",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
     "geckodriver": "^2.0.4",
