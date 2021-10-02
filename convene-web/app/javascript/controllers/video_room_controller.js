@@ -1,4 +1,4 @@
-import { Controller } from "stimulus"
+import { Controller } from "@hotwired/stimulus"
 import VideoRoom from "../src/video_room";
 
 export default class extends Controller {
