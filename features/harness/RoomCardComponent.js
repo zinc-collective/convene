@@ -51,7 +51,7 @@ class RoomCardComponent extends Component {
    * @returns {Component}
    */
   lockedIcon() {
-    return this.component(".fa-lock");
+    return this.component(".icon.--lock");
   }
 
   /**

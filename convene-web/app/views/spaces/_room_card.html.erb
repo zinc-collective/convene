@@ -2,10 +2,10 @@
   <header>
     <h3><%= room.name %></h3>
     <%- if room.locked? %>
-      <span>🔒</span>
+      <span class="icon --lock" role="img" aria-label="Locked"></span>
     <%- end %>
     <%- if room.locked? && room.enterable?(current_access_code(room)) %>
-      <span>🔑</span>
+      <span class="icon --key" role="img" aria-label="Enterable"></span>
     <%- end %>
   </header>
   <footer>
