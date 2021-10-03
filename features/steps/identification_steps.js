@@ -1,5 +1,5 @@
 const assert = require("assert").strict;
-const { Given, When, Then } = require("cucumber");
+const { Given, When, Then } = require("@cucumber/cucumber");
 
 const { SignInPage, SpacePage, MePage } = require("../harness/Pages");
 const { Space, Actor } = require("../lib");

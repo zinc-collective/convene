@@ -1,4 +1,4 @@
-const { defineParameterType } = require("cucumber");
+const { defineParameterType } = require("@cucumber/cucumber");
 const { By } = require("selenium-webdriver");
 const { Room, AccessLevel, AccessCode, concatRegExp } = require("../../lib");
 const FLEXIBLE_ARTICLE_ADJECTIVES = /(an |the |is |a )/;

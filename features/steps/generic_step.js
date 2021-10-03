@@ -1,4 +1,4 @@
-const { When } = require("cucumber");
+const { When } = require("@cucumber/cucumber");
 
 When('the {actor} hit the back button', async function (actor) {
   await this.driver.navigate().back();

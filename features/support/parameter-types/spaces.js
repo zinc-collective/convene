@@ -1,4 +1,4 @@
-const { defineParameterType } = require("cucumber");
+const { defineParameterType } = require("@cucumber/cucumber");
 const Space = require('../../lib/Space');
 
 // This injects a Space class into steps with named Spaces (i.e.)

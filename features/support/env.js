@@ -1,5 +1,5 @@
 const fse = require('fs-extra');
-const { setWorldConstructor, BeforeAll, After, setDefaultTimeout, Status } = require('cucumber');
+const { setWorldConstructor, BeforeAll, After, setDefaultTimeout, Status } = require('@cucumber/cucumber');
 
 const appUrl = require('../lib/appUrl')
 const { Builder } = require('selenium-webdriver');
