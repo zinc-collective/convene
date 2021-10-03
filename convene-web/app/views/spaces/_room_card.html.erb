@@ -2,12 +2,10 @@
   <header>
     <h3><%= room.name %></h3>
     <%- if room.locked? %>
-      <!-- todo: Extract to  icons.scss and replace with emoji -->
-      <span class="fas fa-lock"></span>
+      <span class="icon --lock" role="img" aria-label="Locked"></span>
     <%- end %>
     <%- if room.locked? && room.enterable?(current_access_code(room)) %>
-      <!-- todo: Extract to  icons.scss and replace with emoji -->
-      <span class="ml-2 fas fa-key"></span>
+      <span class="icon --key" role="img" aria-label="Enterable"></span>
     <%- end %>
   </header>
   <footer>

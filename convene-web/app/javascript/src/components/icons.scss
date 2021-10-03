@@ -18,5 +18,13 @@
     &.--destroy::before{
       content: "🗑 ";
     }
+
+    &.--lock::before {
+      content: "🔒";
+    }
+
+    &.--key::before {
+      content: "🔑"
+    }
   }
 }
