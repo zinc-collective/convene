@@ -18,4 +18,5 @@ class Item
   delegate :utilities, to: :item_record
   delegate :save, to: :item_record
   delegate :persisted?, to: :item_record
+  delegate :space, to: :item_record
 end
