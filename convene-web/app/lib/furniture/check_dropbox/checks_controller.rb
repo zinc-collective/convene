@@ -9,21 +9,21 @@ module Furniture
 
       def index
         # TODO: Replace with proper authorization check once that's ready.
-        if current_person.present? && current_person.member_of?(current_space)
-          @checks = furniture.checks
-        else
-          @checks = []
-        end
+        @checks = if current_person.present? && current_person.member_of?(current_space)
+                    furniture.checks
+                  else
+                    []
+                  end
       end
 
       private def check_params
-        params.require(:furniture_check_dropbox_check)
+        params.require(:check)
               .permit(:payer_name, :payer_email, :amount, :memo, :public_token)
       end
 
       # @returns [CheckDropbox]
       helper_method def furniture
-        room.furniture_placements.find_by(furniture_kind: "check_dropbox").furniture
+        room.furniture_placements.find_by(furniture_kind: 'check_dropbox').furniture
       end
 
       helper_method def room

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Furniture
   # Encapsulates where a particular piece of {Furniture} lives in a {Room} and
   # what it looks like.
@@ -6,7 +7,7 @@ module Furniture
     # @return {FurniturePlacement}
     attr_accessor :placement
 
-    delegate :id, :utilities, :persisted?, to: :placement
+    delegate :id, :utilities, :persisted?, :save!, to: :placement
 
     def self.included(placeable)
       placeable.include ActiveModel::Model
