@@ -2,6 +2,7 @@ module Furniture
   class CheckDropbox
     class CheckPolicy
       attr_accessor :object, :actor
+
       def initialize(actor, object)
         self.object = object
         self.actor = actor
@@ -10,17 +11,15 @@ module Furniture
       def show?
         actor.member_of?(object.space)
       end
-      
-      alias_method :update?, :show?
-      alias_method :edit?, :show?
-      alias_method :destroy?, :show?
 
+      alias update? show?
+      alias edit? show?
+      alias destroy? show?
 
       def index?
         true
       end
-      alias_method :create?, :index?
-
+      alias create? index?
     end
   end
 end
