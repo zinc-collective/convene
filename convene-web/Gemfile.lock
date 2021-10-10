@@ -106,7 +106,7 @@ GEM
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
-    ffaker (2.19.0)
+    ffaker (2.20.0)
     ffi (1.15.3)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
