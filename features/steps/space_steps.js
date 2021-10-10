@@ -1,4 +1,4 @@
-const { Given, When, Then } = require("cucumber");
+const { Given, When, Then } = require("@cucumber/cucumber");
 const { RoomPage, SpacePage, SpaceEditPage } = require("../harness/Pages");
 
 const { linkParameters } = require("../lib");

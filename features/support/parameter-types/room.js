@@ -1,4 +1,4 @@
-const { defineParameterType } = require("cucumber");
+const { defineParameterType } = require("@cucumber/cucumber");
 const { By } = require("selenium-webdriver");
 const { Room, AccessLevel, AccessCode, concatRegExp } = require("../../lib");
 const FLEXIBLE_ARTICLE_ADJECTIVES = /(an |the |is |a )/;
@@ -20,7 +20,7 @@ defineParameterType({
   // In the meantime, adding a capture-group around "Room" ensures that the Room
   // class has a string provided to it.
   regexp: /("[^"]*" )?(Room)/,
-  transformer: (roomName) => new Room(roomName.trim().replace(/"/g, "")),
+  transformer: (roomName = "") => new Room(roomName.trim().replace(/"/g, "")),
 });
 
 // This matches steps based on the access control model

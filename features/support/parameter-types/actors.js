@@ -1,4 +1,4 @@
-const { defineParameterType } = require("cucumber");
+const { defineParameterType } = require("@cucumber/cucumber");
 const Actor = require('../../lib/Actor.js')
 
 // Actors are the people or sytems our test suite emulates as it
