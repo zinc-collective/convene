@@ -17,3 +17,4 @@ convene-web/public/packs/
 *log/
 
 features/test_reports/*.png
+tmp/*
