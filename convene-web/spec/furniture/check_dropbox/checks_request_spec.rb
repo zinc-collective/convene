@@ -24,10 +24,19 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks'
   describe 'POST' do
     it 'creates a check' do
       post "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks",
-           { params: { check: { payer_name: 'Zee', payer_email: 'zee@example.com', amount: 100_00, memo: 'Example',
+           { params: { check_dropbox_check: { payer_name: 'Zee', payer_email: 'zee@example.com', amount: 100_00, memo: 'Example',
                                 public_token: 'Fake' } } }
 
       expect(check_dropbox.checks).not_to be_empty
+
+      check = check_dropbox.checks.last
+
+      expect(check.payer_name).to eql('Zee')
+      expect(check.payer_email).to eql('zee@example.com')
+      expect(check.amount).to eql(100_00)
+      expect(check.memo).to eql('Example')
+      expect(check.plaid_access_token).to eql "Access Token from Fake"
+      expect(check.plaid_item_id).to eql "Item Id from Fake"
     end
   end
 

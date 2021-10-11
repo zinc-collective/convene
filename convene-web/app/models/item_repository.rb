@@ -6,7 +6,7 @@ class ItemRepository
 
   delegate :model_name, to: :type
 
-  delegate :size, :empty?, :present?, to: :item_records
+  delegate :size, :empty?, :present?,  to: :item_records
 
   def initialize(type:, item_records:, space:)
     self.type = type
@@ -30,6 +30,14 @@ class ItemRepository
     item_records.each do |item_record|
       yield item_record.item
     end
+  end
+
+  def last
+    item_records.last&.item
+  end
+
+  def first
+    item_records.first&.item
   end
 
   def include?(item)
