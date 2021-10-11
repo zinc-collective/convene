@@ -20,6 +20,7 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks'
     allow(fake_plaid).to receive(:account_number_for).and_return('Account Number')
     allow(fake_plaid).to receive(:routing_number_for).and_return('Routing Number')
   end
+
   describe 'POST' do
     it 'creates a check' do
       post "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks",
@@ -34,17 +35,23 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks'
     let!(:check) { check_dropbox.checks.create(FactoryBot.attributes_for(:check_dropbox_check)) }
     it 'is a 404 for guests' do
       get "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks"
+
       expect(response).to be_not_found
     end
 
     it 'is a 404 for neighbors' do
       sign_in(space, neighbor)
+
       get "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks"
+
+      expect(response).to be_not_found
     end
 
     it 'is a list of the checks for residents' do
       sign_in(space, space_member)
+
       get "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks"
+
       expect(response).to be_ok
       expect(response).to(render_template(:index))
       expect(assigns(:checks)).to be_present

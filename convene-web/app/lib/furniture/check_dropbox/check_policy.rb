@@ -24,6 +24,10 @@ module Furniture
         true
       end
 
+      def permitted_attributes
+        %i[payer_name payer_email amount memo public_token]
+      end
+
       class Scope
         attr_accessor :actor, :scope
 

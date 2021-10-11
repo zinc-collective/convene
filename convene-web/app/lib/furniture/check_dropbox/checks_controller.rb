@@ -4,14 +4,14 @@ module Furniture
   class CheckDropbox
     class ChecksController < FurnitureController
       def create
-        @check = furniture.checks.create(check_params)
+        check.save
       end
 
       def index; end
 
       private def check_params
-        params.require(:check)
-              .permit(:payer_name, :payer_email, :amount, :memo, :public_token)
+        params.require(:check_dropbox_check)
+              .permit(policy(checks.new).permitted_attributes)
       end
 
       # @returns [CheckDropbox]
@@ -25,6 +25,10 @@ module Furniture
 
       helper_method def space
         current_space
+      end
+
+      helper_method def check
+        @check ||= checks.new(check_params)
       end
 
       helper_method def checks
