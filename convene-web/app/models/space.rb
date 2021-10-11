@@ -52,7 +52,7 @@ class Space < ApplicationRecord
   # A room's Access Code is a "secret" that, when known, grants access to the room.
   attribute :access_code, :string
 
-  scope :default, -> { friendly.find(ENV.fetch('DEFAULT_SPACE', 'convene')) }
+  scope :default, -> { friendly.find(Neighborhood.config.default_space_slug) }
 
   def unlocked?
     access_level&.to_sym != :locked
