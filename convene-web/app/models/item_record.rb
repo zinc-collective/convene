@@ -3,9 +3,10 @@
 # Persists {Item} data and connects them to their appropriate location in the
 # {Neighborhood}.
 class ItemRecord < ApplicationRecord
-  # @return [Space, FurniturePlacement]
+  # @return [FurniturePlacement]
   belongs_to :location, polymorphic: true, inverse_of: :item_records
   delegate :utilities, to: :location
+  belongs_to :space, inverse_of: :item_records
 
   # @todo pull this out to an {ActiveRecord::Type} that marshals and unmarshals
   # the {Item}. Maybe StoreModel would work for this?

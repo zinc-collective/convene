@@ -17,9 +17,24 @@ module Furniture
       alias destroy? show?
 
       def index?
+        actor.member_of?(object.space)
+      end
+
+      def create?
         true
       end
-      alias create? index?
+
+      class Scope
+        attr_accessor :actor, :scope
+        def initialize(actor, scope)
+          self.actor = actor
+          self.scope = scope
+        end
+
+        def resolve
+          scope.where(space: actor.spaces)
+        end
+      end
     end
   end
 end

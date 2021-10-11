@@ -8,12 +8,6 @@ module Furniture
       end
 
       def index
-        # TODO: Replace with proper authorization check once that's ready.
-        @checks = if current_person.present? && current_person.member_of?(current_space)
-                    furniture.checks
-                  else
-                    []
-                  end
       end
 
       private def check_params
@@ -32,6 +26,12 @@ module Furniture
 
       helper_method def space
         current_space
+      end
+
+      helper_method def checks
+        @checks ||= policy_scope(furniture.checks).tap do |checks|
+          authorize(checks)
+        end
       end
     end
   end

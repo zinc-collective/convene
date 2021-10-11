@@ -6,11 +6,11 @@ RSpec.describe Furniture::CheckDropbox::CheckPolicy, type: :policy do
   let(:check) { instance_double(Furniture::CheckDropbox::Check, space: space) }
   context 'as a guest' do
     let(:actor) { Guest.new }
-    permissions :show?, :update?, :edit?, :destroy? do
+    permissions :show?, :update?, :edit?, :destroy?, :index? do
       it { is_expected.not_to permit(actor, check) }
     end
 
-    permissions :create?, :index? do
+    permissions :create? do
       it { is_expected.to permit(actor, check) }
     end
   end
@@ -22,11 +22,11 @@ RSpec.describe Furniture::CheckDropbox::CheckPolicy, type: :policy do
       end
     end
 
-    permissions :show?, :update?, :edit?, :destroy? do
+    permissions :show?, :update?, :edit?, :destroy?, :index? do
       it { is_expected.not_to permit(actor, check) }
     end
 
-    permissions :create?, :index? do
+    permissions :create? do
       it { is_expected.to permit(actor, check) }
     end
   end

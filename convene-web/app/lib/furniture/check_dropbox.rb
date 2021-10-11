@@ -16,7 +16,7 @@ module Furniture
 
     # @returns [ItemRepository<Check>]
     def checks
-      ItemRepository.new(type: Check, item_records: placement.item_records)
+      ItemRepository.new(type: Check, item_records: placement.item_records, space: placement.space)
     end
 
     def link_token_for(person)
