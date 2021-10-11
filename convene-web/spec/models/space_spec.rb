@@ -21,10 +21,10 @@ RSpec.describe Space, type: :model do
   end
 
   describe '.default' do
-    before { FactoryBot.create(:space, slug: 'convene') }
+    before { FactoryBot.create(:space, :default) }
 
     subject(:default) { described_class.default }
 
-    it { is_expected.to eql(Space.friendly.find('convene')) }
+    it { is_expected.to eql(Space.friendly.find(Neighborhood.config.default_space_slug)) }
   end
 end
