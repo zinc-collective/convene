@@ -3,10 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe ItemRepository do
-  let(:item_repository) { ItemRepository.new(type: Furniture::CheckDropbox::Check, item_records: item_records) }
+  let(:item_repository) do
+    ItemRepository.new(type: Furniture::CheckDropbox::Check, item_records: item_records, space: space)
+  end
   let(:type) { Furniture::CheckDropbox::Check }
   let(:item_records) { location.item_records }
   let(:location) { FactoryBot.create(:furniture_placement) }
+  let(:space) { location.space }
   describe '#new' do
     it 'instantiates an item record with the given attributes within the item records' do
       item = item_repository.new(status: 'green')

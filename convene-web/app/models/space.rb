@@ -39,6 +39,9 @@ class Space < ApplicationRecord
   # The Rooms within this Space
   has_many :rooms, inverse_of: :space
 
+  # All the items held within the space
+  has_many :item_records, inverse_of: :space
+
   belongs_to :entrance, class_name: 'Room', optional: true
 
   # A Space's Access Level indicates what a participant must know in order to gain access.

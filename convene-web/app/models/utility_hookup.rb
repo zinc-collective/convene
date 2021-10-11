@@ -33,7 +33,7 @@ class UtilityHookup < ApplicationRecord
 
   # @todo How could we streamline this without too much metaprogramming?
   def self.plaid
-    where(name: 'Plaid').first&.utility
+    where(utility_slug: 'plaid').first&.utility
   end
 
   # @return [Utilities::Utility]

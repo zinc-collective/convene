@@ -4,26 +4,19 @@ module Furniture
   class CheckDropbox
     class ChecksController < FurnitureController
       def create
-        @check = furniture.checks.create(check_params)
+        check.save
       end
 
-      def index
-        # TODO: Replace with proper authorization check once that's ready.
-        if current_person.present? && current_person.member_of?(current_space)
-          @checks = furniture.checks
-        else
-          @checks = []
-        end
-      end
+      def index; end
 
       private def check_params
-        params.require(:furniture_check_dropbox_check)
-              .permit(:payer_name, :payer_email, :amount, :memo, :public_token)
+        params.require(:check_dropbox_check)
+              .permit(policy(checks.new).permitted_attributes)
       end
 
       # @returns [CheckDropbox]
       helper_method def furniture
-        room.furniture_placements.find_by(furniture_kind: "check_dropbox").furniture
+        room.furniture_placements.find_by(furniture_kind: 'check_dropbox').furniture
       end
 
       helper_method def room
@@ -32,6 +25,16 @@ module Furniture
 
       helper_method def space
         current_space
+      end
+
+      helper_method def check
+        @check ||= checks.new(check_params)
+      end
+
+      helper_method def checks
+        @checks ||= policy_scope(furniture.checks).tap do |checks|
+          authorize(checks)
+        end
       end
     end
   end

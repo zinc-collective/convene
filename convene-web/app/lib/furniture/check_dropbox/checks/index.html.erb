@@ -1,8 +1,8 @@
 <turbo-frame id="check-dropbox">
-  <%= @checks.where("data->>'status' = 'ready_for_deposit' OR data->>'status' is null").size %> checks ready for deposit
-  <%= @checks.where("data->>'status' = 'uncleared'").size %> checks deposited but not yet cleared
-  <%= @checks.where("data->>'status' = 'cleared'").size %> checks deposited and cleared.
-  <% @checks.each do |check| %>
+  <%= checks.where("data->>'status' = 'ready_for_deposit' OR data->>'status' is null").size %> checks ready for deposit
+  <%= checks.where("data->>'status' = 'uncleared'").size %> checks deposited but not yet cleared
+  <%= checks.where("data->>'status' = 'cleared'").size %> checks deposited and cleared.
+  <% checks.each do |check| %>
     <p>
       Payer name: <%= check.payer_name %><br>
       Payer email: <%= check.payer_email %><br/>

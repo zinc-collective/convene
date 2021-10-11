@@ -7,5 +7,9 @@ FactoryBot.define do
     trait :jitsi do
       utility_slug { 'jitsi' }
     end
+
+    trait :plaid do
+      utility_slug { 'plaid' }
+    end
   end
 end

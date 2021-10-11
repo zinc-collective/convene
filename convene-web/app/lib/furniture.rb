@@ -21,4 +21,8 @@ module Furniture
   def self.from_placement(placement)
     REGISTRY[placement.furniture_kind.to_sym].new(placement: placement)
   end
+
+  def self.use_relative_model_naming?
+    true
+  end
 end

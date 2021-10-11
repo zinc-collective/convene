@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :person do
     name { FFaker::Name.name }
-    email { FFaker::Internet.email }
+    email { "#{name.downcase.gsub(' ', '-')}@example.com" }
   end
 end

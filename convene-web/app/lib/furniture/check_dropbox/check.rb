@@ -13,7 +13,7 @@ module Furniture
         @public_token = public_token
 
         response = utilities.plaid.exchange_public_token(public_token: public_token)
-        self.access_token = response.access_token
+        self.plaid_access_token = response.access_token
         self.plaid_item_id = response.item_id
 
         self.public_token
@@ -56,19 +56,19 @@ module Furniture
       end
 
       def account_number
-        utilities.plaid.account_number_for(access_token: access_token, item_id: plaid_item_id)
+        utilities.plaid.account_number_for(access_token: plaid_access_token, item_id: plaid_item_id)
       end
 
       def routing_number
-        utilities.plaid.routing_number_for(access_token: access_token, item_id: plaid_item_id)
+        utilities.plaid.routing_number_for(access_token: plaid_access_token, item_id: plaid_item_id)
       end
 
-      def access_token=(access_token)
-        data['access_token'] = access_token
+      def plaid_access_token=(plaid_access_token)
+        data['plaid_access_token'] = plaid_access_token
       end
 
-      def access_token
-        data['access_token']
+      def plaid_access_token
+        data['plaid_access_token']
       end
 
       def payer_name=(payer_name)
@@ -88,11 +88,11 @@ module Furniture
       end
 
       def amount=(amount)
-        data['amount'] = amount
+        data['amount'] = amount&.to_i
       end
 
       def amount
-        data['amount']
+        data['amount']&.to_i
       end
 
       def memo=(memo)
