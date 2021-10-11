@@ -7,8 +7,7 @@ module Furniture
         @check = furniture.checks.create(check_params)
       end
 
-      def index
-      end
+      def index; end
 
       private def check_params
         params.require(:check)

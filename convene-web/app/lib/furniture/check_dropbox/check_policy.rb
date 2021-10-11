@@ -26,6 +26,7 @@ module Furniture
 
       class Scope
         attr_accessor :actor, :scope
+
         def initialize(actor, scope)
           self.actor = actor
           self.scope = scope

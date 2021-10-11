@@ -17,8 +17,8 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks'
       double(access_token: "Access Token from #{attrs[:public_token]}",
              item_id: "Item Id from #{attrs[:public_token]}")
     end
-    allow(fake_plaid).to receive(:account_number_for).and_return("Account Number")
-    allow(fake_plaid).to receive(:routing_number_for).and_return("Routing Number")
+    allow(fake_plaid).to receive(:account_number_for).and_return('Account Number')
+    allow(fake_plaid).to receive(:routing_number_for).and_return('Routing Number')
   end
   describe 'POST' do
     it 'creates a check' do

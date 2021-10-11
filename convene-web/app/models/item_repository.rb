@@ -26,7 +26,7 @@ class ItemRepository
     ItemRepository.new(type: type, item_records: item_records.where(*args), space: space)
   end
 
-  def each(&block)
+  def each
     item_records.each do |item_record|
       yield item_record.item
     end
