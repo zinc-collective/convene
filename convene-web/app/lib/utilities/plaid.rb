@@ -73,7 +73,9 @@ module Utilities
       configuration['secret'] = secret
     end
 
+    AVAILABLE_ENVIRONMENTS = %w[sandbox development production].freeze
     validates_presence_of :environment
+    validates_inclusion_of :environment, in: AVAILABLE_ENVIRONMENTS
     def environment
       configuration['environment']&.downcase&.to_s
     end
