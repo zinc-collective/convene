@@ -1,0 +1,3 @@
+<%= form.label attribute %>
+<%= form.select attribute, options, include_blank: include_blank %>
+<%= render partial: "error", locals: { model: form.object, field: attribute } %>

@@ -278,7 +278,7 @@ DEPENDENCIES
   listen (~> 3.7)
   lockbox (= 0.6.6)
   pg (~> 1.2)
-  plaid (= 14.5.0)
+  plaid (~> 14.5)
   pry-byebug
   puma (~> 5.5)
   pundit (~> 2.1)
