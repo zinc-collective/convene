@@ -25,6 +25,7 @@ class UtilityHookup < ApplicationRecord
   validates :status, presence: true, inclusion: { in: %w[ready unavailable] }
 
   attribute :old_configuration, :json, default: {}
+  validates_associated :utility
   encrypts :configuration, type: :json
 
   after_initialize do

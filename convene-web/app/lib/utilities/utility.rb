@@ -8,6 +8,7 @@ module Utilities
     include ActiveModel::Model
     include ActiveModel::Attributes
     include ActiveModel::AttributeAssignment
+    include ActiveModel::Validations
     # @return [UtilityHookup]
     attr_accessor :utility_hookup
 

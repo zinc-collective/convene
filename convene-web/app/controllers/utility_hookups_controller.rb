@@ -9,13 +9,19 @@ class UtilityHookupsController < ApplicationController
   end
 
   def create
-    utility_hookup.save
-    redirect_to edit_space_path(space)
+    if utility_hookup.save
+      redirect_to edit_space_path(space)
+    else
+      render :new
+    end
   end
 
   def update
-    utility_hookup.update(utility_hookup_params)
-    redirect_to edit_space_path(space)
+    if utility_hookup.update(utility_hookup_params)
+      redirect_to edit_space_path(space)
+    else
+      render :edit
+    end
   end
 
   helper_method def utility_hookups
