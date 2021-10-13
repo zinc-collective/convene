@@ -26,7 +26,7 @@
     "@cucumber/cucumber": "^7.3.1",
     "@cucumber/pretty-formatter": "^1.0.0-alpha.1 ",
     "geckodriver": "^2.0.4",
-    "get-urls": "^10.0.0",
+    "get-urls": "^10.0.1",
     "lodash": "^4.17.21",
     "selenium-webdriver": "^4.0.0-rc-2"
   },
