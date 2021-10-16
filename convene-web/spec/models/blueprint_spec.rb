@@ -18,7 +18,7 @@ RSpec.describe Blueprint do
           }
         }],
         utility_hookups: [
-          FactoryBot.attributes_for(:utility_hookup, :plaid)
+          FactoryBot.attributes_for(:plaid_utility_hookup)
         ]
       }
     }

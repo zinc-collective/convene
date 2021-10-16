@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks', type: :request do
   let(:space) { FactoryBot.create(:space) }
   let(:room) { FactoryBot.create(:room, space: space) }
-  let!(:plaid_hookup) { FactoryBot.create(:utility_hookup, :plaid, space: space) }
+  let!(:plaid_hookup) { FactoryBot.create(:plaid_utility_hookup, space: space) }
   let!(:check_dropbox) { FactoryBot.create(:check_dropbox, room: room) }
   let(:neighbor) { FactoryBot.create(:person) }
   let(:space_member) { FactoryBot.create(:person, spaces: [space]) }
