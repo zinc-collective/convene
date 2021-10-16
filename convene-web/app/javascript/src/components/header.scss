@@ -1,6 +1,6 @@
 @layer components {
   body > header {
-    @apply flex justify-between px-2 py-2 bg-primary-900 text-white place-items-end;
+    @apply flex justify-between px-2 py-2 bg-primary-900 text-white;
 
 
     .profile-menu {

@@ -6,11 +6,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application'  %>
-    <%= javascript_pack_tag 'application' %>
     <% if current_space&.jitsi_meet_domain %>
       <script defer src='https://<%= current_space.jitsi_meet_domain %>/external_api.js'></script>
     <% end %>
+    <%= javascript_pack_tag "application" %>
   </head>
 
   <body>

@@ -252,7 +252,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpacker (5.4.3)
+    webpacker (6.0.0.rc.5)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
@@ -295,7 +295,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data (~> 1.2021)
   web-console (~> 4.1)
-  webpacker (~> 5.4)
+  webpacker (= 6.0.0.rc.5)
 
 RUBY VERSION
    ruby 2.7.3p183
