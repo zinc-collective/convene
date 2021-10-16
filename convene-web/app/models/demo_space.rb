@@ -40,7 +40,7 @@ class DemoSpace
   ].freeze
 
   UTILITY_HOOKUPS = [
-    { utility_slug: :plaid, name: 'Plaid', configuration: {} },
+    FactoryBot.attributes_for(:utility_hookup, :plaid),
     { utility_slug: :jitsi, name: 'Jitsi', configuration:
       { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
   ].freeze

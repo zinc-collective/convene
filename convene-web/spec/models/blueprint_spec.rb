@@ -18,11 +18,7 @@ RSpec.describe Blueprint do
           }
         }],
         utility_hookups: [
-          {
-            utility_slug: :plaid,
-            name: 'Plaid',
-            configuration: {}
-          }
+          FactoryBot.attributes_for(:utility_hookup, :plaid)
         ]
       }
     }

@@ -10,6 +10,13 @@ FactoryBot.define do
 
     trait :plaid do
       utility_slug { 'plaid' }
+      configuration do
+        {
+          'client_id' => 'a-fake-client-id',
+          'secret' => 'a-fake-secret',
+          'environment' => 'sandbox',
+        }
+      end
     end
   end
 end
