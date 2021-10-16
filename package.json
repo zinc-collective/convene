@@ -28,7 +28,7 @@
     "geckodriver": "^2.0.4",
     "get-urls": "^10.0.1",
     "lodash": "^4.17.21",
-    "selenium-webdriver": "^4.0.0-rc-2"
+    "selenium-webdriver": "^4.0.0"
   },
   "dependencies": {
     "fs-extra": "^10.0.0"
