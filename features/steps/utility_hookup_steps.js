@@ -5,7 +5,7 @@ const { Actor, Space } = require("../lib");
 
 
 When("a Space Owner adds a Hookup to their Space", async function () {
-  this.actor = new Actor("Space Owner");
+  this.actor = new Actor("Space Owner", 'space-owner@example.com');
   await this.actor.signIn(this.driver);
   this.space = new Space("System Test");
 

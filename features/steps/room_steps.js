@@ -23,7 +23,7 @@ Given("{a} {space} with {a} {accessLevel} {room}", async function (_, space, _, 
   this.space = await new SpacePage(this.driver, space).visit();
   const matchingRooms = await this.space.roomCardsWhere({ accessLevel });
   if (!matchingRooms.length > 0) {
-    const spaceMember = new Actor("Space Member");
+    const spaceMember = new Actor("Space Member", 'space-member@example.com');
     const page = await spaceMember
       .signIn(this.driver, space)
       .then(() => new SpaceEditPage(this.driver, space).visit());
