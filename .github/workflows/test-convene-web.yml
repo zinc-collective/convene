@@ -106,7 +106,7 @@ jobs:
           # To wait for asset built
           # TODO: Start server in production mode
           curl system-test.zinc.local:8080/packs/manifest.json 1> /dev/null
-          curl system-test.zinc.local:3000 1> /dev/null
+          curl system-test.zinc.local:80 1> /dev/null
           bin/test
 
     - uses: actions/upload-artifact@v2
