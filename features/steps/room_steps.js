@@ -18,12 +18,12 @@ const {
 
 const assert = require("assert").strict;
 
-Given("a Space with {accessLevel} {room}", async function (accessLevel, room) {
-  let { space } = linkParameters({ accessLevel, room });
+Given("{a} {space} with {a} {accessLevel} {room}", async function (_, space, _, accessLevel, room) {
+  linkParameters({ accessLevel, room, space });
   this.space = await new SpacePage(this.driver, space).visit();
   const matchingRooms = await this.space.roomCardsWhere({ accessLevel });
   if (!matchingRooms.length > 0) {
-    const spaceMember = new Actor("Space Member");
+    const spaceMember = new Actor("Space Member", 'space-member@example.com');
     const page = await spaceMember
       .signIn(this.driver, space)
       .then(() => new SpaceEditPage(this.driver, space).visit());
@@ -51,14 +51,9 @@ Given("a Space with {accessLevel} {room}", async function (accessLevel, room) {
   }
 });
 
-Given("a Space with an {publicityLevel} Room", function (publicityLevel) {
-  // Write code here that turns the phrase above into concrete actions
-  return "pending";
-});
-
 When(
-  "a {actor} unlocks {accessLevel} {room} with {accessCode}",
-  async function (actor, accessLevel, room, accessCode) {
+  "{a} {actor} unlocks {a} {accessLevel} {room} with {a} {accessCode}",
+  async function (_, actor, _, accessLevel, room, _, accessCode) {
     const { space } = linkParameters({ room, accessLevel });
     await actor.signIn(this.driver, space);
 
@@ -70,8 +65,8 @@ When(
 );
 
 When(
-  "a {actor} locks {accessLevel} {room} with {accessCode}",
-  async function (actor, accessLevel, room, accessCode) {
+  "{a} {actor} locks {a} {accessLevel} {room} with {a} {accessCode}",
+  async function (_, actor, _, accessLevel, room, _, accessCode) {
     const { space } = linkParameters({ accessLevel, room });
     await actor.signIn(this.driver, space);
 
@@ -97,16 +92,8 @@ Then("the {actor} is not placed in the {room}", function (actor, room) {
 });
 
 Then(
-  "a {actor} may enter the Room without providing {accessCode}",
-  function (actor, accessCode) {
-    // Write code here that turns the phrase above into concrete actions
-    return "pending";
-  }
-);
-
-Then(
-  "a {actor} may not enter {accessLevel} {room} after providing {accessCode}",
-  async function (actor, accessLevel, room, accessCode) {
+  "{a} {actor} may not enter {a} {accessLevel} {room} after providing {a} {accessCode}",
+  async function (_, actor, _, accessLevel, room, _, accessCode) {
     linkParameters({ room, accessLevel });
 
     await this.driver.manage().deleteAllCookies();
@@ -121,8 +108,8 @@ Then(
 );
 
 Then(
-  "a {actor} may enter {accessLevel} {room} after providing {accessCode}",
-  async function (actor, accessLevel, room, accessCode) {
+  "{a} {actor} may enter {a} {accessLevel} {room} after providing {a} {accessCode}",
+  async function (_, actor, _, accessLevel, room, _, accessCode) {
     linkParameters({ room, accessLevel, accessCode });
     await this.driver.manage().deleteAllCookies();
 
@@ -148,8 +135,7 @@ Then(
   }
 );
 
-Then("the Room {accessLevel}", async function (accessLevel) {
-  const room = new Room("");
+Then("{a} {room} is {accessLevel}", async function (_, room, accessLevel) {
   const { space } = linkParameters({ room, accessLevel });
   await new SpacePage(this.driver, space).visit();
   if (accessLevel.level === "Locked") {
@@ -160,8 +146,8 @@ Then("the Room {accessLevel}", async function (accessLevel) {
 });
 
 Then(
-  "the {actor} is informed they need to set {accessCode} when they are locking a {room}",
-  async function (actor, accessCode, room) {
+  "{a} {actor} is informed they need to set {a} {accessCode} when they are locking {a} {room}",
+  async function (_, actor, _, accessCode, _, room) {
     const roomSettingPage = new RoomEditPage(this.driver);
     assert(await roomSettingPage.accessCodeError());
   }

@@ -8,9 +8,9 @@ const MailServer = require("./MailServer");
 const Space = require("./Space");
 
 class Actor {
-  constructor(type) {
+  constructor(type, email) {
     this.type = type;
-    this.email = `${type.replace(/\s/g, "-").toLowerCase()}@example.com`;
+    this.email = email
   }
 
   /**

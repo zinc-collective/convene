@@ -1,7 +1,6 @@
 const { defineParameterType } = require("@cucumber/cucumber");
 const { By } = require("selenium-webdriver");
-const { Room, AccessLevel, AccessCode, concatRegExp } = require("../../lib");
-const FLEXIBLE_ARTICLE_ADJECTIVES = /(an |the |is |a )/;
+const { Room } = require("../../lib");
 
 // This injects a Room class into steps with named rooms (i.e.) `the "Ada" Room` and
 // steps that mention `Room` in isolation.
@@ -21,38 +20,4 @@ defineParameterType({
   // class has a string provided to it.
   regexp: /("[^"]*" )?(Room)/,
   transformer: (roomName = "") => new Room(roomName.trim().replace(/"/g, "")),
-});
-
-// This matches steps based on the access control model
-// See: https://github.com/zinc-collective/convene/issues/40
-// See: https://github.com/zinc-collective/convene/issues/41
-defineParameterType({
-  name: "accessLevel",
-  regexp: concatRegExp(
-    FLEXIBLE_ARTICLE_ADJECTIVES,
-    /(Unlocked|Internal|Locked)/
-  ),
-  transformer: (_, level) => new AccessLevel(level),
-});
-
-// Defines whether a Room may be discovered or not.
-// See: https://github.com/zinc-collective/convene/issues/39
-defineParameterType({
-  name: "publicityLevel",
-  regexp: /(Unlisted|Listed)/,
-});
-
-class PublicityLevel {
-  constructor(level) {
-    this.level = level;
-  }
-}
-
-defineParameterType({
-  name: "accessCode",
-  regexp: concatRegExp(
-    FLEXIBLE_ARTICLE_ADJECTIVES,
-    /(correct |valid |wrong |empty )?Access Code/
-  ),
-  transformer: (_, validity = "") => new AccessCode(validity.trim()),
 });
