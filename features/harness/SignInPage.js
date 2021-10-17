@@ -11,6 +11,7 @@ class SignInPage extends Page {
   }
 
   submitEmail(email) {
+    if(!email) { raise `WTF ${email}` }
     return this.component("input[type=email]")
       .fillIn(email)
       .then(() => this.submitButton().click())
