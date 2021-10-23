@@ -55,6 +55,7 @@ module Utilities
       end
     end
 
+    validates_presence_of :client_id
     def client_id
       configuration['client_id']
     end
@@ -63,6 +64,7 @@ module Utilities
       configuration['client_id'] = client_id
     end
 
+    validates_presence_of :secret
     def secret
       configuration['secret']
     end
@@ -71,6 +73,9 @@ module Utilities
       configuration['secret'] = secret
     end
 
+    AVAILABLE_ENVIRONMENTS = %w[sandbox development production].freeze
+    validates_presence_of :environment
+    validates_inclusion_of :environment, in: AVAILABLE_ENVIRONMENTS
     def environment
       configuration['environment']&.downcase&.to_s
     end
@@ -79,6 +84,7 @@ module Utilities
       configuration['environment'] = environment
     end
 
+    validates_presence_of :version
     def version=(version)
       configuration['version'] = version
     end

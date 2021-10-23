@@ -112,7 +112,6 @@ class Blueprint
         access_level: :unlocked,
         entrance: 'lobby',
         utility_hookups: [
-          { utility_slug: :plaid, name: 'Plaid', configuration: {} },
           {
             utility_slug: :jitsi, name: 'Jitsi', configuration:
             { meet_domain: 'convene-videobridge-zinc.zinc.coop' }

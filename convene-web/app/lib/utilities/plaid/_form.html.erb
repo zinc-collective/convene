@@ -1,14 +1,5 @@
 <%= form.fields_for(:utility) do |utility_fields| %>
-  <%= utility_fields.label :client_id %>
-  <%= utility_fields.text_field :client_id %>
-  <%= render partial: "error", locals: { model: utility_fields.object, field: :client_id } %>
-
-
-  <%= utility_fields.label :secret %>
-  <%= utility_fields.password_field :secret, value: utility_fields.object.secret %>
-  <%= render partial: "error", locals: { model: utility_fields.object, field: :plaid_secret } %>
-
-  <%= utility_fields.label :environment %>
-  <%= utility_fields.select :environment, ["Sandbox", "Development", "Production"].map { |x| [x, x.downcase] }, include_blank: true %>
-  <%= render partial: "error", locals: { model: utility_fields.object, field: :environment } %>
+  <%= render "text_field", form: utility_fields, attribute: :client_id %>
+  <%= render "password_field", form: utility_fields, attribute: :secret %>
+  <%= render "select", form: utility_fields, attribute: :environment, options: Utilities::Plaid::AVAILABLE_ENVIRONMENTS.map { |x| [x.capitalize, x] }, include_blank: true %>
 <%- end %>
