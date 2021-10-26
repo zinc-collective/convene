@@ -39,11 +39,7 @@ class DemoSpace
     }
   ].freeze
 
-  UTILITY_HOOKUPS = [
-    FactoryBot.attributes_for(:plaid_utility_hookup),
-    { utility_slug: :jitsi, name: 'Jitsi', configuration:
-      { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
-  ].freeze
+
 
   # @return [Space]
   def self.prepare
@@ -53,12 +49,20 @@ class DemoSpace
                     name: 'Zinc',
                     space: {
                       name: 'Convene Demo',
-                      utility_hookups: UTILITY_HOOKUPS,
+                      utility_hookups: utility_hookups,
                       branded_domain: 'convene-demo.zinc.coop',
                       members: [{ email: 'zee@zinc.coop' },
                                 { email: 'vivek@zinc.coop' }],
                       rooms: DEMO_ROOMS
                     }
                   }).find_or_create!
+  end
+
+  def self.utility_hookups
+    [
+      FactoryBot.attributes_for(:plaid_utility_hookup),
+      { utility_slug: :jitsi, name: 'Jitsi', configuration:
+        { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
+    ]
   end
 end
