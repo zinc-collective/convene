@@ -1,8 +1,3 @@
 #!/bin/bash
 
-# Runs the application and supporting services locally
-if [ -n "${PORT}" ]; then
-  overmind start -p $PORT
-else
-  overmind start
-fi
+overmind start -l web,worker,assets,mail_server

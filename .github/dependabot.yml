@@ -6,11 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: "bundler" # See documentation for possible values
-    directory: "/convene-web" # Location of package manifests
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/convene-web" # Location of package manifests
+    directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
   - package-ecosystem: "npm" # See documentation for possible values

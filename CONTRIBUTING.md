@@ -32,10 +32,11 @@ overview of the norms we follow across projects.
 
 At present, Convene is split into three modules:
 
+The root directory provides the human and programmatic interface for Convene
+as well as data-persistence; with two additional submodules.
+
 - `infrastructure`, which contains infrastructure management code for Packer,
   Terraform and Ansible.
-- `convene-web`, which provides the human and programmatic interface for
-  Convene, as well as data-persistence.
 - `features`, which includes the high-level test definitions for the Convene
   experience.
 
@@ -59,16 +60,14 @@ Designers who have agreed to protect the privacy of our clients may access our
 
 ### 2.1. Developer Setup and Documentation.
 
-Much of Convene development happens in `convene-web`.
-
 To set up your development environment you'll need `ruby`, `node` and
-`postgresql`. 
+`postgresql`.
 
 First, ensure your development environment has:
 
 1. Ruby (See [.ruby-version](./.ruby-version) for version)
-1. Node (See [.nvmrc](./.nvmrc) for version)
-1. [Yarn]
+2. Node (See [.nvmrc](./.nvmrc) for version)
+3. [Yarn]
 1. [PostgreSQL 12]. (Note: For people using [Docker], a [docker-compose.yml]
    file has been included for convenience.)
 
@@ -76,7 +75,6 @@ Then, run `bin/setup` to install Ruby and Node dependencies and set up the
 database.
 
 Once setup completes, configure your local development environment.
-1. Open `convene-web/.env` and make any changes.
 1. Open `.env` and make any changes.
 
 Once you have completed configuration; run `bin/run`. You now should be able to open

@@ -44,9 +44,4 @@ else
   cp .env.example .env
 fi
 
-## APPLICATION LEVEL DEPENDENCIES ##
-# Installs environment dependencies such as packages and
-# prepares the application by running setup scripts in
-# each module
-yarn install
-(cd convene-web && bin/setup)
+bin/setup-rails

@@ -9,7 +9,7 @@ Feature: Furniture
 # Adapter & Hybrid examples: Jitsi-meet interaction, Breakout tables, Shared whiteboards.
 # Fully Encapsulated Furniture could be: Random Number Generator, A conversation stack manager
 #
-# For working Code examples and further developer documentation, check out convene-web/app/lib/furniture
+# For working Code examples and further developer documentation, check out app/lib/furniture
 #
 # Most Furniture can be configured by Space Members to fit the specific needs of the specific Room.
 #
