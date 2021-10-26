@@ -64,7 +64,6 @@ gem 'tzinfo-data', '~> 1.2021', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootsnap', '~> 1.9', require: false
 
 # Permissions and policies
-#
 gem 'pundit', '~> 2.1'
 
 # Utility hookup support
@@ -73,16 +72,17 @@ gem 'plaid', '~> 14.5'
 # Workers and Background Jobs
 gem 'sidekiq'
 
+
+# Demo data
+gem 'factory_bot_rails'
+gem 'ffaker'
+
 group :development, :test do
   gem 'pry-byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # Our preferred testing library for Ruby and Rails projects
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 5.0'
-
-  # I hear you like tests.
-  gem 'factory_bot_rails'
-  gem 'ffaker'
   gem 'rails-controller-testing'
 end
 
