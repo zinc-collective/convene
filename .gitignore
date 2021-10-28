@@ -1,20 +1,18 @@
+.byebug_history
 .DS_Store
-node_modules
 .terraform
 *.tfstate*
 *secrets.tfvars
 .env
 .env.production
 
-# gitignore for convene-web
-convene-web/log
-convene-web/tmp/*
-convene-web/node_modules/
-convene-web/public/packs/
+tmp/*
+node_modules/
+public/packs/
+public/packs-test
 *master.key
 *credentials.yml.enc
 *.log*
 *log/
 
 features/test_reports/*.png
-tmp/*

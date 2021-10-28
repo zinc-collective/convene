@@ -6,21 +6,20 @@ on:
     branches: [ development ]
 
 jobs:
-  convene-web-test:
+  test:
     runs-on: ubuntu-latest
 
     env:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      PORT: 80
-      APP_ROOT_URL: http://localhost
-      CUSTOM_DOMAIN: http://system-test.zinc.local
+      APP_ROOT_URL: http://localhost:5000
       # Connect to locally-running Maildev for tests
       SMTP_PORT: 1025
       SMTP_DOMAIN: localhost
       SMTP_ENABLE_TLS: false
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      HEADLESS: true
 
     services:
       postgres:
@@ -50,8 +49,6 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
-        # Use this directory for finding the Gemfile and other Ruby goodies.
-        working-directory: 'convene-web'
 
     - name: Increase the amount of inotify watchers
       run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -60,10 +57,10 @@ jobs:
       run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
 
     - name: Setup CI database.yml
-      run: cd convene-web && cp config/database.yml.github-actions config/database.yml
+      run: cp config/database.yml.github-actions config/database.yml
 
     - name: Use Development mode env
-      run: cd convene-web && cp .env.example .env
+      run: cp .env.example .env
 
     # Yarn caching steps borroed from https://github.com/actions/cache/blob/main/examples.md#node---yarn
     - name: Get yarn cache directory path
@@ -100,13 +97,12 @@ jobs:
           export PATH=$PATH:~/bin
           bin/run &
 
-    - name: Test convene-web
+    - name: Run the tests
       run: |
-          sudo sh -c "echo '127.0.0.1 system-test.zinc.local' >> /etc/hosts"
           # To wait for asset built
           # TODO: Start server in production mode
-          curl system-test.zinc.local:8080/packs/manifest.json 1> /dev/null
-          curl system-test.zinc.local:80 1> /dev/null
+          curl localhost:8080/packs/manifest.json 1> /dev/null
+          curl localhost:5000 1> /dev/null
           bin/test
 
     - uses: actions/upload-artifact@v2

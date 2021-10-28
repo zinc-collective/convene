@@ -27,7 +27,7 @@ provider "cloudflare" {
 
 
 
-# Create a DNS Record for the convene-web instance deployed to Heroku
+# Create a DNS Record for the application instance deployed to Heroku
 resource "cloudflare_record" "convene" {
   zone_id = var.cloudflare_zone_id
   name    = "convene"

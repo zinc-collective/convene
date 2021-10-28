@@ -1,19 +1,12 @@
 {
   "name": "Convene Web",
   "env": {
-    "APP_BASE": {
-      "description": "Relative path for Convene Web, consume by Heroku mono repo buildpack",
-      "value": "convene-web"
-    },
     "LOCKBOX_MASTER_KEY": {
       "description": "Encrypts data within the database",
       "generator": "secret"
     }
   },
   "buildpacks": [
-    {
-      "url": "https://github.com/lstoll/heroku-buildpack-monorepo"
-    },
     {
       "url": "https://github.com/heroku/heroku-buildpack-ruby"
     }

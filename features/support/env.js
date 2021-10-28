@@ -42,7 +42,7 @@ BeforeAll(function() {
 function firefoxOption() {
   // GitHub Actions set CI to true
   // Ref: https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
-  return process.env.CI ? new firefox.Options().headless() : new firefox.Options()
+  return process.env.HEADLESS ? new firefox.Options().headless() : new firefox.Options()
 }
 
 AfterAll(function() {
