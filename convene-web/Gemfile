@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '2.7.4'
 
 # Loads environment level configuration from `.env` when it exists.
 # Also loads from `.env.development` when `RAILS_ENV=development`
