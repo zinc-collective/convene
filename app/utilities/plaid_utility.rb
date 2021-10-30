@@ -4,7 +4,7 @@
 # Provides Plaid functionality to a {Space}
 # @see https://plaid.com
 class PlaidUtility < Utility
-  # @return [Plaid::PlaidApi]
+  # @return [PlaidUtility::PlaidApi]
   def plaid_client
     @plaid_client ||= sdk::PlaidApi.new(
       sdk::ApiClient.new(plaid_configuration)
