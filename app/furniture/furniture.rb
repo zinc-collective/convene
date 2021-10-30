@@ -4,10 +4,10 @@
 # folks defining new Furniture.
 module Furniture
   REGISTRY = {
-    breakout_tables_by_jitsi: Furniture::BreakoutTablesByJitsi,
-    check_dropbox: Furniture::CheckDropbox,
-    markdown_text_block: Furniture::MarkdownTextBlock,
-    videobridge_by_jitsi: Furniture::VideobridgeByJitsi
+    breakout_tables_by_jitsi: BreakoutTablesByJitsi,
+    check_dropbox: CheckDropbox,
+    markdown_text_block: MarkdownTextBlock,
+    videobridge_by_jitsi: VideobridgeByJitsi
   }.freeze
 
   # Appends each {Furniture}'s CRUD actions

@@ -5,7 +5,8 @@
 class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found
-  prepend_view_path 'app/lib/utilities'
+  prepend_view_path 'app/utilities'
+  prepend_view_path 'app/furniture'
 
   # Referenced in application layout to display page title
   # Override on a per-controller basis to display different title

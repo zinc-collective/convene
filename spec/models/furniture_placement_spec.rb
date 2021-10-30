@@ -15,7 +15,7 @@ RSpec.describe FurniturePlacement do
       furniture_placement = FurniturePlacement
                             .new(furniture_kind: :breakout_tables_by_jitsi, settings: { names: %w[a b] })
 
-      expect(furniture_placement.furniture).to be_a(Furniture::BreakoutTablesByJitsi)
+      expect(furniture_placement.furniture).to be_a(BreakoutTablesByJitsi)
       expect(furniture_placement.furniture.placement).to eql(furniture_placement)
       expect(furniture_placement.furniture.tables.to_a[0].name).to eql('a')
       expect(furniture_placement.furniture.tables.to_a[1].name).to eql('b')

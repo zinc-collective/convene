@@ -16,7 +16,7 @@ RSpec.describe '/spaces/:space_slug/room/:room_slug/furniture_placements', type:
       end.to change { room.furniture_placements.count }.by(1)
 
       placement = room.furniture_placements.last
-      expect(placement.furniture).to be_a(Furniture::MarkdownTextBlock)
+      expect(placement.furniture).to be_a(MarkdownTextBlock)
       expect(placement.slot).to eql(0)
       expect(response).to redirect_to(edit_space_room_path(space, room))
     end

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :check_dropbox, class: 'Furniture::CheckDropbox' do
+  factory :check_dropbox, class: 'CheckDropbox' do
     transient do
       room { build(:room) }
     end
@@ -9,7 +9,7 @@ FactoryBot.define do
     end
   end
 
-  factory :check_dropbox_check, class: 'Furniture::CheckDropbox::Check' do
+  factory :check_dropbox_check, class: 'CheckDropbox::Check' do
     sequence(:payer_name) { |i| "Payer #{i}" }
     payer_email { "#{payer_name.downcase.gsub(' ', '-')}@example.com" }
     amount { 100_00 }
