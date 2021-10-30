@@ -22,7 +22,7 @@ RSpec.describe UtilityHookup, type: :model do
   describe '#utility' do
     it 'exposes its configuration' do
       utility_hookup = UtilityHookup.new(utility_slug: :null_hookup, configuration: { a: :b })
-      expect(utility_hookup.utility).to be_a(Utilities::NullUtility)
+      expect(utility_hookup.utility).to be_a(NullUtility)
       expect(utility_hookup.utility.configuration['a']).to eq('b')
     end
   end

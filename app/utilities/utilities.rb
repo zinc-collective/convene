@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'utilities/utility'
-require_relative 'utilities/null_utility'
-
-require_relative 'utilities/plaid'
-require_relative 'utilities/jitsi'
-
 # {Utilities} allow external services to provide functionality to a {Space} and
 # its {Furniture}.
 #
@@ -16,8 +10,8 @@ require_relative 'utilities/jitsi'
 # @see features/utilities/
 module Utilities
   REGISTRY = {
-    plaid: Plaid,
-    jitsi: Jitsi
+    plaid: PlaidUtility,
+    jitsi: JitsiUtility
   }.freeze
 
   # @param utility_hookup [UtilityHookup]

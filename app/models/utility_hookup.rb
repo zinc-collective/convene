@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Links a {Utilities::Utility} to a {Space}
+# Links a {Utility} to a {Space}
 class UtilityHookup < ApplicationRecord
   # @return [Space]
   belongs_to :space
@@ -14,7 +14,7 @@ class UtilityHookup < ApplicationRecord
     attributes[:name] ||= utility_slug.to_s.humanize
   end
 
-  # Which type of {Utilities::Utility} is connected
+  # Which type of {Utility} is connected
   # Should match one of the keys in {Utilities::REGISTRY}
   # @return [String]
   attribute :utility_slug, :string
@@ -37,7 +37,7 @@ class UtilityHookup < ApplicationRecord
     where(utility_slug: 'plaid').first&.utility
   end
 
-  # @return [Utilities::Utility]
+  # @return [Utility]
   def utility
     @utility ||= Utilities.from_utility_hookup(self)
   end
