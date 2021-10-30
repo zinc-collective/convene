@@ -12,7 +12,6 @@ jobs:
     env:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      APP_ROOT_URL: http://localhost:5000
       # Connect to locally-running Maildev for tests
       SMTP_PORT: 1025
       SMTP_DOMAIN: localhost
@@ -102,7 +101,7 @@ jobs:
           # To wait for asset built
           # TODO: Start server in production mode
           curl localhost:8080/packs/manifest.json 1> /dev/null
-          curl localhost:5000 1> /dev/null
+          curl localhost:3000 1> /dev/null
           bin/test
 
     - uses: actions/upload-artifact@v2
