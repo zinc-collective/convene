@@ -9,8 +9,10 @@ const getUrls = require("get-urls");
  * @returns
  */
 function findUrl(text, regex) {
-  for(let url  of getUrls(text).values()) {
-    if(url.match(regex)) { return url  }
+  for (let url of getUrls(text).values()) {
+    if (url.match(regex)) {
+      return url;
+    }
   }
 }
 const MailServer = require("./MailServer");
@@ -35,22 +37,11 @@ class Invitation {
   }
 
   /**
-   * @returns {Promise<Boolean>}
-   */
-  hasStatus({ status, space, driver }) {
-    const matcher = new RegExp(`<${this.emailAddress}>.*${status}`)
-    return new SpaceEditPage(driver, space).visit().then(
-      (page) => page.hasContent(matcher)
-    )
-  }
-
-
-  /**
    * @returns {Promise<String>}
    */
   rsvpLink() {
-    return this.latestDelivery().then(
-      (email) => findUrl(email.text, /spaces\/.*\/invitations\/.*\/rsvp/)
+    return this.latestDelivery().then((email) =>
+      findUrl(email.text, /spaces\/.*\/invitations\/.*\/rsvp/)
     );
   }
 

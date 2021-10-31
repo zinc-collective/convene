@@ -81,6 +81,11 @@ class SpaceEditPage extends Page {
       .finally(() => this);
   }
 
+  hasInvitation({ invitation, status }) {
+    const matcher = new RegExp(`<${invitation.emailAddress}>.*${status}`);
+    return this.visit().then((page) => page.hasContent(matcher));
+  }
+
   /**
    * @returns {Promise<this>}
    */

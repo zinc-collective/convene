@@ -32,6 +32,7 @@ Then(
    * @param {Invitation} invitation
    */
   async function (_a, invitation, _a2, space, _a3, status) {
-    assert(await invitation.hasStatus({ status, space, driver: this.driver }));
+    const page = new SpaceEditPage(this.driver, space);
+    assert(await page.hasInvitation({ invitation, status }));
   }
 );
