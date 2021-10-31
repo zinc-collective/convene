@@ -8,6 +8,8 @@ class SpacesController < ApplicationController
   end
 
   helper_method def space
-    @space ||= current_space
+    @space ||= current_space.tap do |space|
+      authorize(space)
+    end
   end
 end

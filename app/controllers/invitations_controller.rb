@@ -5,7 +5,7 @@ class InvitationsController < ApplicationController
     # TODO: Extract a DeliverInvitationJob that sets the last sent at
     if invitation.save
       SpaceInvitationMailer.space_invitation_email(invitation).deliver_later
-      redirect_to edit_space_path(@invitation.space),
+      redirect_to edit_space_path(invitation.space),
                   notice: t('.success', invitee_email: invitation.email,
                                         invitee_name: invitation.name)
     else
