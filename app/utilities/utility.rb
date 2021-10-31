@@ -11,7 +11,6 @@ class Utility
   # @return [UtilityHookup]
   attr_accessor :utility_hookup
 
-
   # @return [Space]
   delegate :space, to: :utility_hookup
 

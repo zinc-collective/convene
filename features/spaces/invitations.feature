@@ -8,10 +8,9 @@ Feature: Spaces: Invitations
     When an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
       | name | email                       |
       | Aang | aang-the-avatar@example.com |
-    Then an Invitation to "aang-the-avatar@example.com" is delivered
-    And the Invitation to "aang-the-avatar@example.com" has an RSVP link
-    And the Invitation to "aang-the-avatar@example.com" has a status of "sent"
-    And the Invitation to "aang-the-avatar@example.com" has an invitor of Space Owner "space-owner@example.com"
+    Then an Invitation to "aang-the-avatar@example.com" for the "System Test" Space is delivered
+    And the Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "pending"
+
 
   # We create new Invitation(s) when inviting someone again,
   # so that we have a record of how many times someone was

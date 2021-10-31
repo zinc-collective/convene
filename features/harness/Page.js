@@ -1,5 +1,5 @@
 const appUrl = require("../lib/appUrl");
-const { ThenableWebDriver } = require("selenium-webdriver");
+const { ThenableWebDriver, By } = require("selenium-webdriver");
 const Component = require("./Component");
 const PersonNavigationComponent = require("./PersonNavigationComponent");
 
@@ -35,6 +35,17 @@ class Page {
    */
   visit() {
     return this.driver.get(`${this.baseUrl}${this.path()}`).then(() => this);
+  }
+
+  /**
+   * @param {RegExp} content
+   * @returns {Promise<Boolean>}
+   */
+  hasContent(content) {
+    return this.driver.findElement(By.tagName('body')).getText().then(
+      (body) =>
+        (body.match(content))
+    )
   }
 
   /**

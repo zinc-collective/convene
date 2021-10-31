@@ -16,21 +16,22 @@ When(
 );
 
 Then(
-  "an {invitation} is delivered",
+  "an {invitation} for {a} {space} is delivered",
   /**
    * @param {Invitation} invitation
    */
-  async function (invitation) {
+  async function (invitation, _a, space) {
     assert(await invitation.wasDelivered());
+    assert(await invitation.rsvpLink());
   }
 );
 
 Then(
-  "{a} {invitation} has an RSVP link",
+  "{a} {invitation} for {a} {space} has {a} status of {string}",
   /**
    * @param {Invitation} invitation
    */
-  async function (a, invitation) {
-    assert(await invitation.rsvpLink());
+  async function (_a, invitation, _a2, space, _a3, status) {
+    assert(await invitation.hasStatus({ status, space, driver: this.driver }));
   }
 );

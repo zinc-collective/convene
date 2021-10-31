@@ -1,3 +1,4 @@
+const { SpaceEditPage } = require("../harness/Pages");
 const { findLast, find, filter } = require("lodash");
 const getUrls = require("get-urls");
 
@@ -31,6 +32,16 @@ class Invitation {
    */
   latestDelivery() {
     return this.emails().then((emails) => emails[0]);
+  }
+
+  /**
+   * @returns {Promise<Boolean>}
+   */
+  hasStatus({ status, space, driver }) {
+    const matcher = new RegExp(`<${this.emailAddress}>.*${status}`)
+    return new SpaceEditPage(driver, space).visit().then(
+      (page) => page.hasContent(matcher)
+    )
   }
 
 
