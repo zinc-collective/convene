@@ -22,6 +22,18 @@ class MailServer {
    * @returns {Promise<MailServerEmail[]>}
    */
   emailsTo(emailAddress) {
+    return this._emailsTo(emailAddress).then((emails) => {
+      if (emails.length > 0) {
+        return emails;
+      } else {
+        return new Promise((resolve) =>
+          delay(() => this._emailsTo(emailAddress).then(resolve), 10)
+        );
+      }
+    });
+  }
+
+  _emailsTo(emailAddress) {
     return this.emails().then((emails) =>
       filter(emails, (email) => email.headers.to === emailAddress)
     );

@@ -1,15 +1,16 @@
 Feature: Spaces: Invitations
   Invitations allow Space Owners to bring additional people into the Space
 
-  @built @unimplemented-steps @andromeda
+  @built @andromeda
   Scenario: Inviting new Members via Email
-    When a Space Owner invites a new Space Member via Email
-    Then an Invitation is sent to that Email
+    Given a "System Test" Space
+    And the "System Test" Space has a Space Owner "space-owner@example.com"
+    When an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
+      | name | email                       |
+      | Aang | aang-the-avatar@example.com |
+    Then an Invitation to "aang-the-avatar@example.com" for the "System Test" Space is delivered
+    And the Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "pending"
 
-  @unstarted @unscheduled
-  Scenario: Inviting new Members via SMS
-    When a Space Owner invites a new Space Member via SMS
-    Then an Invitation is sent to that SMS
 
   # We create new Invitation(s) when inviting someone again,
   # so that we have a record of how many times someone was
@@ -60,3 +61,9 @@ Feature: Spaces: Invitations
   # an explicit option to block further invitations from the Space
   @unstarted @andromeda
   Scenario: Blocking Further Invitations
+
+
+  @unstarted @unscheduled
+  Scenario: Inviting new Members via SMS
+    When a Space Owner invites a new Space Member via SMS
+    Then an Invitation is sent to that SMS

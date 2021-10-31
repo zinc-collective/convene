@@ -12,9 +12,8 @@ defineParameterType({
   name: "actor",
   regexp: /(Guest|Space Member|Space Owner|Neighbor)( ".*")?/,
   transformer: function(type, email) {
-    email = email || `${type.toLowerCase()
-      .replace(/\s/, '-')}@example.com`
-      .replace(/"/g,'')
-    return new Actor(type, email)
+    email = email || `${type.toLowerCase()}@example.com`
+
+    return new Actor(type, email.trim().replace(/\s/, '-').replace(/"/g,''))
   }
 });

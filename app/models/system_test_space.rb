@@ -29,7 +29,8 @@ class SystemTestSpace
         { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
     ],
     access_level: :unlocked,
-    members: [{ email: 'space-member@example.com' }],
+    members: [{ email: 'space-owner@example.com' },
+              { email: 'space-member@example.com' }],
     rooms: [
       {
         name: 'Listed Room 1',
