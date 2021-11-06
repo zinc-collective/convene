@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_11_011702) do
+ActiveRecord::Schema.define(version: 2021_11_06_220854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -122,8 +122,6 @@ ActiveRecord::Schema.define(version: 2021_10_11_011702) do
     t.uuid "client_id"
     t.string "jitsi_meet_domain"
     t.string "name"
-    t.string "access_level"
-    t.string "access_code"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

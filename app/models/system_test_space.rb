@@ -28,7 +28,6 @@ class SystemTestSpace
       { utility_slug: :jitsi, name: 'Jitsi', configuration:
         { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
     ],
-    access_level: :unlocked,
     members: [{ email: 'space-owner@example.com' },
               { email: 'space-member@example.com' }],
     rooms: [
