@@ -1,14 +1,20 @@
 class FurniturePlacementPolicy < ApplicationPolicy
   alias furniture_placement object
+  delegate :space, to: :furniture_placement
+
+  class Scope < ApplicationScope
+    def resolve
+      room_policy_scope = RoomPolicy::Scope.new(person, Room.all)
+      scope.joins(:room).where(room: room_policy_scope.resolve)
+    end
+  end
 
   def show?
     true
   end
 
   def update?
-    return false unless person
-
-    person.member_of?(furniture_placement.space)
+    person&.member_of?(furniture_placement.space)
   end
 
   alias edit? update?

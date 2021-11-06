@@ -16,4 +16,11 @@ class InvitationPolicy < ApplicationPolicy
   alias update? create?
   alias destroy? create?
   alias new? create?
+
+  class Scope < ApplicationScope
+    # All invitations for an accessible space are visible.
+    def resolve
+      scope.all
+    end
+  end
 end

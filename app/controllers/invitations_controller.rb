@@ -21,7 +21,7 @@ class InvitationsController < ApplicationController
   end
 
   def invitation
-    @invitation ||= current_space.invitations.new(invitation_params).tap do |invitation|
+    @invitation ||= policy_scope(current_space.invitations).new(invitation_params).tap do |invitation|
       authorize(invitation)
     end
   end

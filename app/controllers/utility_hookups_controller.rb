@@ -32,7 +32,7 @@ class UtilityHookupsController < ApplicationController
     return @utility_hookup if defined?(@utility_hookup)
 
     @utility_hookup = policy_scope(space.utility_hookups).find_by(id: params[:id]) if params[:id]
-    @utility_hookup ||= space.utility_hookups.new(utility_hookup_params)
+    @utility_hookup ||= policy_scope(space.utility_hookups).new(utility_hookup_params)
     @utility_hookup.tap { authorize(@utility_hookup) }
   end
 

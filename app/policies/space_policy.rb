@@ -13,4 +13,10 @@ class SpacePolicy < ApplicationPolicy
 
   alias new? update?
   alias edit? update?
+
+  class Scope < ApplicationScope
+    def resolve
+      scope.all
+    end
+  end
 end

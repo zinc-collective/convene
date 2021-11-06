@@ -17,4 +17,10 @@ class RoomPolicy < ApplicationPolicy
   alias update? create?
   alias destroy? create?
   alias new? create?
+
+  class Scope < ApplicationScope
+    def resolve
+      scope.listed
+    end
+  end
 end
