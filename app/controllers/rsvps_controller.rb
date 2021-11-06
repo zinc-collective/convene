@@ -1,4 +1,7 @@
 class RsvpsController < ApplicationController
+  # Not a database-backed model, no need to policy-scope.
+  skip_after_action :verify_policy_scoped
+
   def show
   end
 
@@ -12,7 +15,7 @@ class RsvpsController < ApplicationController
   end
 
   helper_method def rsvp
-    @rsvp ||= Rsvp.new(invitation: invitation)
+    @rsvp ||= Rsvp.new(invitation: invitation).tap { |rsvp| authorize(rsvp) }
   end
 
   helper_method def invitation
