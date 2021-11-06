@@ -224,6 +224,16 @@ GEM
       sprockets-rails
       tilt
     semantic_range (3.0.0)
+    sentry-rails (4.7.3)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 4.7.0)
+    sentry-ruby (4.7.3)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      faraday (>= 1.0)
+      sentry-ruby-core (= 4.7.3)
+    sentry-ruby-core (4.7.3)
+      concurrent-ruby
+      faraday
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
     sidekiq (6.2.2)
@@ -288,6 +298,8 @@ DEPENDENCIES
   rotp (~> 6.2)
   rspec-rails
   sass-rails (~> 6.0)
+  sentry-rails
+  sentry-ruby
   shoulda-matchers (~> 5.0)
   sidekiq
   spring

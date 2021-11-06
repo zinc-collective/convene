@@ -72,6 +72,9 @@ gem 'plaid', '~> 14.7'
 # Workers and Background Jobs
 gem 'sidekiq'
 
+# Error reporting in production
+gem 'sentry-ruby'
+gem 'sentry-rails'
 
 # Demo data
 gem 'factory_bot_rails'
