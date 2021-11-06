@@ -29,10 +29,16 @@ class FurniturePlacementsController < ApplicationController
       authorize(furniture_placement)
     end
   end
+
   def find_or_build
     return current_room.furniture_placements.find(params[:id]) if params[:id]
 
     current_room.furniture_placements.new(furniture_placement_params)
+  end
+
+  def furniture_placement_params
+    params.require(:furniture_placement).permit(:furniture_kind, :slot,
+      furniture_attributes: furniture_params)
   end
 
   def furniture_params
