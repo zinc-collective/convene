@@ -10,8 +10,8 @@ class FurniturePlacementPolicy < ApplicationPolicy
     end
 
     def resolve
-      # TODO: is this even the right scope?
-      @scope.joins(:room).where(room: { space: @person.spaces })
+      room_policy_scope = RoomPolicy::Scope.new(person, Room.all)
+      scope.joins(:room).where(room: room_policy_scope.resolve)
     end
   end
 
