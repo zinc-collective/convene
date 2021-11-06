@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   # @return [nil, Room]
   helper_method def current_room
     @current_room ||=
-      current_space.rooms.friendly.find(
+      policy_scope(current_space.rooms).friendly.find(
         params[:room_id] || params[:id]
       )
   rescue ActiveRecord::RecordNotFound
