@@ -9,8 +9,6 @@ RSpec.describe DemoSpace, type: :model do
         demo_space = DemoSpace.prepare
         aggregate_failures do
           expect(demo_space).to be_persisted
-          expect(demo_space).to be_unlocked
-          expect(demo_space.access_code).to be_nil
           expect(demo_space.name).to eql("Convene Demo")
           expect(demo_space.slug).to eql("convene-demo")
           expect(demo_space.jitsi_meet_domain).to eql("convene-videobridge-zinc.zinc.coop")

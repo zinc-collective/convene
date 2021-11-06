@@ -44,23 +44,7 @@ class Space < ApplicationRecord
 
   belongs_to :entrance, class_name: 'Room', optional: true
 
-  # A Space's Access Level indicates what a participant must know in order to gain access.
-  # `unlocked` The participant does not need to know anything to gain access.
-  # `locked` Participants must know the Space's `access_code` to gain access.
-  attribute :access_level, :string
-
-  # A room's Access Code is a "secret" that, when known, grants access to the room.
-  attribute :access_code, :string
-
   scope :default, -> { friendly.find(Neighborhood.config.default_space_slug) }
-
-  def unlocked?
-    access_level&.to_sym != :locked
-  end
-
-  def locked?
-    access_level&.to_sym == :locked
-  end
 
   # @see {Utilities}
   # @see {UtilityHookup}

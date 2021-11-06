@@ -109,7 +109,6 @@ class Blueprint
       space: {
         members: [{ email: 'zee@zinc.coop' }, { email: 'cheryl@zinc.coop' }],
         name: 'Zinc', branded_domain: 'meet.zinc.coop',
-        access_level: :unlocked,
         entrance: 'lobby',
         utility_hookups: [
           {
