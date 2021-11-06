@@ -62,9 +62,6 @@ class Room < ApplicationRecord
   # The People who own the room
   has_many :owners, through: :room_ownerships
 
-  scope :owned_by,      ->(person) { joins(:owners).where(room_ownerships: { owner: person }) }
-  scope :accessable_by, ->(person = nil) { union(owned_by(person)).union(listed) }
-
   has_many :furniture_placements
   accepts_nested_attributes_for :furniture_placements
 

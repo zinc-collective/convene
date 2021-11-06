@@ -20,7 +20,7 @@ class RoomPolicy < ApplicationPolicy
 
   class Scope < ApplicationScope
     def resolve
-      scope.accessable_by(person)
+      scope.listed
     end
   end
 end
