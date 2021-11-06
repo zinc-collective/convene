@@ -40,8 +40,9 @@ class Room < ApplicationRecord
 
   # A Room's Publicity Level indicates how visible the room is.
   # `listed` - The room is discoverable by anyone in the space lobby.
-  # `unlisted` - The room is only visible to it's owners and people who have been in it before.
-  PUBLICITY_LEVELS = [ :listed, :unlisted].freeze
+  # `unlisted` - The room is not listed.
+
+  PUBLICITY_LEVELS = [:listed, :unlisted].freeze
   attribute :publicity_level, :string
   validates :publicity_level, presence: true, inclusion: { in: PUBLICITY_LEVELS + PUBLICITY_LEVELS.map(&:to_s) }
 
@@ -55,12 +56,6 @@ class Room < ApplicationRecord
   def unlisted?
     publicity_level&.to_sym == :unlisted
   end
-
-  # Links People to the room for permissioning
-  has_many :room_ownerships, inverse_of: :room
-
-  # The People who own the room
-  has_many :owners, through: :room_ownerships
 
   has_many :furniture_placements
   accepts_nested_attributes_for :furniture_placements
