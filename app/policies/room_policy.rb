@@ -18,16 +18,9 @@ class RoomPolicy < ApplicationPolicy
   alias destroy? create?
   alias new? create?
 
-  class Scope
-    attr_accessor :actor, :scope
-
-    def initialize(actor, scope)
-      self.actor = actor
-      self.scope = scope
-    end
-
+  class Scope < ApplicationScope
     def resolve
-      scope.accessable_by(actor)
+      scope.accessable_by(person)
     end
   end
 end

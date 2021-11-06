@@ -14,14 +14,7 @@ class SpacePolicy < ApplicationPolicy
   alias new? update?
   alias edit? update?
 
-  class Scope
-    attr_accessor :actor, :scope
-
-    def initialize(actor, scope)
-      @actor = actor
-      @scope = scope
-    end
-
+  class Scope < ApplicationScope
     def resolve
       scope.all
     end

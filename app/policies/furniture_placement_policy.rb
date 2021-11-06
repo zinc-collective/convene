@@ -2,13 +2,7 @@ class FurniturePlacementPolicy < ApplicationPolicy
   alias furniture_placement object
   delegate :space, to: :furniture_placement
 
-  class Scope
-    attr_accessor :person, :scope
-    def initialize(person, scope)
-      @person = person
-      @scope = scope
-    end
-
+  class Scope < ApplicationScope
     def resolve
       room_policy_scope = RoomPolicy::Scope.new(person, Room.all)
       scope.joins(:room).where(room: room_policy_scope.resolve)
