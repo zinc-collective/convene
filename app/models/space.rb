@@ -45,9 +45,6 @@ class Space < ApplicationRecord
   belongs_to :entrance, class_name: 'Room', optional: true
 
   scope :default, -> { friendly.find(Neighborhood.config.default_space_slug) }
-  scope :unlocked, -> { where(access_level: :unlocked) }
-  scope :membership_by, ->(person) { joins(:space_memberships).where(space_memberships: { member: person }) }
-  scope :accessable_by, ->(person = nil) { union(membership_by(person)).union(unlocked) }
 
   # @see {Utilities}
   # @see {UtilityHookup}

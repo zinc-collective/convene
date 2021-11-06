@@ -23,7 +23,7 @@ class SpacePolicy < ApplicationPolicy
     end
 
     def resolve
-      scope.accessable_by(actor)
+      scope.all
     end
   end
 end
