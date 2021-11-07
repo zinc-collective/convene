@@ -16,3 +16,5 @@ public/packs-test
 *log/
 
 features/test_reports/*.png
+
+coverage/
