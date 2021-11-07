@@ -77,6 +77,9 @@ gem 'sidekiq'
 gem 'factory_bot_rails'
 gem 'ffaker'
 
+# Code coverage
+gem 'simplecov', require: false, group: :test
+
 group :development, :test do
   gem 'pry-byebug', platforms: [:mri, :mingw, :x64_mingw]
 
