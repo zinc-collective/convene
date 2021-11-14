@@ -20,7 +20,7 @@ class RoomPolicy < ApplicationPolicy
 
   class Scope < ApplicationScope
     def resolve
-      scope.listed
+      scope.all
     end
   end
 end
