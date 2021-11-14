@@ -18,20 +18,25 @@ When(
   }
 );
 
-When('{a} {invitation} for {a} {space} is accepted by {a} {actor}',
+When(
+  "{a} {invitation} for {a} {space} is accepted by {a} {actor}",
   /**
    * @param {Invitation} invitation
    * @param {Space} space
    * @param {Actor} actor
    */
   function (_, invitation, _2, space, _3, actor) {
-    return invitation.rsvpLink()
-      // @todo Refactor to live in the harness
-      .then((rsvpLink) => this.driver.get(rsvpLink))
-      .then(() => new Component(this.driver, 'input[type="submit"]').click())
-      .then(() => actor.authenticationCode())
-      .then((code) => new SignInPage(this.driver, space).submitCode(code))
-});
+    return (
+      invitation
+        .rsvpLink()
+        // @todo Refactor to live in the harness
+        .then((rsvpLink) => this.driver.get(rsvpLink))
+        .then(() => new Component(this.driver, 'input[type="submit"]').click())
+        .then(() => actor.authenticationCode())
+        .then((code) => new SignInPage(this.driver, space).submitCode(code))
+    );
+  }
+);
 
 Then(
   "an {invitation} for {a} {space} is delivered",
@@ -55,15 +60,43 @@ Then(
   }
 );
 
-Then('{a} {actor} becomes {a} {actor} of {a} {space}',
+Then(
+  "{a} {actor} becomes {a} {actor} of {a} {space}",
   /**
    * @param {Actor} actor
    * @param {Actor} role
    * @param {Space} space
    */
   function (_, actor, _2, role, _3, space) {
-    return actor.signIn(this.driver, space)
-      // @todo Refactor to live in the harness
-      .then(() => new Component(this.driver, 'header a.--configure[aria_label="Configure Space"]').isDisplayed())
-      .then((displayed) => assert(displayed))
-});
+    return (
+      actor
+        .signIn(this.driver, space)
+        // @todo Refactor to live in the harness
+        .then(() =>
+          new Component(
+            this.driver,
+            'header a.--configure[aria_label="Configure Space"]'
+          ).isDisplayed()
+        )
+        .then((displayed) => assert(displayed))
+    );
+  }
+);
+
+Then(
+  "all other Invitations to {actor} for {a} {space} no longer have {a} status of {string}",
+  /**
+   * @param {Actor} actor
+   * @param {Space} space
+   * @param {string} status
+   */
+  function (actor, a, space, a2, status) {
+    return actor
+      .signIn(this.driver, space)
+      .then(() => new SpaceEditPage(this.driver, space).visit())
+      .then((page) => page.invitations({ to: actor }))
+      .then((invitations) =>
+        assert(invitations.every((i) => i.status !== status))
+      );
+  }
+);

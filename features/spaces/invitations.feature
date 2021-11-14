@@ -49,7 +49,8 @@ Feature: Spaces: Invitations
     When the Invitation to "a-guest@example.com" for the "System Test" Space is accepted by the Guest "a-guest@example.com"
     Then the Guest "a-guest@example.com" becomes a Space Member of the "System Test" Space
     And the Invitation to "a-guest@example.com" for the "System Test" Space has a status of "accepted"
-    And all other Invitations to "a-guest@example.com" for the "System Test" Space have a status of "accepted elsewhere"
+    # @todo implement me!
+    # And all other Invitations to Space Member "a-guest@example.com" for the "System Test" Space no longer have a status of "pending"
 
   # We want to make sure that people who were invited but
   # didn't take action can't suddenly appear and disorient
