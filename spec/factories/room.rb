@@ -8,6 +8,14 @@ FactoryBot.define do
       access_level { :internal }
     end
 
+    trait :listed do
+      publicity_level { 'listed' }
+    end
+
+    trait :unlisted do
+      publicity_level { 'unlisted' }
+    end
+
     trait :locked do
       access_level { :locked }
       access_code { 'secret' }
