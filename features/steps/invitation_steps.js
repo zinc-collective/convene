@@ -4,7 +4,7 @@ const assert = require("assert").strict;
 const Invitation = require("../lib/Invitation");
 const Space = require("../lib/Space");
 const Actor = require("../lib/Actor");
-const { SpaceEditPage } = require("../harness/Pages");
+const { SpaceEditPage, SignInPage } = require("../harness/Pages");
 const Component = require("../harness/Component");
 
 When(
@@ -26,8 +26,11 @@ When('{a} {invitation} for {a} {space} is accepted by {a} {actor}',
    */
   function (_, invitation, _2, space, _3, actor) {
     return invitation.rsvpLink()
+      // @todo Refactor to live in the harness
       .then((rsvpLink) => this.driver.get(rsvpLink))
       .then(() => new Component(this.driver, 'input[type="submit"]').click())
+      .then(() => actor.authenticationCode())
+      .then((code) => new SignInPage(this.driver, space).submitCode(code))
 });
 
 Then(
@@ -51,3 +54,16 @@ Then(
     assert(await page.hasInvitation({ invitation, status }));
   }
 );
+
+Then('{a} {actor} becomes {a} {actor} of {a} {space}',
+  /**
+   * @param {Actor} actor
+   * @param {Actor} role
+   * @param {Space} space
+   */
+  function (_, actor, _2, role, _3, space) {
+    return actor.signIn(this.driver, space)
+      // @todo Refactor to live in the harness
+      .then(() => new Component(this.driver, 'header a.--configure[aria_label="Configure Space"]').isDisplayed())
+      .then((displayed) => assert(displayed))
+});
