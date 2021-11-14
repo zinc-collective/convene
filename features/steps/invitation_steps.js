@@ -2,7 +2,10 @@ const { When, Then } = require("@cucumber/cucumber");
 const assert = require("assert").strict;
 
 const Invitation = require("../lib/Invitation");
+const Space = require("../lib/Space");
+const Actor = require("../lib/Actor");
 const { SpaceEditPage } = require("../harness/Pages");
+const Component = require("../harness/Component");
 
 When(
   "an {invitation} to {a} {space} is sent by {actor}",
@@ -14,6 +17,18 @@ When(
       .then((page) => page.inviteAll(invitations.hashes()));
   }
 );
+
+When('{a} {invitation} for {a} {space} is accepted by {a} {actor}',
+  /**
+   * @param {Invitation} invitation
+   * @param {Space} space
+   * @param {Actor} actor
+   */
+  function (_, invitation, _2, space, _3, actor) {
+    return invitation.rsvpLink()
+      .then((rsvpLink) => this.driver.get(rsvpLink))
+      .then(() => new Component(this.driver, 'input[type="submit"]').click())
+});
 
 Then(
   "an {invitation} for {a} {space} is delivered",
