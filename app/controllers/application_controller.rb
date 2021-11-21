@@ -26,9 +26,20 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # @return [Guest, Person] the authenticated user, or a Guest
+  OPERATOR_TOKEN = ENV['OPERATOR_API_KEY']
+  # @return [Guest, Person, Operator] the authenticated user, or a Guest
   def current_person
-    @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
+    return @current_person if defined?(@current_person)
+
+    case request.format
+    when Mime[:xml], Mime[:atom], Mime[:json]
+      authenticate_or_request_with_http_token do |token, _options|
+        ActiveSupport::SecurityUtils.secure_compare(token, OPERATOR_TOKEN)
+      end
+      @current_person = Operator.new
+    else
+      @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
+    end
   end
 
   def pundit_user
@@ -43,10 +54,10 @@ class ApplicationController < ActionController::Base
         space_repository.friendly.find(params[:space_id])
       else
         BrandedDomain.new(space_repository).space_for_request(request) ||
-        space_repository.friendly.find(params[:id])
+          space_repository.friendly.find(params[:id])
       end.tap { |space| authorize(space, :show?) }
-  rescue ActiveRecord::RecordNotFound
-    @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
+                rescue ActiveRecord::RecordNotFound
+                  @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
   end
 
   def space_repository
@@ -60,8 +71,8 @@ class ApplicationController < ActionController::Base
       policy_scope(current_space.rooms).friendly.find(
         params[:room_id] || params[:id]
       )
-  rescue ActiveRecord::RecordNotFound
-    nil
+                rescue ActiveRecord::RecordNotFound
+                  nil
   end
 
   helper_method def current_access_code(room)

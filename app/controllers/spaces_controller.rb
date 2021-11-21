@@ -7,6 +7,10 @@ class SpacesController < ApplicationController
   def edit
   end
 
+  def destroy
+    space.destroy
+  end
+
   helper_method def space
     @space ||= current_space.tap do |space|
       authorize(space)

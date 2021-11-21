@@ -19,6 +19,10 @@ class Person < ApplicationRecord
     spaces.include?(space)
   end
 
+  def operator?
+    false
+  end
+
   def authenticated?
     true
   end

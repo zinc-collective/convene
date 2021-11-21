@@ -10,6 +10,10 @@ class Guest
     false
   end
 
+  def operator?
+    false
+  end
+
   def authenticated?
     false
   end
