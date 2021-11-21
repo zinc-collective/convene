@@ -24,12 +24,14 @@ Feature: Discovering Rooms
 
   @built
   Scenario: Guest may not discover Unlisted Rooms
-    Given the Guest is on the "System Test" Space Dashboard
+    Given a fresh "System Test" Space
+    When the Guest is on the "System Test" Space Dashboard
     Then the Guest does not see the "Unlisted Room 1" Room's Door
 
   @built
   Scenario: Space Member may not discover Unlisted Room
-    Given the Space Member is on the "System Test" Space Dashboard
+    Given a fresh "System Test" Space
+    When the Space Member is on the "System Test" Space Dashboard
     Then the Space Member does not see the "Unlisted Room 1" Room's Door
 
   @unstarted @unimplemented-steps
