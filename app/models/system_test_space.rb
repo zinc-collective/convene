@@ -9,6 +9,8 @@ class SystemTestSpace
   def self.prepare
     return unless Feature.enabled?(:system_test)
 
+    Space.find_by(name: 'System Test')&.destroy
+
     Blueprint.new(client: { name: 'System Test',
                             space: DEFAULT_SPACE_CONFIG.merge(
                               name: 'System Test Branded Domain',
