@@ -17,6 +17,7 @@ class SpacePolicy < ApplicationPolicy
   def destroy?
     person.operator?
   end
+  alias create? destroy?
 
   class Scope < ApplicationScope
     def resolve
