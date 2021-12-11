@@ -1,19 +1,17 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const { RoomPage, SpacePage, SpaceEditPage } = require("../harness/Pages");
-
 const { linkParameters } = require("../lib");
 const appUrl = require("../lib/appUrl");
+const { Api } = require("../lib/Api");
 
 Given('{a} {space}', function(_, space) {
   return true
 })
 
 Given('{a} fresh {space}', function(_, space) {
-  api = new API(appUrl, process.env.OPERATOR_API_KEY)
+  const api = new Api(appUrl(), process.env.OPERATOR_API_KEY)
 
-  return api.spaces()
-    .destroy(space)
-    .then(() => api.spaces().create(space))
+  return api.spaces().create(space);
 })
 
 
