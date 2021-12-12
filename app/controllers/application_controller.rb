@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   prepend_view_path 'app/utilities'
   prepend_view_path 'app/furniture'
 
+  protect_from_forgery with: :exception, unless: -> { api_request? }
+
   # Referenced in application layout to display page title
   # Override on a per-controller basis to display different title
   # @return [String]
@@ -31,14 +33,22 @@ class ApplicationController < ActionController::Base
   def current_person
     return @current_person if defined?(@current_person)
 
-    case request.format
-    when Mime[:xml], Mime[:atom], Mime[:json]
+    if api_request?
       authenticate_or_request_with_http_token do |token, _options|
         ActiveSupport::SecurityUtils.secure_compare(token, OPERATOR_TOKEN)
       end
       @current_person = Operator.new
     else
       @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
+    end
+  end
+
+  def api_request?
+    case request.format
+    when Mime[:xml], Mime[:atom], Mime[:json]
+      true
+    else
+      false
     end
   end
 
@@ -55,9 +65,11 @@ class ApplicationController < ActionController::Base
       else
         BrandedDomain.new(space_repository).space_for_request(request) ||
           space_repository.friendly.find(params[:id])
-      end.tap { |space| authorize(space, :show?) }
-                rescue ActiveRecord::RecordNotFound
-                  @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
+      end.tap do |space|
+        authorize(space, :show?)
+      end
+  rescue ActiveRecord::RecordNotFound
+    @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
   end
 
   def space_repository

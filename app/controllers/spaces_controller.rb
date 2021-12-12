@@ -4,8 +4,7 @@
 class SpacesController < ApplicationController
   def show; end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @space = Space.new(space_params)
@@ -13,10 +12,7 @@ class SpacesController < ApplicationController
     authorize(@space)
     Blueprint.new(client:
       { name: space_params[:name],
-        space: SystemTestSpace::DEFAULT_SPACE_CONFIG.merge(space_params).with_indifferent_access
-
-       }
-      ).find_or_create!
+        space: SystemTestSpace::DEFAULT_SPACE_CONFIG.merge(space_params).with_indifferent_access }).find_or_create!
   end
 
   def destroy
@@ -24,7 +20,7 @@ class SpacesController < ApplicationController
   end
 
   def space_params
-    params.require(:space).permit(:name)
+    params.require(:space).permit(:name, :slug)
   end
 
   helper_method def space
