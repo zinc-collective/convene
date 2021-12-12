@@ -21,7 +21,6 @@ Feature: Discovering Rooms
     Then they do not see the Room
 
   # Unlisted Rooms
-
   @built
   Scenario: Guest may not discover Unlisted Rooms
     Given a fresh "System Test" Space
