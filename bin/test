@@ -6,4 +6,4 @@
 set -e
 
 bin/rake
-yarn run test
+dotenv yarn run test

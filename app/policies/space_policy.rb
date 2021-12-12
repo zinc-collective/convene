@@ -14,6 +14,11 @@ class SpacePolicy < ApplicationPolicy
   alias new? update?
   alias edit? update?
 
+  def destroy?
+    person.operator?
+  end
+  alias create? destroy?
+
   class Scope < ApplicationScope
     def resolve
       scope.all

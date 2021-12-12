@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   prepend_view_path 'app/utilities'
   prepend_view_path 'app/furniture'
 
+  protect_from_forgery with: :exception, unless: -> { api_request? }
+
   # Referenced in application layout to display page title
   # Override on a per-controller basis to display different title
   # @return [String]
@@ -26,9 +28,28 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # @return [Guest, Person] the authenticated user, or a Guest
+  OPERATOR_TOKEN = ENV['OPERATOR_API_KEY']
+  # @return [Guest, Person, Operator] the authenticated user, or a Guest
   def current_person
-    @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
+    return @current_person if defined?(@current_person)
+
+    if api_request?
+      authenticate_or_request_with_http_token do |token, _options|
+        ActiveSupport::SecurityUtils.secure_compare(token, OPERATOR_TOKEN)
+      end
+      @current_person = Operator.new
+    else
+      @current_person ||= Person.find_by(id: session[:person_id]) || Guest.new
+    end
+  end
+
+  def api_request?
+    case request.format
+    when Mime[:xml], Mime[:atom], Mime[:json]
+      true
+    else
+      false
+    end
   end
 
   def pundit_user
@@ -43,8 +64,10 @@ class ApplicationController < ActionController::Base
         space_repository.friendly.find(params[:space_id])
       else
         BrandedDomain.new(space_repository).space_for_request(request) ||
-        space_repository.friendly.find(params[:id])
-      end.tap { |space| authorize(space, :show?) }
+          space_repository.friendly.find(params[:id])
+      end.tap do |space|
+        authorize(space, :show?)
+      end
   rescue ActiveRecord::RecordNotFound
     @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
   end
@@ -60,8 +83,8 @@ class ApplicationController < ActionController::Base
       policy_scope(current_space.rooms).friendly.find(
         params[:room_id] || params[:id]
       )
-  rescue ActiveRecord::RecordNotFound
-    nil
+                rescue ActiveRecord::RecordNotFound
+                  nil
   end
 
   helper_method def current_access_code(room)

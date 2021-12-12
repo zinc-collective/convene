@@ -105,7 +105,7 @@ class PlaidUtility < Utility
   end
 end
 
-class PlaidUtilityPolicy < Utility::Policy
+class PlaidUtilityPolicy < UtilityPolicy
   def permitted_params
     %i[environment secret client_id version]
   end

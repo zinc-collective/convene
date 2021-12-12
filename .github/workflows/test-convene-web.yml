@@ -1,9 +1,5 @@
 name: Test
-on:
-  push:
-    branches: [ development ]
-  pull_request_target:
-    branches: [ development ]
+on: push
 
 jobs:
   test:

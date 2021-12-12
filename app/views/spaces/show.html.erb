@@ -1,6 +1,6 @@
 <% breadcrumb :root %>
 <div class="space-container card-list">
-  <% policy_scope(space.rooms).each do |room| %>
+  <% policy_scope(space.rooms.listed).each do |room| %>
     <%= render partial: 'spaces/room_card', locals: { room: room } %>
   <% end %>
 </div>

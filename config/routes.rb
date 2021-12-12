@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # get "/auth/:provider/callback", "sessions#create"
   # post "/auth/:provider/callback", "sessions#create"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :spaces, only: %I[show edit update] do
+  resources :spaces, only: %I[show edit update create destroy] do
     resource :authenticated_session, only: %i[new create destroy show]
 
     resources :invitations, only: %i[create destroy] do

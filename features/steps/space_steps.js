@@ -1,12 +1,19 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const { RoomPage, SpacePage, SpaceEditPage } = require("../harness/Pages");
-
 const { linkParameters } = require("../lib");
+const appUrl = require("../lib/appUrl");
+const { Api } = require("../lib/Api");
 
 Given('{a} {space}', function(_, space) {
-  // @todo eventually let's hit an endpoint or create a Space with a factory
   return true
 })
+
+Given('{a} fresh {space}', function(_, space) {
+  const api = new Api(appUrl(), process.env.OPERATOR_API_KEY)
+
+  return api.spaces().create(space);
+})
+
 
 Given('a Space with a Room', function() {
   // This space intentionally left blank... For now...

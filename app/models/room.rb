@@ -57,7 +57,7 @@ class Room < ApplicationRecord
     publicity_level&.to_sym == :unlisted
   end
 
-  has_many :furniture_placements
+  has_many :furniture_placements, dependent: :destroy_async
   accepts_nested_attributes_for :furniture_placements
 
   def full_slug

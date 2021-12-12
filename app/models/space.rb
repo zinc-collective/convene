@@ -28,19 +28,19 @@ class Space < ApplicationRecord
 
   # Joins People to spaces for permissioning and
   # other purposes
-  has_many :space_memberships, inverse_of: :space
+  has_many :space_memberships, inverse_of: :space, dependent: :destroy_async
 
   # The People with permissions for the Space
   has_many :members, through: :space_memberships
 
   # Inviting new members
-  has_many :invitations, inverse_of: :space
+  has_many :invitations, inverse_of: :space, dependent: :destroy_async
 
   # The Rooms within this Space
-  has_many :rooms, inverse_of: :space
+  has_many :rooms, inverse_of: :space, dependent: :destroy_async
 
   # All the items held within the space
-  has_many :item_records, inverse_of: :space
+  has_many :item_records, inverse_of: :space, dependent: :destroy_async
 
   belongs_to :entrance, class_name: 'Room', optional: true
 
@@ -49,7 +49,7 @@ class Space < ApplicationRecord
   # @see {Utilities}
   # @see {UtilityHookup}
   # @returns {ActiveRecord::Relation<UtilityHookups>}
-  has_many :utility_hookups
+  has_many :utility_hookups, dependent: :destroy_async
 
   def jitsi_meet_domain
     jitsi_hookup = utility_hookups.find_by(utility_slug: :jitsi)
