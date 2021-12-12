@@ -22,18 +22,18 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "webpack-dev-server": "^4.4.0",
+    "webpack-dev-server": "^4.6.0",
     "axios": "^0.24.0",
     "@cucumber/cucumber": "^7.3.1",
     "@cucumber/pretty-formatter": "^1.0.0-alpha.1 ",
     "geckodriver": "^2.0.4",
     "get-urls": "^10.0.1",
     "lodash": "^4.17.21",
-    "selenium-webdriver": "^4.0.0",
+    "selenium-webdriver": "^4.1.0",
     "fs-extra": "^10.0.0"
   },
   "dependencies": {
-    "@hotwired/turbo-rails": "^7.0.1",
+    "@hotwired/turbo-rails": "^7.1.0",
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@rails/actioncable": "^6.1.4",

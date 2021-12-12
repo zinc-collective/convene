@@ -29,7 +29,7 @@ gem 'turbo-rails'
 # API Layer
 #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2.11'
 
 # View Layer
 #
@@ -94,7 +94,7 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '~> 4.1'
+  gem 'web-console', '~> 4.2'
   gem 'listen', '~> 3.7'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
