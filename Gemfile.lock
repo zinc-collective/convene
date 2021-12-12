@@ -264,7 +264,7 @@ GEM
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    web-console (4.1.0)
+    web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -314,7 +314,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   turbo-rails
   tzinfo-data (~> 1.2021)
-  web-console (~> 4.1)
+  web-console (~> 4.2)
   webpacker (~> 5.4)
 
 RUBY VERSION
