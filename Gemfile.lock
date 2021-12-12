@@ -141,7 +141,7 @@ GEM
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     pg (1.2.3)
-    plaid (14.8.0)
+    plaid (14.10.0)
       faraday (~> 1.0, >= 1.0.1)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -228,11 +228,11 @@ GEM
     sentry-rails (4.8.0)
       railties (>= 5.0)
       sentry-ruby-core (~> 4.8.0)
-    sentry-ruby (4.8.0)
+    sentry-ruby (4.8.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       faraday (>= 1.0)
-      sentry-ruby-core (= 4.8.0)
-    sentry-ruby-core (4.8.0)
+      sentry-ruby-core (= 4.8.1)
+    sentry-ruby-core (4.8.1)
       concurrent-ruby
       faraday
     shoulda-matchers (5.0.0)
@@ -295,7 +295,7 @@ DEPENDENCIES
   listen (~> 3.7)
   lockbox (= 0.6.6)
   pg (~> 1.2)
-  plaid (~> 14.8)
+  plaid (~> 14.10)
   pry-byebug
   puma (~> 5.5)
   pundit (~> 2.1)
