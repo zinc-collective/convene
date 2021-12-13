@@ -47,7 +47,7 @@
     select:focus,
     textarea:focus,
     input:focus {
-      @apply outline-none shadow-outline;
+      @apply outline-none ring;
     }
     select:disabled,
     textarea:disabled,

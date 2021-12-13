@@ -1,0 +1,55 @@
+@layer base {
+  h1,
+  h2,
+  h3 {
+    @apply font-medium;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  h4 {
+    @apply text-lg font-light;
+  }
+
+  p,
+  ul,
+  ol,
+  blockquote {
+    // We use margin on the _bottom_ of non-heading blocks of text to give
+    // space to breathe at a break; while ensuring they don't "float away" from
+    // whatever heading they fall under
+    @apply mb-2;
+
+    &:last-of-type {
+      @apply mb-0;
+    }
+  }
+
+  ol,
+  ul {
+    @apply list-outside pl-8;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+
+  a {
+    @apply underline;
+  }
+}

@@ -1,0 +1,20 @@
+@layer base {
+  body {
+    background: rgb(200, 200, 200);
+    background: linear-gradient(
+      0deg,
+      rgba(200, 200, 200, 1) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    @apply min-h-screen flex flex-col;
+  }
+
+  main {
+    @apply mx-2 flex-1;
+    > :last-child {
+      @apply mb-2;
+    }
+  }
+}

@@ -1,8 +1,11 @@
-// TODO: Uncomment tailwindcss/colors upon upgrading to Tailwind 2
-// const colors = require('tailwindcss/colors')
-const { colors } = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 module.exports = {
+  content: [
+    './app/views/**/*.html.erb',
+    './app/helpers/**/*.rb',
+    './app/javascript/**/*.js'
+  ],
   theme: {
     extend: {
       colors: {
@@ -11,8 +14,5 @@ module.exports = {
         neutral: colors.gray,
       },
     },
-  },
-  plugins: [
-    require('@tailwindcss/ui'),
-  ]
+  }
 }

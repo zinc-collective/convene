@@ -1,0 +1,36 @@
+@layer components {
+  .room-card {
+    @apply card;
+
+    header {
+      @apply card__header flex;
+      h3 {
+        @apply text-neutral-900 text-sm leading-5 font-medium truncate pl-8 mr-4;
+      }
+    }
+
+
+    footer {
+      @apply card__footer;
+
+      .room-door_enter, .room-door_configure {
+        @apply flex justify-center text-sm leading-5 text-neutral-700 font-medium transition ease-in-out duration-150;
+        a {
+          @apply flex-1 inline-flex items-center justify-center py-4 no-underline;
+        }
+        span {
+          @apply pl-4;
+        }
+
+        &:focus {
+          @apply outline-none ring-blue-500 border-blue-300 z-10;
+        }
+
+        &:hover {
+          @apply text-neutral-500;
+        }
+      }
+
+    }
+  }
+}

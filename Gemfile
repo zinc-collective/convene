@@ -21,8 +21,8 @@ gem 'puma', '~> 5.5'
 #
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 6.0'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.4'
+gem 'jsbundling-rails'
+gem 'cssbundling-rails'
 # Turbo lets us swap chunks of HTML without page reloads: https://github.com/hotwired/turbo-rails
 gem 'turbo-rails'
 

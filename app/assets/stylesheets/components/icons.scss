@@ -1,0 +1,30 @@
+@layer components {
+  .icon {
+    display: inline-block;
+    text-decoration: none;
+
+    &.--enter::before {
+      content: "🚪";
+    }
+
+    &.--configure::before {
+      content: "⚙️ ";
+    }
+
+    &.--add::before {
+      content: "➕";
+    }
+
+    &.--destroy::before{
+      content: "🗑 ";
+    }
+
+    &.--lock::before {
+      content: "🔒";
+    }
+
+    &.--key::before {
+      content: "🔑"
+    }
+  }
+}
