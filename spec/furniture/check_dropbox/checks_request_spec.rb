@@ -10,9 +10,9 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks'
   let(:neighbor) { FactoryBot.create(:person) }
   let(:space_member) { FactoryBot.create(:person, spaces: [space]) }
 
-  let(:fake_plaid) { instance_double(PlaidUtility) }
+  let(:fake_plaid) { instance_double(Plaid::PlaidUtility) }
   before do
-    allow(PlaidUtility).to receive(:new).and_return(fake_plaid)
+    allow(Plaid::PlaidUtility).to receive(:new).and_return(fake_plaid)
     allow(fake_plaid).to receive(:exchange_public_token) do |attrs|
       double(access_token: "Access Token from #{attrs[:public_token]}",
              item_id: "Item Id from #{attrs[:public_token]}")
