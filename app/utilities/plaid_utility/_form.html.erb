@@ -1,5 +1,5 @@
 <%= form.fields_for(:utility) do |utility_fields| %>
   <%= render "text_field", form: utility_fields, attribute: :client_id %>
   <%= render "password_field", form: utility_fields, attribute: :secret %>
-  <%= render "select", form: utility_fields, attribute: :environment, options: PlaidUtility::AVAILABLE_ENVIRONMENTS.map { |x| [x.capitalize, x] }, include_blank: true %>
+  <%= render "select", form: utility_fields, attribute: :environment, options: Plaid::PlaidUtility::AVAILABLE_ENVIRONMENTS.map { |x| [x.capitalize, x] }, include_blank: true %>
 <%- end %>
