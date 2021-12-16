@@ -1,4 +1,4 @@
-class JitsiUtility < Utility
+module Jitsi
   class JitsiUtilityPolicy < UtilityPolicy
     def permitted_params
       [:meet_domain]
