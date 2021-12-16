@@ -19,7 +19,7 @@
       @apply block w-full;
     }
     label {
-      @apply text-sm font-medium leading-5 text-neutral-700;
+      @apply font-medium leading-5 text-neutral-700;
     }
     input[type="text"],
     input[type="email"],
@@ -34,11 +34,24 @@
         transition duration-150 ease-in-out;
 
       @screen sm {
-        @apply text-sm leading-5;
+        @apply leading-5;
       }
     }
     input {
       @apply appearance-none;
+    }
+
+    .field_with_errors {
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="search"],
+      input[type="number"],
+      input[type="tel"],
+      select,
+      textarea {
+        @apply border-red-300 bg-red-100;
+      }
     }
 
     textarea {
@@ -54,8 +67,8 @@
     input:disabled {
       @apply bg-neutral-200;
     }
-    .error-message {
-      @apply mt-1 px-4 italic text-red-500;
+    .field_with_errors {
+      @apply text-red-500;
     }
 
     footer {
@@ -77,25 +90,6 @@
       }
     }
   }
-}
-
-.access-code-form {
-  @apply m-auto flex flex-col;
-}
-.access-code-form__input {
-  @apply mt-4;
-}
-.access-code-form__input--error {
-  @apply border border-red-500;
-}
-.access-code-form__message {
-  @apply hidden;
-}
-.access-code-form__error-message {
-  @apply text-xs italic font-thin text-red-500;
-}
-.access-code-form__submit {
-  @apply mt-4;
 }
 
 .identification-form {

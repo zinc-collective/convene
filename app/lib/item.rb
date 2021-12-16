@@ -10,12 +10,17 @@ class Item
   include ActiveModel::Model
   include ActiveModel::Attributes
   include ActiveModel::AttributeAssignment
+  include ActiveModel::Validations
 
   # @return [ItemRecord]
   attr_accessor :item_record
 
   delegate :data, to: :item_record
   delegate :utilities, to: :item_record
+
+  def save
+    valid? ? save : false
+  end
   delegate :save, to: :item_record
   delegate :persisted?, to: :item_record
   delegate :space, to: :item_record

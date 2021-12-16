@@ -2,7 +2,7 @@
 <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
 
 <turbo-frame id="check-dropbox" data-turbo="true">
-  <%= render "check_dropbox/checks/form", room: room, furniture: furniture, check: furniture.checks.new %>
+  <%= render "check_dropbox/checks/form", room: room, furniture: furniture, check: check %>
 
   <%- if policy(furniture.checks).index? %>
     <p>

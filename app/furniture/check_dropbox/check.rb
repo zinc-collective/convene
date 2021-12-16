@@ -4,32 +4,30 @@ class CheckDropbox
   # @todo Probably want to figure out how we can make this play well with the
   # {ActiveModel::Attributes::ClassMethods} API or something so we don't have # to define methods for each write/read for attributes :(.
   class Check < Item
-    # When Linking an Account, Plaid provides a "Public" token, which is
-    # exchanged for an "Access Token" and "Item ID".
-    #
-    # Setting the public token takes care of that for us
-    def public_token=(public_token)
-      @public_token = public_token
-
-      response = utilities.plaid.exchange_public_token(public_token: public_token)
-      self.plaid_access_token = response.access_token
-      self.plaid_item_id = response.item_id
-
-      self.public_token
+    def save
+      return false unless valid?
+      exchange_public_token_for_access_token_and_item
+      super
     end
+
+    attr_accessor :public_token
+    validates :payer_name, presence: true
+    validates :payer_email, presence: true
+    validates :amount, presence: true
+    validates :memo, presence: true
+    validates :plaid_item_id, presence: true
+    validates :public_token, presence: true
 
     READY_FOR_DEPOSIT = :ready_for_deposit
     UNCLEARED = :uncleared
     CLEARED = :cleared
-
     STATES = [READY_FOR_DEPOSIT, UNCLEARED, CLEARED].freeze
-
     def status
       data['status']&.to_sym
     end
 
     def status=(status)
-      data['status']=status
+      data['status'] = status
     end
 
     def ready_for_deposit?
@@ -43,8 +41,6 @@ class CheckDropbox
     def cleared?
       status == UNCLEARED
     end
-
-    attr_reader :public_token
 
     def plaid_item_id=(plaid_item_id)
       data['plaid_item_id'] = plaid_item_id
@@ -100,6 +96,14 @@ class CheckDropbox
 
     def memo
       data['memo']
+    end
+
+    # When Linking an Account, Plaid provides a "Public" token, which is
+    # exchanged for an "Access Token" and "Item ID".
+    private def exchange_public_token_for_access_token_and_item
+      response = utilities.plaid.exchange_public_token(public_token: public_token)
+      self.plaid_access_token = response.access_token
+      self.plaid_item_id = response.item_id
     end
   end
 end

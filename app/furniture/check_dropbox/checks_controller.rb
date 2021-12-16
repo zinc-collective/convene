@@ -3,7 +3,9 @@
 class CheckDropbox
   class ChecksController < FurnitureController
     def create
-      check.save
+      return if check.save
+
+      render :new
     end
 
     def index; end
