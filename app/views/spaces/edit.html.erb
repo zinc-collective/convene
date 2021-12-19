@@ -12,13 +12,13 @@
         <div>
           <%= invitation_form.label :name %>
           <%= invitation_form.text_field :name %>
-          <%= render partial: "error", locals: { model: invitation_form.object, field: :name } %>
+          <%= render partial: "error", locals: { model: invitation_form.object, attribute: :name } %>
         </div>
 
         <div>
           <%= invitation_form.label :email %>
           <%= invitation_form.text_field :email %>
-          <%= render partial: "error", locals: { model: invitation_form.object, field: :email } %>
+          <%= render partial: "error", locals: { model: invitation_form.object, attribute: :email } %>
         </div>
 
         <footer>
