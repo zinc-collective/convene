@@ -7,12 +7,9 @@
   </div>
 
   <%= form_with model: waiting_room, url: space_room_waiting_room_path(waiting_room.space, waiting_room.room), class: "access-code-form", local: true do |form| %>
-    <%= form.label :access_code %>
-    <%= form.password_field :access_code, class: "access-code-form__input" %>
+    <%= render "password_field", form: form, attribute: :access_code%>
+
     <%= form.hidden_field :redirect_url %>
-    <%- if waiting_room.errors[:access_code].present? %>
-      <p class="access-code-form__error-message"><%= waiting_room.errors[:access_code].join(', ') %></p>
-    <%- end %>
     <footer>
       <%= form.submit class: "--neutral" %>
     </footer>
