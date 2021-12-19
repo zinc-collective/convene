@@ -15,8 +15,6 @@ require("./channels")
 
 // TODO: figure these out
 // import "controllers"
-// require('./src/tailwind.scss')
-// require('./src/application.scss')
 
 // Disable Turbo by default, and let us instead enable it on a per-element basis.
 import { Turbo } from "@hotwired/turbo-rails"

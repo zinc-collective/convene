@@ -1,7 +1,6 @@
 /* Entry point for your PostCSS build */
 
 @import "./base/layout.scss";
-@import "./base/layout.scss";
 
 @import "./tailwind.scss";
 
