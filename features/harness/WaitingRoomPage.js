@@ -37,7 +37,7 @@ class WaitingRoomPage extends RoomPage {
    * @returns {Component}
    */
   errors() {
-    return this.component("[class='access-code-form__error-message']");
+    return this.component(".field_with_errors");
   }
 }
 

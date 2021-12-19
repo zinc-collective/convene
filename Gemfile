@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.11'
 # Allows us to render .markdown.erb files
 gem 'redcarpet', '~> 3.5'
 # Breadcrumbs!
-gem 'gretel',  '~> 4.3'
+gem 'gretel',  '~> 4.4'
 
 # Database Layer
 #

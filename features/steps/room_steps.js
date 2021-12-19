@@ -93,6 +93,13 @@ Then("the {actor} is not placed in the {room}", function (actor, room) {
 
 Then(
   "{a} {actor} may not enter {a} {accessLevel} {room} after providing {a} {accessCode}",
+  /**
+   *
+   * @param {Actor} actor
+   * @param {AccessLevel} accessLevel
+   * @param {Room} room
+   * @param {AccessCode} accessCode
+   */
   async function (_, actor, _, accessLevel, room, _, accessCode) {
     linkParameters({ room, accessLevel });
 

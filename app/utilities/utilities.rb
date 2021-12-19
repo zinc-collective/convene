@@ -10,8 +10,8 @@
 # @see features/utilities/
 module Utilities
   REGISTRY = {
-    plaid: PlaidUtility,
-    jitsi: JitsiUtility
+    plaid: Plaid::PlaidUtility,
+    jitsi: Jitsi::JitsiUtility
   }.freeze
 
   # @param utility_hookup [UtilityHookup]
