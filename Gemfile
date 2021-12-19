@@ -25,6 +25,7 @@ gem 'jsbundling-rails'
 gem 'cssbundling-rails'
 # Turbo lets us swap chunks of HTML without page reloads: https://github.com/hotwired/turbo-rails
 gem 'turbo-rails'
+gem 'stimulus-rails'
 
 # API Layer
 #
