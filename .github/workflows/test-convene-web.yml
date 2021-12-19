@@ -96,7 +96,6 @@ jobs:
       run: |
           # To wait for asset built
           # TODO: Start server in production mode
-          curl localhost:8080/packs/manifest.json 1> /dev/null
           curl localhost:3000 1> /dev/null
           bin/test
 
