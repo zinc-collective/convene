@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 # Provides Plaid functionality to a {Space}
 # @see https://plaid.com
 class PlaidUtility < Utility
@@ -102,11 +101,5 @@ class PlaidUtility < Utility
   # @returns [::Plaid]
   def sdk
     ::Plaid
-  end
-end
-
-class PlaidUtilityPolicy < UtilityPolicy
-  def permitted_params
-    %i[environment secret client_id version]
   end
 end

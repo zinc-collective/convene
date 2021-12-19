@@ -15,9 +15,3 @@ class JitsiUtility < Utility
     super + [:meet_domain]
   end
 end
-
-class JitsiUtilityPolicy < UtilityPolicy
-  def permitted_params
-    [:meet_domain]
-  end
-end
