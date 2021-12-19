@@ -96,7 +96,7 @@ jobs:
       run: |
           # To wait for asset built
           # TODO: Start server in production mode
-          curl localhost:3000 1> /dev/null
+          curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 40 --retry-connrefused localhost:3000 1> /dev/null
           bin/test
 
     - uses: actions/upload-artifact@v2
