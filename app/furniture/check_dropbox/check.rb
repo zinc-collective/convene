@@ -17,8 +17,16 @@ class CheckDropbox
     validates :payer_email, presence: true
     validates :amount, presence: true
     validates :memo, presence: true
+    validates :plaid_account_id, presence: true
+    validate :retrievable_from_plaid
     # validates :plaid_item_id, presence: true
     # validates :public_token, presence: true
+
+    def retrievable_from_plaid
+      return if public_token.present? || plaid_item_id.present?
+
+      errors.add(:public_token, "Pick ur bank account m8")
+    end
 
     READY_FOR_DEPOSIT = :ready_for_deposit
     UNCLEARED = :uncleared
@@ -109,7 +117,7 @@ class CheckDropbox
     end
 
     def amount
-      data['amount']&.to_i
+      data['amount']
     end
 
     def memo=(memo)

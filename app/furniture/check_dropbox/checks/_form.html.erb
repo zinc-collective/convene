@@ -9,9 +9,9 @@
         </span>
       <%- end %>
       <%= render "error", model: check_form.object, attribute: :public_token %>
-      <%= check_form.hidden_field :public_token, data: { check_dropbox_target: "publicToken" } %>
-      <%= check_form.hidden_field :plaid_account_id, data: { check_dropbox_target: "plaidAccountId" } %>
-      <%= check_form.hidden_field :account_description, data: { check_dropbox_target: "accountDescription" } %>
+      <%= check_form.hidden_field :public_token, data: { check_dropbox_target: "publicToken" }, autocomplete: "off" %>
+      <%= check_form.hidden_field :plaid_account_id, data: { check_dropbox_target: "plaidAccountId" }, autocomplete: "off" %>
+      <%= check_form.hidden_field :account_description, data: { check_dropbox_target: "accountDescription" }, autocomplete: "off" %>
     </div>
   <%- else %>
     <%= check.account_description %>
