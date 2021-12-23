@@ -1,12 +1,1 @@
-<h3>Check Dropbox</h3>
-<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
-
-<turbo-frame id="check-dropbox" data-turbo="true">
-  <%= render "check_dropbox/checks/form", room: room, furniture: furniture, check: check %>
-
-  <%- if policy(furniture.checks).index? %>
-    <p>
-    See <%= link_to "all checks", space_room_furniture_check_dropbox_checks_path(room.space, room) %>
-    </p>
-  <%- end %>
-</turbo-frame>
+<%= render "check_dropbox/checks/new", room: room, furniture: furniture, check: check %>
