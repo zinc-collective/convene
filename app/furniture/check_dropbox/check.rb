@@ -2,11 +2,13 @@
 
 class CheckDropbox
   # @todo Probably want to figure out how we can make this play well with the
-  # {ActiveModel::Attributes::ClassMethods} API or something so we don't have # to define methods for each write/read for attributes :(.
+  # {ActiveModel::Attributes::ClassMethods} API or something so we don't have
+  # to define methods for each write/read for attributes :(.
   class Check < Item
     def save
+      exchange_public_token_for_access_token_and_item if plaid_access_token.blank? && public_token.present?
       return false unless valid?
-      exchange_public_token_for_access_token_and_item
+
       super
     end
 
@@ -15,8 +17,8 @@ class CheckDropbox
     validates :payer_email, presence: true
     validates :amount, presence: true
     validates :memo, presence: true
-    validates :plaid_item_id, presence: true
-    validates :public_token, presence: true
+    # validates :plaid_item_id, presence: true
+    # validates :public_token, presence: true
 
     READY_FOR_DEPOSIT = :ready_for_deposit
     UNCLEARED = :uncleared
@@ -50,12 +52,32 @@ class CheckDropbox
       data['plaid_item_id']
     end
 
+    def plaid_account_id=(plaid_account_id)
+      data['plaid_account_id'] = plaid_account_id
+    end
+
+    def plaid_account_id
+      data['plaid_account_id']
+    end
+
+    def account_description
+      data['account_description']
+    end
+
+    def account_description=(account_description)
+      data['account_description'] = account_description
+    end
+
     def account_number
-      utilities.plaid.account_number_for(access_token: plaid_access_token, item_id: plaid_item_id)
+      auth_get.numbers.ach.find { |a| a.account_id == plaid_account_id }.account
     end
 
     def routing_number
-      utilities.plaid.routing_number_for(access_token: plaid_access_token, item_id: plaid_item_id)
+      auth_get.numbers.ach.find { |a| a.account_id == plaid_account_id }.routing
+    end
+
+    def auth_get
+      @auth_get ||= utilities.plaid.auth_get(access_token: plaid_access_token)
     end
 
     def plaid_access_token=(plaid_access_token)
