@@ -15,18 +15,10 @@ class CheckDropbox
     attr_accessor :public_token
     validates :payer_name, presence: true
     validates :payer_email, presence: true
-    validates :amount, presence: true
+    validates :amount, presence: true, numericality: { greater_than: 0 }
     validates :memo, presence: true
     validates :plaid_account_id, presence: true
-    validate :retrievable_from_plaid
-    # validates :plaid_item_id, presence: true
-    # validates :public_token, presence: true
-
-    def retrievable_from_plaid
-      return if public_token.present? || plaid_item_id.present?
-
-      errors.add(:public_token, "Pick ur bank account m8")
-    end
+    validates :plaid_item_id, presence: true
 
     READY_FOR_DEPOSIT = :ready_for_deposit
     UNCLEARED = :uncleared

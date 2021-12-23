@@ -8,7 +8,7 @@
           </button>
         </span>
       <%- end %>
-      <%= render "error", model: check_form.object, attribute: :public_token %>
+      <%= render "error", model: check_form.object, attribute: :plaid_item_id %>
       <%= check_form.hidden_field :public_token, data: { check_dropbox_target: "publicToken" }, autocomplete: "off" %>
       <%= check_form.hidden_field :plaid_account_id, data: { check_dropbox_target: "plaidAccountId" }, autocomplete: "off" %>
       <%= check_form.hidden_field :account_description, data: { check_dropbox_target: "accountDescription" }, autocomplete: "off" %>
