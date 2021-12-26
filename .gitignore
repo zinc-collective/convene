@@ -10,6 +10,7 @@ tmp/*
 node_modules/
 public/packs/
 public/packs-test
+public/assets
 *master.key
 *credentials.yml.enc
 *.log*
