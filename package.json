@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Community owned tools that bring people together, both online and off",
   "main": "index.js",
-  "engines": { "node": "16.13.1", "yarn": "1.22.17" },
+  "engines": { "node": "~16.13", "yarn": "~1.22" },
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "build:css": "postcss ./app/assets/stylesheets/application.postcss.css -o ./app/assets/builds/application.css",
