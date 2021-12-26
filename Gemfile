@@ -89,7 +89,7 @@ group :development, :test do
 
   # Our preferred testing library for Ruby and Rails projects
   gem 'rspec-rails'
-  gem 'shoulda-matchers', '~> 5.0'
+  gem 'shoulda-matchers', '~> 5.1'
   gem 'rails-controller-testing'
 end
 

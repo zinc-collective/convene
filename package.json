@@ -28,11 +28,11 @@
     "@cucumber/pretty-formatter": "^1.0.0-alpha.1 ",
     "axios": "^0.24.0",
     "fs-extra": "^10.0.0",
-    "geckodriver": "^2.0.4",
+    "geckodriver": "^3.0.1",
     "get-urls": "^10.0.1",
     "lodash": "^4.17.21",
     "selenium-webdriver": "^4.1.0",
-    "webpack-dev-server": "^4.6.0"
+    "webpack-dev-server": "^4.7.1"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",

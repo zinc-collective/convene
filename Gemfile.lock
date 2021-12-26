@@ -120,7 +120,8 @@ GEM
       railties (>= 5.1, < 7.1)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.11.4)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jsbundling-rails (0.2.2)
       railties (>= 6.0.0)
@@ -236,7 +237,7 @@ GEM
     sentry-ruby-core (4.8.1)
       concurrent-ruby
       faraday
-    shoulda-matchers (5.0.0)
+    shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
     sidekiq (6.3.1)
       connection_pool (>= 2.2.2)
@@ -308,7 +309,7 @@ DEPENDENCIES
   sass-rails (~> 6.0)
   sentry-rails
   sentry-ruby
-  shoulda-matchers (~> 5.0)
+  shoulda-matchers (~> 5.1)
   sidekiq
   simplecov
   spring
