@@ -27,7 +27,7 @@ class MailServer {
         return emails;
       } else {
         return new Promise((resolve) =>
-          delay(() => this._emailsTo(emailAddress).then(resolve), 10)
+          setTimeout(() => this._emailsTo(emailAddress).then(resolve), 10)
         );
       }
     });
