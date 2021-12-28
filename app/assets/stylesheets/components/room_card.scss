@@ -23,7 +23,7 @@
         }
 
         &:focus {
-          @apply outline-none shadow-outline-blue border-blue-300 z-10;
+          @apply outline-none ring-blue-500 border-blue-300 z-10;
         }
 
         &:hover {

@@ -10,7 +10,7 @@
     }
 
     &:focus {
-      @apply outline-none border-neutral-300 shadow-outline-gray;
+      @apply outline-none border-neutral-300  ring-gray-500;
     }
 
     &.--danger {

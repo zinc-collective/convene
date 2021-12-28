@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { filter, last } = require("lodash");
+var promiseRetry = require('promise-retry');
 
 /**
  * Adapter connecting our test suite to our mail handler
@@ -22,21 +23,11 @@ class MailServer {
    * @returns {Promise<MailServerEmail[]>}
    */
   emailsTo(emailAddress) {
-    return this._emailsTo(emailAddress).then((emails) => {
-      if (emails.length > 0) {
-        return emails;
-      } else {
-        return new Promise((resolve) =>
-          delay(() => this._emailsTo(emailAddress).then(resolve), 10)
-        );
-      }
-    });
-  }
-
-  _emailsTo(emailAddress) {
-    return this.emails().then((emails) =>
-      filter(emails, (email) => email.headers.to === emailAddress)
-    );
+    return promiseRetry((retry) => {
+      return this.emails()
+        .then((emails) => filter(emails, (email) => email.headers.to === emailAddress))
+        .then((emails) => emails.length > 0 ? emails : retry());
+    })
   }
 
   /**

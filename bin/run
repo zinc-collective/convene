@@ -1,3 +1,3 @@
 #!/bin/bash
 
-overmind start -l web,worker,assets,mail_server
+overmind start -l web,worker,js,css,mail_server
