@@ -76,7 +76,7 @@ GEM
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
     crass (1.0.6)
-    cssbundling-rails (0.2.8)
+    cssbundling-rails (1.0.0)
       railties (>= 6.0.0)
     diff-lcs (1.4.4)
     docile (1.4.0)
@@ -266,7 +266,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.5.1)
+    zeitwerk (2.5.2)
 
 PLATFORMS
   ruby
