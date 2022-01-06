@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "Community owned tools that bring people together, both online and off",
   "main": "index.js",
-  "engines": { "node": "~16.13", "yarn": "~1.22" },
+  "engines": {
+    "node": "~16.13",
+    "yarn": "~1.22"
+  },
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "build:css": "postcss ./app/assets/stylesheets/application.postcss.css -o ./app/assets/builds/application.css",
@@ -43,6 +46,7 @@
     "@rails/actioncable": "^7.0.0",
     "@rails/activestorage": "^7.0.0",
     "@rails/ujs": "^6.1.4",
+    "@tailwindcss/typography": "^0.5.0",
     "@webpack-cli/serve": "^1.5.2",
     "autoprefixer": "^10.4.1",
     "event-target-shim": "^6.0.2",
