@@ -15,7 +15,7 @@ class Item
   # @return [ItemRecord]
   attr_accessor :item_record
 
-  delegate :data, to: :item_record
+  delegate :data, :data=, to: :item_record
   delegate :utilities, to: :item_record
 
   def save
