@@ -41,7 +41,7 @@
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@hotwired/turbo-rails": "^7.1.0",
     "@rails/actioncable": "^6.1.4",
-    "@rails/activestorage": "^6.1.4",
+    "@rails/activestorage": "^7.0.0",
     "@rails/ujs": "^6.1.4",
     "@webpack-cli/serve": "^1.5.2",
     "autoprefixer": "^10.4.1",
