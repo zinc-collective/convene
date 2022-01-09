@@ -1,6 +1,6 @@
 const { ThenableWebDriver } = require("selenium-webdriver");
 
-const { findLast, find, filter } = require("lodash");
+const { last } = require("lodash");
 const getUrls = require("get-urls");
 const { MePage, SignInPage } = require("../harness/Pages");
 
@@ -10,7 +10,7 @@ const Space = require("./Space");
 class Actor {
   constructor(type, email) {
     this.type = type;
-    this.email = email
+    this.email = email;
   }
 
   /**
@@ -36,7 +36,9 @@ class Actor {
    * @returns {Promise<string>}
    */
   async authenticationUrl() {
-    const email = await this.emailServer().lastEmailTo(this.email);
+    const email = await this.emailServer()
+      .emailsWhere({ to: this.email })
+      .then(last);
     return getUrls(email.text).values().next().value;
   }
 
@@ -44,10 +46,15 @@ class Actor {
    * The code a user can use to sign in
    * @returns {Promise<string>}
    */
-   async authenticationCode() {
-    const email = await this.emailServer().lastEmailTo(this.email);
+  async authenticationCode() {
+    const email = await this.emailServer()
+      .emailsWhere({
+        to: this.email,
+        text: (t) => t.match(/password is (\d+)/),
+      })
+      .then(last);
 
-    return email.text.match(/password is (\d+)/)[1]
+    return email.text.match(/password is (\d+)/)[1];
   }
 
   /**

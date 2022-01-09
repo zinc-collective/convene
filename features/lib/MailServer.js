@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { filter, last } = require("lodash");
-var promiseRetry = require('promise-retry');
+var promiseRetry = require("promise-retry");
 
 /**
  * Adapter connecting our test suite to our mail handler
@@ -8,26 +8,22 @@ var promiseRetry = require('promise-retry');
  */
 class MailServer {
   /**
-   * Retrieves the latest email to the given email address
-   * @param {string} emailAddress
-   * @returns {Promise<MailServerEmail>}
-   */
-
-  lastEmailTo(emailAddress) {
-    return this.emailsTo(emailAddress).then((emails) => last(emails));
-  }
-
-  /**
-   * Retrieves all emails to the given email address
-   * @param {string} emailAddress
+   * @param {MailQuery} query
    * @returns {Promise<MailServerEmail[]>}
    */
-  emailsTo(emailAddress) {
+  emailsWhere(query) {
     return promiseRetry((retry) => {
       return this.emails()
-        .then((emails) => filter(emails, (email) => email.headers.to === emailAddress))
-        .then((emails) => emails.length > 0 ? emails : retry());
-    })
+        .then((emails) =>
+          filter(emails, (email) => email.headers.to === query.to)
+        )
+        .then((emails) =>
+          filter(emails, (email) =>
+            query.text ? query.text(email.text) : true
+          )
+        )
+        .then((emails) => (emails.length > 0 ? emails : retry()));
+    });
   }
 
   /**
@@ -41,6 +37,12 @@ class MailServer {
       .catch((err) => console.log(err));
   }
 }
+
+/**
+ * @typedef {Object} MailQuery
+ * @property {string} to - Filter the email address
+ * @property {function} [text] - Callback to limit to only emails that match the given text
+ */
 
 /**
  * An Email, as returned from MailDev's REST Api
