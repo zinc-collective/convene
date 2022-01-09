@@ -47,21 +47,19 @@ class Actor {
    * @returns {Promise<string>}
    */
   async authenticationCode() {
-    const email = await this.emailServer()
-      .emailsWhere({
-        to: this.email,
-        text: (t) => t.match(/password is (\d+)/),
-      })
-      .then(last);
+    const email = await this.emails({
+      text: (t) => t.match(/password is (\d+)/),
+    }).then(last);
 
     return email.text.match(/password is (\d+)/)[1];
   }
 
   /**
+   * @param {MailQuery} query
    * @returns {Promise<MailServerEmail[]>}
    */
-  emails() {
-    return this.emailServer.emailsTo(this.email);
+  emails(query) {
+    return this.emailServer().emailsWhere({ ...query, to: this.email });
   }
 
   /**

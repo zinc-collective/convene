@@ -49,11 +49,10 @@ class Invitation {
    * @returns {Promise<MailServerEmail[]>}
    */
   emails() {
-    return this.emailServer()
-      .emailsTo(this.emailAddress)
-      .then((emails) =>
-        filter(emails, (email) => /You've been invited/.test(email.text))
-      );
+    return this.emailServer().emailsWhere({
+      to: this.emailAddress,
+      text: (text) => /You've been invited/.test(text),
+    });
   }
 
   /**
