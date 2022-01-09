@@ -1,6 +1,6 @@
-const { SpaceEditPage } = require("../harness/Pages");
-const { findLast, find, filter } = require("lodash");
 const getUrls = require("get-urls");
+const { ThenableWebDriver } = require("selenium-webdriver");
+const InvitationResponsePage = require("../harness/InvitationResponsePage");
 
 /**
  *
@@ -37,6 +37,16 @@ class Invitation {
   }
 
   /**
+   *
+   * @param {ThenableWebDriver} driver
+   * @returns
+   */
+  accept(driver) {
+    return new InvitationResponsePage(driver, this).visit()
+      .then((page) => page.submit())
+  }
+
+  /**
    * @returns {Promise<String>}
    */
   rsvpLink() {
@@ -49,11 +59,10 @@ class Invitation {
    * @returns {Promise<MailServerEmail[]>}
    */
   emails() {
-    return this.emailServer()
-      .emailsTo(this.emailAddress)
-      .then((emails) =>
-        filter(emails, (email) => /You've been invited/.test(email.text))
-      );
+    return this.emailServer().emailsWhere({
+      to: this.emailAddress,
+      text: (text) => /You've been invited/.test(text),
+    });
   }
 
   /**

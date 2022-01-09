@@ -39,13 +39,18 @@ Feature: Spaces: Invitations
     And that Invitation is Accepted
     And all other Invitations to that Invitation's contact info are Resolved
 
-  @unstarted @andromeda
+  @built @andromeda
   Scenario: Accepting an Invitation as a Guest
-    Given an Invitation was sent less than 14 days ago
-    When a Guest accepts that Invitation
-    Then the Guest becomes a Space Member
-    And that Invitation is Accepted
-    And all other Invitations to that Invitation's contact info are Resolved
+    Given a "System Test" Space
+    And the "System Test" Space has a Space Owner "space-owner@example.com"
+    And an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
+      | name | email                       |
+      | A Guest | a-guest@example.com |
+    When the Invitation to "a-guest@example.com" for the "System Test" Space is accepted by the Guest "a-guest@example.com"
+    Then the Guest "a-guest@example.com" becomes a Space Member of the "System Test" Space
+    And the Invitation to "a-guest@example.com" for the "System Test" Space has a status of "accepted"
+    # @todo implement me!
+    # And all other Invitations to Space Member "a-guest@example.com" for the "System Test" Space no longer have a status of "pending"
 
   # We want to make sure that people who were invited but
   # didn't take action can't suddenly appear and disorient

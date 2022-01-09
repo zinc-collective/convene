@@ -10,7 +10,7 @@ const Actor = require('../../lib/Actor.js')
 // - Space Owner (Someone who is authenticated and has moderator rights within the Space)
 defineParameterType({
   name: "actor",
-  regexp: /(Guest|Space Member|Space Owner|Neighbor)( ".*")?/,
+  regexp: /(Guest|Space Member|Space Owner|Neighbor)( "[^"]*")?/,
   transformer: function(type, email) {
     email = email || `${type.toLowerCase()}@example.com`
 

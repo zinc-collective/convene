@@ -17,6 +17,11 @@ class SignInPage extends Page {
       .then(() => this);
   }
 
+  /**
+   *
+   * @param {String} code
+   * @returns {Promise<this>}
+   */
   submitCode(code) {
     return this.component('input[name="authenticated_session[one_time_password]"]')
       .fillIn(code)
