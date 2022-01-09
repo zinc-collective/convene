@@ -26,15 +26,7 @@ When(
    * @param {Actor} actor
    */
   function (_, invitation, _2, space, _3, actor) {
-    return (
-      invitation
-        .rsvpLink()
-        // @todo Refactor to live in the harness
-        .then((rsvpLink) => this.driver.get(rsvpLink))
-        .then(() => new Component(this.driver, 'input[type="submit"]').click())
-        .then(() => actor.authenticationCode())
-        .then((code) => new SignInPage(this.driver, space).submitCode(code))
-    );
+    return actor.acceptInvitation(invitation, space, this.driver)
   }
 );
 
