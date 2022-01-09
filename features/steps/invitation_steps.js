@@ -90,7 +90,7 @@ Then(
    * @param {Space} space
    * @param {string} status
    */
-  function (actor, a, space, a2, status) {
+  function (actor, _a, space, _a2, status) {
     return actor
       .signIn(this.driver, space)
       .then(() => new SpaceEditPage(this.driver, space).visit())
