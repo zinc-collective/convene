@@ -1,9 +1,8 @@
 const Page = require("./Page");
 
 class InvitationResponsePage extends Page {
-  constructor(driver, space, invitation) {
+  constructor(driver, invitation) {
     super(driver);
-    this.space = space;
     this.invitation = invitation
   }
 

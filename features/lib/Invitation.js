@@ -1,6 +1,6 @@
-const { SpaceEditPage } = require("../harness/Pages");
-const { findLast, find, filter } = require("lodash");
 const getUrls = require("get-urls");
+const { ThenableWebDriver } = require("selenium-webdriver");
+const InvitationResponsePage = require("../harness/InvitationResponsePage");
 
 /**
  *
@@ -34,6 +34,16 @@ class Invitation {
    */
   latestDelivery() {
     return this.emails().then((emails) => emails[0]);
+  }
+
+  /**
+   *
+   * @param {ThenableWebDriver} driver
+   * @returns
+   */
+  accept(driver) {
+    return new InvitationResponsePage(driver, this).visit()
+      .then((page) => page.submit())
   }
 
   /**

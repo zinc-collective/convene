@@ -5,8 +5,6 @@ const getUrls = require("get-urls");
 const { MePage, SignInPage } = require("../harness/Pages");
 
 const MailServer = require("./MailServer");
-const Space = require("./Space");
-const InvitationResponsePage = require("../harness/InvitationResponsePage");
 
 class Actor {
   constructor(type, email) {
@@ -43,19 +41,6 @@ class Actor {
     return getUrls(email.text).values().next().value;
   }
 
-  /**
-   *
-   * @param {Invitation} invitation
-   * @param {Space} space
-   * @param {ThenableWebDriver} driver
-   * @returns
-   */
-  acceptInvitation(invitation, space, driver) {
-    return new InvitationResponsePage(driver, space, invitation).visit()
-      .then((page) => page.submit())
-      .then(() => this.authenticationCode())
-      .then((code) => new SignInPage(driver, space).submitCode(code));
-  }
 
   /**
    * The code a user can use to sign in

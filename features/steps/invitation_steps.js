@@ -26,7 +26,9 @@ When(
    * @param {Actor} actor
    */
   function (_, invitation, _2, space, _3, actor) {
-    return actor.acceptInvitation(invitation, space, this.driver)
+    return invitation.accept(this.driver)
+      .then(() => actor.authenticationCode())
+      .then((code) => new SignInPage(this.driver, space).submitCode(code));
   }
 );
 
