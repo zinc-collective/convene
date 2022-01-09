@@ -34,7 +34,16 @@ class Page {
    * @returns {Promise<this>}
    */
   visit() {
-    return this.driver.get(`${this.baseUrl}${this.path()}`).then(() => this);
+    return this.url()
+      .then((url) => this.driver.get(url))
+      .then(() => this)
+  }
+
+  /**
+   * @returns {Promise<string>}
+   */
+  url() {
+    return Promise.resolve(`${this.baseUrl}${this.path()}`)
   }
 
   /**
