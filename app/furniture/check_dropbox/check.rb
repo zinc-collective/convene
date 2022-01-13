@@ -14,7 +14,7 @@ class CheckDropbox
 
     attr_accessor :public_token
     validates :payer_name, presence: true
-    validates :payer_email, presence: true
+    validates :payer_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates :amount, presence: true, numericality: { greater_than: 0 }
     validates :memo, presence: true
     validates :plaid_account_id, presence: true

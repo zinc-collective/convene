@@ -6,4 +6,6 @@ en:
           attributes:
             plaid_item_id:
               blank: choose a bank account
+            payer_email:
+              invalid: must be a valid email address
 
