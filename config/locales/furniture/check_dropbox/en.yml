@@ -1,0 +1,9 @@
+en:
+  activemodel:
+    errors:
+      models:
+        check_dropbox/check:
+          attributes:
+            plaid_item_id:
+              blank: choose a bank account
+
