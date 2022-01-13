@@ -89,6 +89,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 5.1'
   gem 'rails-controller-testing'
+
+  # Let the robots do the request/response faking.
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

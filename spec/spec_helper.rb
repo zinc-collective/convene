@@ -1,6 +1,7 @@
 require 'ffaker'
 require 'pundit/rspec'
 require 'simplecov'
+require 'vcr'
 
 SimpleCov.start do
   enable_coverage :branch
@@ -105,6 +106,11 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'cassettes'
+  config.hook_into :webmock
 end
 
 $LOAD_PATH << File.join(__dir__, '../', 'app', 'lib')
