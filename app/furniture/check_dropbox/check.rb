@@ -105,7 +105,7 @@ class CheckDropbox
     end
 
     def amount=(amount)
-      data['amount'] = amount&.to_i
+      data['amount'] = amount
     end
 
     def amount
