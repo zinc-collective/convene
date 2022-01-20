@@ -24,7 +24,7 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks'
 
       expect(check.payer_name).to eql(check_attributes[:payer_name])
       expect(check.payer_email).to eql(check_attributes[:payer_email])
-      expect(check.amount).to eql(check_attributes[:amount])
+      expect(check.amount).to eql(check_attributes[:amount].to_s)
       expect(check.memo).to eql(check_attributes[:memo])
       expect(check.plaid_access_token).to include('access-sandbox')
       expect(check.plaid_item_id).to be_present
