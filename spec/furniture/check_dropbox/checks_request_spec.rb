@@ -10,38 +10,34 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks'
   let(:neighbor) { FactoryBot.create(:person) }
   let(:space_member) { FactoryBot.create(:person, spaces: [space]) }
 
-  let(:fake_plaid) { instance_double(Plaid::PlaidUtility) }
-  before do
-    allow(Plaid::PlaidUtility).to receive(:new).and_return(fake_plaid)
-    allow(fake_plaid).to receive(:exchange_public_token) do |attrs|
-      double(access_token: "Access Token from #{attrs[:public_token]}",
-             item_id: "Item Id from #{attrs[:public_token]}")
-    end
-    allow(fake_plaid).to receive(:account_number_for).and_return('Account Number')
-    allow(fake_plaid).to receive(:routing_number_for).and_return('Routing Number')
-  end
-
   describe 'POST' do
     it 'creates a check' do
-      post "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks",
-           { params: { check_dropbox_check: { payer_name: 'Zee', payer_email: 'zee@example.com', amount: 100_00, memo: 'Example',
-                                public_token: 'Fake' } } }
+      check_attributes = attributes_for(:check_dropbox_check, :sort_of_real)
+      VCR.use_cassette('check_dropbox/checks/create') do
+        post "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks",
+             { params: { check_dropbox_check: check_attributes } }
+      end
 
       expect(check_dropbox.checks).not_to be_empty
 
       check = check_dropbox.checks.last
 
-      expect(check.payer_name).to eql('Zee')
-      expect(check.payer_email).to eql('zee@example.com')
-      expect(check.amount).to eql(100_00)
-      expect(check.memo).to eql('Example')
-      expect(check.plaid_access_token).to eql "Access Token from Fake"
-      expect(check.plaid_item_id).to eql "Item Id from Fake"
+      expect(check.payer_name).to eql(check_attributes[:payer_name])
+      expect(check.payer_email).to eql(check_attributes[:payer_email])
+      expect(check.amount).to eql(check_attributes[:amount].to_s)
+      expect(check.memo).to eql(check_attributes[:memo])
+      expect(check.plaid_access_token).to include('access-sandbox')
+      expect(check.plaid_item_id).to be_present
     end
   end
 
   describe 'GET' do
-    let!(:check) { check_dropbox.checks.create(FactoryBot.attributes_for(:check_dropbox_check)) }
+    let!(:check) {
+      VCR.use_cassette('check_dropbox/checks/create') do
+        check_dropbox.checks.create(attributes_for(:check_dropbox_check, :sort_of_real))
+      end
+    }
+
     it 'is a 404 for guests' do
       get "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks"
 
@@ -59,7 +55,9 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/check_dropbox/checks'
     it 'is a list of the checks for residents' do
       sign_in(space, space_member)
 
-      get "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks"
+      VCR.use_cassette('check_dropbox/checks/index') do
+        get "/spaces/#{space.id}/rooms/#{room.id}/furniture/check_dropbox/checks"
+      end
 
       expect(response).to be_ok
       expect(response).to(render_template(:index))

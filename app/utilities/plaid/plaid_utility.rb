@@ -34,16 +34,11 @@ module Plaid
       response.link_token
     end
 
-    def account_number_for(access_token:, item_id:)
+    def auth_get(access_token:)
       request = sdk::AuthGetRequest.new(access_token: access_token)
       response = plaid_client.auth_get(request)
-      response.numbers.ach.find { |a| a.account_id = item_id }.account
-    end
 
-    def routing_number_for(access_token:, item_id:)
-      request = sdk::AuthGetRequest.new(access_token: access_token)
-      response = plaid_client.auth_get(request)
-      response.numbers.ach.find { |a| a.account_id = item_id }.account
+      response
     end
 
     def plaid_configuration

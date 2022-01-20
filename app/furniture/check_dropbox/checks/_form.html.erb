@@ -1,36 +1,31 @@
-<%= form_with model: [room.space, room, :furniture, furniture.checks.new], data: { controller: "check-dropbox", check_dropbox_link_token: furniture.link_token_for(current_person) } do |check_form|%>
-  <div>
-    <%= check_form.label :pay_from do %>
-      <span data-check-dropbox-target="payFrom">
-        <button
-        data-action="click->check-dropbox#createLink">Choose bank account
-        </button>
-      </span>
-    <%- end %>
-    <%= check_form.hidden_field :public_token, data: { check_dropbox_target: "publicToken" } %>
-  </div>
+<%= form_with model: [room.space, room, :furniture, check], data: { controller: "check-dropbox", check_dropbox_link_token: furniture.link_token_for(current_person) } do |check_form|%>
+  <%- if check.public_token.blank? %>
+    <div>
+      <%= check_form.label :pay_from do %>
+        <span data-check-dropbox-target="payFrom">
+          <button
+          data-action="click->check-dropbox#createLink">Choose bank account
+          </button>
+        </span>
+      <%- end %>
+      <%= render "error", model: check_form.object, attribute: :plaid_item_id %>
+      <%= check_form.hidden_field :public_token, data: { check_dropbox_target: "publicToken" }, autocomplete: "off" %>
+      <%= check_form.hidden_field :plaid_account_id, data: { check_dropbox_target: "plaidAccountId" }, autocomplete: "off" %>
+      <%= check_form.hidden_field :account_description, data: { check_dropbox_target: "accountDescription" }, autocomplete: "off" %>
+    </div>
+  <%- else %>
+    <%= check.account_description %>
+    <%= check_form.hidden_field :public_token %>
+    <%= check_form.hidden_field :plaid_account_id %>
+    <%= check_form.hidden_field :account_description %>
+  <%- end %>
+
+  <%= render "text_field", form: check_form, attribute: :amount %>
+  <%= render "text_field", form: check_form, attribute: :payer_name %>
+  <%= render "text_field", form: check_form, attribute: :payer_email %>
+  <%= render "text_field", form: check_form, attribute: :memo %>
 
   <div>
-    <%= check_form.label :amount %>
-    <%= check_form.text_field :amount %>
-  </div>
-
-  <div>
-    <%= check_form.label :payer_name %>
-    <%= check_form.text_field :payer_name %>
-  </div>
-
-  <div>
-    <%= check_form.label :payer_email %>
-    <%= check_form.text_field :payer_email %>
-  </div>
-
-  <div>
-    <%= check_form.label :memo %>
-    <%= check_form.text_field :memo %>
-  </div>
-
-  <div>
-    <%= check_form.submit disabled: true, data: { check_dropbox_target: "dropOffButton" } %>
+    <%= check_form.submit data: { check_dropbox_target: "dropOffButton" } %>
   </div>
 <%- end %>

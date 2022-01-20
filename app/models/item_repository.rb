@@ -6,9 +6,9 @@ class ItemRepository
 
   delegate :model_name, to: :type
 
-  delegate :size, :empty?, :present?,  to: :item_records
+  delegate :size, :empty?, :present?, to: :item_records
 
-  def initialize(type:, item_records:, space:)
+  def initialize(item_records:, space:, type: Item)
     self.type = type
     self.item_records = item_records
     self.space = space

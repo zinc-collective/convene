@@ -64,6 +64,8 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     ar_outer_joins (0.2.0)
       activerecord (>= 3.2)
     bcrypt (3.1.16)
@@ -75,6 +77,8 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
+    crack (0.4.5)
+      rexml
     crass (1.0.6)
     cssbundling-rails (1.0.0)
       railties (>= 6.0.0)
@@ -122,6 +126,7 @@ GEM
     gretel (4.4.0)
       actionview (>= 5.1, < 7.1)
       railties (>= 5.1, < 7.1)
+    hashdiff (1.0.1)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
@@ -158,6 +163,7 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
+    public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
     pundit (2.1.1)
@@ -202,6 +208,7 @@ GEM
       ffi (~> 1.0)
     redcarpet (3.5.1)
     redis (4.5.1)
+    rexml (3.2.5)
     rotp (6.2.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
@@ -262,11 +269,16 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    vcr (6.0.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webmock (3.14.0)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -309,7 +321,9 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data (~> 1.2021)
+  vcr
   web-console (~> 4.2)
+  webmock
 
 RUBY VERSION
    ruby 2.7.4p191

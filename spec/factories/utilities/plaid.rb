@@ -5,8 +5,10 @@ FactoryBot.define do
     utility_slug { 'plaid' }
     configuration do
       {
-        'client_id' => 'a-fake-client-id',
-        'secret' => 'a-fake-secret',
+        # Use sandbox client id and secret if they are available, to
+        # make it possible to record VCR cassettes in tests.
+        'client_id' => ENV.fetch('PLAID_CLIENT_ID', 'a-fake-client-id'),
+        'secret' => ENV.fetch('PLAID_SECRET', 'a-fake-secret'),
         'environment' => 'sandbox'
       }
     end
