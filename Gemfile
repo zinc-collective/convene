@@ -50,7 +50,7 @@ gem 'lockbox', '0.6.6'
 gem 'rotp', '~> 6.2'
 
 # Use postgresql for data persistence
-gem 'pg', '~> 1.2'
+gem 'pg', '~> 1.3'
 
 # Date/Time and Internationalization
 #
