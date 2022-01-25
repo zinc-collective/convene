@@ -39,8 +39,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_record_extended (2.0.3)
-      activerecord (>= 5.1, < 6.2)
+    active_record_extended (2.1.0)
+      activerecord (>= 5.1, < 7.1.0)
       ar_outer_joins (~> 0.2)
       pg (< 3.0)
     activejob (6.1.4.4)
@@ -288,7 +288,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_record_extended (~> 2.0)
+  active_record_extended (~> 2.1)
   bcrypt (~> 3.1.7)
   bootsnap (~> 1.10)
   cssbundling-rails
