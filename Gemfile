@@ -46,7 +46,7 @@ gem 'active_record_extended', '~> 2.1'
 gem 'friendly_id', '~> 5.4.2'
 # Hashing / Encrypting data at rest
 gem 'bcrypt', '~> 3.1.7'
-gem 'lockbox', '0.6.6'
+gem 'lockbox', '0.6.8'
 gem 'rotp', '~> 6.2'
 
 # Use postgresql for data persistence
