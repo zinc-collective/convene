@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CheckDropbox
+class PaymentForm
   class ChecksController < FurnitureController
     def create
       return if check.save
@@ -11,13 +11,13 @@ class CheckDropbox
     def index; end
 
     private def check_params
-      params.require(:check_dropbox_check)
+      params.require(:payment_form_check)
             .permit(policy(checks.new).permitted_attributes)
     end
 
-    # @returns [CheckDropbox]
+    # @returns [PaymentForm]
     helper_method def furniture
-      room.furniture_placements.find_by(furniture_kind: 'check_dropbox').furniture
+      room.furniture_placements.find_by(furniture_kind: 'payment_form').furniture
     end
 
     helper_method def room

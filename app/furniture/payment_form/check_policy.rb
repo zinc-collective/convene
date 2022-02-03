@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class CheckDropbox
+class PaymentForm
   class CheckPolicy
     attr_accessor :object, :actor
 

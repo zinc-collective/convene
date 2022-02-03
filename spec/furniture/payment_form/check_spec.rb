@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CheckDropbox::Check, type: :model do
+RSpec.describe PaymentForm::Check, type: :model do
   subject { described_class.new(item_record: ItemRecord.new) }
 
   describe '#payer_name' do

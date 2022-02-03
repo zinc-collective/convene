@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe CheckDropbox::CheckPolicy, type: :policy do
+RSpec.describe PaymentForm::CheckPolicy, type: :policy do
   let(:subject) { described_class }
   let(:space) { FactoryBot.build_stubbed(:space) }
-  let(:check) { instance_double(CheckDropbox::Check, space: space) }
+  let(:check) { instance_double(PaymentForm::Check, space: space) }
   context 'as a guest' do
     let(:actor) { Guest.new }
     permissions :show?, :update?, :edit?, :destroy?, :index? do

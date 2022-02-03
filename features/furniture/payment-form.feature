@@ -1,4 +1,4 @@
-Feature: Electronic Check Drop Box
+Feature: Payment Form
   In order to reduce transaction fees when accepting large payments
   As a Space Owner
   I would like to accept Electronic Checks

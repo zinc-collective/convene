@@ -1,4 +1,4 @@
-<%= form_with model: [room.space, room, :furniture, check], data: { controller: "check-dropbox", check_dropbox_link_token: furniture.link_token_for(current_person) } do |check_form|%>
+<%= form_with model: [room.space, room, :furniture, check], data: { controller: "payment-form", payment_form_link_token: furniture.link_token_for(current_person) } do |check_form|%>
   <%- if check.public_token.blank? %>
     <div>
       <%= check_form.label :pay_from do %>
@@ -9,9 +9,9 @@
         </span>
       <%- end %>
       <%= render "error", model: check_form.object, attribute: :plaid_item_id %>
-      <%= check_form.hidden_field :public_token, data: { check_dropbox_target: "publicToken" }, autocomplete: "off" %>
-      <%= check_form.hidden_field :plaid_account_id, data: { check_dropbox_target: "plaidAccountId" }, autocomplete: "off" %>
-      <%= check_form.hidden_field :account_description, data: { check_dropbox_target: "accountDescription" }, autocomplete: "off" %>
+      <%= check_form.hidden_field :public_token, data: { payment_form_target: "publicToken" }, autocomplete: "off" %>
+      <%= check_form.hidden_field :plaid_account_id, data: { payment_form_target: "plaidAccountId" }, autocomplete: "off" %>
+      <%= check_form.hidden_field :account_description, data: { payment_form_target: "accountDescription" }, autocomplete: "off" %>
     </div>
   <%- else %>
     <%= check.account_description %>
@@ -26,6 +26,6 @@
   <%= render "text_field", form: check_form, attribute: :memo %>
 
   <div>
-    <%= check_form.submit data: { check_dropbox_target: "dropOffButton" } %>
+    <%= check_form.submit data: { payment_form_target: "dropOffButton" } %>
   </div>
 <%- end %>

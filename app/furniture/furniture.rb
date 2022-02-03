@@ -5,7 +5,7 @@
 module Furniture
   REGISTRY = {
     breakout_tables_by_jitsi: BreakoutTablesByJitsi,
-    check_dropbox: CheckDropbox,
+    payment_form: PaymentForm,
     markdown_text_block: MarkdownTextBlock,
     videobridge_by_jitsi: VideobridgeByJitsi
   }.freeze

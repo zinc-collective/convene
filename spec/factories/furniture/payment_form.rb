@@ -1,15 +1,15 @@
 FactoryBot.define do
-  factory :check_dropbox, class: 'CheckDropbox' do
+  factory :payment_form, class: 'PaymentForm' do
     transient do
       room { build(:room) }
     end
 
     placement do
-      association :furniture_placement, { furniture_kind: 'check_dropbox', room: room }
+      association :furniture_placement, { furniture_kind: 'payment_form', room: room }
     end
   end
 
-  factory :check_dropbox_check, class: 'CheckDropbox::Check' do
+  factory :payment_form_check, class: 'PaymentForm::Check' do
     sequence(:payer_name) { |i| "Payer #{i}" }
     payer_email { "#{payer_name.downcase.gsub(' ', '-')}@example.com" }
     amount { 100_00 }

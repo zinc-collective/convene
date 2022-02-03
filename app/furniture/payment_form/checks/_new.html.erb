@@ -1,0 +1,12 @@
+<h3>Check Dropbox</h3>
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+
+<turbo-frame id="payment_form" data-turbo="true">
+  <%= render "payment_form/checks/form", room: room, furniture: furniture, check: check %>
+
+  <%- if policy(furniture.checks).index? %>
+    <p>
+    See <%= link_to "all checks", space_room_furniture_payment_form_checks_path(room.space, room) %>
+    </p>
+  <%- end %>
+</turbo-frame>

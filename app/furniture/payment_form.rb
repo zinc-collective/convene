@@ -2,12 +2,12 @@
 
 # Allows a Space to receive eChecks
 # @see features/furniture/check-drop-off.feature
-class CheckDropbox
+class PaymentForm
   include Placeable
 
   def self.append_routes(router)
-    router.scope module: 'check_dropbox' do
-      router.resource :check_dropbox, only: [:show] do
+    router.scope module: 'payment_form' do
+      router.resource :payment_form, only: [:show] do
         router.resources :checks, only: %i[create index]
       end
     end
