@@ -2,9 +2,9 @@
   <%- if payment.public_token.blank? %>
     <div>
       <%= payment_form.label :pay_from do %>
-        <span data-check-dropbox-target="payFrom">
+        <span data-payment-form-target="payFrom">
           <button
-          data-action="click->check-dropbox#createLink">Choose bank account
+          data-action="click->payment-form#createLink">Choose bank account
           </button>
         </span>
       <%- end %>
