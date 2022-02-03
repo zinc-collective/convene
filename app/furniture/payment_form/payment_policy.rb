@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class PaymentForm
-  class CheckPolicy
+  class PaymentPolicy
     attr_accessor :object, :actor
 
     def initialize(actor, object)

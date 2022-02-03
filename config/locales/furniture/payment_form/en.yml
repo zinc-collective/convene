@@ -2,7 +2,7 @@ en:
   activemodel:
     errors:
       models:
-        payment_form/check:
+        payment_form/payment:
           attributes:
             plaid_item_id:
               blank: choose a bank account

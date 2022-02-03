@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 class PaymentForm
-  class ChecksController < FurnitureController
+  class PaymentsController < FurnitureController
     def create
-      return if check.save
+      return if payment.save
 
       render :new
     end
 
     def index; end
 
-    private def check_params
-      params.require(:payment_form_check)
-            .permit(policy(checks.new).permitted_attributes)
+    private def payment_params
+      params.require(:payment_form_payment)
+            .permit(policy(payments.new).permitted_attributes)
     end
 
     # @returns [PaymentForm]
@@ -28,13 +28,13 @@ class PaymentForm
       current_space
     end
 
-    helper_method def check
-      @check ||= checks.new(check_params)
+    helper_method def payment
+      @payment ||= payments.new(payment_params)
     end
 
-    helper_method def checks
-      @checks ||= policy_scope(furniture.checks).tap do |checks|
-        authorize(checks)
+    helper_method def payments
+      @payments ||= policy_scope(furniture.payments).tap do |payments|
+        authorize(payments)
       end
     end
   end

@@ -4,7 +4,7 @@ class PaymentForm
   # @todo Probably want to figure out how we can make this play well with the
   # {ActiveModel::Attributes::ClassMethods} API or something so we don't have
   # to define methods for each write/read for attributes :(.
-  class Check < Item
+  class Payment < Item
     def save
       exchange_public_token_for_access_token_and_item if plaid_access_token.blank? && public_token.present?
       return false unless valid?

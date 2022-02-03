@@ -9,11 +9,11 @@ FactoryBot.define do
     end
   end
 
-  factory :payment_form_check, class: 'PaymentForm::Check' do
+  factory :payment_form_payment, class: 'PaymentForm::Payment' do
     sequence(:payer_name) { |i| "Payer #{i}" }
     payer_email { "#{payer_name.downcase.gsub(' ', '-')}@example.com" }
     amount { 100_00 }
-    sequence(:memo) { |i| "Check Memo #{i}" }
+    sequence(:memo) { |i| "Memo #{i}" }
     sequence(:public_token) { |i| "Public Token #{i}" }
     association :space
 

@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe PaymentForm::PaymentPolicy, type: :policy do
   let(:subject) { described_class }
   let(:space) { FactoryBot.build_stubbed(:space) }
-  let(:payment) { instance_double(PaymentForm::Payment, space: space) }
+  let(:check) { instance_double(PaymentForm::Payment, space: space) }
   context 'as a guest' do
     let(:actor) { Guest.new }
     permissions :show?, :update?, :edit?, :destroy?, :index? do
-      it { is_expected.not_to permit(actor, payment) }
+      it { is_expected.not_to permit(actor, check) }
     end
 
     permissions :create? do
-      it { is_expected.to permit(actor, payment) }
+      it { is_expected.to permit(actor, check) }
     end
   end
 
@@ -23,11 +23,11 @@ RSpec.describe PaymentForm::PaymentPolicy, type: :policy do
     end
 
     permissions :show?, :update?, :edit?, :destroy?, :index? do
-      it { is_expected.not_to permit(actor, payment) }
+      it { is_expected.not_to permit(actor, check) }
     end
 
     permissions :create? do
-      it { is_expected.to permit(actor, payment) }
+      it { is_expected.to permit(actor, check) }
     end
   end
 
@@ -39,7 +39,7 @@ RSpec.describe PaymentForm::PaymentPolicy, type: :policy do
     end
 
     permissions :create?, :index?, :show?, :update?, :edit?, :destroy? do
-      it { is_expected.to permit(actor, payment) }
+      it { is_expected.to permit(actor, check) }
     end
   end
 end
