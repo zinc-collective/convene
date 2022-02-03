@@ -10,7 +10,7 @@ ruby File.read('.ruby-version').strip
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 
 # Data Transport
 #
