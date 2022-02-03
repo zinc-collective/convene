@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import CheckDropboxController from "./check_dropbox_controller.js"
-application.register("check-dropbox", CheckDropboxController)
+import PaymentFormController from "./payment_form_controller.js"
+application.register("payment-form", PaymentFormController)
 
 import MenuController from "./menu_controller.js"
 application.register("menu", MenuController)

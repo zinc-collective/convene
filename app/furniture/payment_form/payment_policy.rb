@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-class CheckDropbox
-  class CheckPolicy
+class PaymentForm
+  class PaymentPolicy
     attr_accessor :object, :actor
 
     def initialize(actor, object)
