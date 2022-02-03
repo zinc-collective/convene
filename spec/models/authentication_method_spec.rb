@@ -44,7 +44,7 @@ RSpec.describe AuthenticationMethod, type: :model do
         authentication_method.send_one_time_password!(space)
       end.to have_enqueued_mail(
         AuthenticatedSessionMailer, :one_time_password_email
-      ).with(args: [authentication_method, space])
+      ).with(authentication_method, space)
     end
   end
 end

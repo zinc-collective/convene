@@ -72,9 +72,7 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
               params: { rsvp: { status: :accepted } }
         end.to have_enqueued_mail(
           AuthenticatedSessionMailer, :one_time_password_email
-        ).with(
-          args: [neighbor.authentication_methods.first, space]
-        )
+        ).with(neighbor.authentication_methods.first, space)
 
         expect(response).to redirect_to(
           new_space_authenticated_session_path(space,
