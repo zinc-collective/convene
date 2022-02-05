@@ -40,6 +40,19 @@ Feature: Furniture - MediaBox (🌰)
       | Ancillary Justice         |
       | A Song for the Wild Built |
 
+  # This illustrates how revenue flows back into the organization operating the Convene instance.
+  # @see features/vendor-affiliates.feature
+  Scenario: Acquiring Media
+    Given the Neighborhood has the following Affiliate Relationships:
+      | vendor       |
+      | bookshop.org |
+    And the "Ancillary Justice" Media may be Acquired At:
+      | format    | link                                                       |
+      | paperback | https://bookshop.org/books/ancillary-justice/9780316246620 |
+      | ebook     | https://www.kobo.com/us/en/ebook/ancillary-justice-1       |
+    When Someone buys a copy of "Ancillary Justice" by following the "Bookshop.org" Get This Link
+    Then the Neighborhood Operator is granted the affiliate fee
+
 
   @unstarted
   Scenario: Reviewing Media
