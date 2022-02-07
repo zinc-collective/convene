@@ -207,7 +207,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
-    redis (4.5.1)
+    redis (4.6.0)
     rexml (3.2.5)
     rotp (6.2.0)
     rspec-core (3.10.1)
@@ -238,7 +238,7 @@ GEM
       concurrent-ruby
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
-    sidekiq (6.4.0)
+    sidekiq (6.4.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
