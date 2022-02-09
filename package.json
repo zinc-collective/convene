@@ -44,7 +44,7 @@
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@hotwired/turbo-rails": "^7.1.1",
     "@rails/actioncable": "^7.0.2",
-    "@rails/activestorage": "^7.0.1",
+    "@rails/activestorage": "^7.0.2",
     "@rails/ujs": "^6.1.4",
     "@tailwindcss/typography": "^0.5.1",
     "@webpack-cli/serve": "^1.6.1",
