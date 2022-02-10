@@ -4,6 +4,25 @@ Feature: Furniture - MediaBox (🌰)
   # - Share your Reccommendations and AntiRecommendations!
   # - Generate Revenue for the Neighborhood through Affiliate Programs!
   #
+  # Each Space operates a MediaBox and own their Reviews of the Media; while the
+  # Neighborhood holds the information about how to acquire the pieces of Media
+  # in they're particular formats, and generates revenue by injecting affiliate
+  # marketing links into the Reviews/Recommendation results.
+  #
+  # Assuming the Neighborhood is operated as a Contributor/Community
+  # Co-operative; profits would flow back to Contributors as part of the regular
+  # Patronage redemptions, and back to the Community as Patronage Refunds or
+  # reduced prices.
+  #
+  # There are likely three main use cases:
+  # - "Reviewing Media" for people who like to keep a record and share what
+  #   they've read/listened to/watched
+  # - "Finding Media" for people who are like "What do I wanna watch/read/listen
+  #   to?"
+  # - "Reading Media Reviews" for people who want a more in-depth way of
+  #   evaluating potential media choices.
+  # - "Acquiring Media" once people have made a "I want this!" decision.
+  #
   # Data Prototype: https://airtable.com/shrUIIkF5Gnm6R5ff
   #
 
