@@ -34,22 +34,26 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/payment_form/payments
   describe 'GET' do
     let!(:payment) {
       VCR.use_cassette('payment_form/payments/create') do
-        payment_form.payments.create(attributes_for(:payment_form_payment, :sort_of_real))
+        payment_form.payments.create!(
+          attributes_for(:payment_form_payment, :sort_of_real)
+        )
       end
     }
 
-    it 'is a 404 for guests' do
+    it 'is a 200 for guests' do
       get "/spaces/#{space.id}/rooms/#{room.id}/furniture/payment_form/payments"
 
-      expect(response).to be_not_found
+      expect(response).to be_ok
+      expect(assigns(:payments)).to be_empty
     end
 
-    it 'is a 404 for neighbors' do
+    it 'is a 200 for neighbors' do
       sign_in(space, neighbor)
 
       get "/spaces/#{space.id}/rooms/#{room.id}/furniture/payment_form/payments"
 
-      expect(response).to be_not_found
+      expect(response).to be_ok
+      expect(assigns(:payments)).to be_empty
     end
 
     it 'is a list of the payments for residents' do
