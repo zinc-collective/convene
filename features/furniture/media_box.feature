@@ -61,6 +61,7 @@ Feature: Furniture - MediaBox (🌰)
 
   # This illustrates how revenue flows back into the organization operating the Convene instance.
   # @see features/vendor-affiliates.feature
+  @unstarted
   Scenario: Acquiring Media
     Given the Neighborhood has the following Affiliate Relationships:
       | vendor       |
