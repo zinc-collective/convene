@@ -63,7 +63,7 @@ gem 'tzinfo-data', '~> 1.2021', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootsnap', '~> 1.10', require: false
 
 # Permissions and policies
-gem 'pundit', '~> 2.1'
+gem 'pundit', '~> 2.2'
 
 # Utility hookup support
 gem 'plaid', '~> 14.12'
