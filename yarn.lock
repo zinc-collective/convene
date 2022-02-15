@@ -3398,11 +3398,6 @@ postcss@^8.4.6:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-prettier-plugin-tailwindcss@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.1.7.tgz#f51de7b7bbabaa0724d3aff7a62957e5aa873482"
-  integrity sha512-tmBr45hCLuit2Cz9Pwow0/Jl1bGivYGsfcF29O+3sKcE++ybjz9dfie565S3ZsvAeV8uYer9SRMBWDsHPly2Lg==
-
 pretty-hrtime@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
@@ -4080,10 +4075,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-tailwindcss@^3.0.20:
-  version "3.0.20"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.0.20.tgz#e2b96f9c99ef68e1c9101d115673f6005cf56643"
-  integrity sha512-Mdo5XMsEkHhZNgh8NzXOEwI9L4WAS9NnnhCWbWWhVDaNZ1bqcHvbybosbmW6CetrCuCgMtDeByQq4trSka7irQ==
+tailwindcss@^3.0.22:
+  version "3.0.22"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.0.22.tgz#5f1aac83810261300ae5b2f98fd4a2fa2ded2c42"
+  integrity sha512-F8lt74RlNZirnkaSk310+vGQta7c0/hgx7/bqxruM4wS9lp8oqV93lzavajC3VT0Lp4UUtUVIt8ifKcmGzkr0A==
   dependencies:
     arg "^5.0.1"
     chalk "^4.1.2"
@@ -4098,12 +4093,12 @@ tailwindcss@^3.0.20:
     is-glob "^4.0.3"
     normalize-path "^3.0.0"
     object-hash "^2.2.0"
+    postcss "^8.4.6"
     postcss-js "^4.0.0"
     postcss-load-config "^3.1.0"
     postcss-nested "5.0.6"
     postcss-selector-parser "^6.0.9"
     postcss-value-parser "^4.2.0"
-    prettier-plugin-tailwindcss "^0.1.7"
     quick-lru "^5.1.1"
     resolve "^1.22.0"
 
