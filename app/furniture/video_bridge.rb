@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 # Provides an iFramed Jitsi Meet to a {Room}.
-class VideobridgeByJitsi
+class VideoBridge
   include Placeable
 end

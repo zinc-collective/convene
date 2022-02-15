@@ -1,0 +1,9 @@
+<div
+
+  data-controller="video-bridge"
+  data-target="video-bridge.wrapper"
+  data-video-bridge-video-host="<%= room.video_host %>"
+  data-video-bridge-name="<%= room.full_slug %>">
+</div>
+
+<%= javascript_include_tag "furniture_video_bridge", "data-turbo-track": "reload", defer: true %>

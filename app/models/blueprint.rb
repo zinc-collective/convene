@@ -128,14 +128,14 @@ class Blueprint
           access_level: :unlocked,
           publicity_level: :listed,
           furniture_placements: {
-            videobridge_by_jitsi: {}
+            video_bridge: {}
           }
         }, {
           name: 'Talk to Zee',
           access_level: :unlocked,
           publicity_level: :unlisted,
           furniture_placements: {
-            videobridge_by_jitsi: {}
+            video_bridge: {}
           }
         }]
       }
