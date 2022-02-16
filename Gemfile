@@ -54,6 +54,7 @@ gem 'pg', '~> 1.3'
 
 # Date/Time and Internationalization
 #
+gem 'localeapp', github: 'ryanb/localeapp', branch: 'i18n-1-9'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', '~> 1.2021', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 

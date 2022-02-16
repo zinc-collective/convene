@@ -1,0 +1,5 @@
+#!/bin/bash
+for f in $(ls config/locales/**/*.yml)
+do
+  bin/localeapp push ${f}
+done
