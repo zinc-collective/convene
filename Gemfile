@@ -10,7 +10,7 @@ ruby File.read('.ruby-version').strip
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0'
 
 # Data Transport
 #
@@ -18,7 +18,7 @@ gem 'rails', '~> 6.1'
 gem 'puma', '~> 5.6'
 
 # Browser Layer
-#
+gem 'sprockets-rails'
 gem 'jsbundling-rails'
 gem 'cssbundling-rails'
 # Turbo lets us swap chunks of HTML without page reloads: https://github.com/hotwired/turbo-rails
@@ -101,5 +101,5 @@ group :development do
   gem 'listen', '~> 3.7'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen', github: 'rails/spring-watcher-listen'
 end
