@@ -4,8 +4,8 @@
   "description": "Community owned tools that bring people together, both online and off",
   "main": "index.js",
   "engines": {
-    "node": "~16.13",
-    "yarn": "~1.22"
+    "node": "^16.13",
+    "yarn": "^1.22"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
