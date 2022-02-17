@@ -40,7 +40,7 @@ class SystemTestSpace
         access_code: nil,
         furniture_placements: {
           markdown_text_block: { content: '# Welcome!' },
-          videobridge_by_jitsi: {},
+          video_bridge: {},
           breakout_tables_by_jitsi: { names: %w[engineering design ops] }
         }
       },
@@ -50,7 +50,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
-          videobridge_by_jitsi: {}
+          video_bridge: {}
         }
       },
       {
@@ -59,7 +59,7 @@ class SystemTestSpace
         access_level: :locked,
         access_code: :secret,
         furniture_placements: {
-          videobridge_by_jitsi: {}
+          video_bridge: {}
         }
       },
       {
@@ -68,7 +68,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
-          videobridge_by_jitsi: {}
+          video_bridge: {}
         }
       },
       {
@@ -77,7 +77,7 @@ class SystemTestSpace
         access_level: :unlocked,
         access_code: nil,
         furniture_placements: {
-          videobridge_by_jitsi: {}
+          video_bridge: {}
         }
       },
       {

@@ -12,6 +12,3 @@ application.register("menu", MenuController)
 
 import RoomFormController from "./room_form_controller.js"
 application.register("room-form", RoomFormController)
-
-import VideoRoomController from "./video_room_controller.js"
-application.register("video-room", VideoRoomController)

@@ -1,7 +1,7 @@
 import { EventTarget } from 'event-target-shim';
 
 const eventBus = new EventTarget()
-export default class VideoRoom {
+export default class VideoBridge {
   constructor(domain, parentNode) {
     this.domain = domain;
     this.parentNode = parentNode;
@@ -11,13 +11,12 @@ export default class VideoRoom {
   enterRoom(roomName) {
     this.roomName = roomName;
     this.connectJitsiApi();
-    const enteredRoomEvent = new CustomEvent("enteredRoom");
-    this.dispatchEvent(enteredRoomEvent);
+    this.dispatchEvent(new CustomEvent("enteredRoom"));
   }
 
-  exitRoom(dispatchEvent) {
+  exitRoom() {
     this.jitsi.dispose();
-    if (dispatchEvent) this.dispatchEvent(new CustomEvent("exitedRoom"));
+    this.dispatchEvent(new CustomEvent("exitedRoom"));
   }
 
   addEventListener(type, listener, option) {
@@ -31,9 +30,6 @@ export default class VideoRoom {
   connectJitsiApi() {
     if (!this.roomName) return;
     this.jitsi = new JitsiMeetExternalAPI(this.domain, this.jitsiApiOption());
-
-    // Exit room without dispatching event when user refresh to prevent replacing to space url
-    this.parentNode.addEventListener('beforeunload', () => this.exitRoom(false));
     this.jitsi.on('readyToClose', () => this.exitRoom(true));
   }
 

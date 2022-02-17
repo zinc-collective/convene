@@ -7,7 +7,9 @@ module Furniture
     breakout_tables_by_jitsi: BreakoutTablesByJitsi,
     payment_form: PaymentForm,
     markdown_text_block: MarkdownTextBlock,
-    videobridge_by_jitsi: VideobridgeByJitsi
+    video_bridge: VideoBridge,
+    # @todo Run a rake task to move all the placements with the type `videobridge_by_jitsi` to `video_bridge`
+    videobridge_by_jitsi: VideoBridge
   }.freeze
 
   # Appends each {Furniture}'s CRUD actions
