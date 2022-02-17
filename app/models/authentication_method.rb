@@ -10,7 +10,7 @@ class AuthenticationMethod < ApplicationRecord
 
   attribute :confirmed_at, :datetime
 
-  encrypts :one_time_password_secret
+  lockbox_encrypts :one_time_password_secret
   attribute :last_one_time_password_at, :datetime
 
   before_validation :set_one_time_password_secret, only: :create
