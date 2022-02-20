@@ -15,5 +15,10 @@ RSpec.describe Invitation, type: :model do
       invitation = build(:invitation, invitor: invitor)
       expect(invitation.invitor_display_name).to eq(invitor.display_name)
     end
+
+    it 'is empty when the invitor is not set' do
+      invitation = build(:invitation, invitor: nil)
+      expect(invitation.invitor_display_name).to be_blank
+    end
   end
 end

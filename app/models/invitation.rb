@@ -28,7 +28,7 @@ class Invitation < ApplicationRecord
 
   # @!method invitor_display_name
   #   @see Person#display_name
-  delegate :display_name, to: :invitor, prefix: true
+  delegate :display_name, to: :invitor, prefix: true, allow_nil: true
 
   attribute :last_sent_at, :datetime
   attribute :created_at, :datetime

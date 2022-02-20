@@ -1,7 +1,7 @@
 <% breadcrumb :rsvp, rsvp %>
 
 <h2><%= t('.header', space_name: rsvp.invitation.space.name)%></h2>
-<p><%= t('.summary', space_name: rsvp.invitation.space.name, invitor_name: rsvp.invitation.invitor.name, invitation_date: rsvp.invitation.created_at) %></p>
+<p><%= t('.summary', space_name: rsvp.invitation.space.name, invitor_name: rsvp.invitation.invitor_display_name, invitation_date: rsvp.invitation.created_at) %></p>
 
 <%= form_with model: [rsvp.space, rsvp.invitation, rsvp], local: true do |rsvp_form|%>
   <%= rsvp_form.hidden_field :status, value: "accepted" %>
