@@ -24,7 +24,9 @@ class Person < ApplicationRecord
   end
 
   def display_name
-    name || email
+    return name if name.present?
+
+    email
   end
 
   def authenticated?

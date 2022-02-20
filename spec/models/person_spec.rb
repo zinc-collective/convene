@@ -5,6 +5,27 @@ require 'rails_helper'
 RSpec.describe Person, type: :model do
   it { is_expected.to have_many(:invitations).inverse_of(:invitor) }
 
+  describe '#display_name' do
+    it 'is blank when `name` and `email` are blank' do
+      expect(described_class.new(name: '', email: nil).display_name).to be_blank
+    end
+    it 'is the `name` when `name` is present and `email` is present' do
+      expect(
+        described_class.new(name: 'Naomi', email: 'naomi@example.com').display_name
+      ).to eq('Naomi')
+    end
+    it 'is the `email` when `name` is blank and `email` is present' do
+      expect(
+        described_class.new(name: '', email: 'naomi@example.com').display_name
+      ).to eq('naomi@example.com')
+    end
+    it 'is the `name` when `name` is present and `email` is blank' do
+      expect(
+        described_class.new(name: 'Naomi', email: nil).display_name
+      ).to eq('Naomi')
+    end
+  end
+
   describe '#member_of?' do
     let(:membership) { create(:space_membership) }
     let(:space) { membership.space }
