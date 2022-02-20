@@ -26,6 +26,10 @@ class Invitation < ApplicationRecord
     status.to_sym == :accepted
   end
 
+  def invitor_display_name
+    invitor.display_name
+  end
+
   attribute :last_sent_at, :datetime
   attribute :created_at, :datetime
   attribute :updated_at, :datetime

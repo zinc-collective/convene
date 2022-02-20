@@ -23,6 +23,10 @@ class Person < ApplicationRecord
     false
   end
 
+  def display_name
+    name || email
+  end
+
   def authenticated?
     true
   end

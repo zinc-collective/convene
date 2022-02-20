@@ -1,6 +1,6 @@
 Hi <%= @invitation.name %>,
 
-You've been invited to <%= @invitation.space.name %> by <%= @invitation.invitor.name %>.
+You've been invited to <%= @invitation.space.name %> by <%= @invitation.invitor_display_name %>.
 
 You may RSVP to this invitation at <%= space_invitation_rsvp_url(@invitation.space, @invitation) %>.
 
