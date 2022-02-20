@@ -26,9 +26,9 @@ class Invitation < ApplicationRecord
     status.to_sym == :accepted
   end
 
-  def invitor_display_name
-    invitor.display_name
-  end
+  # @!method invitor_display_name
+  #   @see Person#display_name
+  delegate :display_name, to: :invitor, prefix: true
 
   attribute :last_sent_at, :datetime
   attribute :created_at, :datetime
