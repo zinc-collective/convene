@@ -23,6 +23,12 @@ class Person < ApplicationRecord
     false
   end
 
+  def display_name
+    return name if name.present?
+
+    email
+  end
+
   def authenticated?
     true
   end

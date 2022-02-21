@@ -31,6 +31,19 @@ Feature: Spaces: Invitations
     When a new Invitation is sent to that Invitation's contact info
     And the old Invitation can not still be accepted
 
+
+  @unstarted @andromeda
+  Scenario: Invitations remain even if the Invitor was Removed from the Space
+    Given a "System Test" Space
+    And the "System Test" Space has a Space Owner "soon-to-leave@example.com"
+    And an Invitation to the "System Test" Space is sent by Space Owner "soon-to-leave@example.com"
+      | name | email                       |
+      | Aang | aang-the-avatar@example.com |
+    And the "System Test" Space removes the Space Owner "soon-to-leave@example.com"
+    When the Invitation to "aang-the-avatar@example.com" is Accepted
+    Then the "System Test" Space has a Space Member "aang-the-avatar@example.com"
+
+
   @unstarted @andromeda
   Scenario: Accepting an Invitation as a Neighbor
     Given an Invitation was sent to a Neighbor
