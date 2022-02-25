@@ -154,7 +154,7 @@ GEM
     nokogiri (1.13.2)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    pg (1.3.2)
+    pg (1.3.3)
     plaid (14.12.1)
       faraday (~> 1.0, >= 1.0.1)
     pry (0.13.1)
