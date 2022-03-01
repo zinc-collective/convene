@@ -6,6 +6,20 @@ GIT
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 4.0)
 
+GIT
+  remote: https://github.com/zinc-collective/rspec-rails.git
+  revision: 6660c8eebbbacfd3200172085254e22ca6475174
+  branch: combo-have_enqueued_mail-fixes
+  specs:
+    rspec-rails (5.1.1)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      railties (>= 5.2)
+      rspec-core (~> 3.10)
+      rspec-expectations (~> 3.10)
+      rspec-mocks (~> 3.10)
+      rspec-support (~> 3.10)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -249,14 +263,6 @@ GEM
     rspec-mocks (3.11.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
-    rspec-rails (5.1.0)
-      actionpack (>= 5.2)
-      activesupport (>= 5.2)
-      railties (>= 5.2)
-      rspec-core (~> 3.10)
-      rspec-expectations (~> 3.10)
-      rspec-mocks (~> 3.10)
-      rspec-support (~> 3.10)
     rspec-support (3.11.0)
     ruby2_keywords (0.0.5)
     sentry-rails (5.1.1)
@@ -338,7 +344,7 @@ DEPENDENCIES
   rails-controller-testing
   redcarpet (~> 3.5)
   rotp (~> 6.2)
-  rspec-rails
+  rspec-rails!
   sentry-rails
   sentry-ruby
   shoulda-matchers (~> 5.1)

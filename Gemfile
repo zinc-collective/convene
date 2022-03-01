@@ -86,7 +86,7 @@ group :development, :test do
   gem 'pry-byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # Our preferred testing library for Ruby and Rails projects
-  gem 'rspec-rails'
+  gem 'rspec-rails', github: 'zinc-collective/rspec-rails', branch: 'combo-have_enqueued_mail-fixes'
   gem 'shoulda-matchers', '~> 5.1'
   gem 'rails-controller-testing'
 
