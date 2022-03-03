@@ -17,7 +17,9 @@ class PaymentForm
     alias destroy? show?
 
     def index?
-      actor.member_of?(object.space)
+      # The Scope resolution limits access to Payments from Spaces
+      # this Actor belongs to.
+      true
     end
 
     def create?

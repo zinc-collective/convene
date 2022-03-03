@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PaymentForm::Payment, type: :model do
-  subject { described_class.new(item_record: ItemRecord.new) }
+  subject { described_class.new }
 
   describe '#payer_name' do
     it { is_expected.to validate_presence_of(:payer_name) }

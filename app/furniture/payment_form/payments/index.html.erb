@@ -1,4 +1,4 @@
-<turbo-frame id="payment-form">
+<turbo-frame id="payment_form">
   <%= payments.where("data->>'status' = 'ready_for_deposit' OR data->>'status' is null").size %> payments ready for deposit
   <%= payments.where("data->>'status' = 'uncleared'").size %> payments deposited but not yet cleared
   <%= payments.where("data->>'status' = 'cleared'").size %> payments deposited and cleared.

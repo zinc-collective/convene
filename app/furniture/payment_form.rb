@@ -13,9 +13,9 @@ class PaymentForm
     end
   end
 
-  # @returns [ItemRepository<Payment>]
+  # @return [ActiveRecord::Relation<Payment>]
   def payments
-    ItemRepository.new(type: Payment, item_records: placement.item_records, space: placement.space)
+    Payment.where(location: placement)
   end
 
   def link_token_for(person)

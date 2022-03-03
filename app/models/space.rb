@@ -40,7 +40,7 @@ class Space < ApplicationRecord
   has_many :rooms, inverse_of: :space, dependent: :destroy_async
 
   # All the items held within the space
-  has_many :item_records, inverse_of: :space, dependent: :destroy_async
+  has_many :items, inverse_of: :space, dependent: :destroy_async
 
   belongs_to :entrance, class_name: 'Room', optional: true
 

@@ -25,7 +25,7 @@ RSpec.describe '/spaces/', type: :request do
 
         expect(space.rooms).to be_empty
         expect(space.utility_hookups).to be_empty
-        expect(space.item_records).to be_empty
+        expect(space.items).to be_empty
         expect(space.invitations).to be_empty
         expect(space.space_memberships).to be_empty
       end
