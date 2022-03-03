@@ -10,10 +10,8 @@
 # {Item} data is stored as jsonb in an {ItemRecord}, which allows new kinds of
 # {Item}s to be invented without requiring database migrations.
 class Item < ApplicationRecord
-  self.table_name = 'item_records'
-
   # @return [FurniturePlacement]
-  belongs_to :location, polymorphic: true, inverse_of: :item_records, optional: true
+  belongs_to :location, inverse_of: :items, optional: true, class_name: 'FurniturePlacement'
   delegate :utilities, to: :location
 
   belongs_to :space, inverse_of: :items

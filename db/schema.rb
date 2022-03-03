@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2021_11_06_232244) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_03_034426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -70,15 +70,15 @@ ActiveRecord::Schema[7.0].define(version: 2021_11_06_232244) do
     t.index ["space_id"], name: "index_invitations_on_space_id"
   end
 
-  create_table "item_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "location_type"
     t.uuid "location_id"
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "space_id"
-    t.index ["location_type", "location_id"], name: "index_item_records_on_location"
-    t.index ["space_id"], name: "index_item_records_on_space_id"
+    t.index ["location_type", "location_id"], name: "index_items_on_location"
+    t.index ["space_id"], name: "index_items_on_space_id"
   end
 
   create_table "people", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
