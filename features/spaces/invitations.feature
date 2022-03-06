@@ -1,10 +1,12 @@
 Feature: Spaces: Invitations
   Invitations allow Space Owners to bring additional people into the Space
 
-  @built @andromeda
-  Scenario: Inviting new Members via Email
+  Background:
     Given a "System Test" Space
     And the "System Test" Space has a Space Owner "space-owner@example.com"
+
+  @built @andromeda
+  Scenario: Inviting new Members via Email
     When an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
       | name | email                       |
       | Aang | aang-the-avatar@example.com |
@@ -12,73 +14,41 @@ Feature: Spaces: Invitations
     And the Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "pending"
 
 
-  # We create new Invitation(s) when inviting someone again,
-  # so that we have a record of how many times someone was
-  # invited.
+  # We create new Invitation(s) when inviting someone again, so that we have a record of how many times someone was
+  # invited. We allow people to accept any of the un-expired invitations that they have been sent.
   @built @unimplemented-steps @andromeda
   Scenario: Re-inviting before an Invitation Expires
-    Given an Invitation was sent less than 14 days ago
-    When a Space Owner re-invites that Invitation's contact info
-    Then a new Invitation is sent
-    # We decided allowing people to accept any of the un-Expired invitations
-    # that they have been sent was better for the UX than invalidating
-    # duplicate Invitations.
-    And the old Invitation can still be accepted
+    Given an Invitation to the "System Test" Space was sent by Space Owner "space-owner@example.com"
+      | name | email                       | created_at  |
+      | Aang | aang-the-avatar@example.com | 13 days ago |
+    When an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
+      | name | email                       |
+      | Aang | aang-the-avatar@example.com |
+    Then an Invitations to "aang-the-avatar@example.com" for the "System Test" Space is delivered
+    And two Invitations to "aang-the-avatar@example.com" for the "System Test" Space have a status of "pending"
 
   @built @unimplemented-steps @andromeda
   Scenario: Re-inviting a Member after their Invitation Expires
-    Given an Invitation was sent 15 days ago
-    When a new Invitation is sent to that Invitation's contact info
-    And the old Invitation can not still be accepted
+    Given an Invitation to the "System Test" Space was sent by Space Owner "space-owner@example.com"
+      | name | email                       | created_at  |
+      | Aang | aang-the-avatar@example.com | 15 days ago |
+    When an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
+      | name | email                       |
+      | Aang | aang-the-avatar@example.com |
+    Then an Invitations to "aang-the-avatar@example.com" for the "System Test" Space is delivered
+    And an Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "pending"
+    And an Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "expired"
 
 
   @unstarted @andromeda
   Scenario: Invitations remain even if the Invitor was Removed from the Space
-    Given a "System Test" Space
-    And the "System Test" Space has a Space Owner "soon-to-leave@example.com"
+    Given the "System Test" Space has a Space Owner "soon-to-leave@example.com"
     And an Invitation to the "System Test" Space is sent by Space Owner "soon-to-leave@example.com"
       | name | email                       |
       | Aang | aang-the-avatar@example.com |
     And the "System Test" Space removes the Space Owner "soon-to-leave@example.com"
     When the Invitation to "aang-the-avatar@example.com" is Accepted
     Then the "System Test" Space has a Space Member "aang-the-avatar@example.com"
-
-
-  @unstarted @andromeda
-  Scenario: Accepting an Invitation as a Neighbor
-    Given an Invitation was sent to a Neighbor
-    When the Neighbor accepts that Invitation
-    Then that Neighbor becomes a Space Member
-    And that Invitation is Accepted
-    And all other Invitations to that Invitation's contact info are Resolved
-
-  @built @andromeda
-  Scenario: Accepting an Invitation as a Guest
-    Given a "System Test" Space
-    And the "System Test" Space has a Space Owner "space-owner@example.com"
-    And an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
-      | name | email                       |
-      | A Guest | a-guest@example.com |
-    When the Invitation to "a-guest@example.com" for the "System Test" Space is accepted by the Guest "a-guest@example.com"
-    Then the Guest "a-guest@example.com" becomes a Space Member of the "System Test" Space
-    And the Invitation to "a-guest@example.com" for the "System Test" Space has a status of "accepted"
-    # @todo implement me!
-    # And all other Invitations to Space Member "a-guest@example.com" for the "System Test" Space no longer have a status of "pending"
-
-  # We want to make sure that people who were invited but
-  # didn't take action can't suddenly appear and disorient
-  # or potentially disrupt the people who are in the Space.
-  @unstarted @andromeda
-  Scenario: Invitation Code Times out after 14 days
-    Given an Invitation was sent 15 days ago
-    Then that Invitation is Expired
-    And that Invitation cannot be Accepted
-
-  # We want to demonstrate that we care about folks having the
-  # affordances to prevent harassment or spam; so we want to provide
-  # an explicit option to block further invitations from the Space
-  @unstarted @andromeda
-  Scenario: Blocking Further Invitations
 
 
   @unstarted @unscheduled
