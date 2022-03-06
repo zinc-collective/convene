@@ -3,6 +3,7 @@ const { RoomPage, SpacePage, SpaceEditPage } = require("../harness/Pages");
 const { linkParameters, Actor, Space } = require("../lib");
 const appUrl = require("../lib/appUrl");
 const { Api } = require("../lib/Api");
+const AuthenticationMethod = require("../lib/AuthenticationMethod");
 
 Given("{a} {space}", function (_, space) {
   return this.api().spaces().create(space);
@@ -26,10 +27,13 @@ Given(
    */
   function (_, space, _, actor) {
     const api = new Api(appUrl(), process.env.OPERATOR_API_KEY);
-    console.log({ space, actor, api })
+    console.log({ space, actor })
     return api.authenticationMethods()
-      .findOrCreateBy({ contactMethod: 'email', contactLocation: actor.email })
-      .then((authenticationMethod) => authenticationMethod.person)
+      .findOrCreateBy(new AuthenticationMethod({ contactMethod: 'email', contactLocation: actor.email }))
+      .then(
+        (authenticationMethod) =>
+          authenticationMethod.person
+      )
       .then((person) => api.spaceMemberships.findOrCreateBy({ space, person }))
   }
 );

@@ -11,6 +11,12 @@ class Space {
       space: { name: this.name, slug: this.slug, blueprint: 'system_test', clientAttributes: { name: this.name } }
     }
   }
+
+  asParams() {
+    return {
+      space: { name: this.name, slug: this.slug }
+    }
+  }
 }
 
 module.exports = Space;
