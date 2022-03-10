@@ -2,7 +2,7 @@ Feature: Boops
   In order to equitably invoice for the costs incurred in providing co-owned digital infrastucture
   Operators want a way to account for costs of interactions/behaviors/etc.
 
-  Boops ("Bytes or OperationS") serve as a cost-unit, similar to KW/h for electricity, that allow Space Owners to only
+  Boops ("Bytes Or OperationS") serve as a cost-unit, similar to KW/h for electricity, that allow Space Owners to only
   pay for what they  actually use in the Convene Neighborhood.
 
   Cost for Boops is set by the Operators of the Convene Neighborhood, and the cost-in-boops for particular events is
@@ -17,6 +17,7 @@ Feature: Boops
 
   Plus it's fun to say. Boop. Boop. Boopboopboop.
 
+  @unimplemented-steps
   Scenario: Monthly Space Fees
     Given a "Personal Website" Space
     And the "Personal Website" Space has 5,000 Boops
@@ -25,6 +26,7 @@ Feature: Boops
     Then the "Personal Website" Space has 4,995 Boops remaining
     And the Boop Log for the "Personal Website" Space has a
 
+  @unimplemented-steps
   Scenario: Filling Boops
     Given a "Personal Website" Space
     And the "Personal Website" Space has 100 Boops
@@ -32,6 +34,7 @@ Feature: Boops
     When a $5 Boops Payment is made for the "Personal Website" Space
     Then the "Personal Website" Space has 5,100 Boops
 
+  @unimplemented-steps
   Scenario: Reviewing Boop Spend History
     Given a "Personal Website" Space
     And the Boop Spends for the "Personal Website" Space are as follows:
