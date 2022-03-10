@@ -2,7 +2,7 @@ Feature: Boops
   In order to equitably invoice for the costs incurred in providing co-owned digital infrastucture
   Operators want a way to account for costs of interactions/behaviors/etc.
 
-  Boops ("Bytes Or OperationS") serve as a cost-unit, similar to KW/h for electricity, that allow Space Owners to only
+  Boops ("Bytes Or OPerationS") serve as a cost-unit, similar to KW/h for electricity, that allow Space Owners to only
   pay for what they  actually use in the Convene Neighborhood.
 
   Cost for Boops is set by the Operators of the Convene Neighborhood, and the cost-in-boops for particular events is
