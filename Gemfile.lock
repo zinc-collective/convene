@@ -96,7 +96,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     ar_outer_joins (0.2.0)
       activerecord (>= 3.2)
-    bcrypt (3.1.16)
+    bcrypt (3.1.17)
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
@@ -323,7 +323,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_extended (~> 2.1)
-  bcrypt (~> 3.1.7)
+  bcrypt (~> 3.1.17)
   bootsnap (~> 1.11)
   cssbundling-rails
   dotenv-rails
