@@ -4,6 +4,7 @@ const Room = require("./Room");
 const applyCaseMiddleware = require("axios-case-converter").default;
 const Space = require("./Space");
 const AuthenticationMethod = require("./AuthenticationMethod");
+const SpaceMembership = require("./SpaceMembership");
 class Api {
   constructor(host, apiKey) {
     this.host = host;
@@ -44,7 +45,18 @@ class Api {
     return new Repository({
       client: this,
       endpoint: "/authentication_methods",
-      model: AuthenticationMethod
+      model: AuthenticationMethod,
+    });
+  }
+
+  /**
+   * @returns {Repository}
+   */
+  spaceMemberships() {
+    return new Repository({
+      client: this,
+      endpoint: "/space_memberships",
+      model: SpaceMembership,
     });
   }
 
@@ -111,4 +123,4 @@ class Repository {
     const data = response.data[camelCase(model.name)] || response.data;
     return new model(data);
   }
-}
+git}

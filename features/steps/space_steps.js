@@ -4,6 +4,9 @@ const { linkParameters, Actor, Space } = require("../lib");
 const appUrl = require("../lib/appUrl");
 const { Api } = require("../lib/Api");
 const AuthenticationMethod = require("../lib/AuthenticationMethod");
+const SpaceMembership = require("../lib/SpaceMembership");
+const crypto = require("crypto");
+
 
 Given("{a} {space}", function (_, space) {
   return this.api().spaces().create(space);
@@ -26,15 +29,25 @@ Given(
    * @returns
    */
   function (_, space, _, actor) {
+    this.testId = this.testId || crypto.randomUUID();
+    this.actors = this.actors || {};
+    this.actors[actor.email] = actor;
+    actor.email = `${this.testId}+${actor.email}`;
     const api = new Api(appUrl(), process.env.OPERATOR_API_KEY);
-    console.log({ space, actor })
-    return api.authenticationMethods()
-      .findOrCreateBy(new AuthenticationMethod({ contactMethod: 'email', contactLocation: actor.email }))
-      .then(
-        (authenticationMethod) =>
-          authenticationMethod.person
-      )
-      .then((person) => api.spaceMemberships.findOrCreateBy({ space, person }))
+    const toCreate = new AuthenticationMethod({
+      contactMethod: "email",
+      contactLocation: actor.email,
+    });
+
+    return api
+      .authenticationMethods()
+      .findOrCreateBy(toCreate)
+      .then((authenticationMethod) => authenticationMethod.person)
+      .then((person) =>
+        api
+          .spaceMemberships()
+          .findOrCreateBy(new SpaceMembership({ space, person }))
+      );
   }
 );
 

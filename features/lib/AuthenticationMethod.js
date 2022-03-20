@@ -1,8 +1,10 @@
 
 class AuthenticationMethod {
-  constructor({ contactMethod, contactLocation} ) {
+  constructor({ id, contactMethod, contactLocation, person }) {
+    this.id = id
     this.contactMethod = contactMethod
     this.contactLocation = contactLocation
+    this.person = person
   }
 
   asParams() {
