@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   after_action :verify_authorized
   after_action :verify_policy_scoped
+  before_action :prepend_theme_views
 
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found
   prepend_view_path 'app/utilities'
@@ -93,5 +94,11 @@ class ApplicationController < ActionController::Base
 
   def render_not_found
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+  end
+
+  def prepend_theme_views
+    if current_space.theme.present?
+      prepend_view_path "app/themes/#{current_space.theme}/"
+    end
   end
 end
