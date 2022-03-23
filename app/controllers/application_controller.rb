@@ -70,7 +70,12 @@ class ApplicationController < ActionController::Base
         authorize(space, :show?)
       end
   rescue ActiveRecord::RecordNotFound
-    @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
+    begin
+      @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
+    rescue ActiveRecord::RecordNotFound
+      Rails.logger.error("No default space exists!")
+      @current_space = nil
+    end
   end
 
   def space_repository
@@ -97,7 +102,7 @@ class ApplicationController < ActionController::Base
   end
 
   def prepend_theme_views
-    if current_space.theme.present?
+    if current_space&.theme.present?
       prepend_view_path "app/themes/#{current_space.theme}/"
     end
   end
