@@ -31,9 +31,6 @@ module ConveneWeb
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
-    # Allows us to place our views for pieces of furniture next to the furniture
-    config.paths['app/views'].unshift(Rails.root.join('app', 'lib', 'furniture'))
     config.session_store :cookie_store, expire_after: 7.days
 
     config.active_job.queue_adapter = :sidekiq
