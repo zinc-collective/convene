@@ -1,0 +1,5 @@
+<div>
+  <%= form.label attribute %>
+  <%= form.url_field attribute %>
+  <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
+</div>
