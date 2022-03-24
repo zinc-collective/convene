@@ -6,6 +6,15 @@ class SpacesController < ApplicationController
 
   def edit; end
 
+  def update
+     if space.update(space_params)
+      flash[:notice] = t('.success')
+      redirect_to edit_space_path(space)
+     else
+      render :edit
+     end
+  end
+
   def create
     @space = Space.new(space_params)
     skip_policy_scope
@@ -20,7 +29,7 @@ class SpacesController < ApplicationController
   end
 
   def space_params
-    params.require(:space).permit(:name, :slug)
+    params.require(:space).permit(:name, :slug, :theme)
   end
 
   helper_method def space
