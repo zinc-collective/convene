@@ -21,12 +21,14 @@
     label {
       @apply font-medium leading-5 text-neutral-700;
     }
-    input[type="text"],
+
     input[type="email"],
+    input[type="number"],
     input[type="password"],
     input[type="search"],
-    input[type="number"],
     input[type="tel"],
+    input[type="text"],
+    input[type="url"],
     select,
     textarea {
       @apply py-2 px-4
@@ -42,12 +44,13 @@
     }
 
     .field_with_errors {
-      input[type="text"],
       input[type="email"],
+      input[type="number"],
       input[type="password"],
       input[type="search"],
-      input[type="number"],
       input[type="tel"],
+      input[type="text"],
+      input[type="url"],
       select,
       textarea {
         @apply border-red-300 bg-red-100;

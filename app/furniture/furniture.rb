@@ -8,6 +8,7 @@ module Furniture
     payment_form: PaymentForm,
     markdown_text_block: MarkdownTextBlock,
     video_bridge: VideoBridge,
+    embedded_form: EmbeddedForm,
     # @todo Run a rake task to move all the placements with the type `videobridge_by_jitsi` to `video_bridge`
     videobridge_by_jitsi: VideoBridge
   }.freeze
