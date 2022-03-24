@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= page_title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "desert_dunes/styles", "data-turbo-track": "reload" %>
+  </head>
+
+  <body class="bg-amber-100">
+    <%= render "header" %>
+
+    <main class="bg-amber-200 bg-opacity-30 m-0 pr-1 pl-1">
+      <%= yield %>
+    </main>
+
+
+    <footer class="bg-amber-500 bg-opacity-30">
+      <%= render partial: "breadcrumbs" %>
+    </footer>
+  </body>
+</html>

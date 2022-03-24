@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   after_action :verify_authorized
   after_action :verify_policy_scoped
+  before_action :prepend_theme_views
 
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found
   prepend_view_path 'app/utilities'
@@ -69,7 +70,12 @@ class ApplicationController < ActionController::Base
         authorize(space, :show?)
       end
   rescue ActiveRecord::RecordNotFound
-    @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
+    begin
+      @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
+    rescue ActiveRecord::RecordNotFound
+      Rails.logger.error("No default space exists!")
+      @current_space = nil
+    end
   end
 
   def space_repository
@@ -93,5 +99,14 @@ class ApplicationController < ActionController::Base
 
   def render_not_found
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+  end
+
+  # Ensure the Theme views and partials are first in the View lookup path
+  # This allows us to override Application and Furniture views in favor of
+  # the theme specific ones.
+  def prepend_theme_views
+    return unless current_space&.theme.present?
+
+    prepend_view_path "app/themes/#{current_space.theme}/"
   end
 end
