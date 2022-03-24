@@ -3,7 +3,7 @@
 # Default controller for new resources; ensures requests fulfill authentication
 # and authorization requirements, as well as exposes common helper methods.
 class ApplicationController < ActionController::Base
-  include Pundit
+  include Pundit::Authorization
   after_action :verify_authorized
   after_action :verify_policy_scoped
   before_action :prepend_theme_views
