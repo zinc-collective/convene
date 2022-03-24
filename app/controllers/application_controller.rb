@@ -101,9 +101,12 @@ class ApplicationController < ActionController::Base
     render file: "#{Rails.root}/public/404.html", layout: false, status: 404
   end
 
+  # Ensure the Theme views and partials are first in the View lookup path
+  # This allows us to override Application and Furniture views in favor of
+  # the theme specific ones.
   def prepend_theme_views
-    if current_space&.theme.present?
-      prepend_view_path "app/themes/#{current_space.theme}/"
-    end
+    return unless current_space&.theme.present?
+
+    prepend_view_path "app/themes/#{current_space.theme}/"
   end
 end
