@@ -14,3 +14,9 @@ input[type=submit]:hover, button:hover, .button:hover {
   background-color: #ff9d00;
   filter: sepia(60%);
 }
+
+.flash-message.--notice {
+  color: black;
+  background-color: #ff9d00;
+  filter: saturate(50%);
+}
