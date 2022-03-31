@@ -1,0 +1,5 @@
+en:
+  spaces:
+    update:
+      success: Space successfully updated 🎉
+      error: "Something went wrong with the update: %{errors}"
