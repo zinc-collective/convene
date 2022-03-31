@@ -2,13 +2,14 @@
   .icon {
     display: inline-block;
     text-decoration: none;
+    @apply pr-2;
 
     &.--enter::before {
       content: "🚪";
     }
 
     &.--configure::before {
-      content: "⚙️ ";
+      content: "⚙️";
     }
 
     &.--add::before {
@@ -16,7 +17,7 @@
     }
 
     &.--destroy::before{
-      content: "🗑 ";
+      content: "🗑";
     }
 
     &.--lock::before {
