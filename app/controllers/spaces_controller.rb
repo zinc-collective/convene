@@ -10,10 +10,7 @@ class SpacesController < ApplicationController
     if space.update(space_params)
       flash[:notice] = t('.success')
     else
-      flash[:error] = t(
-        '.error',
-        errors: space.errors.full_messages.join(' ')
-      )
+      flash[:alert] = t('.error')
     end
     render :edit
   end

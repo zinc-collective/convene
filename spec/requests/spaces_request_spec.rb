@@ -68,7 +68,7 @@ RSpec.describe '/spaces/', type: :request do
         put space_path(space), params: { space: { theme: 'bogus_theme' } }
 
         expect(space.reload.theme).to eq('purple_mountains')
-        expect(flash[:error]).to include('went wrong')
+        expect(flash[:alert]).to include('went wrong')
       end
     end
   end
