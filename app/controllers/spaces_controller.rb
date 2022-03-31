@@ -7,16 +7,15 @@ class SpacesController < ApplicationController
   def edit; end
 
   def update
-     if space.update(space_params)
+    if space.update(space_params)
       flash[:notice] = t('.success')
-      redirect_to edit_space_path(space)
-     else
+    else
       flash[:error] = t(
         '.error',
         errors: space.errors.full_messages.join(' ')
       )
-      render :edit
-     end
+    end
+    render :edit
   end
 
   def create

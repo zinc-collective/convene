@@ -48,4 +48,28 @@ RSpec.describe '/spaces/', type: :request do
       end
     end
   end
+
+  describe 'PUT /space/:space_slug' do
+    context 'as a Space Member' do
+      let(:space) { create(:space, :with_members, theme: 'purple_mountains') }
+
+      before do
+        sign_in_as_member(space)
+      end
+
+      it 'updates the theme' do
+        put space_path(space), params: { space: { theme: 'desert_dunes' } }
+
+        expect(space.reload.theme).to eq('desert_dunes')
+        expect(flash[:notice]).to include('successfully updated')
+      end
+
+      it 'shows an error message with an invalid theme' do
+        put space_path(space), params: { space: { theme: 'bogus_theme' } }
+
+        expect(space.reload.theme).to eq('purple_mountains')
+        expect(flash[:error]).to include('went wrong')
+      end
+    end
+  end
 end

@@ -3,6 +3,8 @@
 # A Space is a collection of infrastructure resources
 # for collaboration
 class Space < ApplicationRecord
+  THEME_OPTIONS = ['purple_mountains', 'desert_dunes'].freeze
+
   # Which client owns the space
   belongs_to :client
 
@@ -20,6 +22,8 @@ class Space < ApplicationRecord
   # The URI-friendly name for the space
   attribute :slug, :string
   validates :slug, uniqueness: true
+
+  validates :theme, inclusion: { in: THEME_OPTIONS }, if: ->(s) { s.theme.present? }
 
   # FriendlyId's does the legwork to make the slug uri-friendly
   extend FriendlyId
