@@ -1,5 +1,16 @@
 <% breadcrumb :edit_space, space %>
 
+<fieldset>
+
+  <%= form_with(model: [space]) do |space_form| %>
+    <%= render "select",
+               attribute: :theme,
+               include_blank: false,
+               options: Space::THEME_OPTIONS.map { |t| [t.titleize, t] },
+               form: space_form %>
+    <%= space_form.submit %>
+  <%- end %>
+</fieldset>
 <%- if Feature.enabled?(:invitation) %>
   <fieldset class="new-invitation-form">
     <header>

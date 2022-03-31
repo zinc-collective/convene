@@ -14,4 +14,11 @@ module AuthHelpers
            one_time_password: authentication_method.one_time_password
          } })
   end
+
+  def sign_in_as_member(space)
+    member = space.members.first
+    raise ArgumentError "Couldn't find a member for space #{space.slug}" unless member.present?
+
+    sign_in(space, member)
+  end
 end
