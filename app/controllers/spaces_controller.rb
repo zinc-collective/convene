@@ -9,10 +9,11 @@ class SpacesController < ApplicationController
   def update
     if space.update(space_params)
       flash[:notice] = t('.success')
+      redirect_to space_path(space)
     else
       flash[:alert] = t('.error')
+      render :edit
     end
-    render :edit
   end
 
   def create
