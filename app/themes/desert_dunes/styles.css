@@ -5,3 +5,12 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+input[type=submit], button, .button {
+  background-color: #ff9d00;
+}
+
+input[type=submit]:hover, button:hover, .button:hover {
+  background-color: #ff9d00;
+  filter: sepia(60%);
+}
