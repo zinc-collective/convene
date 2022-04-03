@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # {People} can have multiple methods to authenticate, such as email addresses,
 # phone numbers, one-time passwords, etc.
 class AuthenticationMethod < ApplicationRecord
@@ -6,7 +8,9 @@ class AuthenticationMethod < ApplicationRecord
   attribute :contact_method, :string
   validates :contact_method, presence: true
   attribute :contact_location, :string
-  validates :contact_location, presence: true
+  validates :contact_location, presence: true,
+                               uniqueness: { case_sensitive: false,
+                                             scope: :contact_method }
 
   attribute :confirmed_at, :datetime
 

@@ -6,14 +6,33 @@ class AuthenticationMethodsController < ApplicationController
     skip_policy_scope
     authentication_method = AuthenticationMethod.new(authentication_method_params)
     authorize(authentication_method)
-    authentication_method.save!
+    if authentication_method.save
+      render json: authentication_method_as_json(authentication_method)
+    else
+      render json: render_errors(authentication_method), status: :unprocessable_entity
+    end
+  end
 
-    render json: {
-      id: authentication_method.id,
-      contact_method: authentication_method.contact_method,
-      contact_location: authentication_method.contact_location,
-      person: {
-        id: authentication_method.person.id
+  private def render_errors(model)
+    {
+      errors: [{
+        title: t('.failure'),
+        detail: model.errors.full_messages.join('.')
+      }]
+    }
+  end
+
+  # @todo Maybe we want to try?
+  #       http://jsonapi-rb.org/guides/serialization/defining.html
+  private def authentication_method_as_json(authentication_method)
+    {
+      authentication_method: {
+        id: authentication_method.id,
+        contact_method: authentication_method.contact_method,
+        contact_location: authentication_method.contact_location,
+        person: {
+          id: authentication_method.person.id
+        }
       }
     }
   end
