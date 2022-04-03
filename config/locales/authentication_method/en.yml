@@ -1,4 +1,4 @@
 en:
   authentication_methods:
     create:
-      failure: "Authentication Method could not be saved"
+      failure: "Authentication Method could not be saved. 🙀"

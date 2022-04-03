@@ -42,12 +42,16 @@ RSpec.describe '/authentication_methods/', type: :request do
              as: :json
 
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(json_response[:errors]).to eq(
-          [{
-            title: I18n.t('authentication_methods.create.failure'),
-            detail: 'Contact location has already been taken'
-          }]
-        )
+
+        expected_error = ActiveModel::Error.new(AuthenticationMethod.new, :contact_location, :taken)
+
+        expect(json_response[:errors])
+          .to include({
+                        code: expected_error.type.to_s,
+                        title: expected_error.full_message,
+                        detail: expected_error.message,
+                        source: { pointer: '/authentication_method/contact_location' }
+                      })
       end
 
       def json_response
