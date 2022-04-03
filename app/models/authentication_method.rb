@@ -20,6 +20,8 @@ class AuthenticationMethod < ApplicationRecord
     self.one_time_password_secret ||= ROTP::Base32.random
   end
 
+  # @todo This is dangerous because we're creating people incidentally
+  #       instead of intentionally...
   def set_person
     self.person ||= Person.find_or_create_by(email: contact_location)
   end
