@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "@cucumber/cucumber": "^7.3.2",
+    "@cucumber/cucumber": "^8.0.0",
     "@cucumber/pretty-formatter": "^1.0.0-alpha.2",
     "axios": "^0.26.1",
     "fs-extra": "^10.0.1",
