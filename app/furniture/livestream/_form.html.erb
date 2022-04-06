@@ -1,0 +1,6 @@
+<%= form.fields_for(:furniture) do |furniture_fields| %>
+  <%= render "text_field", form: furniture_fields, attribute: :channel %>
+  <%= render "select", form: furniture_fields, attribute: :layout, options: ['video', 'video_with_chat'], include_blank: false %>
+
+  <%= render "select", form: furniture_fields, attribute: :provider, options: ['twitch'], include_blank: false %>
+<%- end %>
