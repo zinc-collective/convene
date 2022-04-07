@@ -25,9 +25,11 @@
   ul,
   ol,
   blockquote {
-    // We use margin on the _bottom_ of non-heading blocks of text to give
-    // space to breathe at a break; while ensuring they don't "float away" from
-    // whatever heading they fall under
+    /*
+    / We use margin on the _bottom_ of non-heading blocks of text to give
+    / space to breathe at a break; while ensuring they don't "float away" from
+    / whatever heading they fall under
+    */
     @apply mb-2;
 
     &:last-of-type {
