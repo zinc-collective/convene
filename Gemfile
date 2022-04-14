@@ -42,6 +42,8 @@ gem 'gretel',  '~> 4.4'
 # Postgres extensions for ActiveRecord
 # @see https://github.com/GeorgeKaraszi/ActiveRecordExtended
 gem 'active_record_extended', '~> 2.1'
+# Support for models with "slots" or "positions"
+gem 'ranked-model', '~> 0.4.8'
 # Slug-based model lookup
 gem 'friendly_id', '~> 5.4.2'
 # Hashing / Encrypting data at rest
