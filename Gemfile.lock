@@ -248,6 +248,8 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    ranked-model (0.4.8)
+      activerecord (>= 4.2)
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -342,6 +344,7 @@ DEPENDENCIES
   pundit (~> 2.2)
   rails (~> 7.0)
   rails-controller-testing
+  ranked-model (~> 0.4.8)
   redcarpet (~> 3.5)
   rotp (~> 6.2)
   rspec-rails!
