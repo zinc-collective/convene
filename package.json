@@ -31,6 +31,7 @@
     "@cucumber/cucumber": "^8.0.0",
     "@cucumber/pretty-formatter": "^1.0.0-alpha.2",
     "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
     "fs-extra": "^10.0.1",
     "geckodriver": "^3.0.1",
     "get-urls": "^10.0.1",
