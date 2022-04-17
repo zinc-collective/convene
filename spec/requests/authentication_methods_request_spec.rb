@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe '/authentication_methods/', type: :request do
-  include ActiveJob::TestHelper
-
   describe 'POST /authentication_methods/' do
     context 'as an Operator using the API' do
       it 'creates an AuthenticationMethod' do
