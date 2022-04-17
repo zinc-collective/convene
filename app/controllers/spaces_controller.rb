@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Exposes CRUD actions on the {Space} model.
+# Exposes CRUD actions for {Space} Resources.
 class SpacesController < ApplicationController
   def show; end
 
