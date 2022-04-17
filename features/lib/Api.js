@@ -1,10 +1,10 @@
 const axios = require("axios");
-const { camelCase } = require("change-case");
-const Room = require("./Room");
 const applyCaseMiddleware = require("axios-case-converter").default;
 const Space = require("./Space");
+const Room = require("./Room");
 const AuthenticationMethod = require("./AuthenticationMethod");
 const SpaceMembership = require("./SpaceMembership");
+const { camelCase } = require("lodash");
 class Api {
   constructor(host, apiKey) {
     this.host = host;

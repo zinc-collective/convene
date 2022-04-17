@@ -2,7 +2,7 @@ Feature: Spaces: Invitations
   Invitations allow Space Owners to bring additional people into the Space
 
   Background:
-    Given a "System Test" Space
+    Given a fresh "System Test" Space
     And the "System Test" Space has a Space Owner "space-owner@example.com"
 
   @built @andromeda
