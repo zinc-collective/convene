@@ -1,3 +1,4 @@
+require('dotenv').config()
 const fse = require('fs-extra');
 const { setWorldConstructor, BeforeAll, AfterAll, After, setDefaultTimeout, Status } = require('@cucumber/cucumber');
 
