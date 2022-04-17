@@ -5,12 +5,6 @@ require 'rails_helper'
 RSpec.describe '/spaces/', type: :request do
   include ActiveJob::TestHelper
 
-  def authorization_headers(token)
-    {
-      'HTTP_AUTHORIZATION' =>
-        ActionController::HttpAuthentication::Token.encode_credentials(token)
-    }
-  end
   describe 'DELETE /spaces/:space_slug/' do
     context 'as an Operator using the API' do
       it "deletes the space and all it's other bits" do
@@ -18,7 +12,7 @@ RSpec.describe '/spaces/', type: :request do
 
         space = Space.find_by(slug: 'system-test')
         delete space_path(space),
-               headers: authorization_headers(ENV['OPERATOR_API_KEY']),
+               headers: authorization_headers,
                as: :json
 
         perform_enqueued_jobs

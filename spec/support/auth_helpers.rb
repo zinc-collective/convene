@@ -21,4 +21,11 @@ module AuthHelpers
 
     sign_in(space, member)
   end
+
+  def authorization_headers(token = ENV['OPERATOR_API_KEY'])
+    {
+      'HTTP_AUTHORIZATION' =>
+        ActionController::HttpAuthentication::Token.encode_credentials(token)
+    }
+  end
 end

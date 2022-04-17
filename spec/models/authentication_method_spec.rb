@@ -13,17 +13,21 @@ RSpec.describe AuthenticationMethod, type: :model do
 
   describe '#contact_location' do
     it { is_expected.to validate_presence_of(:contact_location) }
+    it do
+      is_expected.to validate_uniqueness_of(:contact_location)
+        .case_insensitive.scoped_to(:contact_method)
+    end
   end
 
   describe '#verify?(one_time_password)' do
-    it 'is true when the OTP is fresh' do
+    it 'returns true when a valid, fresh OTP is used' do
       authentication_method.last_one_time_password_at = Time.now
       one_time_password = authentication_method.one_time_password
 
       expect(authentication_method.verify?(one_time_password)).to be_truthy
     end
 
-    it 'is false when the OTP is stale' do
+    it 'returns false when the OTP is stale' do
       authentication_method.last_one_time_password_at = 3.hours.ago
       one_time_password = authentication_method.one_time_password
 
