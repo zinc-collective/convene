@@ -32,7 +32,7 @@
     "@cucumber/pretty-formatter": "^1.0.0-alpha.2",
     "axios": "^0.26.1",
     "dotenv": "^16.0.0",
-    "fs-extra": "^10.0.1",
+    "fs-extra": "^10.1.0",
     "geckodriver": "^3.0.1",
     "get-urls": "^10.0.1",
     "lodash": "^4.17.21",
