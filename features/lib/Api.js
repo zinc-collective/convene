@@ -18,7 +18,11 @@ class Api {
   }
 
   post(path, model) {
-    return this.axios.post(path, model)
+    return this.axios.post(path, model).catch(function (error) {
+      console.error(`Can't POST to ${path}`);
+      console.error(model);
+      throw error;
+    });
   }
 }
 exports.Api = Api;

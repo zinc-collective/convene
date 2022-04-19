@@ -61,4 +61,13 @@ class Space < ApplicationRecord
 
     Utilities.from_utility_hookup(jitsi_hookup).meet_domain
   end
+
+  attr_accessor :blueprint
+  after_create :apply_blueprint, if: -> { blueprint.present? }
+
+  def apply_blueprint
+    blueprint = @blueprint
+    @blueprint = nil
+    Blueprint.new(client: { name: client.name, space: Blueprint::BLUEPRINTS[blueprint] }, space: self).find_or_create!
+  end
 end
