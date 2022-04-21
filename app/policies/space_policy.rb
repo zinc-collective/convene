@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SpacePolicy < ApplicationPolicy
   alias space object
 
@@ -17,7 +19,12 @@ class SpacePolicy < ApplicationPolicy
   def destroy?
     person.operator?
   end
+
   alias create? destroy?
+
+  def permit(params)
+    params.require(:space).permit(:name, :slug, :theme, :blueprint, client_attributes: [:name])
+  end
 
   class Scope < ApplicationScope
     def resolve

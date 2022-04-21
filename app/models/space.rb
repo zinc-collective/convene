@@ -3,10 +3,12 @@
 # A Space is a collection of infrastructure resources
 # for collaboration
 class Space < ApplicationRecord
-  THEME_OPTIONS = ['purple_mountains', 'desert_dunes'].freeze
+  THEME_OPTIONS = %w[purple_mountains desert_dunes].freeze
 
   # Which client owns the space
   belongs_to :client
+
+  accepts_nested_attributes_for :client
 
   # The fully-qualified domain to enter the space.
   # Spaces without a branded_domain are still accessible via their slug.
@@ -60,5 +62,15 @@ class Space < ApplicationRecord
     return if jitsi_hookup.blank?
 
     Utilities.from_utility_hookup(jitsi_hookup).meet_domain
+  end
+
+  def self.find_or_create_from_blueprint!(space_attributes)
+    blueprint_name = space_attributes.delete(:blueprint)
+    create_with(space_attributes).find_or_create_by!(name: space_attributes[:name]).tap do |space|
+      Blueprint.new(
+        client: { name: space.client.name, space: Blueprint::BLUEPRINTS[blueprint_name] },
+        space: space
+      ).find_or_create!
+    end
   end
 end

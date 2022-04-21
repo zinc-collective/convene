@@ -17,12 +17,15 @@ class SpacesController < ApplicationController
   end
 
   def create
-    @space = Space.new(space_params)
     skip_policy_scope
-    authorize(@space)
-    Blueprint.new(client:
-      { name: space_params[:name],
-        space: SystemTestSpace::DEFAULT_SPACE_CONFIG.merge(space_params).with_indifferent_access }).find_or_create!
+    authorize(Client)
+    authorize(Space)
+
+    if space_params[:blueprint].present?
+      Space.find_or_create_from_blueprint!(space_params)
+    else
+      Space.create_with(space_params).find_or_create_by!(name: space_params[:name])
+    end
   end
 
   def destroy
@@ -30,7 +33,7 @@ class SpacesController < ApplicationController
   end
 
   def space_params
-    params.require(:space).permit(:name, :slug, :theme)
+    policy(Space).permit(params)
   end
 
   helper_method def space

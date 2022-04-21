@@ -28,10 +28,23 @@ RSpec.describe '/spaces/', type: :request do
 
   describe 'POST /spaces/' do
     context 'as an Operator using the API' do
+      it 'creates a space' do
+        name = "System Test #{SecureRandom.hex(4)}"
+        post spaces_path,
+             params: { space: { name: name, client_attributes: { name: name } } },
+             headers: authorization_headers(ENV['OPERATOR_API_KEY']),
+             as: :json
+
+        space = Space.find_by(name: name)
+        expect(space.rooms).to be_empty
+        expect(space.space_memberships).to be_empty
+        expect(space.utility_hookups).to be_empty
+      end
+
       it 'creates the space from the given blueprint' do
         name = "System Test #{SecureRandom.hex(4)}"
         post spaces_path,
-             params: { blueprint: :system_test, space: { name: name } },
+             params: { space: { name: name, blueprint: :system_test, client_attributes: { name: name } } },
              headers: authorization_headers(ENV['OPERATOR_API_KEY']),
              as: :json
 

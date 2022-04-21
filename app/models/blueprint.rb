@@ -55,7 +55,9 @@ class Blueprint
   end
 
   def set_entrance
-    space.update!(entrance: space.rooms.find_by!(slug: space_attributes[:entrance])) if space_attributes[:entrance]
+    if space_attributes[:entrance]
+      space.update!(entrance: space.rooms.find_by!(slug: space_attributes[:entrance]))
+    end
   end
 
   def set_members
@@ -72,7 +74,7 @@ class Blueprint
   end
 
   def space
-    @space ||= client.spaces.find_or_create_by!(name: space_attributes[:name])
+    @space ||= attributes[:space] || client.spaces.find_or_create_by!(name: space_attributes[:name])
   end
 
   def client
@@ -101,6 +103,77 @@ class Blueprint
 
     left.with_indifferent_access.merge(right.with_indifferent_access)
   end
+
+  BLUEPRINTS = {
+    system_test: {
+
+      entrance: 'entrance-hall',
+      utility_hookups: [
+        { utility_slug: :plaid, name: 'Plaid', configuration: { client_id: 'set-me', secret: 'and-me', environment: 'sandbox' } },
+        { utility_slug: :jitsi, name: 'Jitsi', configuration:
+          { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
+      ],
+      members: [{ email: 'space-owner@example.com' },
+                { email: 'space-member@example.com' }],
+      rooms: [
+        {
+          name: 'Listed Room 1',
+          publicity_level: :listed,
+          access_level: :unlocked,
+          access_code: nil,
+          furniture_placements: {
+            markdown_text_block: { content: '# Welcome!' },
+            video_bridge: {},
+            breakout_tables_by_jitsi: { names: %w[engineering design ops] }
+          }
+        },
+        {
+          name: 'Listed Room 2',
+          publicity_level: :listed,
+          access_level: :unlocked,
+          access_code: nil,
+          furniture_placements: {
+            video_bridge: {}
+          }
+        },
+        {
+          name: 'Listed Locked Room 1',
+          publicity_level: :listed,
+          access_level: :locked,
+          access_code: :secret,
+          furniture_placements: {
+            video_bridge: {}
+          }
+        },
+        {
+          name: 'Unlisted Room 1',
+          publicity_level: :unlisted,
+          access_level: :unlocked,
+          access_code: nil,
+          furniture_placements: {
+            video_bridge: {}
+          }
+        },
+        {
+          name: 'Unlisted Room 2',
+          publicity_level: :unlisted,
+          access_level: :unlocked,
+          access_code: nil,
+          furniture_placements: {
+            video_bridge: {}
+          }
+        },
+        {
+          name: 'Entrance Hall',
+          publicity_level: :unlisted,
+          furniture_placements: {
+            markdown_text_block: { content: '# Wooo!' }
+          }
+
+        }
+      ]
+    }
+  }.with_indifferent_access
 
   # @todo migrate this to a private configuration file!
   CLIENTS = [{
