@@ -18,13 +18,14 @@ class SpacesController < ApplicationController
 
   def create
     skip_policy_scope
-    client = authorize(Client.find_or_create_by(name: space_params[:name]))
+    authorize(Client)
     authorize(Space)
-    @space = if space_params[:blueprint].present?
-               Space.find_or_create_from_blueprint!(space_params.merge(client: client))
-             else
-               Space.create_with(space_params.merge(client: client)).find_or_create_by!(name: space_params[:name])
-             end
+
+    if space_params[:blueprint].present?
+      Space.find_or_create_from_blueprint!(space_params)
+    else
+      Space.create_with(space_params).find_or_create_by!(name: space_params[:name])
+    end
   end
 
   def destroy

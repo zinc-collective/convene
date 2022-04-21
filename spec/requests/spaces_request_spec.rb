@@ -31,7 +31,7 @@ RSpec.describe '/spaces/', type: :request do
       it 'creates a space' do
         name = "System Test #{SecureRandom.hex(4)}"
         post spaces_path,
-             params: { space: { name: name } },
+             params: { space: { name: name, client_attributes: { name: name } } },
              headers: authorization_headers(ENV['OPERATOR_API_KEY']),
              as: :json
 
@@ -44,7 +44,7 @@ RSpec.describe '/spaces/', type: :request do
       it 'creates the space from the given blueprint' do
         name = "System Test #{SecureRandom.hex(4)}"
         post spaces_path,
-             params: { space: { name: name, blueprint: :system_test } },
+             params: { space: { name: name, blueprint: :system_test, client_attributes: { name: name } } },
              headers: authorization_headers(ENV['OPERATOR_API_KEY']),
              as: :json
 
