@@ -92,10 +92,10 @@
   dependencies:
     regexp-match-indices "1.0.2"
 
-"@cucumber/cucumber@^8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-8.1.1.tgz#c36575361dc5fb174b1b22d0fe803f346de22d9c"
-  integrity sha512-yvL/LG6ti28Untjvw0d4EEIihJqQmijDuwO3evZbtUbe5F9dHyfZaAyNdxGMJVz0BtzZAYjotNkPkfG3+POE6A==
+"@cucumber/cucumber@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-8.1.2.tgz#591696d350cfce95e936264711d8cbfa0cd5ebf5"
+  integrity sha512-HaAkGa40P8YNCkT6D4hVNFdvTHL3eIJbZmvPI9XKszQA+A7tkBxKjHva8esI4dfdLeZuq5ksNkyjEiHobPxfIA==
   dependencies:
     "@cspotcode/source-map-support" "^0.7.0"
     "@cucumber/ci-environment" "9.0.4"
