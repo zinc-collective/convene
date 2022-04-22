@@ -1,10 +1,60 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'swagger_helper'
 
 RSpec.describe '/spaces/', type: :request do
   include ActiveJob::TestHelper
 
+  path '/spaces' do
+    include ApiHelpers::Path
+
+    post 'Creates a Space' do
+      tags 'Spaces'
+      consumes 'application/json'
+      produces 'application/json'
+
+      security [api_key: []]
+      parameter name: :body, in: :body, schema: {
+        type: :object,
+        properties: {
+          space: {
+            type: :object,
+            properties: {
+              name: { type: :string, example: 'A Cool Book Club for Cool Folks' },
+              blueprint: { type: :string, optional: true, example: 'book_club' }
+            },
+            required: ['name']
+          }
+        },
+        required: ['space']
+      }
+
+      let(:api_key) { ENV['OPERATOR_API_KEY'] }
+      let(:Authorization) { encode_authorization_token(api_key) }
+      let(:body) { { space: attributes } }
+      response '201', 'space created' do
+        let(:attributes) { attributes_for(:space, :with_client_attributes) }
+        run_test! do |_response|
+          space = Space.find_by(name: attributes[:name])
+          expect(space.rooms).to be_empty
+          expect(space.space_memberships).to be_empty
+          expect(space.utility_hookups).to be_empty
+        end
+      end
+
+      context 'with a blueprint' do
+        let(:attributes) { attributes_for(:space, :with_client_attributes, blueprint: :system_test) }
+        response '201', 'space created from the blueprint' do
+          run_test! do |_response|
+            space = Space.find_by(name: attributes[:name])
+            expect(space.rooms).not_to be_empty
+            expect(space.space_memberships).not_to be_empty
+            expect(space.utility_hookups).not_to be_empty
+          end
+        end
+      end
+    end
+  end
   describe 'DELETE /spaces/:space_slug/' do
     context 'as an Operator using the API' do
       it "deletes the space and all it's other bits" do
@@ -22,36 +72,6 @@ RSpec.describe '/spaces/', type: :request do
         expect(space.items).to be_empty
         expect(space.invitations).to be_empty
         expect(space.space_memberships).to be_empty
-      end
-    end
-  end
-
-  describe 'POST /spaces/' do
-    context 'as an Operator using the API' do
-      it 'creates a space' do
-        name = "System Test #{SecureRandom.hex(4)}"
-        post spaces_path,
-             params: { space: { name: name, client_attributes: { name: name } } },
-             headers: authorization_headers(ENV['OPERATOR_API_KEY']),
-             as: :json
-
-        space = Space.find_by(name: name)
-        expect(space.rooms).to be_empty
-        expect(space.space_memberships).to be_empty
-        expect(space.utility_hookups).to be_empty
-      end
-
-      it 'creates the space from the given blueprint' do
-        name = "System Test #{SecureRandom.hex(4)}"
-        post spaces_path,
-             params: { space: { name: name, blueprint: :system_test, client_attributes: { name: name } } },
-             headers: authorization_headers(ENV['OPERATOR_API_KEY']),
-             as: :json
-
-        space = Space.find_by(name: name)
-        expect(space.rooms).not_to be_empty
-        expect(space.space_memberships).not_to be_empty
-        expect(space.utility_hookups).not_to be_empty
       end
     end
   end

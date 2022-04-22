@@ -21,6 +21,7 @@ class SpacesController < ApplicationController
     authorize(Client)
     authorize(Space)
     Space::Factory.create(space_params)
+    head :created
   end
 
   def destroy

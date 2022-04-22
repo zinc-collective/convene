@@ -24,8 +24,15 @@ module AuthHelpers
 
   def authorization_headers(token = ENV['OPERATOR_API_KEY'])
     {
-      'HTTP_AUTHORIZATION' =>
-        ActionController::HttpAuthentication::Token.encode_credentials(token)
+      'HTTP_AUTHORIZATION' => encode_authorization_token(token)
     }
+  end
+
+  def encode_authorization_token(token = ENV['OPERATOR_API_KEY'])
+    ActionController::HttpAuthentication::Token.encode_credentials(token)
+  end
+
+  def response_data(response)
+    JSON.parse(response.body, symbolize_names: true)
   end
 end

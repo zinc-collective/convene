@@ -1,4 +1,4 @@
-class BrandedDomain
+class BrandedDomainConstraint
   attr_accessor :space_repository
 
   def initialize(space_repository)
