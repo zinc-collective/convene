@@ -4,9 +4,14 @@ FactoryBot.define do
   factory :space do
     client
     name { FFaker::CheesyLingo.title }
+    slug { name.gsub(' ', '_').downcase.dasherize }
 
     trait :default do
       slug { Neighborhood.config.default_space_slug }
+    end
+
+    trait :with_client_attributes do
+      client_attributes { attributes_for(:client) }
     end
 
     trait :with_members do
