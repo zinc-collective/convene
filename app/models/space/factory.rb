@@ -4,7 +4,7 @@ class Space::Factory
   def self.create(space_attributes)
     blueprint_name = space_attributes.delete(:blueprint)
     space = Space.create_with(space_attributes)
-                 .find_or_create_by!(name: space_attributes[:name])
+                 .find_or_create_by(name: space_attributes[:name])
 
     if blueprint_name.present?
       Blueprint.new(

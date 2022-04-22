@@ -1,18 +1,12 @@
-# @todo Maybe we want to try?
-# http://jsonapi-rb.org/guides/serialization/defining.html
-class AuthenticationMethod::Serializer
-  # @return [AuthenticatioMethod]
-  attr_accessor :authentication_method
+# frozen_string_literal: true
 
-  def initialize(authentication_method)
-    @authentication_method = authentication_method
-  end
+# Serializes {AuthenticationMethod}s for programmatic consumption
+class AuthenticationMethod::Serializer < ApplicationSerializer
+  # @return [AuthenticationMethod]
+  alias authentication_method resource
 
-  # @todo make this even more like JSON API?
-  #       https://jsonapi.org/format/1.1/#fetching-resources-responses
-  def to_json
-    {
-      errors: authentication_method.errors.map(&method(:error_json)),
+  def to_json(*_args)
+    super.merge(
       authentication_method: {
         id: authentication_method.id,
         contact_method: authentication_method.contact_method,
@@ -21,17 +15,6 @@ class AuthenticationMethod::Serializer
           id: authentication_method.person.id
         }
       }
-    }
-  end
-
-  private def error_json(error)
-    {
-      code: error.type,
-      title: error.full_message,
-      detail: error.message,
-      source: {
-        pointer: "/#{error.base.model_name.param_key}/#{error.attribute}"
-      }
-    }
+    )
   end
 end

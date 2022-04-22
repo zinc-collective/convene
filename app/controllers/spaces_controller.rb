@@ -20,8 +20,14 @@ class SpacesController < ApplicationController
     skip_policy_scope
     authorize(Client)
     authorize(Space)
-    Space::Factory.create(space_params)
-    head :created
+
+    space = Space::Factory.create(space_params)
+
+    if space.persisted?
+      render json: Space::Serializer.new(space).to_json, status: :created
+    else
+      render json: Space::Serializer.new(space).to_json, status: :unprocessable_entity
+    end
   end
 
   def destroy
