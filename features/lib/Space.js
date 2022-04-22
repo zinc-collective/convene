@@ -1,10 +1,15 @@
 
 class Space {
-  constructor(spaceName) {
-    this.name = spaceName;
-    this.slug = spaceName.replace(/\s+/g, '-').toLowerCase();
-    this.blueprint = 'system_test'
-    this.client_attributes = { name: spaceName };
+  constructor({ name, slug, id }) {
+    this.name = name;
+    this.slug = slug || name.replace(/\s+/g, '-').toLowerCase();
+    this.id = id;
+  }
+
+  asParams() {
+    return {
+      space: { name: this.name, slug: this.slug, blueprint: 'system_test', clientAttributes: { name: this.name } }
+    }
   }
 }
 

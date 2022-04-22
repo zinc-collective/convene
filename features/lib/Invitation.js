@@ -1,4 +1,5 @@
 const getUrls = require("get-urls");
+const { last } = require("lodash");
 const { ThenableWebDriver } = require("selenium-webdriver");
 const InvitationResponsePage = require("../harness/InvitationResponsePage");
 
@@ -33,7 +34,7 @@ class Invitation {
    * @returns {Promise<MailServerEmail>}
    */
   latestDelivery() {
-    return this.emails().then((emails) => emails[0]);
+    return this.emails().then(last);
   }
 
   /**

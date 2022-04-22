@@ -5,19 +5,9 @@ const appUrl = require("../lib/appUrl");
 const { Api } = require("../lib/Api");
 
 Given("{a} {space}", function (_, space) {
-  return true;
-});
-
-Given("{a} fresh {space}", function (_, space) {
   const api = new Api(appUrl(), process.env.OPERATOR_API_KEY);
 
   return api.spaces().create(space);
-});
-
-Given("a Space with a Room", function () {
-  // This space intentionally left blank... For now...
-  // TODO: Create a Space for each test instead of re-using the
-  //       System Test Space
 });
 
 Given("{a} {space} has {a} {actor}", function (_, space, _, actor) {

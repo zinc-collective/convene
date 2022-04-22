@@ -1,4 +1,5 @@
 require('dotenv').config()
+const crypto = require("crypto");
 const fse = require('fs-extra');
 const { setWorldConstructor, BeforeAll, AfterAll, After, setDefaultTimeout, Status } = require('@cucumber/cucumber');
 
@@ -13,6 +14,10 @@ let driver;
 class CustomWorld {
   constructor() {
     this.driver = driver;
+  }
+
+  testId() {
+    return this._testId = this._testId || crypto.randomUUID();
   }
 }
 
