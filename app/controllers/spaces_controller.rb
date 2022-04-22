@@ -20,12 +20,7 @@ class SpacesController < ApplicationController
     skip_policy_scope
     authorize(Client)
     authorize(Space)
-
-    if space_params[:blueprint].present?
-      Space.find_or_create_from_blueprint!(space_params)
-    else
-      Space.create_with(space_params).find_or_create_by!(name: space_params[:name])
-    end
+    Space::Factory.create(space_params)
   end
 
   def destroy

@@ -63,14 +63,4 @@ class Space < ApplicationRecord
 
     Utilities.from_utility_hookup(jitsi_hookup).meet_domain
   end
-
-  def self.find_or_create_from_blueprint!(space_attributes)
-    blueprint_name = space_attributes.delete(:blueprint)
-    create_with(space_attributes).find_or_create_by!(name: space_attributes[:name]).tap do |space|
-      Blueprint.new(
-        client: { name: space.client.name, space: Blueprint::BLUEPRINTS[blueprint_name] },
-        space: space
-      ).find_or_create!
-    end
-  end
 end
