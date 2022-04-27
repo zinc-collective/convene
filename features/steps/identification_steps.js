@@ -9,7 +9,7 @@ Given(
   "an unauthenticated {actor} has requested to be identified via Email",
   async function (actor) {
     this.actor = actor;
-    const space = new Space("System Test");
+    const space = new Space({ name: "System Test" });
     const signInPage = await new SignInPage(this.driver, space).visit();
     return signInPage.submitEmail(actor.email);
   }
@@ -19,7 +19,7 @@ Given("a {actor} Authenticated Session",
 /** @param {Actor} actor */
 function (actor) {
   this.actor = actor;
-  const space = new Space("System Test");
+  const space = new Space({ name: "System Test" });
   return this.actor.signIn(this.driver, space)
 });
 

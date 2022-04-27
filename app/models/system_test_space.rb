@@ -3,6 +3,7 @@
 # A Space that's accessible at both a branded domain and `/spaces/system-test/`:
 #  - http://system-test.zinc.local
 #  - http://localhost:3000/spaces/system-test/
+# @deprecated use blueprints instead when possible
 class SystemTestSpace
   # Creates the system test space on environments that include it by default,
   # such as review apps, test, and local dev environments.
