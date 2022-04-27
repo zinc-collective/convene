@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { camelCase } = require('change-case');
+const { camelCase } = require("change-case");
 const applyCaseMiddleware = require("axios-case-converter").default;
 const Space = require("./Space");
 class Api {
@@ -48,7 +48,7 @@ class Repository {
     return this.client.post(this.endpoint, data).then(function (response) {
       const data = response.data[camelCase(model.name)] || response.data;
       return new model(data);
-    })
+    });
   }
 
   findOrCreateBy(data) {
