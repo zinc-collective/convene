@@ -8,7 +8,7 @@ class AuthenticationMethodsController < ApplicationController
     authentication_method = AuthenticationMethod.new(authentication_method_params)
     authorize(authentication_method)
     if authentication_method.save
-      render json: AuthenticationMethod::Serializer.new(authentication_method).to_json
+      render json: AuthenticationMethod::Serializer.new(authentication_method).to_json, status: :created
     else
       render json: AuthenticationMethod::Serializer.new(authentication_method).to_json, status: :unprocessable_entity
     end

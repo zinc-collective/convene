@@ -1,59 +1,74 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'swagger_helper'
 
 RSpec.describe '/authentication_methods/', type: :request do
-  describe 'POST /authentication_methods/' do
-    context 'as an Operator using the API' do
-      it 'creates an AuthenticationMethod' do
-        person = create(:person)
-        params = attributes_for(:authentication_method, person: person)
-        post authentication_methods_path,
-             params: { authentication_method: params },
-             headers: authorization_headers,
-             as: :json
+  path '/authentication_methods' do
+    include ApiHelpers::Path
 
-        authentication_method = AuthenticationMethod.find_by!(
-          params.slice(:contact_method, :contact_location)
-        )
+    post 'Creates an AuthenticationMethod' do
+      tags 'AuthenticationMethod'
+      produces 'application/json'
+      consumes 'application/json'
+      security [api_key: []]
 
-        expect(authentication_method).to be_present
-        expect(authentication_method.person).to be_present
-        expect(authentication_method.person).to eq(person)
+      parameter name: :body, in: :body, schema: {
+        type: :object,
+        properties: {
+          authentication_method: {
+            type: :object,
+            properties: {
+              contact_method: { type: :string, example: 'email' },
+              contact_location: { type: :string, example: 'your-email@example.com' }
+            },
+            required: %w[contact_method contact_location]
+          }
+        },
+        required: ['authentication_method']
+      }
+      let(:person) { create(:person) }
+      let(:api_key) { ENV['OPERATOR_API_KEY'] }
+      let(:Authorization) { encode_authorization_token(api_key) }
+      let(:body) { { authentication_method: attributes } }
 
-        expect(json_response[:authentication_method])
-          .to eq({ id: authentication_method.id,
-                   contact_method: params[:contact_method].to_s,
-                   contact_location: params[:contact_location],
-                   person: { id: person.id } })
+      response '201', 'authentication method created' do
+        let(:attributes) { attributes_for(:authentication_method, person: person) }
+
+        run_test! do |response|
+          data = response_data(response)
+
+          authentication_method = AuthenticationMethod.find(data[:authentication_method][:id])
+          expect(authentication_method).to be_present
+          expect(authentication_method.person).to be_present
+          expect(authentication_method.person).to eq(person)
+
+          expect(data[:authentication_method])
+            .to eq(id: authentication_method.id,
+                   contact_method: attributes[:contact_method].to_s,
+                   contact_location: attributes[:contact_location],
+                   person: { id: person.id })
+        end
       end
+      response '422', 'authentication method invalid' do
+        let(:existing_authentication_method) { create(:authentication_method) }
+        let(:attributes) do
+          {
+            contact_method: existing_authentication_method.contact_method,
+            contact_location: existing_authentication_method.contact_location
+          }
+        end
 
-      it 'returns validation errors when the authentication method cannot be saved' do
-        existing_authentication_method = create(:authentication_method)
+        run_test! do |response|
+          expected_error = ActiveModel::Error.new(AuthenticationMethod.new, :contact_location, :taken)
 
-        post authentication_methods_path,
-             params: { authentication_method: {
-               contact_method: existing_authentication_method.contact_method,
-               contact_location: existing_authentication_method.contact_location
-             } },
-             headers: authorization_headers,
-             as: :json
-
-        expect(response).to have_http_status(:unprocessable_entity)
-
-        expected_error = ActiveModel::Error.new(AuthenticationMethod.new, :contact_location, :taken)
-
-        expect(json_response[:errors])
-          .to include({
-                        code: expected_error.type.to_s,
-                        title: expected_error.full_message,
-                        detail: expected_error.message,
-                        source: { pointer: '/authentication_method/contact_location' }
-                      })
-      end
-
-      def json_response
-        @json_response ||= JSON.parse(response.body, symbolize_names: true)
+          expect(response_data(response)[:errors])
+            .to include(
+              code: expected_error.type.to_s,
+              title: expected_error.full_message,
+              detail: expected_error.message,
+              source: { pointer: '/authentication_method/contact_location' }
+            )
+        end
       end
     end
   end

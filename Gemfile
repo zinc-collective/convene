@@ -31,6 +31,8 @@ gem 'turbo-rails'
 #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.11'
+gem 'rswag-api'
+gem 'rswag-ui'
 
 # View Layer
 #
@@ -92,6 +94,7 @@ group :development, :test do
   # Our preferred testing library for Ruby and Rails projects
   gem 'rails-controller-testing'
   gem 'rspec-rails', github: 'zinc-collective/rspec-rails', branch: 'combo-have_enqueued_mail-fixes'
+  gem 'rswag-specs'
   gem 'shoulda-matchers', '~> 5.1'
 
   # Let the robots do the request/response faking.

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'spaces#show'
 
@@ -28,7 +30,12 @@ Rails.application.routes.draw do
 
   resources :guides, only: %i[index show]
 
-  constraints BrandedDomain.new(Space) do
+  constraints DefaultSpaceConstraint.new(Space) do
+    mount Rswag::Ui::Engine => '/api-docs'
+    mount Rswag::Api::Engine => '/api-docs'
+  end
+
+  constraints BrandedDomainConstraint.new(Space) do
     resources :authenticated_sessions, only: %i[new create delete show]
 
     get '/:id', to: 'rooms#show'
