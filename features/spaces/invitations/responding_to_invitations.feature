@@ -4,12 +4,12 @@ Feature: Spaces: Invitations: Responding to Invitations
   - Prevent further Invitations from the Space
 
   Background:
-    Given a fresh "Team Avatar" Space
+    Given a "Team Avatar" Space
     And the "Team Avatar" Space has a Space Owner "appa@example.com"
 
   @unstarted @unimplemented-steps @andromeda
   Scenario: Accepting an Invitation as a Neighbor
-    Given a fresh "Water Tribe" Space
+    Given a "Water Tribe" Space
     And the "Water Tribe" Space has a Space Owner "katara@example.com"
     And an Invitation to the "Team Avatar" Space is sent by Space Owner "appa@example.com"
       | name   | email              |
