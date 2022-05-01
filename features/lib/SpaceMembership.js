@@ -1,13 +1,13 @@
 class SpaceMembership {
-  constructor({ space, person }) {
+  constructor({ space, member }) {
     this.space = space
-    this.person = person
+    this.member = member
   }
 
   asParams() {
     return {
       spaceId: this.space.id,
-      personId: this.person.id
+      memberId: this.member.id
     }
   }
 }

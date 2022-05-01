@@ -51,7 +51,7 @@ Given(
         api
           .spaceMemberships()
           .findOrCreateBy(
-            new SpaceMembership({ space, person: authenticationMethod.person })
+            new SpaceMembership({ space, member: authenticationMethod.person })
           )
       );
   }
