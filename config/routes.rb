@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     resources :utility_hookups, only: %I[create edit update destroy index]
   end
 
+  resources :space_memberships, only: %I[create]
+
   resource :me, only: %i[show], controller: 'me'
 
   resources :guides, only: %i[index show]

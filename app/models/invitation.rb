@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Invitation < ApplicationRecord
   belongs_to :space, inverse_of: :invitations
 
