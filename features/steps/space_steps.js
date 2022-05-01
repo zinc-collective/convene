@@ -14,7 +14,6 @@ Given("{a} {space}", function (_, space) {
   return this.api().spaces().create(space)
     .then(
       ((space) => {
-        console.error('wtf');
         return this.spaces[space.name] = space;
       })
   )
