@@ -7,16 +7,13 @@ const AuthenticationMethod = require("../lib/AuthenticationMethod");
 const SpaceMembership = require("../lib/SpaceMembership");
 const crypto = require("crypto");
 
-
 Given("{a} {space}", function (_, space) {
   this.spaces = this.spaces || {};
 
-  return this.api().spaces().create(space)
-    .then(
-      ((space) => {
-        return this.spaces[space.name] = space;
-      })
-  )
+  return this.api()
+    .spaces()
+    .create(space)
+    .then((space) => (this.spaces[space.name] = space));
 });
 
 Given("a Space with a Room", function () {
@@ -36,12 +33,11 @@ Given(
    * @returns
    */
   function (_, space, _, actor) {
-    this.testId = this.testId || crypto.randomUUID();
     this.actors = this.actors || {};
     this.actors[actor.email] = actor;
 
     space = this.spaces[space.name] || space;
-    actor.email = `${this.testId}+${actor.email}`;
+    actor.email = `${this.testId()}+${actor.email}`;
     const api = new Api(appUrl(), process.env.OPERATOR_API_KEY);
     const toCreate = new AuthenticationMethod({
       contactMethod: "email",
@@ -54,7 +50,9 @@ Given(
       .then((authenticationMethod) =>
         api
           .spaceMemberships()
-          .findOrCreateBy(new SpaceMembership({ space, person: authenticationMethod.person }))
+          .findOrCreateBy(
+            new SpaceMembership({ space, person: authenticationMethod.person })
+          )
       );
   }
 );
@@ -64,19 +62,21 @@ Given("the {actor} is on the {space} Dashboard", async function (actor, space) {
   await this.space.visit();
 });
 
-When('{a} {actor} visits {a} {space}',
-/**
- * @this {CustomWorld}
- * @param {*} _a
- * @param {Actor} actor
- * @param {*} _a2
- * @param {Space} space
- * @returns
- */
-function (_a, actor, _a2, space) {
-  this.space = new SpacePage(this.driver, space);
-  return this.space.visit();
-});
+When(
+  "{a} {actor} visits {a} {space}",
+  /**
+   * @this {CustomWorld}
+   * @param {*} _a
+   * @param {Actor} actor
+   * @param {*} _a2
+   * @param {Space} space
+   * @returns
+   */
+  function (_a, actor, _a2, space) {
+    this.space = new SpacePage(this.driver, space);
+    return this.space.visit();
+  }
+);
 
 Given(
   "the {actor} is in the {space} and in the {room}",
