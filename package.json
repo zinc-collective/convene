@@ -51,7 +51,7 @@
     "@rails/ujs": "^7.0.2",
     "@tailwindcss/typography": "^0.5.2",
     "@webpack-cli/serve": "^1.6.1",
-    "autoprefixer": "^10.4.4",
+    "autoprefixer": "^10.4.7",
     "event-target-shim": "^6.0.2",
     "postcss": "^8.4.12",
     "postcss-cli": "^9.1.0",
