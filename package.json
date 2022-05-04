@@ -40,7 +40,7 @@
     "lodash": "^4.17.21",
     "promise-retry": "^2.0.1",
     "selenium-webdriver": "^4.1.2",
-    "webpack-dev-server": "^4.8.1"
+    "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",
