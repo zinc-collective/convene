@@ -1,13 +1,11 @@
 const { Given, When, Then } = require("@cucumber/cucumber");
 const { RoomPage, SpacePage, SpaceEditPage } = require("../harness/Pages");
-const { linkParameters } = require("../lib");
+const { linkParameters, Actor, Space } = require("../lib");
 const appUrl = require("../lib/appUrl");
 const { Api } = require("../lib/Api");
 
 Given("{a} {space}", function (_, space) {
-  const api = new Api(appUrl(), process.env.OPERATOR_API_KEY);
-
-  return api.spaces().create(space);
+  return this.api().spaces().create(space);
 });
 
 Given("{a} {space} has {a} {actor}", function (_, space, _, actor) {
@@ -17,6 +15,20 @@ Given("{a} {space} has {a} {actor}", function (_, space, _, actor) {
 Given("the {actor} is on the {space} Dashboard", async function (actor, space) {
   this.space = new SpacePage(this.driver, space);
   await this.space.visit();
+});
+
+When('{a} {actor} visits {a} {space}',
+/**
+ * @this {CustomWorld}
+ * @param {*} _a
+ * @param {Actor} actor
+ * @param {*} _a2
+ * @param {Space} space
+ * @returns
+ */
+function (_a, actor, _a2, space) {
+  this.space = new SpacePage(this.driver, space);
+  return this.space.visit();
 });
 
 Given(
