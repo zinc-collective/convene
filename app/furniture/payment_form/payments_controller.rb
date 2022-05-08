@@ -11,8 +11,7 @@ class PaymentForm
     def index; end
 
     private def payment_params
-      params.require(:payment_form_payment)
-            .permit(policy(payments.new).permitted_attributes)
+      policy(payments.new).permit(params.require(:payment_form_payment))
     end
 
     # @returns [PaymentForm]

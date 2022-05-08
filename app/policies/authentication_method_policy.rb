@@ -7,7 +7,7 @@ class AuthenticationMethodPolicy < ApplicationPolicy
     person.operator?
   end
 
-  def permit(params)
-    params.require(:authentication_method).permit(:contact_method, :contact_location)
+  def permitted_attributes(_params)
+    [:contact_method, :contact_location]
   end
 end

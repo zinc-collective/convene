@@ -22,8 +22,8 @@ class SpacePolicy < ApplicationPolicy
 
   alias create? destroy?
 
-  def permit(params)
-    params.require(:space).permit(:name, :slug, :theme, :blueprint, client_attributes: [:name])
+  def permitted_attributes(_params)
+    [:name, :slug, :theme, :blueprint, client_attributes: [:name]]
   end
 
   class Scope < ApplicationScope

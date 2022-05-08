@@ -37,13 +37,6 @@ class FurniturePlacementsController < ApplicationController
   end
 
   def furniture_placement_params
-    params.require(:furniture_placement).permit(:furniture_kind, :slot,
-      furniture_attributes: furniture_params)
-  end
-
-  def furniture_params
-    Furniture::REGISTRY.each_value.reduce([]) do |m, v|
-      m.concat(v.new.attribute_names)
-    end
+    policy(FurniturePlacement).permit(params.require(:furniture_placement))
   end
 end

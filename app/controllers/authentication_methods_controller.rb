@@ -4,7 +4,7 @@
 class AuthenticationMethodsController < ApplicationController
   def create
     skip_policy_scope
-    authentication_method_params = policy(AuthenticationMethod).permit(params)
+    authentication_method_params = policy(AuthenticationMethod).permit(params.require(:authentication_method))
     authentication_method = AuthenticationMethod.new(authentication_method_params)
     authorize(authentication_method)
     if authentication_method.save

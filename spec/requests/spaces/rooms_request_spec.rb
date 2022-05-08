@@ -1,8 +1,84 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require 'swagger_helper'
 
 RSpec.describe '/spaces/:space_slug/room/', type: :request do
   let(:space) { create(:space) }
 
+  path '/spaces/{space_slug}/rooms/{room_slug}' do
+    parameter name: :space_slug, in: :path, type: :string
+    parameter name: :room_slug, in: :path, type: :string
+    let(:api_key) { ENV['OPERATOR_API_KEY'] }
+    let(:Authorization) { encode_authorization_token(api_key) }
+    include ApiHelpers::Path
+
+    let(:space_slug) { space.slug }
+    let(:room_slug) { room.slug }
+
+    get 'Returns the Room Resource' do
+      tags 'Room'
+      security [api_key: []]
+      produces 'application/json'
+      consumes 'application/json'
+
+      let(:room) { create(:room, :with_furniture, space: space) }
+
+      response '200', 'Room retrieved' do
+        run_test! do |response|
+          data = response_data(response)
+          furniture_data = room.furniture_placements
+                               .map(&FurniturePlacement::Serializer.method(:new))
+                               .map(&:to_json)
+          expect(data[:room]).to eq(id: room.id, name: room.name,
+                                    slug: room.slug,
+                                    furniture_placements: furniture_data)
+        end
+      end
+    end
+
+    put 'Modifies the Room' do
+      tags 'Room'
+      security [api_key: []]
+      produces 'application/json'
+      consumes 'application/json'
+
+      parameter name: :body, in: :body, schema: {
+        type: :object,
+        properties: {
+          room: {
+            type: :object,
+            properties: {
+              name: { type: :string, example: 'Fancy Room' },
+              slug: { type: :string, example: 'fancy-room' },
+              furniture_placements_attributes: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {}
+                }
+              }
+            }
+          }
+        },
+        required: ['room']
+      }
+
+      let(:body) { { room: attributes } }
+
+      response '200', 'Room updated with furniture' do
+        let(:room) { create(:room, space: space) }
+        let(:attributes) do
+          { name: 'A new name', furniture_placements_attributes: [attributes_for(:furniture_placement)] }
+        end
+
+        run_test! do
+          data = response_data(response)
+          expect(data[:room][:name]).to eq('A new name')
+          expect(data[:room][:furniture_placements]).to be_present
+        end
+      end
+    end
+  end
   describe 'GET /spaces/:space_slug/rooms/new' do
     let(:path) { new_space_room_path(space) }
 

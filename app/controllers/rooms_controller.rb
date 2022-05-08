@@ -1,15 +1,18 @@
+# frozen_string_literal: true
+
 class RoomsController < ApplicationController
   before_action :check_access_code
 
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: Room::Serializer.new(room).to_json }
+    end
   end
 
-  def edit
-  end
+  def edit; end
 
-  def new
-
-  end
+  def new; end
 
   def create
     if room.save
@@ -21,10 +24,16 @@ class RoomsController < ApplicationController
   end
 
   def update
-    if room.update(room_params)
-      redirect_to edit_space_path(room.space), notice: t('.success', room_name: room.name)
-    else
-      render :edit
+    respond_to do |format|
+      if room.update(room_params)
+        format.html do
+          redirect_to edit_space_path(room.space), notice: t('.success', room_name: room.name)
+        end
+      else
+        format.html { render :edit }
+      end
+
+      format.json { render json: Room::Serializer.new(room).to_json }
     end
   end
 
@@ -40,11 +49,11 @@ class RoomsController < ApplicationController
   def room_params
     return {} unless params.key?(:room)
 
-    params.require(:room).permit(:access_level, :access_code, :name, :slug, :publicity_level)
+    policy(Room).permit(params.require(:room))
   end
 
   helper_method def page_title
-    ["[Convene]", current_room&.name, current_space&.name].compact.join(" - ")
+    ['[Convene]', current_room&.name, current_space&.name].compact.join(' - ')
   end
 
   helper_method def room
@@ -57,14 +66,17 @@ class RoomsController < ApplicationController
   private def check_access_code
     return unless room.persisted?
 
-    if !room.enterable?(current_access_code(room))
+    unless room.enterable?(current_access_code(room))
       redirect_to space_room_waiting_room_path(current_space, current_room, redirect_url: after_authorization_redirect_url)
     end
   end
 
   # TODO: Unit test authorize and redirect url
   private def after_authorization_redirect_url
-    return edit_space_room_path(room.space, room) if [:edit, :update].include?(action_name.to_sym)
+    if %i[edit update].include?(action_name.to_sym)
+      return edit_space_room_path(room.space, room)
+    end
+
     space_room_path(room.space, room)
   end
 end

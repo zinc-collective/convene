@@ -18,6 +18,12 @@ class RoomPolicy < ApplicationPolicy
   alias destroy? create?
   alias new? create?
 
+  def permitted_attributes(params)
+    [:access_level, :access_code, :name, :slug, :publicity_level,
+     furniture_placements_attributes:
+      policy(FurniturePlacement).permitted_attributes(params)]
+  end
+
   class Scope < ApplicationScope
     def resolve
       scope.all
