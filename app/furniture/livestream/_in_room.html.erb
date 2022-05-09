@@ -1,9 +1,10 @@
 
 <div data-furniture-kind="livestream" data-provider="<%=furniture.provider%>" class="w-full aspect-video">
-  <div id="twitch-embed"></div>
+
 
   <%- if furniture.provider == 'twitch' %>
     <!-- Load the Twitch embed JavaScript file -->
+    <div id="twitch-embed" class="w-full aspect-video"></div>
     <script src="https://embed.twitch.tv/embed/v1.js"></script>
 
     <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
