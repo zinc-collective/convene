@@ -22,6 +22,6 @@ Owncast is libre software for hosting a LiveStream. You'll need to follow the [O
 - Given a "Zee's Space O' Streaming" Space
 - And the Entrance Hall to "Zee's Space O' Streaming" Space's has the following Furniture:
   | furnitureKind | furnitureAttributes |
-  | livestream | { "host": "https://owncast.example.com", "provider": "owncast" } |
+  | livestream | { "channel": "https://owncast.example.com", "provider": "owncast" } |
 - When a Guest visits the "Zee's Space O' Streaming" Space
 - Then a Livestream is playing the "https://owncast.example.com" OwnCast Channel

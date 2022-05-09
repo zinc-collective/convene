@@ -69,7 +69,7 @@ class Component {
   isDisplayed() {
     return this.el()
       .then((el) => el.isDisplayed())
-      .catch(() => false);
+      .catch(() => console.error(`Can't find ${this.selector}`) && false);
   }
 
   /**

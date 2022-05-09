@@ -30,6 +30,6 @@ class Livestream
   # @todo can we make it so we don't need to define this?
   # and the `settings.fetch` bits?
   def attribute_names
-    super + %w[channel layout]
+    super + %w[channel layout provider]
   end
 end
