@@ -33,7 +33,7 @@
     "axios": "^0.27.2",
     "axios-case-converter": "^0.9.0",
     "change-case": "^4.1.2",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "fs-extra": "^10.1.0",
     "geckodriver": "^3.0.1",
     "get-urls": "^10.0.1",
