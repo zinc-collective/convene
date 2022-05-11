@@ -28,5 +28,15 @@ FactoryBot.define do
     trait :with_slug do
       slug { name.parameterize }
     end
+
+    trait :with_furniture do
+      transient do
+        furniture_count { 1 }
+      end
+
+      after(:create) do |room, evaluator|
+        create_list(:furniture_placement, evaluator.furniture_count, room: room)
+      end
+    end
   end
 end

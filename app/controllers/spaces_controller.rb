@@ -35,7 +35,7 @@ class SpacesController < ApplicationController
   end
 
   def space_params
-    policy(Space).permit(params)
+    policy(Space).permit(params.require(:space))
   end
 
   helper_method def space
