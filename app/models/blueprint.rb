@@ -167,7 +167,8 @@ class Blueprint
           name: 'Entrance Hall',
           publicity_level: :unlisted,
           furniture_placements: {
-            markdown_text_block: { content: '# Wooo!' }
+            markdown_text_block: { content: '# Wooo!' },
+            embedded_image: {},
           }
 
         }

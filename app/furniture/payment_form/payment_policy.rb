@@ -23,16 +23,9 @@ class PaymentForm
       %i[payer_name payer_email amount memo public_token plaid_account_id account_description]
     end
 
-    class Scope
-      attr_accessor :actor, :scope
-
-      def initialize(actor, scope)
-        self.actor = actor
-        self.scope = scope
-      end
-
+    class Scope < ApplicationScope
       def resolve
-        scope.where(space: actor.spaces)
+        scope.where(space: person.spaces)
       end
     end
   end
