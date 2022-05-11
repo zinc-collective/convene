@@ -25,3 +25,5 @@ app/assets/builds/
 
 /node_modules
 /swagger
+
+/storage

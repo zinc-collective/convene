@@ -1,0 +1,13 @@
+<h3>Upload an image</h3>
+
+<%- if furniture.image_file.file.present? %>
+  <%= image_tag furniture.image_file.file %>
+<%- end %>
+
+<%- if policy(furniture.image_file).create? %>
+  <%= render "embedded_image/image_files/form",
+      room: room,
+      furniture: furniture,
+      image_file: furniture.image_file %>
+<%- end %>
+

@@ -1,0 +1,4 @@
+<%= form_with model: [room.space, room, :furniture, image_file] do |form| %>
+  <%= render "file_field", form: form, attribute: :file %>
+  <%= form.submit %>
+<% end %>
