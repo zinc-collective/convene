@@ -7,7 +7,17 @@ const { Api } = require("../lib/Api");
 Given("{a} {space}", function (_, space) {
   const api = new Api(appUrl(), process.env.OPERATOR_API_KEY);
 
-  return api.spaces().create(space);
+  return api
+    .spaces()
+    .create(space)
+    .then((space) => (this.spaces[space.name] = space));
+});
+
+
+Given("a Space with a Room", function () {
+  // This space intentionally left blank... For now...
+  // TODO: Create a Space for each test instead of re-using the
+  //       System Test Space
 });
 
 Given(
