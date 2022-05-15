@@ -11,10 +11,19 @@ When(
   "an {invitation} to {a} {space} is sent by {actor}",
   { timeout: 90000 },
   function (invitation, _, space, actor, invitations) {
+    /**
+     * @todo This feels like responsibility for our Invitation class
+     *       or the invitation parameter type?
+     */
+    const toSend = invitations.hashes().map((invitation) => {
+      invitation.email = this.upsertTestId(invitation.email);
+      return invitation;
+    });
+
     return actor
       .signIn(this.driver, space)
       .then(() => new SpaceEditPage(this.driver, space))
-      .then((page) => page.inviteAll(invitations.hashes()));
+      .then((page) => page.inviteAll(toSend));
   }
 );
 
@@ -26,7 +35,8 @@ When(
    * @param {Actor} actor
    */
   function (_, invitation, _2, space, _3, actor) {
-    return invitation.accept(this.driver)
+    return invitation
+      .accept(this.driver)
       .then(() => actor.authenticationCode())
       .then((code) => new SignInPage(this.driver, space).submitCode(code));
   }

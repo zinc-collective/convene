@@ -37,7 +37,6 @@ Given(
     this.actors[actor.email] = actor;
 
     space = this.spaces[space.name] || space;
-    actor.email = `${this.testId()}+${actor.email}`;
     const api = new Api(appUrl(), process.env.OPERATOR_API_KEY);
     const toCreate = new AuthenticationMethod({
       contactMethod: "email",
