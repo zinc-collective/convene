@@ -12,7 +12,7 @@ defineParameterType({
   name: "actor",
   regexp: /(Guest|Space Member|Space Owner|Neighbor)( "[^"]*")?/,
   transformer: function(type, email) {
-    email = email || `${type.toLowerCase()}@example.com`
+    email = this.upsertTestId(email || `${type.toLowerCase()}@example.com`)
 
     return new Actor(type, email.trim().replace(/\s/, '-').replace(/"/g,''))
   }

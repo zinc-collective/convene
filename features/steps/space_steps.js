@@ -10,9 +10,39 @@ Given("{a} {space}", function (_, space) {
   return api.spaces().create(space);
 });
 
-Given("{a} {space} has {a} {actor}", function (_, space, _, actor) {
-  return true;
-});
+Given(
+  "{a} {space} has {a} {actor}",
+  /**
+   *
+   * @param {*} _
+   * @param {Space} space
+   * @param {*} _
+   * @param {Actor} actor
+   * @returns
+   */
+  function (_, space, _, actor) {
+    this.actors = this.actors || {};
+    this.actors[actor.email] = actor;
+
+    space = this.spaces[space.name] || space;
+    const api = new Api(appUrl(), process.env.OPERATOR_API_KEY);
+    const toCreate = new AuthenticationMethod({
+      contactMethod: "email",
+      contactLocation: actor.email,
+    });
+
+    return api
+      .authenticationMethods()
+      .findOrCreateBy(toCreate)
+      .then((authenticationMethod) =>
+        api
+          .spaceMemberships()
+          .findOrCreateBy(
+            new SpaceMembership({ space, member: authenticationMethod.person })
+          )
+      );
+  }
+);
 
 Given("the {actor} is on the {space} Dashboard", async function (actor, space) {
   this.space = new SpacePage(this.driver, space);
