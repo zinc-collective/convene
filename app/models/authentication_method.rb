@@ -34,6 +34,10 @@ class AuthenticationMethod < ApplicationRecord
     totp.verify(one_time_password).present?
   end
 
+  def verify!(one_time_password)
+    verify?(one_time_password) && confirm!
+  end
+
   def one_time_password
     totp.at(last_one_time_password_at)
   end

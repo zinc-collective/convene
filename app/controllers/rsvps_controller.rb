@@ -7,11 +7,10 @@ class RsvpsController < ApplicationController
 
   def update
     rsvp.update(rsvp_params)
-    redirect_to new_space_authenticated_session_path(invitation.space, authenticated_session: { contact_method: :email, contact_location: invitation.email })
   end
 
   def rsvp_params
-    params.require(:rsvp).permit(:status)
+    params.require(:rsvp).permit(:status, :one_time_password)
   end
 
   helper_method def rsvp

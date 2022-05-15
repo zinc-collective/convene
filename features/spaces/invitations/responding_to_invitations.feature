@@ -7,7 +7,7 @@ Feature: Spaces: Invitations: Responding to Invitations
     Given a "Team Avatar" Space
     And the "Team Avatar" Space has a Space Owner "appa@example.com"
 
-  @unstarted @unimplemented-steps @andromeda
+  @built @andromeda
   Scenario: Accepting an Invitation as a Neighbor
     Given a "Water Tribe" Space
     And the "Water Tribe" Space has a Space Owner "katara@example.com"

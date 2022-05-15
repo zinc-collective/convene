@@ -35,10 +35,11 @@ When(
    * @param {Actor} actor
    */
   function (_, invitation, _2, space, _3, actor) {
-    return invitation
-      .accept(this.driver)
+    return actor.signOut(this.driver)
+      .then(() => invitation.accept(this.driver))
       .then(() => actor.authenticationCode())
-      .then((code) => new SignInPage(this.driver, space).submitCode(code));
+      .then((code) => new SignInPage(this.driver, space).submitCode(code))
+      .then(() => console.log('woohoo!') )
   }
 );
 
