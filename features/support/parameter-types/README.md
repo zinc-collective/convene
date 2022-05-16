@@ -27,7 +27,9 @@ The core nouns in Convene are:
 2. [Rooms], where people congregate to work together.
 3. [Spaces], which group Rooms and People for access and discoverability
    purposes.
+4. [Furniture] for human/computer interaction within a space.
 
 [actors]: ./actors.js
 [rooms]: ./rooms.js
 [spaces]: ./spaces.js
+[furniture]: ./furniture.js
