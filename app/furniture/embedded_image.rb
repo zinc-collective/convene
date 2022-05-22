@@ -6,7 +6,7 @@ class EmbeddedImage
   def self.append_routes(router)
     router.scope module: 'embedded_image' do
       router.resource :embedded_image, only: [:show] do
-        router.resource :image_file, only: %i[create update]
+        router.resources :image_files, only: %i[create update]
       end
     end
   end
