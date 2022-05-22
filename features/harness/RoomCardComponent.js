@@ -14,7 +14,7 @@ class RoomCardComponent extends Component {
    * @param {ThenableWebDriver} driver
    * @param {Room} room
    */
-  constructor(driver, room = new Room("")) {
+  constructor(driver, room = new Room({ name: "" })) {
     super(driver);
     // TODO: Try to build a room from the passed in Element if undefined
     this.room = room;

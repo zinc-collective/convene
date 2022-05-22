@@ -1,5 +1,4 @@
 const { defineParameterType } = require("@cucumber/cucumber");
-const { By } = require("selenium-webdriver");
 const { Room } = require("../../lib");
 
 // This injects a Room class into steps with named rooms (i.e.) `the "Ada" Room` and
@@ -19,5 +18,12 @@ defineParameterType({
   // In the meantime, adding a capture-group around "Room" ensures that the Room
   // class has a string provided to it.
   regexp: /("[^"]*" )?(Room)/,
-  transformer: (roomName = "") => new Room(roomName.trim().replace(/"/g, "")),
+  transformer: (roomName = "") => new Room({ name: roomName.trim().replace(/"/g, "") }),
 });
+
+
+defineParameterType({
+  name: "entranceHall",
+  regexp: /Entrance Hall/,
+  transformer: () => new Room({ name: "Entrance Hall" })
+})
