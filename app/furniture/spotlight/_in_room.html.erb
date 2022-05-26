@@ -1,11 +1,17 @@
-<%- if furniture.image_file.file.present? %>
-  <%= image_tag furniture.image_file.file %>
-<%- end %>
+<turbo-frame id="spotlight" data-turbo="true">
+  <%- if furniture.image_file.file.present? %>
+    <%= image_tag furniture.image_file.file %>
+  <%- end %>
 
-<%- if policy(furniture.image_file).create? %>
-  <%= render "spotlight/image_files/form",
-      room: room,
-      furniture: furniture,
-      image_file: furniture.image_file %>
-<%- end %>
+  <%- if policy(furniture.image_file).create? %>
+    <%- if furniture.image_file.file.present? %>
+      <%= link_to 'Edit image', [:edit, room.space, room, :furniture, furniture.image_file] %>
+    <%- else %>
+      <%= render "spotlight/image_files/form",
+          room: room,
+          furniture: furniture,
+          image_file: furniture.image_file %>
+    <%- end %>
+  <%- end %>
+</turbo-frame>
 
