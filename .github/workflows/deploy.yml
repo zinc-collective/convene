@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - development
 
 # Uses https://github.com/AkhileshNS/heroku-deploy to deploy to Heroku
 jobs:
