@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class EmbeddedImage
+class Spotlight
   include Placeable
 
   def self.append_routes(router)
-    router.scope module: 'embedded_image' do
-      router.resource :embedded_image, only: [:show] do
+    router.scope module: 'spotlight' do
+      router.resource :spotlight, only: [:show] do
         router.resources :image_files, only: %i[create update]
       end
     end

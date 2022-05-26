@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmbeddedImage
+class Spotlight
   class ImageFilePolicy < ApplicationPolicy
     def index?
       true
