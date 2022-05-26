@@ -12,6 +12,8 @@ class Spotlight
       redirect_to [space, room]
     end
 
+    def edit ; end
+
     def update
       if image_file.update(image_file_params)
         flash[:notice] = t('.success')
