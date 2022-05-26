@@ -5,8 +5,7 @@ Websites would be pretty boring without a way to highlight something really impo
 Whether a video highlighting your favorite book, a picture of the sunset, or a value-proposition
 with a mind-blowing animated GIF; Spotlights illuminate the best you have to offer!
 
-`@andromeda`
-
+`@andromeda` `@unimplemented-steps`
 ## Scenario: Hero Image
 
 Hero' images<sup>[1] [2]</sup> are a mainstay of web design, providing a clear place for people who enter a space to direct their attention.
@@ -32,7 +31,6 @@ Hero Images are automatically resized to maintain their aspect ratio while provi
 [2]: https://elementor.com/blog/hero-image/
 
 `@andromeda` `@unstarted`
-
 ## Scenario: Hero Video
 
 While Hero _Images_ are quite common, many sites embed video to really showcase what's up.
