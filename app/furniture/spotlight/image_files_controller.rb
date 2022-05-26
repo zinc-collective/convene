@@ -4,9 +4,9 @@ class Spotlight
   class ImageFilesController < FurnitureController
     def create
       if image_file.update(image_file_params)
-        flash[:success] = "BOOM"
+        flash[:notice] = t('.success')
       else
-        flash[:error] = "WOMP"
+        flash[:alert] = t('.failure')
       end
 
       redirect_to [space, room]
@@ -14,9 +14,9 @@ class Spotlight
 
     def update
       if image_file.update(image_file_params)
-        flash[:success] = "BOOM"
+        flash[:notice] = t('.success')
       else
-        flash[:error] = "WOMP"
+        flash[:alert] = t('.failure')
       end
 
       redirect_to [space, room]
