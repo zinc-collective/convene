@@ -33,7 +33,7 @@ FileUtils.chdir APP_ROOT do
   system! 'bin/rake release:after_build'
 
   puts "\n== Preparing test database =="
-  system! 'RAILS_ENV=test bin/rails db:test:prepare'
+  system! 'bin/rails db:test:prepare'
 
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
