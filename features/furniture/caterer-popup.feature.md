@@ -5,6 +5,7 @@ Local Caterers and Delivery Companies partner to bring affordable, high-quality,
 This piece of furniture is for the Delivery Company to provide folks who are near-by that a local caterer is setting up;
 and if they want they can add their order and ?save some cash? (Need to check w/April re: most compelling hook).
 
+`@unimplemented-steps` `@unstarted`
 ## Scenario: Offering a Catering Pop-Up
 
 - Given a "Catering Pop-Up" Furniture in the Entrance Hall to "Dev's Deliveries" Space
@@ -19,7 +20,8 @@ and if they want they can add their order and ?save some cash? (Need to check w/
   | menu | Zee's Munchies Merchants |
 - Then a Catering Pop-Up Order may be placed by Guests to the Entrance Hall to "Dev's Deliveries" Space
 
-  ## Scenario: Placing a Catering Pop-Up Order
+`@unimplemented-steps` `@unstarted`
+## Scenario: Placing a Catering Pop-Up Order
 
   - Given a "Catering Pop-Up" Furniture in the Entrance Hall to "Dev's Deliveries" Space with the following configuration:
     | order_email | orders@devs-deliveries.example.com |
@@ -39,4 +41,3 @@ and if they want they can add their order and ?save some cash? (Need to check w/
   | deliver_to | "123 N West St, Oakland, CA 94612 |
 - Then a Catering Pop-Up Payment of $11.90 is collected from the Guest "A-rando@example.com" in "Dev's Deliveries" Space
 - And the following Catering Pop-Up Order Confirmation Email is sent to "orders@devs-deliveries.example.com"
-
