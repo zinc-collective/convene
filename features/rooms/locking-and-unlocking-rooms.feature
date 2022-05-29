@@ -25,11 +25,11 @@ Feature: Locked Rooms
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/04ee266e-931b-4bde-bcf9-af94c7ac444e
   @built
   Scenario: Entering a Locked Room
-    Given a Space with a Locked Room
-    Then a Space Member may enter the Locked Room after providing the correct Access Code
-    And a Space Member may not enter the Locked Room after providing the wrong Access Code
-    And a Guest may enter the Locked Room after providing the correct Access Code
-    And a Guest may not enter the Locked Room after providing the wrong Access Code
+    Given the "System Test" Space with a Locked Room
+    Then a Space Member may enter the Locked Room in the "System Test" Space after providing the correct Access Code
+    And a Space Member may not enter the Locked Room in the "System Test" Space after providing the wrong Access Code
+    And a Guest may enter the Locked Room in the "System Test" Space after providing the correct Access Code
+    And a Guest may not enter the Locked Room in the "System Test" Space after providing the wrong Access Code
 
   # Wireframe:
   # https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/screen/847810bf-5d62-4131-a70d-d9efdfadb334
