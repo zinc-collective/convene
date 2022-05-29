@@ -1,12 +1,12 @@
 <% breadcrumb :root %>
+
+<%- if space.entrance.present? %>
+  <%= render space.entrance&.furniture_placements %>
+<%- end %>
+
+
 <div class="space-container card-list">
   <% policy_scope(space.rooms.listed).each do |room| %>
     <%= render partial: 'spaces/room_card', locals: { room: room } %>
   <% end %>
 </div>
-
-<%- space.entrance&.furniture_placements&.each do |furniture_placement| %>
-  <%= render partial: furniture_placement.furniture.in_room_template,
-             locals: { furniture: furniture_placement.furniture, room: space.entrance,
-                       person: current_person } %>
-<% end %>

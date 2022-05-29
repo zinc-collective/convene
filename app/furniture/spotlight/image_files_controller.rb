@@ -29,7 +29,11 @@ class Spotlight
     end
 
     helper_method def spotlight
-      room.furniture_placements.find_by(furniture_kind: 'spotlight').furniture
+      furniture_placement.furniture
+    end
+
+    helper_method def furniture_placement
+      @furniture_placement ||= room.furniture_placements.find_by(furniture_kind: 'spotlight')
     end
 
     helper_method def image_file
