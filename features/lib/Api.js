@@ -45,7 +45,7 @@ class Api {
   put(path, model) {
     return this.axios.put(path, model.asParams()).catch(function (error) {
       console.error(`Can't PUT to ${path}`);
-      console.error(data);
+      console.error(model);
       throw error;
     });
   }
