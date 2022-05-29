@@ -1,35 +1,39 @@
-require('dotenv').config()
-const fse = require('fs-extra');
-const { setWorldConstructor, BeforeAll, AfterAll, After, setDefaultTimeout, Status } = require('@cucumber/cucumber');
+require("dotenv").config();
+const fse = require("fs-extra");
+const {
+  setWorldConstructor,
+  BeforeAll,
+  AfterAll,
+  After,
+  setDefaultTimeout,
+  Status,
+} = require("@cucumber/cucumber");
 
-const appUrl = require('../lib/appUrl');
+const appUrl = require("../lib/appUrl");
 const { CustomWorld } = require("./CustomWorld");
-let { driver } = require('./driver')
-
-
-
+let { driver } = require("./driver");
 
 setWorldConstructor(CustomWorld);
 
-After(function(testCase) {
+After(function (testCase) {
   if (testCase.result.status == Status.FAILED) {
-    return driver.takeScreenshot().then( screenShot => {
-      const filePath = `features/test_reports/${testCase.pickle.name.split(' ').join('_')}.png`;
-      fse.outputFile(filePath, screenShot, { encoding: 'base64' }, err => {
-        if (err) console.log(err)
-        console.log("Screenshot created: ", filePath)
+    return driver.takeScreenshot().then((screenShot) => {
+      const filePath = `features/test_reports/${testCase.pickle.name
+        .split(" ")
+        .join("_")}.png`;
+      fse.outputFile(filePath, screenShot, { encoding: "base64" }, (err) => {
+        if (err) console.log(err);
+        console.log("Screenshot created: ", filePath);
       });
     });
   }
 });
 
-
-BeforeAll(function() {
-  return driver.get(appUrl())
+BeforeAll(function () {
+  return driver.get(appUrl());
 });
 
-
-AfterAll(function() {
+AfterAll(function () {
   driver.quit();
 });
 

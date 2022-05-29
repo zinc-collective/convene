@@ -18,56 +18,39 @@ const {
 
 const assert = require("assert").strict;
 
-Given("{a} {space} with {a} {accessLevel} {room}", async function (_, space, _, accessLevel, room) {
-  linkParameters({ accessLevel, room, space });
-  this.space = await new SpacePage(this.driver, space).visit();
-  const matchingRooms = await this.space.roomCardsWhere({ accessLevel });
-  if (!matchingRooms.length > 0) {
-    const spaceMember = new Actor("Space Member", 'space-member@example.com');
-    const page = await spaceMember
-      .signIn(this.driver, space)
-      .then(() => new SpaceEditPage(this.driver, space).visit());
-
-    // @todo Sprout an API for editing a Space so we don't need to do it via
-    //       the UI
-    if (accessLevel.isLocked()) {
-      room.reinitialize(new AccessLevel("unlocked"));
-      await page
-        .roomCard(room)
-        .configure()
-        .then((page) => page.lock(new AccessCode("valid")));
-    } else {
-      room.reinitialize(new AccessLevel("locked"));
-      await page
-        .roomCard(room)
-        .configure()
-        .then((page) => page.unlock(new AccessCode("valid")));
+Given(
+  "{a} {space} with {a} {accessLevel} {room}",
+  async function (_, space, _, accessLevel, room) {
+    this.spaces = this.spaces || {};
+    if (this.spaces[space.name]) {
+      return;
     }
 
-    return this.space
-      .visit()
-      .then(() => this.space.roomCardsWhere({ accessLevel }))
-      .then((matchingRooms) => assert(matchingRooms.length > 0));
+    return this.api()
+      .spaces()
+      .create(space)
+      .then((space) => (this.spaces[space.name] = space));
   }
-});
+);
 
 When(
-  "{a} {actor} unlocks {a} {accessLevel} {room} with {a} {accessCode}",
-  async function (_, actor, _, accessLevel, room, _, accessCode) {
-    const { space } = linkParameters({ room, accessLevel });
-    await actor.signIn(this.driver, space);
+  "{a} {actor} unlocks {a} {accessLevel} {room} in {a} {space} with {a} {accessCode}",
+  function (a, actor, a2, accessLevel, room, a3, space, a4, accessCode) {
+    // @todo someday, it would be nice to consolidate the AccessLevel Parameter Type, since it's only ever used in context with a room
+    linkParameters({ room, accessLevel });
 
-    return new SpaceEditPage(this.driver, space)
-      .visit()
+    return actor
+      .signIn(this.driver, space)
+      .then(() => new SpaceEditPage(this.driver, space).visit())
       .then((page) => page.roomCard(room).configure())
       .then((page) => page.unlock(accessCode));
   }
 );
 
 When(
-  "{a} {actor} locks {a} {accessLevel} {room} with {a} {accessCode}",
-  async function (_, actor, _, accessLevel, room, _, accessCode) {
-    const { space } = linkParameters({ accessLevel, room });
+  "{a} {actor} locks {a} {accessLevel} {room} in {a} {space} with {a} {accessCode}",
+  async function (_, actor, _, accessLevel, room, _a, space, _, accessCode) {
+    linkParameters({ accessLevel, room });
     await actor.signIn(this.driver, space);
 
     return new SpaceEditPage(this.driver, space)
@@ -92,40 +75,44 @@ Then("the {actor} is not placed in the {room}", function (actor, room) {
 });
 
 Then(
-  "{a} {actor} may not enter {a} {accessLevel} {room} after providing {a} {accessCode}",
+  "{a} {actor} may not enter {a} {accessLevel} {room} in {a} {space} after providing {a} {accessCode}",
   /**
    *
    * @param {Actor} actor
    * @param {AccessLevel} accessLevel
    * @param {Room} room
+   * @param {Space} space
    * @param {AccessCode} accessCode
    */
-  async function (_, actor, _, accessLevel, room, _, accessCode) {
+  function (_, _actor, _, accessLevel, room, _, space, _, accessCode) {
     linkParameters({ room, accessLevel });
 
-    await this.driver.manage().deleteAllCookies();
-
-    const waitingRoomPage = await this.space
-      .visit()
-      .then((spacePage) => spacePage.roomCard(room).enter(accessCode));
-
-    assert(await waitingRoomPage.isWaitingRoom());
-    assert(await waitingRoomPage.errors().isDisplayed());
+    return this.driver
+      .manage()
+      .deleteAllCookies()
+      .then(() => new SpacePage(this.driver, space).visit())
+      .then((spacePage) => spacePage.roomCard(room).enter(accessCode))
+      .then((waitingRoomPage) => {
+        return Promise.all([
+          waitingRoomPage.isWaitingRoom().then(assert),
+          waitingRoomPage.errors().isDisplayed().then(assert),
+        ]);
+      });
   }
 );
 
 Then(
-  "{a} {actor} may enter {a} {accessLevel} {room} after providing {a} {accessCode}",
-  async function (_, actor, _, accessLevel, room, _, accessCode) {
+  "{a} {actor} may enter {a} {accessLevel} {room} in {a} {space} after providing {a} {accessCode}",
+  function (_, actor, _, accessLevel, room, _, space, _, accessCode) {
     linkParameters({ room, accessLevel, accessCode });
-    await this.driver.manage().deleteAllCookies();
 
-    const isWaitingRoom = await this.space
-      .visit()
+    return this.driver
+      .manage()
+      .deleteAllCookies()
+      .then(() => new SpacePage(this.driver, space).visit())
       .then((spacePage) => spacePage.roomCard(room).enter(accessCode))
       .then((roomPage) => roomPage.isWaitingRoom())
-
-    assert(!isWaitingRoom);
+      .then((isWaitingRoom) => assert(!isWaitingRoom));
   }
 );
 

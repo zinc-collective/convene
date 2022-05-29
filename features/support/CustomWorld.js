@@ -21,5 +21,18 @@ class CustomWorld {
   testId() {
     return this._testId = this._testId || crypto.randomUUID();
   }
+
+  /**
+   * Ensures email addresses are all traceable back to the same test
+   * This isolates our tests, eliminates race conditions, and makes things easier to diagnose
+   * @param {string} email
+   * @returns string
+   */
+   upsertTestId(email) {
+    if (!email) {
+      return email;
+    }
+    return email.replace("@", `-${this.testId()}@`);
+  }
 }
 exports.CustomWorld = CustomWorld;

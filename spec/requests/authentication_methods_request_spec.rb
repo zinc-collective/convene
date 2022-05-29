@@ -49,6 +49,7 @@ RSpec.describe '/authentication_methods/', type: :request do
                    person: { id: person.id })
         end
       end
+
       response '422', 'authentication method invalid' do
         let(:existing_authentication_method) { create(:authentication_method) }
         let(:attributes) do

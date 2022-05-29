@@ -41,17 +41,14 @@ class Actor {
     return getUrls(email.text).values().next().value;
   }
 
-
   /**
    * The code a user can use to sign in
    * @returns {Promise<string>}
    */
   async authenticationCode() {
-    const email = await this.emails({
-      text: (t) => t.match(/password is (\d+)/),
-    }).then(last);
-
-    return email.text.match(/password is (\d+)/)[1];
+    return this.emails({ text: (t) => t.match(/password is (\d+)/) })
+      .then(last)
+      .then((email) => email.text.match(/password is (\d+)/)[1]);
   }
 
   /**
