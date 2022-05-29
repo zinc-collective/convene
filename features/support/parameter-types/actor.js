@@ -14,7 +14,7 @@ defineParameterType({
   transformer: function (actorType, email) {
     email = formatEmail(actorType, email);
 
-    if (actorType !== "Guest") {
+    if (email !== "guest@example.com") {
       email = this.upsertTestId(email);
     }
 

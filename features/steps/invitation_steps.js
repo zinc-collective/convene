@@ -39,7 +39,6 @@ When(
       .then(() => invitation.accept(this.driver))
       .then(() => actor.authenticationCode())
       .then((code) => new SignInPage(this.driver, space).submitCode(code))
-      .then(() => console.log('woohoo!') )
   }
 );
 
