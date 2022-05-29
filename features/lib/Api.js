@@ -123,4 +123,4 @@ class Repository {
     const data = response.data[camelCase(model.name)] || response.data;
     return new model(data);
   }
-git}
+}
