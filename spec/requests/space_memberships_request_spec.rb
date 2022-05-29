@@ -54,6 +54,12 @@ RSpec.describe '/space_memberships/', type: :request do
 
         run_test!
       end
+
+      response '422', 'Required Attributes are not included' do
+        let(:attributes) { attributes_for(:space_membership, member_id: nil, space_id: nil) }
+
+        run_test!
+      end
     end
   end
 end
