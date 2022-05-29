@@ -6,6 +6,6 @@ en:
       accept: "Join %{space_name}"
       ignore: "Ignore this invitation"
     update:
-      header: "Confirm your access to the email address '${email}'"
+      header: "Confirm your access to the email address '%{email}'"
       summary: "Let's make sure you really are the person %{invitor_name} thinks you are!"
       accept: "Confirm and Join %{space_name}"
