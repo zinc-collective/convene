@@ -51,23 +51,20 @@ Given("{a} {space} with {a} {accessLevel} {room}", async function (_, space, _, 
   }
 });
 
-When(
-  "{a} {actor} unlocks {a} {accessLevel} {room} with {a} {accessCode}",
-  async function (_, actor, _, accessLevel, room, _, accessCode) {
-    const { space } = linkParameters({ room, accessLevel });
-    await actor.signIn(this.driver, space);
+When('{a} {actor} unlocks {a} {accessLevel} {room} in {a} {space} with {a} {accessCode}', function (a, actor, a2, accessLevel, room, a3, space, a4, accessCode) {
+  // @todo someday, it would be nice to consolidate the AccessLevel Parameter Type, since it's only ever used in context with a room
+  linkParameters({ room, accessLevel });
 
-    return new SpaceEditPage(this.driver, space)
-      .visit()
-      .then((page) => page.roomCard(room).configure())
-      .then((page) => page.unlock(accessCode));
-  }
-);
+  return actor.signIn(this.driver, space)
+    .then(() => new SpaceEditPage(this.driver, space).visit())
+    .then((page) => page.roomCard(room).configure())
+    .then((page) => page.unlock(accessCode));
+});
 
 When(
-  "{a} {actor} locks {a} {accessLevel} {room} with {a} {accessCode}",
-  async function (_, actor, _, accessLevel, room, _, accessCode) {
-    const { space } = linkParameters({ accessLevel, room });
+  "{a} {actor} locks {a} {accessLevel} {room} in {a} {space} with {a} {accessCode}",
+  async function (_, actor, _, accessLevel, room, _a, space, _, accessCode) {
+    linkParameters({ accessLevel, room });
     await actor.signIn(this.driver, space);
 
     return new SpaceEditPage(this.driver, space)
