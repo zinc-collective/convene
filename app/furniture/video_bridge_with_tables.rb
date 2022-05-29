@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-class BreakoutTablesByJitsi
+class VideoBridgeWithTables
   def self.append_routes(router)
-    router.resources :breakout_tables_by_jitsi, only: [:show], controller: 'breakout_tables_by_jitsi_by_jitsi/'
+    router.scope module: :video_bridge_with_tables do
+      router.resources :tables, only: [:show]
+    end
   end
   include Placeable
 

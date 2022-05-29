@@ -4,10 +4,12 @@
 # folks defining new Furniture.
 module Furniture
   REGISTRY = {
-    breakout_tables_by_jitsi: BreakoutTablesByJitsi,
+    # @todo Rename these to `video_bridge_with_tables` in prod after it's been deployed.
+    breakout_tables_by_jitsi: VideoBridgeWithTables,
     payment_form: PaymentForm,
     markdown_text_block: MarkdownTextBlock,
     video_bridge: VideoBridge,
+    video_bridge_with_tables: VideoBridgeWithTables,
     livestream: Livestream,
     embedded_form: EmbeddedForm,
     spotlight: Spotlight,

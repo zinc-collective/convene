@@ -5,7 +5,6 @@ export default class VideoBridge {
   constructor(domain, parentNode) {
     this.domain = domain;
     this.parentNode = parentNode;
-    this.connectJitsiApi();
   }
 
   enterRoom(roomName) {

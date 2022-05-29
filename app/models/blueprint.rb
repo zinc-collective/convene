@@ -123,8 +123,7 @@ class Blueprint
           access_code: nil,
           furniture_placements: {
             markdown_text_block: { content: '# Welcome!' },
-            video_bridge: {},
-            breakout_tables_by_jitsi: { names: %w[engineering design ops] }
+            video_bridge_with_tables: { names: %w[engineering design ops] }
           }
         },
         {

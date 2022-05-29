@@ -1,11 +1,8 @@
-Feature: Breakout Tables
-  Breakout Tables allow Space Members to section off a Room so folks can gather
-  in small(er) groups. Breakout Tables are more fluid than Rooms, in that they
-  can _expire_ after a period of time, be put up, or be taken down by Space
-  Members.
+Feature: VideoBridge With Tables
+  A VideoBridge with Tables allows people to join and leave discussions with a sub-set of the people in the Room.
 
   @built @unimplemented-steps
-  Scenario: Taking a Seat at a Breakout Table
+  Scenario: Taking a Seat at a Table
     Given a Room with the Breakout Tables Furniture
     When a Room Occupant joins a Breakout Table
     Then the Room Occupant is no longer in the Room
