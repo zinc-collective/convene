@@ -10,8 +10,6 @@ module Furniture
     video_bridge: VideoBridge,
     livestream: Livestream,
     embedded_form: EmbeddedForm,
-    # @todo Run a rake task to move all the placements with the type `videobridge_by_jitsi` to `video_bridge`
-    videobridge_by_jitsi: VideoBridge
   }.freeze
 
   # Appends each {Furniture}'s CRUD actions
