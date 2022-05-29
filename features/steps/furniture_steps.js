@@ -12,7 +12,7 @@ Given(
   "{a} {furniture} in {a} {entranceHall} to {space} is configured with:",
   /**
    *
-   * @this {CustomWorld}asd
+   * @this {CustomWorld}
    * @param {*} a
    * @param {Furniture} furniture
    * @param {*} a2
@@ -23,7 +23,7 @@ Given(
   function (_a, furniture, _a2, room, space, dataTable) {
     const furniturePlacementsAttributes = [
       {
-        furnitureKind: furniture.type,
+        furnitureKind: furniture.type.toLowerCase(),
         furnitureAttributes: dataTableToHash(dataTable),
       },
     ];
