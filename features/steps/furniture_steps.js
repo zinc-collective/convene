@@ -3,11 +3,10 @@ const { assertDisplayed } = require("../support/assertDisplayed");
 const { FurnitureComponent } = require("../harness/FurnitureComponent");
 
 const dataTableToHash = function (dataTable) {
-  return dataTable
-    .rows()
-    .reduce(
-      (attributes, [name, value]) => (attributes[name] = value && attributes)
-    );
+  return dataTable.rows().reduce((attributes, [name, value]) => {
+    attributes[name] = value;
+    return attributes;
+  }, {});
 };
 Given(
   "{a} {furniture} in {a} {entranceHall} to {space} is configured with:",
@@ -22,15 +21,16 @@ Given(
    * @param {DataTable} dataTable
    */
   function (_a, furniture, _a2, room, space, dataTable) {
+    const furniturePlacementsAttributes = [
+      {
+        furnitureKind: furniture.type,
+        furnitureAttributes: dataTableToHash(dataTable),
+      },
+    ];
+
     return this.api()
       .rooms(space)
-      .update(
-        room.assign({
-          furniturePlacementsAttributes: [
-            furniture.assign(dataTableToHash(dataTable)).attributes,
-          ],
-        })
-      );
+      .update(room.assign({ furniturePlacementsAttributes }));
   }
 );
 
@@ -44,7 +44,10 @@ Then(
    */
   function (_a, furniture, dataTable) {
     return assertDisplayed(
-      new FurnitureComponent(this.driver, furniture.assign(dataTableTohash(dataTable.hashes())))
+      new FurnitureComponent(
+        this.driver,
+        furniture.assign(dataTableTohash(dataTable.hashes()))
+      )
     );
   }
 );
