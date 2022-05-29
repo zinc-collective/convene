@@ -8,10 +8,10 @@ class SpaceMembership::Serializer < ApplicationSerializer
       space_membership: {
         id: space_membership.id,
         member: {
-          id: space_membership.member.id
+          id: space_membership.member&.id
         },
         space: {
-          id: space_membership.space.id
+          id: space_membership.space&.id
         }
       }
     )
