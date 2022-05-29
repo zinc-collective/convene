@@ -2,7 +2,7 @@ const { Given, DataTable } = require("@cucumber/cucumber");
 const { Space, Room } = require("../../lib");
 const { CustomWorld } = require("../../support/CustomWorld");
 
-Given('{a} {entranceHall} to {space}\'s has {a} following Furniture:',
+Given('{a} {entranceHall} to {space} has {a} following Furniture:',
 /**
  * @this {CustomWorld}
  * @param {*} a
