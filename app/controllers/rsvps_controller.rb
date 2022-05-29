@@ -6,13 +6,16 @@ class RsvpsController < ApplicationController
   end
 
   def update
-    rsvp.update(rsvp_params)
+    if rsvp.update(rsvp_params)
+      redirect_to rsvp.space, notice: t('.success', space_name: rsvp.space.name)
+    end
   end
 
   def rsvp_params
     params.require(:rsvp).permit(:status, :one_time_password)
   end
 
+  # @return [Rsvp]
   helper_method def rsvp
     @rsvp ||= Rsvp.new(invitation: invitation).tap { |rsvp| authorize(rsvp) }
   end

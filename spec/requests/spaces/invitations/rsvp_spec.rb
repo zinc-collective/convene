@@ -37,6 +37,7 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
                                             contact_location: invitation.email)
 
           expect(authentication_method.confirmed_at).to be_blank
+          expect(response).to render_template(:update)
         end
       end
 
@@ -62,6 +63,8 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
                                             contact_location: invitation.email)
 
           expect(authentication_method).to be_confirmed
+          expect(response).to redirect_to(space)
+          expect(flash[:notice]).to eq(I18n.t('rsvps.update.success', space_name: space.name))
         end
       end
     end

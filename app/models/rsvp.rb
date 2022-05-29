@@ -20,6 +20,7 @@ class Rsvp
       person.space_memberships.create(space: invitation.space)
     else
       authentication_method.send_one_time_password!(invitation.space)
+      false
     end
   end
 
