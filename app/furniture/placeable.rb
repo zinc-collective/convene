@@ -6,7 +6,7 @@ module Placeable
   # @return {FurniturePlacement}
   attr_accessor :placement
 
-  delegate :id, :utilities, :persisted?, :save!, to: :placement
+  delegate :id, :room, :utilities, :persisted?, :save!, to: :placement
 
   def self.included(placeable)
     placeable.include ActiveModel::Model

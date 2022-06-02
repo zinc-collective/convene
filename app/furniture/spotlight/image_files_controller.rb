@@ -37,7 +37,7 @@ class Spotlight
     end
 
     helper_method def image_file
-      @image_file ||= authorize policy_scope(spotlight.image_file)
+      @image_file ||= authorize spotlight.image_file
     end
   end
 end
