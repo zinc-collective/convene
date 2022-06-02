@@ -1,15 +1,15 @@
 
-<%- if furniture.image_file.file.present? %>
-  <%= image_tag furniture.image_file.file %>
+<%- if furniture.image.file.present? %>
+  <%= image_tag furniture.image.file %>
 <%- end %>
 
-<%- if policy(furniture.image_file).create? %>
-  <%- if furniture.image_file.file.present? %>
-    <%= link_to 'Edit image', [:edit, room.space, room, :furniture, furniture.image_file] %>
+<%- if policy(furniture.image).create? %>
+  <%- if furniture.image.file.present? %>
+    <%= link_to 'Edit image', [:edit, room.space, room, :furniture, furniture.image] %>
   <%- else %>
-    <%= render "spotlight/image_files/form",
+    <%= render "spotlight/images/form",
         room: room,
         furniture: furniture,
-        image_file: furniture.image_file %>
+        image: furniture.image %>
   <%- end %>
 <%- end %>

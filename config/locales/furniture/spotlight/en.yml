@@ -1,6 +1,6 @@
 en:
   spotlight:
-    image_files:
+    images:
       update:
         success: Spotlight updated 🥳
         failure: Oops! Something went wrong 😿
@@ -9,6 +9,6 @@ en:
         failure: Oops! Something went wrong 😿
   helpers:
     submit:
-      spotlight_image_file:
+      spotlight_image:
         create: Upload 🖼️
         update: Upload 🖼️

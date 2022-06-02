@@ -2,23 +2,23 @@
 
 require 'rails_helper'
 
-RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/spotlight/image_files', type: :request do
+RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/spotlight/images', type: :request do
   let(:spotlight) { create(:spotlight) }
   let(:room) { spotlight.room }
   let(:space) { room.space }
   let(:space_member) { create(:person, spaces: [space]) }
 
-  let(:params) { { spotlight_image_file: attributes_for(:spotlight_image_file) } }
+  let(:params) { { spotlight_image: attributes_for(:spotlight_image) } }
 
   %i[post patch put].each do |method|
     describe "#{method}" do
       if %i[patch put].include?(method)
-        let(:image_file) { create(:spotlight_image_file, location: spotlight.placement) }
+        let(:image) { create(:spotlight_image, location: spotlight.placement) }
       end
 
       subject do
-        url = "/spaces/#{space.id}/rooms/#{room.id}/furniture/spotlight/image_files"
-        url += "/#{image_file.id}" if %i[patch put].include?(method)
+        url = "/spaces/#{space.id}/rooms/#{room.id}/furniture/spotlight/images"
+        url += "/#{image.id}" if %i[patch put].include?(method)
         public_send(method, url, params: params)
       end
 
@@ -27,7 +27,7 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/spotlight/image_files
           subject
 
           expect(response).to be_not_found
-          expect(spotlight.image_file.file).not_to be_attached
+          expect(spotlight.image.file).not_to be_attached
         end
       end
 
@@ -40,7 +40,7 @@ RSpec.describe '/spaces/:space_id/rooms/:room_id/furniture/spotlight/image_files
           subject
 
           expect(response).to redirect_to([space, room])
-          expect(spotlight.image_file.file).to be_attached
+          expect(spotlight.image.file).to be_attached
         end
       end
     end

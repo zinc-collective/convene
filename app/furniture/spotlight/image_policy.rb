@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Spotlight
-  class ImageFilePolicy < ApplicationPolicy
+  class ImagePolicy < ApplicationPolicy
     def index?
       true
     end

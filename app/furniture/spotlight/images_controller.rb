@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Spotlight
-  class ImageFilesController < FurnitureController
+  class ImagesController < FurnitureController
     def create
-      if image_file.update(image_file_params)
+      if image.update(image_params)
         flash[:notice] = t('.success')
       else
         flash[:alert] = t('.failure')
@@ -15,7 +15,7 @@ class Spotlight
     def edit ; end
 
     def update
-      if image_file.update(image_file_params)
+      if image.update(image_params)
         flash[:notice] = t('.success')
       else
         flash[:alert] = t('.failure')
@@ -24,8 +24,8 @@ class Spotlight
       redirect_to [space, room]
     end
 
-    private def image_file_params
-      policy(image_file).permit(params.require(:spotlight_image_file))
+    private def image_params
+      policy(image).permit(params.require(:spotlight_image))
     end
 
     helper_method def spotlight
@@ -36,8 +36,8 @@ class Spotlight
       @furniture_placement ||= room.furniture_placements.find_by(furniture_kind: 'spotlight')
     end
 
-    helper_method def image_file
-      @image_file ||= authorize spotlight.image_file
+    helper_method def image
+      @image ||= authorize spotlight.image
     end
   end
 end

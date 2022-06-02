@@ -9,7 +9,7 @@ FactoryBot.define do
     end
   end
 
-  factory :spotlight_image_file, class: 'Spotlight::ImageFile' do
+  factory :spotlight_image, class: 'Spotlight::Image' do
     association :space
 
     transient do
