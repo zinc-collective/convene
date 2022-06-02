@@ -1,6 +1,6 @@
-<turbo-frame id="spotlight" data-turbo="true">
+<%= turbo_frame_tag furniture_placement, data: { turbo: true } do %>
   <%= render "spotlight/image_files/form",
       room: room,
       furniture: spotlight,
       image_file: spotlight.image_file %>
-</turbo-frame>
+<%- end %>

@@ -1,0 +1,5 @@
+<%= turbo_frame_tag furniture_placement, data: { turbo: true } do %>
+  <%= render partial: furniture_placement.furniture.in_room_template,
+            locals: { furniture: furniture_placement.furniture, room: furniture_placement.room,
+                      person: current_person } %>
+<%- end %>

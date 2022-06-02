@@ -1,12 +1,6 @@
 <% breadcrumb :room, room %>
 
-<%- room.furniture_placements.each do |furniture_placement| %>
-  <%= render partial: furniture_placement.furniture.in_room_template,
-             locals: { furniture: furniture_placement.furniture, room: room,
-                       person: current_person } %>
-<% end %>
-
-
+<%= render room.furniture_placements %>
 
 <div class="px-6 pt-3">
   <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
