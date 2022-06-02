@@ -1,0 +1,14 @@
+en:
+  spotlight:
+    images:
+      update:
+        success: Spotlight updated 🥳
+        failure: Oops! Something went wrong 😿
+      create:
+        success: Spotlight updated 🥳
+        failure: Oops! Something went wrong 😿
+  helpers:
+    submit:
+      spotlight_image:
+        create: Upload 🖼️
+        update: Upload 🖼️

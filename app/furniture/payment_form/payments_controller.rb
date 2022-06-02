@@ -19,22 +19,12 @@ class PaymentForm
       room.furniture_placements.find_by(furniture_kind: 'payment_form').furniture
     end
 
-    helper_method def room
-      current_space.rooms.friendly.find(params[:room_id])
-    end
-
-    helper_method def space
-      current_space
-    end
-
     helper_method def payment
       @payment ||= payments.new(payment_params)
     end
 
     helper_method def payments
-      @payments ||= policy_scope(furniture.payments).tap do |payments|
-        authorize(payments)
-      end
+      @payments ||= authorize policy_scope(furniture.payments)
     end
   end
 end

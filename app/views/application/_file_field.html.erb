@@ -1,0 +1,6 @@
+<% required ||= required | false %>
+<div>
+  <%= form.label attribute %>
+  <%= form.file_field attribute, required: required %>
+  <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
+</div>
