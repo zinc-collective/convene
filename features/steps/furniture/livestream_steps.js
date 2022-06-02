@@ -1,12 +1,6 @@
 const { Then } = require("@cucumber/cucumber");
-const assert = require("assert").strict;
 
-function assertDisplayed(component) {
-  return component
-    .isDisplayed()
-    .then((result) => assert(result, `${component.selector}`));
-}
-
+const { assertDisplayed } = require("../../support/assertDisplayed");
 const LiveStreamFurnitureComponent = require("../../harness/LiveStreamFurnitureComponent");
 
 Then(

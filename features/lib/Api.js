@@ -13,10 +13,10 @@ class Api {
       axios.create({
         baseURL: host,
         headers: {
-          "Authorization": `Token token="${apiKey}"`,
+          Authorization: `Token token="${apiKey}"`,
           "Content-Type": "application/json",
-          'Accept':  "application/json"
-        }
+          Accept: "application/json",
+        },
       })
     );
   }
@@ -34,7 +34,11 @@ class Api {
    * @returns
    */
   rooms(space) {
-    return new Repository({ client: this, endpoint: `/spaces/${space.slug}/rooms`, model: Room });
+    return new Repository({
+      client: this,
+      endpoint: `/spaces/${space.slug}/rooms`,
+      model: Room,
+    });
   }
 
   /**
@@ -70,7 +74,8 @@ class Api {
   put(path, model) {
     return this.axios.put(path, model.asParams()).catch(function (error) {
       console.error(`Can't PUT to ${path}`);
-      console.error(data);
+      console.error({ model });
+      console.error({ error });
       throw error;
     });
   }
@@ -90,7 +95,6 @@ class Repository {
   }
 
   create(model) {
-
     return this.client
       .post(this.endpoint, model)
       .then((response) => this.castToModel(response));

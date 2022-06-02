@@ -5,10 +5,6 @@ class Furniture extends Model {
     super();
     this.type = type;
   }
-
-  attributes() {
-    return { type: this.type }
-  }
 }
 
 module.exports = Furniture;

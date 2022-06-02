@@ -16,35 +16,44 @@ Hero Images are automatically resized to maintain their aspect ratio while provi
 
 - Given an "Zee's Artist Portfolio" Space
 - And a "Spotlight" Furniture in the Entrance Hall to "Zee's Artist Portfolio" Space is configured with:
-  | file | adorable_kitten_12mp_16x9.heic |
+  | file | adorable_kitten.heic |
+  | alt | Two adorable kittens sitting in a fruit bowl |
   | heading | Kittens Are The Best |
   | summary | Everyone loves kittens. They're adorable! Look at them! They make you melt! How can you not love kittens?! |
   | link_text | Scroll your way to happiness |
   | link | //kitten-gallery |
 
-- Then a 1 megapixel 16x9 Spotlight of "adorable_kittens" is shown to Portrait Phone visits to "Zee's Artist Portfolio" Space
-- And a 4 megapixel 16x9 Spotlight of "adorable_kittens" is shown to Landscape Phone visits to "Zee's Artist Portfolio" Space
-- And a 2 megapixel 16x9 Spotlight of "adorable_kittens" is shown to Portrait Tablet visits to "Zee's Artist Portfolio" Space
-- And a 6 megapixel 16x9 Spotlight of "adorable_kittens" is shown to Landscape Tablet visits to "Zee's Artist Portfolio" Space
+- When a Guest visits the "Zee's Artist Portfolio" Space
+- Then a "Spotlight" Furniture is rendered with:
+  | file | adorable_kitten.heic |
+  | alt | Two adorable kittens sitting in a fruit bowl |
+  | heading | Kittens Are The Best |
+  | summary | Everyone loves kittens. They're adorable! Look at them! They make you melt! How can you not love kittens?! |
+  | link_text | Scroll your way to happiness |
+  | link | //kitten-gallery |
 
 [1]: https://design4users.com/hero-images-in-web-design/
 [2]: https://elementor.com/blog/hero-image/
 
 `@andromeda` `@unstarted`
+
 ## Scenario: Hero Video
 
 While Hero _Images_ are quite common, many sites embed video to really showcase what's up.
 
 - Given an "Zee's Artist Portfolio" Space
 - And a "Spotlight" Furniture in the Entrance Hall to "Zee's Artist Portfolio" Space is configured with:
-  | file | adorable_kitten_12mp_16x9.mp4 |
+  | file | adorable_kitten.mp4 |
+  | alt | Two adorable kittens playing in a fruit bowl |
   | heading | Kittens Are The Best |
   | summary | Everyone loves kittens. They're adorable! Look at them! They make you melt! How can you not love kittens?! |
   | link_text | Scroll your way to happiness |
   | link | //kitten-gallery |
-
-- Then Portrait Phone Guests see a 1.2 megapixel 16x9 Spotlight of "adorable_kittens" on "Zee's Artist Portfolio"
-- And Landscape Phone Guests see a 4 megapixel 16x9 Spotlight of "adorable_kittens" on "Zee's Artist Portfolio"
-- And Portrait Tablet Guests see a 2 megapixel 16x9 Spotlight of "adorable_kittens" on "Zee's Artist Portfolio"
-- And Landscape Tablet Guests see a 6 megapixel 16x9 Spotlight of "adorable_kittens" on "Zee's Artist Portfolio"
-to
+- When a Guest visits the "Zee's Artist Portfolio" Space
+- Then a "Spotlight" Furniture is rendered with:
+  | file | adorable_kitten.heic |
+  | alt | Two adorable kittens sitting in a fruit bowl |
+  | heading | Kittens Are The Best |
+  | summary | Everyone loves kittens. They're adorable! Look at them! They make you melt! How can you not love kittens?! |
+  | link_text | Scroll your way to happiness |
+  | link | //kitten-gallery |

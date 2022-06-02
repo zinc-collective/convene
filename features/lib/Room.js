@@ -1,7 +1,8 @@
 const slugify = require("./slugify");
 const AccessLevel = require("./AccessLevel");
+const Model = require("./Model");
 
-class Room {
+class Room extends Model{
   /**
    * @type {AccessLevel | undefined}
    */
@@ -11,6 +12,7 @@ class Room {
    * @param {string} roomName
    */
   constructor({ name, slug, id }) {
+    super()
     this.name = name;
     this.slug = slug;
     if (name !== "Room") {
@@ -23,12 +25,6 @@ class Room {
     this.accessLevel = accessLevel;
   }
 
-  assign(attributes) {
-    for (const attribute in attributes) {
-      this[attribute] = attributes[attribute];
-    }
-    return this;
-  }
   asParams() {
     return {
       room: {

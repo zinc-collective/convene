@@ -1,10 +1,10 @@
 class Model {
   assign(attributes) {
-    for(const attribute in attributes) {
+    for (const attribute in attributes) {
       this[attribute] = attributes[attribute];
     }
-    return this
+    return this;
   }
 }
 
-module.exports  = Model
+module.exports = Model;
