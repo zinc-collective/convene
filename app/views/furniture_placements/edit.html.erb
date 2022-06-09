@@ -1,0 +1,8 @@
+
+
+<%= turbo_frame_tag furniture_placement, data: { turbo: true } do %>
+  <%= form_with model: [furniture_placement.space, furniture_placement.room, furniture_placement] do |form| %>
+    <%= render furniture_placement.furniture.form_template, form: form%>
+    <%= form.submit%>
+  <%- end %>
+<%- end %>
