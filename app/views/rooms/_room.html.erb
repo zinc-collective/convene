@@ -1,0 +1,23 @@
+<div class="flex flex-col content-between justify-end">
+  <div class="grow">
+    <%= render room.furniture_placements %>
+  </div>
+
+  <div class="px-6 pt-3">
+    <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <% policy_scope(current_space.rooms.listed).each do |room| %>
+        <%= render partial: 'spaces/room_card', locals: { room: room } %>
+      <% end %>
+    </ul>
+  </div>
+
+
+  <%- content_for :footer do %>
+    <%- if policy(room).edit? %>
+      <p class="text-center">
+        <%= link_to t('helpers.submit.room.edit', room_name: room.name), [:edit, room.space, room], class: 'no-underline' %>
+      </p>
+    <%- end %>
+  <%- end %>
+</div>
+

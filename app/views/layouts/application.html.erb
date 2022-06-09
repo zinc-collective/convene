@@ -17,7 +17,13 @@
     </main>
 
 
-    <footer>
+    <footer class="flex-wrap">
+      <%- if content_for?(:footer) %>
+        <div class="basis-full">
+          <%= content_for :footer%>
+        </div>
+      <%- end %>
+
       <%= render partial: "breadcrumbs" %>
 
       <div>
