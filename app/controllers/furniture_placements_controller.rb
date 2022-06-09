@@ -3,7 +3,7 @@ class FurniturePlacementsController < ApplicationController
     furniture_placement.update!(furniture_placement_params)
 
     redirect_to(
-      edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
+      space_room_path(furniture_placement.room.space, furniture_placement.room),
       notice: t('.success', name: furniture_placement.furniture.model_name.human )
     )
   end
@@ -24,7 +24,7 @@ class FurniturePlacementsController < ApplicationController
     )
   end
 
-  def furniture_placement
+  helper_method def furniture_placement
     @furniture_placement ||= find_or_build.tap do |furniture_placement|
       authorize(furniture_placement)
     end
