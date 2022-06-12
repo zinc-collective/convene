@@ -8,7 +8,7 @@ Feature: Spaces: Invitations: Responding to Invitations
     And the "Team Avatar" Space has a Space Owner "appa@example.com"
 
   @built @andromeda
-  Scenario: Accepting an Invitation as an Un-Authenticated Neighbor
+  Scenario: Accepting an Invitation as the invited Un-Authenticated Neighbor
     Given a "Water Tribe" Space
     And the "Water Tribe" Space has a Space Owner "katara@example.com"
     And an Invitation to the "Team Avatar" Space is sent by Space Owner "appa@example.com"
@@ -19,7 +19,7 @@ Feature: Spaces: Invitations: Responding to Invitations
     Then the Invitation to "katara@example.com" for the "Team Avatar" Space has a status of "accepted"
 
   @built @andromeda
-  Scenario: Accepting an Invitation as an Authenticated Neighbor
+  Scenario: Accepting an Invitation as the invited Authenticated Neighbor
     Given a "Water Tribe" Space
     And the "Water Tribe" Space has a Space Owner "katara@example.com"
     And an Invitation to the "Team Avatar" Space is sent by Space Owner "appa@example.com"
@@ -31,7 +31,32 @@ Feature: Spaces: Invitations: Responding to Invitations
     Then the Invitation to "katara@example.com" for the "Team Avatar" Space has a status of "accepted"
 
   @built @andromeda
-  Scenario: Accepting an Invitation as a Guest
+  Scenario: Accepting an Invitation as the un-invited Un-Authenticated Neighbor
+    Given a "Fire Nation" Space
+    And the "Fire Nation" Space has a Space Owner "ozai@example.com"
+    And an Invitation to the "Team Avatar" Space is sent by Space Owner "appa@example.com"
+      | name   | email              |
+      | Katara | katara@example.com |
+    When the Invitation to "katara@example.com" for the "Team Avatar" Space is accepted by the Neighbor "ozai@example.com"
+    Then the Neighbor "katara@example.com" does not become a Space Member of the "Team Avatar" Space
+    And the Neighbor "ozai@example.com" does not become a Space Member of the "Team Avatar" Space
+    # And the Invitation to "katara@example.com" for the "Team Avatar" Space has a status of "invited"
+
+  @built @andromeda
+  Scenario: Accepting an Invitation as the un-invited Authenticated Neighbor
+    Given a "Fire Nation" Space
+    And the "Fire Nation" Space has a Space Owner "ozai@example.com"
+    And an Invitation to the "Team Avatar" Space is sent by Space Owner "appa@example.com"
+      | name   | email              |
+      | Katara | katara@example.com |
+    And the Neighbor "ozai@example.com" is signed in to the "Team Avatar" Space
+    When the Invitation to "katara@example.com" for the "Team Avatar" Space is accepted by the Neighbor "ozai@example.com"
+    Then the Neighbor "katara@example.com" does not become a Space Member of the "Team Avatar" Space
+    And the Neighbor "ozai@example.com" does not become a Space Member of the "Team Avatar" Space
+    # And the Invitation to "katara@example.com" for the "Team Avatar" Space has a status of "invited"
+
+  @built @andromeda
+  Scenario: Accepting an Invitation as the invited Guest
     Given an Invitation to the "Team Avatar" Space is sent by Space Owner "appa@example.com"
       | name | email            |
       | Zuko | zuko@example.com |

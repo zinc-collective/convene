@@ -6,7 +6,7 @@ const Space = require("../lib/Space");
 const Actor = require("../lib/Actor");
 const { SpaceEditPage, SignInPage } = require("../harness/Pages");
 const Component = require("../harness/Component");
-const { assertDisplayed } = require("../support/assertDisplayed");
+const { assertDisplayed, refuteDisplayed } = require("../support/assertDisplayed");
 
 When(
   "an {invitation} to {a} {space} is sent by {actor}",
@@ -44,7 +44,8 @@ When(
           .signOut(this.driver)
           .then(() => invitation.accept(this.driver))
           .then(() => actor.authenticationCode())
-          .then((code) => new SignInPage(this.driver, space).submitCode(code));
+          .then((code) => new SignInPage(this.driver, space).submitCode(code))
+          .catch((e) => console.error(e));
       }
     });
   }
@@ -76,10 +77,9 @@ Then(
   "{a} {actor} becomes {a} {actor} of {a} {space}",
   /**
    * @param {Actor} actor
-   * @param {Actor} role
    * @param {Space} space
    */
-  function (_, actor, _2, role, _3, space) {
+  function (_, actor, _2, _role, _3, space) {
     return (
       actor
         .signIn(this.driver, space)
@@ -90,10 +90,24 @@ Then(
             'header a.--configure[aria_label="Configure Space"]'
           ))
         )
-
     );
   }
 );
+
+Then('{a} {actor} does not become {a} {actor} of {a} {space}', function (_a, actor, _a2, _role, _a3, space) {
+  // Write code here that turns the phrase above into concrete actions
+  return (
+    actor
+      .signIn(this.driver, space)
+      // @todo Refactor to live in the harness
+      .then(() =>
+        refuteDisplayed(new Component(
+          this.driver,
+          'header a.--configure[aria_label="Configure Space"]'
+        ))
+      )
+  );
+});
 
 Then(
   "all other Invitations to {actor} for {a} {space} no longer have {a} status of {string}",
