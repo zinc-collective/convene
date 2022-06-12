@@ -40,7 +40,7 @@ When(
       if (signedIn) {
         return invitation.accept(this.driver);
       } else {
-        actor
+        return actor
           .signOut(this.driver)
           .then(() => invitation.accept(this.driver))
           .then(() => actor.authenticationCode())

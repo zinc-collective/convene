@@ -5,6 +5,7 @@ const getUrls = require("get-urls");
 const { MePage, SignInPage } = require("../harness/Pages");
 
 const MailServer = require("./MailServer");
+const PersonNavigationComponent = require("../harness/PersonNavigationComponent");
 
 class Actor {
   constructor(type, email) {
@@ -19,15 +20,17 @@ class Actor {
    */
   signIn(driver, space) {
     return this.isSignedIn(driver).then((signedIn) => {
-      if(signedIn) { return this }
-      const signInPage = new SignInPage(driver, space);
-      return signInPage
+      if (signedIn) {
+        return this;
+      }
+
+      return new SignInPage(driver, space)
         .visit()
         .then((page) => page.submitEmail(this.email))
         .then(() => this.authenticationUrl())
         .then((authUrl) => driver.get(authUrl))
         .then(() => this);
-    })
+    });
   }
 
   signOut(driver) {
@@ -70,10 +73,9 @@ class Actor {
    * @returns {Promise<boolean>}
    */
   isSignedIn(driver) {
-    return new MePage(driver).visit()
-      .then((page) => page.email())
+    return new PersonNavigationComponent(driver, ".profile-menu")
+      .signedInEmail()
       .then((email) => this.email == email)
-      .then((result) => { driver.navigate().back(); return result })
   }
 
   /**

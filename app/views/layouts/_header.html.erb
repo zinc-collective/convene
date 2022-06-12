@@ -2,7 +2,7 @@
   <%= render partial: "breadcrumbs" %>
 
 
-  <nav aria-label="Menu" class="profile-menu">
+  <nav aria-label="Menu" class="profile-menu" data-person-email="<%= current_person.email %>">
     <%- if current_person.authenticated? %>
       <%= link_to "Sign out", space_authenticated_session_path(current_space), method: :delete, class: 'sign-out' %>
     <%- else %>
