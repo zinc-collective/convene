@@ -6,6 +6,7 @@ const Space = require("../lib/Space");
 const Actor = require("../lib/Actor");
 const { SpaceEditPage, SignInPage } = require("../harness/Pages");
 const Component = require("../harness/Component");
+const { assertDisplayed } = require("../support/assertDisplayed");
 
 When(
   "an {invitation} to {a} {space} is sent by {actor}",
@@ -35,10 +36,17 @@ When(
    * @param {Actor} actor
    */
   function (_, invitation, _2, space, _3, actor) {
-    return actor.signOut(this.driver)
-      .then(() => invitation.accept(this.driver))
-      .then(() => actor.authenticationCode())
-      .then((code) => new SignInPage(this.driver, space).submitCode(code))
+    return actor.isSignedIn(this.driver).then((signedIn) => {
+      if (signedIn) {
+        return invitation.accept(this.driver);
+      } else {
+        actor
+          .signOut(this.driver)
+          .then(() => invitation.accept(this.driver))
+          .then(() => actor.authenticationCode())
+          .then((code) => new SignInPage(this.driver, space).submitCode(code));
+      }
+    });
   }
 );
 
@@ -77,12 +85,12 @@ Then(
         .signIn(this.driver, space)
         // @todo Refactor to live in the harness
         .then(() =>
-          new Component(
+          assertDisplayed(new Component(
             this.driver,
             'header a.--configure[aria_label="Configure Space"]'
-          ).isDisplayed()
+          ))
         )
-        .then((displayed) => assert(displayed))
+
     );
   }
 );
