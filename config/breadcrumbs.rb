@@ -38,7 +38,7 @@ end
 
 crumb :edit_room do |room|
   link t('helpers.submit.room.edit', {room_name: room.name}), edit_space_room_path(room.space, room)
-  parent :root
+  parent :edit_space, room.space
 end
 
 crumb :waiting_room do |waiting_room|
