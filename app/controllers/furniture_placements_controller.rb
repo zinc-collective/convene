@@ -1,7 +1,6 @@
 class FurniturePlacementsController < ApplicationController
   def update
     furniture_placement.update!(furniture_placement_params)
-
     redirect_to(
       edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
       notice: t('.success', name: furniture_placement.furniture.model_name.human )
