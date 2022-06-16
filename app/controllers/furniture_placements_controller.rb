@@ -23,7 +23,7 @@ class FurniturePlacementsController < ApplicationController
     )
   end
 
-  def furniture_placement
+  helper_method def furniture_placement
     @furniture_placement ||= find_or_build.tap do |furniture_placement|
       authorize(furniture_placement)
     end

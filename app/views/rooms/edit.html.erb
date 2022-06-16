@@ -8,11 +8,8 @@
     <%= t('rooms.no_furniture_notice') %>
   <%- end %>
 
-  <%- room.furniture_placements.each do |furniture_placement| %>
-    <section>
-      <%= render partial: "furniture_placements/form", locals: { furniture_placement: furniture_placement } %>
-    </section>
-  <%- end %>
+  <%= render room.furniture_placements %>
+
 </fieldset>
 
 <fieldset>
