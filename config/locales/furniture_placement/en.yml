@@ -8,8 +8,6 @@ en:
       success: Furniture '%{name}' successfully removed! 🎉
     form:
       destroy: "Remove Furniture 🗑️"
-  furniture_placement:
-    edit_icon: ⚙️
   helpers:
     submit:
       furniture_placement:

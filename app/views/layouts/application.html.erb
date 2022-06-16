@@ -18,15 +18,17 @@
 
 
     <footer class="flex-wrap">
-      <%- if content_for?(:footer) %>
-        <div class="basis-full">
-          <%= content_for :footer%>
-        </div>
-      <%- end %>
 
       <%= render partial: "breadcrumbs" %>
 
       <div>
+        <%- if policy(current_space).edit? %>
+          <%- if editing? %>
+            <%= link_to t('icons.edit'), polymorphic_path(current_space, { editing: nil  }), class: 'no-underline' %>
+          <%- else %>
+            <%= link_to t('icons.edit'), polymorphic_path(current_space, { editing: true }), class: 'no-underline' %>
+          <%- end %>
+        <%- end %>
         <%= link_to "Convene", "https://convene.zinc.coop/" %>: Space to Work, Play, or Simply Be
       </div>
       <div>

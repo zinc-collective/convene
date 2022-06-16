@@ -10,18 +10,5 @@
       <% end %>
     </ul>
   </div>
-
-
-  <%- content_for :footer do %>
-    <%- if policy(room).edit? %>
-      <p class="text-center">
-        <%- if editing? %>
-          <%= link_to t('helpers.submit.room.edit', room_name: room.name), polymorphic_path([room.space, room], { editing: nil  }), class: 'no-underline' %>
-        <%- else %>
-          <%= link_to t('helpers.submit.room.edit', room_name: room.name), polymorphic_path([room.space, room], { editing: true }), class: 'no-underline' %>
-        <%- end %>
-      </p>
-    <%- end %>
-  <%- end %>
 </div>
 
