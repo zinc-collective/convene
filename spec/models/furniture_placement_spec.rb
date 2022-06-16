@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe FurniturePlacement do
   it { is_expected.to belong_to(:room) }
   it { is_expected.to delegate_method(:space).to(:room) }
+  it { is_expected.to have_many(:items).with_foreign_key(:location_id).inverse_of(:location) }
 
   describe '#furniture' do
     it 'returns the configured piece of furniture' do
