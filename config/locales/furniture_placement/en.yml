@@ -1,8 +1,4 @@
 en:
-  furniture_placement:
-    edit: "⚙️"
-    help_text:
-      edit: "Edit %{furniture_name}"
   furniture_placements:
     update:
       success: Furniture '%{name}' successfully updated! 🎉

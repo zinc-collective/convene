@@ -1,11 +1,5 @@
-
-
 <%= turbo_frame_tag furniture_placement, data: { turbo: true } do %>
-  <%- if local_assigns[:editing] %>
-    <%= link_to t('furniture_placement.edit'), [:edit, furniture_placement.space, furniture_placement.room, furniture_placement], class: 'no-underline', title: t('furniture_placement.help_text.edit', furniture_name: furniture_placement.furniture.model_name.human) %>
-  <%- end %>
-
   <%= render partial: furniture_placement.furniture.in_room_template,
             locals: { furniture: furniture_placement.furniture, room: furniture_placement.room,
-                      person: current_person, editing: local_assigns[:editing] } %>
+                      person: current_person } %>
 <%- end %>
