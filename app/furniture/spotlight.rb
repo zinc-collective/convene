@@ -14,4 +14,12 @@ class Spotlight
   def image
     Image.find_or_initialize_by(location: placement, space: placement.space)
   end
+
+  def file=file
+    image.file.attach(file)
+  end
+
+  def attribute_names
+    %w[file]
+  end
 end
