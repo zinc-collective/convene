@@ -50,7 +50,7 @@
     "@rails/activestorage": "^7.0.3",
     "@rails/ujs": "^7.0.2",
     "@tailwindcss/typography": "^0.5.2",
-    "@webpack-cli/serve": "^1.6.1",
+    "@webpack-cli/serve": "^1.7.0",
     "autoprefixer": "^10.4.4",
     "event-target-shim": "^6.0.2",
     "postcss": "^8.4.14",
