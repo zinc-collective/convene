@@ -1,5 +1,10 @@
+
 <%= turbo_frame_tag furniture_placement, data: { turbo: true } do %>
+  <%- if editing? %>
+    <%= link_to t('furniture_placement.edit_icon'), [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement] %>
+  <%- end %>
   <%= render partial: furniture_placement.furniture.in_room_template,
             locals: { furniture: furniture_placement.furniture, room: furniture_placement.room,
                       person: current_person } %>
+
 <%- end %>
