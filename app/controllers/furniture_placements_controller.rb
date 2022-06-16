@@ -1,18 +1,17 @@
 class FurniturePlacementsController < ApplicationController
   def update
-    furniture_placement.update!(furniture_placement_params)
-    redirect_to(
-      edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
-      notice: t('.success', name: furniture_placement.furniture.model_name.human )
-    )
+    respond_to do |format|
+      furniture_placement.update!(furniture_placement_params)
+      format.turbo_stream
+    end
   end
 
   def create
-    furniture_placement.save!
-    redirect_to(
-      edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
-      notice: t('.success', name: furniture_placement.furniture.model_name.human.titleize )
-    )
+    respond_to do |format|
+      furniture_placement.save!
+
+      format.turbo_stream
+    end
   end
 
   def destroy

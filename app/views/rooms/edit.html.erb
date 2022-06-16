@@ -1,27 +1,3 @@
 <% breadcrumb :edit_room, room %>
 
 <%= render partial: 'form', locals: { room: room } %>
-
-<fieldset>
-  <h3>Existing Furniture</h3>
-  <%- if room.furniture_placements.empty? %>
-    <%= t('rooms.no_furniture_notice') %>
-  <%- end %>
-
-  <%= render room.furniture_placements %>
-
-</fieldset>
-
-<fieldset>
-  <h3><%= t('rooms.place_furniture_heading') %></h3>
-  <%- new_furniture_placement = room.furniture_placements.new %>
-  <%- if policy(new_furniture_placement).new? %>
-    <%= form_with model: new_furniture_placement, url: space_room_furniture_placements_path(room.space, room, new_furniture_placement), local: true do | placement_form | %>
-      <%= placement_form.hidden_field :slot, value: room.furniture_placements.count %>
-      <%= placement_form.select :furniture_kind, Furniture::REGISTRY.keys.map { |k| [k.to_s.titleize, k] } %>
-      <footer>
-        <%= placement_form.submit %>
-      </footer>
-    <%- end %>
-  <%- end %>
-</fieldset>

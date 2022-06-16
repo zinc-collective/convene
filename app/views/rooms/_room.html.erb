@@ -1,6 +1,24 @@
-<div class="flex flex-col content-between justify-end">
+<div class="flex flex-col content-between justify-end" data-turbo="true">
   <div class="grow">
-    <%= render room.furniture_placements %>
+    <section id="furniture_placements">
+      <%= render room.furniture_placements %>
+    </section>
+
+    <%- if editing? %>
+      <%- new_furniture_placement = room.furniture_placements.new %>
+      <%- if policy(new_furniture_placement).new? %>
+        <fieldset>
+          <h3><%= t('rooms.place_furniture_heading') %></h3>
+          <%= form_with model: [room.space, room, new_furniture_placement], local: false do | placement_form | %>
+            <%= placement_form.hidden_field :slot, value: room.furniture_placements.count %>
+            <%= placement_form.select :furniture_kind, Furniture::REGISTRY.keys.map { |k| [k.to_s.titleize, k] } %>
+            <footer>
+              <%= placement_form.submit %>
+            </footer>
+          </fieldset>
+        <%- end %>
+      <%- end %>
+    <%- end %>
   </div>
 
   <div class="px-6 pt-3">
