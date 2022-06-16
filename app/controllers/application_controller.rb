@@ -46,13 +46,17 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method def editing?
-    return true if params[:editing]
+    return true if params[:editing] == 'true'
 
     false
   end
 
   def default_url_options
-    super.merge({ editing: params[:editing] })
+    options = super
+
+    return options unless editing?
+
+    options.merge({ editing: params[:editing] })
   end
 
   def api_request?
