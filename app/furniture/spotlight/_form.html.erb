@@ -1,7 +1,0 @@
-<%- furniture = furniture_placement.furniture%>
-<%- if policy(furniture.image).create? %>
-  <%= render "spotlight/images/form",
-      room: furniture_placement.room,
-      furniture: furniture_placement.furniture,
-      image: furniture.image %>
-<%- end %>
