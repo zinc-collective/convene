@@ -216,7 +216,7 @@ GEM
     nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    pg (1.3.5)
+    pg (1.4.0)
     plaid (15.8.0)
       faraday (~> 1.0, >= 1.0.1)
     pry (0.13.1)
@@ -365,7 +365,7 @@ DEPENDENCIES
   jsbundling-rails
   listen (~> 3.7)
   lockbox (= 1.0.0)
-  pg (~> 1.3)
+  pg (~> 1.4)
   plaid (~> 15.8)
   pry-byebug
   puma (~> 5.6)
