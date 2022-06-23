@@ -15,6 +15,7 @@ class EmbeddedForm
     form_id = form_url
               .gsub('https://airtable.com/', '')
               .gsub('/embed', '')
+              .gsub('embed/', '')
 
     "https://airtable.com/embed/#{form_id}"
   end
