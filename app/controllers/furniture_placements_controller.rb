@@ -26,8 +26,8 @@ class FurniturePlacementsController < ApplicationController
         end
         format.turbo_stream do
           render(turbo_stream
-              .append(:furniture_placements, partial: 'furniture_placement/furniture_placment', locals: { furniture_placement: furniture_placement })
-              .replace(:new_furniture_placement, partial: 'furniture_placements/new', locals: { furniture_placement: room.furniture_placements.new }))
+              .append(:furniture_placements, partial: 'furniture_placements/furniture_placement', locals: { furniture_placement: furniture_placement })
+              .replace(:new_furniture_placement, partial: 'furniture_placements/new', locals: { furniture_placement: current_room.furniture_placements.new }))
         end
       end
     end
