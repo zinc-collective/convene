@@ -1,7 +1,7 @@
 
 import { Controller } from "@hotwired/stimulus"
-import VideoBridge from "./video_bridge";
-import { application } from "../../javascript/controllers/application"
+import VideoBridge from "./video_bridge.js";
+import { application } from "../../javascript/controllers/application.js"
 
 class VideoBridgeController extends Controller {
   static targets = [ "wrapper" ]

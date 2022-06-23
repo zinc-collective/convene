@@ -1,9 +1,12 @@
 // Entry point for the build script in your package.json
 
-require("@rails/ujs").start()
-require("@rails/activestorage").start()
+import Rails from "@rails/ujs"
+Rails.start()
 
-require("./channels")
+import * as ActiveStorage from "@rails/activestorage"
+ActiveStorage.start()
+
+import "./channels/index.js"
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -16,4 +19,4 @@ require("./channels")
 // Disable Turbo by default, and let us instead enable it on a per-element basis.
 import { Turbo } from "@hotwired/turbo-rails"
 Turbo.session.drive = false
-import "./controllers"
+import "./controllers/index.js"

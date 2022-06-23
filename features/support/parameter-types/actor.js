@@ -1,6 +1,5 @@
-const { defineParameterType } = require("@cucumber/cucumber");
-const Actor = require("../../lib/Actor.js");
-
+import { defineParameterType } from "@cucumber/cucumber";
+import Actor from "../../lib/Actor.js";
 // Actors are the people or sytems our test suite emulates as it
 // interacts with Convene.
 // We have several Actor types:
@@ -9,19 +8,16 @@ const Actor = require("../../lib/Actor.js");
 // - Space Member (Someone who is authenticated and is a Member of the Space)
 // - Space Owner (Someone who is authenticated and has moderator rights within the Space)
 defineParameterType({
-  name: "actor",
-  regexp: /(Guest|Space Member|Space Owner|Neighbor)( "[^"]*")?/,
-  transformer: function (actorType, email) {
-    email = formatEmail(actorType, email);
-
-    if (email !== "guest@example.com") {
-      email = this.upsertTestId(email);
-    }
-
-    return new Actor(actorType, email);
-  },
+    name: "actor",
+    regexp: /(Guest|Space Member|Space Owner|Neighbor)( "[^"]*")?/,
+    transformer: function (actorType, email) {
+        email = formatEmail(actorType, email);
+        if (email !== "guest@example.com") {
+            email = this.upsertTestId(email);
+        }
+        return new Actor(actorType, email);
+    },
 });
-
 /**
  * Infers the email from the actorType if necessary; then removes the string matching regex slop.
  * @param {String} actorType
@@ -29,6 +25,6 @@ defineParameterType({
  * @returns {String} the email
  */
 function formatEmail(actorType, email = undefined) {
-  email = email || `${actorType.toLowerCase()}@example.com`;
-  return email.trim().replace(/\s/, "-").replace(/"/g, "");
+    email = email || `${actorType.toLowerCase()}@example.com`;
+    return email.trim().replace(/\s/, "-").replace(/"/g, "");
 }

@@ -1,10 +1,8 @@
-const Model = require("./Model");
-
+import Model from "./Model.js";
 class Furniture extends Model {
-  constructor({ type }) {
-    super();
-    this.type = type;
-  }
+    constructor({ type }) {
+        super();
+        this.type = type;
+    }
 }
-
-module.exports = Furniture;
+export default Furniture;
