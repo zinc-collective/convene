@@ -5,4 +5,11 @@ function assertDisplayed(component) {
     .isDisplayed()
     .then((result) => assert(result, `${component.selector}`));
 }
+
+function refuteDisplayed(component) {
+  return component
+    .isDisplayed()
+    .then((result) => assert(!result, `${component.selector}`))
+}
 exports.assertDisplayed = assertDisplayed;
+exports.refuteDisplayed = refuteDisplayed;

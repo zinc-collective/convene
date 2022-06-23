@@ -7,6 +7,10 @@ class PersonNavigationComponent extends Component {
     return this.signOutLink().click().then(() => this )
   }
 
+  signedInEmail() {
+    return this.el().then((el) => el.getAttribute('data-person-email'))
+  }
+
   /**
    * @returns {Promise<Component>}
    */
