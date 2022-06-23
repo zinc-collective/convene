@@ -26,7 +26,7 @@ class UtilityHookup < ApplicationRecord
 
   attribute :old_configuration, :json, default: {}
   validates_associated :utility
-  lockbox_encrypts :configuration, type: :json
+  has_encrypted :configuration, type: :json
 
   after_initialize do
     self.configuration ||= {}
