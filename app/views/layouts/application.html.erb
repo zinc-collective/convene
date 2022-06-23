@@ -24,9 +24,9 @@
       <div>
         <%- if policy(current_space).edit? %>
           <%- if editing? %>
-            <%= link_to t('icons.edit'), polymorphic_path(current_space, { editing: nil  }), class: 'no-underline' %>
+            <%= link_to t('icons.edit'), polymorphic_path(current_space, { editing: nil  }), class: 'no-underline', aria: { label: "Stop Configuring Space" } %>
           <%- else %>
-            <%= link_to t('icons.edit'), polymorphic_path(current_space, { editing: true }), class: 'no-underline' %>
+            <%= link_to t('icons.edit'), polymorphic_path(current_space, { editing: true }), class: 'no-underline', aria: { label: "Configure Space"} %>
           <%- end %>
         <%- end %>
         <%= link_to "Convene", "https://convene.zinc.coop/" %>: Space to Work, Play, or Simply Be
