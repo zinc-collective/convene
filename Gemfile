@@ -56,7 +56,7 @@ gem 'lockbox', '1.0.0'
 gem 'rotp', '~> 6.2'
 
 # Use postgresql for data persistence
-gem 'pg', '~> 1.3'
+gem 'pg', '~> 1.4'
 
 # Use S3 for file storage
 gem 'aws-sdk-s3', '~> 1.114', require: false
