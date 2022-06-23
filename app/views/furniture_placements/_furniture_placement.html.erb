@@ -5,6 +5,11 @@
                   [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement],
                   title: "Configure #{furniture_placement.furniture.model_name.human.titleize}",
                   class: 'no-underline absolute -top-4'  %>
+      <%= link_to t('icons.remove'),
+                  [furniture_placement.room.space, furniture_placement.room, furniture_placement],
+                  title: "Remove #{furniture_placement.furniture.model_name.human.titleize}",
+                  data: { turbo_method: :delete },
+                  class: 'no-underline absolute -top-4 left-6'  %>
     <%- end %>
     <%= render partial: furniture_placement.furniture.in_room_template,
               locals: { furniture: furniture_placement.furniture, room: furniture_placement.room,
