@@ -1,9 +1,13 @@
 <%= turbo_frame_tag furniture_placement do %>
-  <%- if editing? %>
-    <%= link_to t('icons.edit'), [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement], class: 'no-underline', title: "Configure #{furniture_placement.furniture.model_name.human.titleize}" %>
-  <%- end %>
-  <%= render partial: furniture_placement.furniture.in_room_template,
-            locals: { furniture: furniture_placement.furniture, room: furniture_placement.room,
-                      person: current_person } %>
-
+  <section class="mt-4 relative">
+    <%- if editing? %>
+      <%= link_to t('icons.edit'),
+                  [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement],
+                  title: "Configure #{furniture_placement.furniture.model_name.human.titleize}",
+                  class: 'no-underline absolute -top-4'  %>
+    <%- end %>
+    <%= render partial: furniture_placement.furniture.in_room_template,
+              locals: { furniture: furniture_placement.furniture, room: furniture_placement.room,
+                        person: current_person } %>
+  </section>
 <%- end %>
