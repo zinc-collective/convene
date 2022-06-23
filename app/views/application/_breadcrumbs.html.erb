@@ -1,5 +1,5 @@
 <div>
-  <%- if policy(current_space).edit? %>
+  <%- if policy(current_space).edit? && editing? %>
     <%= link_to "", edit_space_path(current_space), class: "icon --configure", aria_label: "Configure Space", role: "img" %>
   <% end %>
   <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; ", semantic: true, display_single_fragment: true %>

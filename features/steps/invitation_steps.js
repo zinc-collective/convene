@@ -87,7 +87,7 @@ Then(
         .then(() =>
           assertDisplayed(new Component(
             this.driver,
-            'header a.--configure[aria_label="Configure Space"]'
+            '*[aria-label="Configure Space"]'
           ))
         )
     );

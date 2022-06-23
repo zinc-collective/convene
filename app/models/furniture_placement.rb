@@ -11,7 +11,7 @@ class FurniturePlacement < ApplicationRecord
   belongs_to :room
   delegate :space, to: :room
 
-  has_many :items, as: :location
+  has_many :items, inverse_of: :location, foreign_key: :location_id
 
   attribute :furniture_kind, :string
 

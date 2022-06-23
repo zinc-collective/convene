@@ -45,6 +45,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method def editing?
+    return true if params[:editing] == 'true'
+
+    false
+  end
+
+  def default_url_options
+    options = super
+
+    return options unless editing?
+
+    options.merge({ editing: params[:editing] })
+  end
+
   def api_request?
     request.content_type == 'application/json'
   end
