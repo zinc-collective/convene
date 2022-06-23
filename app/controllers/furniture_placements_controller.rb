@@ -31,10 +31,18 @@ class FurniturePlacementsController < ApplicationController
 
   def destroy
     furniture_placement.destroy!
-    redirect_to(
-      edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
-      notice: t('.success', name: furniture_placement.furniture.model_name.human.titleize)
-    )
+    respond_to do |format|
+      format.html do
+        redirect_to(
+          space_room_path(furniture_placement.room.space, furniture_placement.room),
+          notice: t('.success', name: furniture_placement.furniture.model_name.human.titleize)
+        )
+      end
+
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.remove(furniture_placement)
+      end
+    end
   end
 
   helper_method def furniture_placement
