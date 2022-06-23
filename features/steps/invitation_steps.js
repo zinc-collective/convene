@@ -79,7 +79,7 @@ Then(
         .then(() =>
           new Component(
             this.driver,
-            'header a.--configure[aria_label="Configure Space"]'
+            '*[aria-label="Configure Space"]'
           ).isDisplayed()
         )
         .then((displayed) => assert(displayed))
