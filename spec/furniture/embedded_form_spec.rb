@@ -8,7 +8,10 @@ RSpec.describe EmbeddedForm do
       embedded_form = build(:embedded_form, form_url: 'https://airtable.com/shrCnrBzflvzDIlvg')
       expect(embedded_form.embeddable_form_url).to eql('https://airtable.com/embed/shrCnrBzflvzDIlvg')
 
-      embedded_form =  build(:embedded_form, form_url: 'https://airtable.com/shrCnrBzflvzDIlvg/embed')
+      embedded_form = build(:embedded_form, form_url: 'https://airtable.com/shrCnrBzflvzDIlvg/embed')
+      expect(embedded_form.embeddable_form_url).to eql('https://airtable.com/embed/shrCnrBzflvzDIlvg')
+
+      embedded_form = build(:embedded_form, form_url: 'https://airtable.com/embed/shrCnrBzflvzDIlvg')
       expect(embedded_form.embeddable_form_url).to eql('https://airtable.com/embed/shrCnrBzflvzDIlvg')
     end
   end
