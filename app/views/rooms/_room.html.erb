@@ -1,6 +1,17 @@
-<div class="flex flex-col content-between justify-end">
+<div class="flex flex-col content-between justify-end" data-turbo="true">
   <div class="grow">
-    <%= render room.furniture_placements %>
+    <section id="furniture_placements">
+      <%= render room.furniture_placements %>
+    </section>
+
+    <%- if editing? %>
+      <%- new_furniture_placement = room.furniture_placements.new %>
+
+      <%- if policy(new_furniture_placement).new? %>
+        <%= render "furniture_placements/new", furniture_placement: new_furniture_placement %>
+
+      <%- end %>
+    <%- end %>
   </div>
 
   <div class="px-6 pt-3">
