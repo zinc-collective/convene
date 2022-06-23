@@ -18,7 +18,7 @@ RSpec.describe '/spaces/:space_slug/room/:room_slug/furniture_placements', type:
       placement = room.furniture_placements.last
       expect(placement.furniture).to be_a(MarkdownTextBlock)
       expect(placement.slot).to eql(0)
-      expect(response).to redirect_to(edit_space_room_path(space, room))
+      expect(response).to redirect_to([space, room])
     end
   end
   describe 'PATCH /spaces/:space_slug/rooms/:room_slug/furniture_placements/:id' do
@@ -63,7 +63,7 @@ RSpec.describe '/spaces/:space_slug/room/:room_slug/furniture_placements', type:
 
       it 'allows destroying a placement' do
         delete placement_path
-        expect(response).to redirect_to(edit_space_room_path(space, room))
+        expect(response).to redirect_to([space, room])
         expect{ placement.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
