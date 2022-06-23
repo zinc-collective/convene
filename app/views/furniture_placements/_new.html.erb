@@ -1,4 +1,4 @@
-<fieldset>
+<fieldset id="new_furniture_placement">
   <h3><%= t('rooms.place_furniture_heading') %></h3>
   <%= form_with model: [furniture_placement.room.space, furniture_placement.room, furniture_placement] do | placement_form | %>
     <%= placement_form.hidden_field :slot, value: furniture_placement.room.furniture_placements.count %>

@@ -24,11 +24,7 @@ class FurniturePlacementsController < ApplicationController
             notice: t('.success', name: furniture_placement.furniture.model_name.human)
           )
         end
-        format.turbo_stream do
-          render(turbo_stream
-              .append(:furniture_placements, partial: 'furniture_placements/furniture_placement', locals: { furniture_placement: furniture_placement })
-              .replace(:new_furniture_placement, partial: 'furniture_placements/new', locals: { furniture_placement: current_room.furniture_placements.new }))
-        end
+        format.turbo_stream
       end
     end
   end
