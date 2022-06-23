@@ -1,3 +1,5 @@
+
+
 <%= turbo_frame_tag furniture_placement, data: { turbo: true } do %>
   <%- if editing? %>
     <%= link_to t('icons.edit'), [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement], class: 'no-underline' %>
