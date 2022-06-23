@@ -1,16 +1,35 @@
 class FurniturePlacementsController < ApplicationController
   def update
     respond_to do |format|
-      furniture_placement.update!(furniture_placement_params)
-      format.turbo_stream
+      if furniture_placement.update!(furniture_placement_params)
+        format.html do
+          redirect_to(
+            space_room_path(furniture_placement.room.space, furniture_placement.room),
+            notice: t('.success', name: furniture_placement.furniture.model_name.human)
+          )
+        end
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(furniture_placement)
+        end
+      end
     end
   end
 
   def create
     respond_to do |format|
-      furniture_placement.save!
-
-      format.turbo_stream
+      if furniture_placement.save!
+        format.html do
+          redirect_to(
+            space_room_path(furniture_placement.room.space, furniture_placement.room),
+            notice: t('.success', name: furniture_placement.furniture.model_name.human)
+          )
+        end
+        format.turbo_stream do
+          render(turbo_stream
+              .append(:furniture_placements, partial: 'furniture_placement/furniture_placment', locals: { furniture_placement: furniture_placement })
+              .replace(:new_furniture_placement, partial: 'furniture_placements/new', locals: { furniture_placement: room.furniture_placements.new }))
+        end
+      end
     end
   end
 
