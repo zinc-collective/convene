@@ -6,6 +6,7 @@ This piece of furniture is for the Delivery Company to provide folks who are nea
 and if they want they can add their order and ?save some cash? (Need to check w/April re: most compelling hook).
 
 `@unimplemented-steps` `@unstarted`
+
 ## Scenario: Offering a Delivery Order Form
 
 - Given a "Delivery Order Form" Furniture in the Entrance Hall to "Dev's Deliveries" Space
@@ -21,14 +22,15 @@ and if they want they can add their order and ?save some cash? (Need to check w/
 - Then a Delivery Order Form Order may be placed by Guests to the Entrance Hall to "Dev's Deliveries" Space
 
 `@unimplemented-steps` `@unstarted`
+
 ## Scenario: Placing a Delivery Order Form Order
 
-  - Given a "Delivery Order Form" Furniture in the Entrance Hall to "Dev's Deliveries" Space with the following configuration:
-    | order_email | orders@devs-deliveries.example.com |
-  - And a Delivery Order Form Menu "Zee's Munchies Merchants" is in "Dev's Deliveries" Space with the following Menu Items:
-    | name | price | description | photo |
-    | A God Damn Pizza | $8.95 | It's a 12" margherita: Tomato's, Moz, Basil. WARNING: Does NOT travel well. No refunds. | <pizza-photo> |
-    | Some Mother Effin' Granola| $2.99 | Maple syrup, dried cranberries, cinnamon, cardamom, almonds, and oats. What more can you want?! | <granola-photo> |
+- Given a "Delivery Order Form" Furniture in the Entrance Hall to "Dev's Deliveries" Space with the following configuration:
+  | order_email | orders@devs-deliveries.example.com |
+- And a Delivery Order Form Menu "Zee's Munchies Merchants" is in "Dev's Deliveries" Space with the following Menu Items:
+  | name | price | description | photo |
+  | A God Damn Pizza | $8.95 | It's a 12" margherita: Tomato's, Moz, Basil. WARNING: Does NOT travel well. No refunds. | <pizza-photo> |
+  | Some Mother Effin' Granola| $2.99 | Maple syrup, dried cranberries, cinnamon, cardamom, almonds, and oats. What more can you want?! | <granola-photo> |
 - And the following Delivery Order Form is open in Dev's Deliveries" Space:
   | name | Downtown Oakland! Get Your Munchies! |
   | date | 2022-03-05 |

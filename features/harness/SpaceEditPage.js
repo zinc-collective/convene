@@ -1,9 +1,8 @@
-const { ThenableWebDriver } = require("selenium-webdriver");
-const Page = require("./Page");
-const Room = require("../lib/Room");
-const RoomCardComponent = require("./RoomCardComponent");
-const Component = require("./Component");
-
+import { ThenableWebDriver } from "selenium-webdriver";
+import Page from "./Page.js";
+import Room from "../lib/Room.js";
+import RoomCardComponent from "./RoomCardComponent.js";
+import Component from "./Component.js";
 class SpaceEditPage extends Page {
   /**
    * @param {ThenableWebDriver} driver
@@ -13,14 +12,12 @@ class SpaceEditPage extends Page {
     super(driver);
     this.space = space;
   }
-
   /**
    * @returns {string}
    */
   path() {
     return `/spaces/${this.space.slug}/edit`;
   }
-
   /**
    * @param {Room} room
    * @returns {RoomCardComponent}
@@ -28,13 +25,11 @@ class SpaceEditPage extends Page {
   roomCard(room) {
     return new RoomCardComponent(this.driver, room);
   }
-
   createRoom({ room }) {
     return new RoomFormComponent(this.driver)
       .fillIn(room)
       .then((c) => c.submit());
   }
-
   /**
    * @param {string} slug
    * @returns {Promise<this>}
@@ -45,21 +40,18 @@ class SpaceEditPage extends Page {
       .then(() => this.newHookupForm().submit())
       .then(() => this);
   }
-
   /**
    * @returns {Component}
    */
   newUtilityHookupSelect() {
     return this.newUtilityHookupForm().component("select");
   }
-
   /**
    * @returns {Component}
    */
   newUtilityHookupForm() {
     return this.component(".new-hookup-form");
   }
-
   /**
    * @returns {Promise<this>}
    */
@@ -80,12 +72,10 @@ class SpaceEditPage extends Page {
       )
       .finally(() => this);
   }
-
   hasInvitation({ invitation, status }) {
     const matcher = new RegExp(`<${invitation.emailAddress}>.*${status}`);
     return this.visit().then((page) => page.hasContent(matcher));
   }
-
   /**
    * @returns {Promise<this>}
    */
@@ -94,7 +84,6 @@ class SpaceEditPage extends Page {
       invitations.map((invitation) => this.invite(invitation))
     ).finally(() => this);
   }
-
   /**
    * @returns {Component}
    */
@@ -102,5 +91,4 @@ class SpaceEditPage extends Page {
     return this.component(".new-invitation-form");
   }
 }
-
-module.exports = SpaceEditPage;
+export default SpaceEditPage;

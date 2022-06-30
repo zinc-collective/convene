@@ -6,5 +6,4 @@ class Model {
     return this;
   }
 }
-
-module.exports = Model;
+export default Model;

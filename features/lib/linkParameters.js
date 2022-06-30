@@ -1,8 +1,5 @@
-const Space = require("./Space");
-/**
- * Merges extracted parameter types together for convenience within step definitions
- */
-module.exports = function linkParameters({
+import Space from "./Space.js";
+export default (function linkParameters({
   space = new Space({ name: "System Test" }),
   accessLevel,
   room,
@@ -14,4 +11,4 @@ module.exports = function linkParameters({
     accessLevel,
     room,
   };
-};
+});

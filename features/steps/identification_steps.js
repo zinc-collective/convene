@@ -1,9 +1,8 @@
-const assert = require("assert").strict;
-const { Given, When, Then } = require("@cucumber/cucumber");
-
-const { SignInPage, SpacePage, MePage } = require("../harness/Pages");
-const { Space, Actor } = require("../lib");
-
+import assert$0 from "assert";
+import { Given, When, Then } from "@cucumber/cucumber";
+import { SignInPage, SpacePage, MePage } from "../harness/Pages.js";
+import { Space, Actor } from "../lib/index.js";
+const assert = assert$0.strict;
 Given(
   "an unauthenticated {actor} has requested to be identified via Email",
   async function (actor) {
@@ -13,16 +12,14 @@ Given(
     return signInPage.submitEmail(actor.email);
   }
 );
-
 Given(
   "{a} {actor} is signed in to {a} {space}",
   function (a, actor, a2, space) {
     return actor
       .signOut(this.driver)
-      .then(() => actor.signIn(this.driver, space))
+      .then(() => actor.signIn(this.driver, space));
   }
 );
-
 Given(
   "a {actor} Authenticated Session",
   /** @param {Actor} actor */
@@ -32,7 +29,6 @@ Given(
     return this.actor.signIn(this.driver, space);
   }
 );
-
 When(
   "the unauthenticated {actor} opens the Identification Verification Link emailed to them",
   /** @param {Actor} actor */
@@ -40,7 +36,6 @@ When(
     return actor.authenticationUrl().then((url) => this.driver.get(url));
   }
 );
-
 When(
   "the unauthenticated {actor} provides the Identification Code emailed to them",
   function (actor) {
@@ -49,11 +44,9 @@ When(
       .then((code) => new SignInPage(this.driver).submitCode(code));
   }
 );
-
 When("the Authenticated Person Signs Out", function () {
   return this.actor.signOut(this.driver);
 });
-
 Then(
   "the {actor} is Verified as the Owner of that Email Address",
   async function (actor) {
@@ -63,14 +56,12 @@ Then(
     assert.strictEqual(await person.email, this.actor.email);
   }
 );
-
 Then("the {actor} has become Authenticated", async function (actor) {
   const mePage = new MePage(this.driver);
   await mePage.visit();
   const person = await mePage.person();
   assert.ok(await person.id);
 });
-
 Then("the Authenticated Person becomes a {actor}", async function (actor) {
   const mePage = await new MePage(this.driver).visit();
   const person = await mePage.person();

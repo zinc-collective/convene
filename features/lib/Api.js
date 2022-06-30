@@ -1,10 +1,12 @@
-const axios = require("axios");
-const applyCaseMiddleware = require("axios-case-converter").default;
-const Space = require("./Space");
-const Room = require("./Room");
-const AuthenticationMethod = require("./AuthenticationMethod");
-const SpaceMembership = require("./SpaceMembership");
-const { camelCase } = require("lodash");
+import axios from "axios";
+import axiosCaseConverter from "axios-case-converter";
+import Space from "./Space.js";
+import Room from "./Room.js";
+import AuthenticationMethod from "./AuthenticationMethod.js";
+import SpaceMembership from "./SpaceMembership.js";
+import lodash from "lodash";
+const applyCaseMiddleware = axiosCaseConverter.default;
+const { camelCase } = lodash;
 class Api {
   constructor(host, apiKey) {
     this.host = host;
@@ -20,14 +22,12 @@ class Api {
       })
     );
   }
-
   /**
    * @returns {Repository}
    */
   spaces() {
     return new Repository({ client: this, endpoint: "/spaces", model: Space });
   }
-
   /**
    *
    * @param {Space} space
@@ -40,7 +40,6 @@ class Api {
       model: Room,
     });
   }
-
   /**
    *
    * @returns {Repository}
@@ -52,7 +51,6 @@ class Api {
       model: AuthenticationMethod,
     });
   }
-
   /**
    * @returns {Repository}
    */
@@ -63,7 +61,6 @@ class Api {
       model: SpaceMembership,
     });
   }
-
   post(path, model) {
     return this.axios.post(path, model.asParams()).catch(function (error) {
       console.error(`Can't POST to ${path}`);
@@ -86,20 +83,17 @@ class Api {
     });
   }
 }
-exports.Api = Api;
 class Repository {
   constructor({ client, endpoint, model }) {
     this.client = client;
     this.endpoint = endpoint;
     this.model = model;
   }
-
   create(model) {
     return this.client
       .post(this.endpoint, model)
       .then((response) => this.castToModel(response));
   }
-
   /**
    *
    * @param {any} object
@@ -110,21 +104,18 @@ class Repository {
       .get(`/spaces/${object.space.slug}${this.endpoint}/${object.slug}`)
       .then((response) => this.castToModel(response));
   }
-
   update(model) {
     return this.client
       .put(`${this.endpoint}/${model.slug}`, model)
       .then((response) => this.castToModel(response));
   }
-
   findOrCreateBy(data) {
     return this.create(data);
   }
-
   castToModel(response) {
     const model = this.model;
-
     const data = response.data[camelCase(model.name)] || response.data;
     return new model(data);
   }
 }
+export { Api };

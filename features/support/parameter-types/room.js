@@ -1,6 +1,5 @@
-const { defineParameterType } = require("@cucumber/cucumber");
-const { Room } = require("../../lib");
-
+import { defineParameterType } from "@cucumber/cucumber";
+import { Room } from "../../lib/index.js";
 // This injects a Room class into steps with named rooms (i.e.) `the "Ada" Room` and
 // steps that mention `Room` in isolation.
 defineParameterType({
@@ -18,12 +17,11 @@ defineParameterType({
   // In the meantime, adding a capture-group around "Room" ensures that the Room
   // class has a string provided to it.
   regexp: /("[^"]*" )?(Room)/,
-  transformer: (roomName = "") => new Room({ name: roomName.trim().replace(/"/g, "") }),
+  transformer: (roomName = "") =>
+    new Room({ name: roomName.trim().replace(/"/g, "") }),
 });
-
-
 defineParameterType({
   name: "entranceHall",
   regexp: /Entrance Hall/,
-  transformer: () => new Room({ name: "Entrance Hall" })
-})
+  transformer: () => new Room({ name: "Entrance Hall" }),
+});

@@ -1,21 +1,18 @@
 class AccessCode {
   constructor(validity) {
-    this.validity = validity
+    this.validity = validity;
   }
-
   get value() {
-    if(this.isValid()) {
-      return "secret"
+    if (this.isValid()) {
+      return "secret";
     } else if (this.validity == "empty") {
-      return ""
+      return "";
     } else {
-      return "wrong"
+      return "wrong";
     }
   }
-
   isValid() {
-    return this.validity == "correct" || this.validity == "valid"
+    return this.validity == "correct" || this.validity == "valid";
   }
 }
-
-module.exports = AccessCode;
+export default AccessCode;

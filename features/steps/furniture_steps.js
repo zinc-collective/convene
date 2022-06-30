@@ -1,7 +1,6 @@
-const { Given, Then, DataTable } = require("@cucumber/cucumber");
-const { assertDisplayed } = require("../support/assertDisplayed");
-const { FurnitureComponent } = require("../harness/FurnitureComponent");
-
+import { Given, Then, DataTable } from "@cucumber/cucumber";
+import { assertDisplayed } from "../support/assertDisplayed.js";
+import { FurnitureComponent } from "../harness/FurnitureComponent.js";
 const dataTableToHash = function (dataTable) {
   return dataTable.rows().reduce((attributes, [name, value]) => {
     attributes[name] = value;
@@ -27,13 +26,11 @@ Given(
         furnitureAttributes: dataTableToHash(dataTable),
       },
     ];
-
     return this.api()
       .rooms(space)
       .update(room.assign({ furniturePlacementsAttributes }));
   }
 );
-
 Then(
   "{a} {furniture} is rendered with:",
   /**

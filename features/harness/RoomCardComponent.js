@@ -1,14 +1,9 @@
-const { By, ThenableWebDriver } = require("selenium-webdriver");
-
-const Component = require("./Component");
-
-const Room = require("../lib/Room");
-const AccessCode = require("../lib/AccessCode");
-
-const RoomPage = require("./RoomPage");
-const RoomEditPage = require("./RoomEditPage");
-const WaitingRoomPage = require("./WaitingRoomPage");
-
+import { By } from "selenium-webdriver";
+import Component from "./Component.js";
+import Room from "../lib/Room.js";
+import RoomPage from "./RoomPage.js";
+import RoomEditPage from "./RoomEditPage.js";
+import WaitingRoomPage from "./WaitingRoomPage.js";
 class RoomCardComponent extends Component {
   /**
    * @param {ThenableWebDriver} driver
@@ -19,7 +14,6 @@ class RoomCardComponent extends Component {
     // TODO: Try to build a room from the passed in Element if undefined
     this.room = room;
   }
-
   get selector() {
     if (this._selector && this._selector.value) {
       return this._selector;
@@ -28,32 +22,26 @@ class RoomCardComponent extends Component {
     if (this.room.slug) {
       selectorParts.push(`[data-slug="${this.room.slug}"]`);
     }
-
     if (this.room.accessLevel) {
       selectorParts.push(this.room.accessLevel.attributeSelector);
     }
-
     return (this.selector = By.css(selectorParts.join("")));
   }
-
   set selector(value) {
     this._selector = value;
   }
-
   /**
    * @returns {Promise<boolean>}
    */
   isLocked() {
     return this.lockedIcon().isDisplayed();
   }
-
   /**
    * @returns {Component}
    */
   lockedIcon() {
     return this.component(".icon.--lock");
   }
-
   /**
    * @param {AccessCode | undefined } accessCode
    * @returns {Promise<RoomPage>}
@@ -63,7 +51,6 @@ class RoomCardComponent extends Component {
       .click()
       .then(() => this.maybeEnterAccessCode(accessCode, RoomPage));
   }
-
   /**
    * @param {string | undefined } accessCode
    * @param {RoomPage | WaitingRoomPage} expectedPage
@@ -78,14 +65,12 @@ class RoomCardComponent extends Component {
       expectedPage
     );
   }
-
   /**
    * @returns {Component}
    */
   enterRoomButton() {
     return this.component(".room-door_enter");
   }
-
   /**
    * @param {string | undefined } accessCode
    * @returns {Promise<RoomEditPage>}
@@ -95,7 +80,6 @@ class RoomCardComponent extends Component {
       .click()
       .then(() => this.maybeEnterAccessCode(accessCode, RoomEditPage));
   }
-
   /**
    * @returns {Component}
    */
@@ -103,5 +87,4 @@ class RoomCardComponent extends Component {
     return this.component(".--configure");
   }
 }
-
-module.exports = RoomCardComponent;
+export default RoomCardComponent;

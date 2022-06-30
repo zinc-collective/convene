@@ -1,16 +1,14 @@
-const Page = require("./Page");
-const { last } = require("lodash");
-
+import Page from "./Page.js";
+import lodash from "lodash";
+const { last } = lodash;
 const valueFromText = (text) => last(text.split(": "));
 class MePage extends Page {
   path() {
     return "/me";
   }
-
   async person() {
     return { id: this.id(), name: this.name(), email: this.email() };
   }
-
   /**
    * @return {Promise<string>}
    */
@@ -19,7 +17,6 @@ class MePage extends Page {
       .text()
       .then(valueFromText);
   }
-
   /**
    * @return {Promise<string>}
    */
@@ -28,7 +25,6 @@ class MePage extends Page {
       .text()
       .then(valueFromText);
   }
-
   /**
    * @return {Promise<string>}
    */
@@ -38,5 +34,4 @@ class MePage extends Page {
       .then(valueFromText);
   }
 }
-
-module.exports = MePage;
+export default MePage;

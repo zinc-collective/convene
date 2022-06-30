@@ -1,3 +1,5 @@
-module.exports = function() {
-  return process.env.APP_ROOT_URL ? process.env.APP_ROOT_URL : 'http://localhost:3000';
-}
+export default (function () {
+  return process.env.APP_ROOT_URL
+    ? process.env.APP_ROOT_URL
+    : "http://localhost:3000";
+});

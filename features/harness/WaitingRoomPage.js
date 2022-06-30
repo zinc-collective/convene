@@ -1,10 +1,4 @@
-const RoomPage = require("./RoomPage");
-
-const Component = require("./Component");
-
-const AccessCode = require("../lib/AccessCode");
-const Room = require("../lib/Room");
-
+import RoomPage from "./RoomPage.js";
 class WaitingRoomPage extends RoomPage {
   /**
    * @param {AccessCode} accessCode
@@ -19,14 +13,12 @@ class WaitingRoomPage extends RoomPage {
       )
       .catch(() => this);
   }
-
   /**
    * @returns {Component}
    */
   submitButton() {
     return this.component("[type='submit']");
   }
-
   /**
    * @returns {Component}
    */
@@ -40,5 +32,4 @@ class WaitingRoomPage extends RoomPage {
     return this.component(".field_with_errors");
   }
 }
-
-module.exports = WaitingRoomPage;
+export default WaitingRoomPage;

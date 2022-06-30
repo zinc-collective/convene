@@ -1,18 +1,16 @@
-const slugify = require("./slugify");
-const AccessLevel = require("./AccessLevel");
-const Model = require("./Model");
-
-class Room extends Model{
+import slugify from "./slugify.js";
+import AccessLevel from "./AccessLevel.js";
+import Model from "./Model.js";
+class Room extends Model {
   /**
    * @type {AccessLevel | undefined}
    */
   accessLevel;
-
   /**
    * @param {string} roomName
    */
   constructor({ name, slug, id }) {
-    super()
+    super();
     this.name = name;
     this.slug = slug;
     if (name !== "Room") {
@@ -20,11 +18,9 @@ class Room extends Model{
     }
     this.id = id;
   }
-
   reinitialize({ accessLevel }) {
     this.accessLevel = accessLevel;
   }
-
   asParams() {
     return {
       room: {
@@ -35,5 +31,4 @@ class Room extends Model{
     };
   }
 }
-
-module.exports = Room;
+export default Room;

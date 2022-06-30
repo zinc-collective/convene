@@ -1,6 +1,5 @@
-const Component = require("./Component");
-const Room = require("../lib/Room");
-
+import Component from "./Component.js";
+import Room from "../lib/Room.js";
 class RoomCardComponent extends Component {
   /**
    * @param {ThenableWebDriver} driver
@@ -16,8 +15,7 @@ class RoomCardComponent extends Component {
    * @returns {Promise<this>}
    */
   async fillIn(room) {
-    return this
+    return this;
   }
 }
-
-module.exports = RoomCardComponent;
+export default RoomCardComponent;

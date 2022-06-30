@@ -1,16 +1,16 @@
-const Component = require("./Component");
+import Component from "./Component.js";
 class PersonNavigationComponent extends Component {
   /**
    * @returns {Promise<PersonNavigationComponent>}
    */
   signOut() {
-    return this.signOutLink().click().then(() => this )
+    return this.signOutLink()
+      .click()
+      .then(() => this);
   }
-
   signedInEmail() {
-    return this.el().then((el) => el.getAttribute('data-person-email'))
+    return this.el().then((el) => el.getAttribute("data-person-email"));
   }
-
   /**
    * @returns {Promise<Component>}
    */
@@ -18,5 +18,4 @@ class PersonNavigationComponent extends Component {
     return this.component(".sign-out");
   }
 }
-
-module.exports = PersonNavigationComponent;
+export default PersonNavigationComponent;

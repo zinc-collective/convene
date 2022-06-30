@@ -1,8 +1,7 @@
-const appUrl = require("../lib/appUrl");
-const { ThenableWebDriver, By } = require("selenium-webdriver");
-const Component = require("./Component");
-const PersonNavigationComponent = require("./PersonNavigationComponent");
-
+import appUrl from "../lib/appUrl.js";
+import { By } from "selenium-webdriver";
+import Component from "./Component.js";
+import PersonNavigationComponent from "./PersonNavigationComponent.js";
 class Page {
   /**
    * @param {ThenableWebDriver} driver
@@ -11,7 +10,6 @@ class Page {
     this.baseUrl = appUrl();
     this.driver = driver;
   }
-
   /**
    * Factory for building {Component}s
    * @param {string} selector
@@ -21,14 +19,12 @@ class Page {
   component(selector, componentClass = Component) {
     return new componentClass(this.driver, selector);
   }
-
   /**
    * @returns {PersonNavigationComponent}
    */
   personNavigation() {
     return this.component(".profile-menu", PersonNavigationComponent);
   }
-
   /**
    * Goes directly to the page, as defined in the path method.
    * @returns {Promise<this>}
@@ -36,27 +32,24 @@ class Page {
   visit() {
     return this.url()
       .then((url) => this.driver.get(url))
-      .then(() => this)
+      .then(() => this);
   }
-
   /**
    * @returns {Promise<string>}
    */
   url() {
-    return Promise.resolve(`${this.baseUrl}${this.path()}`)
+    return Promise.resolve(`${this.baseUrl}${this.path()}`);
   }
-
   /**
    * @param {RegExp} content
    * @returns {Promise<Boolean>}
    */
   hasContent(content) {
-    return this.driver.findElement(By.tagName('body')).getText().then(
-      (body) =>
-        (body.match(content))
-    )
+    return this.driver
+      .findElement(By.tagName("body"))
+      .getText()
+      .then((body) => body.match(content));
   }
-
   /**
    * @throws if not defined in child classes
    */
@@ -64,5 +57,4 @@ class Page {
     throw "NotImplemented";
   }
 }
-
-module.exports = Page;
+export default Page;

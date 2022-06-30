@@ -1,11 +1,12 @@
-const Component = require("./Component");
+import Component from "./Component.js";
 class LiveStreamFurnitureComponent extends Component {
   constructor(driver, { provider, channel }) {
-    super(driver, `*[data-furniture-kind="livestream"][data-provider="${provider}"]` )
-
+    super(
+      driver,
+      `*[data-furniture-kind="livestream"][data-provider="${provider}"]`
+    );
     this.provider = provider;
     this.channel = channel;
   }
 }
-
-module.exports = LiveStreamFurnitureComponent;
+export default LiveStreamFurnitureComponent;

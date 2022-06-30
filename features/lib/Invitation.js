@@ -1,8 +1,9 @@
-const getUrls = require("get-urls");
-const { last } = require("lodash");
-const { ThenableWebDriver } = require("selenium-webdriver");
-const InvitationResponsePage = require("../harness/InvitationResponsePage");
-
+import getUrls from "get-urls";
+import lodash from "lodash";
+import { ThenableWebDriver } from "selenium-webdriver";
+import InvitationResponsePage from "../harness/InvitationResponsePage.js";
+import MailServer from "./MailServer.js";
+const { last } = lodash;
 /**
  *
  * @param {String} text
@@ -16,37 +17,32 @@ function findUrl(text, regex) {
     }
   }
 }
-const MailServer = require("./MailServer");
-
 class Invitation {
   constructor(emailAddress) {
     this.emailAddress = emailAddress;
   }
-
   /**
    * @returns {Promise<Boolean>}
    */
   wasDelivered() {
     return this.latestDelivery().then((email) => !!email);
   }
-
   /**
    * @returns {Promise<MailServerEmail>}
    */
   latestDelivery() {
     return this.emails().then(last);
   }
-
   /**
    *
    * @param {ThenableWebDriver} driver
    * @returns
    */
   accept(driver) {
-    return new InvitationResponsePage(driver, this).visit()
-      .then((page) => page.submit())
+    return new InvitationResponsePage(driver, this)
+      .visit()
+      .then((page) => page.submit());
   }
-
   /**
    * @returns {Promise<String>}
    */
@@ -55,7 +51,6 @@ class Invitation {
       findUrl(email.text, /spaces\/.*\/invitations\/.*\/rsvp/)
     );
   }
-
   /**
    * @returns {Promise<MailServerEmail[]>}
    */
@@ -65,7 +60,6 @@ class Invitation {
       text: (text) => /You've been invited/.test(text),
     });
   }
-
   /**
    * @returns {MailServer}
    */
@@ -73,5 +67,4 @@ class Invitation {
     return (this._emailServer = this._emailServer || new MailServer());
   }
 }
-
-module.exports = Invitation;
+export default Invitation;

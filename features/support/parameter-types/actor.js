@@ -1,6 +1,5 @@
-const { defineParameterType } = require("@cucumber/cucumber");
-const Actor = require("../../lib/Actor.js");
-
+import { defineParameterType } from "@cucumber/cucumber";
+import Actor from "../../lib/Actor.js";
 // Actors are the people or sytems our test suite emulates as it
 // interacts with Convene.
 // We have several Actor types:
@@ -13,15 +12,12 @@ defineParameterType({
   regexp: /(Guest|Space Member|Space Owner|Neighbor)( "[^"]*")?/,
   transformer: function (actorType, email) {
     email = formatEmail(actorType, email);
-
     if (email !== "guest@example.com") {
       email = this.upsertTestId(email);
     }
-
     return new Actor(actorType, email);
   },
 });
-
 /**
  * Infers the email from the actorType if necessary; then removes the string matching regex slop.
  * @param {String} actorType
