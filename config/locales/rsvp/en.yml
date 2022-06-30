@@ -5,6 +5,7 @@ en:
       summary: "You were invited to '%{space_name}' by %{invitor_name} on %{invitation_date}"
       accept: "Join %{space_name}"
       ignore: "Ignore this invitation"
+      ignored_message: "You have ignored this invitation. You will no longer receive invitations to %{space_name}."
     update:
       header: "Confirm your access to the email address '%{email}'"
       summary: "Let's make sure you really are the person %{invitor_name} thinks you are! We've sent you an email with a passcode that will expire in 10 minutes."
