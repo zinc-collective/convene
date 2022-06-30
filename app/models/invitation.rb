@@ -19,7 +19,8 @@ class Invitation < ApplicationRecord
   # accepted - receiver accepted the invitation
   # rejected - receivers rejected the invitation
   # expired - Invitation was sent too long ago
-  STATUSES = %w[pending sent accepted rejected expired].freeze
+  # ignored - receiver ignored the invitation
+  STATUSES = %w[pending sent accepted rejected expired ignored].freeze
 
   attribute :status, :string
   validates :status, inclusion: STATUSES
