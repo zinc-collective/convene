@@ -37,7 +37,7 @@
     "dotenv": "^16.0.1",
     "fs-extra": "^10.1.0",
     "geckodriver": "^3.0.1",
-    "get-urls": "^10.0.1",
+    "get-urls": "^11.0.0",
     "lodash": "^4.17.21",
     "promise-retry": "^2.0.1",
     "selenium-webdriver": "^4.3.0",
