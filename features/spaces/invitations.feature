@@ -39,7 +39,6 @@ Feature: Spaces: Invitations
     And an Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "pending"
     And an Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "expired"
 
-
   @unstarted @andromeda
   Scenario: Invitations remain even if the Invitor was Removed from the Space
     Given the "System Test" Space has a Space Owner "soon-to-leave@example.com"
@@ -50,8 +49,16 @@ Feature: Spaces: Invitations
     When the Invitation to "aang-the-avatar@example.com" is Accepted
     Then the "System Test" Space has a Space Member "aang-the-avatar@example.com"
 
-
   @unstarted @unscheduled
   Scenario: Inviting new Members via SMS
     When a Space Owner invites a new Space Member via SMS
     Then an Invitation is sent to that SMS
+
+  @unstarted @andromeda
+  Scenario: Ignoring invitations
+    Given an Invitation to the "System Test" Space was sent by Space Owner "space-owner@example.com"
+      | name | email                       |
+      | Aang | aang-the-avatar@example.com |
+    When the Invitation to "aang-the-avatar@example.com" is Ignored
+    Then the Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "ignored"
+    And no further Invitations can be sent to "aang-the-avatar@example.com" for the "System Test" Space
