@@ -13,11 +13,11 @@ export { AccessCode };
 export { concatRegExp };
 export { linkParameters };
 export default {
-    Actor,
-    Space,
-    Room,
-    AccessLevel,
-    AccessCode,
-    concatRegExp,
-    linkParameters
+  Actor,
+  Space,
+  Room,
+  AccessLevel,
+  AccessCode,
+  concatRegExp,
+  linkParameters,
 };

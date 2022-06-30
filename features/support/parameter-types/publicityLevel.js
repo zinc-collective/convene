@@ -2,11 +2,11 @@ import { defineParameterType } from "@cucumber/cucumber";
 // Defines whether a Room may be discovered or not.
 // See: https://github.com/zinc-collective/convene/issues/39
 defineParameterType({
-    name: "publicityLevel",
-    regexp: /(Unlisted|Listed)/,
+  name: "publicityLevel",
+  regexp: /(Unlisted|Listed)/,
 });
 class PublicityLevel {
-    constructor(level) {
-        this.level = level;
-    }
+  constructor(level) {
+    this.level = level;
+  }
 }

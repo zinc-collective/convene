@@ -4,7 +4,7 @@ import { defineParameterType } from "@cucumber/cucumber";
 // See: https://github.com/zinc-collective/convene/issues/40
 // See: https://github.com/zinc-collective/convene/issues/41
 defineParameterType({
-    name: "accessLevel",
-    regexp: /(Unlocked|Internal|Locked)/,
-    transformer: (level) => new AccessLevel(level),
+  name: "accessLevel",
+  regexp: /(Unlocked|Internal|Locked)/,
+  transformer: (level) => new AccessLevel(level),
 });

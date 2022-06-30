@@ -15,12 +15,12 @@ export { SpaceEditPage };
 export { RoomEditPage };
 export { WaitingRoomPage };
 export default {
-    Page,
-    SpacePage,
-    MePage,
-    SignInPage,
-    RoomPage,
-    SpaceEditPage,
-    RoomEditPage,
-    WaitingRoomPage
+  Page,
+  SpacePage,
+  MePage,
+  SignInPage,
+  RoomPage,
+  SpaceEditPage,
+  RoomEditPage,
+  WaitingRoomPage,
 };

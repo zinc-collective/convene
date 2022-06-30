@@ -7,28 +7,38 @@ const { filter, last } = lodash;
  * @see {@link https://github.com/maildev/maildev/}
  */
 class MailServer {
-    /**
-     * @param {MailQuery} query
-     * @returns {Promise<MailServerEmail[]>}
-     */
-    emailsWhere(query) {
-        return promiseRetry((retry) => {
-            return this.emails()
-                .then((emails) => filter(emails, (email) => email.headers.to === query.to))
-                .then((emails) => filter(emails, (email) => query.text ? query.text(email.text) : true))
-                .then((emails) => (emails.length > 0 ? emails : retry()));
-        }, { maxRetryTime: 1000 })
-            .catch(() => { throw `Couldn't find email ${JSON.stringify(query)}`; });
-    }
-    /**
-     * Retrieves all emails sent
-     * @returns {Promise<MailServerEmail[]>}
-     */
-    emails() {
-        return axios
-            .get("http://localhost:1080/email")
-            .then((res) => res.data)
-            .catch((err) => console.log(err));
-    }
+  /**
+   * @param {MailQuery} query
+   * @returns {Promise<MailServerEmail[]>}
+   */
+  emailsWhere(query) {
+    return promiseRetry(
+      (retry) => {
+        return this.emails()
+          .then((emails) =>
+            filter(emails, (email) => email.headers.to === query.to)
+          )
+          .then((emails) =>
+            filter(emails, (email) =>
+              query.text ? query.text(email.text) : true
+            )
+          )
+          .then((emails) => (emails.length > 0 ? emails : retry()));
+      },
+      { maxRetryTime: 1000 }
+    ).catch(() => {
+      throw `Couldn't find email ${JSON.stringify(query)}`;
+    });
+  }
+  /**
+   * Retrieves all emails sent
+   * @returns {Promise<MailServerEmail[]>}
+   */
+  emails() {
+    return axios
+      .get("http://localhost:1080/email")
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  }
 }
 export default MailServer;

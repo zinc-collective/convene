@@ -6,6 +6,7 @@ Whether a video highlighting your favorite book, a picture of the sunset, or a v
 with a mind-blowing animated GIF; Spotlights illuminate the best you have to offer!
 
 `@andromeda` `@unimplemented-steps`
+
 ## Scenario: Hero Image
 
 Hero' images<sup>[1] [2]</sup> are a mainstay of web design, providing a clear place for people who enter a space to direct their attention.

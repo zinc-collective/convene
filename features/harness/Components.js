@@ -5,7 +5,7 @@ export { Component };
 export { RoomCardComponent };
 export { PersonNavigationComponent };
 export default {
-    Component,
-    RoomCardComponent,
-    PersonNavigationComponent
+  Component,
+  RoomCardComponent,
+  PersonNavigationComponent,
 };
