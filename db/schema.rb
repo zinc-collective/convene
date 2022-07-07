@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_11_024831) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_07_003459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_enum :invitation_status, [
+    "pending",
+    "sent",
+    "accepted",
+    "rejected",
+    "expired",
+    "ignored",
+  ], force: :cascade
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -89,11 +98,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_11_024831) do
     t.uuid "space_id"
     t.string "name", null: false
     t.string "email", null: false
-    t.string "status", default: "pending", null: false
     t.datetime "last_sent_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "invitor_id"
+    t.enum "status", default: "pending", null: false, enum_type: "invitation_status"
     t.index ["invitor_id"], name: "index_invitations_on_invitor_id"
     t.index ["space_id"], name: "index_invitations_on_space_id"
   end
