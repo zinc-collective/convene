@@ -4,5 +4,9 @@ FactoryBot.define do
     name { FFaker::Name.name }
     email { "#{name.downcase.gsub(' ', '-')}@example.com" }
     invitor factory: :person
+
+    trait :ignored do
+      status { "ignored" }
+    end
   end
 end

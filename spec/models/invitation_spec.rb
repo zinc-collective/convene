@@ -24,4 +24,16 @@ RSpec.describe Invitation, type: :model do
       expect(invitation.invitor_display_name).to be_blank
     end
   end
+
+  describe "#save" do
+    let(:invitee) { create(:person) }
+    let!(:ignored_invitation) { create(:invitation, :ignored, email: invitee.email) }
+    let(:ignored_space) { ignored_invitation.space }
+
+    it "won't let you create invitations for a person who has ignored the space" do
+      invitation = build(:invitation, email: invitee.email, space: ignored_space)
+      expect(invitation.save).to eq(false)
+      expect(invitation.errors).to be_added(:email, :invitee_ignored_space)
+    end
+  end
 end
