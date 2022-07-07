@@ -9,7 +9,7 @@ RSpec.describe Invitation, type: :model do
   it { is_expected.to validate_presence_of(:name) }
   it "defines status as an enum" do
     is_expected.to define_enum_for(:status).with_values(Invitation.statuses)
-      .backed_by_column_of_type(:string)
+      .backed_by_column_of_type(:enum)
   end
 
   describe '#invitor_display_name' do
