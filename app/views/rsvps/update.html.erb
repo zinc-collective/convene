@@ -1,6 +1,8 @@
 <% breadcrumb :rsvp, rsvp %>
 
-<% if rsvp.invitation.status != 'ignored' %>
+<% if rsvp.invitation.ignored? %>
+  <%= render partial: "ignored", locals: { rsvp: rsvp } %>
+<% else %>
   <h2><%= t('.header', email: rsvp.invitation.email)%></h2>
   <p><%= t('.summary', invitor_name: rsvp.invitation.invitor_display_name) %></p>
 
@@ -9,9 +11,4 @@
     <%= render "text_field", form: rsvp_form, attribute: :one_time_password %>
     <%= rsvp_form.submit t('.accept', space_name: rsvp.space.name) %>
   <%- end %>
-<% else %>
-  <p>
-    <%= t('.ignore', space_name: rsvp.space.name) %>
-  </p>
-
 <% end %>

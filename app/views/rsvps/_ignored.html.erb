@@ -1,0 +1,10 @@
+<p>
+  <%= t('.ignored_message', space_name: rsvp.invitation.space.name) %>
+</p>
+<p>
+  <%= button_to t('.unignore'),
+                [rsvp.space, rsvp.invitation, rsvp],
+                params: { rsvp: { status: 'sent' } },
+                class: '--neutral w-full'
+  %>
+</p>

@@ -8,9 +8,8 @@ class Rsvp
   delegate :space, to: :invitation
 
   def update(attributes)
-    if attributes[:status] == 'ignored'
-      invitation.update(status: attributes[:status])
-      return false
+    if %w[ignored sent].include?(attributes[:status])
+      return invitation.update(status: attributes[:status])
     end
 
     person = Person.create_with(name: invitation.name).find_or_create_by(email: invitation.email)
