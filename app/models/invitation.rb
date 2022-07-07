@@ -20,14 +20,16 @@ class Invitation < ApplicationRecord
   # rejected - receivers rejected the invitation
   # expired - Invitation was sent too long ago
   # ignored - receiver ignored the invitation
-  STATUSES = %w[pending sent accepted rejected expired ignored].freeze
+  enum status: {
+    pending: "pending",
+    sent: "sent",
+    accepted: "accepted",
+    rejected: "rejected",
+    expired: "expired",
+    ignored: "ignored"
+  }
 
-  attribute :status, :string
-  validates :status, inclusion: STATUSES
-
-  def accepted?
-    status.to_sym == :accepted
-  end
+  validates :status, inclusion: { in: statuses.keys }
 
   # @!method invitor_display_name
   #   @see Person#display_name
