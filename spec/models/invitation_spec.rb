@@ -6,8 +6,11 @@ RSpec.describe Invitation, type: :model do
   it { is_expected.to belong_to(:space).inverse_of(:invitations) }
   it { is_expected.to belong_to(:invitor).class_name('Person').inverse_of(:invitations) }
   it { is_expected.to validate_presence_of(:email) }
-  it { is_expected.to validate_inclusion_of(:status).in_array(Invitation::STATUSES) }
   it { is_expected.to validate_presence_of(:name) }
+  it "defines status as an enum" do
+    is_expected.to define_enum_for(:status).with_values(Invitation.statuses)
+      .backed_by_column_of_type(:string)
+  end
 
   describe '#invitor_display_name' do
     it 'is the invitors display name' do
