@@ -38,4 +38,13 @@ class Invitation < ApplicationRecord
   attribute :last_sent_at, :datetime
   attribute :created_at, :datetime
   attribute :updated_at, :datetime
+
+  validate :not_ignored_space
+
+private
+  def not_ignored_space
+   return unless Invitation.ignored.where(space: space, email: email).exists?
+
+   errors.add(:email, :invitee_ignored_space)
+  end
 end
