@@ -1,6 +1,6 @@
 <% breadcrumb :rsvp, rsvp %>
 
-<% if rsvp.invitation.status == 'ignored' %>
+<% if rsvp.invitation.ignored? %>
   <p>
     <%= t('.ignored_message', space_name: rsvp.invitation.space.name) %>
   </p>
