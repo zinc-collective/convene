@@ -54,9 +54,9 @@ Feature: Spaces: Invitations
     When a Space Owner invites a new Space Member via SMS
     Then an Invitation is sent to that SMS
 
-  @unstarted @andromeda
+  @andromeda
   Scenario: Ignoring invitations
-    Given an Invitation to the "System Test" Space was sent by Space Owner "space-owner@example.com"
+    Given an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
       | name | email                       |
       | Aang | aang-the-avatar@example.com |
     When the Invitation to "aang-the-avatar@example.com" is Ignored
