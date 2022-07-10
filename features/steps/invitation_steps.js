@@ -10,6 +10,11 @@ import {
   refuteDisplayed,
 } from "../support/assertDisplayed.js";
 const assert = assert$0.strict;
+
+When('{a} {invitation} is Ignored', function (a, invitation) {
+  return invitation.ignore(this.driver);
+});
+
 When(
   "an {invitation} to {a} {space} is sent by {actor}",
   { timeout: 90000 },
@@ -50,6 +55,12 @@ When(
     });
   }
 );
+
+Then('no further Invitations can be sent to {string} for {a} {space}', function (string, a, space) {
+  // Write code here that turns the phrase above into concrete actions
+  return 'pending';
+});
+
 Then(
   "an {invitation} for {a} {space} is delivered",
   /**
