@@ -19,14 +19,14 @@ Convene secure, affordable, always-available digital Spaces where anyone can
 
 ## Overview
 
-Convene is an _Operating System_ for **Community Owned Digital Infrastructure**. Once installed
-to the cloud, you access Convene via a web browser or on-device apps.
+Convene is an _Operating System_ for **Community Owned Digital Infrastructure**. 
+Once deployed to a server, Convene is accessed by any web browser.
 
 Convene serves as a community-owned, more ethical alternative to investor-owned online tools like
 SquareSpace, Etsy, Patreon, Zoom, Yelp, and more.
 
-A Convene Deployment is a _Neighborhood_, which People can create _Spaces_ in, and fill those _Spaces_
-with _Furniture_ to meet their collective digital needs. For example
+A Convene Deployment is a _Neighborhood_. People create _Spaces_ in a _Neighborhood_, and fill those _Spaces_
+with _Furniture_ to meet their collective digital needs. For example:
 
 - A Regional Co-operative network could provide their members with shared payments and video communication infrastructure.
 - A Farmer's Market could provide professionally designed websites and social media presences for their vendors.
