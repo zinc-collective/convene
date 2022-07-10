@@ -36,13 +36,25 @@ class Invitation {
   /**
    *
    * @param {ThenableWebDriver} driver
-   * @returns
+   * @returns {Promise<InvitationResponsePage>}
    */
   accept(driver) {
     return new InvitationResponsePage(driver, this)
       .visit()
       .then((page) => page.submit());
   }
+  /**
+   *
+   * @param {ThenableWebDriver} driver
+   * @returns {Promise<InvitationResponsePage>}
+   */
+   ignore(driver) {
+    return new InvitationResponsePage(driver, this)
+      .visit()
+      .then((page) => page.ignoreButton().click());
+  }
+
+
   /**
    * @returns {Promise<String>}
    */
