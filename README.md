@@ -4,7 +4,6 @@ Convene secure, affordable, always-available digital Spaces where anyone can
 (play || work || grow || be). 🎲 👩‍💻 🌱 🛋️
 
 - [Overview](#overview)
-  - [Objectives](#objectives)
 - [Using Convene](#using-convene)
   - [Purchasing a Convene Operator License.](#purchasing-a-convene-operator-license)
   - [Help and Support](#help-and-support)
@@ -20,29 +19,22 @@ Convene secure, affordable, always-available digital Spaces where anyone can
 
 ## Overview
 
-Convene serves as the _Means of Connection_. Create a Space to co-conspire,
-relax, learn, play, work, swap recipes, read books, or really anything!
+Convene is an _Operating System_ for **Community Owned Digital Infrastructure**. 
+Once deployed to a server, Convene is accessed by any web browser.
 
-Convene provides the underlying infrastructure for a _Neighborhood of Spaces_.
-_Operators_ help _Clients_ design their _Spaces_ and keep the Neighborhood up
-and running. _Maintainers_ and _Contributors_ enhance Convene with:
+Convene serves as a community-owned, more ethical alternative to investor-owned online tools like
+SquareSpace, Etsy, Patreon, Zoom, Yelp, and more.
 
-- _Furniture_, fun toys and powerful tools
-- _Utilities_, integrating external services like Stripe, Calendly, Jitsi, and
-  more.
+A Convene Deployment is a _Neighborhood_. People create _Spaces_ in a _Neighborhood_, and fill those _Spaces_
+with _Furniture_ to meet their collective digital needs. For example:
 
-The Internet is for People, so why not put People in charge of their digital
-spaces?
+- A Regional Co-operative network could provide their members with shared payments and video communication infrastructure.
+- A Farmer's Market could provide professionally designed websites and social media presences for their vendors.
+- A Co-operative Startup Incubator could keep capitalization tables, Patronage Records and other logistical records.
 
-### Objectives
+You can see more in the [Zinc neighborhood](https://convene.zinc.coop).
 
-To put it succinctly, Convene provides:
-
-1. Digital infrastructure, toys, and tooling
-2. For small groups and individuals
-3. Co-creating a better future.
-
-We have two milestones in flight at any one time:
+We have two milestones we are working towards:
 
 - Product Milestone:
   [1.0 Andromeda](https://github.com/zinc-collective/convene/milestone/1)
@@ -54,6 +46,8 @@ We have two milestones in flight at any one time:
 [Zinc] maintains a Convene Neighborhood at https://convene.zinc.coop. For people
 who want to run their own Neighborhood of Spaces, consider purchasing a Convene
 Operator License.
+
+[zinc]: https://www.zinc.coop/
 
 ### Purchasing a Convene Operator License.
 
@@ -87,7 +81,6 @@ We're always excited for new contributors! Read more in our
 # Convene Web <!-- omit in toc -->
 
 - [Overview](#overview)
-  - [Objectives](#objectives)
 - [Using Convene](#using-convene)
   - [Purchasing a Convene Operator License.](#purchasing-a-convene-operator-license)
   - [Help and Support](#help-and-support)
@@ -101,13 +94,12 @@ We're always excited for new contributors! Read more in our
   - [Overview of the `features` folder](#overview-of-the-features-folder)
 - [About The Zinc Collective](#about-the-zinc-collective)
 
-
-
 ## System Overview
 
 The central piece of Convene is a Ruby on Rails server that is responsible for:
-* serving the Convene UI
-* managing users, spaces, rooms, permissions, etc
+
+- serving the Convene UI
+- managing users, spaces, rooms, permissions, etc
 
 This [high level view of our design](https://docs.google.com/spreadsheets/d/1BOBCT0yrgrbCuQFTx_hIQak0FSQjnjjFZVA3YksEv8s/edit#gid=622652343)
 shows the personas and segments we are focusing on initially with
@@ -115,10 +107,11 @@ Convene. It also includes our current vision of the types of spaces, rooms and p
 serves and clarifies the design of privacy permissions.
 
 The Convene UI is based on Rails standard templating system, with heavy use of:
-* [Stimulus JS](https://stimulusjs.org/)
-   * the entry point for our JavaScript is in `app/javascript/controllers/index.js`,
-     which loads all `app/javascript/*_controllers.js` files
-* [Tailwind CSS](https://tailwindcss.com/) to help speed up making good-looking UIs
+
+- [Stimulus JS](https://stimulusjs.org/)
+  - the entry point for our JavaScript is in `app/javascript/controllers/index.js`,
+    which loads all `app/javascript/*_controllers.js` files
+- [Tailwind CSS](https://tailwindcss.com/) to help speed up making good-looking UIs
 
 Jitsi is Convene's video call infrastructure. The
 [video_room_controller.js](./app/javascript/controllers/video_room_controller.js) is the entry point
@@ -128,13 +121,15 @@ If you want to run Jitsi locally, see the configuration provided in
 [`infrastructure/jitsi-meet-local`](./infrastructure/jitsi-meet-local/README.md).
 
 ### Architecture overview diagram
+
 _Last updated: April 2021_
 
 ![](./docs/convene-architecture-overview.jpg)
 
-Original on Miro:  https://miro.com/app/board/o9J_lLrbz1g=/
+Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
 
 ## Configuring Your Development Machine
+
 See [Developer setup and documentation](./CONTRIBUTING.md#2-machine-setup).
 
 ### Debugger
@@ -143,7 +138,7 @@ To run `pry` or `byebug`, run `bin/connect web`.
 
 ### Developing Mailers
 
-Set [SMTP_* environment variables to configure Action Mailer](.env.example).
+Set [SMTP\_\* environment variables to configure Action Mailer](.env.example).
 
 To preview mailers, visit http://localhost:3000/rails/mailers/
 
@@ -174,16 +169,15 @@ Tests that need database access should `require "rails_helper"`, and tests that
 can be executed without a database should `require "spec_helper"`.
 
 ### Overview of the `features` folder
+
 _Last updated: April 2021_
 
 ![](./docs/features-overview.jpg)
 
-Original on Miro:  https://miro.com/app/board/o9J_lLrbz1g=/
+Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
 
 [rspec]: https://rspec.info/
 [cucumber]: https://cucumber.io/
-
-
 
 ## About The Zinc Collective
 
@@ -212,5 +206,4 @@ be determined on a case-by-case basis.
 
 [footnote-1]: #paid-support
 [san-francisco-living-wage]: https://livingwage.mit.edu/metros/41860
-[what-is-patronage]:
-  https://www.co-oplaw.org/finances-tax/patronage/#How_Patronage_Works
+[what-is-patronage]: https://www.co-oplaw.org/finances-tax/patronage/#How_Patronage_Works
