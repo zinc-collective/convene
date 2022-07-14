@@ -29,4 +29,23 @@ RSpec.describe PaymentForm::Payment, type: :model do
   describe '#plaid_item_id' do
     it { is_expected.to validate_presence_of(:plaid_item_id) }
   end
+
+  describe 'stored_attributes for #data' do
+    described_class.stored_attributes[:data].each do |attribute|
+      next if attribute == :status # special case, tested separaately
+
+      it "provides an accessor for #{attribute}" do
+        expect(subject.send("#{attribute}=", "some value")).to eq("some value")
+        expect(subject.send("#{attribute}")).to eq("some value")
+        expect(subject.data[attribute.to_s]).to eq("some value")
+      end
+    end
+  end
+
+  describe '#status' do
+    it 'returns a symbol' do
+      subject.status = "accepted"
+      expect(subject.status).to eq(:accepted)
+    end
+  end
 end
