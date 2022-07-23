@@ -74,7 +74,7 @@ gem 'bootsnap', '~> 1.12', require: false
 gem 'pundit', '~> 2.2'
 
 # Utility hookup support
-gem 'plaid', '~> 15.9'
+gem 'plaid', '~> 15.10'
 
 # Workers and Background Jobs
 gem 'sidekiq'
