@@ -15,7 +15,7 @@ Given(
    * @param {*} a
    * @param {Furniture} furniture
    * @param {*} a2
-   * @param {Room} room
+   * @param {Room} entranceHall
    * @param {Space} space
    * @param {DataTable} dataTable
    */
@@ -31,7 +31,6 @@ Given(
       .update(room.assign({ furniturePlacementsAttributes }));
   }
 );
-
 Then(
   "{a} {furniture} is rendered with:",
   /**
