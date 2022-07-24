@@ -15,7 +15,7 @@ Given(
    * @param {*} a
    * @param {Furniture} furniture
    * @param {*} a2
-   * @param {Room} entranceHall
+   * @param {Room} room
    * @param {Space} space
    * @param {DataTable} dataTable
    */
@@ -31,6 +31,19 @@ Given(
       .update(room.assign({ furniturePlacementsAttributes }));
   }
 );
+
+Given('{a} {furniture} is in {a} {entranceHall} to {a} {space}', function (a, furniture, a2, room, a3, space) {
+  const furniturePlacementsAttributes = [
+    {
+      furnitureKind: furniture.type.toLowerCase(),
+      furnitureAttributes: {},
+    },
+  ];
+  return this.api()
+    .rooms(space)
+    .update(room.assign({ furniturePlacementsAttributes }));
+});
+
 Then(
   "{a} {furniture} is rendered with:",
   /**
