@@ -7,6 +7,13 @@ local vendors and the community is the cornerstone of a strong regional economy.
 
 A Marketplace connects producers, distributors and consumers in a single Space.
 ## Scenario: Place a Delivery Order
+For now, our primary client is local owned and operated delivery
+organizations, like [Piikup](https://piikup.com/) or
+[Candlestick](https://www.candlestickcourier.com/).
+
+These organizations serve as distributors for regional vendors, closing the
+last-mile and keeping money flowing within the community.
+
 - Given a "Piikup Marketplace" Space
 - And a "Marketplace" Furniture in the Entrance Hall to "Piikup Marketplace" Space is configured with:
   | delivery_fee             | $6.99              |

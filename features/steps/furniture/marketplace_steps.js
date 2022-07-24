@@ -15,8 +15,6 @@ When('{a} {actor} places {a} Delivery Marketplace Order in {a} {space} for:', fu
   return 'pending';
 });
 
-
-
 Then('{a} Marketplace Order placed by {a} {actor} in {a} {space} is delivered to {string}', function (a, a2, actor, a3, space, string) {
   // Write code here that turns the phrase above into concrete actions
   return 'pending';
