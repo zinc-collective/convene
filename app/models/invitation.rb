@@ -43,6 +43,7 @@ class Invitation < ApplicationRecord
 
 private
   def not_ignored_space
+   return if will_save_change_to_attribute?(:status, from: "ignored")
    return unless Invitation.ignored.where(space: space, email: email).exists?
 
    errors.add(:email, :invitee_ignored_space)

@@ -35,5 +35,10 @@ RSpec.describe Invitation, type: :model do
       expect(invitation.save).to eq(false)
       expect(invitation.errors).to be_added(:email, :invitee_ignored_space)
     end
+
+    it "allows an invitation to be un-ignored" do
+      expect(ignored_invitation.update(status: :sent)).to eq(true)
+      expect(ignored_invitation.errors).not_to be_added(:email, :invitee_ignored_space)
+    end
   end
 end
