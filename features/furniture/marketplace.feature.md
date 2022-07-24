@@ -1,5 +1,3 @@
-`@unstarted` `@andromeda`
-
 # Feature: Furniture: Marketplace!
 
 Whether you're a farmers market or other local distributor, transactions between

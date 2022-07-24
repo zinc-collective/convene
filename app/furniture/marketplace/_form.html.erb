@@ -1,0 +1,5 @@
+<%= form.fields_for(:furniture) do |furniture_fields| %>
+  <%= render "text_field", attribute: :stripe_account, form: furniture_fields %>
+  <%= render "text_field", attribute: :delivery_fee, form: furniture_fields %>
+  <%= render "email_field", attribute: :order_notification_email, form: furniture_fields %>
+<%- end %>

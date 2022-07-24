@@ -9,6 +9,7 @@ module Furniture
     markdown_text_block: MarkdownTextBlock,
     video_bridge: VideoBridge,
     livestream: Livestream,
+    marketplace: Marketplace,
     embedded_form: EmbeddedForm,
     spotlight: Spotlight,
   }.freeze
