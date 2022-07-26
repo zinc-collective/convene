@@ -2,9 +2,7 @@
   <fieldset>
     <%- if form.object.contact_location.blank? %>
       <%= form.hidden_field :contact_method, value: :email %>
-      <%= form.label :contact_location %>
-      <%= form.email_field :contact_location %>
-      <%= render partial: "error", locals: { model: form.object, attribute: :contact_location } %>
+      <%= render "email_field", form: form, attribute: :contact_location %>
     <% else %>
       <p>Check your email for a one-time password to complete the sign in process</p>
       <%= form.hidden_field :contact_method %>
