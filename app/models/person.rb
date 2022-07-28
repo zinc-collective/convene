@@ -13,7 +13,7 @@ class Person < ApplicationRecord
   # The Spaces the Person is part of
   has_many :spaces, through: :space_memberships
 
-  has_many :invitations, inverse_of: :invitor
+  has_many :invitations, inverse_of: :invitor, foreign_key: :invitor_id
 
   def member_of?(space)
     spaces.include?(space)

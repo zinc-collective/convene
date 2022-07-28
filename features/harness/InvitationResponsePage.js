@@ -15,5 +15,8 @@ class InvitationResponsePage extends Page {
   submitButton() {
     return this.component("input[type=submit");
   }
+  ignoreButton() {
+    return this.component("[data-testid=ignore]");
+  }
 }
 export default InvitationResponsePage;

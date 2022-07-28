@@ -8,6 +8,10 @@ class Rsvp
   delegate :space, to: :invitation
 
   def update(attributes)
+    if %w[ignored sent].include?(attributes[:status])
+      return invitation.update(status: attributes[:status])
+    end
+
     person = Person.create_with(name: invitation.name).find_or_create_by(email: invitation.email)
 
     authentication_method = person.authentication_methods.find_or_create_by(contact_method: :email,
@@ -17,9 +21,9 @@ class Rsvp
     if authentication_method.confirmed?
       invitation.update(status: attributes[:status])
 
-      person.space_memberships.create(space: invitation.space)
+      person.space_memberships.create(space: space)
     else
-      authentication_method.send_one_time_password!(invitation.space)
+      authentication_method.send_one_time_password!(space)
       false
     end
   end

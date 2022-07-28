@@ -1,9 +1,20 @@
 <% breadcrumb :rsvp, rsvp %>
 
-<h2><%= t('.header', space_name: rsvp.invitation.space.name)%></h2>
-<p><%= t('.summary', space_name: rsvp.invitation.space.name, invitor_name: rsvp.invitation.invitor_display_name, invitation_date: rsvp.invitation.created_at) %></p>
+<% if rsvp.invitation.ignored? %>
+  <%= render partial: "ignored", locals: { rsvp: rsvp } %>
+<% else %>
+  <h2><%= t('.header', space_name: rsvp.invitation.space.name)%></h2>
+  <p><%= t('.summary', space_name: rsvp.invitation.space.name, invitor_name: rsvp.invitation.invitor_display_name, invitation_date: rsvp.invitation.created_at) %></p>
 
-<%= form_with model: [rsvp.space, rsvp.invitation, rsvp], local: true do |rsvp_form|%>
-  <%= rsvp_form.hidden_field :status, value: "accepted" %>
-  <%= rsvp_form.submit t('.accept', space_name: rsvp.space.name) %>
-<%- end %>
+  <%= form_with model: [rsvp.space, rsvp.invitation, rsvp], local: true do |rsvp_form|%>
+    <%= rsvp_form.hidden_field :status, value: 'accepted' %>
+    <%= rsvp_form.submit t('.accept', space_name: rsvp.space.name) %>
+  <%- end %>
+
+  <%= button_to t('.ignore'),
+                [rsvp.space, rsvp.invitation, rsvp],
+                params: { rsvp: { status: 'ignored' } },
+                data: {testid: 'ignore' },
+                class: '--neutral w-full'
+  %>
+<% end %>

@@ -92,5 +92,29 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
           .find_by(space: space)).not_to be_present
       end
     end
+
+    context 'when ignoring an invitation' do
+      subject do
+        put space_invitation_rsvp_path(space, invitation), params: { rsvp: { status: 'ignored' } }
+      end
+
+      it 'doesnt complete the invitation' do
+        expect { subject }.to change { invitation.reload.status }.to('ignored')
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context 'when un-ignoring an invitation' do
+      let(:invitation) { create(:invitation, status: "ignored") }
+
+      subject do
+        put space_invitation_rsvp_path(space, invitation), params: { rsvp: { status: 'sent' } }
+      end
+
+      it 'doesnt complete the invitation' do
+        expect { subject }.to change { invitation.reload.status }.to('sent')
+        expect(response).to render_template(:show)
+      end
+    end
   end
 end

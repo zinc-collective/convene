@@ -1,5 +1,9 @@
 en:
   rsvps:
+    ignored:
+      header: "You have ignored this invitation. 🤚"
+      summary: "You will no longer receive invitations to %{space_name}."
+      unignore: "Allow invitations from  %{space_name} 💌"
     show:
       header: "You've been invited to '%{space_name}'!"
       summary: "You were invited to '%{space_name}' by %{invitor_name} on %{invitation_date}"

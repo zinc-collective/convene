@@ -7,7 +7,11 @@ class RsvpsController < ApplicationController
 
   def update
     if rsvp.update(rsvp_params)
-      redirect_to rsvp.space, notice: t('.success', space_name: rsvp.space.name)
+      if rsvp.invitation.accepted?
+        redirect_to rsvp.space, notice: t('.success', space_name: rsvp.space.name)
+      else
+        render :show
+      end
     end
   end
 

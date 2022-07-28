@@ -1,0 +1,13 @@
+<h2>
+  <%= t('.header') %>
+</h2>
+<p>
+  <%= t('.summary', space_name: rsvp.invitation.space.name) %>
+</p>
+<p>
+  <%= button_to t('.unignore', space_name: rsvp.invitation.space.name),
+                [rsvp.space, rsvp.invitation, rsvp],
+                params: { rsvp: { status: 'sent' } },
+                class: '--neutral w-full'
+  %>
+</p>

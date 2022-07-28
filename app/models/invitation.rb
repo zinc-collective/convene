@@ -19,14 +19,17 @@ class Invitation < ApplicationRecord
   # accepted - receiver accepted the invitation
   # rejected - receivers rejected the invitation
   # expired - Invitation was sent too long ago
-  STATUSES = %w[pending sent accepted rejected expired].freeze
+  # ignored - receiver ignored the invitation
+  enum status: {
+    pending: "pending",
+    sent: "sent",
+    accepted: "accepted",
+    rejected: "rejected",
+    expired: "expired",
+    ignored: "ignored"
+  }
 
-  attribute :status, :string
-  validates :status, inclusion: STATUSES
-
-  def accepted?
-    status.to_sym == :accepted
-  end
+  validates :status, inclusion: { in: statuses.keys }
 
   # @!method invitor_display_name
   #   @see Person#display_name
@@ -35,4 +38,14 @@ class Invitation < ApplicationRecord
   attribute :last_sent_at, :datetime
   attribute :created_at, :datetime
   attribute :updated_at, :datetime
+
+  validate :not_ignored_space
+
+private
+  def not_ignored_space
+   return if will_save_change_to_attribute?(:status, from: "ignored")
+   return unless Invitation.ignored.where(space: space, email: email).exists?
+
+   errors.add(:email, :invitee_ignored_space)
+  end
 end
