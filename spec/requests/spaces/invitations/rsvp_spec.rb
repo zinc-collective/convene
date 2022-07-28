@@ -67,6 +67,26 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
           expect(flash[:notice]).to eq(I18n.t('rsvps.update.success', space_name: space.name))
         end
       end
+
+      context 'when the invitation has expired' do
+        before do
+          invitation.update!(created_at: invitation.created_at - 1.year)
+        end
+
+        it 'does not allow accepting the invitation' do
+          expect do
+            put space_invitation_rsvp_path(space, invitation),
+                params: { rsvp: { status: :accepted } }
+          end.not_to have_enqueued_mail(AuthenticatedSessionMailer, :one_time_password_email)
+
+          person = Person.find_by!(email: invitation.email)
+
+          expect(invitation.reload).not_to be_accepted
+          expect(person.space_memberships.find_by(space: space)).not_to be_present
+          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to render_template(:show)
+        end
+      end
     end
 
     context 'whose email is already registered' do
