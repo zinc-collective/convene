@@ -2,6 +2,8 @@
 
 <% if rsvp.invitation.ignored? %>
   <%= render partial: "ignored", locals: { rsvp: rsvp } %>
+<% elsif rsvp.invitation.expired? %>
+  <%= render partial: "expired", locals: { rsvp: rsvp } %>
 <% else %>
   <h2><%= t('.header', email: rsvp.invitation.email)%></h2>
   <p><%= t('.summary', invitor_name: rsvp.invitation.invitor_display_name) %></p>

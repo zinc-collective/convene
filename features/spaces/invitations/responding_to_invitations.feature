@@ -73,7 +73,7 @@ Feature: Spaces: Invitations: Responding to Invitations
   # We want to make sure that people who were invited but
   # didn't take action can't suddenly appear and disorient
   # or potentially disrupt the people who are in the Space.
-  @unstarted @andromeda
+  @built @andromeda @unimplemented-steps
   Scenario: Responding to an Expired Invitation
     Given an Invitation was sent 15 days ago
     Then that Invitation is Expired

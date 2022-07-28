@@ -40,12 +40,28 @@ class Invitation < ApplicationRecord
   attribute :updated_at, :datetime
 
   validate :not_ignored_space
+  validate :not_expired, if: ->() do
+    will_save_change_to_attribute?(:status, to: "accepted")
+  end
+
+  EXPIRATION_PERIOD = 14.days
+
+  def expired?
+    created_at.present? && created_at < EXPIRATION_PERIOD.ago
+  end
 
 private
+
   def not_ignored_space
    return if will_save_change_to_attribute?(:status, from: "ignored")
    return unless Invitation.ignored.where(space: space, email: email).exists?
 
    errors.add(:email, :invitee_ignored_space)
+  end
+
+  def not_expired
+    return unless expired?
+
+    errors.add(:base, :invitation_expired)
   end
 end

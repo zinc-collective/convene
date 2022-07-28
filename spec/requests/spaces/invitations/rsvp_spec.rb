@@ -6,6 +6,7 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
   let(:space) { invitation.space }
   let(:neighbor) { create(:neighbor) }
   let(:invitation) { create(:invitation) }
+
   describe 'GET /spaces/:space_id/invitations/:invitation_id/rsvp' do
     it 'Does not require people to sign in' do
       get space_invitation_rsvp_path(space, invitation)
@@ -17,13 +18,19 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
   end
 
   describe 'PUT /spaces/:space_id/invitations/:invitation_id/rsvp' do
+    subject(:request) do
+      put space_invitation_rsvp_path(space, invitation),
+        params: { rsvp: rsvp_params }
+    end
+    let(:rsvp_params) { {} }
+
     context 'as a guest' do
       context 'who does not include the one-time-code' do
+        let(:rsvp_params) { { status: :accepted } }
+
         it 'doesnt complete the invitation' do
-          expect do
-            put space_invitation_rsvp_path(space, invitation),
-                params: { rsvp: { status: :accepted } }
-          end.to have_enqueued_mail(AuthenticatedSessionMailer, :one_time_password_email)
+          expect { request }.to have_enqueued_mail(
+            AuthenticatedSessionMailer, :one_time_password_email)
 
           person = Person.find_by!(email: invitation.email)
 
@@ -42,14 +49,15 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
       end
 
       context 'who does include the one-time code proving they are who they say they are' do
-        it 'completes the invitation and confirms their authentication method' do
-          person = create(:person, email: invitation.email)
-          authentication_method = create(:authentication_method, person: person)
+        let(:person) { create(:person, email: invitation.email) }
+        let(:authentication_method) { create(:authentication_method, person: person) }
+        let(:rsvp_params) do
+          { status: :accepted, one_time_password: authentication_method.one_time_password }
+        end
 
-          expect do
-            put space_invitation_rsvp_path(space, invitation),
-                params: { rsvp: { status: :accepted, one_time_password: authentication_method.one_time_password } }
-          end.not_to have_enqueued_mail(AuthenticatedSessionMailer, :one_time_password_email)
+        it 'completes the invitation and confirms their authentication method' do
+          expect { request }.not_to have_enqueued_mail(
+            AuthenticatedSessionMailer, :one_time_password_email)
 
           person = Person.find_by!(email: invitation.email)
 
@@ -67,25 +75,37 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
           expect(flash[:notice]).to eq(I18n.t('rsvps.update.success', space_name: space.name))
         end
       end
+
+      context 'when the invitation has expired' do
+        let(:rsvp_params) { { status: :accepted } }
+        before do
+          invitation.update!(created_at: invitation.created_at - 1.year)
+        end
+
+        it 'does not allow accepting the invitation' do
+          expect { request }.not_to have_enqueued_mail(
+            AuthenticatedSessionMailer, :one_time_password_email)
+
+          expect(Person.where(email: invitation.email)).not_to exist
+
+          expect(invitation.reload).not_to be_accepted
+          expect(response).to have_http_status(:ok)
+          expect(response).to render_template(:update)
+        end
+      end
     end
 
     context 'whose email is already registered' do
+      let(:rsvp_params) { { status: :accepted } }
       let!(:neighbor) { create(:person, email: invitation.email) }
       let!(:authentication_method) do
         create(:authentication_method, person: neighbor)
       end
 
       it 'does not accept the invitation until they sign in' do
-        expect do
-          put space_invitation_rsvp_path(space, invitation),
-              params: { rsvp: { status: :accepted } }
-        end.to have_enqueued_mail(
+        expect { request }.to have_enqueued_mail(
           AuthenticatedSessionMailer, :one_time_password_email
         ).with(neighbor.authentication_methods.first, space)
-
-        # @todo - can we assert there's a flash message?
-        # @todo - Maybe we want to require signing in when showing the
-        #         invitation if it's for a  person who is already registered?
 
         expect(invitation.reload).not_to be_accepted
         expect(neighbor.space_memberships
@@ -94,25 +114,20 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
     end
 
     context 'when ignoring an invitation' do
-      subject do
-        put space_invitation_rsvp_path(space, invitation), params: { rsvp: { status: 'ignored' } }
-      end
+      let(:rsvp_params) { { status: :ignored } }
 
       it 'doesnt complete the invitation' do
-        expect { subject }.to change { invitation.reload.status }.to('ignored')
+        expect { request }.to change { invitation.reload.status }.to('ignored')
         expect(response).to render_template(:show)
       end
     end
 
     context 'when un-ignoring an invitation' do
       let(:invitation) { create(:invitation, status: "ignored") }
-
-      subject do
-        put space_invitation_rsvp_path(space, invitation), params: { rsvp: { status: 'sent' } }
-      end
+      let(:rsvp_params) { { status: :sent } }
 
       it 'doesnt complete the invitation' do
-        expect { subject }.to change { invitation.reload.status }.to('sent')
+        expect { request }.to change { invitation.reload.status }.to('sent')
         expect(response).to render_template(:show)
       end
     end
