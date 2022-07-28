@@ -4,6 +4,8 @@
   <%= render partial: "ignored", locals: { rsvp: rsvp } %>
 <% elsif rsvp.invitation.expired? %>
   <%= render partial: "expired", locals: { rsvp: rsvp } %>
+<% elsif rsvp.invitation.accepted? %>
+  <%= render partial: "accepted", locals: { rsvp: rsvp } %>
 <% else %>
   <h2><%= t('.header', space_name: rsvp.invitation.space.name)%></h2>
   <p><%= t('.summary', space_name: rsvp.invitation.space.name, invitor_name: rsvp.invitation.invitor_display_name, invitation_date: rsvp.invitation.created_at) %></p>

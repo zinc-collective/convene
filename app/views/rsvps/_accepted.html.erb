@@ -1,0 +1,9 @@
+<h2>
+  <%= t('.header') %>
+</h2>
+<p>
+  <%= t('.summary', space_name: rsvp.invitation.space.name) %>
+</p>
+<p>
+  <%= link_to rsvp.invitation.space.name, rsvp.invitation.space %>
+</p>

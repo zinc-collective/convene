@@ -1,5 +1,9 @@
 en:
   rsvps:
+    accepted:
+      header: Invitation Accepted 🎉
+      summary:
+        This invitation to %{space_name} has been accepted.
     expired:
       header: Expired Invitation
       summary:
