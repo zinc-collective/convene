@@ -47,7 +47,7 @@ class Invitation < ApplicationRecord
   EXPIRATION_PERIOD = 14.days
 
   def expired?
-    created_at < EXPIRATION_PERIOD.ago
+    created_at.present? && created_at < EXPIRATION_PERIOD.ago
   end
 
 private
