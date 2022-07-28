@@ -79,12 +79,11 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
                 params: { rsvp: { status: :accepted } }
           end.not_to have_enqueued_mail(AuthenticatedSessionMailer, :one_time_password_email)
 
-          person = Person.find_by!(email: invitation.email)
+          expect(Person.where(email: invitation.email)).not_to exist
 
           expect(invitation.reload).not_to be_accepted
-          expect(person.space_memberships.find_by(space: space)).not_to be_present
-          expect(response).to have_http_status(:unprocessable_entity)
-          expect(response).to render_template(:show)
+          expect(response).to have_http_status(:ok)
+          expect(response).to render_template(:update)
         end
       end
     end

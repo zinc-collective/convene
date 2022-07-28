@@ -8,6 +8,8 @@ class Rsvp
   delegate :space, to: :invitation
 
   def update(attributes)
+    return false if invitation.expired?
+
     if %w[ignored sent].include?(attributes[:status])
       return invitation.update(status: attributes[:status])
     end

@@ -46,10 +46,11 @@ class Invitation < ApplicationRecord
 
   EXPIRATION_PERIOD = 14.days
 
-private
   def expired?
     created_at < EXPIRATION_PERIOD.ago
   end
+
+private
 
   def not_ignored_space
    return if will_save_change_to_attribute?(:status, from: "ignored")

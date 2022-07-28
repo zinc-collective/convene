@@ -1,5 +1,10 @@
 en:
   rsvps:
+    expired:
+      header: Expired Invitation
+      summary:
+        This invitation to %{space_name} has expired.
+        Please request a new invitation if you still want to join.
     ignored:
       header: "You have ignored this invitation. 🤚"
       summary: "You will no longer receive invitations to %{space_name}."
@@ -14,3 +19,4 @@ en:
       summary: "Let's make sure you really are the person %{invitor_name} thinks you are! We've sent you an email with a passcode that will expire in 10 minutes."
       accept: "Confirm and Join %{space_name}"
       success: "Yay! Welcome to %{space_name} 🎉"
+
