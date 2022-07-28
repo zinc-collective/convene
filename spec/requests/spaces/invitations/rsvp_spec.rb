@@ -100,6 +100,7 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
 
       it 'doesnt complete the invitation' do
         expect { subject }.to change { invitation.reload.status }.to('ignored')
+        expect(response).to render_template(:show)
       end
     end
 
