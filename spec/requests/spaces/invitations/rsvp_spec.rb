@@ -20,7 +20,7 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
   describe 'PUT /spaces/:space_id/invitations/:invitation_id/rsvp' do
     subject(:request) do
       put space_invitation_rsvp_path(space, invitation),
-        params: { rsvp: rsvp_params }
+          params: { rsvp: rsvp_params }
     end
     let(:rsvp_params) { {} }
 
@@ -30,7 +30,8 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
 
         it 'doesnt complete the invitation' do
           expect { request }.to have_enqueued_mail(
-            AuthenticatedSessionMailer, :one_time_password_email)
+            AuthenticatedSessionMailer, :one_time_password_email
+          )
 
           person = Person.find_by!(email: invitation.email)
 
@@ -57,7 +58,8 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
 
         it 'completes the invitation and confirms their authentication method' do
           expect { request }.not_to have_enqueued_mail(
-            AuthenticatedSessionMailer, :one_time_password_email)
+            AuthenticatedSessionMailer, :one_time_password_email
+          )
 
           person = Person.find_by!(email: invitation.email)
 
@@ -84,7 +86,8 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
 
         it 'does not allow accepting the invitation' do
           expect { request }.not_to have_enqueued_mail(
-            AuthenticatedSessionMailer, :one_time_password_email)
+            AuthenticatedSessionMailer, :one_time_password_email
+          )
 
           expect(Person.where(email: invitation.email)).not_to exist
 
@@ -123,11 +126,11 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
     end
 
     context 'when un-ignoring an invitation' do
-      let(:invitation) { create(:invitation, status: "ignored") }
-      let(:rsvp_params) { { status: :sent } }
+      let(:invitation) { create(:invitation, status: 'ignored') }
+      let(:rsvp_params) { { status: :pending } }
 
       it 'doesnt complete the invitation' do
-        expect { request }.to change { invitation.reload.status }.to('sent')
+        expect { request }.to change { invitation.reload.status }.to('pending')
         expect(response).to render_template(:show)
       end
     end

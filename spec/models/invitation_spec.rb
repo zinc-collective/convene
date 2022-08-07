@@ -42,24 +42,6 @@ RSpec.describe Invitation, type: :model do
     end
   end
 
-  describe '#revokable?' do
-    let(:invitation) { build(:invitation, status: status) }
-    subject(:revokable?) { invitation.revokable? }
-    %i[pending sent].each do |status|
-      context "when status is #{status}" do
-        let(:status) { status }
-        it { is_expected.to be_truthy }
-      end
-    end
-
-    %i[accepted rejected expired ignored].each do |status|
-      context "when status is #{status}" do
-        let(:status) { status }
-        it { is_expected.to be_falsey }
-      end
-    end
-  end
-
   describe '#save' do
     let(:invitee) { create(:person) }
 
@@ -74,7 +56,7 @@ RSpec.describe Invitation, type: :model do
       end
 
       it 'allows an invitation to be un-ignored' do
-        expect(ignored_invitation.update(status: :sent)).to eq(true)
+        expect(ignored_invitation.update(status: :pending)).to eq(true)
         expect(ignored_invitation.errors).not_to be_added(:email, :invitee_ignored_space)
       end
     end

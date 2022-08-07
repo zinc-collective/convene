@@ -2,8 +2,7 @@ class RsvpsController < ApplicationController
   # Not a database-backed model, no need to policy-scope.
   skip_after_action :verify_policy_scoped
 
-  def show
-  end
+  def show; end
 
   def update
     if rsvp.update(rsvp_params)

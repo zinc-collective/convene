@@ -14,7 +14,7 @@ RSpec.describe SpaceMembershipPolicy do
   let(:invitee) { create(:person, name: invitee_name).tap { invitation } }
   let(:invitee_name) { "Invitee #{SecureRandom.hex(4)}" }
   let(:invitee_email) { "#{invitee_name.gsub(' ', '-')}@example.com".downcase }
-  let(:invitation_status) { :sent }
+  let(:invitation_status) { :pending }
 
   permissions :create? do
     let(:space_membership) { build(:space_membership, member: invitee, space: space) }
