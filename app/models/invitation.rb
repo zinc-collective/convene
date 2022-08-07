@@ -26,7 +26,8 @@ class Invitation < ApplicationRecord
     accepted: "accepted",
     rejected: "rejected",
     expired: "expired",
-    ignored: "ignored"
+    ignored: "ignored",
+    revoked: "revoked"
   }
 
   validates :status, inclusion: { in: statuses.keys }

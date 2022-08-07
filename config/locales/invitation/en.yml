@@ -10,6 +10,8 @@ en:
     create:
       success: You've invited '%{invitee_name} <%{invitee_email}>' successfully! 🎉
       failure: We couldn't invite '%{invitee_name} <%{invitee_email}>'. 🙀
+    destroy:
+      success: "You've revoked the invitation to '%{invitee_name} <%{invitee_email}>' successfully! 🎉"
   helpers:
     submit:
       invitation:
