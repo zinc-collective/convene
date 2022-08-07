@@ -21,12 +21,12 @@ RSpec.describe Invitation, type: :model do
   end
 
   describe '#status' do
-    it "defines status as an enum" do
+    it 'defines status as an enum' do
       is_expected.to define_enum_for(:status).with_values(Invitation.statuses)
-        .backed_by_column_of_type(:enum)
+                                             .backed_by_column_of_type(:enum)
     end
 
-    context "when the invitation has expired" do
+    context 'when the invitation has expired' do
       let(:expired_invitation) { create(:invitation) }
 
       before do
@@ -42,10 +42,28 @@ RSpec.describe Invitation, type: :model do
     end
   end
 
-  describe "#save" do
+  describe '#revokable?' do
+    let(:invitation) { build(:invitation, status: status) }
+    subject(:revokable?) { invitation.revokable? }
+    %i[pending sent].each do |status|
+      context "when status is #{status}" do
+        let(:status) { status }
+        it { is_expected.to be_truthy }
+      end
+    end
+
+    %i[accepted rejected expired ignored].each do |status|
+      context "when status is #{status}" do
+        let(:status) { status }
+        it { is_expected.to be_falsey }
+      end
+    end
+  end
+
+  describe '#save' do
     let(:invitee) { create(:person) }
 
-    context "with an ignored invitation" do
+    context 'with an ignored invitation' do
       let!(:ignored_invitation) { create(:invitation, :ignored, email: invitee.email) }
       let(:ignored_space) { ignored_invitation.space }
 
@@ -55,7 +73,7 @@ RSpec.describe Invitation, type: :model do
         expect(invitation.errors).to be_added(:email, :invitee_ignored_space)
       end
 
-      it "allows an invitation to be un-ignored" do
+      it 'allows an invitation to be un-ignored' do
         expect(ignored_invitation.update(status: :sent)).to eq(true)
         expect(ignored_invitation.errors).not_to be_added(:email, :invitee_ignored_space)
       end

@@ -51,6 +51,10 @@ class Invitation < ApplicationRecord
     created_at.present? && created_at < EXPIRATION_PERIOD.ago
   end
 
+  def revokable?
+    pending? || sent?
+  end
+
 private
 
   def not_ignored_space
