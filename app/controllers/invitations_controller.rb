@@ -27,11 +27,11 @@ class InvitationsController < ApplicationController
   end
 
   def invitation
-    @invitations ||= if params[:id]
-                       authorize(invitations.find(params[:id]))
-                     else
-                       authorize(invitations.new(invitation_params))
-                     end
+    @invitation ||= if params[:id]
+                      authorize(invitations.find(params[:id]))
+                    else
+                      authorize(invitations.new(invitation_params))
+                    end
   end
 
   def invitations

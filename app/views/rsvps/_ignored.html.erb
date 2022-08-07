@@ -7,7 +7,7 @@
 <p>
   <%= button_to t('.unignore', space_name: rsvp.invitation.space.name),
                 [rsvp.space, rsvp.invitation, rsvp],
-                params: { rsvp: { status: 'sent' } },
+                params: { rsvp: { status: 'pending' } },
                 class: '--neutral w-full'
   %>
 </p>

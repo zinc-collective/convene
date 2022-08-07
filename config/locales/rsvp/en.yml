@@ -18,7 +18,7 @@ en:
       summary:
         This invitation to %{space_name} has been revoked.
         Please request a new invitation if you still want to join.
-    show:
+    pending:
       header: "You've been invited to '%{space_name}'!"
       summary: "You were invited to '%{space_name}' by %{invitor_name} on %{invitation_date}"
       accept: "Join %{space_name}"
