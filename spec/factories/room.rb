@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :room do
     space
-    name { FFaker::Book.genre }
+    name { Faker::Book.genre }
     publicity_level { 'listed' }
 
     trait :internal do

@@ -88,7 +88,7 @@ gem 'sentry-ruby'
 
 # Demo data
 gem 'factory_bot_rails'
-gem 'ffaker'
+gem 'faker'
 
 # Code coverage
 gem 'simplecov', require: false, group: :test
