@@ -142,6 +142,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.22.0)
+      i18n (>= 1.8.11, < 2)
     faraday (1.10.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -165,7 +167,6 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
-    ffaker (2.21.0)
     ffi (1.15.5)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -364,7 +365,7 @@ DEPENDENCIES
   cssbundling-rails
   dotenv-rails
   factory_bot_rails
-  ffaker
+  faker
   friendly_id (~> 5.4.2)
   gretel (~> 4.4)
   jbuilder (~> 2.11)

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :invitation do
     space
-    name { FFaker::Name.name }
+    name { Faker::Name.name }
     email { "#{name.downcase.gsub(' ', '-')}@example.com" }
     invitor factory: :person
 

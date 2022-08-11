@@ -1,4 +1,4 @@
-require 'ffaker'
+require 'faker'
 require 'pundit/rspec'
 require 'simplecov'
 require 'vcr'
