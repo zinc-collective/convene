@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :space do
     client
-    name { FFaker::CheesyLingo.title }
+    sequence(:name) do |n| { "#{FFaker::CheesyLingo.title} #{n}" }
     slug { name.gsub(' ', '_').downcase.dasherize }
 
     trait :default do
