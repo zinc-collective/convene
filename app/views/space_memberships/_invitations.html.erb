@@ -1,0 +1,40 @@
+<fieldset class="new-invitation-form">
+  <header>
+    <h3><%= t('invitations.invite_member_heading') %></h3>
+  </header>
+
+
+  <div>
+    <%= form_with(model: [ space, Invitation.new ], local: true) do |invitation_form| %>
+      <div>
+        <%= invitation_form.label :name %>
+        <%= invitation_form.text_field :name %>
+        <%= render partial: "error", locals: { model: invitation_form.object, attribute: :name } %>
+      </div>
+
+      <div>
+        <%= invitation_form.label :email %>
+        <%= invitation_form.text_field :email %>
+        <%= render partial: "error", locals: { model: invitation_form.object, attribute: :email } %>
+      </div>
+
+      <footer>
+        <%= invitation_form.submit %>
+      </footer>
+    <% end %>
+  </div>
+
+  <section>
+    <h3><%= t('invitations.invited_members_heading') %></h3>
+    <ul>
+      <%- space.invitations.each do |invitation| %>
+        <li>
+          <%= invitation.name %>
+          &lt;<%= invitation.email %>&gt;
+          <%= invitation.last_sent_at %>
+          (<%= invitation.status %>)
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</fieldset>
