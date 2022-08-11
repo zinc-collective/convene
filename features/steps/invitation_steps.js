@@ -3,7 +3,7 @@ import assert$0 from "assert";
 import Invitation from "../lib/Invitation.js";
 import Space from "../lib/Space.js";
 import Actor from "../lib/Actor.js";
-import { SpaceEditPage, SignInPage } from "../harness/Pages.js";
+import { SignInPage, SpaceMembershipsIndexPage } from "../harness/Pages.js";
 import Component from "../harness/Component.js";
 import {
   assertDisplayed,
@@ -29,7 +29,7 @@ When(
     });
     return actor
       .signIn(this.driver, space)
-      .then(() => new SpaceEditPage(this.driver, space))
+      .then(() => new SpaceMembershipsIndexPage(this.driver, space))
       .then((page) => page.inviteAll(toSend));
   }
 );
@@ -77,7 +77,7 @@ Then(
    * @param {Invitation} invitation
    */
   async function (_a, invitation, _a2, space, _a3, status) {
-    const page = new SpaceEditPage(this.driver, space);
+    const page = new SpaceMembershipsIndexPage(this.driver, space);
     assert(await page.hasInvitation({ invitation, status }));
   }
 );
@@ -129,7 +129,7 @@ Then(
   function (actor, _a, space, _a2, status) {
     return actor
       .signIn(this.driver, space)
-      .then(() => new SpaceEditPage(this.driver, space).visit())
+      .then(() => new SpaceMembershipsIndexPage(this.driver, space).visit())
       .then((page) => page.invitations({ to: actor }))
       .then((invitations) =>
         assert(invitations.every((i) => i.status !== status))
