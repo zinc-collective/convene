@@ -13,6 +13,9 @@ class SpaceMembershipsController < ApplicationController
 
   def index; end
 
+  def destroy
+  end
+
   helper_method def space
     current_space
   end
