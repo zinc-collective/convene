@@ -11,7 +11,15 @@ class SpaceMembershipsController < ApplicationController
     end
   end
 
-  private def space_membership_params
+  def index; end
+
+  helper_method def space
+    current_space
+  end
+
+private
+
+  def space_membership_params
     params.require(:space_membership).permit(:space_id, :member_id)
   end
 end

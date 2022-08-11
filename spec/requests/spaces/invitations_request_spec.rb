@@ -25,10 +25,10 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       expect(invitation).to be_present
       expect(invitation.status).to eq('pending')
 
-      expect(response).to redirect_to(edit_space_path(space))
-      expect(flash[:notice]).to eql(I18n.t('invitations.create.success',
-                                           invitee_email: invitation.email,
-                                           invitee_name: invitation.name))
+    expect(response).to redirect_to(space_space_memberships_path(space))
+    expect(flash[:notice]).to eql(I18n.t('invitations.create.success',
+                                         invitee_email: invitation.email,
+                                         invitee_name: invitation.name))
 
       expect(SpaceInvitationMailer).to have_received(:space_invitation_email)
         .with(invitation)
