@@ -61,7 +61,7 @@ Feature: Spaces: Invitations
     Then the Invitation to "invitee-a@example.com" for the "System Test" Space has a status of "revoked"
     Then the Invitation to "invitee-a@example.com" for the "System Test" Space cannot be Accepted
 
-  @unimplemented-steps @unstarted
+  @unimplemented-steps @built
   Scenario: Revoking Accepted Invitations
     Given an Invitation to "invitee-a@example.com" for the "System Test" Space is sent by Space Owner "space-owner@example.com"
     When the Invitation to "invitee-a@example.com" for the "System Test" Space is Accepted
