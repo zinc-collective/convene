@@ -1,18 +1,23 @@
 <%= turbo_frame_tag furniture_placement do %>
   <section class="mt-4 relative">
     <%- if editing? %>
-      <%= button_to t('icons.edit'),
-                  [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement],
-                  method: :get,
-                  title: t('.edit_title', { name: furniture_placement.furniture.model_name.human.titleize }),
-                  class: 'no-underline absolute -top-8'  %>
-      <%= button_to t('icons.remove'),
-                  [furniture_placement.room.space, furniture_placement.room, furniture_placement],
-                  title: t('.remove_title', { name: furniture_placement.furniture.model_name.human.titleize }),
-                  method: :delete,
+      <header class="flex border-b border-dashed border-primary-900">
+        <h4 class="grow">
+          <%= furniture_placement.furniture.model_name.human.titleize %>
+        </h4>
+        <%= button_to t('icons.edit'),
+                    [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement],
+                    method: :get,
+                    title: t('.edit_title', { name: furniture_placement.furniture.model_name.human.titleize }),
+                    class: 'no-underline' %>
+        <%= button_to t('icons.remove'),
+                    [furniture_placement.room.space, furniture_placement.room, furniture_placement],
+                    title: t('.remove_title', { name: furniture_placement.furniture.model_name.human.titleize }),
+                    method: :delete,
 
-                  data: { turbo_method: :delete, turbo_confirm: t('.confirm_removal') },
-                  class: 'no-underline absolute -top-8 left-14'  %>
+                    data: { turbo_method: :delete, turbo_confirm: t('.confirm_removal') },
+                    class: 'no-underline' %>
+      </header>
     <%- end %>
     <%= render partial: furniture_placement.furniture.in_room_template,
               locals: { furniture: furniture_placement.furniture, room: furniture_placement.room,
