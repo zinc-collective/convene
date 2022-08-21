@@ -7,5 +7,6 @@
         "ruby": false
   },
   "solargraph.diagnostics": true,
-  "ruby.useLanguageServer": true
+  "ruby.useLanguageServer": true,
+  "files.trimTrailingWhitespace": true
 }
