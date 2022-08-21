@@ -1,9 +1,5 @@
 <div class="flex flex-col content-between justify-end" data-turbo="true">
   <div class="grow">
-    <section id="furniture_placements">
-      <%= render room.furniture_placements.rank(:slot) %>
-    </section>
-
     <%- if editing? %>
       <%- new_furniture_placement = room.furniture_placements.new %>
 
@@ -12,6 +8,10 @@
 
       <%- end %>
     <%- end %>
+
+    <section id="furniture_placements">
+      <%= render room.furniture_placements.rank(:slot) %>
+    </section>
   </div>
 
   <div class="px-6 pt-3">
