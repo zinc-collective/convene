@@ -1,10 +1,4 @@
 <%= turbo_frame_tag furniture_placement do %>
-  <header>
-    <h4>
-      <%= furniture_placement.furniture.model_name.human.titleize %>
-    </h4>
-  </header>
-
   <%- if policy(furniture_placement).edit? %>
     <%= form_with(model: [furniture_placement.room.space, furniture_placement.room, furniture_placement], local: true) do |form| %>
       <div>

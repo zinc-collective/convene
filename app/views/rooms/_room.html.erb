@@ -1,5 +1,5 @@
 <div class="flex flex-col content-between justify-end" data-turbo="true">
-  <div class="grow">
+  <div class="grow <%=editing? ? 'max-w-3xl' : '' %> mx-auto w-full">
     <%- if editing? %>
       <%- new_furniture_placement = room.furniture_placements.new %>
 
