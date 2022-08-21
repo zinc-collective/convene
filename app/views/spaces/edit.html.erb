@@ -47,7 +47,7 @@
             <%= invitation.last_sent_at %>
             (<%= invitation.status %>)
             <%- if invitation.pending? %>
-              <%= button_to t('icons.remove'), [space, invitation], title: 'Revoke', method: :delete, class: 'no-underline' %>
+              <%= button_to t('icons.remove'), [space, invitation], title: t('invitation.destroy') , method: :delete, class: 'no-underline' %>
             <%- end %>
           </li>
         <% end %>
