@@ -2,7 +2,6 @@
 
 class InvitationsController < ApplicationController
   def create
-    # TODO: Extract a DeliverInvitationJob that sets the last sent at
     if invitation.save
       SpaceInvitationMailer.space_invitation_email(invitation).deliver_later
       redirect_to edit_space_path(invitation.space),
@@ -15,14 +14,27 @@ class InvitationsController < ApplicationController
     end
   end
 
+  def destroy
+    invitation.update!(status: :revoked)
+    redirect_to edit_space_path(invitation.space),
+                notice: t('.success', invitee_email: invitation.email,
+                                      invitee_name: invitation.name)
+  end
+
   def invitation_params
     params.require(:invitation).permit(:name, :email)
           .merge(last_sent_at: Time.zone.now, invitor: current_person)
   end
 
   def invitation
-    @invitation ||= policy_scope(current_space.invitations).new(invitation_params).tap do |invitation|
-      authorize(invitation)
-    end
+    @invitation ||= if params[:id]
+                      authorize(invitations.find(params[:id]))
+                    else
+                      authorize(invitations.new(invitation_params))
+                    end
+  end
+
+  def invitations
+    policy_scope(current_space.invitations)
   end
 end

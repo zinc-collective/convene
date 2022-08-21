@@ -13,20 +13,13 @@ class Invitation < ApplicationRecord
   attribute :email, :string
   validates :email, presence: true
 
-  # Kelly H, Zee, Egbet decided these are the possible invitation statuses:
-  # pending - email was not sent yet due to mailer issues etc.
-  # sent - email was sent but not accepted
-  # accepted - receiver accepted the invitation
-  # rejected - receivers rejected the invitation
-  # expired - Invitation was sent too long ago
-  # ignored - receiver ignored the invitation
   enum status: {
-    pending: "pending",
-    sent: "sent",
-    accepted: "accepted",
-    rejected: "rejected",
-    expired: "expired",
-    ignored: "ignored"
+    pending: 'pending',
+    accepted: 'accepted',
+    rejected: 'rejected',
+    expired: 'expired',
+    ignored: 'ignored',
+    revoked: 'revoked'
   }
 
   validates :status, inclusion: { in: statuses.keys }
@@ -40,9 +33,9 @@ class Invitation < ApplicationRecord
   attribute :updated_at, :datetime
 
   validate :not_ignored_space
-  validate :not_expired, if: ->() do
-    will_save_change_to_attribute?(:status, to: "accepted")
-  end
+  validate :not_expired, if: lambda {
+    will_save_change_to_attribute?(:status, to: 'accepted')
+  }
 
   EXPIRATION_PERIOD = 14.days
 
@@ -50,13 +43,13 @@ class Invitation < ApplicationRecord
     created_at.present? && created_at < EXPIRATION_PERIOD.ago
   end
 
-private
+  private
 
   def not_ignored_space
-   return if will_save_change_to_attribute?(:status, from: "ignored")
-   return unless Invitation.ignored.where(space: space, email: email).exists?
+    return if will_save_change_to_attribute?(:status, from: 'ignored')
+    return unless Invitation.ignored.where(space: space, email: email).exists?
 
-   errors.add(:email, :invitee_ignored_space)
+    errors.add(:email, :invitee_ignored_space)
   end
 
   def not_expired

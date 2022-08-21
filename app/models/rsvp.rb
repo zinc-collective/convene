@@ -10,7 +10,7 @@ class Rsvp
   def update(attributes)
     return false if invitation.expired?
 
-    if %w[ignored sent].include?(attributes[:status])
+    if %w[ignored pending].include?(attributes[:status])
       return invitation.update(status: attributes[:status])
     end
 

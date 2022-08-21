@@ -39,7 +39,7 @@ Feature: Spaces: Invitations
     And an Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "pending"
     And an Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "expired"
 
-  @unstarted @andromeda
+  @built @unimplemented-steps @andromeda
   Scenario: Invitations remain even if the Invitor was Removed from the Space
     Given the "System Test" Space has a Space Owner "soon-to-leave@example.com"
     And an Invitation to the "System Test" Space is sent by Space Owner "soon-to-leave@example.com"
@@ -54,11 +54,15 @@ Feature: Spaces: Invitations
     When a Space Owner invites a new Space Member via SMS
     Then an Invitation is sent to that SMS
 
-  @built @andromeda @unimplemented-steps
-  Scenario: Ignoring invitations
-    Given an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
-      | name | email                       |
-      | Aang | aang-the-avatar@example.com |
-    When the Invitation to "aang-the-avatar@example.com" is Ignored
-    Then the Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "ignored"
-    And no further Invitations can be sent to "aang-the-avatar@example.com" for the "System Test" Space
+  @unimplemented-steps @unstarted
+  Scenario: Revoking a Pending Invitation
+    Given an Invitation to "invitee-a@example.com" for the "System Test" Space is sent by Space Owner "space-owner@example.com"
+    When the Invitation to "invitee-a@example.com" for the "System Test" Space is Revoked by Space Owner "space-owner@example.com"
+    Then the Invitation to "invitee-a@example.com" for the "System Test" Space has a status of "revoked"
+    Then the Invitation to "invitee-a@example.com" for the "System Test" Space cannot be Accepted
+
+  @unimplemented-steps @built
+  Scenario: Revoking Accepted Invitations
+    Given an Invitation to "invitee-a@example.com" for the "System Test" Space is sent by Space Owner "space-owner@example.com"
+    When the Invitation to "invitee-a@example.com" for the "System Test" Space is Accepted
+    Then the Invitation to "invitee-a@example.com" for the "System Test" Space cannot be Revoked

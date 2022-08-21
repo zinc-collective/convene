@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_07_003459) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_07_184623) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_enum :invitation_status, [
     "pending",
-    "sent",
     "accepted",
     "rejected",
     "expired",
     "ignored",
+    "revoked",
   ], force: :cascade
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -79,10 +79,14 @@ Feature: Spaces: Invitations: Responding to Invitations
     Then that Invitation is Expired
     And that Invitation cannot be Accepted
 
-
-
   # We want to demonstrate that we care about folks having the
   # affordances to prevent harassment or spam; so we want to provide
   # an explicit option to block further invitations from the Space
-  @unstarted @andromeda
-  Scenario: Blocking Further Invitations
+  @built @andromeda @unimplemented-steps
+  Scenario: Ignoring invitations
+    Given an Invitation to the "System Test" Space is sent by Space Owner "space-owner@example.com"
+      | name | email                       |
+      | Aang | aang-the-avatar@example.com |
+    When the Invitation to "aang-the-avatar@example.com" is Ignored
+    Then the Invitation to "aang-the-avatar@example.com" for the "System Test" Space has a status of "ignored"
+    And no further Invitations can be sent to "aang-the-avatar@example.com" for the "System Test" Space
