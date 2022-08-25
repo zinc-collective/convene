@@ -8,6 +8,7 @@ class Marketplace
     router.namespace :marketplace do
       router.resources :orders do
         router.resources :items
+        router.resource :checkout
       end
     end
   end

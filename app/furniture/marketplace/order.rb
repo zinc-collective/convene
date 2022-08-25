@@ -6,4 +6,8 @@ class Marketplace::Order < Item
   def marketplace
     furniture
   end
+
+  def checkout
+    Marketplace::Checkout.new(order: self)
+  end
 end

@@ -1,16 +1,19 @@
 <%- marketplace = furniture %>
-<%- marketplace.products.each do |product| %>
+<div id="<%= dom_id(marketplace)%>">
+  <%- marketplace.products.each do |product| %>
 
-  <h3><%= product.name %> (<%= product.price.format %>)</h3>
+    <h3><%= product.name %> (<%= product.price.format %>)</h3>
 
   <%= button_to "Add to Order", [space, room, :furniture, marketplace.order, :items], params: { marketplace_item: { product: product.name } }, method: :post %>
-<%- end %>
+  <%- end %>
 
-<div>
-  <div id="<%= dom_id(marketplace.order) %>-items">
-  </div>
+  <div id="<%= dom_id(marketplace.order)%>">
+    <div id="<%= dom_id(marketplace.order) %>-items">
+    </div>
 
-  <div id="<%= dom_id(marketplace.order) %>-total">
+    <div id="<%= dom_id(marketplace.order) %>-total">
+    </div>
+
+    <%= link_to "Checkout", [space, room, :furniture, marketplace.order, :checkout], class: "button" %>
   </div>
-  <button>Checkout</button>
 </div>
