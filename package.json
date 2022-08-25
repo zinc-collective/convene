@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "@cucumber/cucumber": "^8.5.1",
+    "@cucumber/cucumber": "^8.5.2",
     "@cucumber/pretty-formatter": "^1.0.0",
     "axios": "^0.27.2",
     "axios-case-converter": "^0.9.0",
