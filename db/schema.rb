@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_184623) do
     "expired",
     "ignored",
     "revoked",
+    "sent",
   ], force: :cascade
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
