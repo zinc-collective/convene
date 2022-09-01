@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_11_013601) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_01_010259) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -144,6 +144,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_013601) do
     t.uuid "space_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "invitation_id"
+    t.index ["invitation_id"], name: "index_space_memberships_on_invitation_id"
     t.index ["member_id"], name: "index_space_memberships_on_member_id"
     t.index ["space_id"], name: "index_space_memberships_on_space_id"
   end
@@ -175,5 +177,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_11_013601) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "space_memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
