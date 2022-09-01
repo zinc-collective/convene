@@ -48,6 +48,17 @@ RSpec.describe SpaceMembershipPolicy do
     end
   end
 
+  permissions :destroy? do
+    let(:member) { build(:person) }
+    let(:space_membership) { build(:space_membership, member: member, space: space) }
+
+    it { is_expected.to permit(Operator.new, space_membership) }
+    it { is_expected.to permit(member, space_membership) }
+    it { is_expected.to permit(space_owner, space_membership) }
+    it { is_expected.not_to permit(build(:person), space_membership) }
+  end
+
+
   describe "Scope" do
     subject(:scope) { SpaceMembershipPolicy::Scope.new(person, SpaceMembership) }
 

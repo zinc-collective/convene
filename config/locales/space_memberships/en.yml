@@ -2,3 +2,6 @@ en:
   space_memberships:
     space_memberships_heading: Space Memberships
     delete: Revoke Membership
+    destroy:
+      success: Membership successfully revoked
+      failure: "Could not revoke membership: %{errors}"
