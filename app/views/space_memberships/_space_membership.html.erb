@@ -8,7 +8,7 @@
   <p class="text-gray-500 px-2">
     Joined on
     <time datetime="2020-01-07">
-      <%= space_membership.created_at %>
+      <%= l(space_membership.created_at, format: :short) %>
     </time>
     <br>
   <% if space_membership.invitation.present? %>
