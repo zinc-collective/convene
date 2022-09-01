@@ -51,7 +51,7 @@
     "@rails/activestorage": "^7.0.3",
     "@rails/ujs": "^7.0.2",
     "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/typography": "^0.5.4",
+    "@tailwindcss/typography": "^0.5.6",
     "@webpack-cli/serve": "^1.7.0",
     "autoprefixer": "^10.4.8",
     "event-target-shim": "^6.0.2",
