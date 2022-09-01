@@ -33,6 +33,9 @@
           &lt;<%= invitation.email %>&gt;
           <%= invitation.last_sent_at %>
           (<%= invitation.status %>)
+          <%- if invitation.pending? %>
+            <%= button_to t('icons.remove'), [space, invitation], title: t('invitation.destroy') , method: :delete, class: 'no-underline' %>
+          <%- end %>
         </li>
       <% end %>
     </ul>
