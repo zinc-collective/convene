@@ -47,4 +47,39 @@ RSpec.describe SpaceMembershipPolicy do
       it { is_expected.not_to permit(invitee, space_membership) }
     end
   end
+
+  permissions :destroy? do
+    let(:member) { build(:person) }
+    let(:space_membership) { build(:space_membership, member: member, space: space) }
+
+    it { is_expected.to permit(Operator.new, space_membership) }
+    it { is_expected.to permit(member, space_membership) }
+    it { is_expected.to permit(space_owner, space_membership) }
+    it { is_expected.not_to permit(build(:person), space_membership) }
+  end
+
+
+  describe "Scope" do
+    subject(:scope) { SpaceMembershipPolicy::Scope.new(person, SpaceMembership) }
+
+    let(:person) { create(:person) }
+    let(:space) { create(:space) }
+    let!(:space_memberships) { create_list(:space_membership, 3, space: space) }
+    let!(:other_memberships) { create_list(:space_membership, 3) }
+
+    before do
+      SpaceMembership.create!(
+        member: person,
+        space: space
+      )
+    end
+
+    it "includes memberships for spaces the person is a member of" do
+      expect(scope.resolve).to match_array(space.space_memberships)
+    end
+
+    it "does not include memberships from spaces the person is not a member of" do
+      expect(scope.resolve).not_to include(other_memberships)
+    end
+  end
 end

@@ -1,0 +1,9 @@
+<fieldset>
+  <header>
+    <h3><%= t('space_memberships.space_memberships_heading') %></h3>
+  </header>
+
+  <div>
+    <%= render policy_scope(space.space_memberships) %>
+  </div>
+</fieldset>

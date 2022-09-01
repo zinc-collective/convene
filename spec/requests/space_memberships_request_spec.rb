@@ -55,10 +55,39 @@ RSpec.describe '/space_memberships/', type: :request do
         run_test!
       end
 
-      response '422', 'Required Attributes are not included' do
+      response '422', 'Required Attributes are not included' do
         let(:attributes) { attributes_for(:space_membership, member_id: nil, space_id: nil) }
 
         run_test!
+      end
+    end
+  end
+
+  describe 'DELETE /space_membership/:id' do
+    let(:space) { create(:space, :with_members) }
+    let(:membership) { create(:space_membership, space: space) }
+
+    subject { delete space_space_membership_path(membership.space, membership) }
+
+    before do
+      sign_in_as_member(space)
+    end
+
+    it 'deletes the membership' do
+      subject
+
+      expect(flash[:notice]).to include('revoked')
+      expect { membership.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    context 'when not logged in as a member of the space' do
+      let(:membership) { create(:space_membership) }
+
+      it 'does not delete the membership' do
+        subject
+
+        expect(response).to be_not_found
+        expect(membership.reload).to be_present
       end
     end
   end
