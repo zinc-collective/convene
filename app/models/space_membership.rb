@@ -7,5 +7,8 @@ class SpaceMembership < ApplicationRecord
   # Which person is in the space
   belongs_to :member, class_name: :Person
 
+  # Which invitation was accepted for this membership to be created
+  belongs_to :invitation, optional: true
+
   validates :member, uniqueness: { scope: :space_id }
 end

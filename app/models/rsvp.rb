@@ -23,7 +23,7 @@ class Rsvp
     if authentication_method.confirmed?
       invitation.update(status: attributes[:status])
 
-      person.space_memberships.create(space: space)
+      person.space_memberships.create(space: space, invitation: invitation)
     else
       authentication_method.send_one_time_password!(space)
       false

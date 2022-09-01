@@ -64,8 +64,11 @@ RSpec.describe '/spaces/:space_id/invitations/:invitation_id/rsvp', type: :reque
           person = Person.find_by!(email: invitation.email)
 
           expect(invitation.reload).to be_accepted
-          expect(person.space_memberships
-              .find_by(space: space)).to be_present
+
+          membership = person.space_memberships.find_by(space: space)
+          expect(membership).to be_present
+          expect(membership.invitation).to eq(invitation)
+          expect(invitation.space_membership).to eq(membership)
 
           authentication_method = person
                                   .authentication_methods
