@@ -4,7 +4,7 @@ RSpec.describe InvitationPolicy do
   subject { described_class }
 
   let(:invitation) { create(:invitation) }
-  let(:membership) { create(:space_membership, space: invitation.space) }
+  let(:membership) { create(:membership, space: invitation.space) }
   let(:member) { membership.member }
   let(:non_member) { create(:person) }
 

@@ -2,7 +2,7 @@
 
 <%= render "tab_group", space: space do %>
   <%= render "current_tab", label: "General", url: edit_space_path(space) %>
-  <%= render "tab", label: "People", url: space_space_memberships_path(space) %>
+  <%= render "tab", label: "People", url: space_memberships_path(space) %>
 <%- end %>
 
 <fieldset>

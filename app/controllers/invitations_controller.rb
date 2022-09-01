@@ -4,11 +4,11 @@ class InvitationsController < ApplicationController
   def create
     if invitation.save
       SpaceInvitationMailer.space_invitation_email(invitation).deliver_later
-      redirect_to space_space_memberships_path(invitation.space),
+      redirect_to space_memberships_path(invitation.space),
                   notice: t('.success', invitee_email: invitation.email,
                                         invitee_name: invitation.name)
     else
-      redirect_to space_space_memberships_path(invitation.space),
+      redirect_to space_memberships_path(invitation.space),
                   alert: t('.failure', invitee_email: invitation.email,
                                        invitee_name: invitation.name)
     end

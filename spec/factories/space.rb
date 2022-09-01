@@ -20,7 +20,7 @@ FactoryBot.define do
       end
 
       after(:create) do |space, evaluator|
-        create_list(:space_membership, evaluator.member_count, space: space)
+        create_list(:membership, evaluator.member_count, space: space)
       end
     end
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SpaceMembership < ApplicationRecord
+class Membership < ApplicationRecord
   # Which space the person is in
   belongs_to :space
 

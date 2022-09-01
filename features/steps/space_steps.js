@@ -4,7 +4,7 @@ import { linkParameters, Actor, Space } from "../lib/index.js";
 import appUrl from "../lib/appUrl.js";
 import { Api } from "../lib/Api.js";
 import AuthenticationMethod from "../lib/AuthenticationMethod.js";
-import SpaceMembership from "../lib/SpaceMembership.js";
+import Membership from "../lib/Membership.js";
 import crypto from "crypto";
 Given("{a} {space}", function (_, space) {
   this.spaces = this.spaces || {};
@@ -44,7 +44,7 @@ Given(
         api
           .spaceMemberships()
           .findOrCreateBy(
-            new SpaceMembership({ space, member: authenticationMethod.person })
+            new Membership({ space, member: authenticationMethod.person })
           )
       );
   }

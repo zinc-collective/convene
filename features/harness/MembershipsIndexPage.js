@@ -1,7 +1,7 @@
 import { ThenableWebDriver } from "selenium-webdriver";
 import Page from "./Page.js";
 import Component from "./Component.js";
-class SpaceMembershipsIndexPage extends Page {
+class MembershipsIndexPage extends Page {
   /**
    * @param {ThenableWebDriver} driver
    * @param {Space} space
@@ -14,7 +14,7 @@ class SpaceMembershipsIndexPage extends Page {
    * @returns {string}
    */
   path() {
-    return `/spaces/${this.space.slug}/space_memberships`;
+    return `/spaces/${this.space.slug}/memberships`;
   }
 
   /**
@@ -59,4 +59,4 @@ class SpaceMembershipsIndexPage extends Page {
     return this.component(".new-invitation-form");
   }
 }
-export default SpaceMembershipsIndexPage;
+export default MembershipsIndexPage;

@@ -4,7 +4,7 @@ RSpec.describe FurniturePlacementPolicy do
   subject { described_class }
 
   let(:furniture_placement) { create(:furniture_placement) }
-  let(:membership) { create(:space_membership, space: furniture_placement.space) }
+  let(:membership) { create(:membership, space: furniture_placement.space) }
   let(:member) { membership.member }
   let(:non_member) { create(:person) }
 

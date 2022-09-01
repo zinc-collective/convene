@@ -37,7 +37,7 @@ RSpec.describe '/spaces/', type: :request do
         run_test! do |_response|
           space = Space.find_by(name: attributes[:name])
           expect(space.rooms).to be_empty
-          expect(space.space_memberships).to be_empty
+          expect(space.memberships).to be_empty
           expect(space.utility_hookups).to be_empty
         end
       end
@@ -48,7 +48,7 @@ RSpec.describe '/spaces/', type: :request do
           run_test! do |_response|
             space = Space.find_by(name: attributes[:name])
             expect(space.rooms).not_to be_empty
-            expect(space.space_memberships).not_to be_empty
+            expect(space.memberships).not_to be_empty
             expect(space.utility_hookups).not_to be_empty
           end
         end
@@ -71,7 +71,7 @@ RSpec.describe '/spaces/', type: :request do
         expect(space.utility_hookups).to be_empty
         expect(space.items).to be_empty
         expect(space.invitations).to be_empty
-        expect(space.space_memberships).to be_empty
+        expect(space.memberships).to be_empty
       end
     end
   end

@@ -9,9 +9,9 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       allow(SpaceInvitationMailer).to receive(:space_invitation_email)
         .and_return(mail)
 
-      space_membership = create(:space_membership)
-      space = space_membership.space
-      member = space_membership.member
+      membership = create(:membership)
+      space = membership.space
+      member = membership.member
 
       sign_in(space, member)
 
@@ -25,7 +25,7 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       expect(invitation).to be_present
       expect(invitation.status).to eq('pending')
 
-    expect(response).to redirect_to(space_space_memberships_path(space))
+    expect(response).to redirect_to(space_memberships_path(space))
     expect(flash[:notice]).to eql(I18n.t('invitations.create.success',
                                          invitee_email: invitation.email,
                                          invitee_name: invitation.name))
@@ -51,9 +51,9 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
 
   describe 'DELETE /:invitation_id' do
     it 'Revokes the Invitation' do
-      space_membership = create(:space_membership)
-      space = space_membership.space
-      member = space_membership.member
+      membership = create(:membership)
+      space = membership.space
+      member = membership.member
       invitation = create(:invitation, space: space)
 
       sign_in(space, member)

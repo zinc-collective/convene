@@ -1,6 +1,6 @@
 en:
-  space_memberships:
-    space_memberships_heading: Space Memberships
+  memberships:
+    heading: Space Memberships
     delete: Revoke Membership
     destroy:
       success: Membership successfully revoked

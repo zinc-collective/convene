@@ -69,7 +69,7 @@ class Blueprint
                        .tap { |record| record.update!(member_attributes) }
                end
 
-      space.space_memberships.find_or_create_by(member: person)
+      space.memberships.find_or_create_by(member: person)
     end
   end
 

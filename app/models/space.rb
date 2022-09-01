@@ -34,10 +34,10 @@ class Space < ApplicationRecord
 
   # Joins People to spaces for permissioning and
   # other purposes
-  has_many :space_memberships, inverse_of: :space, dependent: :destroy_async
+  has_many :memberships, inverse_of: :space, dependent: :destroy_async
 
   # The People with permissions for the Space
-  has_many :members, through: :space_memberships
+  has_many :members, through: :memberships
 
   # Inviting new members
   has_many :invitations, inverse_of: :space, dependent: :destroy_async

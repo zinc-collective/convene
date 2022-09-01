@@ -1,24 +1,24 @@
 <div class="flex justify-between px-4 py-4 sm:px-6 text-sm">
   <p class="grow font-medium text-primary-600 truncate">
-    <%= space_membership.member.name || "Unknown" %>
+    <%= membership.member.name || "Unknown" %>
   </p>
   <p class="text-gray-500 px-2">
-    <%= space_membership.member.email %>
+    <%= membership.member.email %>
   </p>
   <p class="text-gray-500 px-2">
     Joined on
     <time datetime="2020-01-07">
-      <%= l(space_membership.created_at, format: :short) %>
+      <%= l(membership.created_at, format: :short) %>
     </time>
     <br>
-  <% if space_membership.invitation.present? %>
-      Invited by: <%= space_membership.invitation.invitor.name %>
+  <% if membership.invitation.present? %>
+      Invited by: <%= membership.invitation.invitor.name %>
   <% end %>
   </p>
   <p class="shrink">
     <%= button_to t('icons.remove'),
-      [space, space_membership],
-      title: t('space_memberships.delete'),
+      [space, membership],
+      title: t('memberships.delete'),
       method: :delete,
       class: 'no-underline'
     %>
