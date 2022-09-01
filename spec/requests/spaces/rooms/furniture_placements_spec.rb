@@ -6,8 +6,8 @@ RSpec.describe '/spaces/:space_slug/room/:room_slug/furniture_placements', type:
   let(:space) { room.space }
 
   describe 'POST /spaces/:space_slug/rooms/:room_slug/furniture_placements' do
-    let(:space_membership) { create(:space_membership, space: space) }
-    let!(:person) { space_membership.member }
+    let(:membership) { create(:membership, space: space) }
+    let!(:person) { membership.member }
 
     before { sign_in(space, person) }
     it "creates a furniture placement of the kind of furniture provided within the room" do
@@ -32,8 +32,8 @@ RSpec.describe '/spaces/:space_slug/room/:room_slug/furniture_placements', type:
     end
 
     context 'when the person is a space member' do
-      let(:space_membership) { create(:space_membership, space: space) }
-      let!(:person) { space_membership.member }
+      let(:membership) { create(:membership, space: space) }
+      let!(:person) { membership.member }
 
       before { sign_in(space, person) }
 
@@ -56,8 +56,8 @@ RSpec.describe '/spaces/:space_slug/room/:room_slug/furniture_placements', type:
     end
 
     context 'when the person is a space member' do
-      let(:space_membership) { create(:space_membership, space: space) }
-      let!(:person) { space_membership.member }
+      let(:membership) { create(:membership, space: space) }
+      let!(:person) { membership.member }
 
       before { sign_in(space, person) }
 

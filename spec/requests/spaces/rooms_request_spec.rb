@@ -90,8 +90,8 @@ RSpec.describe '/spaces/:space_slug/room/', type: :request do
     end
 
     context 'when the person is a space member' do
-      let(:space_membership) { create(:space_membership, space: space) }
-      let!(:person) { space_membership.member }
+      let(:membership) { create(:membership, space: space) }
+      let!(:person) { membership.member }
 
       before { sign_in(space, person) }
 
@@ -114,8 +114,8 @@ RSpec.describe '/spaces/:space_slug/room/', type: :request do
     end
 
     context 'when the person is a space member' do
-      let(:space_membership) { create(:space_membership, space: space) }
-      let!(:person) { space_membership.member }
+      let(:membership) { create(:membership, space: space) }
+      let!(:person) { membership.member }
 
       before { sign_in(space, person) }
 
@@ -141,8 +141,8 @@ RSpec.describe '/spaces/:space_slug/room/', type: :request do
     end
 
     context 'when the person is a space member' do
-      let(:space_membership) { create(:space_membership, space: space) }
-      let!(:person) { space_membership.member }
+      let(:membership) { create(:membership, space: space) }
+      let!(:person) { membership.member }
 
       before { sign_in(space, person) }
 

@@ -5,7 +5,7 @@ class Invitation < ApplicationRecord
 
   belongs_to :invitor, class_name: :Person, inverse_of: :invitations
 
-  has_one :space_membership
+  has_one :membership
 
   default_scope -> { order(updated_at: :desc) }
 

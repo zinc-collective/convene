@@ -1,4 +1,4 @@
-class SpaceMembership {
+class Membership {
   constructor({ space, member }) {
     this.space = space;
     this.member = member;
@@ -10,4 +10,4 @@ class SpaceMembership {
     };
   }
 }
-export default SpaceMembership;
+export default Membership;

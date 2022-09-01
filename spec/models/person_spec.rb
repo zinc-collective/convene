@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Person, type: :model do
   it { is_expected.to have_many(:invitations).inverse_of(:invitor).with_foreign_key(:invitor_id) }
   it { is_expected.to have_many(:authentication_methods).inverse_of(:person).dependent(:destroy_async) }
-  it { is_expected.to have_many(:space_memberships).inverse_of(:member).dependent(:destroy_async) }
+  it { is_expected.to have_many(:memberships).inverse_of(:member).dependent(:destroy_async) }
 
   describe '#display_name' do
     it 'is blank when `name` and `email` are blank' do
@@ -29,7 +29,7 @@ RSpec.describe Person, type: :model do
   end
 
   describe '#member_of?' do
-    let(:membership) { create(:space_membership) }
+    let(:membership) { create(:membership) }
     let(:space) { membership.space }
     let(:member) { membership.member }
     let(:non_member) { create :person }

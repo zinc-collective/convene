@@ -4,7 +4,7 @@ RSpec.describe RoomPolicy do
   subject { described_class }
 
   let(:room) { create(:room) }
-  let(:membership) { create(:space_membership, space: room.space) }
+  let(:membership) { create(:membership, space: room.space) }
   let(:member) { membership.member }
   let(:non_member) { create(:person) }
 

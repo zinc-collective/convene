@@ -3,7 +3,7 @@ import axiosCaseConverter from "axios-case-converter";
 import Space from "./Space.js";
 import Room from "./Room.js";
 import AuthenticationMethod from "./AuthenticationMethod.js";
-import SpaceMembership from "./SpaceMembership.js";
+import Membership from "./Membership.js";
 import lodash from "lodash";
 const applyCaseMiddleware = axiosCaseConverter.default;
 const { camelCase } = lodash;
@@ -57,8 +57,8 @@ class Api {
   spaceMemberships() {
     return new Repository({
       client: this,
-      endpoint: "/space_memberships",
-      model: SpaceMembership,
+      endpoint: "/memberships",
+      model: Membership,
     });
   }
   post(path, model) {

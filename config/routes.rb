@@ -25,10 +25,10 @@ Rails.application.routes.draw do
 
     resources :utility_hookups, only: %I[create edit update destroy index]
 
-    resources :space_memberships, only: %I[index destroy]
+    resources :memberships, only: %I[index destroy]
   end
 
-  resources :space_memberships, only: %I[create]
+  resources :memberships, only: %I[create]
 
   resource :me, only: %i[show], controller: 'me'
 
