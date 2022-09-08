@@ -1,6 +1,7 @@
 en:
   memberships:
-    heading: Space Memberships
+    heading: Memberships
+    summary: Members are People who have explicit access rights within the Space
     delete: Revoke Membership
     destroy:
       success: Membership successfully revoked
