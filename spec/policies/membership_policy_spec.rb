@@ -49,17 +49,20 @@ RSpec.describe MembershipPolicy do
   end
 
   permissions :destroy? do
-    let(:member) { build(:person) }
-    let(:membership) { build(:membership, member: member, space: space) }
+    let(:member) { membership.member }
+    let(:membership) { create(:membership, space: space) }
+    let(:own_membership) { membership }
+    let(:revoked_membership) { create(:membership, space: space, status: :revoked) }
+    let(:other_membership) { create(:membership, space: space) }
 
     it { is_expected.to permit(Operator.new, membership) }
-    it { is_expected.to permit(member, membership) }
-    it { is_expected.to permit(space_owner, membership) }
+    it { is_expected.not_to permit(member, own_membership) }
+    it { is_expected.to permit(member, other_membership) }
+    it { is_expected.not_to permit(member, revoked_membership) }
     it { is_expected.not_to permit(build(:person), membership) }
   end
 
-
-  describe "Scope" do
+  describe 'Scope' do
     subject(:scope) { described_class::Scope.new(person, Membership) }
 
     let(:person) { create(:person) }
@@ -74,11 +77,11 @@ RSpec.describe MembershipPolicy do
       )
     end
 
-    it "includes memberships for spaces the person is a member of" do
+    it 'includes memberships for spaces the person is a member of' do
       expect(scope.resolve).to match_array(space.memberships)
     end
 
-    it "does not include memberships from spaces the person is not a member of" do
+    it 'does not include memberships from spaces the person is not a member of' do
       expect(scope.resolve).not_to include(other_memberships)
     end
   end

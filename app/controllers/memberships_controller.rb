@@ -14,15 +14,15 @@ class MembershipsController < ApplicationController
 
   def destroy
     membership = authorize(Membership.find(params[:id]))
-    if membership.destroy
+    if membership.revoked!
       flash[:notice] = t('.success')
     else
-      flash[:error] = t('.failure', errors: membership.errors.join(", "))
+      flash[:error] = t('.failure', errors: membership.errors.join(', '))
     end
 
     respond_to do |format|
       format.html do
-        redirect_to(space_memberships_path(membership.space, membership))
+        redirect_to(space_memberships_path(membership.space))
       end
 
       format.turbo_stream do
@@ -35,7 +35,7 @@ class MembershipsController < ApplicationController
     current_space
   end
 
-private
+  private
 
   def membership_params
     params.require(:membership).permit(:space_id, :member_id)

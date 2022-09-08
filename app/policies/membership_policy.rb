@@ -8,9 +8,10 @@ class MembershipPolicy < ApplicationPolicy
   end
 
   def destroy?
-    person.operator? ||
-    person.member_of?(space) ||
-    person == membership.member
+    return false if membership.revoked?
+    return false if membership.member == person
+
+    person.operator? || person.member_of?(space)
   end
 
   private def person_responding_to_invitation_to_space?

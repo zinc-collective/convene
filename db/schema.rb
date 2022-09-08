@@ -10,18 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_01_014331) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_08_002936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_enum :invitation_status, [
     "pending",
-    "sent",
     "accepted",
     "rejected",
     "expired",
     "ignored",
+    "revoked",
+    "sent",
+  ], force: :cascade
+
+  create_enum :membership_status, [
+    "active",
     "revoked",
   ], force: :cascade
 
@@ -124,6 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_01_014331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "invitation_id"
+    t.enum "status", default: "active", null: false, enum_type: "membership_status"
     t.index ["invitation_id"], name: "index_memberships_on_invitation_id"
     t.index ["member_id"], name: "index_memberships_on_member_id"
     t.index ["space_id"], name: "index_memberships_on_space_id"

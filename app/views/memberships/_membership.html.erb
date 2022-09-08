@@ -1,26 +1,38 @@
-<div class="flex justify-between px-4 py-4 sm:px-6 text-sm">
-  <p class="grow font-medium text-primary-600 truncate">
+
+<tr>
+  <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
     <%= membership.member.name || "Unknown" %>
-  </p>
-  <p class="text-gray-500 px-2">
+    <dl class="font-normal lg:hidden">
+      <dt class="sr-only"><%= Membership.human_attribute_name(:status) %></dt>
+      <dd class="mt-1 truncate text-gray-700"><%= membership.status.titleize %></dd>
+      <dt class="sr-only sm:hidden"><%= Membership.human_attribute_name(:email) %></dt>
+      <dd class="mt-1 truncate text-gray-500 sm:hidden"><%= membership.member.email %></dd>
+    </dl>
+  </td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+    <%= membership.status.titleize %>
+  </td>
+  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
     <%= membership.member.email %>
-  </p>
-  <p class="text-gray-500 px-2">
+  </td>
+  <td class="px-3 py-4 text-sm text-gray-500">
     Joined on
     <time datetime="2020-01-07">
       <%= l(membership.created_at, format: :short) %>
     </time>
     <br>
-  <% if membership.invitation.present? %>
-      Invited by: <%= membership.invitation.invitor.name %>
-  <% end %>
-  </p>
-  <p class="shrink">
-    <%= button_to t('icons.remove'),
-      [space, membership],
-      title: t('memberships.delete'),
-      method: :delete,
-      class: 'no-underline'
-    %>
-  </p>
-</div>
+    <% if membership.invitation.present? %>
+        Invited by: <%= membership.invitation.invitor.name %>
+    <% end %>
+  </td>
+  <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+    <%- if policy(membership).destroy?  %>
+      <%= button_to t('icons.remove'),
+        [space, membership],
+        title: t('memberships.delete'),
+        method: :delete,
+        class: 'no-underline bg-transparent hover:bg-primary-100'
+      %>
+    <%- end %>
+  </td>
+</tr>
