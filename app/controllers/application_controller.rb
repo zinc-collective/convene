@@ -88,6 +88,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method def current_membership
+    @current_membership ||= if current_space.present? && current_person.present?
+      current_space.memberships.find_by(member: current_person)
+    end
+  end
+
   def space_repository
     policy_scope(Space.includes(:rooms, entrance: [:furniture_placements]))
   end

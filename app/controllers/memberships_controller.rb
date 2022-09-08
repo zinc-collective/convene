@@ -2,7 +2,6 @@
 
 class MembershipsController < ApplicationController
   def create
-    membership = authorize(Membership.new(membership_params))
     if membership.save
       render json: Membership::Serializer.new(membership).to_json, status: :created
     else
@@ -10,10 +9,11 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def show; end
+
   def index; end
 
   def destroy
-    membership = authorize(Membership.find(params[:id]))
     if membership.revoked!
       flash[:notice] = t('.success')
     else
@@ -33,6 +33,14 @@ class MembershipsController < ApplicationController
 
   helper_method def space
     current_space
+  end
+
+  helper_method def membership
+    @membership ||= if params[:id]
+                      policy_scope(Membership).find(params[:id])
+                    else
+                      Membership.new(membership_params)
+                    end.tap(&method(:authorize))
   end
 
   private

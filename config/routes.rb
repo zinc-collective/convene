@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
     resources :utility_hookups, only: %I[create edit update destroy index]
 
-    resources :memberships, only: %I[index destroy]
+    resources :memberships, only: %I[index show destroy]
   end
 
   resources :memberships, only: %I[create]
