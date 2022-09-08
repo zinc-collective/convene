@@ -9,7 +9,7 @@ class Person < ApplicationRecord
 
   # Joins the person to the spaces they are part of
   has_many :memberships, inverse_of: :member, foreign_key: :member_id, dependent: :destroy_async
-  has_many :active_memberships,  -> { active }, class_name: :Membership, inverse_of: :member, foreign_key: :member_id
+  has_many :active_memberships, -> { active }, class_name: :Membership, inverse_of: :member, foreign_key: :member_id
 
   # The Spaces the Person is part of
   has_many :spaces, through: :active_memberships
