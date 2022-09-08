@@ -29,17 +29,22 @@ RSpec.describe Person, type: :model do
   end
 
   describe '#member_of?' do
-    let(:membership) { create(:membership) }
-    let(:space) { membership.space }
-    let(:member) { membership.member }
-    let(:non_member) { create :person }
+    let(:space) { create(:space) }
+    subject(:person) { membership.member }
 
-    it 'returns true for a space the person belongs to' do
-      expect(member.member_of?(space)).to eq(true)
+    context 'when a member' do
+      let(:membership) { create(:membership, status: :active, space: space) }
+      it { is_expected.to be_member_of(space) }
     end
 
-    it 'returns false for a space the person does not belong to' do
-      expect(non_member.member_of?(space)).to eq(false)
+    context 'when not a member' do
+      subject(:person) { create(:person) }
+      it { is_expected.not_to be_member_of(space) }
+    end
+
+    context 'when a revoked member' do
+      let(:membership) { create(:membership, status: :revoked, space: space) }
+      it { is_expected.not_to be_member_of(space) }
     end
   end
 end
