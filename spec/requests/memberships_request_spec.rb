@@ -73,11 +73,12 @@ RSpec.describe '/memberships/', type: :request do
       sign_in_as_member(space)
     end
 
-    it 'deletes the membership' do
+    it 'revokes the membership' do
       subject
 
       expect(flash[:notice]).to include('revoked')
-      expect { membership.reload }.to raise_error(ActiveRecord::RecordNotFound)
+
+      expect(membership.reload).to be_revoked
     end
 
     context 'when not logged in as a member of the space' do

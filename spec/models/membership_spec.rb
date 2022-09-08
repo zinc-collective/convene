@@ -12,4 +12,10 @@ RSpec.describe Membership, type: :model do
   describe '#space' do
     it { is_expected.to belong_to(:space) }
   end
+
+  describe '#revoke' do
+    it 'sets the status to revoked' do
+      expect { membership.revoked! }.to change(membership, :status).from('active').to('revoked')
+    end
+  end
 end

@@ -11,4 +11,9 @@ class Membership < ApplicationRecord
   belongs_to :invitation, optional: true
 
   validates :member, uniqueness: { scope: :space_id }
+
+  enum status: {
+    active: 'active',
+    revoked: 'revoked'
+  }
 end
