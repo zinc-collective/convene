@@ -289,7 +289,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-support (3.11.0)
-    rswag-api (2.5.1)
+    rswag-api (2.6.0)
       railties (>= 3.1, < 7.1)
     rswag-specs (2.6.0)
       activesupport (>= 3.1, < 7.1)
