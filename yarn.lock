@@ -144,10 +144,10 @@
   dependencies:
     regexp-match-indices "1.0.2"
 
-"@cucumber/cucumber@^8.5.2":
-  version "8.5.2"
-  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-8.5.2.tgz#bddeb4b6d30bb549f620e3c18312764b6ffa3943"
-  integrity sha512-wwoaPe7IfoDk+fsxsnZasQpXAz3jNgQzbuEys00KLmnRASxhlenJo8cd+kAwecYJrxak5cui74yo4w8C4vE3hw==
+"@cucumber/cucumber@^8.5.3":
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-8.5.3.tgz#099f8a05664bbbbaa7e5fd7a3d303d4c9709af2b"
+  integrity sha512-cLyMebI20K57JzOd22DJ3atGYwpxYz0YVCAl/iU9iY04A6uWY/6NoOSl8Vfd73ROjLA6T5ZJpGlfw5VkWJnq4A==
   dependencies:
     "@cspotcode/source-map-support" "^0.8.0"
     "@cucumber/ci-environment" "9.1.0"
@@ -155,7 +155,7 @@
     "@cucumber/gherkin" "24.0.0"
     "@cucumber/gherkin-streams" "5.0.1"
     "@cucumber/gherkin-utils" "8.0.0"
-    "@cucumber/html-formatter" "19.2.0"
+    "@cucumber/html-formatter" "20.0.0"
     "@cucumber/message-streams" "4.0.1"
     "@cucumber/messages" "19.1.2"
     "@cucumber/tag-expressions" "4.1.0"
@@ -212,10 +212,10 @@
   dependencies:
     "@cucumber/messages" "^19.0.0"
 
-"@cucumber/html-formatter@19.2.0":
-  version "19.2.0"
-  resolved "https://registry.yarnpkg.com/@cucumber/html-formatter/-/html-formatter-19.2.0.tgz#47b9fcb58fbb48d0e6124fd2e867d9c6fe299470"
-  integrity sha512-qGms4588jmVF/G3fTbgZvxn6OQw9GaTFV007nZZ9/10M9DfrgRqjFjVxVI9TPV63xOLPicEVoqsKZtcECbdMSA==
+"@cucumber/html-formatter@20.0.0":
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/@cucumber/html-formatter/-/html-formatter-20.0.0.tgz#d0958b2d53a6f5ce0fb6f6d7eac88902e9b31030"
+  integrity sha512-I6ZzUZ0CkaaPm6QHThoCRmdcuEIV9kJlNjaWvQ3PRkJm0OscQkQ0SXL/j73U30RDPiCAWwtq6ZSeQrgkTnSK+Q==
 
 "@cucumber/message-streams@4.0.1":
   version "4.0.1"
