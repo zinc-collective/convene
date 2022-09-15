@@ -67,14 +67,14 @@ RSpec.describe '/memberships/', type: :request do
     let(:space) { create(:space, :with_members) }
     let(:membership) { create(:membership, space: space) }
 
-    subject { delete space_membership_path(membership.space, membership) }
+    subject(:perform_request) { delete polymorphic_path([membership.space, membership]) }
 
     before do
       sign_in_as_member(space)
     end
 
     it 'revokes the membership' do
-      subject
+      perform_request
 
       expect(flash[:notice]).to include('revoked')
 
@@ -85,10 +85,9 @@ RSpec.describe '/memberships/', type: :request do
       let(:membership) { create(:membership) }
 
       it 'does not delete the membership' do
-        subject
-
-        expect(response).to be_not_found
+        expect { perform_request }.to raise_error(ActiveRecord::RecordNotFound)
         expect(membership.reload).to be_present
+        expect(membership.reload).not_to be_revoked
       end
     end
   end
