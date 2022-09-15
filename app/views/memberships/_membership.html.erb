@@ -27,12 +27,7 @@
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
     <%- if policy(membership).destroy?  %>
-      <%= button_to t('icons.remove'),
-        [space, membership],
-        title: t('memberships.delete'),
-        method: :delete,
-        class: 'no-underline bg-transparent hover:bg-primary-100'
-      %>
+      <%= render "buttons/remove", href: [space, membership], title: t('memberships.delete') %>
     <%- end %>
   </td>
 </tr>
