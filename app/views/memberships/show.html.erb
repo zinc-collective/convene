@@ -1,0 +1,9 @@
+<h1><%= membership.member.name %></h1>
+<p><%= membership.member.email %></p>
+
+<section>
+  <h3><%= t('invitations.invited_members_heading') %></h3>
+  <ul>
+    <%= render membership.sent_invitations %>
+  </ul>
+</section>

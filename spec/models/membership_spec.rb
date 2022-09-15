@@ -18,4 +18,19 @@ RSpec.describe Membership, type: :model do
       expect { membership.revoked! }.to change(membership, :status).from('active').to('revoked')
     end
   end
+
+  describe '#sent_invitations' do
+    it { is_expected.to have_many(:sent_invitations).conditions(space: subject.space).source(:invitations).inverse_of(:invitor) }
+    it 'includes only invitations to the memberships space' do
+      membership.save!
+      invitation_to_this_space = create(:invitation, invitor: membership.member, space: membership.space)
+      invitation_to_other_space = create(:invitation, invitor: membership.member)
+
+      membership.member.reload
+      expect(membership.member.invitations).to match_array([invitation_to_other_space, invitation_to_this_space])
+
+      expect(membership.sent_invitations).to include(invitation_to_this_space)
+      expect(membership.sent_invitations).not_to include(invitation_to_other_space)
+    end
+  end
 end

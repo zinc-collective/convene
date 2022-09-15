@@ -7,6 +7,9 @@ class Membership < ApplicationRecord
   # Which person is in the space
   belongs_to :member, class_name: :Person
 
+  has_many :sent_invitations, ->(membership) { where(space: membership.space) },
+           through: :member, source: :invitations, inverse_of: :invitor
+
   # Which invitation was accepted for this membership to be created
   belongs_to :invitation, optional: true
 

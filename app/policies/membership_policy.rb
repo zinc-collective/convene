@@ -14,6 +14,10 @@ class MembershipPolicy < ApplicationPolicy
     person.operator? || person.member_of?(space)
   end
 
+  def show?
+    person.operator? || membership.member == person || person.member_of?(space)
+  end
+
   private def person_responding_to_invitation_to_space?
     (membership.member.email == person.email && space.invitations.exists?(status: %i[pending], email: person.email))
   end

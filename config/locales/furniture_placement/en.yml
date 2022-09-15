@@ -11,7 +11,7 @@ en:
     furniture_placement:
       edit_title: "Configure %{name}"
       remove_title: "Remove %{name}"
-      confirm_remove: "This will remove the furniture and it's data"
+      confirm_destroy: "This Removes the Furniture and all its Data"
   helpers:
     submit:
       furniture_placement:
