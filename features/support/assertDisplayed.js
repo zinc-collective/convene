@@ -3,7 +3,9 @@ const assert = assert$0.strict;
 function assertDisplayed(component) {
   return component
     .isDisplayed()
-    .then((result) => assert(result, `${component.selector}`));
+    .then((result) => {
+      assert(result, `${component.selector}`)
+    });
 }
 function refuteDisplayed(component) {
   return component

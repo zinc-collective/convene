@@ -54,7 +54,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <%= render policy_scope(space.invitations.where.not(status: :accepted)) %>
+        <%= render policy_scope(space.invitations) %>
       </tbody>
     </table>
   </div>
