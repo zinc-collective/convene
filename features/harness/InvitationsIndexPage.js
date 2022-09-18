@@ -23,26 +23,30 @@ class InvitationsIndexPage extends Page {
    */
   invite({ name, email }) {
     return this.visit()
-      .then(() =>
-        this.newInvitationForm()
+      .then(() => {
+        return this.newInvitationForm()
           .component('input[name="invitation[name]"]')
-          .fillIn(name)
-      )
-      .then(() =>
-        this.newInvitationForm()
+          .fillIn(name);
+      })
+      .then(() => {
+        return this.newInvitationForm()
           .component('input[name="invitation[email]"]')
-          .fillIn(email)
-      )
-      .then(() =>
-        this.newInvitationForm().component('input[type="submit"]').click()
-      )
+          .fillIn(email);
+      })
+      .then(() => {
+        return this.newInvitationForm()
+          .component('input[type="submit"]')
+          .click();
+      })
       .finally(() => {
-        this
+        return this;
       });
   }
 
   invitation({ invitation, status }) {
-    return this.component(`*[data-invitation-status="${status}"][data-invitation-email="${invitation.emailAddress}"]`)
+    return this.component(
+      `*[data-invitation-status="${status}"][data-invitation-email="${invitation.emailAddress}"]`
+    );
   }
 
   /**
