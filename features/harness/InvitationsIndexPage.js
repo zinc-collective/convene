@@ -42,7 +42,7 @@ class InvitationsIndexPage extends Page {
   }
 
   invitation({ invitation, status }) {
-    return page.component(`*[data-invitation-status="${status}"][data-invitation-email="${invitation.emailAddress}"]`)
+    return this.component(`*[data-invitation-status="${status}"][data-invitation-email="${invitation.emailAddress}"]`)
   }
 
   /**
