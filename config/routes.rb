@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :spaces, only: %I[show edit update create destroy] do
     resource :authenticated_session, only: %i[new create destroy show]
 
-    resources :invitations, only: %i[create destroy] do
+    resources :invitations, only: %i[create destroy index] do
       resource :rsvp, only: %i[show update]
     end
 

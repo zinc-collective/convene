@@ -7,8 +7,10 @@ en:
   invitation:
     destroy: Revoke
   invitations:
-    invite_member_heading: Invite a Member
-    invited_members_heading: Invited Members
+    heading: Invitations
+    summary: Invitations allow people to Join your Space as Members
+    new:
+      heading: Invite Members
     create:
       success: You've invited '%{invitee_name} <%{invitee_email}>' successfully! 🎉
       failure: We couldn't invite '%{invitee_name} <%{invitee_email}>'. 🙀

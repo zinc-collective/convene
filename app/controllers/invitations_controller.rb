@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class InvitationsController < ApplicationController
+
+  def index
+
+  end
+
   def create
     if invitation.save
       SpaceInvitationMailer.space_invitation_email(invitation).deliver_later
@@ -34,7 +39,11 @@ class InvitationsController < ApplicationController
                     end
   end
 
-  def invitations
+  helper_method def space
+    current_space
+  end
+
+  helper_method def invitations
     policy_scope(current_space.invitations)
   end
 end

@@ -1,10 +1,3 @@
-<% breadcrumb :edit_space, space %>
-
-<%= render "tab_group", space: space do %>
-  <%= render "tab", label: "General", url: edit_space_path(space) %>
-  <%= render "current_tab", label: "People", url: space_memberships_path(space) %>
-<%- end %>
+<% breadcrumb :memberships, space %>
 
 <%= render "memberships", space: space %>
-
-<%= render "invitations", space: space %>
