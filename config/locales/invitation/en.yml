@@ -5,7 +5,7 @@ en:
         invitee_ignored_space: The invitee has ignored this Space
         invitation_expired: This invitation has expired
   invitation:
-    destroy: Revoke
+    destroy: Revoke Invitation
   invitations:
     heading: Invitations
     summary: Members Invited to '%{space_name}'

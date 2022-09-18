@@ -26,8 +26,8 @@
     <% end %>
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-    <%- if policy(invitation).destroy?  %>
-      <%= render "buttons/remove", href: [space, invitation], title: t('invitations.delete') %>
+    <%- if !invitation.revoked? && policy(invitation).destroy?  %>
+      <%= render "buttons/remove", href: [space, invitation], title: t('invitation.destroy') %>
     <%- end %>
   </td>
 </tr>
