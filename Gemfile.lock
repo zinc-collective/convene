@@ -144,7 +144,7 @@ GEM
       railties (>= 5.0.0)
     faker (2.23.0)
       i18n (>= 1.8.11, < 2)
-    faraday (1.10.0)
+    faraday (1.10.2)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -223,7 +223,7 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     pg (1.4.3)
-    plaid (15.11.0)
+    plaid (16.0.0)
       faraday (~> 1.0, >= 1.0.1)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -371,7 +371,7 @@ DEPENDENCIES
   lockbox (= 1.0.0)
   money
   pg (~> 1.4)
-  plaid (~> 15.11)
+  plaid (~> 16.0)
   pry-byebug
   puma (~> 5.6)
   pundit (~> 2.2)
