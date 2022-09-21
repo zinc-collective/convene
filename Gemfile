@@ -100,7 +100,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', github: 'zinc-collective/rspec-rails', branch: 'combo-have_enqueued_mail-fixes'
   gem 'rswag-specs'
-  gem 'shoulda-matchers', '~> 5.1'
+  gem 'shoulda-matchers', '~> 5.2'
 
   # Let the robots do the request/response faking.
   gem 'vcr'
