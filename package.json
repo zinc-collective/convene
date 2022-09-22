@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "@cucumber/cucumber": "^8.5.3",
+    "@cucumber/cucumber": "^8.6.0",
     "@cucumber/pretty-formatter": "^1.0.0",
     "axios": "^0.27.2",
     "axios-case-converter": "^0.9.0",
@@ -53,7 +53,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.7",
     "@webpack-cli/serve": "^1.7.0",
-    "autoprefixer": "^10.4.11",
+    "autoprefixer": "^10.4.12",
     "event-target-shim": "^6.0.2",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",

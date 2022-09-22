@@ -15,7 +15,7 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
 
       sign_in(space, member)
 
-      post "/spaces/#{space.slug}/invitations", params: {
+      post space_invitations_path(space), params: {
         invitation: { name: 'foobar', email: 'foobar@example.com' }
       }
 
@@ -55,7 +55,7 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
 
       sign_in(space, non_member)
 
-      post "/spaces/#{space.slug}/invitations", params: {
+      post space_invitations_path(space), params: {
         invitation: { name: 'foobar', email: 'foobar@example.com' }
       }
 

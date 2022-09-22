@@ -76,7 +76,7 @@ gem 'bootsnap', '~> 1.13', require: false
 gem 'pundit', '~> 2.2'
 
 # Utility hookup support
-gem 'plaid', '~> 15.11'
+gem 'plaid', '~> 16.0'
 gem 'money'
 
 # Workers and Background Jobs
@@ -100,7 +100,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', github: 'zinc-collective/rspec-rails', branch: 'combo-have_enqueued_mail-fixes'
   gem 'rswag-specs'
-  gem 'shoulda-matchers', '~> 5.1'
+  gem 'shoulda-matchers', '~> 5.2'
 
   # Let the robots do the request/response faking.
   gem 'vcr'
