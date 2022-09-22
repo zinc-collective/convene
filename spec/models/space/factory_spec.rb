@@ -10,7 +10,7 @@ RSpec.describe Space::Factory do
 
       expect(space).to be_persisted
       expect(space.name).to eq(attributes[:name])
-      expect(space.slug).to eq(attributes[:slug])
+      expect(space.slug).to be_present
     end
 
     # @todo this is probably dangerous?

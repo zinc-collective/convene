@@ -4,7 +4,6 @@ FactoryBot.define do
   factory :space do
     client
     sequence(:name) { |n| "#{Faker::Book.title} #{n}" }
-    slug { name.gsub(' ', '_').downcase.dasherize }
 
     trait :default do
       slug { Neighborhood.config.default_space_slug }
