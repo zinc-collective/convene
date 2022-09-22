@@ -76,7 +76,7 @@ RSpec.describe '/memberships/', type: :request do
     it 'revokes the membership' do
       perform_request
 
-      expect(flash[:notice]).to include('revoked')
+      expect(flash[:notice]).to eq(I18n.t('memberships.destroy.success'))
 
       expect(membership.reload).to be_revoked
     end

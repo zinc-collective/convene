@@ -20,6 +20,7 @@ class Actor {
       if (signedIn) {
         return this;
       }
+
       return new SignInPage(driver, space)
         .visit()
         .then((page) => page.submitEmail(this.email))

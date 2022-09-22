@@ -5,10 +5,12 @@ en:
         invitee_ignored_space: The invitee has ignored this Space
         invitation_expired: This invitation has expired
   invitation:
-    destroy: Revoke
+    destroy: Revoke Invitation
   invitations:
-    invite_member_heading: Invite a Member
-    invited_members_heading: Invited Members
+    heading: Invitations
+    summary: Members Invited to '%{space_name}'
+    new:
+      heading: Invite Members to '%{space_name}'
     create:
       success: You've invited '%{invitee_name} <%{invitee_email}>' successfully! 🎉
       failure: We couldn't invite '%{invitee_name} <%{invitee_email}>'. 🙀

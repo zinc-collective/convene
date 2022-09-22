@@ -25,7 +25,7 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       expect(invitation).to be_present
       expect(invitation.status).to eq('pending')
 
-      expect(response).to redirect_to(space_memberships_path(space))
+      expect(response).to redirect_to([space, :invitations])
       expect(flash[:notice]).to eql(I18n.t('invitations.create.success',
                                            invitee_email: invitation.email,
                                            invitee_name: invitation.name))
@@ -33,6 +33,20 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       expect(SpaceInvitationMailer).to have_received(:space_invitation_email)
         .with(invitation)
       expect(mail).to have_received(:deliver_later)
+    end
+
+    it "re-renders the new invitation form" do
+      membership = create(:membership)
+      space = membership.space
+      member = membership.member
+
+      sign_in(space, member)
+
+      post "/spaces/#{space.slug}/invitations", params: {
+        invitation: { name: 'foobar'  }
+      }
+      expect(assigns(:invitation)).not_to be_valid
+      expect(response).to render_template(:index)
     end
 
     it "doesn't allow non-space-members to create invitations" do
@@ -45,6 +59,7 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
         invitation: { name: 'foobar', email: 'foobar@example.com' }
       }
 
+      expect(response).to be_not_found
       expect(space.invitations).to be_empty
     end
   end
@@ -59,6 +74,7 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       sign_in(space, member)
 
       delete polymorphic_path([space, invitation])
+      expect(response).to redirect_to([space, :invitations])
 
       expect(invitation.reload).to be_revoked
     end

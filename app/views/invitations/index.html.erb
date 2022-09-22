@@ -1,16 +1,43 @@
-<fieldset>
+<% breadcrumb :invitations, space %>
+<fieldset class="new-invitation-form">
+  <header>
+    <h3><%= t('invitations.new.heading', space_name: space.name) %></h3>
+  </header>
+
+
+  <div>
+    <%= form_with(model: [space, invitation], local: true) do |invitation_form| %>
+      <div>
+        <%= invitation_form.label :name %>
+        <%= invitation_form.text_field :name %>
+        <%= render partial: "error", locals: { model: invitation_form.object, attribute: :name } %>
+      </div>
+
+      <div>
+        <%= invitation_form.label :email %>
+        <%= invitation_form.text_field :email %>
+        <%= render partial: "error", locals: { model: invitation_form.object, attribute: :email } %>
+      </div>
+
+      <footer>
+        <%= invitation_form.submit %>
+      </footer>
+    <% end %>
+  </div>
+
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-      <h1 class="text-xl font-semibold text-gray-900"><%= t('memberships.heading') %></h1>
-      <p class="mt-2 text-sm text-gray-700"><%= t('memberships.summary') %></p>
+      <h1 class="text-xl font-semibold text-gray-900"><%= t('invitations.heading') %></h1>
+      <p class="mt-2 text-sm text-gray-700"><%= t('invitations.summary', space_name: space.name) %></p>
     </div>
   </div>
+
   <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
     <table class="min-w-full divide-y divide-gray-300">
       <thead class="bg-gray-50">
         <tr>
           <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-            <%= Membership.human_attribute_name(:name) %>
+            <%= Invitation.human_attribute_name(:name) %>
           </th>
           <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
             <%= Membership.human_attribute_name(:status) %>
@@ -27,7 +54,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <%= render policy_scope(space.memberships) %>
+        <%= render policy_scope(space.invitations) %>
       </tbody>
     </table>
   </div>

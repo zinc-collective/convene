@@ -1,19 +1,11 @@
 <% breadcrumb :edit_space, space %>
 
-<%= render "tab_group", space: space do %>
-  <%= render "current_tab", label: "General", url: edit_space_path(space) %>
-  <%= render "tab", label: "People", url: space_memberships_path(space) %>
-<%- end %>
-
 <fieldset>
-  <%= form_with(model: [space]) do |space_form| %>
-    <%= render "select",
-               attribute: :theme,
-               include_blank: false,
-               options: Space::THEME_OPTIONS.map { |t| [t.titleize, t] },
-               form: space_form %>
-    <%= space_form.submit %>
-  <%- end %>
+  <h3>People & Permissions</h3>
+  <ul>
+    <li><%= link_to t('memberships.heading'), [space, :memberships] %></li>
+    <li><%= link_to t('invitations.heading'), [space, :invitations] %></li>
+  </ul>
 </fieldset>
 
 <fieldset>
@@ -39,6 +31,18 @@
     <% end %>
   </footer>
 </fieldset>
+
+<fieldset>
+  <%= form_with(model: [space]) do |space_form| %>
+    <%= render "select",
+               attribute: :theme,
+               include_blank: false,
+               options: Space::THEME_OPTIONS.map { |t| [t.titleize, t] },
+               form: space_form %>
+    <%= space_form.submit %>
+  <%- end %>
+</fieldset>
+
 
 <fieldset>
   <h3>Utility Hookups</h3>

@@ -1,8 +1,8 @@
 en:
   memberships:
-    heading: Memberships
-    summary: Members are People who have explicit access rights within the Space
-    delete: Revoke Membership
+    heading: Members
+    summary: People with access to '%{space_name}'
+    delete: Remove Member
     destroy:
-      success: Membership successfully revoked
-      failure: "Could not revoke membership: %{errors}"
+      success: Member successfully Removed
+      failure: "Could not remove Member: %{errors}"
