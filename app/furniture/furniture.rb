@@ -7,6 +7,7 @@ module Furniture
     breakout_tables_by_jitsi: BreakoutTablesByJitsi,
     payment_form: PaymentForm,
     markdown_text_block: MarkdownTextBlock,
+    marketplace: Marketplace,
     video_bridge: VideoBridge,
     livestream: Livestream,
     embedded_form: EmbeddedForm,
