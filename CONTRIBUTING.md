@@ -78,7 +78,9 @@ Once setup completes, configure your local development environment.
 1. Open `.env` and make any changes.
 
 Once you have completed configuration; run `bin/run`. You now should be able to open
-http://localhost:3000/spaces/system-test and see Convene.
+http://localhost:3000 and see Convene.
+
+Log in with space-member@example.com. You can check the email using http://localhost:1080.
 
 Finally, with the server still running (perhaps in a different terminal), run
 `bin/test` to ensure that your development environment is configured correctly.
