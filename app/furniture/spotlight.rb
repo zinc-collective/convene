@@ -2,6 +2,7 @@
 
 class Spotlight
   include Placeable
+  delegate :alt_text,:alt_text=, to: :image
 
   def self.append_routes(router)
     router.scope module: 'spotlight' do
@@ -15,11 +16,15 @@ class Spotlight
     Image.find_or_initialize_by(location: placement, space: placement.space)
   end
 
+  def alt_text=text
+    image.update(alt_text:text)
+  end
+
   def file=file
     image.file.attach(file)
   end
 
   def attribute_names
-    %w[file]
+    %w[file alt_text]
   end
 end
