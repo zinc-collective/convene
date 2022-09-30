@@ -34,7 +34,7 @@
     "axios": "^0.27.2",
     "axios-case-converter": "^0.9.0",
     "change-case": "^4.1.2",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.0.3",
     "fs-extra": "^10.1.0",
     "geckodriver": "^3.0.2",
     "get-urls": "^11.0.0",
