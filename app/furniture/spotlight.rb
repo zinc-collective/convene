@@ -3,7 +3,7 @@
 class Spotlight
   include Placeable
 
-  def self.append_routes(router)
+  def self.deprecated_append_routes(router)
     router.scope module: 'spotlight' do
       router.resource :spotlight, only: [:show] do
         router.resources :images, only: %i[create edit update]
