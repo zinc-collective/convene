@@ -18,6 +18,11 @@ class PaymentForm
     Payment.where(location: placement)
   end
 
+  # @deprecated
+  def in_room_template
+    "#{self.class.furniture_kind}/in_room"
+  end
+
   def link_token_for(person)
     utilities.plaid.create_link_token(person: person, space: placement.space)
   end

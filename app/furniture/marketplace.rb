@@ -3,11 +3,15 @@ class Marketplace
 
   def self.append_routes(router)
     router.resource :marketplace, only: [] do
-      router.resources :products, only: %i[create index], module: "marketplace"
+      router.resources :products, only: %i[create index], module: 'marketplace'
     end
   end
 
   def products
     Marketplace::Product.where(space: space)
+  end
+
+  def to_partial_path
+    'marketplace/marketplace'
   end
 end

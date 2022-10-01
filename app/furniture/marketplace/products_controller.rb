@@ -3,6 +3,8 @@ class Marketplace
     def create
       product = marketplace.products.new(product_params)
       product.save!
+
+      render product
     end
 
     def marketplace
@@ -10,7 +12,7 @@ class Marketplace
     end
 
     def product_params
-      policy(Marketplace::Product).permit(params.require(:product))
+      policy(Marketplace::Product).permit(params.require(:marketplace_product))
     end
   end
 end

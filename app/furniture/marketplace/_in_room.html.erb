@@ -1,8 +1,0 @@
-<h2>Marketplace</h2>
-
-<%= form_with model: [space, room, :furniture, Marketplace::Product.new] do |f| %>
-  <%= render "text_field", { attribute: :name, form: f} %>
-  <%= render "text_area", { attribute: :description, form: f} %>
-  <%= render "number_field", { attribute: :price, form: f} %>
-  <%= f.submit %>
-<% end %>

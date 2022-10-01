@@ -19,6 +19,12 @@ class Spotlight
     image.file.attach(file)
   end
 
+
+  # @deprecated
+  def in_room_template
+    "#{self.class.furniture_kind}/in_room"
+  end
+
   def attribute_names
     %w[file]
   end

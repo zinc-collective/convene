@@ -27,6 +27,11 @@ class Livestream
     settings.fetch('layout', '')
   end
 
+  # @deprecated
+  def in_room_template
+    "#{self.class.furniture_kind}/in_room"
+  end
+
   # @todo can we make it so we don't need to define this?
   # and the `settings.fetch` bits?
   def attribute_names

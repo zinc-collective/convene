@@ -20,6 +20,11 @@ class EmbeddedForm
     "https://airtable.com/embed/#{form_id}"
   end
 
+  # @deprecated
+  def in_room_template
+    "#{self.class.furniture_kind}/in_room"
+  end
+
   def attribute_names
     super + ['form_url']
   end

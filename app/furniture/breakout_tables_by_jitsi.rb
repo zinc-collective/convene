@@ -16,6 +16,12 @@ class BreakoutTablesByJitsi
     end
   end
 
+
+  # @deprecated
+  def in_room_template
+    "#{self.class.furniture_kind}/in_room"
+  end
+
   class Table
     include ActiveModel::Model
     include ActiveModel::Attributes
