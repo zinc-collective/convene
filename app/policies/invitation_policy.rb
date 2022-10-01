@@ -14,6 +14,7 @@ class InvitationPolicy < ApplicationPolicy
 
   alias edit? create?
   alias update? create?
+  alias index? create?
   alias destroy? create?
   alias new? create?
 

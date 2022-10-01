@@ -1,10 +1,39 @@
-<% breadcrumb :edit_space, space %>
+<% breadcrumb :memberships, space %>
 
-<%= render "tab_group", space: space do %>
-  <%= render "tab", label: "General", url: edit_space_path(space) %>
-  <%= render "current_tab", label: "People", url: space_memberships_path(space) %>
-<%- end %>
-
-<%= render "invitations", space: space %>
-
-<%= render "memberships", space: space %>
+<fieldset>
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-xl font-semibold text-gray-900"><%= t('memberships.heading') %></h1>
+      <p class="mt-2 text-sm text-gray-700"><%= t('memberships.summary', space_name: space.name) %></p>
+    </div>
+  </div>
+  <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+            <%= Membership.human_attribute_name(:name) %>
+          </th>
+          <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
+            <%= Membership.human_attribute_name(:status) %>
+          </th>
+          <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">
+            <%= Membership.human_attribute_name(:email) %>
+          </th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+            <%= Membership.human_attribute_name(:metadata) %>
+          </th>
+          <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+            <span class="sr-only">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <%= render policy_scope(space.memberships) %>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-center m-5">
+    <%= link_to t('invitations.new.heading', space_name: space.name), [space, :invitations], class: "button no-underline" %>
+  </p>
+</fieldset>

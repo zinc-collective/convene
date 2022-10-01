@@ -42,6 +42,9 @@ jobs:
           --health-retries 5
     steps:
     - uses: actions/checkout@v2
+    # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
+    # Perhaps we should consider not using brew in CI (though it sure is nice!)
+    - uses: raviqqe/enable-homebrew@main
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1

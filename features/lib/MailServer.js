@@ -25,7 +25,7 @@ class MailServer {
           )
           .then((emails) => (emails.length > 0 ? emails : retry()));
       },
-      { maxRetryTime: 1000 }
+      { maxRetryTime: 2000 }
     ).catch(() => {
       throw `Couldn't find email ${JSON.stringify(query)}`;
     });

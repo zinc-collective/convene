@@ -13,6 +13,16 @@ crumb :edit_space do |space|
   link 'Configure Space', edit_space_path(space)
 end
 
+crumb :memberships do |space|
+  link 'Members', [space, :memberships]
+  parent :edit_space, space
+end
+
+crumb :invitations do |space|
+  link 'Invitations', [space, :invitations]
+  parent :memberships, space
+end
+
 crumb :utility_hookups do |space|
   link 'Utility Hookups', space_utility_hookups_path(space)
   parent :edit_space, space

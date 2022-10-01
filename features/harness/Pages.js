@@ -5,6 +5,7 @@ import WaitingRoomPage from "./WaitingRoomPage.js";
 import SpacePage from "./SpacePage.js";
 import SpaceEditPage from "./SpaceEditPage.js";
 import MembershipsIndexPage from "./MembershipsIndexPage.js";
+import InvitationsIndexPage from "./InvitationsIndexPage.js";
 import MePage from "./MePage.js";
 import SignInPage from "./SignInPage.js";
 export { Page };
@@ -14,6 +15,7 @@ export { SignInPage };
 export { RoomPage };
 export { SpaceEditPage };
 export { MembershipsIndexPage };
+export { InvitationsIndexPage };
 export { RoomEditPage };
 export { WaitingRoomPage };
 export default {

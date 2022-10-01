@@ -3,7 +3,11 @@ import assert$0 from "assert";
 import Invitation from "../lib/Invitation.js";
 import Space from "../lib/Space.js";
 import Actor from "../lib/Actor.js";
-import { SignInPage, MembershipsIndexPage } from "../harness/Pages.js";
+import {
+  SignInPage,
+  MembershipsIndexPage,
+  InvitationsIndexPage,
+} from "../harness/Pages.js";
 import Component from "../harness/Component.js";
 import {
   assertDisplayed,
@@ -11,7 +15,7 @@ import {
 } from "../support/assertDisplayed.js";
 const assert = assert$0.strict;
 
-When('{a} {invitation} is Ignored', function (a, invitation) {
+When("{a} {invitation} is Ignored", function (a, invitation) {
   return invitation.ignore(this.driver);
 });
 
@@ -27,9 +31,10 @@ When(
       invitation.email = this.upsertTestId(invitation.email);
       return invitation;
     });
+
     return actor
       .signIn(this.driver, space)
-      .then(() => new MembershipsIndexPage(this.driver, space))
+      .then(() => new InvitationsIndexPage(this.driver, space))
       .then((page) => page.inviteAll(toSend));
   }
 );
@@ -56,10 +61,13 @@ When(
   }
 );
 
-Then('no further Invitations can be sent to {string} for {a} {space}', function (string, a, space) {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending';
-});
+Then(
+  "no further Invitations can be sent to {string} for {a} {space}",
+  function (string, a, space) {
+    // Write code here that turns the phrase above into concrete actions
+    return "pending";
+  }
+);
 
 Then(
   "an {invitation} for {a} {space} is delivered",
@@ -76,9 +84,11 @@ Then(
   /**
    * @param {Invitation} invitation
    */
-  async function (_a, invitation, _a2, space, _a3, status) {
-    const page = new MembershipsIndexPage(this.driver, space);
-    assert(await page.hasInvitation({ invitation, status }));
+  function (_a, invitation, _a2, space, _a3, status) {
+    const page = new InvitationsIndexPage(this.driver, space);
+    return page.visit().then(() => {
+      return assertDisplayed(page.invitation({ invitation, status }))
+    })
   }
 );
 Then(

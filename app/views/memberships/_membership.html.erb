@@ -22,7 +22,13 @@
     </time>
     <br>
     <% if membership.invitation.present? %>
-        Invited by: <%= membership.invitation.invitor.name %>
+      Invited by <%= membership.invitation.invitor.name %>
+      on
+      <br />
+      <time datetime="2020-01-07">
+        <%= l(membership.invitation.created_at, format: :short) %>
+      </time>
+      <br>
     <% end %>
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

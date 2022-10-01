@@ -1,22 +1,24 @@
 # frozen_string_literal: true
 
 class InvitationsController < ApplicationController
+  def index; end
+
   def create
     if invitation.save
       SpaceInvitationMailer.space_invitation_email(invitation).deliver_later
-      redirect_to space_memberships_path(invitation.space),
+      redirect_to [invitation.space, :invitations],
                   notice: t('.success', invitee_email: invitation.email,
                                         invitee_name: invitation.name)
     else
-      redirect_to space_memberships_path(invitation.space),
-                  alert: t('.failure', invitee_email: invitation.email,
-                                       invitee_name: invitation.name)
+      flash[:alert] = t('.failure', invitee_email: invitation.email,
+        invitee_name: invitation.name)
+      render :index
     end
   end
 
   def destroy
     invitation.update!(status: :revoked)
-    redirect_to edit_space_path(invitation.space),
+    redirect_to [invitation.space, :invitations],
                 notice: t('.success', invitee_email: invitation.email,
                                       invitee_name: invitation.name)
   end
@@ -26,15 +28,21 @@ class InvitationsController < ApplicationController
           .merge(last_sent_at: Time.zone.now, invitor: current_person)
   end
 
-  def invitation
+  helper_method def invitation
     @invitation ||= if params[:id]
                       authorize(invitations.find(params[:id]))
-                    else
+                    elsif params[:invitation]
                       authorize(invitations.new(invitation_params))
+                    else
+                      authorize(invitations.new)
                     end
   end
 
-  def invitations
+  helper_method def space
+    current_space
+  end
+
+  helper_method def invitations
     policy_scope(current_space.invitations)
   end
 end
