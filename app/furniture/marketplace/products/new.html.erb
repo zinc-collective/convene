@@ -1,0 +1,8 @@
+<%= turbo_frame_tag marketplace do %>
+  <%= form_with model: [marketplace.space, marketplace.room, marketplace.products.new] do |f| %>
+    <%= render "text_field", { attribute: :name, form: f} %>
+    <%= render "text_area", { attribute: :description, form: f} %>
+    <%= render "number_field", { attribute: :price_cents, form: f} %>
+    <%= f.submit %>
+  <% end %>
+<%- end %>
