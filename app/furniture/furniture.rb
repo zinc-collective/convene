@@ -14,10 +14,18 @@ module Furniture
     spotlight: Spotlight,
   }.freeze
 
-  # Appends each {Furniture}'s CRUD actions
-  def self.append_routes(routing_context)
+  # Appends each {Furniture}'s CRUD actions under a FurniturePlacement
+  # @deprecated
+  def self.deprecated_append_routes(router)
     REGISTRY.each_value do |furniture|
-      furniture.append_routes(routing_context) if furniture.respond_to?(:append_routes)
+      furniture.deprecated_append_routes(router) if furniture.respond_to?(:deprecated_append_routes)
+    end
+  end
+
+  # Appends each Furnitures CRUD actions within the {Room}
+  def self.append_routes(router)
+    REGISTRY.each_value do |furniture|
+      furniture.append_routes(router) if furniture.respond_to?(:append_routes)
     end
   end
 

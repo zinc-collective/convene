@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BreakoutTablesByJitsi
-  def self.append_routes(router)
+  def self.deprecated_append_routes(router)
     router.resources :breakout_tables_by_jitsi, only: [:show], controller: 'breakout_tables_by_jitsi_by_jitsi/'
   end
   include Placeable
@@ -14,6 +14,12 @@ class BreakoutTablesByJitsi
     settings.fetch('names', []).lazy.map do |name|
       Table.new(name: name, placement: placement)
     end
+  end
+
+
+  # @deprecated
+  def in_room_template
+    "#{self.class.furniture_kind}/in_room"
   end
 
   class Table

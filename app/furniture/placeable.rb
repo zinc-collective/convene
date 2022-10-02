@@ -6,23 +6,38 @@ module Placeable
   # @return {FurniturePlacement}
   attr_accessor :placement
 
-  delegate :id, :room, :utilities, :persisted?, :save!, to: :placement
+  delegate :id, :room, :space, :utilities, :persisted?, :save!, to: :placement
 
   def self.included(placeable)
     placeable.include ActiveModel::Model
     placeable.include ActiveModel::Attributes
     placeable.include ActiveModel::AttributeAssignment
+    placeable.extend ClassMethods
+  end
+
+  module ClassMethods
+    def find_by(room:)
+      room.furniture_placements.find_by(furniture_kind: furniture_kind).furniture
+    end
+
+    def furniture_kind
+      @furniture_kind ||= name.demodulize.underscore
+    end
   end
 
   def settings
     placement.settings
   end
 
-  def in_room_template
-    "#{self.class.name.demodulize.underscore}/in_room"
+  # Allows us to `render furniture` and use the partial at `furniture/_furniture.html.erb`
+  # @example Assuming `spotlight` is a {Spotlight} that inherits {Placeable}
+  #      render spotlight # renders spotlight/_spotlight.html.erb
+  # @see https://api.rubyonrails.org/classes/ActiveModel/Conversion.html#method-i-to_partial_path
+  def to_partial_path
+    "#{self.class.furniture_kind}/#{self.class.furniture_kind}"
   end
 
   def form_template
-    "#{self.class.name.demodulize.underscore}/form"
+    "#{self.class.furniture_kind}/form"
   end
 end
