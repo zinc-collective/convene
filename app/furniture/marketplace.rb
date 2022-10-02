@@ -1,3 +1,4 @@
+# @see features/furniture/marketplace.feature.md
 class Marketplace
   include Placeable
 
@@ -9,9 +10,5 @@ class Marketplace
 
   def products
     Marketplace::Product.where(space: space)
-  end
-
-  def to_partial_path
-    'marketplace/marketplace'
   end
 end

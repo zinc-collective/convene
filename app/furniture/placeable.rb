@@ -21,12 +21,20 @@ module Placeable
     end
 
     def furniture_kind
-      name.demodulize.underscore
+      @furniture_kind ||= name.demodulize.underscore
     end
   end
 
   def settings
     placement.settings
+  end
+
+  # Allows us to `render furniture` and use the partial at `furniture/_furniture.html.erb`
+  # @example Assuming `spotlight` is a {Spotlight} that inherits {Placeable}
+  #      render spotlight # renders spotlight/_spotlight.html.erb
+  # @see https://api.rubyonrails.org/classes/ActiveModel/Conversion.html#method-i-to_partial_path
+  def to_partial_path
+    "#{self.class.furniture_kind}/#{self.class.furniture_kind}"
   end
 
   def form_template
