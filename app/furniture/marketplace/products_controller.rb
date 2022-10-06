@@ -10,7 +10,7 @@ class Marketplace
 
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to [space, room, marketplace] }
+        format.html { redirect_to [space, room] }
       end
     end
 
