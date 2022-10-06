@@ -3,9 +3,13 @@
 class Marketplace
   class Product < ApplicationRecord
     self.table_name = 'marketplace_products'
-    attribute :name, :string
-    attribute :description, :string
-    monetize :price_cents
     belongs_to :space
+
+    attribute :name, :string
+    validates :name, presence: true
+
+    attribute :description, :string
+
+    monetize :price_cents
   end
 end
