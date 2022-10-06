@@ -1,12 +1,1 @@
-<h2>Marketplace</h2>
-
-<div>
-  <h3>Products</h3>
-  <%= render marketplace.products %>
-</div>
-<%= form_with model: [marketplace.space, marketplace.room, marketplace.products.new] do |f| %>
-  <%= render "text_field", { attribute: :name, form: f} %>
-  <%= render "text_area", { attribute: :description, form: f} %>
-  <%= render "number_field", { attribute: :price_cents, form: f} %>
-  <%= f.submit %>
-<% end %>
+<%= render partial: "marketplace/marketplace/marketplace", object: marketplace %>

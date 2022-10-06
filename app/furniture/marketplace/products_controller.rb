@@ -1,13 +1,20 @@
 class Marketplace
   class ProductsController < FurnitureController
+    def new
+
+    end
+
     def create
       product = marketplace.products.new(product_params)
       product.save!
 
-      render product
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to [space, room] }
+      end
     end
 
-    def marketplace
+    helper_method def marketplace
       Marketplace.find_by(room: room)
     end
 
