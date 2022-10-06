@@ -1,0 +1,5 @@
+<div>
+  <%= form.label attribute %>
+  <%= form.text_area attribute %>
+  <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
+</div>

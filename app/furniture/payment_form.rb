@@ -5,7 +5,7 @@
 class PaymentForm
   include Placeable
 
-  def self.append_routes(router)
+  def self.deprecated_append_routes(router)
     router.scope module: 'payment_form' do
       router.resource :payment_form, only: [:show] do
         router.resources :payments, only: %i[create index]
@@ -16,6 +16,11 @@ class PaymentForm
   # @return [ActiveRecord::Relation<Payment>]
   def payments
     Payment.where(location: placement)
+  end
+
+  # @deprecated
+  def in_room_template
+    "#{self.class.furniture_kind}/in_room"
   end
 
   def link_token_for(person)

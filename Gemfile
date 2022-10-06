@@ -77,7 +77,7 @@ gem 'pundit', '~> 2.2'
 
 # Utility hookup support
 gem 'plaid', '~> 16.0'
-gem 'money'
+gem 'money-rails'
 
 # Workers and Background Jobs
 gem 'sidekiq'

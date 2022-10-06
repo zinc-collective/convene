@@ -16,10 +16,11 @@ Rails.application.routes.draw do
     end
 
     resources :rooms, only: %i[show edit update new create destroy] do
+      Furniture.append_routes(self)
       resource :waiting_room, only: %i[show update]
       resources :furniture_placements, only: %i[create edit update destroy]
       resource :furniture, only: [] do
-        Furniture.append_routes(self)
+        Furniture.deprecated_append_routes(self)
       end
     end
 
