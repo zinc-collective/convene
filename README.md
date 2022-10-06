@@ -19,7 +19,7 @@ Convene secure, affordable, always-available digital Spaces where anyone can
 
 ## Overview
 
-Convene is an _Operating System_ for **Community Owned Digital Infrastructure**. 
+Convene is an _Operating System_ for **Community Owned Digital Infrastructure**.
 Once deployed to a server, Convene is accessed by any web browser.
 
 Convene serves as a community-owned, more ethical alternative to investor-owned online tools like
@@ -77,22 +77,6 @@ Paid support is available for \$135 USD per hour<sup>[1][footnote-1]</sup>.
 
 We're always excited for new contributors! Read more in our
 [guide to contributing, located in CONTRIBUTING.md](./CONTRIBUTING.md)
-
-# Convene Web <!-- omit in toc -->
-
-- [Overview](#overview)
-- [Using Convene](#using-convene)
-  - [Purchasing a Convene Operator License.](#purchasing-a-convene-operator-license)
-  - [Help and Support](#help-and-support)
-- [Contributing to Convene](#contributing-to-convene)
-- [System Overview](#system-overview)
-  - [Architecture overview diagram](#architecture-overview-diagram)
-- [Configuring Your Development Machine](#configuring-your-development-machine)
-  - [Debugger](#debugger)
-  - [Developing Mailers](#developing-mailers)
-- [Testing Convene](#testing-convene)
-  - [Overview of the `features` folder](#overview-of-the-features-folder)
-- [About The Zinc Collective](#about-the-zinc-collective)
 
 ## System Overview
 
