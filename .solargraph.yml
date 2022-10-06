@@ -18,6 +18,5 @@ formatter:
     only: []
     extra_args: []
 require_paths: []
-plugins:
-  - solargraph-rails
+plugins: []
 max_files: 5000
