@@ -1,0 +1,22 @@
+
+
+<article>
+  <header>
+    <h3><%= entry.headline %></h3>
+  </header>
+
+  <div>
+    <%= entry.body %>
+  </div>
+
+  <footer>
+    <%- if entry.published?%>
+      <%= entry.published_at %>
+    <%- else %>
+      <%= button_to "Publish", [entry.space, entry.room, entry, { published_at: Time.now }], method: :put%>
+    <%- end %>
+
+    <%= button_to "Delete", [entry.space, entry.room, entry], method: :delete%>
+  </footer>
+</article>
+

@@ -1,0 +1,34 @@
+class Journal::EntriesController < FurnitureController
+  def new; end
+
+  def create
+    if entry.save
+      redirect_to [space, room]
+    else
+      render :new
+    end
+  end
+
+  def destroy
+    entry.destroy
+    redirect_to [space, room]
+  end
+
+  helper_method def entry
+    @entry ||=  if params[:id]
+                  journal.entries.find(params[:id])
+                elsif params[:journal_entry]
+                  journal.entries.new(journal_entry_params)
+                else
+                  journal.entries.new
+                end
+  end
+
+  def journal_entry_params
+    params.require(:journal_entry).permit(:headline, :body)
+  end
+
+  helper_method def journal
+    Journal.find_by(room: room)
+  end
+end
