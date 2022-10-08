@@ -34,6 +34,7 @@
     "axios": "^0.27.2",
     "axios-case-converter": "^0.9.0",
     "change-case": "^4.1.2",
+    "cypress": "^10.9.0",
     "dotenv": "^16.0.3",
     "fs-extra": "^10.1.0",
     "geckodriver": "^3.0.2",
