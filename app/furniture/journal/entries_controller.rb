@@ -15,17 +15,21 @@ class Journal::EntriesController < FurnitureController
   end
 
   helper_method def entry
-    @entry ||=  if params[:id]
-                  journal.entries.find(params[:id])
-                elsif params[:journal_entry]
-                  journal.entries.new(journal_entry_params)
-                else
-                  journal.entries.new
-                end
+    return @entry if defined? @entry
+
+    @entry = if params[:id]
+               journal.entries.find(params[:id])
+             elsif params[:journal_entry]
+               journal.entries.new(journal_entry_params)
+             else
+               journal.entries.new
+             end
+
+    authorize(@entry)
   end
 
   def journal_entry_params
-    params.require(:journal_entry).permit(:headline, :body)
+    policy(Journal::Entry).permit(params.require(:journal_entry))
   end
 
   helper_method def journal
