@@ -54,7 +54,7 @@ gem 'ranked-model', '~> 0.4.8'
 gem 'friendly_id', '~> 5.4.2'
 # Hashing / Encrypting data at rest
 gem 'bcrypt', '~> 3.1.18'
-gem 'lockbox', '1.0.0'
+gem 'lockbox', '1.1.0'
 gem 'rotp', '~> 6.2'
 
 # Use postgresql for data persistence
@@ -98,7 +98,7 @@ group :development, :test do
 
   # Our preferred testing library for Ruby and Rails projects
   gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 6.0.0.rc1'
+  gem 'rspec-rails', '~> 6.0.0'
   gem 'rswag-specs'
   gem 'shoulda-matchers', '~> 5.2'
 
