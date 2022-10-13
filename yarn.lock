@@ -967,10 +967,10 @@ autoprefixer@^10.4.11, autoprefixer@^10.4.12:
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
 
-axios-case-converter@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/axios-case-converter/-/axios-case-converter-0.9.0.tgz#9f47f641ae3f8c04a5395370601342e4f8c33c77"
-  integrity sha512-G6tOanR1cdIrBtRyiPvR+xXyWCCZacSw8LtT8bmImvpye+XiyoOlLluz0N61IfetznNQ9BeMi5yA0rIyYDr8mQ==
+axios-case-converter@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/axios-case-converter/-/axios-case-converter-0.10.0.tgz#5c64398670e89c9721e88ee2f4ddcee82df5409d"
+  integrity sha512-GPMh20Ieape1YxAOrtry8WL3GhIpVOAn1OPFZgOUijN+dcuzjAssUoFoDct45nLEqODMII3P7raz53/7dIqnKg==
   dependencies:
     camel-case "^4.1.1"
     header-case "^2.0.3"
