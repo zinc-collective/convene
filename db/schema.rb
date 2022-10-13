@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_012134) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_enum :invitation_status, [
     "pending",
+    "sent",
     "accepted",
     "rejected",
     "expired",
     "ignored",
     "revoked",
-    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
@@ -123,7 +123,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_012134) do
     t.index ["space_id"], name: "index_items_on_space_id"
   end
 
-  create_table "marketplace_products", force: :cascade do |t|
+  create_table "marketplace_ordered_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "order_id"
+    t.uuid "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_marketplace_ordered_products_on_order_id"
+    t.index ["product_id"], name: "index_marketplace_ordered_products_on_product_id"
+  end
+
+  create_table "marketplace_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "marketplace_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "space_id"
     t.string "name"
     t.string "description"
@@ -194,6 +208,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_012134) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "marketplace_ordered_products", "marketplace_orders", column: "order_id"
+  add_foreign_key "marketplace_ordered_products", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_products", "spaces"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
