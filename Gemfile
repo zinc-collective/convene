@@ -108,6 +108,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.7'
   gem 'web-console', '~> 4.2'
