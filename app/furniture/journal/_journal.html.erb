@@ -1,5 +1,5 @@
 
-<%= render journal.entries %>
+<%= render policy_scope(journal.entries) %>
 
 <%- if policy(journal.entries.new).new? %>
   <%= link_to "+", [:new, journal.space, journal.room, journal, :entry] %>
