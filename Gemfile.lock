@@ -232,7 +232,7 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.0)
-    puma (5.6.5)
+    puma (6.0.0)
       nio4r (~> 2.0)
     pundit (2.2.0)
       activesupport (>= 3.0.0)
@@ -383,7 +383,7 @@ DEPENDENCIES
   pg (~> 1.4)
   plaid (~> 16.0)
   pry-byebug
-  puma (~> 5.6)
+  puma (~> 6.0)
   pundit (~> 2.2)
   rails (~> 7.0)
   rails-controller-testing
