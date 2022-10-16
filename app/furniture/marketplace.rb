@@ -9,6 +9,10 @@ class Marketplace
   end
 
   def products
-    Marketplace::Product.where(space: space)
+    Product.where(space: space)
+  end
+
+  def self.from_placement(placement)
+    placement.becomes(Marketplace)
   end
 end

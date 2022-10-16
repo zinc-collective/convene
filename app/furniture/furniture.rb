@@ -31,7 +31,8 @@ module Furniture
 
   # @return [Placeable]
   def self.from_placement(placement)
-    REGISTRY[placement.furniture_kind.to_sym].new(placement: placement)
+    furniture_class = REGISTRY[placement.furniture_kind.to_sym]
+    furniture_class.from_placement(placement)
   end
 
   def self.use_relative_model_naming?

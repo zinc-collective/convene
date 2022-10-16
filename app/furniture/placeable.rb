@@ -45,5 +45,9 @@ module Placeable
     def furniture_kind
       @furniture_kind ||= name.demodulize.underscore
     end
+
+    def from_placement(placement)
+      new(placement: placement)
+    end
   end
 end

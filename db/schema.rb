@@ -84,7 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at", precision: nil
+    t.datetime "created_at"
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -133,19 +133,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
   end
 
   create_table "marketplace_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "marketplace_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["marketplace_id"], name: "index_marketplace_orders_on_marketplace_id"
   end
 
   create_table "marketplace_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "space_id"
+    t.uuid "marketplace_id"
     t.string "name"
     t.string "description"
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["space_id"], name: "index_marketplace_products_on_space_id"
+    t.index ["marketplace_id"], name: "index_marketplace_products_on_marketplace_id"
   end
 
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -210,7 +212,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "marketplace_ordered_products", "marketplace_orders", column: "order_id"
   add_foreign_key "marketplace_ordered_products", "marketplace_products", column: "product_id"
-  add_foreign_key "marketplace_products", "spaces"
+  add_foreign_key "marketplace_orders", "furniture_placements", column: "marketplace_id"
+  add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
