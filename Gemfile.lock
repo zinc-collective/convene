@@ -219,7 +219,7 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.8)
+    nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     pg (1.4.4)
@@ -303,7 +303,7 @@ GEM
       activesupport (>= 3.1, < 7.1)
       json-schema (~> 2.2)
       railties (>= 3.1, < 7.1)
-    rswag-ui (2.6.0)
+    rswag-ui (2.7.0)
       actionpack (>= 3.1, < 7.1)
       railties (>= 3.1, < 7.1)
     ruby2_keywords (0.0.5)
