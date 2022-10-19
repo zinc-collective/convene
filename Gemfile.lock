@@ -219,7 +219,7 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.8)
+    nokogiri (1.13.9)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     pg (1.4.4)
@@ -297,7 +297,7 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.11.1)
-    rswag-api (2.6.0)
+    rswag-api (2.7.0)
       railties (>= 3.1, < 7.1)
     rswag-specs (2.6.0)
       activesupport (>= 3.1, < 7.1)
