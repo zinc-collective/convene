@@ -4,7 +4,10 @@ class Marketplace
 
   def self.append_routes(router)
     router.resources :marketplace, only: [] do
-      router.resources :products, only: %i[new create index], module: 'marketplace'
+      router.resources :products, :orders, only: %i[new create index], module: 'marketplace'
+      router.resources :orders, only: [], module: 'marketplace' do
+        router.resources :ordered_products
+      end
     end
   end
 
