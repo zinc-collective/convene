@@ -3,7 +3,7 @@
 class Marketplace
   class Product < ApplicationRecord
     self.table_name = 'marketplace_products'
-    belongs_to :space
+    belongs_to :marketplace
 
     has_many :orders
 
