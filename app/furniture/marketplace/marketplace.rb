@@ -4,8 +4,8 @@ class Marketplace
   class Marketplace < FurniturePlacement
     has_many :products
 
-    def self.use_relative_model_naming?
-      false
+    def self.model_name
+      @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
     end
   end
 end

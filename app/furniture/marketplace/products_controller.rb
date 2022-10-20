@@ -1,8 +1,6 @@
 class Marketplace
   class ProductsController < FurnitureController
-    def new
-
-    end
+    def new; end
 
     def create
       product = marketplace.products.new(product_params)
@@ -19,7 +17,7 @@ class Marketplace
     end
 
     def product_params
-      policy(Marketplace::Product).permit(params.require(:marketplace_product))
+      policy(Product).permit(params.require(:marketplace_product))
     end
   end
 end

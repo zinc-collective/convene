@@ -76,8 +76,8 @@ gem 'bootsnap', '~> 1.13', require: false
 gem 'pundit', '~> 2.2'
 
 # Utility hookup support
-gem 'plaid', '~> 16.0'
 gem 'money-rails'
+gem 'plaid', '~> 16.0'
 
 # Workers and Background Jobs
 gem 'sidekiq'
