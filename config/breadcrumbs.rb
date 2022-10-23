@@ -15,7 +15,16 @@ end
 
 crumb :memberships do |space|
   link 'Members', [space, :memberships]
-  parent :edit_space, space
+  if policy(space).edit?
+    parent :edit_space, Space
+  else
+    parent :root
+  end
+end
+
+crumb :show_membership do |membership|
+  link membership.member_name, [membership.space, membership]
+  parent :memberships, membership.space
 end
 
 crumb :invitations do |space|
