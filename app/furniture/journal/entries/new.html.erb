@@ -1,6 +1,2 @@
-<%= form_with model: [entry.room.space, entry.room, entry] do |f| %>
-    <%= render "text_field", { attribute: :headline, form: f} %>
-    <%= render "text_area", { attribute: :body, form: f} %>
-
-    <%= f.submit %>
-  <% end %>
+<%- breadcrumb :new_journal_entry, entry %>
+<%= render "form", entry: entry %>

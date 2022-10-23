@@ -17,7 +17,7 @@ class Journal
     end
 
     def permitted_attributes(_params)
-      %i[headline body]
+      %i[headline body published_at]
     end
 
     class Scope < ApplicationScope

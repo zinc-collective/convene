@@ -20,4 +20,15 @@ RSpec.describe Journal::EntriesController, type: :request do
       expect(created_entry.body).to eql(attributes[:body])
     end
   end
+
+  describe 'PUT /entries/:entry_id' do
+    it 'allows members to update Journal Entries' do
+      sign_in(space, member)
+      entry = create(:journal_entry, room: room.becomes(Journal::Room))
+      published_at = 1.day.ago.beginning_of_day
+      expect do
+        put polymorphic_path([space, room, entry]), params: { journal_entry: { published_at: published_at } }
+      end.to change { entry.reload.published_at }.from(nil).to(published_at.to_time)
+    end
+  end
 end

@@ -5,7 +5,7 @@ class Journal
   include Placeable
   def self.append_routes(router)
     router.resource :journal do
-      router.resources :entries, only: %i[index new create destroy], module: 'journal'
+      router.resources :entries, module: 'journal'
     end
   end
 

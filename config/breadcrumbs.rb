@@ -47,7 +47,7 @@ crumb :guide do |guide|
 end
 
 crumb :room do |room|
-  link room.name, space_room_path(room.space, room)
+  link room.name, [room.space, room] unless room.entrance?
 end
 
 crumb :new_room do |room|
@@ -56,7 +56,7 @@ crumb :new_room do |room|
 end
 
 crumb :edit_room do |room|
-  link t('helpers.submit.room.edit', {room_name: room.name}), edit_space_room_path(room.space, room)
+  link t('helpers.submit.room.edit', { room_name: room.name }), edit_space_room_path(room.space, room)
   parent :edit_space, room.space
 end
 

@@ -1,22 +1,28 @@
-
-
-<article>
+<article class="sm:w-1/2 md:w-1/3 w-full p-2 grow prose">
   <header>
     <h3><%= entry.headline %></h3>
+    <%- if entry.published?%>
+      <em>Published on <%= link_to entry.published_at.to_fs(:long_ordinal), [entry.space, entry.room, entry] %></em>
+    <%- else %>
+      <em>Unpublished.</em>
+    <%- end %>
+
   </header>
 
   <div>
-    <%= entry.body %>
+    <%= entry.to_html.html_safe %>
   </div>
 
-  <footer>
-    <%- if entry.published?%>
-      <%= entry.published_at %>
-    <%- else %>
-      <%= button_to "Publish", [entry.space, entry.room, entry, { published_at: Time.now }], method: :put%>
+  <footer class="flex justify-between">
+    <%- if policy(entry).update? %>
+      <%= link_to "Edit", [:edit, entry.space, entry.room, entry] %>
+      <%- if !entry.published? %>
+        <%= link_to "Publish Now", [entry.space, entry.room, entry, { journal_entry: { published_at: Time.now } }], method: :put%>
+      <%- end %>
     <%- end %>
 
-    <%= button_to "Delete", [entry.space, entry.room, entry], method: :delete%>
+    <%- if policy(entry).destroy? %>
+      <%= link_to "Delete", [entry.space, entry.room, entry], method: :delete%>
+    <%- end %>
   </footer>
 </article>
-

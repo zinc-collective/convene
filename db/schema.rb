@@ -123,7 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_224846) do
     t.index ["space_id"], name: "index_items_on_space_id"
   end
 
-  create_table "journal_entries", force: :cascade do |t|
+  create_table "journal_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "room_id"
     t.string "headline"
     t.text "body"
