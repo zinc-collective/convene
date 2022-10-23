@@ -1,6 +1,6 @@
 # Feature: Journal
 
-Many people maintain an online journal. Often, these journals are intended to connect with a broader collection of people a one-on-one or small group message.
+Many people maintain an online journal. Often, these journals are intended to connect with a broader collection of people via one-on-one or small group messages.
 
 Journal entries are frequently responded to, remixed, or amplified.
 
