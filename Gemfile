@@ -37,7 +37,7 @@ gem 'rswag-ui'
 # View Layer
 #
 # Allows us to render .markdown.erb files
-gem 'commonmarker'
+gem 'redcarpet', '~> 3.5'
 # Breadcrumbs!
 gem 'gretel', '~> 4.4'
 

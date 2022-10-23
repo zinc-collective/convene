@@ -15,7 +15,7 @@ RSpec.describe Journal::EntriesController, type: :request do
         post polymorphic_path([space, room, journal, :entries]), params: { journal_entry: attributes }
       end.to change(journal.entries, :count).by(1)
 
-      created_entry = journal.entries.last
+      created_entry = journal.entries.first
       expect(created_entry.headline).to eql(attributes[:headline])
       expect(created_entry.body).to eql(attributes[:body])
     end
