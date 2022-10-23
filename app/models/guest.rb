@@ -21,4 +21,8 @@ class Guest
   def spaces
     []
   end
+
+  def rooms
+    []
+  end
 end

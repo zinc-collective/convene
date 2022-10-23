@@ -19,5 +19,12 @@ class Journal
     def permitted_attributes(_params)
       %i[headline body]
     end
+
+    class Scope < ApplicationScope
+      def resolve
+        scope.where('published_at < ?', Time.zone.now)
+             .or(scope.where(room: person.rooms))
+      end
+    end
   end
 end
