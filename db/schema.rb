@@ -124,14 +124,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_224846) do
   end
 
   create_table "journal_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "room_id"
+    t.uuid "journal_id"
     t.string "headline"
     t.text "body"
     t.string "slug"
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["room_id"], name: "index_journal_entries_on_room_id"
+    t.index ["journal_id"], name: "index_journal_entries_on_journal_id"
   end
 
   create_table "marketplace_products", force: :cascade do |t|
@@ -205,7 +205,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_224846) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "journal_entries", "rooms"
+  add_foreign_key "journal_entries", "furniture_placements", column: "journal_id"
   add_foreign_key "marketplace_products", "spaces"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"

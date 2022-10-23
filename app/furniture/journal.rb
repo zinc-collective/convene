@@ -2,14 +2,21 @@
 
 # @see features/furniture/journal.feature.md
 class Journal
-  include Placeable
   def self.append_routes(router)
-    router.resource :journal do
+    router.resources :journals do
       router.resources :entries, module: 'journal'
     end
   end
 
-  def entries
-    room.becomes(Room).journal_entries.recent
+  def self.from_placement(placement)
+    placement.becomes(Journal)
+  end
+
+  def attribute_names
+    []
+  end
+
+  def form_template
+    "noop"
   end
 end

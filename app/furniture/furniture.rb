@@ -30,7 +30,7 @@ module Furniture
     end
   end
 
-  # @return [Placeable]
+  # @return [Placeable, FurniturePlacement]
   def self.from_placement(placement)
     furniture_class = REGISTRY[placement.furniture_kind.to_sym]
     furniture_class.from_placement(placement)

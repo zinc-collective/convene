@@ -12,7 +12,7 @@ class Journal::EntriesController < FurnitureController
   def edit; end
 
   def update
-    if entry.update(journal_entry_params)
+    if entry.update(entry_params)
       render :show
     else
       render :edit
@@ -29,8 +29,8 @@ class Journal::EntriesController < FurnitureController
 
     @entry = if params[:id]
                journal.entries.friendly.find(params[:id])
-             elsif params[:journal_entry]
-               journal.entries.new(journal_entry_params)
+             elsif params[:entry]
+               journal.entries.new(entry_params)
              else
                journal.entries.new
              end
@@ -38,11 +38,11 @@ class Journal::EntriesController < FurnitureController
     authorize(@entry)
   end
 
-  def journal_entry_params
-    policy(Journal::Entry).permit(params.require(:journal_entry))
+  def entry_params
+    policy(Journal::Entry).permit(params.require(:entry))
   end
 
   helper_method def journal
-    Journal.find_by(room: room)
+    Journal::Journal.find_by(room: room)
   end
 end

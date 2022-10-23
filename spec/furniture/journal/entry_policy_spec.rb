@@ -46,7 +46,7 @@ RSpec.describe Journal::EntryPolicy, type: :policy do
     let(:space) { published_entry.space }
     let!(:published_entry) { create(:journal_entry, published_at: 1.year.ago) }
 
-    let!(:unpublished_entry) { create(:journal_entry, room: published_entry.room) }
+    let!(:unpublished_entry) { create(:journal_entry, journal: published_entry.journal) }
 
     subject(:results) { described_class.new(user, Journal::Entry.all).resolve }
 
