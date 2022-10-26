@@ -15,6 +15,10 @@ class Membership < ApplicationRecord
 
   validates :member, uniqueness: { scope: :space_id }
 
+  def member_name
+    member.display_name
+  end
+
   enum status: {
     active: 'active',
     revoked: 'revoked'
