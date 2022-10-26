@@ -61,7 +61,7 @@ gem 'rotp', '~> 6.2'
 gem 'pg', '~> 1.4'
 
 # Use S3 for file storage
-gem 'aws-sdk-s3', '~> 1.116', require: false
+gem 'aws-sdk-s3', '~> 1.117', require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
