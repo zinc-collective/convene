@@ -17,7 +17,7 @@ gem 'rails', '~> 7.0'
 # Data Transport
 #
 # Use Puma as the app server
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 6.0'
 
 # Browser Layer
 gem 'cssbundling-rails'
@@ -61,7 +61,7 @@ gem 'rotp', '~> 6.2'
 gem 'pg', '~> 1.4'
 
 # Use S3 for file storage
-gem 'aws-sdk-s3', '~> 1.114', require: false
+gem 'aws-sdk-s3', '~> 1.117', require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -98,7 +98,7 @@ group :development, :test do
 
   # Our preferred testing library for Ruby and Rails projects
   gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 6.0.0'
+  gem 'rspec-rails', '~> 6.0.1'
   gem 'rswag-specs'
   gem 'shoulda-matchers', '~> 5.2'
 
@@ -108,6 +108,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '~> 3.7'
   gem 'web-console', '~> 4.2'
