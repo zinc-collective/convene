@@ -34,8 +34,4 @@ module Furniture
     furniture_class = REGISTRY[placement.furniture_kind.to_sym]
     furniture_class.from_placement(placement)
   end
-
-  def self.use_relative_model_naming?
-    true
-  end
 end

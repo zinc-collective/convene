@@ -17,7 +17,7 @@ class MembershipsController < ApplicationController
     if membership.revoked!
       flash[:notice] = t('.success')
     else
-      flash[:error] = t('.failure', errors: membership.errors.join(', '))
+      flash[:alert] = t('.failure', errors: membership.errors.join(', '))
     end
 
     respond_to do |format|
