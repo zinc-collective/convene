@@ -85,7 +85,7 @@ MoneyRails.configure do |config|
 
   # If you would like to use I18n localization (formatting depends on the
   # locale):
-  # config.locale_backend = :i18n
+  config.locale_backend = :i18n
   #
   # Example (using default localization from rails-i18n):
   #
