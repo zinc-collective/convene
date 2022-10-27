@@ -17,12 +17,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
 
   create_enum :invitation_status, [
     "pending",
-    "sent",
     "accepted",
     "rejected",
     "expired",
     "ignored",
     "revoked",
+    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
@@ -84,7 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
