@@ -1,5 +1,3 @@
-<%- order = Marketplace::Order.new(marketplace:marketplace) %>
-
 <%= turbo_frame_tag marketplace do %>
   <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
     <table class="min-w-full divide-y divide-gray-300">
@@ -21,7 +19,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <%= render marketplace.products, order: order %>
+        <%= render marketplace.products, order: marketplace.orders.find_or_create_by(id: session[:current_order] ||= SecureRandom.uuid) %>
       </tbody>
     </table>
   </div>

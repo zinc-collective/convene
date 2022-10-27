@@ -5,6 +5,7 @@ class AddMarketplaceOrders < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
+    # We can't change the primary key type so we drop and recreate :'(
     drop_table :marketplace_products do |t|
       t.references :marketplace, type: :uuid, foreign_key: { to_table: :furniture_placements }
       t.string :name
@@ -24,6 +25,7 @@ class AddMarketplaceOrders < ActiveRecord::Migration[7.0]
     create_table :marketplace_ordered_products, id: :uuid do |t|
       t.belongs_to(:order, foreign_key: { to_table: :marketplace_orders }, type: :uuid)
       t.belongs_to(:product, foreign_key: { to_table: :marketplace_products }, type: :uuid)
+      t.integer :quantity
       t.timestamps
     end
   end

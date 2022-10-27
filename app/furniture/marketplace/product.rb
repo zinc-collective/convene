@@ -5,7 +5,8 @@ class Marketplace
     self.table_name = 'marketplace_products'
     belongs_to :marketplace
 
-    has_many :orders
+    has_many :ordered_products, inverse_of: :product
+    has_many :orders, through: :ordered_products
 
     attribute :name, :string
     validates :name, presence: true

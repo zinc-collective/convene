@@ -1,0 +1,17 @@
+en:
+  helpers:
+    submit:
+      ordered_product:
+        update: "Update Quantity ✔️"
+        create: "Add to Order ➕"
+  marketplace:
+    ordered_products:
+      destroy:
+        success: "Removed %{quantity} %{product} from Order"
+        failure: "Could not remove %{quantity} %{product} from Order"
+      create:
+        success: "Added %{quantity} %{product} to Order"
+        failure: "Could not add %{quantity} %{product} to Order"
+      update:
+        success: "Changed %{quantity} %{product} on Order"
+        failure: "Could not change %{quantity} %{product} on Order"

@@ -13,6 +13,13 @@
     <%= humanized_money_with_symbol(product.price) %>
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-    <%= render "buttons/new", label: "🛒", title: t('marketplace.products.new'), href: [order.space, order.room, order, :ordered_products, {product_id:product.id}] %>
+    <%- ordered_product = order.ordered_products.find_or_initialize_by(product: product) %>
+    <%= form_with model: [order.space, order.room, order.marketplace, order, ordered_product] do |form| %>
+      <%= form.hidden_field :product_id %>
+      <%= form.select :quantity, 1..10 %>
+      <%= form.submit %>
+    <%- end %>
+
+    <%= render "buttons/remove", title: t('.destroy'), href: [order.space, order.room, order.marketplace, order, ordered_product] %>
   </td>
 </tr>
