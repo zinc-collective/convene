@@ -1,19 +1,18 @@
-<article class="sm:w-1/2 md:w-1/3 w-full p-2 grow prose">
-  <header>
-    <h3><%= entry.headline %></h3>
+<article class="sm:w-1/2 md:w-1/3 w-full grow p-2 bg-white rounded">
+  <header class="border-b border-primary-500">
+    <h2 class=" text-primary-900"><%= entry.headline %></h2>
     <%- if entry.published?%>
       <em>Published on <%= link_to entry.published_at.to_fs(:long_ordinal), entry.location %></em>
     <%- else %>
       <em>Unpublished.</em>
     <%- end %>
-
   </header>
 
-  <div>
+  <div class="prose">
     <%= entry.to_html.html_safe %>
   </div>
 
-  <footer class="flex justify-between">
+  <footer class="flex justify-between my-2">
     <%- if policy(entry).update? %>
       <%= link_to "Edit", [:edit] + entry.location %>
       <%- if !entry.published? %>
