@@ -39,7 +39,7 @@ class Journal::Entry < ApplicationRecord
     when :new
       [:new] + journal.location + [:entry]
     when :edit
-      [:edit] + journal.location
+      [:edit] + journal.location + [self]
     else
       journal.location + [self]
     end

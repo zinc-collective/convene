@@ -1,4 +1,4 @@
-<article class="sm:w-1/2 md:w-1/3 w-full grow p-2 bg-white rounded">
+<article class="w-full p-2 my-2 bg-white rounded flex flex-col justify-between">
   <header class="border-b border-primary-500">
     <h2 class=" text-primary-900"><%= entry.headline %></h2>
     <%- if entry.published?%>
@@ -14,7 +14,7 @@
 
   <footer class="flex justify-between my-2">
     <%- if policy(entry).update? %>
-      <%= link_to "Edit", [:edit] + entry.location %>
+      <%= link_to "Edit", entry.location(:edit) %>
       <%- if !entry.published? %>
         <%= link_to "Publish Now", entry.location + [{ entry: { published_at: Time.now } }], method: :put%>
       <%- end %>
