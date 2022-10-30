@@ -1,0 +1,27 @@
+<article class="w-full p-2 my-2 bg-white rounded flex flex-col justify-between">
+  <header class="border-b border-primary-500">
+    <h2 class=" text-primary-900"><%= entry.headline %></h2>
+    <%- if entry.published?%>
+      <em>Published on <%= link_to entry.published_at.to_fs(:long_ordinal), entry.location %></em>
+    <%- else %>
+      <em>Unpublished.</em>
+    <%- end %>
+  </header>
+
+  <div class="prose">
+    <%= entry.to_html.html_safe %>
+  </div>
+
+  <footer class="flex justify-between my-2">
+    <%- if policy(entry).update? %>
+      <%= link_to "Edit", entry.location(:edit) %>
+      <%- if !entry.published? %>
+        <%= link_to "Publish Now", entry.location + [{ entry: { published_at: Time.now } }], method: :put%>
+      <%- end %>
+    <%- end %>
+
+    <%- if policy(entry).destroy? %>
+      <%= link_to "Delete", entry.location, method: :delete%>
+    <%- end %>
+  </footer>
+</article>

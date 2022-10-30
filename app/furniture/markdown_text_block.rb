@@ -3,9 +3,10 @@
 # Renders some HTML in a {Room}.
 class MarkdownTextBlock
   include Placeable
+  include RendersMarkdown
 
   def to_html
-    MarkdownTextBlock.renderer.render(content)
+    render_markdown(content)
   end
 
   def content=(content)
@@ -25,9 +26,5 @@ class MarkdownTextBlock
   # @deprecated
   def in_room_template
     "#{self.class.furniture_kind}/in_room"
-  end
-
-  def self.renderer
-    @_renderer ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(with_toc_data: true))
   end
 end

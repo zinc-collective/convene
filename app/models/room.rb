@@ -42,7 +42,7 @@ class Room < ApplicationRecord
   # `listed` - The room is discoverable by anyone in the space lobby.
   # `unlisted` - The room is not listed.
 
-  PUBLICITY_LEVELS = [:listed, :unlisted].freeze
+  PUBLICITY_LEVELS = %i[listed unlisted].freeze
   attribute :publicity_level, :string
   validates :publicity_level, presence: true, inclusion: { in: PUBLICITY_LEVELS + PUBLICITY_LEVELS.map(&:to_s) }
 
@@ -74,5 +74,13 @@ class Room < ApplicationRecord
     can_enter = self.access_code == access_code
     errors.add(:base, 'Invalid access code') if access_code
     can_enter
+  end
+
+  def entrance?
+    space.entrance == self
+  end
+
+  def ==(other)
+    super(other.becomes(Room))
   end
 end
