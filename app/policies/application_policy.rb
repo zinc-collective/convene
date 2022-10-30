@@ -5,6 +5,30 @@
 class ApplicationPolicy
   attr_reader :person, :object
 
+  def create?
+    raise NotImplementedError
+  end
+
+  def new?
+    create?
+  end
+
+  def update?
+    raise NotImplementedError
+  end
+
+  def edit?
+    update?
+  end
+
+  def destroy?
+    update?
+  end
+
+  def index?
+    true
+  end
+
   def initialize(person, object)
     @person = person
     @object = object
