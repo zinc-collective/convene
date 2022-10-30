@@ -31,4 +31,8 @@ class FurniturePlacement < ApplicationRecord
   def utilities
     space.utility_hookups
   end
+
+  def form_template
+    "noop"
+  end
 end

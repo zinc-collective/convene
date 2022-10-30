@@ -1,6 +1,7 @@
 class Journal::Entry < ApplicationRecord
   self.table_name = 'journal_entries'
   include RendersMarkdown
+  extend StripsNamespaceFromModelName
 
   scope :recent, -> { order('published_at DESC NULLS FIRST') }
 
@@ -33,11 +34,14 @@ class Journal::Entry < ApplicationRecord
     slug
   end
 
-  def location
-    journal.location + [self]
-  end
-
-  def self.model_name
-    @model_name ||= ActiveModel::Name.new(self, ::Journal)
+  def location(action = :show)
+    case action
+    when :new
+      [:new] + journal.location + [:entry]
+    when :edit
+      [:edit] + journal.location
+    else
+      journal.location + [self]
+    end
   end
 end

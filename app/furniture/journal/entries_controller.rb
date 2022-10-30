@@ -43,6 +43,6 @@ class Journal::EntriesController < FurnitureController
   end
 
   helper_method def journal
-    Journal::Journal.find_by(room: room)
+    Journal::Journal.find_by(id: params[:journal_id])
   end
 end

@@ -27,7 +27,7 @@ RSpec.describe Journal::EntriesController, type: :request do
       entry = create(:journal_entry, journal: journal)
       published_at = 1.day.ago.beginning_of_day
       expect do
-        put polymorphic_path([space, room, journal, entry]), params: { entry: { published_at: published_at } }
+        put polymorphic_path(entry.location), params: { entry: { published_at: published_at } }
       end.to change { entry.reload.published_at }.from(nil).to(published_at.to_time)
     end
   end
