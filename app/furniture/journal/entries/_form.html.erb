@@ -1,4 +1,4 @@
-<%= form_with model: [entry.room.space, entry.room, entry] do |f| %>
+<%= form_with model: entry.location do |f| %>
     <%= render "text_field", { attribute: :headline, form: f} %>
     <%= render "text_area", { attribute: :body, form: f} %>
     <%= render "datetime_field", { attribute: :published_at, form: f} %>

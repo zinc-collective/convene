@@ -2,7 +2,7 @@
   <header>
     <h3><%= entry.headline %></h3>
     <%- if entry.published?%>
-      <em>Published on <%= link_to entry.published_at.to_fs(:long_ordinal), [entry.space, entry.room, entry] %></em>
+      <em>Published on <%= link_to entry.published_at.to_fs(:long_ordinal), entry.location %></em>
     <%- else %>
       <em>Unpublished.</em>
     <%- end %>
@@ -15,14 +15,14 @@
 
   <footer class="flex justify-between">
     <%- if policy(entry).update? %>
-      <%= link_to "Edit", [:edit, entry.space, entry.room, entry] %>
+      <%= link_to "Edit", [:edit] + entry.location %>
       <%- if !entry.published? %>
-        <%= link_to "Publish Now", [entry.space, entry.room, entry, { journal_entry: { published_at: Time.now } }], method: :put%>
+        <%= link_to "Publish Now", entry.location + [{ entry: { published_at: Time.now } }], method: :put%>
       <%- end %>
     <%- end %>
 
     <%- if policy(entry).destroy? %>
-      <%= link_to "Delete", [entry.space, entry.room, entry], method: :delete%>
+      <%= link_to "Delete", entry.location, method: :delete%>
     <%- end %>
   </footer>
 </article>

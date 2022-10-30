@@ -3,9 +3,10 @@
     <%= render policy_scope(journal.entries) %>
   </div>
 
-  <%- if policy(journal.entries.new).new? %>
+  <%- new_entry = journal.entries.new %>
+  <%- if policy(new_entry).new? %>
     <footer class="text-center">
-    <%= link_to "New Journal Entry", [:new, journal.space, journal.room, journal, :entry] %>
+    <%= link_to "New Journal Entry", new_entry.location(:new) %>
     </footer>
   <%- end %>
 </section>
