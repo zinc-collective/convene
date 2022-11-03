@@ -1,10 +1,9 @@
 en:
-  helpers:
-    submit:
-      ordered_product:
-        update: "Update Quantity ✔️"
-        create: "Add to Order ➕"
   marketplace:
+    products:
+      product:
+        add: Add
+        remove: Remove
     ordered_products:
       destroy:
         success: "Removed %{quantity} %{product} from Order"

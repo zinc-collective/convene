@@ -13,7 +13,7 @@ class Marketplace
     end
 
     helper_method def marketplace
-      Marketplace.find_by(room: room)
+      Marketplace.find(params[:marketplace_id])
     end
 
     def product_params
