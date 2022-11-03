@@ -13,7 +13,7 @@ class Journal::EntriesController < FurnitureController
 
   def update
     if entry.update(entry_params)
-      render :show
+      redirect_to entry.location
     else
       render :edit
     end

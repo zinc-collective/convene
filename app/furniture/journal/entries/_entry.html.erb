@@ -1,4 +1,4 @@
-<article class="w-full p-2 my-2 bg-white rounded flex flex-col justify-between">
+<article class="w-full p-2 my-2 bg-white rounded flex flex-col justify-between" data-turbo="true">
   <header class="border-b border-primary-500">
     <h2 class=" text-primary-900"><%= entry.headline %></h2>
     <%- if entry.published?%>
@@ -16,12 +16,12 @@
     <%- if policy(entry).update? %>
       <%= link_to "Edit", entry.location(:edit) %>
       <%- if !entry.published? %>
-        <%= link_to "Publish Now", entry.location + [{ entry: { published_at: Time.now } }], method: :put%>
+        <%= link_to "Publish Now", entry.location + [{ entry: { published_at: Time.now } }], data: { turbo_method: :put } %>
       <%- end %>
     <%- end %>
 
     <%- if policy(entry).destroy? %>
-      <%= link_to "Delete", entry.location, method: :delete%>
+      <%= link_to "Delete", entry.location, data: { turbo_method: :delete } %>
     <%- end %>
   </footer>
 </article>

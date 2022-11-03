@@ -1,8 +1,5 @@
 // Entry point for the build script in your package.json
 
-import Rails from "@rails/ujs"
-Rails.start()
-
 import * as ActiveStorage from "@rails/activestorage"
 ActiveStorage.start()
 
@@ -13,7 +10,6 @@ ActiveStorage.start()
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-// Disable Turbo by default, and let us instead enable it on a per-element basis.
 import { Turbo } from "@hotwired/turbo-rails"
 Turbo.session.drive = false
 import "./controllers/index.js"
