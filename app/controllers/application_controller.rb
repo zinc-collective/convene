@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   before_action :prepend_theme_views
 
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found
-  prepend_view_path 'app/utilities'
-  prepend_view_path 'app/furniture'
+  prepend_view_path "app/utilities"
+  prepend_view_path "app/furniture"
 
   protect_from_forgery with: :exception, unless: -> { api_request? }
 
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     if current_space.present?
       "Convene - #{current_space.name}"
     else
-      'Convene - Video Meeting Spaces'
+      "Convene - Video Meeting Spaces"
     end
   end
 
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  OPERATOR_TOKEN = ENV['OPERATOR_API_KEY']
+  OPERATOR_TOKEN = ENV["OPERATOR_API_KEY"]
   # @return [Guest, Person, Operator] the authenticated user, or a Guest
   def current_person
     return @current_person if defined?(@current_person)
@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method def editing?
-    return true if params[:editing] == 'true'
+    return true if params[:editing] == "true"
 
     false
   end
@@ -56,11 +56,11 @@ class ApplicationController < ActionController::Base
 
     return options unless editing?
 
-    options.merge({ editing: params[:editing] })
+    options.merge({editing: params[:editing]})
   end
 
   def api_request?
-    request.content_type == 'application/json'
+    request.content_type == "application/json"
   end
 
   def pundit_user
@@ -105,23 +105,23 @@ class ApplicationController < ActionController::Base
       policy_scope(current_space.rooms).friendly.find(
         params[:room_id] || params[:id]
       )
-                rescue ActiveRecord::RecordNotFound
-                  nil
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 
   helper_method def current_access_code(room)
-    session.dig(room.id, 'access_code')
+    session.dig(room.id, "access_code")
   end
 
   def render_not_found
-    render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
   end
 
   # Ensure the Theme views and partials are first in the View lookup path
   # This allows us to override Application and Furniture views in favor of
   # the theme specific ones.
   def prepend_theme_views
-    return unless current_space&.theme.present?
+    return if current_space&.theme.blank?
 
     prepend_view_path "app/themes/#{current_space.theme}/"
   end

@@ -5,11 +5,11 @@ FactoryBot.define do
     end
 
     placement do
-      association :furniture_placement, { furniture_kind: 'marketplace', room: room }
+      association :furniture_placement, {furniture_kind: "marketplace", room: room}
     end
   end
 
-  factory :marketplace_product, class: 'Marketplace::Product' do
+  factory :marketplace_product, class: "Marketplace::Product" do
     name { Faker::TvShows::DrWho.specie }
     price_cents { Random.rand(1_00..9999_99) }
 

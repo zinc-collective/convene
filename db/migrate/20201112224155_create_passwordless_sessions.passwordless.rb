@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from passwordless (originally 20171104221735)
 
 class CreatePasswordlessSessions < ActiveRecord::Migration[5.1]

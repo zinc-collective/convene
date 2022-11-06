@@ -1,5 +1,6 @@
 class Journal::EntriesController < FurnitureController
-  def new; end
+  def new
+  end
 
   def create
     if entry.save
@@ -9,7 +10,8 @@ class Journal::EntriesController < FurnitureController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if entry.update(entry_params)
@@ -28,12 +30,12 @@ class Journal::EntriesController < FurnitureController
     return @entry if defined? @entry
 
     @entry = if params[:id]
-               journal.entries.friendly.find(params[:id])
-             elsif params[:entry]
-               journal.entries.new(entry_params)
-             else
-               journal.entries.new
-             end
+      journal.entries.friendly.find(params[:id])
+    elsif params[:entry]
+      journal.entries.new(entry_params)
+    else
+      journal.entries.new
+    end
 
     authorize(@entry)
   end

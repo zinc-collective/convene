@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe RoomPolicy do
   subject { described_class }
@@ -8,8 +8,9 @@ RSpec.describe RoomPolicy do
   let(:member) { membership.member }
   let(:non_member) { create(:person) }
 
-  describe 'Internal Rooms' do
+  describe "Internal Rooms" do
     let(:room) { create(:room, :internal) }
+
     permissions :show? do
       it { is_expected.not_to permit(nil, room) }
       it { is_expected.to permit(member, room) }
@@ -17,8 +18,9 @@ RSpec.describe RoomPolicy do
     end
   end
 
-  describe 'Unlocked Rooms' do
+  describe "Unlocked Rooms" do
     let(:room) { create(:room, :unlocked) }
+
     permissions :show? do
       it { is_expected.to permit(nil, room) }
       it { is_expected.to permit(member, room) }
@@ -26,8 +28,9 @@ RSpec.describe RoomPolicy do
     end
   end
 
-  describe 'Locked Rooms' do
+  describe "Locked Rooms" do
     let(:room) { create(:room, :locked) }
+
     # For now, because we haven't thunked through the access code bit just
     # yet.
     permissions :show? do

@@ -4,14 +4,14 @@
 class Guide
   include ActiveModel::Model
   attr_accessor :slug, :value_proposition
-  alias id slug
+  alias_method :id, :slug
 
   def to_partial_path
     slug.to_s
   end
 
   def attributes
-    { id: id, slug: slug }
+    {id: id, slug: slug}
   end
 
   def persisted?

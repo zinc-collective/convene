@@ -2,7 +2,7 @@
 
 class Membership::Serializer < ApplicationSerializer
   # @return [Membership]
-  alias membership resource
+  alias_method :membership, :resource
   def to_json(*_args)
     super.merge(
       membership: {

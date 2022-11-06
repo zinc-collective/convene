@@ -1,17 +1,17 @@
 FactoryBot.define do
-  factory :payment_form, class: 'PaymentForm' do
+  factory :payment_form, class: "PaymentForm" do
     transient do
       room { build(:room) }
     end
 
     placement do
-      association :furniture_placement, { furniture_kind: 'payment_form', room: room }
+      association :furniture_placement, {furniture_kind: "payment_form", room: room}
     end
   end
 
-  factory :payment_form_payment, class: 'PaymentForm::Payment' do
+  factory :payment_form_payment, class: "PaymentForm::Payment" do
     sequence(:payer_name) { |i| "Payer #{i}" }
-    payer_email { "#{payer_name.downcase.gsub(' ', '-')}@example.com" }
+    payer_email { "#{payer_name.downcase.tr(" ", "-")}@example.com" }
     amount { 100_00 }
     sequence(:memo) { |i| "Memo #{i}" }
     sequence(:public_token) { |i| "Public Token #{i}" }

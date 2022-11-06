@@ -9,9 +9,7 @@ class FurnitureController < ::ApplicationController
     current_space
   end
 
-  def dom_id(record)
-    record_identifier.dom_id(record)
-  end
+  delegate :dom_id, to: :record_identifier
 
   def record_identifier
     @record_identifier ||= ActionView::RecordIdentifier

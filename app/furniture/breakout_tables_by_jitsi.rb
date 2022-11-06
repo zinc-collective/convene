@@ -2,7 +2,7 @@
 
 class BreakoutTablesByJitsi
   def self.deprecated_append_routes(router)
-    router.resources :breakout_tables_by_jitsi, only: [:show], controller: 'breakout_tables_by_jitsi_by_jitsi/'
+    router.resources :breakout_tables_by_jitsi, only: [:show], controller: "breakout_tables_by_jitsi_by_jitsi/"
   end
   include Placeable
 
@@ -11,11 +11,10 @@ class BreakoutTablesByJitsi
   end
 
   def tables
-    settings.fetch('names', []).lazy.map do |name|
+    settings.fetch("names", []).lazy.map do |name|
       Table.new(name: name, placement: placement)
     end
   end
-
 
   # @deprecated
   def in_room_template

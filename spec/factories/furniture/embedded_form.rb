@@ -7,7 +7,7 @@ FactoryBot.define do
     end
 
     placement do
-      association :furniture_placement, { furniture_kind: 'embedded_form', room: room }
+      association :furniture_placement, {furniture_kind: "embedded_form", room: room}
     end
   end
 end

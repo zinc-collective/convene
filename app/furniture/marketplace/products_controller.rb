@@ -1,7 +1,6 @@
 class Marketplace
   class ProductsController < FurnitureController
     def new
-
     end
 
     def create

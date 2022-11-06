@@ -1,27 +1,29 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Membership, type: :model do
   subject(:membership) { build(:membership) }
-  describe '#member' do
+
+  describe "#member" do
     it { is_expected.to belong_to(:member) }
     it { is_expected.to validate_uniqueness_of(:member).scoped_to(:space_id) }
   end
 
-  describe '#space' do
+  describe "#space" do
     it { is_expected.to belong_to(:space) }
   end
 
-  describe '#revoke' do
-    it 'sets the status to revoked' do
-      expect { membership.revoked! }.to change(membership, :status).from('active').to('revoked')
+  describe "#revoke" do
+    it "sets the status to revoked" do
+      expect { membership.revoked! }.to change(membership, :status).from("active").to("revoked")
     end
   end
 
-  describe '#sent_invitations' do
+  describe "#sent_invitations" do
     it { is_expected.to have_many(:sent_invitations).conditions(space: subject.space).source(:invitations).inverse_of(:invitor) }
-    it 'includes only invitations to the memberships space' do
+
+    it "includes only invitations to the memberships space" do
       membership.save!
       invitation_to_this_space = create(:invitation, invitor: membership.member, space: membership.space)
       invitation_to_other_space = create(:invitation, invitor: membership.member)

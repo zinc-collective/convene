@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RsvpPolicy < ApplicationPolicy
-  alias rsvp object
+  alias_method :rsvp, :object
   delegate :invitation, to: :rsvp
   delegate :space, to: :invitation
 
@@ -14,8 +14,8 @@ class RsvpPolicy < ApplicationPolicy
     true
   end
 
-  alias edit? create?
-  alias update? create?
-  alias destroy? create?
-  alias new? create?
+  alias_method :edit?, :create?
+  alias_method :update?, :create?
+  alias_method :destroy?, :create?
+  alias_method :new?, :create?
 end

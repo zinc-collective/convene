@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 class UtilityHookupsController < ApplicationController
-  def edit
+  def index
     utility_hookup
   end
 
-  def index
+  def edit
     utility_hookup
   end
 

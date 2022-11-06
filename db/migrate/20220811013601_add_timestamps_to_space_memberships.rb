@@ -5,7 +5,7 @@ class AddTimestampsToSpaceMemberships < ActiveRecord::Migration[7.0]
     end
 
     up_only do
-      execute <<~SQL
+      execute <<~SQL.squish
         ALTER TABLE space_memberships
           ALTER COLUMN created_at DROP DEFAULT
         ;

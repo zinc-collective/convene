@@ -16,15 +16,15 @@ class Invitation < ApplicationRecord
   validates :email, presence: true
 
   enum status: {
-    pending: 'pending',
-    accepted: 'accepted',
-    rejected: 'rejected',
-    expired: 'expired',
-    ignored: 'ignored',
-    revoked: 'revoked'
+    pending: "pending",
+    accepted: "accepted",
+    rejected: "rejected",
+    expired: "expired",
+    ignored: "ignored",
+    revoked: "revoked"
   }
 
-  validates :status, inclusion: { in: statuses.keys }
+  validates :status, inclusion: {in: statuses.keys}
 
   # @!method invitor_display_name
   #   @see Person#display_name
@@ -36,7 +36,7 @@ class Invitation < ApplicationRecord
 
   validate :not_ignored_space
   validate :not_expired, if: lambda {
-    will_save_change_to_attribute?(:status, to: 'accepted')
+    will_save_change_to_attribute?(:status, to: "accepted")
   }
 
   EXPIRATION_PERIOD = 14.days
@@ -48,8 +48,8 @@ class Invitation < ApplicationRecord
   private
 
   def not_ignored_space
-    return if will_save_change_to_attribute?(:status, from: 'ignored')
-    return unless Invitation.ignored.where(space: space, email: email).exists?
+    return if will_save_change_to_attribute?(:status, from: "ignored")
+    return unless Invitation.ignored.exists?(space: space, email: email)
 
     errors.add(:email, :invitee_ignored_space)
   end

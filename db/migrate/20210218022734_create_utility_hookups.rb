@@ -6,7 +6,7 @@ class CreateUtilityHookups < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.string :utility_slug, null: false
 
-      t.string :status, null: false, default: 'unavailable'
+      t.string :status, null: false, default: "unavailable"
 
       t.jsonb :configuration
 

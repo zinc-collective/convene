@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UtilityHookupPolicy < ApplicationPolicy
-  alias utility_hookup object
+  alias_method :utility_hookup, :object
 
   class Scope < ApplicationScope
     def resolve
@@ -42,7 +42,7 @@ class UtilityHookupPolicy < ApplicationPolicy
   def permitted_attributes(params)
     utility_permitted_attributes =
       policy(Utilities.new_from_slug(params[:utility_slug]))
-      .permitted_attributes(params[:utility_attributes])
+        .permitted_attributes(params[:utility_attributes])
 
     [:name, :utility_slug, utility_attributes: utility_permitted_attributes]
   end

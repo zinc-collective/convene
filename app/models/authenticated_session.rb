@@ -11,15 +11,13 @@ class AuthenticatedSession
   validate :verify_one_time_password
 
   # @return [Person]
-  def person
-    authentication_method.person
-  end
+  delegate :person, to: :authentication_method
 
   # @return [AuthenticationMethod]
   def authentication_method
     @authentication_method ||= AuthenticationMethod
       .find_or_initialize_by(contact_method: contact_method,
-                             contact_location: contact_location)
+        contact_location: contact_location)
   end
 
   def authentication_method_id=(authentication_method_id)

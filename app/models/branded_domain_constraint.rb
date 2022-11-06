@@ -17,9 +17,9 @@ class BrandedDomainConstraint
 
   # We cache the branded spaces to reduce the database-hits-per-request where we can.
   private def branded_spaces
-    Rails.cache.fetch('BrandedSubdomain#branded_spaces', expires_in: 1.minute) do
-      space_repository.where.not(branded_domain: nil).each_with_object({}) do |space, branded_domains|
-        branded_domains[space.branded_domain] = space
+    Rails.cache.fetch("BrandedSubdomain#branded_spaces", expires_in: 1.minute) do
+      space_repository.where.not(branded_domain: nil).index_by do |space|
+        space.branded_domain
       end
     end
   end

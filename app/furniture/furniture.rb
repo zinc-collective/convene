@@ -12,7 +12,7 @@ module Furniture
     video_bridge: VideoBridge,
     livestream: Livestream,
     embedded_form: EmbeddedForm,
-    spotlight: Spotlight,
+    spotlight: Spotlight
   }.freeze
 
   # Appends each {Furniture}'s CRUD actions under a FurniturePlacement

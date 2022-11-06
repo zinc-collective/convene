@@ -3,17 +3,11 @@ class WaitingRoom
 
   attr_accessor :room, :access_code, :redirect_url
 
-  def space
-    room.space
-  end
+  delegate :space, to: :room
 
-  def persisted?
-    room.persisted?
-  end
+  delegate :persisted?, to: :room
 
-  def id
-    room.id
-  end
+  delegate :id, to: :room
 
   def update(params)
     if params[:access_code] == room.access_code

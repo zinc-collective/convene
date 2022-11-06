@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class InvitationPolicy < ApplicationPolicy
-  alias invitation object
+  alias_method :invitation, :object
   delegate :space, to: :invitation
 
   def show?
@@ -12,11 +12,11 @@ class InvitationPolicy < ApplicationPolicy
     person&.member_of?(space)
   end
 
-  alias edit? create?
-  alias update? create?
-  alias index? create?
-  alias destroy? create?
-  alias new? create?
+  alias_method :edit?, :create?
+  alias_method :update?, :create?
+  alias_method :index?, :create?
+  alias_method :destroy?, :create?
+  alias_method :new?, :create?
 
   class Scope < ApplicationScope
     # All invitations for an accessible space are visible.
