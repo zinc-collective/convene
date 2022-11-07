@@ -1,13 +1,14 @@
 # frozen_string_literal: true
+
 class PaymentForm
   class PaymentPolicy < ApplicationPolicy
     def show?
       person.member_of?(object.space)
     end
 
-    alias update? show?
-    alias edit? show?
-    alias destroy? show?
+    alias_method :update?, :show?
+    alias_method :edit?, :show?
+    alias_method :destroy?, :show?
 
     def index?
       # The Scope resolution limits access to Payments from Spaces

@@ -8,7 +8,8 @@ class PaymentForm
       render :new
     end
 
-    def index; end
+    def index
+    end
 
     private def payment_params
       policy(payments.new).permit(params.require(:payment_form_payment))
@@ -16,7 +17,7 @@ class PaymentForm
 
     # @returns [PaymentForm]
     helper_method def furniture
-      room.furniture_placements.find_by(furniture_kind: 'payment_form').furniture
+      room.furniture_placements.find_by(furniture_kind: "payment_form").furniture
     end
 
     helper_method def payment

@@ -9,10 +9,10 @@ module AuthHelpers
     authentication_method.bump_one_time_password!
 
     post(space_authenticated_session_path(space),
-         params: { authenticated_session: {
-           authentication_method_id: authentication_method.id,
-           one_time_password: authentication_method.one_time_password
-         } })
+      params: {authenticated_session: {
+        authentication_method_id: authentication_method.id,
+        one_time_password: authentication_method.one_time_password
+      }})
   end
 
   def sign_in_as_member(space)
@@ -22,13 +22,13 @@ module AuthHelpers
     sign_in(space, member)
   end
 
-  def authorization_headers(token = ENV['OPERATOR_API_KEY'])
+  def authorization_headers(token = ENV["OPERATOR_API_KEY"])
     {
-      'HTTP_AUTHORIZATION' => encode_authorization_token(token)
+      "HTTP_AUTHORIZATION" => encode_authorization_token(token)
     }
   end
 
-  def encode_authorization_token(token = ENV['OPERATOR_API_KEY'])
+  def encode_authorization_token(token = ENV["OPERATOR_API_KEY"])
     ActionController::HttpAuthentication::Token.encode_credentials(token)
   end
 

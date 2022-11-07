@@ -2,7 +2,7 @@
 
 class Journal
   class EntryPolicy < ApplicationPolicy
-    alias entry object
+    alias_method :entry, :object
 
     def create?
       person&.member_of?(entry.space)
@@ -22,8 +22,8 @@ class Journal
 
     class Scope < ApplicationScope
       def resolve
-        scope.includes(:journal).where('published_at < ?', Time.zone.now)
-             .or(scope.includes(:journal).where(journal: { room: person.rooms }))
+        scope.includes(:journal).where("published_at < ?", Time.zone.now)
+          .or(scope.includes(:journal).where(journal: {room: person.rooms}))
       end
     end
   end

@@ -7,7 +7,7 @@ class Neighborhood
 
   class Config
     def default_space_slug
-      ENV.fetch('DEFAULT_SPACE', 'convene')
+      ENV.fetch("DEFAULT_SPACE", "convene")
     end
   end
 end

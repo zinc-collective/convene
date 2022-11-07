@@ -1,5 +1,5 @@
 class ClientPolicy < ApplicationPolicy
-  alias client object
+  alias_method :client, :object
 
   def show?
     true
@@ -9,10 +9,10 @@ class ClientPolicy < ApplicationPolicy
     person.operator?
   end
 
-  alias new? update?
-  alias edit? update?
-  alias create? update?
-  alias destroy? update?
+  alias_method :new?, :update?
+  alias_method :edit?, :update?
+  alias_method :create?, :update?
+  alias_method :destroy?, :update?
 
   class Scope < ApplicationScope
     def resolve

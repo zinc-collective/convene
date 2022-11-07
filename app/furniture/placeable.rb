@@ -20,9 +20,7 @@ module Placeable
   #       Perhaps what we want to do is switch `placeable` from a module to a class that
   #       Furniture inherits from?
   module InstanceMethods
-    def settings
-      placement.settings
-    end
+    delegate :settings, to: :placement
 
     # Allows us to `render furniture` and use the partial at `furniture/_furniture.html.erb`
     # @example Assuming `spotlight` is a {Spotlight} that inherits {Placeable}

@@ -15,14 +15,12 @@ class FurniturePlacement < ApplicationRecord
 
   attribute :furniture_kind, :string
 
-  attribute :settings, :json, default: {}
+  attribute :settings, :json, default: -> { {} }
 
   # The order in which {Furniture} is rendered in a Room. Lower is higher.
   attribute :slot, :integer
 
-  def furniture_attributes=(attributes)
-    furniture.attributes = attributes
-  end
+  delegate :attributes=, to: :furniture, prefix: true
 
   def furniture
     @furniture ||= Furniture.from_placement(self)

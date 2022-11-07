@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Marketplace
   class ProductPolicy < ApplicationPolicy
     def permitted_attributes(_params)

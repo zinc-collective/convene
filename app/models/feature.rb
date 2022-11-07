@@ -8,6 +8,6 @@ class Feature
   def self.enabled?(feature)
     feature = feature.to_s if feature.respond_to?(:to_s)
 
-    ENV.fetch("FEATURE_#{feature.upcase}", 'false') == 'true'
+    ENV.fetch("FEATURE_#{feature.upcase}", "false") == "true"
   end
 end

@@ -5,11 +5,11 @@ FactoryBot.define do
     end
 
     placement do
-      association :furniture_placement, { furniture_kind: 'spotlight', room: room }
+      association :furniture_placement, {furniture_kind: "spotlight", room: room}
     end
   end
 
-  factory :spotlight_image, class: 'Spotlight::Image' do
+  factory :spotlight_image, class: "Spotlight::Image" do
     association :space
 
     transient do
@@ -17,7 +17,7 @@ FactoryBot.define do
     end
 
     location do
-      association :furniture_placement, { furniture_kind: 'spotlight', room: room }
+      association :furniture_placement, {furniture_kind: "spotlight", room: room}
     end
 
     file { Rack::Test::UploadedFile.new("spec/fixtures/cc-kitten.jpg", "image/jpeg") }

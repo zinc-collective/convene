@@ -6,7 +6,7 @@ module ApiHelpers
       path_definition.after do |example|
         next unless response.body.present?
         example.metadata[:response][:content] = {
-          'application/json' => {
+          "application/json" => {
             example: JSON.parse(response.body, symbolize_names: true)
           }
         }

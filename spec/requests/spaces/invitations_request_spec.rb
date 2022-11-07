@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe '/spaces/:space_id/invitations', type: :request do
-  describe 'POST' do
-    it 'creates and sends an invitation for a space' do
+RSpec.describe "/spaces/:space_id/invitations", type: :request do
+  describe "POST" do
+    it "creates and sends an invitation for a space" do
       mail = double(deliver_later: true)
       allow(SpaceInvitationMailer).to receive(:space_invitation_email)
         .and_return(mail)
@@ -16,19 +16,19 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       sign_in(space, member)
 
       post space_invitations_path(space), params: {
-        invitation: { name: 'foobar', email: 'foobar@example.com' }
+        invitation: {name: "foobar", email: "foobar@example.com"}
       }
 
-      invitation = space.invitations.find_by(name: 'foobar',
-                                             email: 'foobar@example.com')
+      invitation = space.invitations.find_by(name: "foobar",
+        email: "foobar@example.com")
 
       expect(invitation).to be_present
-      expect(invitation.status).to eq('pending')
+      expect(invitation.status).to eq("pending")
 
       expect(response).to redirect_to([space, :invitations])
-      expect(flash[:notice]).to eql(I18n.t('invitations.create.success',
-                                           invitee_email: invitation.email,
-                                           invitee_name: invitation.name))
+      expect(flash[:notice]).to eql(I18n.t("invitations.create.success",
+        invitee_email: invitation.email,
+        invitee_name: invitation.name))
 
       expect(SpaceInvitationMailer).to have_received(:space_invitation_email)
         .with(invitation)
@@ -43,7 +43,7 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       sign_in(space, member)
 
       post "/spaces/#{space.slug}/invitations", params: {
-        invitation: { name: 'foobar'  }
+        invitation: {name: "foobar"}
       }
       expect(assigns(:invitation)).not_to be_valid
       expect(response).to render_template(:index)
@@ -56,7 +56,7 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
       sign_in(space, non_member)
 
       post space_invitations_path(space), params: {
-        invitation: { name: 'foobar', email: 'foobar@example.com' }
+        invitation: {name: "foobar", email: "foobar@example.com"}
       }
 
       expect(response).to be_not_found
@@ -64,8 +64,8 @@ RSpec.describe '/spaces/:space_id/invitations', type: :request do
     end
   end
 
-  describe 'DELETE /:invitation_id' do
-    it 'Revokes the Invitation' do
+  describe "DELETE /:invitation_id" do
+    it "Revokes the Invitation" do
       membership = create(:membership)
       space = membership.space
       member = membership.member

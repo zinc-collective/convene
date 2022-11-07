@@ -17,7 +17,7 @@ class Rsvp
     person = Person.create_with(name: invitation.name).find_or_create_by(email: invitation.email)
 
     authentication_method = person.authentication_methods.find_or_create_by(contact_method: :email,
-                                                                            contact_location: invitation.email)
+      contact_location: invitation.email)
 
     authentication_method.verify!(attributes[:one_time_password]) if attributes[:one_time_password]
     if authentication_method.confirmed?

@@ -2,13 +2,14 @@ class AuthenticatedSessionsController < ApplicationController
   # Not a database-backed model, no need to policy-scope.
   skip_after_action :verify_policy_scoped
 
-  def create
+  def show
     redirect_to current_space if authenticated_session.save
   end
 
-  def new; end
+  def new
+  end
 
-  def show
+  def create
     redirect_to current_space if authenticated_session.save
   end
 
@@ -25,8 +26,8 @@ class AuthenticatedSessionsController < ApplicationController
 
   def authenticated_session_params
     params.fetch(:authenticated_session, {})
-          .permit(:authentication_method_id, :contact_method, :contact_location,
-                  :one_time_password)
-          .merge(space: current_space, session: session)
+      .permit(:authentication_method_id, :contact_method, :contact_location,
+        :one_time_password)
+      .merge(space: current_space, session: session)
   end
 end

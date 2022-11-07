@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class MembershipsController < ApplicationController
+  def index
+  end
+
+  def show
+  end
+
   def create
     if membership.save
       render json: Membership::Serializer.new(membership).to_json, status: :created
@@ -9,15 +15,11 @@ class MembershipsController < ApplicationController
     end
   end
 
-  def show; end
-
-  def index; end
-
   def destroy
     if membership.revoked!
-      flash[:notice] = t('.success')
+      flash.now[:notice] = t(".success")
     else
-      flash[:alert] = t('.failure', errors: membership.errors.join(', '))
+      flash.now[:alert] = t(".failure", errors: membership.errors.join(", "))
     end
 
     respond_to do |format|
@@ -37,10 +39,10 @@ class MembershipsController < ApplicationController
 
   helper_method def membership
     @membership ||= if params[:id]
-                      policy_scope(Membership).find(params[:id])
-                    else
-                      Membership.new(membership_params)
-                    end.tap(&method(:authorize))
+      policy_scope(Membership).find(params[:id])
+    else
+      Membership.new(membership_params)
+    end.tap(&method(:authorize))
   end
 
   private

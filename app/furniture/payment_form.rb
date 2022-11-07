@@ -6,7 +6,7 @@ class PaymentForm
   include Placeable
 
   def self.deprecated_append_routes(router)
-    router.scope module: 'payment_form' do
+    router.scope module: "payment_form" do
       router.resource :payment_form, only: [:show] do
         router.resources :payments, only: %i[create index]
       end

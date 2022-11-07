@@ -9,7 +9,7 @@ class Room < ApplicationRecord
 
   # URI-friendly description of the room.
   attribute :slug, :string
-  validates :slug, uniqueness: { scope: :space_id }
+  validates :slug, uniqueness: {scope: :space_id}
 
   # FriendlyId does the legwork to make the slug uri-friendly
   extend FriendlyId
@@ -20,11 +20,11 @@ class Room < ApplicationRecord
   # `locked` indicates that only participants who know the rrooms `access_code` may access the room.
   # `internal` indicates that only participants who are Space Members _or_ know the Spaces `access_code` may
   # access the room.
-  attribute :access_level, :string, default: 'unlocked'
+  attribute :access_level, :string, default: "unlocked"
 
   # A room's Access Code is a "secret" that, when known, grants access to the room.
   attribute :access_code, :string
-  validates :access_code, presence: { if: :locked? }
+  validates :access_code, presence: {if: :locked?}
 
   def locked?
     access_level&.to_sym == :locked
@@ -44,9 +44,9 @@ class Room < ApplicationRecord
 
   PUBLICITY_LEVELS = %i[listed unlisted].freeze
   attribute :publicity_level, :string
-  validates :publicity_level, presence: true, inclusion: { in: PUBLICITY_LEVELS + PUBLICITY_LEVELS.map(&:to_s) }
+  validates :publicity_level, presence: true, inclusion: {in: PUBLICITY_LEVELS + PUBLICITY_LEVELS.map(&:to_s)}
 
-  scope :listed,   -> { where(publicity_level: :listed) }
+  scope :listed, -> { where(publicity_level: :listed) }
   scope :unlisted, -> { where(publicity_level: :unlisted) }
 
   def listed?
@@ -69,10 +69,10 @@ class Room < ApplicationRecord
   end
 
   def enterable?(access_code)
-    return true if access_level == 'unlocked'
+    return true if access_level == "unlocked"
 
     can_enter = self.access_code == access_code
-    errors.add(:base, 'Invalid access code') if access_code
+    errors.add(:base, "Invalid access code") if access_code
     can_enter
   end
 

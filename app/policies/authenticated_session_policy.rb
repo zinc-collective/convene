@@ -2,7 +2,7 @@
 
 class AuthenticatedSessionPolicy < ApplicationPolicy
   # @return [AuthenticatedSession]
-  alias authenticated_session object
+  alias_method :authenticated_session, :object
 
   def new?
     true
@@ -12,7 +12,7 @@ class AuthenticatedSessionPolicy < ApplicationPolicy
     true
   end
 
-  alias update? show?
-  alias destroy? show?
-  alias create? new?
+  alias_method :update?, :show?
+  alias_method :destroy?, :show?
+  alias_method :create?, :new?
 end

@@ -2,12 +2,13 @@ class RsvpsController < ApplicationController
   # Not a database-backed model, no need to policy-scope.
   skip_after_action :verify_policy_scoped
 
-  def show; end
+  def show
+  end
 
   def update
     if rsvp.update(rsvp_params)
       if rsvp.invitation.accepted?
-        redirect_to rsvp.space, notice: t('.success', space_name: rsvp.space.name)
+        redirect_to rsvp.space, notice: t(".success", space_name: rsvp.space.name)
       else
         render :show
       end

@@ -6,12 +6,12 @@ class PaymentForm
   # to define methods for each write/read for attributes :(.
   class Payment < Item
     before_validation :exchange_public_token_for_access_token_and_item,
-                      if: -> { plaid_access_token.blank? && public_token.present? }
+      if: -> { plaid_access_token.blank? && public_token.present? }
 
     attr_accessor :public_token
     validates :payer_name, presence: true
-    validates :payer_email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-    validates :amount, presence: true, numericality: { greater_than: 0 }
+    validates :payer_email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}
+    validates :amount, presence: true, numericality: {greater_than: 0}
     validates :memo, presence: true
     validates :plaid_account_id, presence: true
     validates :plaid_item_id, presence: true
@@ -36,7 +36,7 @@ class PaymentForm
     end
 
     def status
-      data['status']&.to_sym
+      data["status"]&.to_sym
     end
 
     def ready_for_deposit?

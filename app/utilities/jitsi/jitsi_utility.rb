@@ -5,11 +5,11 @@ module Jitsi
   # @see https://jitsi.org
   class JitsiUtility < Utility
     def meet_domain
-      configuration['meet_domain']
+      configuration["meet_domain"]
     end
 
     def meet_domain=(value)
-      configuration['meet_domain'] = value
+      configuration["meet_domain"] = value
     end
 
     def attribute_names

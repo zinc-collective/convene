@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe AuthenticatedSession, type: :model do
   subject(:authenticated_session) do
     described_class.new(authentication_method: authentication_method,
-                        contact_method: contact_method,
-                        contact_location: contact_location,
-                        space: space,
-                        session: session,
-                        one_time_password: one_time_password)
+      contact_method: contact_method,
+      contact_location: contact_location,
+      space: space,
+      session: session,
+      one_time_password: one_time_password)
   end
 
   let(:space) { FactoryBot.build_stubbed(:space, id: SecureRandom.uuid) }
@@ -20,12 +20,12 @@ RSpec.describe AuthenticatedSession, type: :model do
   describe "#save" do
     let(:authentication_method) do
       instance_double(AuthenticationMethod, send_one_time_password!: nil,
-                      verify?: nil, confirm!: nil)
+        verify?: nil, confirm!: nil)
     end
 
     context "when there is nothing to do" do
       it "does nothing" do
-        expect(authenticated_session.save).to eql(false)
+        expect(authenticated_session.save).to be(false)
 
         expect(session[:person_id]).to be_nil
         expect(authentication_method).not_to have_received(:send_one_time_password!)
@@ -36,9 +36,9 @@ RSpec.describe AuthenticatedSession, type: :model do
 
     context "when contact info is provided" do
       let(:contact_method) { :email }
-      let(:contact_location) { 'test@example.com' }
+      let(:contact_location) { "test@example.com" }
 
-      context 'but no one time password' do
+      context "but no one time password" do
         it "delivers a one time password to the authentication method" do
           authenticated_session.save
 
@@ -60,10 +60,11 @@ RSpec.describe AuthenticatedSession, type: :model do
 
         context "and the contact info is for an existing person" do
           let(:authentication_method) { nil }
+
           before do
             FactoryBot.create(:authentication_method,
-                              contact_method: contact_method,
-                              contact_location: contact_location)
+              contact_method: contact_method,
+              contact_location: contact_location)
           end
 
           it "leverages the existing authentication method" do
@@ -71,8 +72,10 @@ RSpec.describe AuthenticatedSession, type: :model do
           end
         end
       end
-     context "and the correct otp is provided" do
+
+      context "and the correct otp is provided" do
         let(:one_time_password) { "123456" }
+
         before do
           allow(authentication_method).to receive(:verify?)
             .with(one_time_password).and_return(true)
