@@ -19,6 +19,7 @@ class Journal::Entry < ApplicationRecord
 
   attribute :published_at, :datetime
 
+  # @attr [Journal::Journal] :journal
   belongs_to :journal, class_name: 'Journal::Journal', inverse_of: :entries
   delegate :room, :space, to: :journal
 

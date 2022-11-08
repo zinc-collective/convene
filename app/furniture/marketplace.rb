@@ -3,9 +3,9 @@ class Marketplace
   include Placeable
 
   def self.append_routes(router)
-    router.resources :marketplace, only: [:show] do
-      router.resources :products, :orders, only: %i[new create index], module: 'marketplace'
-      router.resources :orders, only: [], module: 'marketplace' do
+    router.resources :marketplaces, only: [:show], module: 'marketplace' do
+      router.resources :products
+      router.resources :orders do
         router.resources :ordered_products
       end
     end

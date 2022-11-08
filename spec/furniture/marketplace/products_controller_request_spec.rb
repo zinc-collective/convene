@@ -4,13 +4,14 @@ RSpec.describe Marketplace::ProductsController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
+
   describe 'POST /products' do
     it 'Creates a Product in the Marketplace' do
       attributes = attributes_for(:marketplace_product)
 
       expect do
         post polymorphic_path([space, room, marketplace, :products]),
-             params: { marketplace_product: attributes }
+             params: { product: attributes }
       end.to change(marketplace.products, :count).by(1)
 
       created_product = marketplace.products.last
