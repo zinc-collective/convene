@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SpacePolicy do
   subject { described_class }
@@ -6,7 +6,7 @@ RSpec.describe SpacePolicy do
   let(:membership) { create(:membership) }
   let(:space) { membership.space }
   let(:member) { membership.member }
-  let(:non_member) { create (:person) }
+  let(:non_member) { create((:person)) }
 
   permissions :update?, :edit? do
     it { is_expected.to permit(member, space) }

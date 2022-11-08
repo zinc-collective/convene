@@ -1,11 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe PaymentForm::PaymentPolicy, type: :policy do
   let(:subject) { described_class }
   let(:space) { FactoryBot.build_stubbed(:space) }
   let(:check) { instance_double(PaymentForm::Payment, space: space) }
-  context 'as a guest' do
+
+  context "as a guest" do
     let(:actor) { Guest.new }
+
     permissions :show?, :update?, :edit?, :destroy? do
       it { is_expected.not_to permit(actor, check) }
     end
@@ -15,7 +17,7 @@ RSpec.describe PaymentForm::PaymentPolicy, type: :policy do
     end
   end
 
-  context 'as a neighbor' do
+  context "as a neighbor" do
     let(:actor) do
       FactoryBot.build_stubbed(:person).tap do |actor|
         allow(actor).to receive(:member_of?).with(space).and_return(false)
@@ -31,7 +33,7 @@ RSpec.describe PaymentForm::PaymentPolicy, type: :policy do
     end
   end
 
-  context 'as a resident' do
+  context "as a resident" do
     let(:actor) do
       FactoryBot.build_stubbed(:person).tap do |actor|
         allow(actor).to receive(:member_of?).with(space).and_return(true)

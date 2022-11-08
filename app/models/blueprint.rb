@@ -38,17 +38,17 @@ class Blueprint
     furniture_placements = room_attributes.fetch(:furniture_placements, {})
     furniture_placements.each.with_index do |(furniture, settings), slot|
       furniture_placement = room.furniture_placements
-                                .find_or_initialize_by(slot: slot)
+        .find_or_initialize_by(slot: slot)
       furniture_placement
         .update!(settings: merge_non_empty(settings, furniture_placement.settings),
-                 furniture_kind: furniture)
+          furniture_kind: furniture)
     end
   end
 
   def set_utility_hookups
     space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
       utility_hookup = space.utility_hookups
-                            .find_or_initialize_by(name: utility_hookup_attributes[:name])
+        .find_or_initialize_by(name: utility_hookup_attributes[:name])
 
       utility_hookup.update!(merge_non_empty(utility_hookup_attributes, utility_hookup.attributes))
     end
@@ -63,11 +63,11 @@ class Blueprint
   def set_members
     space_attributes.fetch(:members, []).each do |member_attributes|
       person = if member_attributes.is_a?(Person)
-                 member_attributes
-               else
-                 Person.find_or_create_by!(email: member_attributes[:email])
-                       .tap { |record| record.update!(member_attributes) }
-               end
+        member_attributes
+      else
+        Person.find_or_create_by!(email: member_attributes[:email])
+          .tap { |record| record.update!(member_attributes) }
+      end
 
       space.memberships.find_or_create_by(member: person)
     end
@@ -97,9 +97,7 @@ class Blueprint
   #   merge_non_empty(new, original)
   #   # => { "a" => "ah", "b": { c: :d }}
   private def merge_non_empty(left, right)
-    right.delete_if do |_key, value|
-      value.blank?
-    end
+    right.compact_blank!
 
     left.with_indifferent_access.merge(right.with_indifferent_access)
   end
@@ -107,28 +105,28 @@ class Blueprint
   BLUEPRINTS = {
     system_test: {
 
-      entrance: 'entrance-hall',
+      entrance: "entrance-hall",
       utility_hookups: [
-        { utility_slug: :plaid, name: 'Plaid', configuration: { client_id: 'set-me', secret: 'and-me', environment: 'sandbox' } },
-        { utility_slug: :jitsi, name: 'Jitsi', configuration:
-          { meet_domain: 'convene-videobridge-zinc.zinc.coop' } }
+        {utility_slug: :plaid, name: "Plaid", configuration: {client_id: "set-me", secret: "and-me", environment: "sandbox"}},
+        {utility_slug: :jitsi, name: "Jitsi", configuration:
+          {meet_domain: "convene-videobridge-zinc.zinc.coop"}}
       ],
-      members: [{ email: 'space-owner@example.com' },
-                { email: 'space-member@example.com' }],
+      members: [{email: "space-owner@example.com"},
+        {email: "space-member@example.com"}],
       rooms: [
         {
-          name: 'Listed Room 1',
+          name: "Listed Room 1",
           publicity_level: :listed,
           access_level: :unlocked,
           access_code: nil,
           furniture_placements: {
-            markdown_text_block: { content: '# Welcome!' },
+            markdown_text_block: {content: "# Welcome!"},
             video_bridge: {},
-            breakout_tables_by_jitsi: { names: %w[engineering design ops] }
+            breakout_tables_by_jitsi: {names: %w[engineering design ops]}
           }
         },
         {
-          name: 'Listed Room 2',
+          name: "Listed Room 2",
           publicity_level: :listed,
           access_level: :unlocked,
           access_code: nil,
@@ -137,7 +135,7 @@ class Blueprint
           }
         },
         {
-          name: 'Listed Locked Room 1',
+          name: "Listed Locked Room 1",
           publicity_level: :listed,
           access_level: :locked,
           access_code: :secret,
@@ -146,7 +144,7 @@ class Blueprint
           }
         },
         {
-          name: 'Unlisted Room 1',
+          name: "Unlisted Room 1",
           publicity_level: :unlisted,
           access_level: :unlocked,
           access_code: nil,
@@ -155,7 +153,7 @@ class Blueprint
           }
         },
         {
-          name: 'Unlisted Room 2',
+          name: "Unlisted Room 2",
           publicity_level: :unlisted,
           access_level: :unlocked,
           access_code: nil,
@@ -164,11 +162,11 @@ class Blueprint
           }
         },
         {
-          name: 'Entrance Hall',
+          name: "Entrance Hall",
           publicity_level: :unlisted,
           furniture_placements: {
-            markdown_text_block: { content: '# Wooo!' },
-            spotlight: {},
+            markdown_text_block: {content: "# Wooo!"},
+            spotlight: {}
           }
 
         }
@@ -179,33 +177,33 @@ class Blueprint
   # @todo migrate this to a private configuration file!
   CLIENTS = [{
     client: {
-      name: 'Zinc',
+      name: "Zinc",
       space: {
-        members: [{ email: 'zee@zinc.coop' }, { email: 'cheryl@zinc.coop' }],
-        name: 'Zinc', branded_domain: 'meet.zinc.coop',
-        entrance: 'lobby',
+        members: [{email: "zee@zinc.coop"}, {email: "cheryl@zinc.coop"}],
+        name: "Zinc", branded_domain: "meet.zinc.coop",
+        entrance: "lobby",
         utility_hookups: [
           {
-            utility_slug: :jitsi, name: 'Jitsi', configuration:
-            { meet_domain: 'convene-videobridge-zinc.zinc.coop' }
+            utility_slug: :jitsi, name: "Jitsi", configuration:
+            {meet_domain: "convene-videobridge-zinc.zinc.coop"}
           }
         ],
         rooms: [{
-          name: 'Lobby',
+          name: "Lobby",
           access_level: :unlocked,
           publicity_level: :unlisted,
           furniture_placements: {
             markdown_text_block: {}
           }
         }, {
-          name: 'Ada',
+          name: "Ada",
           access_level: :unlocked,
           publicity_level: :listed,
           furniture_placements: {
             video_bridge: {}
           }
         }, {
-          name: 'Talk to Zee',
+          name: "Talk to Zee",
           access_level: :unlocked,
           publicity_level: :unlisted,
           furniture_placements: {
@@ -216,13 +214,13 @@ class Blueprint
     }
   }, {
     client: {
-      name: 'Zinc',
+      name: "Zinc",
       space: {
-        name: 'Convene',
-        entrance: 'landing-page',
-        members: [{ email: 'zee@zinc.coop' }],
+        name: "Convene",
+        entrance: "landing-page",
+        members: [{email: "zee@zinc.coop"}],
         rooms: [{
-          name: 'Landing Page',
+          name: "Landing Page",
           access_level: :unlocked,
           publicity_level: :unlisted,
           furniture_placements: {

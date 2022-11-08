@@ -11,14 +11,14 @@
 # {Item}s to be invented without requiring database migrations.
 class Item < ApplicationRecord
   # @return [FurniturePlacement]
-  belongs_to :location, inverse_of: :items, optional: true, class_name: 'FurniturePlacement'
+  belongs_to :location, inverse_of: :items, optional: true, class_name: "FurniturePlacement"
   delegate :utilities, to: :location
 
   belongs_to :space, inverse_of: :items
 
   # @todo pull this out to an {ActiveRecord::Type} that marshals and unmarshals
   # the {Item}. Maybe StoreModel would work for this?
-  attribute :data, :json, default: {}
+  attribute :data, :json, default: -> { {} }
 
   before_validation :infer_space, if: -> { space.blank? }
 

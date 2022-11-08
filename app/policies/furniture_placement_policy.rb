@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FurniturePlacementPolicy < ApplicationPolicy
-  alias furniture_placement object
+  alias_method :furniture_placement, :object
   delegate :space, to: :furniture_placement
 
   class Scope < ApplicationScope
@@ -19,10 +19,10 @@ class FurniturePlacementPolicy < ApplicationPolicy
     person&.member_of?(furniture_placement.space)
   end
 
-  alias edit? update?
-  alias new? update?
-  alias create? update?
-  alias destroy? update?
+  alias_method :edit?, :update?
+  alias_method :new?, :update?
+  alias_method :create?, :update?
+  alias_method :destroy?, :update?
 
   def permitted_attributes(_params)
     [:furniture_kind, :slot, furniture_attributes: furniture_params]

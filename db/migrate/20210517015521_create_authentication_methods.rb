@@ -13,7 +13,7 @@ class CreateAuthenticationMethods < ActiveRecord::Migration[6.1]
 
       t.timestamps
       t.index [:contact_method, :contact_location], unique: true,
-              name: "index_authentication_methods_on_contact_fields"
+        name: "index_authentication_methods_on_contact_fields"
     end
   end
 end

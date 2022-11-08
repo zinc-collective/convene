@@ -10,13 +10,15 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit; end
+  def new
+  end
 
-  def new; end
+  def edit
+  end
 
   def create
     if room.save
-      flash[:notice] = t('.success', room_name: room.name)
+      flash[:notice] = t(".success", room_name: room.name)
       redirect_to edit_space_room_path(room.space, room)
     else
       render :new
@@ -27,7 +29,7 @@ class RoomsController < ApplicationController
     respond_to do |format|
       if room.update(room_params)
         format.html do
-          redirect_to edit_space_path(room.space), notice: t('.success', room_name: room.name)
+          redirect_to edit_space_path(room.space), notice: t(".success", room_name: room.name)
         end
       else
         format.html { render :edit }
@@ -39,9 +41,9 @@ class RoomsController < ApplicationController
 
   def destroy
     if room.destroy
-      redirect_to edit_space_path(room.space), notice: t('.success', room_name: room.name)
+      redirect_to edit_space_path(room.space), notice: t(".success", room_name: room.name)
     else
-      flash[:alert] = t('.failure', room_name: room.name)
+      flash.now[:alert] = t(".failure", room_name: room.name)
       render :edit
     end
   end
@@ -53,7 +55,7 @@ class RoomsController < ApplicationController
   end
 
   helper_method def page_title
-    ['[Convene]', current_room&.name, current_space&.name].compact.join(' - ')
+    ["[Convene]", current_room&.name, current_space&.name].compact.join(" - ")
   end
 
   helper_method def room

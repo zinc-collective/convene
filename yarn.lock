@@ -402,10 +402,10 @@
   dependencies:
     mini-svg-data-uri "^1.2.3"
 
-"@tailwindcss/typography@^0.5.7":
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.5.7.tgz#e0b95bea787ee14c5a34a74fc824e6fe86ea8855"
-  integrity sha512-JTTSTrgZfp6Ki4svhPA4mkd9nmQ/j9EfE7SbHJ1cLtthKkpW2OxsFXzSmxbhYbEkfNIyAyhle5p4SYyKRbz/jg==
+"@tailwindcss/typography@^0.5.8":
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.5.8.tgz#8fb31db5ab0590be6dfa062b1535ac86ad9d12bf"
+  integrity sha512-xGQEp8KXN8Sd8m6R4xYmwxghmswrd0cPnNI2Lc6fmrC3OojysTBJJGSIVwPV56q4t6THFUK3HJ0EaWwpglSxWw==
   dependencies:
     lodash.castarray "^4.4.0"
     lodash.isplainobject "^4.0.6"
@@ -3434,7 +3434,7 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.2.0:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.4.17, postcss@^8.4.18:
+postcss@^8.4.18:
   version "8.4.18"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.18.tgz#6d50046ea7d3d66a85e0e782074e7203bc7fbca2"
   integrity sha512-Wi8mWhncLJm11GATDaQKobXSNEYGUHeQLiQqDFG1qQ5UTDPTEvKw0Xt5NsTpktGTwLps3ByrWsBrG0rB8YQ9oA==
@@ -3746,10 +3746,10 @@ select-hose@^2.0.0:
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
-selenium-webdriver@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/selenium-webdriver/-/selenium-webdriver-4.5.0.tgz#7e20d0fc038177970dad81159950c12f7411ac0d"
-  integrity sha512-9mSFii+lRwcnT2KUAB1kqvx6+mMiiQHH60Y0VUtr3kxxi3oZ3CV3B8e2nuJ7T4SPb+Q6VA0swswe7rYpez07Bg==
+selenium-webdriver@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/selenium-webdriver/-/selenium-webdriver-4.6.0.tgz#b4e27959e94618b398358b26efe2e64debb22dfd"
+  integrity sha512-HIH/+J+V7l/lbSRSOwyLcpjezg9CV4DLo1pBhP9aphuMlf/PJXEDwC/A/Ht2bFc1AqQppFBGvClYcuMzyO6tRw==
   dependencies:
     jszip "^3.10.0"
     tmp "^0.2.1"
@@ -4042,10 +4042,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-tailwindcss@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.1.tgz#1bd828fff3172489962357f8d531c184080a6786"
-  integrity sha512-Uw+GVSxp5CM48krnjHObqoOwlCt5Qo6nw1jlCRwfGy68dSYb/LwS9ZFidYGRiM+w6rMawkZiu1mEMAsHYAfoLg==
+tailwindcss@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.2.tgz#705f78cec8f4de2feb52abdb7a8a056e67f2d736"
+  integrity sha512-c2GtSdqg+harR4QeoTmex0Ngfg8IIHNeLQH5yr2B9uZbZR1Xt1rYbjWOWTcj3YLTZhrmZnPowoQDbSRFyZHQ5Q==
   dependencies:
     arg "^5.0.2"
     chokidar "^3.5.3"
@@ -4061,7 +4061,7 @@ tailwindcss@^3.2.1:
     normalize-path "^3.0.0"
     object-hash "^3.0.0"
     picocolors "^1.0.0"
-    postcss "^8.4.17"
+    postcss "^8.4.18"
     postcss-import "^14.1.0"
     postcss-js "^4.0.0"
     postcss-load-config "^3.1.4"

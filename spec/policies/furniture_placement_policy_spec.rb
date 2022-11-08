@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe FurniturePlacementPolicy do
   subject { described_class }
@@ -9,9 +9,9 @@ RSpec.describe FurniturePlacementPolicy do
   let(:non_member) { create(:person) }
 
   permissions :show? do
-    it { is_expected.to permit(nil, furniture_placement )}
-    it { is_expected.to permit(member, furniture_placement )}
-    it { is_expected.to permit(non_member, furniture_placement )}
+    it { is_expected.to permit(nil, furniture_placement) }
+    it { is_expected.to permit(member, furniture_placement) }
+    it { is_expected.to permit(non_member, furniture_placement) }
   end
 
   permissions :update?, :edit?, :new?, :create? do

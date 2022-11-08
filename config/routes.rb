@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'spaces#show'
+  root "spaces#show"
 
   resources :authentication_methods, only: %i[create]
 
@@ -31,18 +31,18 @@ Rails.application.routes.draw do
 
   resources :memberships, only: %I[create]
 
-  resource :me, only: %i[show], controller: 'me'
+  resource :me, only: %i[show], controller: "me"
 
   resources :guides, only: %i[index show]
 
   constraints DefaultSpaceConstraint.new(Space) do
-    mount Rswag::Ui::Engine => '/api-docs'
-    mount Rswag::Api::Engine => '/api-docs'
+    mount Rswag::Ui::Engine => "/api-docs"
+    mount Rswag::Api::Engine => "/api-docs"
   end
 
   constraints BrandedDomainConstraint.new(Space) do
     resources :authenticated_sessions, only: %i[new create delete show]
 
-    get '/:id', to: 'rooms#show'
+    get "/:id", to: "rooms#show"
   end
 end

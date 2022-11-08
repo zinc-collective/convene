@@ -15,7 +15,7 @@ class MarkdownTemplateHandler
   end
 
   private def glossary
-    @glossary ||= File.read(Rails.root.join('app', 'views', 'guides', '_glossary.md'))
+    @glossary ||= Rails.root.join("app", "views", "guides", "_glossary.md").read
   end
 end
 

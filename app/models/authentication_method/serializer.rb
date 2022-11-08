@@ -3,7 +3,7 @@
 # Serializes {AuthenticationMethod}s for programmatic consumption
 class AuthenticationMethod::Serializer < ApplicationSerializer
   # @return [AuthenticationMethod]
-  alias authentication_method resource
+  alias_method :authentication_method, :resource
 
   def to_json(*_args)
     super.merge(

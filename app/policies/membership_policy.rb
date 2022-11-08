@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MembershipPolicy < ApplicationPolicy
-  alias membership object
+  alias_method :membership, :object
   delegate :space, to: :membership
   def create?
     person.operator? || person_responding_to_invitation_to_space?

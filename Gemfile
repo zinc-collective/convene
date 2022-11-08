@@ -1,119 +1,124 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby File.read('.ruby-version').strip
+ruby File.read(".ruby-version").strip
 
 # Loads environment level configuration from `.env` when it exists.
 # Also loads from `.env.development` when `RAILS_ENV=development`
 # and from `.env.test` when the `RAILS_ENV=test`
 #
-gem 'dotenv-rails', groups: %i[development test]
+gem "dotenv-rails", groups: %i[development test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.0'
+gem "rails", "~> 7.0"
 
 # Data Transport
 #
 # Use Puma as the app server
-gem 'puma', '~> 6.0'
+gem "puma", "~> 6.0"
 
 # Browser Layer
-gem 'cssbundling-rails'
-gem 'jsbundling-rails'
-gem 'sprockets-rails'
+gem "cssbundling-rails"
+gem "jsbundling-rails"
+gem "sprockets-rails"
 # Turbo lets us swap chunks of HTML without page reloads: https://github.com/hotwired/turbo-rails
-gem 'stimulus-rails'
-gem 'turbo-rails'
+gem "stimulus-rails"
+gem "turbo-rails"
 
 # API Layer
 #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.11'
-gem 'rswag-api'
-gem 'rswag-ui'
+gem "jbuilder", "~> 2.11"
+gem "rswag-api"
+gem "rswag-ui"
 
 # View Layer
 #
 # Allows us to render .markdown.erb files
-gem 'redcarpet', '~> 3.5'
+gem "redcarpet", "~> 3.5"
 # Breadcrumbs!
-gem 'gretel', '~> 4.4'
+gem "gretel", "~> 4.4"
 
 # Database Layer
 #
 # Postgres extensions for ActiveRecord
 # @see https://github.com/GeorgeKaraszi/ActiveRecordExtended
-gem 'active_record_extended', '~> 3.0'
+gem "active_record_extended", "~> 3.0"
 # Postgres enums
-gem 'activerecord-postgres_enum', '~> 2.0'
+gem "activerecord-postgres_enum", "~> 2.0"
 # Support for models with "slots" or "positions"
-gem 'ranked-model', '~> 0.4.8'
+gem "ranked-model", "~> 0.4.8"
 # Slug-based model lookup
-gem 'friendly_id', '~> 5.4.2'
+gem "friendly_id", "~> 5.4.2"
 # Hashing / Encrypting data at rest
-gem 'bcrypt', '~> 3.1.18'
-gem 'lockbox', '1.1.0'
-gem 'rotp', '~> 6.2'
+gem "bcrypt", "~> 3.1.18"
+gem "lockbox", "1.1.0"
+gem "rotp", "~> 6.2"
 
 # Use postgresql for data persistence
-gem 'pg', '~> 1.4'
+gem "pg", "~> 1.4"
 
 # Use S3 for file storage
-gem 'aws-sdk-s3', '~> 1.117', require: false
+gem "aws-sdk-s3", "~> 1.117", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', '~> 1.2021', platforms: %i[mingw mswin x64_mingw jruby]
+gem "tzinfo-data", "~> 1.2021", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Performance Optimization
 #
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '~> 1.13', require: false
+gem "bootsnap", "~> 1.13", require: false
 
 # Permissions and policies
-gem 'pundit', '~> 2.2'
+gem "pundit", "~> 2.2"
 
 # Utility hookup support
-gem 'money-rails'
-gem 'plaid', '~> 16.0'
+gem "plaid", "~> 16.0"
+gem "money-rails"
 
 # Workers and Background Jobs
-gem 'sidekiq'
+gem "sidekiq"
 
 # Error reporting in production
-gem 'sentry-rails'
-gem 'sentry-ruby'
+gem "sentry-rails"
+gem "sentry-ruby"
 
 # Demo data
-gem 'factory_bot_rails'
-gem 'faker'
+gem "factory_bot_rails"
+gem "faker"
 
 # Code coverage
-gem 'simplecov', require: false, group: :test
+gem "simplecov", require: false, group: :test
 
 group :development, :test do
-  gem 'pry-byebug', platforms: %i[mri mingw x64_mingw]
+  gem "pry-byebug", platforms: %i[mri mingw x64_mingw]
 
   # Our preferred testing library for Ruby and Rails projects
-  gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 6.0.1'
-  gem 'rswag-specs'
-  gem 'shoulda-matchers', '~> 5.2'
+  gem "rails-controller-testing"
+  gem "rspec-rails", "~> 6.0.1"
+  gem "rswag-specs"
+  gem "shoulda-matchers", "~> 5.2"
 
   # Let the robots do the request/response faking.
-  gem 'vcr'
-  gem 'webmock'
+  gem "vcr"
+  gem "webmock"
+
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
+  gem "standardrb", "~> 1.0"
+  gem "solargraph", "~> 0.47.2"
 end
 
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'listen', '~> 3.7'
-  gem 'web-console', '~> 4.2'
+  gem "listen", "~> 3.7"
+  gem "web-console", "~> 4.2"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', github: 'rails/spring-watcher-listen'
+  gem "spring"
+  gem "spring-watcher-listen", github: "rails/spring-watcher-listen"
 end

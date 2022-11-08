@@ -1,9 +1,9 @@
 class Journal::Entry < ApplicationRecord
-  self.table_name = 'journal_entries'
+  self.table_name = "journal_entries"
   include RendersMarkdown
   extend StripsNamespaceFromModelName
 
-  scope :recent, -> { order('published_at DESC NULLS FIRST') }
+  scope :recent, -> { order("published_at DESC NULLS FIRST") }
 
   attribute :headline, :string
   attribute :body, :string
@@ -11,7 +11,7 @@ class Journal::Entry < ApplicationRecord
 
   # URI-friendly description of the entry.
   attribute :slug, :string
-  validates :slug, uniqueness: { scope: :journal_id }
+  validates :slug, uniqueness: {scope: :journal_id}
 
   # FriendlyId does the legwork to make the slug uri-friendly
   extend FriendlyId
@@ -19,8 +19,9 @@ class Journal::Entry < ApplicationRecord
 
   attribute :published_at, :datetime
 
-  # @attr [Journal::Journal] :journal
-  belongs_to :journal, class_name: 'Journal::Journal', inverse_of: :entries
+  # @!attribute journal
+  #   @return [Journal::Journal]
+  belongs_to :journal, class_name: "Journal::Journal", inverse_of: :entries
   delegate :room, :space, to: :journal
 
   def published?

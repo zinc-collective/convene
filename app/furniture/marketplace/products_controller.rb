@@ -2,7 +2,8 @@
 
 class Marketplace
   class ProductsController < FurnitureController
-    def new; end
+    def new
+    end
 
     def create
       product = marketplace.products.new(product_params)
@@ -27,7 +28,8 @@ class Marketplace
       end
     end
 
-    def index; end
+    def index
+    end
 
     helper_method def marketplace
       Marketplace.find(params[:marketplace_id])

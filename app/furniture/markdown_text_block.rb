@@ -10,17 +10,17 @@ class MarkdownTextBlock
   end
 
   def content=(content)
-    settings['content'] = content
+    settings["content"] = content
   end
 
   def content
-    settings.fetch('content', '')
+    settings.fetch("content", "")
   end
 
   # @todo can we make it so we don't need to define this?
   # and the `settings.fetch` bits?
   def attribute_names
-    super + ['content']
+    super + ["content"]
   end
 
   # @deprecated

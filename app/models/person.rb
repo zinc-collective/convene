@@ -2,7 +2,7 @@
 
 # A representation of a human
 class Person < ApplicationRecord
-  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :email, presence: true, uniqueness: {case_sensitive: false}
 
   # Ways for the person to sign in
   has_many :authentication_methods, inverse_of: :person, dependent: :destroy_async

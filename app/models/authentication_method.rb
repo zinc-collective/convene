@@ -9,8 +9,8 @@ class AuthenticationMethod < ApplicationRecord
   validates :contact_method, presence: true
   attribute :contact_location, :string
   validates :contact_location, presence: true,
-                               uniqueness: { case_sensitive: false,
-                                             scope: :contact_method }
+    uniqueness: {case_sensitive: false,
+                 scope: :contact_method}
 
   attribute :confirmed_at, :datetime
 
@@ -47,7 +47,7 @@ class AuthenticationMethod < ApplicationRecord
   end
 
   def bump_one_time_password!
-    update!(last_one_time_password_at: Time.now)
+    update!(last_one_time_password_at: Time.zone.now)
   end
 
   def send_one_time_password!(space)
@@ -58,7 +58,7 @@ class AuthenticationMethod < ApplicationRecord
   def confirm!
     return if confirmed?
 
-    update(confirmed_at: Time.now)
+    update(confirmed_at: Time.zone.now)
   end
 
   def confirmed?

@@ -22,8 +22,6 @@ class Spotlight
       def resolve
         if person.spaces.include?(scope.space)
           scope
-        else
-          nil
         end
       end
     end

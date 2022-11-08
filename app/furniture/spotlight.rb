@@ -2,10 +2,10 @@
 
 class Spotlight
   include Placeable
-  delegate :alt_text,:alt_text=, to: :image
+  delegate :alt_text, :alt_text=, to: :image
 
   def self.deprecated_append_routes(router)
-    router.scope module: 'spotlight' do
+    router.scope module: "spotlight" do
       router.resource :spotlight, only: [:show] do
         router.resources :images, only: %i[create edit update]
       end
@@ -17,13 +17,12 @@ class Spotlight
   end
 
   def alt_text=text
-    image.update(alt_text:text)
+    image.update(alt_text: text)
   end
 
   def file=file
     image.file.attach(file)
   end
-
 
   # @deprecated
   def in_room_template

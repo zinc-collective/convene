@@ -3,7 +3,7 @@
 # Serializes {Room}s for programmatic consumption
 class Room::Serializer < ApplicationSerializer
   # @return [Room]
-  alias room resource
+  alias_method :room, :resource
 
   def to_json(*_args)
     super.merge(
@@ -11,7 +11,7 @@ class Room::Serializer < ApplicationSerializer
         id: room.id,
         slug: room.slug,
         name: room.name,
-        furniture_placements: room.furniture_placements.map(&(FurniturePlacement::Serializer.method(:new))).map(&:to_json)
+        furniture_placements: room.furniture_placements.map(&FurniturePlacement::Serializer.method(:new)).map(&:to_json)
       }
     )
   end

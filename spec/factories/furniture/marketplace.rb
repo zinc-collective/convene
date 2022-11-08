@@ -1,9 +1,9 @@
 FactoryBot.define do
-  factory :marketplace, class: 'Marketplace::Marketplace' do
+  factory :marketplace, class: "Marketplace::Marketplace" do
     room
   end
 
-  factory :marketplace_product, class: 'Marketplace::Product' do
+  factory :marketplace_product, class: "Marketplace::Product" do
     name { Faker::TvShows::DrWho.specie }
     price_cents { Random.rand(1_00..999_999) }
 

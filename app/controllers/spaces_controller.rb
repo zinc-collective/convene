@@ -2,18 +2,10 @@
 
 # Exposes CRUD actions for {Space} Resources.
 class SpacesController < ApplicationController
-  def show; end
+  def show
+  end
 
-  def edit; end
-
-  def update
-    if space.update(space_params)
-      flash[:notice] = t('.success')
-      redirect_to space_path(space)
-    else
-      flash[:alert] = t('.error')
-      render :edit
-    end
+  def edit
   end
 
   def create
@@ -30,9 +22,17 @@ class SpacesController < ApplicationController
     end
   end
 
-  def destroy
-    space.destroy
+  def update
+    if space.update(space_params)
+      flash[:notice] = t(".success")
+      redirect_to space_path(space)
+    else
+      flash.now[:alert] = t(".error")
+      render :edit
+    end
   end
+
+  delegate :destroy, to: :space
 
   def space_params
     policy(Space).permit(params.require(:space))

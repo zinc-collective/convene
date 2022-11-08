@@ -25,7 +25,7 @@ class Space < ApplicationRecord
   attribute :slug, :string
   validates :slug, uniqueness: true
 
-  validates :theme, inclusion: { in: THEME_OPTIONS }, if: ->(s) { s.theme.present? }
+  validates :theme, inclusion: {in: THEME_OPTIONS}, if: ->(s) { s.theme.present? }
 
   # FriendlyId's does the legwork to make the slug uri-friendly
   extend FriendlyId
@@ -48,7 +48,7 @@ class Space < ApplicationRecord
   # All the items held within the space
   has_many :items, inverse_of: :space, dependent: :destroy_async
 
-  belongs_to :entrance, class_name: 'Room', optional: true
+  belongs_to :entrance, class_name: "Room", optional: true
 
   scope :default, -> { friendly.find(Neighborhood.config.default_space_slug) }
 

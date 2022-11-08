@@ -4,27 +4,27 @@
 class Livestream
   include Placeable
   def channel=(channel)
-    settings['channel'] = channel
+    settings["channel"] = channel
   end
 
   def channel
-    settings.fetch('channel', '')
+    settings.fetch("channel", "")
   end
 
   def provider=(provider)
-    settings['provider'] = provider
+    settings["provider"] = provider
   end
 
   def provider
-    settings.fetch('provider', 'twitch')
+    settings.fetch("provider", "twitch")
   end
 
   def layout=(layout)
-    settings['layout'] = layout
+    settings["layout"] = layout
   end
 
   def layout
-    settings.fetch('layout', '')
+    settings.fetch("layout", "")
   end
 
   # @deprecated

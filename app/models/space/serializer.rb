@@ -3,7 +3,7 @@
 # Serializes {Space}s for programmatic consumption
 class Space::Serializer < ApplicationSerializer
   # @return [Space]
-  alias space resource
+  alias_method :space, :resource
 
   def to_json(*_args)
     super.merge(

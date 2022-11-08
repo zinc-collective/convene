@@ -29,10 +29,11 @@ RSpec.describe DemoSpace, type: :model do
 
     context "When the environment is set to disable demo" do
       before { allow(Feature).to receive(:enabled?).with(:demo).and_return(false) }
+
       it "does not create demo space" do
         expect do
           DemoSpace.prepare
-        end.not_to change {[ Space.count, Client.count, Room.count] }
+        end.not_to change { [Space.count, Client.count, Room.count] }
       end
     end
 
@@ -40,7 +41,7 @@ RSpec.describe DemoSpace, type: :model do
       DemoSpace.prepare
       expect do
         DemoSpace.prepare
-      end.not_to change {[ Space.count, Client.count, Room.count] }
+      end.not_to change { [Space.count, Client.count, Room.count] }
     end
   end
 end

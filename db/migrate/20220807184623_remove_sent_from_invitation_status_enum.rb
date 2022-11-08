@@ -6,7 +6,7 @@ class RemoveSentFromInvitationStatusEnum < ActiveRecord::Migration[7.0]
         # remove_enum_value :invitation_status, 'sent'
       end
       direction.down do
-        add_enum_value :invitation_status, 'sent'
+        add_enum_value :invitation_status, "sent"
       end
     end
   end

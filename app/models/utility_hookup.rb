@@ -21,10 +21,10 @@ class UtilityHookup < ApplicationRecord
   validates :utility_slug, presence: true
 
   # @return [String]
-  attribute :status, :string, default: 'unavailable'
-  validates :status, presence: true, inclusion: { in: %w[ready unavailable] }
+  attribute :status, :string, default: "unavailable"
+  validates :status, presence: true, inclusion: {in: %w[ready unavailable]}
 
-  attribute :old_configuration, :json, default: {}
+  attribute :old_configuration, :json, default: -> { {} }
   validates_associated :utility
   has_encrypted :configuration, type: :json
 
@@ -34,7 +34,7 @@ class UtilityHookup < ApplicationRecord
 
   # @todo How could we streamline this without too much metaprogramming?
   def self.plaid
-    where(utility_slug: 'plaid').first&.utility
+    where(utility_slug: "plaid").first&.utility
   end
 
   # @return [Utility]
