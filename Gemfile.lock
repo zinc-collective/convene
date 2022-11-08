@@ -348,10 +348,10 @@ GEM
       rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
-    sentry-rails (5.5.0)
+    sentry-rails (5.6.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.5.0)
-    sentry-ruby (5.5.0)
+      sentry-ruby (~> 5.6.0)
+    sentry-ruby (5.6.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
     shoulda-matchers (5.2.0)
       activesupport (>= 5.2.0)
@@ -423,7 +423,7 @@ GEM
     websocket-extensions (0.1.5)
     yard (0.9.28)
       webrick (~> 1.7.0)
-    zeitwerk (2.6.3)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
