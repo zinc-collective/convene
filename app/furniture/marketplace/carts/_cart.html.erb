@@ -1,0 +1,24 @@
+<div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+  <table class="min-w-full divide-y divide-gray-300 table-fixed">
+    <thead class="bg-gray-50">
+      <tr>
+        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+          <%= Marketplace::Product.human_attribute_name(:name) %>
+        </th>
+        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">
+          <%= Marketplace::Product.human_attribute_name(:description) %>
+        </th>
+        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
+          <%= Marketplace::Product.human_attribute_name(:price) %>
+        </th>
+        <th  scope="col" class="w-48">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 bg-white">
+      <%- cart.marketplace.products.each do |product| %>
+        <%= render cart.cart_products.find_or_initialize_by(product: product) %>
+      <%- end %>
+    </tbody>
+    <%= render "marketplace/carts/footer", cart: cart %>
+  </table>
+</div>
