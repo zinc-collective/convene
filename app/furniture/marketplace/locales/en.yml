@@ -4,8 +4,8 @@ en:
       index:
         new: Add a Product
       product:
-        add: Add
-        remove: Remove
+        add: Add Product
+        remove: Remove Product
     ordered_products:
       destroy:
         success: "Removed %{quantity} %{product} from Order"
