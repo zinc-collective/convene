@@ -1,44 +1,71 @@
 class Marketplace
   class CartProductsController < FurnitureController
     def create
-      if cart_product.save
-        flash[:notice] = t(".success",
-          product: cart_product.product.name.pluralize(cart_product.quantity),
-          quantity: cart_product.quantity)
-      else
-        flash[:alert] = t(".failure",
-          product: cart_product.product.name.pluralize(cart_product.quantity),
-          quantity: cart_product.quantity)
-      end
+      cart_product.save
 
-      redirect_to [marketplace.space, marketplace.room]
+      respond_to do |format|
+        format.html do
+          if cart_product.errors.empty?
+            flash[:notice] = t(".success",
+              product: cart_product.product.name.pluralize(cart_product.quantity),
+              quantity: cart_product.quantity)
+          else
+            flash[:alert] = t(".failure",
+              product: cart_product.product.name.pluralize(cart_product.quantity),
+              quantity: cart_product.quantity)
+          end
+
+          redirect_to [marketplace.space, marketplace.room]
+        end
+
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product)
+        end
+      end
     end
 
     def update
-      if cart_product.update(cart_product_params)
-        flash[:notice] =
-          t(".success", product: cart_product.product.name.pluralize(cart_product.quantity),
-            quantity: cart_product.quantity)
-      else
-        flash[:alert] =
-          t(".failure", product: cart_product.product.name.pluralize(cart_product.quantity),
-            quantity: cart_product.quantity)
-      end
+      cart_product.update(cart_product_params)
+      respond_to do |format|
+        format.html do
+          if cart_product.errors.empty?
+            flash[:notice] =
+              t(".success", product: cart_product.product.name.pluralize(cart_product.quantity),
+                quantity: cart_product.quantity)
+          else
+            flash[:alert] =
+              t(".failure", product: cart_product.product.name.pluralize(cart_product.quantity),
+                quantity: cart_product.quantity)
+          end
 
-      redirect_to [marketplace.space, marketplace.room]
+          redirect_to [marketplace.space, marketplace.room]
+        end
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product)
+        end
+      end
     end
 
     def destroy
-      if cart_product.destroy
-        flash[:notice] =
-          t(".success", product: cart_product.product.name.pluralize(cart_product.quantity),
-            quantity: cart_product.quantity)
-      else
-        flash[:alert] =
-          t(".failure", product: cart_product.product.name.pluralize(cart_product.quantity),
-            quantity: cart_product.quantity)
+      cart_product.destroy
+      respond_to do |format|
+        format.html do
+          if cart_product.destroyed?
+            flash[:notice] =
+              t(".success", product: cart_product.product.name.pluralize(cart_product.quantity),
+                quantity: cart_product.quantity)
+          else
+            flash[:alert] =
+              t(".failure", product: cart_product.product.name.pluralize(cart_product.quantity),
+                quantity: cart_product.quantity)
+          end
+          redirect_to [marketplace.space, marketplace.room]
+        end
+
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("cart-product-#{cart_product.product_id}", cart.cart_products.new(product: cart_product.product))
+        end
       end
-      redirect_to [marketplace.space, marketplace.room]
     end
 
     def cart_product
