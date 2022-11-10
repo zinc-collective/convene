@@ -3,7 +3,7 @@
 <%- href = local_assigns.fetch(:href) %>
 <%- method = local_assigns.fetch(:method, :put)%>
 <%- disabled = local_assigns.fetch(:disabled, false)%>
-<%- data = { turbo_method: method } %>
+<%- data = { turbo_method: method, turbo: true} %>
 <%- data = data.merge(turbo_confirm: local_assigns[:confirm], confirm: local_assigns[:confirm]) if local_assigns.key?(:confirm) %>
 
 <%= link_to_unless disabled, label, href, title: title, method: method,
