@@ -134,21 +134,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
     t.index ["journal_id"], name: "index_journal_entries_on_journal_id"
   end
 
-  create_table "marketplace_ordered_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "order_id"
+  create_table "marketplace_cart_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "cart_id"
     t.uuid "product_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_marketplace_ordered_products_on_order_id"
-    t.index ["product_id"], name: "index_marketplace_ordered_products_on_product_id"
+    t.index ["cart_id"], name: "index_marketplace_cart_products_on_cart_id"
+    t.index ["product_id"], name: "index_marketplace_cart_products_on_product_id"
   end
 
-  create_table "marketplace_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "marketplace_carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "marketplace_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["marketplace_id"], name: "index_marketplace_orders_on_marketplace_id"
+    t.index ["marketplace_id"], name: "index_marketplace_carts_on_marketplace_id"
   end
 
   create_table "marketplace_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -223,9 +223,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "journal_entries", "furniture_placements", column: "journal_id"
-  add_foreign_key "marketplace_ordered_products", "marketplace_orders", column: "order_id"
-  add_foreign_key "marketplace_ordered_products", "marketplace_products", column: "product_id"
-  add_foreign_key "marketplace_orders", "furniture_placements", column: "marketplace_id"
+  add_foreign_key "marketplace_cart_products", "marketplace_carts", column: "cart_id"
+  add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
+  add_foreign_key "marketplace_carts", "furniture_placements", column: "marketplace_id"
   add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"

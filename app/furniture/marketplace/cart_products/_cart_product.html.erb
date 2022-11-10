@@ -1,5 +1,5 @@
-<%- product = ordered_product.product %>
-<%- order = ordered_product.order %>
+<%- product = cart_product.product %>
+<%- cart = cart_product.cart %>
 <tr>
   <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
     <%= product.name %>
@@ -16,14 +16,14 @@
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
     <%# TODO: Extract minus and plus buttons into components %>
-    <%- minus_quantity = [ordered_product.quantity - 1, 0].max %>
+    <%- minus_quantity = [cart_product.quantity - 1, 0].max %>
     <%- minus_method = minus_quantity.zero? ? :delete : :put %>
-    <%= render "buttons/minus", disabled: ordered_product.quantity.zero?, method: minus_method, title: t('.remove'), href: [order.space, order.room, order.marketplace, order, ordered_product, { ordered_product: { quantity: minus_quantity, product_id: product.id} }] %>
+    <%= render "buttons/minus", disabled: cart_product.quantity.zero?, method: minus_method, title: t('.remove'), href: [cart.space, cart.room, cart.marketplace, cart, cart_product, { cart_product: { quantity: minus_quantity, product_id: product.id} }] %>
 
-    <%= ordered_product.quantity %>
+    <%= cart_product.quantity %>
 
-    <%- add_quantity = ordered_product.quantity + 1 %>
+    <%- add_quantity = cart_product.quantity + 1 %>
     <%- add_method = add_quantity == 1 ? :post : :put %>
-    <%= render "buttons/plus", method: add_method, title: t('.add'), href: [order.space, order.room, order.marketplace, order, ordered_product, { ordered_product: {quantity: add_quantity, product_id: product.id} }] %>
+    <%= render "buttons/plus", method: add_method, title: t('.add'), href: [cart.space, cart.room, cart.marketplace, cart, cart_product, { cart_product: {quantity: add_quantity, product_id: product.id} }] %>
   </td>
 </tr>

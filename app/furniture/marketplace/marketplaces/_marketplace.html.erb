@@ -14,10 +14,9 @@
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-200 bg-white">
-      <%- order = marketplace.orders.find_or_create_by(id: session[:current_order] ||= SecureRandom.uuid) %>
+      <%- cart = marketplace.carts.find_or_create_by(id: session[:current_cart] ||= SecureRandom.uuid) %>
       <%- marketplace.products.each do |product| %>
-        <%- ordered_product = order.ordered_products.find_or_initialize_by(product: product) %>
-        <%= render ordered_product %>
+        <%= render cart.cart_products.find_or_initialize_by(product: product) %>
       <%- end %>
     </tbody>
   </table>

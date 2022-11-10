@@ -6,13 +6,13 @@ en:
       product:
         add: Add Product
         remove: Remove Product
-    ordered_products:
+    cart_products:
       destroy:
-        success: "Removed %{quantity} %{product} from Order"
-        failure: "Could not remove %{quantity} %{product} from Order"
+        success: "Removed %{quantity} %{product} from Cart"
+        failure: "Could not remove %{quantity} %{product} from Cart"
       create:
-        success: "Added %{quantity} %{product} to Order"
-        failure: "Could not add %{quantity} %{product} to Order"
+        success: "Added %{quantity} %{product} to Cart"
+        failure: "Could not add %{quantity} %{product} to Cart"
       update:
-        success: "Changed %{quantity} %{product} on Order"
-        failure: "Could not change %{quantity} %{product} on Order"
+        success: "Changed %{quantity} %{product} on Cart"
+        failure: "Could not change %{quantity} %{product} on Cart"

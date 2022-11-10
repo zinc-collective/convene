@@ -9,8 +9,8 @@ class Marketplace
     belongs_to :marketplace
     delegate :space, to: :marketplace
 
-    has_many :ordered_products, inverse_of: :product
-    has_many :orders, through: :ordered_products
+    has_many :cart_products, inverse_of: :product
+    has_many :carts, through: :cart_products
 
     attribute :name, :string
     validates :name, presence: true
