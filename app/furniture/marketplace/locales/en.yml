@@ -7,6 +7,9 @@ en:
         add: Add Product
         remove: Remove Product
     cart_products:
+      cart_product:
+        remove: Remove from Cart
+        add: Add to Cart
       destroy:
         success: "Removed %{quantity} %{product} from Cart"
         failure: "Could not remove %{quantity} %{product} from Cart"
