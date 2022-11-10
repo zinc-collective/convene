@@ -16,11 +16,13 @@
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
     <%# TODO: Extract minus and plus buttons into components %>
-    <%- minus_quantity = [cart_product.quantity - 1, 0].max %>
-    <%- minus_method = minus_quantity.zero? ? :delete : :put %>
-    <%= render "buttons/minus", disabled: cart_product.quantity.zero?, method: minus_method, title: t('.remove'), href: [cart.space, cart.room, cart.marketplace, cart, cart_product, { cart_product: { quantity: minus_quantity, product_id: product.id} }] %>
+    <%- if cart_product.quantity.positive? %>
+      <%- minus_quantity = [cart_product.quantity - 1, 0].max %>
+      <%- minus_method = minus_quantity.zero? ? :delete : :put %>
+      <%= render "buttons/minus", disabled: cart_product.quantity.zero?, method: minus_method, title: t('.remove'), href: [cart.space, cart.room, cart.marketplace, cart, cart_product, { cart_product: { quantity: minus_quantity, product_id: product.id} }] %>
+    <%- end %>
 
-    <%= cart_product.quantity %>
+    <span class="text-lg"><%= cart_product.quantity %></span>
 
     <%- add_quantity = cart_product.quantity + 1 %>
     <%- add_method = add_quantity == 1 ? :post : :put %>
