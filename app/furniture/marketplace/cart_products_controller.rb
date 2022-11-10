@@ -19,7 +19,11 @@ class Marketplace
         end
 
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product)
+          render turbo_stream: [
+            turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product),
+            turbo_stream.replace("cart-footer-#{cart.id}",
+              partial: "marketplace/carts/footer", locals: {cart: cart}),
+            ]
         end
       end
     end
@@ -41,7 +45,11 @@ class Marketplace
           redirect_to [marketplace.space, marketplace.room]
         end
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product)
+          render turbo_stream: [
+            turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product),
+            turbo_stream.replace("cart-footer-#{cart.id}",
+              partial: "marketplace/carts/footer", locals: {cart: cart}),
+            ]
         end
       end
     end
@@ -63,7 +71,11 @@ class Marketplace
         end
 
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace("cart-product-#{cart_product.product_id}", cart.cart_products.new(product: cart_product.product))
+          render turbo_stream: [
+            turbo_stream.replace("cart-product-#{cart_product.product_id}", cart.cart_products.new(product: cart_product.product)),
+            turbo_stream.replace("cart-footer-#{cart.id}",
+              partial: "marketplace/carts/footer", locals: {cart: cart})
+          ]
         end
       end
     end
