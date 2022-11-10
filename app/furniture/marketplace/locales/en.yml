@@ -1,0 +1,21 @@
+en:
+  marketplace:
+    products:
+      index:
+        new: Add a Product
+      product:
+        add: Add Product
+        remove: Remove Product
+    cart_products:
+      cart_product:
+        remove: Remove from Cart
+        add: Add to Cart
+      destroy:
+        success: "Removed %{quantity} %{product} from Cart"
+        failure: "Could not remove %{quantity} %{product} from Cart"
+      create:
+        success: "Added %{quantity} %{product} to Cart"
+        failure: "Could not add %{quantity} %{product} to Cart"
+      update:
+        success: "Changed %{quantity} %{product} on Cart"
+        failure: "Could not change %{quantity} %{product} on Cart"

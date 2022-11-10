@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_07_224846) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -134,15 +134,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_224846) do
     t.index ["journal_id"], name: "index_journal_entries_on_journal_id"
   end
 
-  create_table "marketplace_products", force: :cascade do |t|
-    t.uuid "space_id"
+  create_table "marketplace_cart_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "cart_id"
+    t.uuid "product_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_marketplace_cart_products_on_cart_id"
+    t.index ["product_id"], name: "index_marketplace_cart_products_on_product_id"
+  end
+
+  create_table "marketplace_carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "marketplace_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marketplace_id"], name: "index_marketplace_carts_on_marketplace_id"
+  end
+
+  create_table "marketplace_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "marketplace_id"
     t.string "name"
     t.string "description"
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["space_id"], name: "index_marketplace_products_on_space_id"
+    t.index ["marketplace_id"], name: "index_marketplace_products_on_marketplace_id"
   end
 
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -206,7 +223,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_224846) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "journal_entries", "furniture_placements", column: "journal_id"
-  add_foreign_key "marketplace_products", "spaces"
+  add_foreign_key "marketplace_cart_products", "marketplace_carts", column: "cart_id"
+  add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
+  add_foreign_key "marketplace_carts", "furniture_placements", column: "marketplace_id"
+  add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end

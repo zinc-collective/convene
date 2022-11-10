@@ -3,12 +3,15 @@ class Marketplace
   include Placeable
 
   def self.append_routes(router)
-    router.resource :marketplace, only: [] do
-      router.resources :products, only: %i[new create index], module: "marketplace"
+    router.resources :marketplaces, only: [:show], module: "marketplace" do
+      router.resources :products
+      router.resources :carts do
+        router.resources :cart_products
+      end
     end
   end
 
-  def products
-    Marketplace::Product.where(space: space)
+  def self.from_placement(placement)
+    placement.becomes(Marketplace)
   end
 end

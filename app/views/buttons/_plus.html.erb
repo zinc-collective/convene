@@ -1,9 +1,10 @@
-<%- label = local_assigns.fetch(:label, t('icons.remove')) %>
+<%- label = local_assigns.fetch(:label, t('icons.plus')) %>
 <%- title = local_assigns.fetch(:title) %>
 <%- href = local_assigns.fetch(:href) %>
-<%- data = { turbo_method: :delete, turbo: true } %>
+<%- method = local_assigns.fetch(:method, :put)%>
+<%- data = { turbo_method: method, turbo: true } %>
 <%- data = data.merge(turbo_confirm: local_assigns[:confirm], confirm: local_assigns[:confirm]) if local_assigns.key?(:confirm) %>
 
-<%= link_to label, href, title: title,
+<%= link_to label, href, title: title, method: method,
               data: data,
               class: 'no-underline bg-transparent hover:bg-primary-100 button' %>

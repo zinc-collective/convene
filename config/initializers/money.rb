@@ -82,6 +82,9 @@ MoneyRails.configure do |config|
   #   sign_before_symbol: nil
   # }
 
+  config.default_format = { no_cents_if_whole: false }
+  config.no_cents_if_whole = false
+
   # If you would like to use I18n localization (formatting depends on the
   # locale):
   config.locale_backend = :i18n
