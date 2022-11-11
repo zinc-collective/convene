@@ -6,7 +6,6 @@ class Marketplace
     end
 
     def create
-      product = marketplace.products.new(product_params)
       product.save!
 
       respond_to do |format|
@@ -16,8 +15,6 @@ class Marketplace
     end
 
     def destroy
-      product = authorize(marketplace.products.find(params[:id]))
-
       respond_to do |format|
         if product.destroy
           format.turbo_stream { render turbo_stream: turbo_stream.remove(product) }
@@ -32,7 +29,15 @@ class Marketplace
     end
 
     helper_method def marketplace
-      Marketplace.find(params[:marketplace_id])
+      policy_scope(Marketplace).find(params[:marketplace_id])
+    end
+
+    helper_method def product
+      @product ||= if params[:id]
+        policy_scope(marketplace.products).find(params[:id])
+      elsif params[:product]
+        marketplace.products.new(product_params)
+      end.tap { |product| authorize(product) }
     end
 
     def product_params
