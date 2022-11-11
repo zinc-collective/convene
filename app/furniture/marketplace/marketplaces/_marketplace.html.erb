@@ -1,10 +1,9 @@
-
 <%- cart = marketplace.carts.find_or_create_by(id: session[:current_cart] ||= SecureRandom.uuid) %>
 
 <%= render cart %>
 
 <div class="m-2 text-center">
-<%- if policy(marketplace.products.new).create? %>
-  <%= link_to t('.manage_products'), marketplace.location(:products) %>
-<%- end %>
+  <%- if policy(marketplace.products.new).create? %>
+    <%= link_to t('.manage_products'), marketplace.location(:products) %>
+  <%- end %>
 </div>
