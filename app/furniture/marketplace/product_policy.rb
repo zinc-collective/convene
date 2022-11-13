@@ -3,8 +3,8 @@
 class Marketplace
   class ProductPolicy < ApplicationPolicy
     alias product object
-    def permitted_attributes(_params)
-      %i[name description price_cents price_currency]
+    def permitted_attributes(_params = nil)
+      %i[name description price_cents price_currency price]
     end
 
     def create?

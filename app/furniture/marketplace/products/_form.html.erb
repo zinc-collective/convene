@@ -1,7 +1,6 @@
 <%= form_with model: product.location do |f| %>
   <%= render "text_field", { attribute: :name, form: f} %>
   <%= render "text_area", { attribute: :description, form: f} %>
-  <%= render "number_field", { attribute: :price_cents, form: f} %>
-  <%= render "money_field", { attribute: :amount, form: f} %>
+  <%= render "money_field", { attribute: :price, form: f, min: 0, step: 0.01} %>
   <%= f.submit %>
 <% end %>
