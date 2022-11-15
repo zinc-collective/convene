@@ -165,7 +165,7 @@ GEM
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
     ffi (1.15.5)
-    friendly_id (5.4.2)
+    friendly_id (5.5.0)
       activerecord (>= 4.0.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -440,7 +440,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
-  friendly_id (~> 5.4.2)
+  friendly_id (~> 5.5.0)
   gretel (~> 4.4)
   jbuilder (~> 2.11)
   jsbundling-rails
