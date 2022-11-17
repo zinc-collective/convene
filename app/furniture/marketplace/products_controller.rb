@@ -31,8 +31,30 @@ class Marketplace
       skip_authorization
     end
 
+    def edit
+    end
+
+    def update
+      if product.update(product_params) 
+        redirect_to marketplace.location(:products)
+      else
+        render :edit
+      end
+    end
+
+    def edit
+    end
+
+    def update
+      if product.update(product_params) 
+        redirect_to marketplace.location(:products)
+      else
+        render :edit
+      end
+    end
+
     helper_method def marketplace
-      policy_scope(Marketplace).find(params[:marketplace_id])
+      @marketplace ||= policy_scope(Marketplace).find(params[:marketplace_id])
     end
 
     helper_method def product
