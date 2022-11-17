@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html style="background-color: <%= params[:lookbook][:display][:bg_color] || "white" %>">
+<head>
+  <title>Component Preview</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= javascript_include_tag "application", defer: true %>
+  <%= stylesheet_link_tag "application" %>
+</head>
+<body style="padding: 20px">
+  <div style="
+    margin-left: auto;
+    margin-right: auto;
+    max-width: <%= params[:lookbook][:display][:max_width] || "100%" %>
+  ">
+    <%= yield %> <!-- rendered preview will be injected here -->
+  </div>
+</body>
+</html>
