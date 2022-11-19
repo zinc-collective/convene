@@ -6,6 +6,7 @@ en:
       product:
         add: Add Product
         remove: Remove Product
+        edit: Edit Product
     cart_products:
       cart_product:
         remove: Remove from Cart
