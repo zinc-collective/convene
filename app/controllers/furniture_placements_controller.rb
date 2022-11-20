@@ -29,9 +29,7 @@ class FurniturePlacementsController < ApplicationController
             notice: t(".success", name: furniture_placement.furniture.model_name.human)
           )
         end
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(furniture_placement)
-        end
+        format.turbo_stream
       end
     end
   end

@@ -1,1 +1,3 @@
-<%= turbo_stream.replace(furniture_placement, partial: 'furniture_placements/form', locals: { furniture_placement: furniture_placement }) %>
+<%= turbo_stream.replace(furniture_placement) do %>
+  <%= render furniture_placement, editing: true, include_form: local_assigns.fetch(:include_form, true) %>
+ <%- end %>
