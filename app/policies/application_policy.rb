@@ -34,6 +34,10 @@ class ApplicationPolicy
     @object = object
   end
 
+  def current_person
+    @person
+  end
+
   def permit(params)
     params.permit(permitted_attributes(params))
   end
