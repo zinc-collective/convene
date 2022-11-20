@@ -76,12 +76,10 @@ class ApplicationController < ActionController::Base
       else
         BrandedDomainConstraint.new(space_repository).space_for_request(request) ||
           space_repository.friendly.find(params[:id])
-      end.tap do |space|
-        authorize(space, :show?)
       end
   rescue ActiveRecord::RecordNotFound
     begin
-      @current_space ||= space_repository.default.tap { |space| authorize(space, :show?) }
+      @current_space ||= space_repository.default
     rescue ActiveRecord::RecordNotFound
       Rails.logger.error("No default space exists!")
       @current_space = nil

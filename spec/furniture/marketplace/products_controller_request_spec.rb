@@ -4,10 +4,13 @@ RSpec.describe Marketplace::ProductsController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
+  let(:member) { create(:membership, space: space).member}
 
   describe "POST /products" do
     it "Creates a Product in the Marketplace" do
       attributes = attributes_for(:marketplace_product)
+
+      sign_in(space, member)
 
       expect do
         post polymorphic_path([space, room, marketplace, :products]),

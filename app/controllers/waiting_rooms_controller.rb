@@ -13,6 +13,6 @@ class WaitingRoomsController < ApplicationController
   end
 
   helper_method def waiting_room
-    @waiting_room ||= WaitingRoom.new(room: current_room)
+    @waiting_room ||= authorize(WaitingRoom.new(room: current_room))
   end
 end
