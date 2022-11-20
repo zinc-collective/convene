@@ -13,14 +13,19 @@ RSpec.describe Marketplace::Product, type: :model do
       product.price = 20
       expect(product.price_cents).to eql(2000)
     end
-
-    it('edits the price_cents') do
-      product = Marketplace::Product.new
-      product.price = 10
-      # TODO: FIX THIS TEST: edit the price via request response flow
-      product.price = 30
-      expect(product.price_cents).to eql(3000)
-    end
   end
+end
 
+# TODO: fill in request spec
+RSpec.describe "/spaces/:space_slug/rooms/:room_slug/marketplaces/:marketplace_slug/products", type: :request do
+  
+  describe "POST /spaces/:space_slug/rooms/:room_slug/marketplaces/:marketplace_slug/products" do
+    
+    it "creates a product in a Marketplace" do
+    end
+
+    it "updates a product in a Marketplace" do
+    end
+  
+  end
 end
