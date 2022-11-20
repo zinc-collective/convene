@@ -1,12 +1,11 @@
 <h3>Make a payment</h3>
 <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
 
-<turbo-frame id="payment_form">
-  <%= render "payment_form/payments/form", room: room, furniture: furniture, payment: payment %>
 
-  <%- if policy(furniture.payments).index? %>
-    <p>
-    See <%= link_to "all payments", space_room_furniture_payment_form_payments_path(room.space, room) %>
-    </p>
-  <%- end %>
-</turbo-frame>
+<%= render "payment_form/payments/form", room: room, furniture: furniture, payment: payment %>
+
+<%- if policy(furniture.payments).index? %>
+  <p>
+  See <%= link_to "all payments", space_room_furniture_payment_form_payments_path(room.space, room) %>
+  </p>
+<%- end %>
