@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "/spaces/:space_slug/room/:room_slug/furniture_placements", type: :request do
+RSpec.describe "/spaces/:space_slug/rooms/:room_slug/furniture_placements", type: :request do
   let(:placement) { create(:furniture_placement, room: room) }
   let(:room) { create(:room) }
   let(:space) { room.space }
