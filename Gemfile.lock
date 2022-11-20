@@ -293,7 +293,7 @@ GEM
     redcarpet (3.5.1)
     redis-client (0.11.1)
       connection_pool
-    regexp_parser (2.6.0)
+    regexp_parser (2.6.1)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
@@ -340,7 +340,7 @@ GEM
     rubocop-performance (1.14.3)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    rubocop-rails (2.17.2)
+    rubocop-rails (2.17.3)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
