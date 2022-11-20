@@ -45,6 +45,7 @@ jobs:
     # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
     # Perhaps we should consider not using brew in CI (though it sure is nice!)
     - uses: raviqqe/enable-homebrew@main
+    - uses: browser-actions/setup-firefox@latest
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
