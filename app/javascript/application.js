@@ -11,5 +11,5 @@ ActiveStorage.start()
 // const imagePath = (name) => images(name, true)
 
 import { Turbo } from "@hotwired/turbo-rails"
-Turbo.session.drive = false
+Turbo.session.drive = true
 import "./controllers/index.js"

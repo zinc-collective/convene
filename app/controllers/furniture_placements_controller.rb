@@ -13,6 +13,13 @@ class FurniturePlacementsController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
+  end
+
   def update
     respond_to do |format|
       if furniture_placement.update!(furniture_placement_params)
