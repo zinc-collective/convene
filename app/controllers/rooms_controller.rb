@@ -21,7 +21,7 @@ class RoomsController < ApplicationController
       flash[:notice] = t(".success", room_name: room.name)
       redirect_to edit_space_room_path(room.space, room)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -32,7 +32,7 @@ class RoomsController < ApplicationController
           redirect_to edit_space_path(room.space), notice: t(".success", room_name: room.name)
         end
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
       end
 
       format.json { render json: Room::Serializer.new(room).to_json }
