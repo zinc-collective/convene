@@ -57,7 +57,7 @@ end
 
 crumb :edit_room do |room|
   link t("helpers.submit.room.edit", {room_name: room.name}), edit_space_room_path(room.space, room)
-  parent :edit_space, room.space
+  parent :room, room
 end
 
 crumb :waiting_room do |waiting_room|
@@ -69,3 +69,9 @@ crumb :rsvp do |rsvp|
   link "Respond to your Invitation"
   parent :root, rsvp.space
 end
+
+crumb :edit_furniture_placement do |furniture_placement|
+  link "Edit #{furniture_placement.title}"
+  parent :edit_room, furniture_placement.room
+end
+

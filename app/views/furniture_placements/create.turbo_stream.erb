@@ -1,10 +1,6 @@
 
 <%= turbo_stream.append(:furniture_placements) do %>
-  <%- if furniture_placement.furniture.attribute_names.present? %>
-    <%= render(partial: 'furniture_placements/form', locals: { furniture_placement: furniture_placement }) %>
-  <%- else %>
-    <%= render furniture_placement%>
-  <%- end %>
+  <%= render(furniture_placement, { editing: true }) %>
 <%- end %>
 
 <%= turbo_stream.replace(:new_furniture_placement, partial: 'furniture_placements/new', locals: { furniture_placement: current_room.furniture_placements.new }) %>

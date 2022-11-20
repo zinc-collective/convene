@@ -26,6 +26,11 @@ class FurniturePlacement < ApplicationRecord
     @furniture ||= Furniture.from_placement(self)
   end
 
+
+  def title
+    furniture.model_name.human.titleize
+  end
+
   def utilities
     space.utility_hookups
   end
