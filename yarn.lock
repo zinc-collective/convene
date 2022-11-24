@@ -137,10 +137,10 @@
   dependencies:
     regexp-match-indices "1.0.2"
 
-"@cucumber/cucumber@^8.8.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-8.8.0.tgz#9e76631a91f48159bcee3049fb85304084fe14f7"
-  integrity sha512-W70MuAF42hH0QgDHUgX1glSqDccJuF/kBbHquOf500gP1aOJczKtO9QgYtct1HvilCBYQLb9rou/hZA08jmMIQ==
+"@cucumber/cucumber@^8.9.0":
+  version "8.9.0"
+  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-8.9.0.tgz#394ed87093af33fbb235bee1970a3368bbb2ffc5"
+  integrity sha512-kU44RHVbS6fNLrEVQAzTtTMP6pDh0gMzB+QXULNymqGGhXDpnk+6PEH88+YG0TsjjPSYYNwOc3mhN/zvQ28yAg==
   dependencies:
     "@cucumber/ci-environment" "9.1.0"
     "@cucumber/cucumber-expressions" "16.0.0"
@@ -179,6 +179,7 @@
     tmp "^0.2.1"
     util-arity "^1.1.0"
     verror "^1.10.0"
+    xmlbuilder "^15.1.1"
     yup "^0.32.11"
 
 "@cucumber/gherkin-streams@5.0.1":
@@ -4461,6 +4462,11 @@ ws@>=8.7.0, ws@^8.4.2:
   version "8.8.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.8.0.tgz#8e71c75e2f6348dbf8d78005107297056cb77769"
   integrity sha512-JDAgSYQ1ksuwqfChJusw1LSJ8BizJ2e/vVu5Lxjq3YvNJNlROv1ui4i+c/kUUrPheBvQl4c5UbERhTwKa6QBJQ==
+
+xmlbuilder@^15.1.1:
+  version "15.1.1"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-15.1.1.tgz#9dcdce49eea66d8d10b42cae94a79c3c8d0c2ec5"
+  integrity sha512-yMqGBqtXyeN1e3TGYvgNgDVZ3j84W4cwkOXQswghol6APgZWaff9lnbvN7MHYJOiXsvGPXtjTYJEiC9J2wv9Eg==
 
 xtend@^4.0.2:
   version "4.0.2"
