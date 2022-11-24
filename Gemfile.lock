@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/rails/spring-watcher-listen.git
-  revision: 1fd7707df3b88076e7428919f6feaff62e3abe46
+  revision: 996d29e8f9b38fb642dd6b496ed600e941bd7de1
   specs:
-    spring-watcher-listen (2.0.1)
+    spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
       spring (>= 4)
 
