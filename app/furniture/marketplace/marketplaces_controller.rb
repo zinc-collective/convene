@@ -5,7 +5,7 @@ class Marketplace
     def show; end
 
     helper_method def marketplace
-      Marketplace.find(params[:id])
+      authorize(Marketplace.find(params[:id]))
     end
   end
 end

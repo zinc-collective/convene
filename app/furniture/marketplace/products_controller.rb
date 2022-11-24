@@ -3,9 +3,11 @@
 class Marketplace
   class ProductsController < FurnitureController
     def new
+      authorize(marketplace.products.new)
     end
 
     def create
+      authorize(product)
       product.save!
 
       respond_to do |format|
@@ -26,6 +28,7 @@ class Marketplace
     end
 
     def index
+      skip_authorization
     end
 
     helper_method def marketplace

@@ -2,6 +2,9 @@
 
 class Marketplace
   class MarketplacePolicy < ApplicationPolicy
+    def show?
+      true
+    end
     class Scope < ApplicationScope
       def resolve
         scope.all
