@@ -42,8 +42,6 @@ gem "redcarpet", "~> 3.5"
 gem "gretel", "~> 4.4"
 # Better UI components
 gem "view_component", "~> 2.76"
-# Help us develop and work with our components
-gem "lookbook", "~> 1.3"
 
 # Database Layer
 #

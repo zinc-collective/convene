@@ -45,8 +45,4 @@ Rails.application.routes.draw do
 
     get "/:id", to: "rooms#show"
   end
-
-  if Rails.env.development?
-    mount Lookbook::Engine, at: "/lookbook"
-  end
 end
