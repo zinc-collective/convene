@@ -35,17 +35,6 @@ class Marketplace
     end
 
     def update
-      if product.update(product_params)
-        redirect_to marketplace.location(:products)
-      else
-        render :edit
-      end
-    end
-
-    def edit
-    end
-
-    def update
       if product.update(product_params) 
         redirect_to marketplace.location(:products)
       else
