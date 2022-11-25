@@ -6,7 +6,7 @@ class IconButtonComponent < ViewComponent::Base
     title:,
     href:,
     method: :put,
-    confirm: false,
+    confirm: nil,
     disabled: false
   )
     @label = label
@@ -17,7 +17,11 @@ class IconButtonComponent < ViewComponent::Base
     @disabled = disabled
   end
 
+  private
+
   def data
-    { turbo_method: @method, turbo: true, turbo_confirm: @confirm, confirm: @confirm }
+    data = { turbo_method: @method, turbo: true }
+    data.merge!({ turbo_confirm: @confirm, confirm: @confirm }) if @confirm.present?
+    data
   end
 end
