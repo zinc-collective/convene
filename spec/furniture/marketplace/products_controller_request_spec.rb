@@ -4,7 +4,7 @@ RSpec.describe Marketplace::ProductsController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
-  let(:member) { create(:membership, space: space).member}
+  let(:member) { create(:membership, space: space).member }
 
   describe "#create" do
     it "Creates a Product in the Marketplace" do
@@ -25,17 +25,12 @@ RSpec.describe Marketplace::ProductsController, type: :request do
     end
   end
 
-  # get "/widgets/new"
-  # expect(response).to render_template(:new)
-
   describe "#edit" do
-    it "Edits a Product in the Marketplace" do
-      product = FactoryBot.create(:marketplace_product, marketplace: marketplace)
+    it "Shows the form to edit a Marketplace Product" do
+      product = create(:marketplace_product, marketplace: marketplace)
 
       get polymorphic_path([:edit, space, room, marketplace, product])
       expect(response).to render_template(:edit)
     end
   end
-
-
 end
