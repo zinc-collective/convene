@@ -408,6 +408,10 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.3.0)
     vcr (6.1.0)
+    view_component (2.76.0)
+      activesupport (>= 5.0.0, < 8.0)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -477,6 +481,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data (~> 1.2021)
   vcr
+  view_component (~> 2.76)
   web-console (~> 4.2)
   webmock
 

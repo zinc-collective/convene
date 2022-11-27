@@ -40,6 +40,8 @@ gem "rswag-ui"
 gem "redcarpet", "~> 3.5"
 # Breadcrumbs!
 gem "gretel", "~> 4.4"
+# Better UI components
+gem "view_component", "~> 2.76"
 
 # Database Layer
 #
