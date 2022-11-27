@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/spaces/:space_slug/room/", type: :request do
+RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
   let(:space) { create(:space) }
 
   path "/spaces/{space_slug}/rooms/{room_slug}" do

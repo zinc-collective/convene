@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class ProductPolicy < ApplicationPolicy
-    alias product object
+  class CartProductPolicy < ApplicationPolicy
+    alias cart_product object
     def permitted_attributes(_params = nil)
-      %i[name description price_cents price_currency price]
+      %i[quantity product_id]
     end
 
     def create?
-      person.member_of?(product.space)
+      true
     end
 
     def update?
-      create?
+      true
     end
 
     class Scope < ApplicationScope

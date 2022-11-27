@@ -4,9 +4,9 @@ RSpec.describe Marketplace::ProductsController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
-  let(:member) { create(:membership, space: space).member}
+  let(:member) { create(:membership, space: space).member }
 
-  describe "POST /products" do
+  describe "#create" do
     it "Creates a Product in the Marketplace" do
       attributes = attributes_for(:marketplace_product)
 
@@ -22,6 +22,15 @@ RSpec.describe Marketplace::ProductsController, type: :request do
       expect(created_product.description).to eql(attributes[:description])
       expect(created_product.price_cents).to eql(attributes[:price_cents])
       expect(created_product.price_currency).to eql(Money.default_currency.to_s)
+    end
+  end
+
+  describe "#edit" do
+    it "Shows the form to edit a Marketplace Product" do
+      product = create(:marketplace_product, marketplace: marketplace)
+
+      get polymorphic_path([:edit, space, room, marketplace, product])
+      expect(response).to render_template(:edit)
     end
   end
 end

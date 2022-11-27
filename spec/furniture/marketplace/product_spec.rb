@@ -14,5 +14,4 @@ RSpec.describe Marketplace::Product, type: :model do
       expect(product.price_cents).to eql(2000)
     end
   end
-
 end
