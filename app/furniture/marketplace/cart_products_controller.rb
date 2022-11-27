@@ -30,6 +30,7 @@ class Marketplace
     end
 
     def update
+      authorize(cart_product)
       cart_product.update(cart_product_params)
       respond_to do |format|
         format.html do
@@ -56,6 +57,7 @@ class Marketplace
     end
 
     def destroy
+      authorize(cart_product)
       cart_product.destroy
       respond_to do |format|
         format.html do
