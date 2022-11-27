@@ -15,17 +15,3 @@ RSpec.describe Marketplace::Product, type: :model do
     end
   end
 end
-
-# TODO: fill in request spec
-RSpec.describe "/spaces/:space_slug/rooms/:room_slug/marketplaces/:marketplace_slug/products", type: :request do
-  
-  describe "POST /spaces/:space_slug/rooms/:room_slug/marketplaces/:marketplace_slug/products" do
-    
-    it "creates a product in a Marketplace" do
-    end
-
-    it "updates a product in a Marketplace" do
-    end
-  
-  end
-end

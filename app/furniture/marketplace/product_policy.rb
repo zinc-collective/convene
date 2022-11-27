@@ -14,5 +14,11 @@ class Marketplace
     def update?
       create?
     end
+
+    class Scope < ApplicationScope
+      def resolve
+        scope.all
+      end
+    end
   end
 end

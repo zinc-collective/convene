@@ -6,7 +6,7 @@ RSpec.describe Marketplace::ProductsController, type: :request do
   let(:room) { marketplace.room }
   let(:member) { create(:membership, space: space).member}
 
-  describe "POST /products" do
+  describe "#create" do
     it "Creates a Product in the Marketplace" do
       attributes = attributes_for(:marketplace_product)
 
@@ -24,4 +24,18 @@ RSpec.describe Marketplace::ProductsController, type: :request do
       expect(created_product.price_currency).to eql(Money.default_currency.to_s)
     end
   end
+
+  # get "/widgets/new"
+  # expect(response).to render_template(:new)
+
+  describe "#edit" do
+    it "Edits a Product in the Marketplace" do
+      product = FactoryBot.create(:marketplace_product, marketplace: marketplace)
+
+      get polymorphic_path([:edit, space, room, marketplace, product])
+      expect(response).to render_template(:edit)
+    end
+  end
+
+
 end
