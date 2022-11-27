@@ -33,7 +33,12 @@
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
     <%- if policy(membership).destroy?  %>
-      <%= render "buttons/remove", href: [space, membership], title: t('memberships.delete') %>
+      <%= render IconButtonComponent.new(
+                   label: t('icons.remove'),
+                   href: [space, membership],
+                   title: t('memberships.delete'),
+                   method: :delete
+      ) %>
     <%- end %>
   </td>
 </tr>

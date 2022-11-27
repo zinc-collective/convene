@@ -10,8 +10,13 @@
                     method: :get,
                     title: t('.edit_title', { name: furniture_placement.furniture.model_name.human.titleize }),
                     class: 'no-underline' %>
-        <%= render "buttons/remove",
-                    href: [furniture_placement.room.space, furniture_placement.room, furniture_placement], title: t('.remove_title', { name: furniture_placement.furniture.model_name.human.titleize }), confirm: t('.confirm_destroy')  %>
+        <%= render IconButtonComponent.new(
+                     label: t('icons.remove'),
+                     href: [furniture_placement.room.space, furniture_placement.room, furniture_placement],
+                     title: t('.remove_title', { name: furniture_placement.furniture.model_name.human.titleize }),
+                     method: :delete,
+                     confirm: t('.confirm_destroy')
+        ) %>
       </header>
     <%- end %>
     <%- if furniture_placement.furniture.respond_to?(:in_room_template) %>
