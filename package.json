@@ -55,7 +55,7 @@
     "autoprefixer": "^10.4.13",
     "event-target-shim": "^6.0.2",
     "postcss": "^8.4.19",
-    "postcss-cli": "^10.0.0",
+    "postcss-cli": "^10.1.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^15.0.0",
     "postcss-preset-env": "^7.8.3",
