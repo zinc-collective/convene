@@ -6,11 +6,11 @@ class Marketplace
 
     extend StripsNamespaceFromModelName
 
-    belongs_to :marketplace
+    belongs_to :marketplace, inverse_of: :products
     delegate :space, to: :marketplace
 
-    has_many :cart_products, inverse_of: :product
-    has_many :carts, through: :cart_products
+    has_many :cart_products, inverse_of: :product, dependent: :destroy
+    has_many :carts, through: :cart_products, inverse_of: :products
 
     attribute :name, :string
     validates :name, presence: true
