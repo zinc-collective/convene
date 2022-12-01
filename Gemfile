@@ -47,7 +47,7 @@ gem "view_component", "~> 2.78"
 #
 # Postgres extensions for ActiveRecord
 # @see https://github.com/GeorgeKaraszi/ActiveRecordExtended
-gem "active_record_extended", "~> 3.0"
+gem "active_record_extended", "~> 3.1"
 # Postgres enums
 gem "activerecord-postgres_enum", "~> 2.0"
 # Support for models with "slots" or "positions"
