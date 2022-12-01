@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Cart, type: :model do
-  it { is_expected.to have_many(:cart_products).dependent(:destroy) }
+  it { is_expected.to have_many(:cart_products).dependent(:destroy).inverse_of(:cart) }
 
-  it { is_expected.to have_many(:products).through(:cart_products) }
+  it { is_expected.to have_many(:products).through(:cart_products).inverse_of(:carts) }
 
-  it { is_expected.to belong_to(:marketplace).class_name("Marketplace::Marketplace") }
+  it { is_expected.to belong_to(:marketplace).class_name("Marketplace::Marketplace").inverse_of(:carts) }
 
   describe "#price_total" do
     subject(:price_total) { cart.price_total }
