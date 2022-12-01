@@ -6,7 +6,7 @@
       </h4>
       <%- if furniture_placement.configurable? %>
         <%= render IconButtonComponent.new(
-                      label: t('icons.edit',
+                      label: t('icons.edit'),
                       href: [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement],
                       method: :get,
                       title: t('.edit_title', { name: furniture_placement.furniture.model_name.human.titleize })) %>
@@ -22,7 +22,7 @@
     <%- if local_assigns[:include_form] %>
       <%= render partial: 'furniture_placements/form', locals: { furniture_placement: furniture_placement } %>
     <%- end %>
-  <%-elsif furniture_placement.furniture.respond_to?(:in_room_template) %>
+  <%- elsif furniture_placement.furniture.respond_to?(:in_room_template) %>
     <%= render partial: furniture_placement.furniture.in_room_template,
               locals: { furniture: furniture_placement.furniture, space: furniture_placement.space, room: furniture_placement.room,
                         person: current_person } %>
