@@ -57,7 +57,7 @@
     "postcss": "^8.4.19",
     "postcss-cli": "^10.1.0",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-import": "^15.0.1",
+    "postcss-import": "^15.1.0",
     "postcss-preset-env": "^7.8.3",
     "tailwindcss": "^3.2.4",
     "webpack": "^5.65.0",
