@@ -1,5 +1,5 @@
 
-<%- cart = marketplace.carts.find_or_create_by(id: session[:current_cart] ||= SecureRandom.uuid) %>
+<%- cart = marketplace.carts.find_or_create_by(shopper: current_person) %>
 
 <%= render cart %>
 

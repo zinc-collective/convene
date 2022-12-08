@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_08_013832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -148,7 +148,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
     t.uuid "marketplace_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "shopper_id"
     t.index ["marketplace_id"], name: "index_marketplace_carts_on_marketplace_id"
+    t.index ["shopper_id"], name: "index_marketplace_carts_on_shopper_id"
   end
 
   create_table "marketplace_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -226,6 +228,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_13_010533) do
   add_foreign_key "marketplace_cart_products", "marketplace_carts", column: "cart_id"
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_carts", "furniture_placements", column: "marketplace_id"
+  add_foreign_key "marketplace_carts", "people", column: "shopper_id"
   add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"

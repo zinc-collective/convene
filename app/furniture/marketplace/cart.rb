@@ -5,6 +5,7 @@ class Marketplace
     self.table_name = 'marketplace_carts'
 
     belongs_to :marketplace, inverse_of: :carts
+    belongs_to :shopper, class_name: "Person"
     delegate :space, :room, to: :marketplace
     has_many :cart_products, dependent: :destroy, inverse_of: :cart
     has_many :products, through: :cart_products, inverse_of: :carts

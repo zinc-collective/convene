@@ -17,5 +17,6 @@ FactoryBot.define do
 
   factory :marketplace_cart, class: "Marketplace::Cart" do
     marketplace
+    association(:shopper, factory: :person)
   end
 end
