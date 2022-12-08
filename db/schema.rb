@@ -164,6 +164,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_013832) do
     t.index ["marketplace_id"], name: "index_marketplace_products_on_marketplace_id"
   end
 
+  create_table "marketplace_shoppers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "person_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_marketplace_shoppers_on_person_id", unique: true
+  end
+
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id"
     t.uuid "space_id"
@@ -228,8 +235,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_013832) do
   add_foreign_key "marketplace_cart_products", "marketplace_carts", column: "cart_id"
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_carts", "furniture_placements", column: "marketplace_id"
-  add_foreign_key "marketplace_carts", "people", column: "shopper_id"
+  add_foreign_key "marketplace_carts", "marketplace_shoppers", column: "shopper_id"
   add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
+  add_foreign_key "marketplace_shoppers", "people"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
