@@ -1,4 +1,10 @@
-<%- cart = marketplace.carts.find_or_create_by(id: session[:current_cart] ||= SecureRandom.uuid) %>
+<%- shopper = if current_person.is_a?(Guest)
+     Marketplace::Shopper.find_or_create_by(id: session[:current_cart] ||= SecureRandom.uuid)
+  else
+    Marketplace::Shopper.find_or_create_by(person: current_person)
+end %>
+
+<%- cart = marketplace.carts.find_or_create_by(shopper: shopper) %>
 
 <%= render cart %>
 
