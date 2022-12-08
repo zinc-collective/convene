@@ -2,6 +2,7 @@
 
 class MembershipsController < ApplicationController
   def index
+    skip_authorization
   end
 
   def show
