@@ -106,7 +106,7 @@ If you want to run Jitsi locally, see the configuration provided in
 
 ### Architecture overview diagram
 
-_Last updated: April 2021_
+_Last updated: Dec 2022_
 
 ![](./docs/convene-architecture-overview.jpg)
 
