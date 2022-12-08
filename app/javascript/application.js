@@ -10,5 +10,5 @@ ActiveStorage.start()
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import { Turbo } from "@hotwired/turbo-rails"
+import "@hotwired/turbo-rails"
 import "./controllers/index.js"
