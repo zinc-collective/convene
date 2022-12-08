@@ -8,7 +8,7 @@ class WaitingRoomsController < ApplicationController
       session[current_room.id] = {access_code: waiting_room.access_code}
       redirect_to waiting_room.redirect_url
     else
-      render :show
+      render :show, status: :unprocessable_entity
     end
   end
 
