@@ -6,5 +6,6 @@ class Marketplace
 
     belongs_to :person, optional: true
     has_many :carts, inverse_of: :shopper
+    has_many :checkouts, inverse_of: :shopper
   end
 end
