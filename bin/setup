@@ -33,6 +33,7 @@ function setup_package {
 setup_package "overmind"
 setup_package "yarn"
 setup_package "redis"
+setup_package "graphviz"
 # Firefox web browser is used for interface testing.
 brew install --cask firefox
 yarn global add maildev
