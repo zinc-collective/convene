@@ -9,6 +9,7 @@ class Marketplace
     delegate :space, :room, to: :marketplace
     has_many :cart_products, dependent: :destroy, inverse_of: :cart
     has_many :products, through: :cart_products, inverse_of: :carts
+    has_one :checkout, inverse_of: :cart
 
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
