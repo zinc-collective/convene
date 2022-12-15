@@ -120,7 +120,7 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    cssbundling-rails (1.1.1)
+    cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     debug_inspector (1.1.0)
     diff-lcs (1.5.0)
