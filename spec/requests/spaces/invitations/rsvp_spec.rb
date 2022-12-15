@@ -97,7 +97,7 @@ RSpec.describe "/spaces/:space_id/invitations/:invitation_id/rsvp", type: :reque
           expect(Person.where(email: invitation.email)).not_to exist
 
           expect(invitation.reload).not_to be_accepted
-          expect(response).to have_http_status(:ok)
+          expect(response).to have_http_status(:unprocessable_entity)
           expect(response).to render_template(:update)
         end
       end
