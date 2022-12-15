@@ -41,7 +41,7 @@ gem "redcarpet", "~> 3.5"
 # Breadcrumbs!
 gem "gretel", "~> 4.4"
 # Better UI components
-gem "view_component", "~> 2.78"
+gem "view_component", "~> 2.79"
 
 # Database Layer
 #
@@ -56,7 +56,7 @@ gem "ranked-model", "~> 0.4.8"
 gem "friendly_id", "~> 5.5.0"
 # Hashing / Encrypting data at rest
 gem "bcrypt", "~> 3.1.18"
-gem "lockbox", "1.1.0"
+gem "lockbox", "1.1.1"
 gem "rotp", "~> 6.2"
 
 # Use postgresql for data persistence
@@ -119,6 +119,7 @@ group :development do
   gem "binding_of_caller"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "listen", "~> 3.7"
+  gem "rails-erd"
   gem "web-console", "~> 4.2"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
