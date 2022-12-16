@@ -40,6 +40,11 @@ as well as data-persistence; with two additional submodules.
 - `features`, which includes the high-level test definitions for the Convene
   experience.
 
+![](./docs/erd.png)
+This Entity-relationship diagram is an overview of our models and how they are associated.
+
+Generate an updated ERD via: `bundle exec erd --filename=docs/erd --filetype=png`
+
 ### 1.2. Design
 
 We encourage everyone to read the
