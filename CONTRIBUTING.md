@@ -40,7 +40,7 @@ as well as data-persistence; with two additional submodules.
 - `features`, which includes the high-level test definitions for the Convene
   experience.
 
-### Architecture Overview
+#### Architecture Overview
 
 _Last updated: Dec 2022_
 
@@ -48,10 +48,9 @@ _Last updated: Dec 2022_
 
 Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
 
-### ERD
+#### ERD
 
-![](./docs/erd.png)
-This Entity-relationship diagram is an overview of our models and how they are associated.
+![Entity Relationship Diagram of Convene, Showing an Overview of our Core Models and Associations](./docs/erd.png)
 
 Generate an updated ERD via: `bundle exec erd --filename=docs/erd --filetype=png`
 
