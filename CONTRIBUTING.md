@@ -1,5 +1,7 @@
 - [1. Getting Oriented.](#1-getting-oriented)
   - [1.1. Architecture](#11-architecture)
+  - [Architecture Overview](#architecture-overview)
+  - [ERD](#erd)
   - [1.2. Design](#12-design)
 - [2. Machine Setup.](#2-machine-setup)
   - [2.1. Developer Setup and Documentation.](#21-developer-setup-and-documentation)
@@ -39,6 +41,16 @@ as well as data-persistence; with two additional submodules.
   Terraform and Ansible.
 - `features`, which includes the high-level test definitions for the Convene
   experience.
+
+### Architecture Overview
+
+_Last updated: Dec 2022_
+
+![](./docs/convene-architecture-overview.jpg)
+
+Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
+
+### ERD
 
 ![](./docs/erd.png)
 This Entity-relationship diagram is an overview of our models and how they are associated.
