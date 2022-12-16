@@ -25,11 +25,10 @@ class FurniturePlacementsController < ApplicationController
       if furniture_placement.update!(furniture_placement_params)
         format.html do
           redirect_to(
-            space_room_path(furniture_placement.room.space, furniture_placement.room),
+            edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
             notice: t(".success", name: furniture_placement.furniture.model_name.human)
           )
         end
-        format.turbo_stream
       end
     end
   end
