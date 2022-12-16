@@ -1,7 +1,5 @@
 - [1. Getting Oriented.](#1-getting-oriented)
   - [1.1. Architecture](#11-architecture)
-  - [Architecture Overview](#architecture-overview)
-  - [ERD](#erd)
   - [1.2. Design](#12-design)
 - [2. Machine Setup.](#2-machine-setup)
   - [2.1. Developer Setup and Documentation.](#21-developer-setup-and-documentation)
