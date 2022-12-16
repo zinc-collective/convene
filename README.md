@@ -9,7 +9,6 @@ Convene secure, affordable, always-available digital Spaces where anyone can
   - [Help and Support](#help-and-support)
 - [Contributing to Convene](#contributing-to-convene)
 - [System Overview](#system-overview)
-  - [Architecture overview diagram](#architecture-overview-diagram)
 - [Configuring Your Development Machine](#configuring-your-development-machine)
   - [Debugger](#debugger)
   - [Developing Mailers](#developing-mailers)
@@ -104,13 +103,7 @@ where we load a Jitsi video call iframe into Convene's UI.
 If you want to run Jitsi locally, see the configuration provided in
 [`infrastructure/jitsi-meet-local`](./infrastructure/jitsi-meet-local/README.md).
 
-### Architecture overview diagram
-
-_Last updated: Dec 2022_
-
-![](./docs/convene-architecture-overview.jpg)
-
-Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
+See [Architecture](./CONTRIBUTING.md#11-architecture) for how Convene is architected.
 
 ## Configuring Your Development Machine
 

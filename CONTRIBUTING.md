@@ -40,6 +40,20 @@ as well as data-persistence; with two additional submodules.
 - `features`, which includes the high-level test definitions for the Convene
   experience.
 
+#### Architecture Overview
+
+_Last updated: Dec 2022_
+
+![](./docs/convene-architecture-overview.jpg)
+
+Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
+
+#### ERD
+
+![Entity Relationship Diagram of Convene, Showing an Overview of our Core Models and Associations](./docs/erd.png)
+
+Generate an updated ERD via: `bundle exec erd --filename=docs/erd --filetype=png`
+
 ### 1.2. Design
 
 We encourage everyone to read the
