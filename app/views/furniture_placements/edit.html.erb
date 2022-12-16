@@ -1,3 +1,2 @@
-<%= turbo_frame_tag furniture_placement do %>
-  <%= render partial: "furniture_placements/form", locals: { furniture_placement: furniture_placement } %>
-<%- end %>
+<%- breadcrumb :edit_furniture_placement, furniture_placement %>
+<%= render partial: "furniture_placements/form", locals: { furniture_placement: furniture_placement, include_form: true } %>

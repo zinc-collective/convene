@@ -1,14 +1,5 @@
 <div class="flex flex-col content-between justify-end">
-  <div class="grow <%= editing? ? 'max-w-3xl' : '' %> mx-auto w-full">
-    <%- if editing? %>
-      <%- new_furniture_placement = room.furniture_placements.new %>
-
-      <%- if policy(new_furniture_placement).new? %>
-        <%= render "furniture_placements/new", furniture_placement: new_furniture_placement %>
-
-      <%- end %>
-    <%- end %>
-
+  <div class="grow mx-auto w-full">
     <section id="furniture_placements">
       <%= render room.furniture_placements.rank(:slot) %>
     </section>

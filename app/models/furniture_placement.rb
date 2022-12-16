@@ -26,11 +26,19 @@ class FurniturePlacement < ApplicationRecord
     @furniture ||= Furniture.from_placement(self)
   end
 
+  def title
+    furniture.model_name.human.titleize
+  end
+
   def utilities
     space.utility_hookups
   end
 
   def form_template
-    "noop"
+    "furniture_placements/noop"
+  end
+
+  def configurable?
+    furniture.form_template != "furniture_placements/noop"
   end
 end

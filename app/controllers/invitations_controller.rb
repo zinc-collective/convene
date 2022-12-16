@@ -13,7 +13,7 @@ class InvitationsController < ApplicationController
     else
       flash.now[:alert] = t(".failure", invitee_email: invitation.email,
         invitee_name: invitation.name)
-      render :index
+      render :index, status: :unprocessable_entity
     end
   end
 

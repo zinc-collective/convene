@@ -12,6 +12,8 @@ class RsvpsController < ApplicationController
       else
         render :show
       end
+    else
+      render :update, status: :unprocessable_entity
     end
   end
 

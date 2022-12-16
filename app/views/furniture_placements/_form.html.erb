@@ -1,4 +1,4 @@
-<%= turbo_frame_tag furniture_placement do %>
+<section id="<%= dom_id(furniture_placement) %>">
   <%- if policy(furniture_placement).edit? %>
     <%= form_with(model: [furniture_placement.room.space, furniture_placement.room, furniture_placement], local: true) do |form| %>
       <div>
@@ -17,4 +17,4 @@
       <%- end %>
     </footer>
   <%- end %>
-<%- end %>
+</section>

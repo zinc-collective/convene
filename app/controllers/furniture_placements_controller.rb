@@ -13,17 +13,21 @@ class FurniturePlacementsController < ApplicationController
     end
   end
 
+  def edit
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
+  end
+
   def update
     respond_to do |format|
       if furniture_placement.update!(furniture_placement_params)
         format.html do
           redirect_to(
-            space_room_path(furniture_placement.room.space, furniture_placement.room),
+            edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
             notice: t(".success", name: furniture_placement.furniture.model_name.human)
           )
-        end
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(furniture_placement)
         end
       end
     end

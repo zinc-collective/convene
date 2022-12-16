@@ -10,7 +10,11 @@ class AuthenticatedSessionsController < ApplicationController
   end
 
   def create
-    redirect_to current_space if authenticated_session.save
+    if authenticated_session.save
+      redirect_to current_space
+    else
+      render :create, status: :unprocessable_entity
+    end
   end
 
   def destroy

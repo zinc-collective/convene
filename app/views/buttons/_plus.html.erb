@@ -2,9 +2,9 @@
 <%- title = local_assigns.fetch(:title) %>
 <%- href = local_assigns.fetch(:href) %>
 <%- method = local_assigns.fetch(:method, :put)%>
-<%- data = { turbo_method: method, turbo: true } %>
+<%- data = { turbo_method: method } %>
 <%- data = data.merge(turbo_confirm: local_assigns[:confirm], confirm: local_assigns[:confirm]) if local_assigns.key?(:confirm) %>
 
-<%= link_to label, href, title: title, method: method,
+<%= link_to label, href, title: title,
               data: data,
               class: 'no-underline bg-transparent hover:bg-primary-100 button' %>

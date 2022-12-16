@@ -15,8 +15,4 @@ class Journal
   def attribute_names
     []
   end
-
-  def form_template
-    "noop"
-  end
 end

@@ -1,3 +1,15 @@
 <% breadcrumb :edit_room, room %>
 
 <%= render partial: 'form', locals: { room: room } %>
+
+
+<section id="furniture_placements">
+  <%= render room.furniture_placements.rank(:slot), editing: true %>
+</section>
+
+<%- new_furniture_placement = room.furniture_placements.new %>
+
+<%- if policy(new_furniture_placement).new? %>
+  <%= render "furniture_placements/new", furniture_placement: new_furniture_placement %>
+
+<%- end %>
