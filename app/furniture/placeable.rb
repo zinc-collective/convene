@@ -2,6 +2,7 @@
 
 # Encapsulates where a particular piece of {Furniture} lives in a {Room} and
 # what it looks like.
+# @Deprecated, see {Marketplace} and {Journal} for how {Furniture} works now.
 module Placeable
   # @return {FurniturePlacement}
   attr_accessor :placement
@@ -31,7 +32,11 @@ module Placeable
     end
 
     def form_template
-      "#{self.class.furniture_kind}/form"
+      if attribute_names.present?
+        "#{self.class.furniture_kind}/form"
+      else
+        "furniture_placements/noop"
+      end
     end
   end
 
