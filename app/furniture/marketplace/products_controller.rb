@@ -11,7 +11,6 @@ class Marketplace
       product.save!
 
       respond_to do |format|
-        format.turbo_stream
         format.html { redirect_to marketplace.location(:products) }
       end
     end
@@ -35,7 +34,7 @@ class Marketplace
     end
 
     def update
-      if product.update(product_params) 
+      if product.update(product_params)
         redirect_to marketplace.location(:products)
       else
         render :edit
