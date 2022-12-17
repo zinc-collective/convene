@@ -130,24 +130,24 @@
   resolved "https://registry.yarnpkg.com/@cucumber/ci-environment/-/ci-environment-9.1.0.tgz#6d868141c7cfd616931f14723e122a1069401998"
   integrity sha512-jdnF6APXP3GawMue8kdMxhu6TBhyRUO4KDRxTowf06NtclLjIw2Ybpo9IcIOMvE8kHukvJyM00uxWX+CfS7JgQ==
 
-"@cucumber/cucumber-expressions@16.0.0":
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/@cucumber/cucumber-expressions/-/cucumber-expressions-16.0.0.tgz#f8bc43da26f12db8f0d74ff3031a881e4fa4516d"
-  integrity sha512-HTh+Pg7oQ5aLuCkSbD2Q6jBaE40M3R/XaLEz+UqD5d9dZRu6P38W4LTooV5bV6dZgBunlMLK8+6ug2ziYvRddw==
+"@cucumber/cucumber-expressions@16.1.0":
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/@cucumber/cucumber-expressions/-/cucumber-expressions-16.1.0.tgz#2a2538b775e83b84a275ea10f618242717937968"
+  integrity sha512-Q/tKDNje9RrcOXF2TO2NwTW92rzk+RwKkhYYKLxQT26Co8Qbjom0Cz02HsCMA2wjJ8dw6/d2IbWgiOay9RQA+w==
   dependencies:
     regexp-match-indices "1.0.2"
 
-"@cucumber/cucumber@^8.9.0":
-  version "8.9.0"
-  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-8.9.0.tgz#394ed87093af33fbb235bee1970a3368bbb2ffc5"
-  integrity sha512-kU44RHVbS6fNLrEVQAzTtTMP6pDh0gMzB+QXULNymqGGhXDpnk+6PEH88+YG0TsjjPSYYNwOc3mhN/zvQ28yAg==
+"@cucumber/cucumber@^8.9.1":
+  version "8.9.1"
+  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-8.9.1.tgz#6b3bb74e5811d69aee85eaac0298218cb38ab6c7"
+  integrity sha512-Ir0yloCGu25mnllHunOAaOVXIKrRSE0ICF1FleoJzeupgYWK/x8o6hjOGRJf1Ui17GoRs1CfkP44/K29lmpMtA==
   dependencies:
     "@cucumber/ci-environment" "9.1.0"
-    "@cucumber/cucumber-expressions" "16.0.0"
-    "@cucumber/gherkin" "24.1.0"
+    "@cucumber/cucumber-expressions" "16.1.0"
+    "@cucumber/gherkin" "25.0.2"
     "@cucumber/gherkin-streams" "5.0.1"
-    "@cucumber/gherkin-utils" "8.0.1"
-    "@cucumber/html-formatter" "20.1.0"
+    "@cucumber/gherkin-utils" "8.0.2"
+    "@cucumber/html-formatter" "20.2.0"
     "@cucumber/message-streams" "4.0.1"
     "@cucumber/messages" "20.0.0"
     "@cucumber/tag-expressions" "4.1.0"
@@ -190,28 +190,28 @@
     commander "9.1.0"
     source-map-support "0.5.21"
 
-"@cucumber/gherkin-utils@8.0.1":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@cucumber/gherkin-utils/-/gherkin-utils-8.0.1.tgz#d9489f3dfc1912f3ae1303aa9a083c966218722c"
-  integrity sha512-SjDcCYQMEX4yCUoOJU38+UZo2p0Mxh1WnvwoJ3rSnun5HhhLrAn2p/Hnbiq4kudYJkAuQcEXlFOllJ3ZTwztIg==
+"@cucumber/gherkin-utils@8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@cucumber/gherkin-utils/-/gherkin-utils-8.0.2.tgz#deae231f84e91f120501d22187c66d36e6c6b59f"
+  integrity sha512-aQlziN3r3cTwprEDbLEcFoMRQajb9DTOu2OZZp5xkuNz6bjSTowSY90lHUD2pWT7jhEEckZRIREnk7MAwC2d1A==
   dependencies:
-    "@cucumber/gherkin" "^24.1.0"
+    "@cucumber/gherkin" "^25.0.0"
     "@cucumber/messages" "^19.1.4"
     "@teppeis/multimaps" "2.0.0"
     commander "9.4.1"
     source-map-support "^0.5.21"
 
-"@cucumber/gherkin@24.1.0", "@cucumber/gherkin@^24.1.0":
-  version "24.1.0"
-  resolved "https://registry.yarnpkg.com/@cucumber/gherkin/-/gherkin-24.1.0.tgz#ca2dcbe11f5f7d7f30fd073280550bd6eca2363c"
-  integrity sha512-B48XrUod4y3SoXe6mv12q7U1zThUNSK3yHSm/hBJCJZ6RJUJhFk3FVMN/83qOEbsYZe6iG9v+4L1Myf8/q8C6g==
+"@cucumber/gherkin@25.0.2", "@cucumber/gherkin@^25.0.0":
+  version "25.0.2"
+  resolved "https://registry.yarnpkg.com/@cucumber/gherkin/-/gherkin-25.0.2.tgz#e430879f01978d1f9e7a7aa0563031a3a36022e7"
+  integrity sha512-EdsrR33Y5GjuOoe2Kq5Y9DYwgNRtUD32H4y2hCrT6+AWo7ibUQu7H+oiWTgfVhwbkHsZmksxHSxXz/AwqqyCRQ==
   dependencies:
     "@cucumber/messages" "^19.1.4"
 
-"@cucumber/html-formatter@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@cucumber/html-formatter/-/html-formatter-20.1.0.tgz#2eda2bc93cbf7e50034430b8cfbd2e9ad80aba25"
-  integrity sha512-bu2shjZuVGfAtKaw8ebCBxhgu3Eiaz/P7ZuSxrw9YCa6rOyxMX5zO+4f2FUBTK/AV0b9O5cAB/xitYBrGhlYKg==
+"@cucumber/html-formatter@20.2.0":
+  version "20.2.0"
+  resolved "https://registry.yarnpkg.com/@cucumber/html-formatter/-/html-formatter-20.2.0.tgz#20857efec721fbc5d64cc31b0107575db1e58651"
+  integrity sha512-apcxS5Imeh3Wk4VMkuB3C4UQ+0/PVlNTkcWx9/5wwd+p3EnEbtvbZUhYIHgVBm+0FKEc22yrXBEc0N85fT/r4A==
 
 "@cucumber/message-streams@4.0.1":
   version "4.0.1"
