@@ -24,6 +24,7 @@ class Marketplace
             turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product),
             turbo_stream.replace("cart-footer-#{cart.id}",
               partial: "marketplace/carts/footer", locals: {cart: cart}),
+              turbo_stream.replace("cart-total-#{cart.id}", partial: "marketplace/carts/total", locals: {cart: cart})
             ]
         end
       end
@@ -51,7 +52,8 @@ class Marketplace
             turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product),
             turbo_stream.replace("cart-footer-#{cart.id}",
               partial: "marketplace/carts/footer", locals: {cart: cart}),
-            ]
+            turbo_stream.replace("cart-total-#{cart.id}", partial: "marketplace/carts/total", locals: {cart: cart})
+          ]
         end
       end
     end
@@ -77,7 +79,8 @@ class Marketplace
           render turbo_stream: [
             turbo_stream.replace("cart-product-#{cart_product.product_id}", cart.cart_products.new(product: cart_product.product)),
             turbo_stream.replace("cart-footer-#{cart.id}",
-              partial: "marketplace/carts/footer", locals: {cart: cart})
+              partial: "marketplace/carts/footer", locals: {cart: cart}),
+            turbo_stream.replace("cart-total-#{cart.id}", partial: "marketplace/carts/total", locals: {cart: cart})
           ]
         end
       end

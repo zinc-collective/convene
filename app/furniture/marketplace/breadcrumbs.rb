@@ -7,6 +7,11 @@ crumb :marketplace do |marketplace|
   link 'Marketplace', marketplace.location
 end
 
+crumb :marketplace_checkout do |checkout|
+  parent :marketplace, checkout.cart.marketplace
+  link 'Checkout', url_for([space, room, checkout])
+end
+
 crumb :marketplace_products do |marketplace|
   parent :marketplace, marketplace
   link 'Products', marketplace.location(:products)

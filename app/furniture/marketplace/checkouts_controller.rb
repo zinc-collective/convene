@@ -1,7 +1,11 @@
 class Marketplace
   class CheckoutsController < FurnitureController
     def new
-      authorize(cart.build_checkout(shopper: shopper))
+      authorize(checkout)
+    end
+
+    helper_method def checkout
+      @checkout ||= cart.build_checkout(shopper: shopper)
     end
 
     helper_method def shopper
