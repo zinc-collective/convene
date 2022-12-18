@@ -41,6 +41,10 @@ Rails.application.routes.draw do
   end
 
   constraints BrandedDomainConstraint.new(Space) do
+    get :edit, to: "spaces#edit"
+
+    resources :memberships, only: %I[index show destroy]
+
     resources :authenticated_sessions, only: %i[new create delete show]
 
     resources :rooms, only: %i[show edit update new create destroy] do

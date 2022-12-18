@@ -27,9 +27,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_person
 
-  helper_method def url_for(options = nil)
+  helper_method def url_for(options)
     space = if options[0].is_a?(Space) && options[0].branded_domain.present?
       options.delete_at(0)
+    elsif [:edit, :new].include?(options[0]) && options[1].is_a?(Space) && options[1].branded_domain.present?
+      options.delete_at(1)
     elsif options.is_a?(Space) && options.branded_domain.present?
       options
     end
@@ -37,11 +39,21 @@ class ApplicationController < ActionController::Base
     if space
       if options.respond_to?(:last) && options.last.is_a?(Hash)
         options.last[:domain] = space.branded_domain
-      elsif options.respond_to?(:<<)
+      elsif options.respond_to?(:<<) && options.length > 0
         options << {domain: space.branded_domain}
       else
         options = [:root, {domain: space.branded_domain}]
       end
+    end
+
+    super
+  end
+
+  helper_method def polymorphic_path(options, **attributes)
+    if options[0].is_a?(Space) && options[0].branded_domain.present?
+      options.delete_at(0)
+    elsif [:edit, :new].include?(options[0]) && options[1].is_a?(Space) && options[1].branded_domain.present?
+      options.delete_at(1)
     end
 
     super
