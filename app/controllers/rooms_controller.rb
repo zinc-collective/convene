@@ -76,9 +76,9 @@ class RoomsController < ApplicationController
   # TODO: Unit test authorize and redirect url
   private def after_authorization_redirect_url
     if %i[edit update].include?(action_name.to_sym)
-      return [:edit, room.space, room]
+      return url_for([:edit, room.space, room])
     end
 
-    [room.space, room]
+    url_for([room.space, room])
   end
 end
