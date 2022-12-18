@@ -17,6 +17,8 @@ class AuthenticatedSessionsController < ApplicationController
     end
   end
 
+  alias_method :update, :create
+
   def destroy
     authenticated_session.destroy
     redirect_to current_space

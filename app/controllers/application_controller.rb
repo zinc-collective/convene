@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method def polymorphic_path(options, **attributes)
-    if options[0].is_a?(Space) && options[0].branded_domain.present?
+    if options[0].is_a?(Space) && options[0].branded_domain.present? && options.length > 1
       options.delete_at(0)
     elsif [:edit, :new].include?(options[0]) && options[1].is_a?(Space) && options[1].branded_domain.present?
       options.delete_at(1)
