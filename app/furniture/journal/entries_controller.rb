@@ -40,6 +40,10 @@ class Journal::EntriesController < FurnitureController
     authorize(@entry)
   end
 
+  helper_method def page_title
+    "#{entry.headline} - #{space.name}"
+  end
+
   def entry_params
     policy(Journal::Entry).permit(params.require(:entry))
   end
