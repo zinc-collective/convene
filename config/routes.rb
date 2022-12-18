@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   constraints BrandedDomainConstraint.new(Space) do
     resources :authenticated_sessions, only: %i[new create delete show]
 
-    get "/:id", to: "rooms#show"
+    resources :rooms, only: %i[show edit update new create destroy] do
+      Furniture.append_routes(self)
+    end
   end
 end
