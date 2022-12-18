@@ -1,9 +1,16 @@
+<% 
+  marketplace = cart.marketplace
+  room = marketplace.room
+  space = room.space
+%>
+
 <tfoot id="cart-footer-<%= cart.id%>" class="bg-gray-50">
   <tr>
     <td></td>
+    <th> <%= link_to("checkout", new_space_room_marketplace_checkout_path(space, room, marketplace), html_options = {}) %> </th>
     <th scope="row" class="text-right px-1 py-3.5">Total: </th>
     <td class="text-left px-3 py-3.5 font-bold">
-      <%= humanized_money_with_symbol(cart.price_total) %>
+      <%= render "marketplace/carts/total", cart: cart %>
     </td>
   </tr>
 </tfoot>

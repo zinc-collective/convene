@@ -8,6 +8,7 @@ class Marketplace
       router.resources :carts do
         router.resources :cart_products
       end
+      router.resources :checkouts
     end
   end
 
