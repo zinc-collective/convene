@@ -1,6 +1,10 @@
 module RendersMarkdown
   def render_markdown(content)
-    self.class.renderer.render(content)
+    if self.class.respond_to?(:renderer)
+      self.class.renderer.render(content)
+    else
+      RendersMarkdown.renderer.render(content)
+    end
   end
 
   def self.renderer
