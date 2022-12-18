@@ -62,7 +62,7 @@ RSpec.describe "/spaces/", type: :request do
         SystemTestSpace.prepare
 
         space = Space.find_by(slug: "system-test")
-        delete space_path(space),
+        delete polymorphic_path(space),
           headers: authorization_headers,
           as: :json
 
@@ -86,14 +86,14 @@ RSpec.describe "/spaces/", type: :request do
       end
 
       it "updates the theme" do
-        put space_path(space), params: {space: {theme: "desert_dunes"}}
+        put polymorphic_path(space), params: {space: {theme: "desert_dunes"}}
 
         expect(space.reload.theme).to eq("desert_dunes")
         expect(flash[:notice]).to include("successfully updated")
       end
 
       it "shows an error message with an invalid theme" do
-        put space_path(space), params: {space: {theme: "bogus_theme"}}
+        put polymorphic_path(space), params: {space: {theme: "bogus_theme"}}
 
         expect(space.reload.theme).to eq("purple_mountains")
         expect(flash[:alert]).to include("went wrong")

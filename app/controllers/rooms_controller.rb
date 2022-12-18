@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
   def create
     if room.save
       flash[:notice] = t(".success", room_name: room.name)
-      redirect_to edit_space_room_path(room.space, room)
+      redirect_to [:edit, room.space, room]
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class RoomsController < ApplicationController
     respond_to do |format|
       if room.update(room_params)
         format.html do
-          redirect_to edit_space_path(room.space), notice: t(".success", room_name: room.name)
+          redirect_to [:edit, room.space], notice: t(".success", room_name: room.name)
         end
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class RoomsController < ApplicationController
 
   def destroy
     if room.destroy
-      redirect_to edit_space_path(room.space), notice: t(".success", room_name: room.name)
+      redirect_to [:edit, room.space], notice: t(".success", room_name: room.name)
     else
       flash.now[:alert] = t(".failure", room_name: room.name)
       render :edit
@@ -69,16 +69,16 @@ class RoomsController < ApplicationController
     return unless room.persisted?
 
     unless room.enterable?(current_access_code(room))
-      redirect_to space_room_waiting_room_path(current_space, current_room, redirect_url: after_authorization_redirect_url)
+      redirect_to [current_space, current_room, :waiting_room, redirect_url: after_authorization_redirect_url]
     end
   end
 
   # TODO: Unit test authorize and redirect url
   private def after_authorization_redirect_url
     if %i[edit update].include?(action_name.to_sym)
-      return edit_space_room_path(room.space, room)
+      return [:edit, room.space, room]
     end
 
-    space_room_path(room.space, room)
+    [room.space, room]
   end
 end

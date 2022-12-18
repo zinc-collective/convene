@@ -123,7 +123,7 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
       it "removes the room" do
         delete path
         expect { room.reload }.to raise_error(ActiveRecord::RecordNotFound)
-        expect(response).to redirect_to(edit_space_path(room.space))
+        expect(response).to redirect_to([:edit, room.space])
         expect(flash[:notice]).to eql(I18n.t("rooms.destroy.success", room_name: room.name))
       end
     end
