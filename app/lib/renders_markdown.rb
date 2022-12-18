@@ -1,6 +1,6 @@
 module RendersMarkdown
   def render_markdown(content)
-    RendersMarkdown.renderer.render(content)
+    self.class.renderer.render(content)
   end
 
   def self.renderer
