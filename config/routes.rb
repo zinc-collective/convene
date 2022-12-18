@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # post "/auth/:provider/callback", "sessions#create"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :spaces, only: %I[show edit update create destroy] do
-    resource :authenticated_session, only: %i[new create destroy show]
+    resource :authenticated_session, only: %i[new create update destroy show]
 
     resources :invitations, only: %i[create destroy index] do
       resource :rsvp, only: %i[show update]
@@ -41,7 +41,19 @@ Rails.application.routes.draw do
   end
 
   constraints BrandedDomainConstraint.new(Space) do
-    resources :authenticated_sessions, only: %i[new create delete show]
+    get :edit, to: "spaces#edit"
+    get "/" => "spaces#show"
+    put "/" => "spaces#update"
+
+    resources :invitations, only: %i[create destroy index] do
+      resource :rsvp, only: %i[show update]
+    end
+
+    resources :memberships, only: %i[index show destroy]
+
+    resources :utility_hookups, only: %I[create edit update destroy index]
+
+    resource :authenticated_session, only: %i[new create update destroy show]
 
     resources :rooms, only: %i[show edit update new create destroy] do
       Furniture.append_routes(self)

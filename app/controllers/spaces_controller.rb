@@ -25,7 +25,7 @@ class SpacesController < ApplicationController
   def update
     if space.update(space_params)
       flash[:notice] = t(".success")
-      redirect_to space_path(space)
+      redirect_to space
     else
       flash.now[:alert] = t(".error")
       render :edit

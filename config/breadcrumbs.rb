@@ -3,20 +3,20 @@
 # @see https://github.com/kzkn/gretel
 crumb :root do
   if current_space.present?
-    link current_space.name, space_path(current_space)
+    link current_space.name, current_space
   else
     link t("home.title"), root_path
   end
 end
 
 crumb :edit_space do |space|
-  link "Configure Space", edit_space_path(space)
+  link "Configure Space", [:edit, space]
 end
 
 crumb :memberships do |space|
   link "Members", [space, :memberships]
   if policy(space).edit?
-    parent :edit_space, Space
+    parent :edit_space, space
   else
     parent :root
   end
@@ -33,7 +33,7 @@ crumb :invitations do |space|
 end
 
 crumb :utility_hookups do |space|
-  link "Utility Hookups", space_utility_hookups_path(space)
+  link "Utility Hookups", [space, :utility_hookups]
   parent :edit_space, space
 end
 
@@ -51,12 +51,12 @@ crumb :room do |room|
 end
 
 crumb :new_room do |room|
-  link t("helpers.submit.room.create"), new_space_room_path(room.space)
+  link t("helpers.submit.room.create"), [:new, room.space, :room]
   parent :edit_space, room.space
 end
 
 crumb :edit_room do |room|
-  link t("helpers.submit.room.edit", {room_name: room.name}), edit_space_room_path(room.space, room)
+  link t("helpers.submit.room.edit", {room_name: room.name}), [:edit, room.space, room]
   parent :room, room
 end
 
@@ -74,4 +74,3 @@ crumb :edit_furniture_placement do |furniture_placement|
   link "Configure #{furniture_placement.title}"
   parent :edit_room, furniture_placement.room
 end
-

@@ -25,7 +25,7 @@ class MembershipsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_to(space_memberships_path(membership.space))
+        redirect_to([membership.space, :memberships])
       end
 
       format.turbo_stream do
