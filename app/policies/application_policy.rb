@@ -49,4 +49,8 @@ class ApplicationPolicy
   def policy(object)
     Pundit.policy(person, object)
   end
+
+  def policy!(object)
+    Pundit.policy!(person, object)
+  end
 end

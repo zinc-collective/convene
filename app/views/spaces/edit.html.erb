@@ -48,7 +48,9 @@
   <h3>Utility Hookups</h3>
   <%- space.utility_hookups.each do |utility_hookup| %>
     <%- if policy(utility_hookup).edit? %>
-    <%= render partial: "utility_hookups/form", locals: { utility_hookup: utility_hookup } %>
+      <%= render partial: "utility_hookups/form", locals: { utility_hookup: utility_hookup } %>
     <%- end %>
   <%- end %>
+
+  <%= link_to "Add a Utility", [:new, space, :utility_hookup] %>
 </fieldset>

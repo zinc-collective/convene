@@ -12,7 +12,7 @@ RSpec.describe "/spaces/:space_id/utility_hookups" do
   end
   let(:utility_hookup) { FactoryBot.create(:utility_hookup, space: space) }
 
-  let(:guest) { nil }
+let(:guest) { nil }
   let(:neighbor) { FactoryBot.create(:person) }
   let(:space_member) { space.members.first }
 

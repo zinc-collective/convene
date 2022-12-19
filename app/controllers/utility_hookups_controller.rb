@@ -5,6 +5,10 @@ class UtilityHookupsController < ApplicationController
     utility_hookup
   end
 
+  def new
+    utility_hookup
+  end
+
   def edit
     utility_hookup
   end
@@ -18,7 +22,7 @@ class UtilityHookupsController < ApplicationController
   end
 
   def update
-    if utility_hookup.update(utility_hookup_params)
+    if utility_hookup.polymorph.update(utility_hookup_params)
       redirect_to edit_space_path(space)
     else
       render :edit
@@ -34,12 +38,12 @@ class UtilityHookupsController < ApplicationController
 
     @utility_hookup = policy_scope(space.utility_hookups).find_by(id: params[:id]) if params[:id]
     @utility_hookup ||= policy_scope(space.utility_hookups).new(utility_hookup_params)
-    @utility_hookup.tap { authorize(@utility_hookup) }
+    authorize(@utility_hookup.polymorph)
   end
 
   def utility_hookup_params
     return {} unless params[:utility_hookup]
-    policy(UtilityHookup).permit(params.require(:utility_hookup))
+    policy(Utilities.fetch(params.dig(:utility_hookup, :utility_slug))).permit(params.require(:utility_hookup))
   end
 
   helper_method def space
