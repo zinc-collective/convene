@@ -3,8 +3,6 @@ require "rails_helper"
 RSpec.describe Journal::Entry do
   subject(:entry) { build(:journal_entry, body: body) }
 
-  let(:body) { Faker::Books::CultureSeries.civ }
-
   describe "#to_html" do
     subject(:to_html) { entry.to_html }
 
