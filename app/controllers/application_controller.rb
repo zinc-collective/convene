@@ -27,32 +27,37 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_person
 
+  # Overrides built in `url_for` to better support branded domains
+  # @see http://api.rubyonrails.org/classes/ActionController/Metal.html#method-i-url_for
   helper_method def url_for(options)
-    space = if options[0].is_a?(Space) && options[0].branded_domain.present?
+    space = if options[0].try(:branded_domain).present?
       options.delete_at(0)
-    elsif [:edit, :new].include?(options[0]) && options[1].is_a?(Space) && options[1].branded_domain.present?
+    elsif [:edit, :new].include?(options[0]) && options[1].try(:branded_domain).present?
       options.delete_at(1)
-    elsif options.is_a?(Space) && options.branded_domain.present?
+    elsif options.try(:branded_domain).present?
       options
     end
 
-    if space
-      if options.respond_to?(:last) && options.last.is_a?(Hash)
-        options.last[:domain] = space.branded_domain
-      elsif options.respond_to?(:<<) && options.length > 0
-        options << {domain: space.branded_domain}
-      else
-        options = [:root, {domain: space.branded_domain}]
-      end
+    return super unless space
+
+    # Appends the domain to the options passed to `url_for`
+    if options.respond_to?(:last) && options.last.is_a?(Hash)
+      options.last[:domain] = space.branded_domain
+    elsif options.respond_to?(:<<) && options.length > 0
+      options << {domain: space.branded_domain}
+    else
+      options = [:root, {domain: space.branded_domain}]
     end
 
     super
   end
 
+  # Removes the root branded domain from the path builder
+  # @see http://api.rubyonrails.org/classes/ActionDispatch/Routing/PolymorphicRoutes.html#method-i-polymorphic_path
   helper_method def polymorphic_path(options, **attributes)
-    if options[0].is_a?(Space) && options[0].branded_domain.present? && options.length > 1
+    if options[0].try(:branded_domain).present? && options.length > 1
       options.delete_at(0)
-    elsif [:edit, :new].include?(options[0]) && options[1].is_a?(Space) && options[1].branded_domain.present?
+    elsif [:edit, :new].include?(options[0]) && options.try(:branded_domain).present?
       options.delete_at(1)
     end
 
