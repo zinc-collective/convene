@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 # Renders a Twitch Livestream in a Room
-class Livestream
-  include Placeable
+class Livestream < FurniturePlacement
   def channel=(channel)
     settings["channel"] = channel
   end
@@ -27,14 +26,17 @@ class Livestream
     settings.fetch("layout", "")
   end
 
-  # @deprecated
-  def in_room_template
-    "#{self.class.furniture_kind}/in_room"
+  def form_template
+    "livestreams/form"
   end
 
   # @todo can we make it so we don't need to define this?
   # and the `settings.fetch` bits?
   def attribute_names
-    super + %w[channel layout provider]
+    %w[channel layout provider]
+  end
+
+  def self.from_placement(placement)
+    placement.becomes(self)
   end
 end
