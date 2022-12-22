@@ -17,7 +17,7 @@ class UtilityHookupsController < ApplicationController
     if utility_hookup.save
       redirect_to [:edit, space]
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

@@ -12,7 +12,7 @@ class UtilityHookup < ApplicationRecord
   validates :name, presence: :true, uniqueness: { scope: :space_id }
 
   def name
-    attributes[:name] ||= utility_slug.to_s.humanize
+    self[:name] ||= utility_slug.to_s.humanize
   end
 
   # Which type of {Utility} is connected
