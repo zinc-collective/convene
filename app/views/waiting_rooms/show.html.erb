@@ -2,11 +2,11 @@
 <div class="min-h-screen flex items-center justify-between">
   <div class="m-auto">
     <div class="bg-neutral-500 text-white font-extrabold px-8 py-4 rounded">
-      <%= current_room.name %>
+      <%= waiting_room.room.name %>
     </div>
   </div>
 
-  <%= form_with model: waiting_room, url: space_room_waiting_room_path(waiting_room.space, waiting_room.room), class: "access-code-form", local: true do |form| %>
+  <%= form_with model: [waiting_room.room.space, waiting_room.room, waiting_room], class: "access-code-form", local: true do |form| %>
     <%= render "password_field", form: form, attribute: :access_code%>
 
     <%= form.hidden_field :redirect_url %>

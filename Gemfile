@@ -41,7 +41,7 @@ gem "redcarpet", "~> 3.5"
 # Breadcrumbs!
 gem "gretel", "~> 4.4"
 # Better UI components
-gem "view_component", "~> 2.79"
+gem "view_component", "~> 2.80"
 
 # Database Layer
 #
@@ -75,7 +75,7 @@ gem "tzinfo-data", "~> 1.2021", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootsnap", "~> 1.15", require: false
 
 # Permissions and policies
-gem "pundit", "~> 2.2"
+gem "pundit", "~> 2.3"
 
 # Utility hookup support
 gem "plaid", "~> 16.0"
@@ -111,7 +111,7 @@ group :development, :test do
   gem "rubocop-rails"
   gem "rubocop-rspec"
   gem "standardrb", "~> 1.0"
-  gem "solargraph", "~> 0.47.2"
+  gem "solargraph", "~> 0.48.0"
 end
 
 group :development do

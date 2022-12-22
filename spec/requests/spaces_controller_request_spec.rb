@@ -2,8 +2,20 @@
 
 require "swagger_helper"
 
-RSpec.describe "/spaces/", type: :request do
+RSpec.describe SpacesController, type: :request do
   include ActiveJob::TestHelper
+
+  describe "#show" do
+    context "with a branded domain" do
+      let(:space) { create(:space, branded_domain: "beta.example.com") }
+
+      it "links to the domain" do
+        get polymorphic_path(space)
+
+        expect(response.body).to include "//beta.example.com/"
+      end
+    end
+  end
 
   path "/spaces" do
     include ApiHelpers::Path
@@ -56,13 +68,13 @@ RSpec.describe "/spaces/", type: :request do
       end
     end
   end
-  describe "DELETE /spaces/:space_slug/" do
+  describe "#destroy" do
     context "as an Operator using the API" do
       it "deletes the space and all it's other bits" do
         SystemTestSpace.prepare
 
         space = Space.find_by(slug: "system-test")
-        delete space_path(space),
+        delete polymorphic_path(space),
           headers: authorization_headers,
           as: :json
 
@@ -77,8 +89,8 @@ RSpec.describe "/spaces/", type: :request do
     end
   end
 
-  describe "PUT /space/:space_slug" do
-    context "as a Space Member" do
+  describe "#update" do
+    context "when a Space Member" do
       let(:space) { create(:space, :with_members, theme: "purple_mountains") }
 
       before do
@@ -86,14 +98,14 @@ RSpec.describe "/spaces/", type: :request do
       end
 
       it "updates the theme" do
-        put space_path(space), params: {space: {theme: "desert_dunes"}}
+        put polymorphic_path(space), params: {space: {theme: "desert_dunes"}}
 
         expect(space.reload.theme).to eq("desert_dunes")
         expect(flash[:notice]).to include("successfully updated")
       end
 
       it "shows an error message with an invalid theme" do
-        put space_path(space), params: {space: {theme: "bogus_theme"}}
+        put polymorphic_path(space), params: {space: {theme: "bogus_theme"}}
 
         expect(space.reload.theme).to eq("purple_mountains")
         expect(flash[:alert]).to include("went wrong")

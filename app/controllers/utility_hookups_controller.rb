@@ -15,7 +15,7 @@ class UtilityHookupsController < ApplicationController
 
   def create
     if utility_hookup.save
-      redirect_to edit_space_path(space)
+      redirect_to [:edit, space]
     else
       render :new
     end
@@ -23,7 +23,7 @@ class UtilityHookupsController < ApplicationController
 
   def update
     if utility_hookup.polymorph.update(utility_hookup_params)
-      redirect_to edit_space_path(space)
+      redirect_to [:edit, space]
     else
       render :edit
     end

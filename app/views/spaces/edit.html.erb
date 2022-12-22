@@ -17,7 +17,7 @@
     <%- space.rooms.each do |room| %>
       <%- if policy(room).edit? %>
         <div data-access-level="<%=room.access_level %>" data-slug="<%=room.slug%>" data-model="room" data-id="<%=room.id%>">
-          <%= link_to edit_space_room_path(room.space, room) do %>
+          <%= link_to [:edit, room.space, room] do %>
             <span class="icon --configure" role="img" aria-label="Configure"></span><%= room.name %>
           <% end %>
         </div>
@@ -26,7 +26,7 @@
   </div>
 
   <footer>
-    <%= link_to new_space_room_path(space) do %>
+    <%= link_to [:new, space, :room] do %>
       <span class="icon --add" role="img" aria-label="Add"></span>Add New Room
     <% end %>
   </footer>

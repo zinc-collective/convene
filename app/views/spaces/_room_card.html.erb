@@ -10,7 +10,7 @@
   </header>
   <footer>
     <div class="room-door_enter">
-      <%= link_to space_room_path(room.space, room) do %>
+      <%= link_to [room.space, room] do %>
         <span class="icon --enter" role="img" aria-label="Enter <%= room.name %>">Enter Room</span>
       <% end %>
     </div>

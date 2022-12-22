@@ -25,7 +25,7 @@ class AuthenticatedSession
   end
 
   def persisted?
-    false
+    true
   end
 
   def destroy

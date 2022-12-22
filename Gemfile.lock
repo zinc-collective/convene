@@ -101,7 +101,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     backport (1.2.0)
     bcrypt (3.1.18)
-    benchmark (0.2.0)
+    benchmark (0.2.1)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -243,9 +243,9 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.0)
-    puma (6.0.0)
+    puma (6.0.1)
       nio4r (~> 2.0)
-    pundit (2.2.0)
+    pundit (2.3.0)
       activesupport (>= 3.0.0)
     racc (1.6.1)
     rack (2.2.4)
@@ -371,7 +371,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.3)
-    solargraph (0.47.2)
+    solargraph (0.48.0)
       backport (~> 1.2)
       benchmark
       bundler (>= 1.17.2)
@@ -413,8 +413,8 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.3.0)
     vcr (6.1.0)
-    view_component (2.79.0)
-      activesupport (>= 5.0.0, < 8.0)
+    view_component (2.80.0)
+      activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
     web-console (4.2.0)
@@ -460,7 +460,7 @@ DEPENDENCIES
   plaid (~> 16.0)
   pry-byebug
   puma (~> 6.0)
-  pundit (~> 2.2)
+  pundit (~> 2.3)
   rails (~> 7.0)
   rails-controller-testing
   rails-erd
@@ -478,7 +478,7 @@ DEPENDENCIES
   shoulda-matchers (~> 5.3)
   sidekiq
   simplecov
-  solargraph (~> 0.47.2)
+  solargraph (~> 0.48.0)
   spring
   spring-watcher-listen!
   sprockets-rails
@@ -487,7 +487,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data (~> 1.2021)
   vcr
-  view_component (~> 2.79)
+  view_component (~> 2.80)
   web-console (~> 4.2)
   webmock
 

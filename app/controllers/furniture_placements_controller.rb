@@ -4,7 +4,7 @@ class FurniturePlacementsController < ApplicationController
       if furniture_placement.save!
         format.html do
           redirect_to(
-            space_room_path(furniture_placement.room.space, furniture_placement.room),
+            [furniture_placement.room.space, furniture_placement.room],
             notice: t(".success", name: furniture_placement.furniture.model_name.human)
           )
         end
@@ -25,7 +25,7 @@ class FurniturePlacementsController < ApplicationController
       if furniture_placement.update!(furniture_placement_params)
         format.html do
           redirect_to(
-            edit_space_room_path(furniture_placement.room.space, furniture_placement.room),
+            [:edit, furniture_placement.room.space, furniture_placement.room],
             notice: t(".success", name: furniture_placement.furniture.model_name.human)
           )
         end
@@ -38,7 +38,7 @@ class FurniturePlacementsController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to(
-          space_room_path(furniture_placement.room.space, furniture_placement.room),
+          [furniture_placement.room.space, furniture_placement.room],
           notice: t(".success", name: furniture_placement.furniture.model_name.human.titleize)
         )
       end

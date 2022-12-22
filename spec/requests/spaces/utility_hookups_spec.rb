@@ -70,7 +70,7 @@ let(:guest) { nil }
     it "Updates the Utility Hookup" do
       expect { perform_request }.to(change { utility_hookup.reload.attributes })
 
-      expect(response).to redirect_to edit_space_path(space)
+      expect(response).to redirect_to [:edit, space]
       expect(utility_hookup.utility_slug).to eq(utility_hookup_attributes[:utility_slug])
       expect(utility_hookup.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
     end
@@ -109,7 +109,7 @@ let(:guest) { nil }
       expect { perform_request }
         .to(change { space.utility_hookups.count }.by(1))
 
-      expect(response).to redirect_to edit_space_path(space)
+      expect(response).to redirect_to [:edit, space]
       expect(space.utility_hookups.last.utility_slug).to eql("jitsi")
       expect(space.utility_hookups.last.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
     end
