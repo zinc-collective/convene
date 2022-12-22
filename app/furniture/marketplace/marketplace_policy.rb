@@ -5,6 +5,10 @@ class Marketplace
     def show?
       true
     end
+
+    def update?
+      true
+    end
     class Scope < ApplicationScope
       def resolve
         scope.all

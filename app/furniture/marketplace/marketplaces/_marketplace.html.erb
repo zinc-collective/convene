@@ -10,6 +10,7 @@ end %>
 
 <div class="m-2 text-center">
   <%- if policy(marketplace.products.new).create? %>
+    <%= link_to t('.configure_marketplace'), marketplace.location().unshift(:edit) %>
     <%= link_to t('.manage_products'), marketplace.location(:products) %>
   <%- end %>
 </div>
