@@ -42,11 +42,11 @@ class ApplicationController < ActionController::Base
 
     # Appends the domain to the options passed to `url_for`
     if options.respond_to?(:last) && options.last.is_a?(Hash)
-      options.last[:domain] = space.branded_domain
+      options.last[:host] = space.branded_domain
     elsif options.respond_to?(:<<) && options.length > 0
-      options << {domain: space.branded_domain}
+      options << {host: space.branded_domain}
     else
-      options = [:root, {domain: space.branded_domain}]
+      options = [:root, {host: space.branded_domain}]
     end
 
     super

@@ -2,8 +2,20 @@
 
 require "swagger_helper"
 
-RSpec.describe "/spaces/", type: :request do
+RSpec.describe SpacesController, type: :request do
   include ActiveJob::TestHelper
+
+  describe "#show" do
+    context "with a branded domain" do
+      let(:space) { create(:space, branded_domain: "beta.example.com") }
+
+      it "links to the domain" do
+        get polymorphic_path(space)
+
+        expect(response.body).to include "//beta.example.com/"
+      end
+    end
+  end
 
   path "/spaces" do
     include ApiHelpers::Path
@@ -56,7 +68,7 @@ RSpec.describe "/spaces/", type: :request do
       end
     end
   end
-  describe "DELETE /spaces/:space_slug/" do
+  describe "#destroy" do
     context "as an Operator using the API" do
       it "deletes the space and all it's other bits" do
         SystemTestSpace.prepare
@@ -77,8 +89,8 @@ RSpec.describe "/spaces/", type: :request do
     end
   end
 
-  describe "PUT /space/:space_slug" do
-    context "as a Space Member" do
+  describe "#update" do
+    context "when a Space Member" do
       let(:space) { create(:space, :with_members, theme: "purple_mountains") }
 
       before do
