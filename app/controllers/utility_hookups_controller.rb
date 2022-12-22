@@ -43,7 +43,7 @@ class UtilityHookupsController < ApplicationController
 
   def utility_hookup_params
     return {} unless params[:utility_hookup]
-    policy(Utilities.fetch(params.dig(:utility_hookup, :utility_slug))).permit(params.require(:utility_hookup))
+    policy(UtilityHookup).permit(params.require(:utility_hookup))
   end
 
   helper_method def space
