@@ -122,7 +122,6 @@ class Blueprint
           furniture_placements: {
             markdown_text_block: {content: "# Welcome!"},
             video_bridge: {},
-            breakout_tables_by_jitsi: {names: %w[engineering design ops]}
           }
         },
         {
