@@ -22,7 +22,7 @@ class UtilityHookupsController < ApplicationController
   end
 
   def update
-    if utility_hookup.polymorph.update(utility_hookup_params)
+    if utility_hookup.update(utility_hookup_params)
       redirect_to [:edit, space]
     else
       render :edit
@@ -38,7 +38,7 @@ class UtilityHookupsController < ApplicationController
 
     @utility_hookup = policy_scope(space.utility_hookups).find_by(id: params[:id]) if params[:id]
     @utility_hookup ||= policy_scope(space.utility_hookups).new(utility_hookup_params)
-    authorize(@utility_hookup.polymorph)
+    authorize(@utility_hookup)
   end
 
   def utility_hookup_params

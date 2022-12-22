@@ -41,7 +41,7 @@ class UtilityHookupPolicy < ApplicationPolicy
 
   def permitted_attributes(params)
     utility_permitted_attributes =
-      policy!(Utilities.new_from_slug(params[:utility_slug]&.to_sym))
+      policy!(Utilities.fetch(params[:utility_slug]))
         &.permitted_attributes(params[:utility_attributes])
 
     [:name, :utility_slug, utility_attributes: utility_permitted_attributes]

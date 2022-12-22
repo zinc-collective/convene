@@ -12,7 +12,7 @@ module Utilities
   REGISTRY = {
     plaid: Plaid::PlaidUtility,
     jitsi: Jitsi::JitsiUtility,
-    stripe: StripeUtility
+    stripe: Stripe::StripeUtility
   }.freeze
 
   # @param utility_hookup [UtilityHookup]

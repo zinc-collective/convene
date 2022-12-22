@@ -25,7 +25,7 @@ class UtilityHookup < ApplicationRecord
   attribute :status, :string, default: "unavailable"
   validates :status, presence: true, inclusion: {in: %w[ready unavailable]}
 
-  # validates_associated :utility
+  validates_associated :utility
   has_encrypted :configuration, type: :json
 
   after_initialize do
@@ -45,18 +45,5 @@ class UtilityHookup < ApplicationRecord
   def utility_attributes=(attributes)
     self.configuration ||= {}
     utility.attributes = attributes
-  end
-
-  def display_name
-    model_name.human.titleize
-  end
-
-  def self.from_utility_hookup(utility_hookup)
-    utility_hookup.becomes(self)
-  end
-
-  def polymorph
-    x = Utilities::REGISTRY.fetch(utility_slug&.to_sym, NullUtility)
-    x.ancestors.include?(UtilityHookup) ? becomes(x) : self
   end
 end

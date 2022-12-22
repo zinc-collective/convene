@@ -1,1 +1,5 @@
-<%= render "password_field", form: form, attribute: :api_token %>
+
+<%= form.fields_for(:utility) do |utility_fields| %>
+  <%= render "password_field", form: utility_fields, attribute: :api_token %>
+<%- end %>
+
