@@ -17,9 +17,7 @@ RSpec.describe Blueprint do
             markdown_text_block: {content: "Obi Swan Kenobi"}
           }
         }],
-        utility_hookups: [
-          FactoryBot.attributes_for(:plaid_utility_hookup)
-        ]
+        utility_hookups: []
       }
     }
   }.freeze

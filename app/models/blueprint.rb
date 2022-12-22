@@ -107,7 +107,6 @@ class Blueprint
 
       entrance: "entrance-hall",
       utility_hookups: [
-        {utility_slug: :plaid, name: "Plaid", configuration: {client_id: "set-me", secret: "and-me", environment: "sandbox"}},
         {utility_slug: :jitsi, name: "Jitsi", configuration:
           {meet_domain: "convene-videobridge-zinc.zinc.coop"}}
       ],

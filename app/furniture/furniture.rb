@@ -6,7 +6,6 @@ module Furniture
   REGISTRY = {
     breakout_tables_by_jitsi: BreakoutTablesByJitsi,
     journal: Journal,
-    payment_form: PaymentForm,
     markdown_text_block: MarkdownTextBlock,
     marketplace: Marketplace,
     video_bridge: VideoBridge,
