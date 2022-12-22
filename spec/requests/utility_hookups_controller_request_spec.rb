@@ -3,26 +3,24 @@
 require "rails_helper"
 require "support/shared_examples/a_space_member_only_route"
 
-RSpec.describe "/spaces/:space_id/utility_hookups" do
-  let(:space) { FactoryBot.create(:space, :with_members) }
+RSpec.describe UtilityHookupsController do
+  let(:space) { create(:space, :with_members) }
   let(:utility_hookup_attributes) do
-    FactoryBot.attributes_for(:utility_hookup,
-      :jitsi)
-      .merge(utility_attributes: {"meet_domain" => "meet.example.com"})
+    attributes_for(:utility_hookup, :jitsi).merge(utility_attributes: {"meet_domain" => "meet.example.com"})
   end
-  let(:utility_hookup) { FactoryBot.create(:utility_hookup, space: space) }
+  let(:utility_hookup) { create(:utility_hookup, space: space) }
 
-let(:guest) { nil }
-  let(:neighbor) { FactoryBot.create(:person) }
+  let(:guest) { nil }
+  let(:neighbor) { create(:person) }
   let(:space_member) { space.members.first }
 
   let(:actor) { space_member }
 
   before { sign_in(space, actor) }
 
-  describe "GET /spaces/:space_id/utility_hookups" do
+  describe "#index" do
     subject(:perform_request) do
-      get "/spaces/#{space.id}/utility_hookups"
+      get polymorphic_path([space, :utility_hookups])
     end
 
     let(:changes) { nil }
@@ -30,7 +28,7 @@ let(:guest) { nil }
     it_behaves_like "a space-member only route"
 
     it "lists the Spaces Utility Hookups" do
-      FactoryBot.create_list(:utility_hookup, 3, space: space)
+      create_list(:utility_hookup, 3, space: space)
       perform_request
       expect(response).to render_template(:index)
       expect(assigns(:utility_hookups)).to eq(space.utility_hookups)

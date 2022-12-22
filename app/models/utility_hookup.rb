@@ -51,10 +51,6 @@ class UtilityHookup < ApplicationRecord
     model_name.human.titleize
   end
 
-  def form_template
-    "#{self.class.name.demodulize.underscore}/form"
-  end
-
   def self.from_utility_hookup(utility_hookup)
     utility_hookup.becomes(self)
   end

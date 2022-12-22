@@ -27,6 +27,6 @@ module Utilities
   end
 
   def self.fetch(slug)
-    REGISTRY.fetch(slug.to_sym, UtilityHookup)
+    REGISTRY.fetch(slug&.to_sym, NullUtility)
   end
 end
