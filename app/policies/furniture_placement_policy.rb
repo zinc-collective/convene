@@ -29,8 +29,6 @@ class FurniturePlacementPolicy < ApplicationPolicy
   end
 
   def furniture_params
-    Furniture::REGISTRY.each_value.reduce([]) do |m, v|
-      m.concat(v.new.attribute_names)
-    end
+    Furniture::REGISTRY.values.flat_map { |f| f.new.try(:attribute_names) }.compact
   end
 end
