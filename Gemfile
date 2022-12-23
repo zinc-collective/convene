@@ -78,7 +78,6 @@ gem "bootsnap", "~> 1.15", require: false
 gem "pundit", "~> 2.3"
 
 # Utility hookup support
-gem "plaid", "~> 16.0"
 gem "money-rails"
 
 # Workers and Background Jobs
@@ -105,7 +104,6 @@ group :development, :test do
   gem "shoulda-matchers", "~> 5.3"
 
   # Let the robots do the request/response faking.
-  gem "vcr"
   gem "webmock"
 
   gem "rubocop-rails"

@@ -10,7 +10,6 @@
 # @see features/utilities/
 module Utilities
   REGISTRY = {
-    plaid: Plaid::PlaidUtility,
     jitsi: Jitsi::JitsiUtility
   }.freeze
 

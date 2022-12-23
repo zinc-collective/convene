@@ -74,26 +74,6 @@ RSpec.describe "/spaces/:space_id/utility_hookups" do
       expect(utility_hookup.utility_slug).to eq(utility_hookup_attributes[:utility_slug])
       expect(utility_hookup.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
     end
-
-    context "when a Plaid Hookup" do
-      let(:utility_hookup_attributes) do
-        {
-          utility_slug: "plaid",
-          utility_attributes: {
-            "client_id" => "abcdefg",
-            "secret" => "hijklmnop",
-            "environment" => "sandbox"
-          }
-        }
-      end
-
-      it "updates all of its configuration" do
-        expect { perform_request }.to(change { utility_hookup.reload.attributes })
-
-        expect(space.utility_hookups.last.utility_slug).to eql("plaid")
-        expect(space.utility_hookups.last.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
-      end
-    end
   end
 
   describe "POST /spaces/:space_id/utility_hookups" do

@@ -1,7 +1,6 @@
 require "faker"
 require "pundit/rspec"
 require "simplecov"
-require "vcr"
 
 SimpleCov.start do
   enable_coverage :branch
@@ -104,14 +103,6 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
-end
-
-VCR.configure do |config|
-  config.cassette_library_dir = "cassettes"
-  config.hook_into :webmock
-  config.ignore_request do |request|
-    URI(request.uri).host.ends_with?("s3.amazonaws.com")
-  end
 end
 
 $LOAD_PATH << File.join(__dir__, "../", "app", "lib")

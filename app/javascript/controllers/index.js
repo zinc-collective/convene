@@ -4,9 +4,6 @@
 
 import { application } from "./application.js"
 
-import PaymentFormController from "./payment_form_controller.js"
-application.register("payment-form", PaymentFormController)
-
 import MenuController from "./menu_controller.js"
 application.register("menu", MenuController)
 

@@ -5,7 +5,6 @@
 module Furniture
   REGISTRY = {
     journal: Journal,
-    payment_form: PaymentForm,
     markdown_text_block: MarkdownTextBlock,
     marketplace: Marketplace,
     video_bridge: VideoBridge,
