@@ -11,8 +11,4 @@ class Journal
   def self.from_placement(placement)
     placement.becomes(Journal)
   end
-
-  def attribute_names
-    []
-  end
 end
