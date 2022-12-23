@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 # Renders some HTML in a {Room}.
-class MarkdownTextBlock
-  include Placeable
+class MarkdownTextBlock < FurniturePlacement
   include RendersMarkdown
 
   def to_html
@@ -23,8 +22,11 @@ class MarkdownTextBlock
     super + ["content"]
   end
 
-  # @deprecated
-  def in_room_template
-    "#{self.class.furniture_kind}/in_room"
+  def form_template
+    "markdown_text_blocks/form"
+  end
+
+  def self.from_placement(placement)
+    placement.becomes(self)
   end
 end
