@@ -10,7 +10,6 @@ RSpec.describe FurniturePlacement do
       furniture_placement = build(:furniture_placement, settings: { content: "# A Block"})
 
       expect(furniture_placement.furniture).to be_a(MarkdownTextBlock)
-      expect(furniture_placement.furniture.placement).to eql(furniture_placement)
       expect(furniture_placement.furniture.content).to eql("# A Block")
     end
   end
