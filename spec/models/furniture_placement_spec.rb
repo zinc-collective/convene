@@ -7,13 +7,10 @@ RSpec.describe FurniturePlacement do
 
   describe "#furniture" do
     it "returns the configured piece of furniture" do
-      furniture_placement = FurniturePlacement
-        .new(furniture_kind: :breakout_tables_by_jitsi, settings: {names: %w[a b]})
+      furniture_placement = build(:furniture_placement, settings: { content: "# A Block"})
 
-      expect(furniture_placement.furniture).to be_a(BreakoutTablesByJitsi)
-      expect(furniture_placement.furniture.placement).to eql(furniture_placement)
-      expect(furniture_placement.furniture.tables.to_a[0].name).to eql("a")
-      expect(furniture_placement.furniture.tables.to_a[1].name).to eql("b")
+      expect(furniture_placement.furniture).to be_a(MarkdownTextBlock)
+      expect(furniture_placement.furniture.content).to eql("# A Block")
     end
   end
 

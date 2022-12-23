@@ -32,11 +32,6 @@ class UtilityHookup < ApplicationRecord
     self.configuration ||= {}
   end
 
-  # @todo How could we streamline this without too much metaprogramming?
-  def self.plaid
-    where(utility_slug: "plaid").first&.utility
-  end
-
   # @return [Utility]
   def utility
     @utility ||= Utilities.from_utility_hookup(self)

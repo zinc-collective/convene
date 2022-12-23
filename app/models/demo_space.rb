@@ -58,7 +58,6 @@ class DemoSpace
 
   def self.utility_hookups
     [
-      FactoryBot.attributes_for(:plaid_utility_hookup),
       {utility_slug: :jitsi, name: "Jitsi", configuration:
         {meet_domain: "convene-videobridge-zinc.zinc.coop"}}
     ]

@@ -107,7 +107,6 @@ class Blueprint
 
       entrance: "entrance-hall",
       utility_hookups: [
-        {utility_slug: :plaid, name: "Plaid", configuration: {client_id: "set-me", secret: "and-me", environment: "sandbox"}},
         {utility_slug: :jitsi, name: "Jitsi", configuration:
           {meet_domain: "convene-videobridge-zinc.zinc.coop"}}
       ],
@@ -122,7 +121,6 @@ class Blueprint
           furniture_placements: {
             markdown_text_block: {content: "# Welcome!"},
             video_bridge: {},
-            breakout_tables_by_jitsi: {names: %w[engineering design ops]}
           }
         },
         {
