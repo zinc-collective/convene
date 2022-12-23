@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class EmbeddedForm
-  include Placeable
-
+class EmbeddedForm < FurniturePlacement
   def form_url=(form_url)
     settings["form_url"] = form_url
   end
@@ -20,12 +18,15 @@ class EmbeddedForm
     "https://airtable.com/embed/#{form_id}"
   end
 
-  # @deprecated
-  def in_room_template
-    "#{self.class.furniture_kind}/in_room"
+  def attribute_names
+    ["form_url"]
   end
 
-  def attribute_names
-    super + ["form_url"]
+  def form_template
+    "embedded_forms/form"
+  end
+
+  def self.from_placement(placement)
+    placement.becomes(self)
   end
 end
