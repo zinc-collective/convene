@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_22_042257) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_27_185339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -111,16 +111,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_042257) do
     t.enum "status", default: "pending", null: false, enum_type: "invitation_status"
     t.index ["invitor_id"], name: "index_invitations_on_invitor_id"
     t.index ["space_id"], name: "index_invitations_on_space_id"
-  end
-
-  create_table "items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "location_id"
-    t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.uuid "space_id"
-    t.index ["location_id"], name: "index_items_on_location_id"
-    t.index ["space_id"], name: "index_items_on_space_id"
   end
 
   create_table "journal_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

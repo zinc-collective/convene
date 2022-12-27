@@ -82,7 +82,6 @@ RSpec.describe SpacesController, type: :request do
 
         expect(space.rooms).to be_empty
         expect(space.utility_hookups).to be_empty
-        expect(space.items).to be_empty
         expect(space.invitations).to be_empty
         expect(space.memberships).to be_empty
       end
