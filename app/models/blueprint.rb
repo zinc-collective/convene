@@ -164,7 +164,6 @@ class Blueprint
           publicity_level: :unlisted,
           furniture_placements: {
             markdown_text_block: {content: "# Wooo!"},
-            spotlight: {}
           }
 
         }

@@ -10,7 +10,6 @@ module Furniture
     video_bridge: VideoBridge,
     livestream: Livestream,
     embedded_form: EmbeddedForm,
-    spotlight: Spotlight
   }.freeze
 
   # Appends each {Furniture}'s CRUD actions under a FurniturePlacement
@@ -28,7 +27,7 @@ module Furniture
     end
   end
 
-  # @return [Placeable, FurniturePlacement]
+  # @return [FurniturePlacement]
   def self.from_placement(placement)
     furniture_class = REGISTRY[placement.furniture_kind.to_sym]
     furniture_class.from_placement(placement)
