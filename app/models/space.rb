@@ -45,9 +45,6 @@ class Space < ApplicationRecord
   # The Rooms within this Space
   has_many :rooms, inverse_of: :space, dependent: :destroy_async
 
-  # All the items held within the space
-  has_many :items, inverse_of: :space, dependent: :destroy_async
-
   belongs_to :entrance, class_name: "Room", optional: true
 
   scope :default, -> { friendly.find(Neighborhood.config.default_space_slug) }

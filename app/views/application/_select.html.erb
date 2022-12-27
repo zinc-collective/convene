@@ -1,3 +1,3 @@
 <%= form.label attribute %>
-<%= form.select attribute, options, include_blank: include_blank %>
+<%= form.select attribute, options, include_blank: local_assigns.fetch(:include_blank, true) %>
 <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>

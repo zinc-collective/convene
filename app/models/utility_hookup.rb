@@ -9,9 +9,10 @@ class UtilityHookup < ApplicationRecord
   # has multiple {UtilityHookup}s.
   # @return [String]
   attribute :name, :string
+  validates :name, presence: :true, uniqueness: { scope: :space_id }
 
   def name
-    attributes[:name] ||= utility_slug.to_s.humanize
+    self[:name] ||= utility_slug.to_s.humanize
   end
 
   # Which type of {Utility} is connected
@@ -24,17 +25,11 @@ class UtilityHookup < ApplicationRecord
   attribute :status, :string, default: "unavailable"
   validates :status, presence: true, inclusion: {in: %w[ready unavailable]}
 
-  attribute :old_configuration, :json, default: -> { {} }
   validates_associated :utility
   has_encrypted :configuration, type: :json
 
   after_initialize do
     self.configuration ||= {}
-  end
-
-  # @todo How could we streamline this without too much metaprogramming?
-  def self.plaid
-    where(utility_slug: "plaid").first&.utility
   end
 
   # @return [Utility]

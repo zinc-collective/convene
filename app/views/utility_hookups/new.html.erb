@@ -1,0 +1,6 @@
+<%- breadcrumb :new_utility_hookup, utility_hookup %>
+<%= form_with(model: [utility_hookup.space, utility_hookup], local: true) do |form| %>
+  <%= render "select", attribute: :utility_slug, options: Utilities::REGISTRY.keys, form: form %>
+  <%= render "text_field", attribute: :name, form: form %>
+  <%= form.submit %>
+<%- end %>

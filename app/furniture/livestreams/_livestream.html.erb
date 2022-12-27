@@ -1,0 +1,28 @@
+
+<div data-furniture-kind="livestream" data-provider="<%=livestream.provider%>" class="w-full aspect-video">
+  <%- if livestream.provider == 'twitch' %>
+    <!-- Load the Twitch embed JavaScript file -->
+    <div id="twitch-embed" class="w-full aspect-video"></div>
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+    <!-- Create a Twitch.Embed object that will render within the "twitch-embed" element -->
+    <script type="text/javascript">
+      new Twitch.Embed("twitch-embed", {
+        width: '100%',
+        height: '100%',
+        channel: '<%= livestream.channel %>',
+        layout: '<%= livestream.layout %>',
+      });
+    </script>
+
+  <%- elsif livestream.provider == 'owncast' %>
+    <iframe
+      src="<%= livestream.channel %>"
+      title="Owncast"
+      height="100%" width="100%"
+      referrerpolicy="origin"
+      scrolling="no"
+      allowfullscreen>
+    </iframe>
+<%- end %>
+</div>

@@ -10,17 +10,22 @@
 # @see features/utilities/
 module Utilities
   REGISTRY = {
-    plaid: Plaid::PlaidUtility,
-    jitsi: Jitsi::JitsiUtility
+    jitsi: Jitsi::JitsiUtility,
+    stripe: Stripe::StripeUtility
   }.freeze
 
   # @param utility_hookup [UtilityHookup]
   # @return [Utility]
   def self.from_utility_hookup(utility_hookup)
-    new_from_slug(utility_hookup.utility_slug, utility_hookup: utility_hookup)
+    fetch(utility_hookup.utility_slug)
+      .from_utility_hookup(utility_hookup)
   end
 
   def self.new_from_slug(slug, attributes = {})
-    REGISTRY.fetch(slug.to_sym, NullUtility).new(attributes)
+    fetch(slug).new(attributes)
+  end
+
+  def self.fetch(slug)
+    REGISTRY.fetch(slug&.to_sym, NullUtility)
   end
 end

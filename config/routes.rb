@@ -19,12 +19,9 @@ Rails.application.routes.draw do
       Furniture.append_routes(self)
       resource :waiting_room, only: %i[show update]
       resources :furniture_placements, only: %i[create edit update destroy]
-      resource :furniture, only: [] do
-        Furniture.deprecated_append_routes(self)
-      end
     end
 
-    resources :utility_hookups, only: %I[create edit update destroy index]
+    resources :utility_hookups
 
     resources :memberships, only: %I[index show destroy]
   end
