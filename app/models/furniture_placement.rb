@@ -6,6 +6,9 @@
 # it's particular use case.
 class FurniturePlacement < ApplicationRecord
   include RankedModel
+  include WithinLocation
+  self.location_parent = :room
+
   ranks :slot, with_same: [:room_id]
 
   belongs_to :room

@@ -11,7 +11,7 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
       product = create(:marketplace_product, marketplace: marketplace)
       cart = create(:marketplace_cart, marketplace: marketplace)
 
-      post polymorphic_path([space, room, marketplace, cart, :cart_products]), params: {cart_product: {product_id: product.id}}
+      post polymorphic_path(cart.location(child: :cart_products), params: {cart_product: {product_id: product.id}})
       expect(response).to redirect_to([space, room])
     end
   end

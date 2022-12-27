@@ -3,6 +3,8 @@
 class Marketplace
   class Cart < ApplicationRecord
     self.table_name = 'marketplace_carts'
+    include WithinLocation
+    self.location_parent = :marketplace
 
     belongs_to :marketplace, inverse_of: :carts
     belongs_to :shopper, inverse_of: :carts

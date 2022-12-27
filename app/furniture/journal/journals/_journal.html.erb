@@ -6,7 +6,7 @@
   <%- new_entry = journal.entries.new %>
   <%- if policy(new_entry).new? %>
     <footer class="text-center p-2">
-      <%= link_to "New Journal Entry", new_entry.location(:new) %>
+      <%= link_to "New Journal Entry", journal.location(:new, child: :entry) %>
     </footer>
   <%- end %>
 </section>
