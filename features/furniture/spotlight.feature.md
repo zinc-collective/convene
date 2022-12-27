@@ -1,19 +1,36 @@
 # Furniture: Spotlight!
 
-Websites would be pretty boring without a way to highlight something really important.
+Instagram and Signal have Stories, eCommerce sites have "Featured Items", Product Landing Pages have
+"Highlighted Value Propositions." Each of these "Spotlight" something on the Web, and bring it to the
+front of a Visitors attention.
 
-Whether a video highlighting your favorite book, a picture of the sunset, or a value-proposition
-with a mind-blowing animated GIF; Spotlights illuminate the best you have to offer!
+Spotlight the latest page from your favorite WebComic, an episode of your friend's thrilling DnD Podcast, or
+your own latest artistic endeavor!
+
+Spotlights are:
+
+1. Focused! Spotlights can fit up to 3 Targets!
+2. Time-Boxed! Targets stick around for a few hours, days or weeks.
+3. Multi-format! Spotlight writing, illustrations, comics, short stories, photos, videos, 3d models, VR scenes, and more!
+
+
+## Fauxsonas
+
+- Spotter - Sets a Spotlight's Targets
+- Viewer - Sees a Spotlight's Targets
 
 `@andromeda` `@unimplemented-steps`
 
-## Scenario: Hero Image
+## Scenario: Hero Style
 
-Hero' images<sup>[1] [2]</sup> are a mainstay of web design, providing a clear place for people who enter a space to direct their attention.
+Hero images<sup>[1] [2]</sup> are a mainstay of web design, providing a clear place for people to direct their
+attention. Spotlights in Hero Style take up a large portion of the Room.
 
-Hero images are often used to convey the core value proposition of a product or service, highlight a particularly impressive piece of work on a portfolio, capture a viewers imagination, or direct their attention to a key call to action.
+Hero's often convey the core value proposition of a product or service, highlight a particularly impressive
+piece of work on a portfolio, capture a viewer's imagination, or direct their attention to a key call to action.
 
-Hero Images are automatically resized to maintain their aspect ratio while providing as high a resolution experience to visitors as possible.
+Spotlights in Hero Style preserve the Spotlighted Target (such as aspect ratio) while providing as resonant
+Viewer's experience as possible across form factors.
 
 - Given an "Zee's Artist Portfolio" Space
 - And a "Spotlight" Furniture in the Entrance Hall to "Zee's Artist Portfolio" Space is configured with:
