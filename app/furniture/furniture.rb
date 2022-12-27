@@ -12,14 +12,6 @@ module Furniture
     embedded_form: EmbeddedForm,
   }.freeze
 
-  # Appends each {Furniture}'s CRUD actions under a FurniturePlacement
-  # @deprecated
-  def self.deprecated_append_routes(router)
-    REGISTRY.each_value do |furniture|
-      furniture.deprecated_append_routes(router) if furniture.respond_to?(:deprecated_append_routes)
-    end
-  end
-
   # Appends each Furnitures CRUD actions within the {Room}
   def self.append_routes(router)
     REGISTRY.each_value do |furniture|
