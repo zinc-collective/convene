@@ -5,6 +5,10 @@ class UtilityHookupsController < ApplicationController
     utility_hookup
   end
 
+  def new
+    utility_hookup
+  end
+
   def edit
     utility_hookup
   end
@@ -13,7 +17,7 @@ class UtilityHookupsController < ApplicationController
     if utility_hookup.save
       redirect_to [:edit, space]
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -34,7 +38,7 @@ class UtilityHookupsController < ApplicationController
 
     @utility_hookup = policy_scope(space.utility_hookups).find_by(id: params[:id]) if params[:id]
     @utility_hookup ||= policy_scope(space.utility_hookups).new(utility_hookup_params)
-    @utility_hookup.tap { authorize(@utility_hookup) }
+    authorize(@utility_hookup)
   end
 
   def utility_hookup_params

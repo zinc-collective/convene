@@ -37,6 +37,11 @@ crumb :utility_hookups do |space|
   parent :edit_space, space
 end
 
+crumb :new_utility_hookup do |utility_hookup|
+  link "New Utility Hookup", [:new, utility_hookup.space, :utility_hookup]
+  parent :utility_hookups, utility_hookup.space
+end
+
 crumb :guides do
   link t("guides.title"), guides_path
 end

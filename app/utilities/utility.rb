@@ -25,4 +25,8 @@ class Utility
   def display_name
     model_name.human.titleize
   end
+
+  def self.from_utility_hookup(utility_hookup)
+    new(utility_hookup: utility_hookup)
+  end
 end
