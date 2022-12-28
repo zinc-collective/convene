@@ -16,7 +16,7 @@
     <%- if policy(entry).update? %>
       <%= link_to "Edit", entry.location(:edit) %>
       <%- if !entry.published? %>
-        <%= link_to "Publish Now", entry.location + [{ entry: { published_at: Time.now } }], data: { turbo_method: :put } %>
+        <%= link_to "Publish Now", entry.location() + [{ entry: { published_at: Time.now } }, data: { turbo_method: :put }] %>
       <%- end %>
     <%- end %>
 

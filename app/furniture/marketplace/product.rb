@@ -3,6 +3,8 @@
 class Marketplace
   class Product < ApplicationRecord
     self.table_name = 'marketplace_products'
+    include WithinLocation
+    self.location_parent = :marketplace
 
     extend StripsNamespaceFromModelName
 
@@ -18,9 +20,5 @@ class Marketplace
     attribute :description, :string
 
     monetize :price_cents
-
-    def location
-      marketplace.location(self)
-    end
   end
 end

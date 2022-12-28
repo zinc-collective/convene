@@ -3,6 +3,7 @@
 # A Space is a collection of infrastructure resources
 # for collaboration
 class Space < ApplicationRecord
+  include WithinLocation
   THEME_OPTIONS = %w[purple_mountains desert_dunes].freeze
 
   # Which client owns the space
@@ -59,5 +60,9 @@ class Space < ApplicationRecord
     return if jitsi_hookup.blank?
 
     Utilities.from_utility_hookup(jitsi_hookup).meet_domain
+  end
+
+  def parent_location
+    []
   end
 end
