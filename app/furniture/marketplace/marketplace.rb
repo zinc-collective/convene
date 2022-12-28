@@ -2,6 +2,8 @@
 
 class Marketplace
   class Marketplace < FurniturePlacement
+    self.location_parent = :room
+
     has_many :products, inverse_of: :marketplace, dependent: :destroy
     has_many :carts, inverse_of: :marketplace, dependent: :destroy
 
@@ -15,10 +17,6 @@ class Marketplace
 
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
-    end
-
-    def location(child = nil)
-      [space, room, self, child].compact
     end
   end
 end

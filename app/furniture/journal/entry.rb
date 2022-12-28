@@ -1,5 +1,8 @@
 class Journal
   class Entry < ApplicationRecord
+    include WithinLocation
+    self.location_parent = :journal
+
     self.table_name = "journal_entries"
     include RendersMarkdown
     extend StripsNamespaceFromModelName
@@ -46,17 +49,6 @@ class Journal
 
     def to_param
       slug
-    end
-
-    def location(action = :show)
-      case action
-      when :new
-        [:new] + journal.location + [:entry]
-      when :edit
-        [:edit] + journal.location + [self]
-      else
-        journal.location + [self]
-      end
     end
   end
 end

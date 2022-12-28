@@ -11,7 +11,7 @@ class Marketplace
       product.save!
 
       respond_to do |format|
-        format.html { redirect_to marketplace.location(:products) }
+        format.html { redirect_to marketplace.location(child: :products) }
       end
     end
 
@@ -19,7 +19,7 @@ class Marketplace
       respond_to do |format|
         if product.destroy
           format.turbo_stream { render turbo_stream: turbo_stream.remove(product) }
-          format.html { redirect_to marketplace.location(:products) }
+          format.html { redirect_to marketplace.location(child: :products) }
         else
           format.html { redirect_to product.location }
         end
@@ -35,7 +35,7 @@ class Marketplace
 
     def update
       if product.update(product_params)
-        redirect_to marketplace.location(:products)
+        redirect_to marketplace.location(child: :products)
       else
         render :edit
       end

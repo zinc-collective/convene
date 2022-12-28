@@ -14,5 +14,5 @@ end
 
 crumb :edit_journal_entry do |entry|
   parent :journal_entry, entry
-  link "Edit", [:edit] + entry.location
+  link "Edit", entry.location(:edit)
 end
