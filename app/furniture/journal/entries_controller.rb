@@ -40,6 +40,9 @@ class Journal::EntriesController < FurnitureController
     authorize(@entry)
   end
 
+  def index
+  end
+
   helper_method def page_title
     "#{entry.headline} - #{space.name}"
   end
