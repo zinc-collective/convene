@@ -6,7 +6,21 @@ RSpec.describe Journal::EntriesController, type: :request do
   let(:room) { journal.room }
   let(:member) { create(:person, spaces: [space]) }
 
-  describe "POST /entries" do
+  describe "#index" do
+    it "shows all the journal entries" do
+      sign_in(space, member)
+      unpublished_entry = create(:journal_entry, journal: journal)
+      published_entry = create(:journal_entry, journal: journal, published_at: 1.week.ago)
+
+      get polymorphic_path(journal.location(child: :entries))
+
+      expect(response).to be_ok
+      expect(response.body).to include(published_entry.headline)
+      expect(response.body).to include(unpublished_entry.headline)
+    end
+  end
+
+  describe "#create" do
     it "Creates an Entry in the Journal" do
       sign_in(space, member)
 
@@ -22,7 +36,7 @@ RSpec.describe Journal::EntriesController, type: :request do
     end
   end
 
-  describe "PUT /journals/:journal_id/entries/:entry_id" do
+  describe "#update" do
     it "allows members to update Journal Entries" do
       sign_in(space, member)
       entry = create(:journal_entry, journal: journal)
