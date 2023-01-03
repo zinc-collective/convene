@@ -9,10 +9,14 @@ RSpec.describe Journal::EntriesController, type: :request do
   describe "#index" do
     it "shows all the journal entries" do
       sign_in(space, member)
-      entries = create_list(:journal_entry, 3, journal: journal)
+      unpublished_entry = create(:journal_entry, journal: journal)
+      published_entry = create(:journal_entry, journal: journal, published_at: 1.week.ago)
+
       get polymorphic_path(journal.location(child: :entries))
 
       expect(response).to be_ok
+      expect(response.body).to include(published_entry.headline)
+      expect(response.body).to include(unpublished_entry.headline)
     end
   end
 
