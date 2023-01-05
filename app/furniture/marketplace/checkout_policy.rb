@@ -2,9 +2,11 @@
 
 class Marketplace
   class CheckoutPolicy < ApplicationPolicy
-    alias checkout object
+    alias_method :checkout, :object
 
     def create?
+      return true if checkout.shopper.person.blank? && !current_person.authenticated?
+
       checkout.shopper.person == current_person
     end
   end

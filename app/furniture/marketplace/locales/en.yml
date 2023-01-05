@@ -1,5 +1,14 @@
+
 en:
   marketplace:
+    marketplace:
+      edit: "Configure Marketplace"
+    marketplaces:
+      update:
+        success: "Marketplace updated successfully!"
+        failure: "Marketplace could not be updated."
+    product:
+      index: "Configure Products"
     products:
       index:
         new: Add a Product
