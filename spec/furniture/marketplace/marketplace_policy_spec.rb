@@ -14,4 +14,10 @@ RSpec.describe Marketplace::MarketplacePolicy, type: :policy do
     it { is_expected.to permit(non_member, marketplace) }
     it { is_expected.to permit(guest, marketplace) }
   end
+
+  permissions :update? do
+    it { is_expected.to permit(member, marketplace) }
+    it { is_expected.not_to permit(non_member, marketplace) }
+    it { is_expected.not_to permit(guest, marketplace) }
+  end
 end
