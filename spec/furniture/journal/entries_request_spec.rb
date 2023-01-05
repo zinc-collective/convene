@@ -1,4 +1,5 @@
 require "rails_helper"
+require "cgi"
 
 RSpec.describe Journal::EntriesController, type: :request do
   let(:journal) { create(:journal) }
@@ -15,8 +16,8 @@ RSpec.describe Journal::EntriesController, type: :request do
       get polymorphic_path(journal.location(child: :entries))
 
       expect(response).to be_ok
-      expect(response.body).to include(published_entry.headline)
-      expect(response.body).to include(unpublished_entry.headline)
+      expect(response.body).to include(CGI.escapeHTML(published_entry.headline))
+      expect(response.body).to include(CGI.escapeHTML(unpublished_entry.headline))
     end
   end
 
