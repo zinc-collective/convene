@@ -2,7 +2,8 @@
 
 class Marketplace
   class MarketplacesController < FurnitureController
-    def show; end
+    def show
+    end
 
     def edit
       marketplace

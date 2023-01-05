@@ -4,7 +4,7 @@ RSpec.describe Marketplace::MarketplacePolicy, type: :policy do
   subject { described_class }
 
   let(:marketplace) { create(:marketplace) }
-  let(:membership) { create(:membership, space: marketplace.room.space ) }
+  let(:membership) { create(:membership, space: marketplace.room.space) }
   let(:member) { membership.member }
   let(:non_member) { create(:person) }
   let(:guest) { nil }
