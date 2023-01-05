@@ -7,6 +7,11 @@ crumb :journal_entry do |entry|
   link entry.headline, entry.location
 end
 
+crumb :journal_entries do |journal|
+  parent :room, journal.room
+  link "Journal", journal.location
+end
+
 crumb :new_journal_entry do |entry|
   parent :room, entry.room
   link "Add a Journal Entry", journal.entries.new.location
