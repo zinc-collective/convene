@@ -1,1 +1,6 @@
+<%- breadcrumb :edit_marketplace, marketplace %>
 <%= render partial: 'form', locals: { marketplace: marketplace } %>
+
+<%- if policy(marketplace.products.new).create? %>
+  <%= link_to t('marketplace.product.index'), marketplace.location(child: :products) %>
+<%- end %>

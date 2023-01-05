@@ -1,5 +1,4 @@
 <%= form_with model: marketplace.location do |marketplace_form| %>
-  <h2> Configure Marketplace</h2>
   <fieldset>
     <%= render "password_field", form: marketplace_form, attribute: :stripe_api_key %>
     <%= marketplace_form.submit %>

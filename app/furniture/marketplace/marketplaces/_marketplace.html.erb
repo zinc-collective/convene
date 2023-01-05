@@ -9,8 +9,7 @@ end %>
 <%= render cart %>
 
 <div class="m-2 text-center">
-  <%- if policy(marketplace.products.new).create? %>
-    <%= link_to t('.configure_marketplace'), marketplace.location(:edit) %>
-    <%= link_to t('.manage_products'), marketplace.location(child: :products) %>
+  <%- if policy(marketplace).edit? %>
+    <%= link_to t('marketplace.marketplace.edit'), marketplace.location(:edit) %>
   <%- end %>
 </div>
