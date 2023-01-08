@@ -79,6 +79,7 @@ gem "pundit", "~> 2.3"
 
 # Utility hookup support
 gem "money-rails"
+gem "stripe"
 
 # Workers and Background Jobs
 gem "sidekiq"
