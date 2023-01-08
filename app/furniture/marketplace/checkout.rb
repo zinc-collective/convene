@@ -5,6 +5,7 @@ class Marketplace
     self.location_parent = :marketplace
 
     belongs_to :cart, inverse_of: :checkout
+    has_many :ordered_products, through: :cart, source: :cart_products, class_name: "Marketplace::OrderedProduct"
     delegate :marketplace, to: :cart
     belongs_to :shopper, inverse_of: :checkouts
 

@@ -1,5 +1,10 @@
 class Marketplace
   class CheckoutsController < FurnitureController
+
+    def show
+      authorize(checkout)
+    end
+
     def new
       authorize(checkout)
       checkout.save!

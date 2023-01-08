@@ -9,5 +9,9 @@ class Marketplace
 
       checkout.shopper.person == current_person
     end
+
+    def show?
+      true
+    end
   end
 end
