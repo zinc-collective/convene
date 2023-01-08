@@ -4,7 +4,13 @@ class Marketplace
       authorize(checkout)
       checkout.save!
 
-      line_items = checkout.cart.cart_products.map { |cart_product| {price_data: {currency: "USD", unit_amount: cart_product.product.price_cents, product_data: {name: cart_product.product.name}}, quantity: cart_product.quantity, adjustable_quantity: {enabled: true}} }
+      line_items = checkout.cart.cart_products.map do |cart_product|
+        {
+          price_data: {currency: "USD", unit_amount: cart_product.product.price_cents,
+                       product_data: {name: cart_product.product.name}},
+          quantity: cart_product.quantity, adjustable_quantity: {enabled: true}
+        }
+      end
 
       stripe_checkout = Stripe::Checkout::Session.create({
         line_items: line_items,
