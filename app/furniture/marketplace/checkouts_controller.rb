@@ -2,10 +2,24 @@ class Marketplace
   class CheckoutsController < FurnitureController
     def new
       authorize(checkout)
+      checkout.save!
+
+      line_items = checkout.cart.cart_products.map { |cart_product| {price_data: {currency: "USD", unit_amount: cart_product.product.price_cents, product_data: {name: cart_product.product.name}}, quantity: cart_product.quantity, adjustable_quantity: {enabled: true}} }
+
+      stripe_checkout = Stripe::Checkout::Session.create({
+        line_items: line_items,
+        mode: "payment",
+        success_url: polymorphic_url(checkout.location),
+        cancel_url: polymorphic_url(marketplace.location)
+      }, {
+        api_key: marketplace.stripe_api_key
+      })
+
+      redirect_to stripe_checkout.url, status: :see_other, allow_other_host: true
     end
 
     helper_method def checkout
-      @checkout ||= cart.build_checkout(shopper: shopper)
+      @checkout ||= cart.checkout || cart.build_checkout(shopper: shopper)
     end
 
     helper_method def shopper
