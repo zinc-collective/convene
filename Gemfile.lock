@@ -164,7 +164,7 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    listen (3.7.1)
+    listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     lockbox (1.1.1)
@@ -425,7 +425,7 @@ DEPENDENCIES
   gretel (~> 4.4)
   jbuilder (~> 2.11)
   jsbundling-rails
-  listen (~> 3.7)
+  listen (~> 3.8)
   lockbox (= 1.1.1)
   money-rails
   pg (~> 1.4)
