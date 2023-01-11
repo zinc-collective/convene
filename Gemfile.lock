@@ -177,7 +177,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.16.3)
+    minitest (5.17.0)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -385,7 +385,7 @@ GEM
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.3.0)
-    view_component (2.80.0)
+    view_component (2.81.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -457,7 +457,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data (~> 1.2021)
-  view_component (~> 2.80)
+  view_component (~> 2.81)
   web-console (~> 4.2)
   webmock
 
