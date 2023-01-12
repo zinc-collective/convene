@@ -3,12 +3,18 @@ class Marketplace
 
     def show
       authorize(checkout)
+      if params[:stripe_session_id].present?
+        checkout.update!(status: :paid, stripe_session_id: params[:stripe_session_id])
+        checkout.cart.update!(status: :checked_out)
+        flash[:notice] = t('.success')
+      end
     end
 
     def new
       authorize(checkout)
       checkout.save!
 
+      # TODO: handle the case when there are no cart_products
       line_items = checkout.cart.cart_products.map do |cart_product|
         {
           price_data: {currency: "USD", unit_amount: cart_product.product.price_cents,
@@ -20,7 +26,7 @@ class Marketplace
       stripe_checkout = Stripe::Checkout::Session.create({
         line_items: line_items,
         mode: "payment",
-        success_url: polymorphic_url(checkout.location),
+        success_url: "#{polymorphic_url(checkout.location)}?stripe_session_id={CHECKOUT_SESSION_ID}",
         cancel_url: polymorphic_url(marketplace.location)
       }, {
         api_key: marketplace.stripe_api_key

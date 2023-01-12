@@ -4,7 +4,7 @@
     Marketplace::Shopper.find_or_create_by(person: current_person)
 end %>
 
-<%- cart = marketplace.carts.find_or_create_by(shopper: shopper) %>
+<%- cart = marketplace.carts.find_or_create_by(shopper: shopper, status: :pre_checkout) %>
 
 <%= render cart %>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_27_185339) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_12_024425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -139,6 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_185339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "shopper_id"
+    t.string "status", default: "pre_checkout", null: false
     t.index ["marketplace_id"], name: "index_marketplace_carts_on_marketplace_id"
     t.index ["shopper_id"], name: "index_marketplace_carts_on_shopper_id"
   end
@@ -148,6 +149,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_185339) do
     t.uuid "shopper_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "pre_checkout", null: false
+    t.string "stripe_session_id"
     t.index ["cart_id"], name: "index_marketplace_checkouts_on_cart_id"
     t.index ["shopper_id"], name: "index_marketplace_checkouts_on_shopper_id"
   end

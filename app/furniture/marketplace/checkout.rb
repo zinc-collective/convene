@@ -9,6 +9,11 @@ class Marketplace
     delegate :marketplace, to: :cart
     belongs_to :shopper, inverse_of: :checkouts
 
+    enum status: {
+      pre_checkout: "pre_checkout",
+      paid: "paid",
+    }
+
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
     end
