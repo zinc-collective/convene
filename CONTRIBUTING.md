@@ -75,7 +75,7 @@ Designers who have agreed to protect the privacy of our clients may access our
 ### 2.1. Developer Setup and Documentation.
 
 To set up your development environment you'll need `ruby`, `node` and
-`postgresql`. If on Windows using WSl2, please see [this document](docs/windows-wsl-dev-setup.md).
+`postgresql`. If on Windows using WSL2, please see [this document](docs/windows-wsl-dev-setup.md).
 
 First, ensure your development environment has:
 
