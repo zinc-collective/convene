@@ -54,7 +54,7 @@ Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
 
 Generate an updated ERD via: 
 ```bash 
-bundle exec erd --connected --filename=docs/erd --filetype=png
+bundle exec erd
 ```
 
 ### 1.2. Design
