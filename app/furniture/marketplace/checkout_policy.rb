@@ -11,7 +11,7 @@ class Marketplace
     end
 
     def show?
-      true
+      create?
     end
   end
 end
