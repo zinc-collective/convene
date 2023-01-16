@@ -52,7 +52,10 @@ Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
 
 ![Entity Relationship Diagram of Convene, Showing an Overview of our Core Models and Associations](./docs/erd.png)
 
-Generate an updated ERD via: `bundle exec erd --filename=docs/erd --filetype=png`
+Generate an updated ERD via: 
+```bash 
+bundle exec erd
+```
 
 ### 1.2. Design
 
