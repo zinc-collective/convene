@@ -1,0 +1,22 @@
+attributes: content
+title: ConveneWeb Model
+connected: false
+filename: docs/erd
+filetype: png
+direct: false
+inheritance: true
+markup: true
+notation: simple
+polymorphism: true
+sort: false
+prepend_primary: false
+cluster: false
+splines: spline
+exclude: 
+ - Record
+ - ActionMailbox::Record
+ - ActionText::Record
+ - ActiveStorage::Record
+ - ActiveStorage::Blob
+ - ActiveStorage::VariantRecord
+ - ActiveStorage::Attachment
