@@ -33,6 +33,8 @@ class Marketplace
     private
 
     def stripe_checkout_session
+      return unless cart.present?
+
       begin
         @stripe_checkout_session = Stripe::Checkout::Session.create({
           line_items: stripe_line_items,
@@ -48,6 +50,8 @@ class Marketplace
     end
 
     def stripe_line_items
+      return [] unless cart.present?
+
       cart.cart_products.map do |cart_product|
         {
           price_data: {
