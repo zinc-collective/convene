@@ -6,7 +6,7 @@ class Marketplace
       router.resources :carts do
         router.resources :cart_products
       end
-      router.resources :checkouts
+      router.resources :checkouts, only: [:show, :create]
     end
   end
 
