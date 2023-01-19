@@ -12,10 +12,12 @@ class Marketplace
 
     def create
       authorize(checkout)
-      checkout.stripe_success_url = "#{polymorphic_url(checkout.location)}?stripe_session_id={CHECKOUT_SESSION_ID}"
-      checkout.stripe_cancel_url = polymorphic_url(marketplace.location)
       if checkout.save
-        redirect_to checkout.stripe_redirect_url, status: :see_other, allow_other_host: true
+        stripe_session = checkout.create_stripe_session(
+          success_url: "#{polymorphic_url(checkout.location)}?stripe_session_id={CHECKOUT_SESSION_ID}",
+          cancel_url: polymorphic_url(marketplace.location)
+        )
+        redirect_to stripe_session.url, status: :see_other, allow_other_host: true
       else
         redirect_to(
           [marketplace.room.space, marketplace.room],
@@ -38,7 +40,7 @@ class Marketplace
     end
 
     helper_method def cart
-      @cart ||= marketplace.carts.find_or_create_by(shopper: shopper)
+      @cart ||= marketplace.carts.find_or_create_by(shopper: shopper, status: :pre_checkout)
     end
 
     helper_method def marketplace
