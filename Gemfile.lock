@@ -142,7 +142,7 @@ GEM
     ffi (1.15.5)
     friendly_id (5.5.0)
       activerecord (>= 4.0.0)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     gretel (4.4.0)
       actionview (>= 5.1, < 7.1)
