@@ -23,4 +23,14 @@ RSpec.describe Marketplace::CheckoutPolicy, type: :policy do
     it { is_expected.to permit(guest, guest_checkout) }
     it { is_expected.not_to permit(member, guest_checkout) }
   end
+
+  permissions :show? do
+    it { is_expected.to permit(member, member_checkout) }
+    it { is_expected.not_to permit(non_member, member_checkout) }
+    it { is_expected.not_to permit(guest, member_checkout) }
+    it { is_expected.to permit(non_member, non_member_checkout) }
+    it { is_expected.not_to permit(member, non_member_checkout) }
+    it { is_expected.to permit(guest, guest_checkout) }
+    it { is_expected.not_to permit(member, guest_checkout) }
+  end
 end

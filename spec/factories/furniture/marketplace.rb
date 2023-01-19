@@ -18,9 +18,14 @@ FactoryBot.define do
   factory :marketplace_cart, class: "Marketplace::Cart" do
     marketplace
     association(:shopper, factory: :marketplace_shopper)
+
+    trait :with_products do
+      after(:build) do |cart, _evaluator|
+        build(:marketplace_cart_product, cart: cart)
+      end
+    end
   end
 
   factory :marketplace_shopper, class: "Marketplace::Shopper" do
   end
-  
 end

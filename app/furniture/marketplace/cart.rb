@@ -13,6 +13,11 @@ class Marketplace
     has_many :products, through: :cart_products, inverse_of: :carts
     has_one :checkout, inverse_of: :cart
 
+    enum status: {
+      pre_checkout: "pre_checkout",
+      checked_out: "check_out"
+    }
+
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
     end
