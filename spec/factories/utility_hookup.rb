@@ -4,8 +4,8 @@ FactoryBot.define do
     association(:space)
 
     utility_slug { "null" }
-    trait :jitsi do
-      utility_slug { "jitsi" }
+    trait :stripe do
+      utility_slug { "stripe" }
     end
   end
 end

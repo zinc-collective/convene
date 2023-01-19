@@ -96,13 +96,6 @@ The Convene UI is based on Rails standard templating system, with heavy use of:
     which loads all `app/javascript/*_controllers.js` files
 - [Tailwind CSS](https://tailwindcss.com/) to help speed up making good-looking UIs
 
-Jitsi is Convene's video call infrastructure. The
-[video_room_controller.js](./app/javascript/controllers/video_room_controller.js) is the entry point
-where we load a Jitsi video call iframe into Convene's UI.
-
-If you want to run Jitsi locally, see the configuration provided in
-[`infrastructure/jitsi-meet-local`](./infrastructure/jitsi-meet-local/README.md).
-
 See [Architecture](./CONTRIBUTING.md#11-architecture) for how Convene is architected.
 
 ## Configuring Your Development Machine

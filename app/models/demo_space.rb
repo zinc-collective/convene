@@ -47,19 +47,12 @@ class DemoSpace
       name: "Zinc",
       space: {
         name: "Convene Demo",
-        utility_hookups: utility_hookups,
+        utility_hookups: [],
         branded_domain: "convene-demo.zinc.coop",
         members: [{email: "zee@zinc.coop"},
           {email: "vivek@zinc.coop"}],
         rooms: DEMO_ROOMS
       }
     }).find_or_create!
-  end
-
-  def self.utility_hookups
-    [
-      {utility_slug: :jitsi, name: "Jitsi", configuration:
-        {meet_domain: "convene-videobridge-zinc.zinc.coop"}}
-    ]
   end
 end

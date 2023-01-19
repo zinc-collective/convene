@@ -11,7 +11,6 @@ RSpec.describe DemoSpace, type: :model do
           expect(demo_space).to be_persisted
           expect(demo_space.name).to eql("Convene Demo")
           expect(demo_space.slug).to eql("convene-demo")
-          expect(demo_space.jitsi_meet_domain).to eql("convene-videobridge-zinc.zinc.coop")
           expect(demo_space.branded_domain).to eql("convene-demo.zinc.coop")
 
           expect(demo_space.rooms.find_by(name: "Zee's Desk")).to be_present

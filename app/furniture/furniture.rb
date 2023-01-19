@@ -7,7 +7,6 @@ module Furniture
     journal: Journal,
     markdown_text_block: MarkdownTextBlock,
     marketplace: Marketplace,
-    video_bridge: VideoBridge,
     livestream: Livestream,
     embedded_form: EmbeddedForm,
   }.freeze

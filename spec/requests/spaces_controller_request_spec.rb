@@ -62,7 +62,6 @@ RSpec.describe SpacesController, type: :request do
             space = Space.find_by(name: attributes[:name])
             expect(space.rooms).not_to be_empty
             expect(space.memberships).not_to be_empty
-            expect(space.utility_hookups).not_to be_empty
           end
         end
       end

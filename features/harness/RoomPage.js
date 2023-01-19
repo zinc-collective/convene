@@ -20,9 +20,7 @@ class RoomPage extends Page {
   accessCodeForm() {
     return this.component(".access-code-form");
   }
-  videoPanel() {
-    return this.component("[name*='jitsiConferenceFrame']");
-  }
+
   path() {
     return `/spaces/${this.room.space.slug}/rooms/${this.room.slug}`;
   }

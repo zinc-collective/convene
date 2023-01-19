@@ -104,12 +104,8 @@ class Blueprint
 
   BLUEPRINTS = {
     system_test: {
-
       entrance: "entrance-hall",
-      utility_hookups: [
-        {utility_slug: :jitsi, name: "Jitsi", configuration:
-          {meet_domain: "convene-videobridge-zinc.zinc.coop"}}
-      ],
+      utility_hookups: [ ],
       members: [{email: "space-owner@example.com"},
         {email: "space-member@example.com"}],
       rooms: [
@@ -120,7 +116,6 @@ class Blueprint
           access_code: nil,
           furniture_placements: {
             markdown_text_block: {content: "# Welcome!"},
-            video_bridge: {},
           }
         },
         {
@@ -129,7 +124,6 @@ class Blueprint
           access_level: :unlocked,
           access_code: nil,
           furniture_placements: {
-            video_bridge: {}
           }
         },
         {
@@ -137,27 +131,21 @@ class Blueprint
           publicity_level: :listed,
           access_level: :locked,
           access_code: :secret,
-          furniture_placements: {
-            video_bridge: {}
-          }
+          furniture_placements: { }
         },
         {
           name: "Unlisted Room 1",
           publicity_level: :unlisted,
           access_level: :unlocked,
           access_code: nil,
-          furniture_placements: {
-            video_bridge: {}
-          }
+          furniture_placements: { }
         },
         {
           name: "Unlisted Room 2",
           publicity_level: :unlisted,
           access_level: :unlocked,
           access_code: nil,
-          furniture_placements: {
-            video_bridge: {}
-          }
+          furniture_placements: { }
         },
         {
           name: "Entrance Hall",
@@ -165,7 +153,6 @@ class Blueprint
           furniture_placements: {
             markdown_text_block: {content: "# Wooo!"},
           }
-
         }
       ]
     }
@@ -173,43 +160,6 @@ class Blueprint
 
   # @todo migrate this to a private configuration file!
   CLIENTS = [{
-    client: {
-      name: "Zinc",
-      space: {
-        members: [{email: "zee@zinc.coop"}, {email: "cheryl@zinc.coop"}],
-        name: "Zinc", branded_domain: "meet.zinc.coop",
-        entrance: "lobby",
-        utility_hookups: [
-          {
-            utility_slug: :jitsi, name: "Jitsi", configuration:
-            {meet_domain: "convene-videobridge-zinc.zinc.coop"}
-          }
-        ],
-        rooms: [{
-          name: "Lobby",
-          access_level: :unlocked,
-          publicity_level: :unlisted,
-          furniture_placements: {
-            markdown_text_block: {}
-          }
-        }, {
-          name: "Ada",
-          access_level: :unlocked,
-          publicity_level: :listed,
-          furniture_placements: {
-            video_bridge: {}
-          }
-        }, {
-          name: "Talk to Zee",
-          access_level: :unlocked,
-          publicity_level: :unlisted,
-          furniture_placements: {
-            video_bridge: {}
-          }
-        }]
-      }
-    }
-  }, {
     client: {
       name: "Zinc",
       space: {

@@ -55,13 +55,6 @@ class Space < ApplicationRecord
   # @returns {ActiveRecord::Relation<UtilityHookups>}
   has_many :utility_hookups, dependent: :destroy_async
 
-  def jitsi_meet_domain
-    jitsi_hookup = utility_hookups.find_by(utility_slug: :jitsi)
-    return if jitsi_hookup.blank?
-
-    Utilities.from_utility_hookup(jitsi_hookup).meet_domain
-  end
-
   def parent_location
     []
   end
