@@ -40,74 +40,82 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     steps:
-    - uses: actions/checkout@v2
-    # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
-    # Perhaps we should consider not using brew in CI (though it sure is nice!)
-    - uses: raviqqe/enable-homebrew@main
-    - uses: browser-actions/setup-firefox@latest
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
+      # Perhaps we should consider not using brew in CI (though it sure is nice!)
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
+      - name: Set up Homebrew environment
+        uses: Homebrew/actions/setup-homebrew@master
 
-    - name: Increase the amount of inotify watchers
-      run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@latest
 
-    - name: Allow Ruby process to access port 80
-      run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Setup CI database.yml
-      run: cp config/database.yml.github-actions config/database.yml
+      - name: Increase the amount of inotify watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-    - name: Use Development mode env
-      run: cp .env.example .env
+      - name: Allow Ruby process to access port 80
+        run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
 
-    # Yarn caching steps borroed from https://github.com/actions/cache/blob/main/examples.md#node---yarn
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Setup CI database.yml
+        run: cp config/database.yml.github-actions config/database.yml
 
-    - uses: actions/cache@v2
-      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-      with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+      - name: Use Development mode env
+        run: cp .env.example .env
 
-    - name: Get brew cache path
-      id: brew-cache-path
-      run: echo "::set-output name=path::$(brew --cache)"
+      # Yarn caching steps borrowed from https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - name: Configure Homebrew cache
-      uses: actions/cache@v2
-      with:
-        path: ${{ steps.brew-cache-path.outputs.path }}
-        key: ${{ runner.os }}-brew-${{ hashFiles('bin/setup') }}
-        restore-keys: ${{ runner.os }}-brew-
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
-    - name: Setup environment
-      run: |
-          sudo chown -R $USER /usr/local/lib/node_modules
-          sudo chown -R $USER /usr/local/bin/
-          bin/setup
+      - name: Get brew cache path
+        id: brew-cache-path
+        run: echo "::set-output name=path::$(brew --cache)"
 
-    - name: Start Rails server
-      run: |
-          export PATH=$PATH:~/bin
-          bin/run &
+      - name: Configure Homebrew cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.brew-cache-path.outputs.path }}
+          key: ${{ runner.os }}-brew-${{ hashFiles('bin/setup') }}
+          restore-keys: ${{ runner.os }}-brew-
 
-    - name: Run the tests
-      run: |
-          # To wait for asset built
-          # TODO: Start server in production mode
-          curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 40 --retry-connrefused localhost:3000 1> /dev/null
-          bin/test
+      - name: Setup test environment
+        run: |
+            sudo chown -R $USER /usr/local/lib/node_modules
+            sudo chown -R $USER /usr/local/bin/
+            bin/setup
 
-    - uses: actions/upload-artifact@v2
-      if: failure()
-      with:
-        name: feature-test-failed-screenshot
-        path: features/test_reports/*.png
+      - name: Start Rails server
+        run: |
+            export PATH=$PATH:~/bin
+            bin/run &
+
+      - name: Run Tests
+        run: |
+            # To wait for asset built
+            # TODO: Start server in production mode
+            curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 40 --retry-connrefused localhost:3000 1> /dev/null
+            bin/test
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: feature-test-failed-screenshot
+          path: features/test_reports/*.png
