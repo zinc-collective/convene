@@ -6,7 +6,7 @@ require "support/shared_examples/a_space_member_only_route"
 RSpec.describe UtilityHookupsController do
   let(:space) { create(:space, :with_members) }
   let(:utility_hookup_attributes) do
-    attributes_for(:utility_hookup, :jitsi).merge(utility_attributes: {"meet_domain" => "meet.example.com"})
+    attributes_for(:utility_hookup, :stripe).merge(utility_attributes: { "api_token" => "fake-token" })
   end
   let(:utility_hookup) { create(:utility_hookup, space: space) }
 
@@ -88,7 +88,7 @@ RSpec.describe UtilityHookupsController do
         .to(change { space.utility_hookups.count }.by(1))
 
       expect(response).to redirect_to [:edit, space]
-      expect(space.utility_hookups.last.utility_slug).to eql("jitsi")
+      expect(space.utility_hookups.last.utility_slug).to eql("stripe")
       expect(space.utility_hookups.last.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
     end
   end

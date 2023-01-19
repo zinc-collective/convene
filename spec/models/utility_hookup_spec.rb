@@ -7,8 +7,8 @@ RSpec.describe UtilityHookup, type: :model do
 
   describe ".new" do
     it "accepts nested attributes for the utility" do
-      uh = UtilityHookup.new(utility_slug: :jitsi, utility_attributes: {meet_domain: "asdf"})
-      expect(uh.utility.meet_domain).to eq("asdf")
+      uh = UtilityHookup.new(utility_slug: :stripe, utility_attributes: {api_token: "asdf"})
+      expect(uh.utility.api_token).to eq("asdf")
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe UtilityHookup, type: :model do
 
   describe "#configuration" do
     it "starts as an empty hash" do
-      uh = FactoryBot.create(:utility_hookup, :jitsi)
+      uh = FactoryBot.create(:utility_hookup, :stripe)
       expect(uh.configuration).to eq({})
     end
 

@@ -67,7 +67,7 @@ When("the {actor} taps the {room} in the Room Picker", function (actor, room) {
 });
 Then("the {actor} is placed in the {room}", async function (actor, room) {
   const roomPage = new RoomPage(this.driver, room);
-  assert(await roomPage.videoPanel().isDisplayed());
+  assert(await roomPage.hasContent(room.name));
 });
 Then("the {actor} is not placed in the {room}", function (actor, room) {
   // Write code here that turns the phrase above into concrete actions

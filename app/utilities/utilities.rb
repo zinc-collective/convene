@@ -10,7 +10,6 @@
 # @see features/utilities/
 module Utilities
   REGISTRY = {
-    jitsi: Jitsi::JitsiUtility,
     stripe: Stripe::StripeUtility
   }.freeze
 

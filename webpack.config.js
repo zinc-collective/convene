@@ -8,8 +8,7 @@ const __dirname = path.dirname(__filename);
 export const mode = "production";
 export const devtool = "source-map";
 export const entry = {
-    application: "./app/javascript/application.js",
-    furniture_video_bridge: "./app/furniture/video_bridge/index.js"
+    application: "./app/javascript/application.js"
 };
 export const output = {
     filename: "[name].js",

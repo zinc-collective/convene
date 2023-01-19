@@ -66,10 +66,6 @@ class Room < ApplicationRecord
     "#{space.slug}--#{slug}"
   end
 
-  def video_host
-    space.jitsi_meet_domain
-  end
-
   def enterable?(access_code)
     return true if access_level == "unlocked"
 

@@ -29,7 +29,6 @@ RSpec.describe Space::Factory do
         blueprint: :system_test))
 
       expect(space.rooms).to be_present
-      expect(space.utility_hookups).to be_present
     end
   end
 end
