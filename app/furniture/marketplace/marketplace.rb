@@ -13,6 +13,11 @@ class Marketplace
       settings["stripe_api_key"] = key
     end
 
+    def stripe_account
+
+
+    end
+
     def stripe_api_key
       settings["stripe_api_key"]
     end
