@@ -2,7 +2,7 @@ name: Test
 on: push
 
 jobs:
-  test:
+  Build-Application:
     runs-on: ubuntu-latest
 
     env:
@@ -98,16 +98,19 @@ jobs:
       run: |
           export PATH=$PATH:~/bin
           bin/run &
+  Run-Tests:
+    runs-on: ubuntu-latest
+    needs: [Build-Application]
+    steps:
+      - name: Run the tests
+        run: |
+            # To wait for asset built
+            # TODO: Start server in production mode
+            curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 40 --retry-connrefused localhost:3000 1> /dev/null
+            bin/test
 
-    - name: Run the tests
-      run: |
-          # To wait for asset built
-          # TODO: Start server in production mode
-          curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 40 --retry-connrefused localhost:3000 1> /dev/null
-          bin/test
-
-    - uses: actions/upload-artifact@v2
-      if: failure()
-      with:
-        name: feature-test-failed-screenshot
-        path: features/test_reports/*.png
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: feature-test-failed-screenshot
+          path: features/test_reports/*.png
