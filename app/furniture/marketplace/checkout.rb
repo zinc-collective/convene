@@ -5,9 +5,11 @@ class Marketplace
     self.location_parent = :marketplace
 
     belongs_to :cart, inverse_of: :checkout
+
     has_many :ordered_products, through: :cart, source: :cart_products, class_name: "Marketplace::OrderedProduct"
     delegate :marketplace, to: :cart
     belongs_to :shopper, inverse_of: :checkouts
+
 
     # It would be nice to validate instead the presence of :ordered_products, but my attempts at this raise:
     #  ActiveRecord::HasManyThroughCantAssociateThroughHasOneOrManyReflection:

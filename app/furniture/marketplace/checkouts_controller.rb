@@ -12,6 +12,7 @@ class Marketplace
 
     def create
       authorize(checkout)
+
       if checkout.save
         stripe_session = checkout.create_stripe_session(
           success_url: "#{polymorphic_url(checkout.location)}?stripe_session_id={CHECKOUT_SESSION_ID}",
@@ -28,7 +29,11 @@ class Marketplace
     end
 
     helper_method def checkout
-      @checkout ||= cart.checkout || cart.build_checkout(shopper: shopper)
+      @checkout ||= if params[:id]
+        Checkout.find(params[:id])
+      else
+        cart.checkout || cart.build_checkout(shopper: shopper)
+      end
     end
 
     helper_method def shopper

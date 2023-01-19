@@ -5,6 +5,18 @@ RSpec.describe Marketplace::Checkout, type: :request do
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
 
+  describe "#show" do
+    let!(:cart) { create(:marketplace_cart, :with_products, marketplace: marketplace) }
+    let(:checkout) { create(:marketplace_checkout, cart: cart, shopper: cart.shopper)}
+    context "when a stripe_session_id is in the params" do
+      it "marks the cart as checked out" do
+        get polymorphic_path([space, room, marketplace, checkout], { stripe_session_id: "12345" })
+        expect(cart.reload).to be_checked_out
+        expect(checkout.reload).to be_paid
+      end
+    end
+  end
+
   describe "#create" do
     subject {
       post polymorphic_path([space, room, marketplace, :checkouts])
