@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_19_012952) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_19_014621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -208,7 +208,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_19_012952) do
 
   create_table "spaces", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "client_id"
-    t.string "jitsi_meet_domain"
     t.string "name"
     t.string "slug"
     t.datetime "created_at", null: false
