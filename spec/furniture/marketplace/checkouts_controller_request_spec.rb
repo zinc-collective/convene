@@ -17,7 +17,7 @@ RSpec.describe Marketplace::Checkout, type: :request do
 
     before do
       allow(Stripe::Checkout::Session).to receive(:create).and_return(stripe_checkout_session)
-      allow_any_instance_of(ApplicationController).to receive(:session).and_return({ current_cart: cart.shopper.id })
+      allow_any_instance_of(ApplicationController).to receive(:session).and_return({ guest_shopper_id: cart.shopper.id })
     end
 
     context "when a Guest checks out their Cart" do
