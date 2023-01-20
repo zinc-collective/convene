@@ -31,7 +31,10 @@ class Marketplace
         line_items: stripe_line_items,
         mode: "payment",
         success_url: success_url,
-        cancel_url: cancel_url
+        cancel_url: cancel_url,
+        payment_intent_data: {
+          transfer_group: id
+        }
       }, {
         api_key: marketplace.stripe_api_key
       })
