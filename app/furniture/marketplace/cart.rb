@@ -12,7 +12,7 @@ class Marketplace
     has_many :cart_products, dependent: :destroy, inverse_of: :cart
     has_many :products, through: :cart_products, inverse_of: :carts
     has_one :checkout, inverse_of: :cart
-    has_one :order, inverse_of: :cart, class_name: "Order"
+    has_one :order, inverse_of: :cart
 
     enum status: {
       pre_checkout: "pre_checkout",
