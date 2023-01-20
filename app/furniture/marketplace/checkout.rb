@@ -5,9 +5,10 @@ class Marketplace
     self.location_parent = :marketplace
 
     belongs_to :cart, inverse_of: :checkout
+    delegate :marketplace, to: :cart
 
     has_many :ordered_products, through: :cart, source: :cart_products, class_name: "Marketplace::OrderedProduct"
-    delegate :marketplace, to: :cart
+
     belongs_to :shopper, inverse_of: :checkouts
 
     # It would be nice to validate instead the presence of :ordered_products, but my attempts at this raise:
@@ -36,6 +37,11 @@ class Marketplace
       }, {
         api_key: marketplace.stripe_api_key
       })
+    end
+
+    def complete(stripe_session_id:)
+      update!(status: :paid, stripe_session_id: stripe_session_id)
+      cart.update!(status: :checked_out)
     end
 
     private

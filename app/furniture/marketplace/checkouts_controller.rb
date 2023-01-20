@@ -1,12 +1,12 @@
 class Marketplace
-  class CheckoutsController < FurnitureController
+  class CheckoutsController < Controller
     def show
       authorize(checkout)
       if params[:stripe_session_id].present?
-        checkout.update!(status: :paid, stripe_session_id: params[:stripe_session_id])
-        checkout.cart.update!(status: :checked_out)
+        checkout.complete(stripe_session_id: params[:stripe_session_id])
         flash[:notice] = t(".success")
       end
+      redirect_to checkout.becomes(Order).location
     end
 
     def create
@@ -35,20 +35,8 @@ class Marketplace
       end
     end
 
-    helper_method def shopper
-      @shopper ||= if current_person.is_a?(Guest)
-        Shopper.find_or_create_by(id: session[:guest_shopper_id] ||= SecureRandom.uuid)
-      else
-        Shopper.find_or_create_by(person: current_person)
-      end
-    end
-
     helper_method def cart
       @cart ||= marketplace.carts.find_or_create_by(shopper: shopper, status: :pre_checkout)
-    end
-
-    helper_method def marketplace
-      @marketplace ||= policy_scope(Marketplace).find(params[:marketplace_id])
     end
   end
 end

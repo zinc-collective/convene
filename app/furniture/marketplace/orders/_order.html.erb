@@ -1,4 +1,4 @@
-<h1>Ordered on <%= checkout.created_at.to_fs(:long_ordinal) %>
+<h1>Ordered on <%= order.created_at.to_fs(:long_ordinal) %>
 <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
   <table class="min-w-full divide-y divide-gray-300 table-fixed">
     <thead class="bg-gray-50">
@@ -16,14 +16,14 @@
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-200 bg-white">
-      <%= render checkout.ordered_products %>
+      <%= render order.ordered_products %>
     </tbody>
-    <tfoot id="checkout-footer-<%= checkout.id%>" class="bg-gray-50">
+    <tfoot id="checkout-footer-<%= order.id%>" class="bg-gray-50">
       <tr>
         <td></td>
         <th scope="row" class="text-right px-1 py-3.5">Total: </th>
         <td class="text-left px-3 py-3.5 font-bold">
-          <%= render "marketplace/carts/total" %>
+          <%= render "marketplace/carts/total", cart: order.cart %>
         </td>
       </tr>
     </tfoot>
