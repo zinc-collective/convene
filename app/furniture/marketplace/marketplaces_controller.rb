@@ -11,9 +11,9 @@ class Marketplace
 
     def update
       if marketplace.update(params[:marketplace].permit([:stripe_api_key]))
-        redirect_to marketplace.location(:edit), notice: t('.success')
+        redirect_to marketplace.location(:edit), notice: t(".success")
       else
-        flash[:alert] = t('.failure')
+        flash[:alert] = t(".failure")
         render :edit, status: :unprocessable_entity
       end
     end

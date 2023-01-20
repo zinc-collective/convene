@@ -10,7 +10,6 @@ class Marketplace
     delegate :marketplace, to: :cart
     belongs_to :shopper, inverse_of: :checkouts
 
-
     # It would be nice to validate instead the presence of :ordered_products, but my attempts at this raise:
     #  ActiveRecord::HasManyThroughCantAssociateThroughHasOneOrManyReflection:
     #   Cannot modify association 'Marketplace::Checkout#ordered_products' because the source reflection class 'CartProduct' is associated to 'Cart' via :has_many.
@@ -18,15 +17,14 @@ class Marketplace
 
     enum status: {
       pre_checkout: "pre_checkout",
-      paid: "paid",
+      paid: "paid"
     }
 
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
     end
 
-
-    def create_stripe_session(success_url: , cancel_url: )
+    def create_stripe_session(success_url:, cancel_url:)
       Stripe::Checkout::Session.create({
         line_items: stripe_line_items,
         mode: "payment",
@@ -53,7 +51,7 @@ class Marketplace
             product_data: {name: cart_product.product.name}
           },
           quantity: cart_product.quantity,
-          adjustable_quantity: { enabled: true }
+          adjustable_quantity: {enabled: true}
         }
       end
     end

@@ -1,12 +1,11 @@
 class Marketplace
   class CheckoutsController < FurnitureController
-
     def show
       authorize(checkout)
       if params[:stripe_session_id].present?
         checkout.update!(status: :paid, stripe_session_id: params[:stripe_session_id])
         checkout.cart.update!(status: :checked_out)
-        flash[:notice] = t('.success')
+        flash[:notice] = t(".success")
       end
     end
 

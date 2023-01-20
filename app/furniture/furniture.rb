@@ -8,7 +8,7 @@ module Furniture
     markdown_text_block: MarkdownTextBlock,
     marketplace: Marketplace,
     livestream: Livestream,
-    embedded_form: EmbeddedForm,
+    embedded_form: EmbeddedForm
   }.freeze
 
   # Appends each Furnitures CRUD actions within the {Room}

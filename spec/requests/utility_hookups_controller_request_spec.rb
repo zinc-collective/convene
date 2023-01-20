@@ -6,7 +6,7 @@ require "support/shared_examples/a_space_member_only_route"
 RSpec.describe UtilityHookupsController do
   let(:space) { create(:space, :with_members) }
   let(:utility_hookup_attributes) do
-    attributes_for(:utility_hookup, :stripe).merge(utility_attributes: { "api_token" => "fake-token" })
+    attributes_for(:utility_hookup, :stripe).merge(utility_attributes: {"api_token" => "fake-token"})
   end
   let(:utility_hookup) { create(:utility_hookup, space: space) }
 

@@ -6,7 +6,7 @@ RSpec.describe FurniturePlacement do
 
   describe "#furniture" do
     it "returns the configured piece of furniture" do
-      furniture_placement = build(:furniture_placement, settings: { content: "# A Block"})
+      furniture_placement = build(:furniture_placement, settings: {content: "# A Block"})
 
       expect(furniture_placement.furniture).to be_a(MarkdownTextBlock)
       expect(furniture_placement.furniture.content).to eql("# A Block")

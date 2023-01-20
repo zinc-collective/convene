@@ -9,7 +9,7 @@ class UtilityHookup < ApplicationRecord
   # has multiple {UtilityHookup}s.
   # @return [String]
   attribute :name, :string
-  validates :name, presence: :true, uniqueness: { scope: :space_id }
+  validates :name, presence: :true, uniqueness: {scope: :space_id}
 
   def name
     self[:name] ||= utility_slug.to_s.humanize

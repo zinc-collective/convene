@@ -2,7 +2,7 @@
 
 class Marketplace
   class Product < ApplicationRecord
-    self.table_name = 'marketplace_products'
+    self.table_name = "marketplace_products"
     include WithinLocation
     self.location_parent = :marketplace
 

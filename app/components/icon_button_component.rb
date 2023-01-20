@@ -20,8 +20,8 @@ class IconButtonComponent < ViewComponent::Base
   private
 
   def data
-    data = { turbo_method: @method, turbo: true }
-    data.merge!({ turbo_confirm: @confirm, confirm: @confirm }) if @confirm.present?
+    data = {turbo_method: @method, turbo: true}
+    data.merge!({turbo_confirm: @confirm, confirm: @confirm}) if @confirm.present?
     data
   end
 end
