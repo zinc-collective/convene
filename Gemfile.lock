@@ -270,7 +270,7 @@ GEM
     redcarpet (3.5.1)
     redis-client (0.12.0)
       connection_pool
-    regexp_parser (2.6.1)
+    regexp_parser (2.6.2)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
@@ -320,9 +320,9 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
-    rubocop-rspec (2.18.0)
+    rubocop-rspec (2.18.1)
       rubocop (~> 1.33)
-      rubocop-capybara
+      rubocop-capybara (~> 2.17)
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.11.0)
