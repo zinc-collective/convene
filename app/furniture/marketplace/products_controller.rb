@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class ProductsController < FurnitureController
+  class ProductsController < Controller
     def new
       authorize(marketplace.products.new)
     end
@@ -39,10 +39,6 @@ class Marketplace
       else
         render :edit
       end
-    end
-
-    helper_method def marketplace
-      @marketplace ||= policy_scope(Marketplace).find(params[:marketplace_id])
     end
 
     helper_method def product

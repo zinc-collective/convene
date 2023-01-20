@@ -17,6 +17,12 @@ crumb :marketplace_checkout do |checkout|
   link "Checkout", checkout.location
 end
 
+crumb :marketplace_order do |order|
+  parent :marketplace, order.marketplace
+  link "Order from #{order.created_at.to_fs(:long_ordinal)}", order.location
+end
+
+
 crumb :marketplace_products do |marketplace|
   parent :edit_marketplace, marketplace
   link t("marketplace.product.index"), marketplace.location(child: :products)

@@ -1,5 +1,5 @@
 class Marketplace
-  class CartProductsController < FurnitureController
+  class CartProductsController < Controller
     def create
       authorize(cart_product)
       cart_product.save
@@ -96,10 +96,6 @@ class Marketplace
 
     def cart
       marketplace.carts.find(params[:cart_id])
-    end
-
-    helper_method def marketplace
-      @marketplace ||= policy_scope(Marketplace).find(params[:marketplace_id])
     end
 
     def cart_product_params

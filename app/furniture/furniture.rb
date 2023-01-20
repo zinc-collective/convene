@@ -15,6 +15,7 @@ module Furniture
   def self.append_routes(router)
     REGISTRY.each_value do |furniture|
       furniture.append_routes(router) if furniture.respond_to?(:append_routes)
+      furniture.const_get(:Routes).append_routes(router) if furniture.const_defined?(:Routes)
     end
   end
 
