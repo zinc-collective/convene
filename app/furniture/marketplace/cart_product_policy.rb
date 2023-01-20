@@ -2,7 +2,7 @@
 
 class Marketplace
   class CartProductPolicy < ApplicationPolicy
-    alias cart_product object
+    alias_method :cart_product, :object
     def permitted_attributes(_params = nil)
       %i[quantity product_id]
     end

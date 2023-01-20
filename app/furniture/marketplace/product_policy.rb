@@ -2,7 +2,7 @@
 
 class Marketplace
   class ProductPolicy < ApplicationPolicy
-    alias product object
+    alias_method :product, :object
     def permitted_attributes(_params = nil)
       %i[name description price_cents price_currency price]
     end

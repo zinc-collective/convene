@@ -105,7 +105,7 @@ class Blueprint
   BLUEPRINTS = {
     system_test: {
       entrance: "entrance-hall",
-      utility_hookups: [ ],
+      utility_hookups: [],
       members: [{email: "space-owner@example.com"},
         {email: "space-member@example.com"}],
       rooms: [
@@ -115,7 +115,7 @@ class Blueprint
           access_level: :unlocked,
           access_code: nil,
           furniture_placements: {
-            markdown_text_block: {content: "# Welcome!"},
+            markdown_text_block: {content: "# Welcome!"}
           }
         },
         {
@@ -123,35 +123,34 @@ class Blueprint
           publicity_level: :listed,
           access_level: :unlocked,
           access_code: nil,
-          furniture_placements: {
-          }
+          furniture_placements: {}
         },
         {
           name: "Listed Locked Room 1",
           publicity_level: :listed,
           access_level: :locked,
           access_code: :secret,
-          furniture_placements: { }
+          furniture_placements: {}
         },
         {
           name: "Unlisted Room 1",
           publicity_level: :unlisted,
           access_level: :unlocked,
           access_code: nil,
-          furniture_placements: { }
+          furniture_placements: {}
         },
         {
           name: "Unlisted Room 2",
           publicity_level: :unlisted,
           access_level: :unlocked,
           access_code: nil,
-          furniture_placements: { }
+          furniture_placements: {}
         },
         {
           name: "Entrance Hall",
           publicity_level: :unlisted,
           furniture_placements: {
-            markdown_text_block: {content: "# Wooo!"},
+            markdown_text_block: {content: "# Wooo!"}
           }
         }
       ]

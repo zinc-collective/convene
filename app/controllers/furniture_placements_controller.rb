@@ -1,4 +1,11 @@
 class FurniturePlacementsController < ApplicationController
+  def edit
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
+  end
+
   def create
     respond_to do |format|
       if furniture_placement.save!
@@ -10,13 +17,6 @@ class FurniturePlacementsController < ApplicationController
         end
         format.turbo_stream
       end
-    end
-  end
-
-  def edit
-    respond_to do |format|
-      format.turbo_stream
-      format.html
     end
   end
 

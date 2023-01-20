@@ -2,7 +2,7 @@
 
 class Marketplace
   class Shopper < ApplicationRecord
-    self.table_name = 'marketplace_shoppers'
+    self.table_name = "marketplace_shoppers"
 
     belongs_to :person, optional: true
     has_many :carts, inverse_of: :shopper

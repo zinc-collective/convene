@@ -7,7 +7,7 @@ RSpec.describe IconButtonComponent, type: :component do
     subject { render_inline(component) }
 
     let(:component) { described_class.new(**params) }
-    let(:params) { { label: "Some label", title: "Our Title", href: "somewhere.com" } }
+    let(:params) { {label: "Some label", title: "Our Title", href: "somewhere.com"} }
 
     let(:a_el) { subject.at_css("a") }
 
@@ -19,7 +19,7 @@ RSpec.describe IconButtonComponent, type: :component do
     end
 
     context "when confirm is false" do
-      let(:component) { described_class.new(**params.merge({ confirm: false })) }
+      let(:component) { described_class.new(**params.merge({confirm: false})) }
 
       it "does not include confirm nor turbo-confirm" do
         expect(a_el.attributes).not_to include("data-confirm")
@@ -29,7 +29,7 @@ RSpec.describe IconButtonComponent, type: :component do
 
     context "when confirm is present" do
       let(:confirm_text) { "you sure????" }
-      let(:component) { described_class.new(**params.merge({ confirm: confirm_text })) }
+      let(:component) { described_class.new(**params.merge({confirm: confirm_text})) }
 
       it "includes confirm and turbo-confirm" do
         expect(a_el.attributes["data-confirm"].value).to eq(confirm_text)
@@ -38,7 +38,7 @@ RSpec.describe IconButtonComponent, type: :component do
     end
 
     context "when disabled is true" do
-      let(:component) { described_class.new(**params.merge({ disabled: true })) }
+      let(:component) { described_class.new(**params.merge({disabled: true})) }
 
       it "does not render a link" do
         expect(a_el).not_to be_present
