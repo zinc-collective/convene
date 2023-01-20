@@ -213,117 +213,117 @@ jobs:
           name: feature-test-failed-screenshot
           path: features/test_reports/*.png
 
-test-features:
-  name: Run Browser Tests
-  runs-on: ubuntu-latest
-  needs: [build]
+  test-features:
+    name: Run Browser Tests
+    runs-on: ubuntu-latest
+    needs: [build]
 
-  env:
-    POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: postgres
-    # Connect to locally-running Maildev for tests
-    SMTP_PORT: 1025
-    SMTP_DOMAIN: localhost
-    SMTP_ENABLE_TLS: false
-    REDIS_HOST: redis
-    REDIS_PORT: 6379
-    HEADLESS: true
-    AWS_S3_ACCESS_KEY_ID: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
-    AWS_S3_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
-    AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      # Connect to locally-running Maildev for tests
+      SMTP_PORT: 1025
+      SMTP_DOMAIN: localhost
+      SMTP_ENABLE_TLS: false
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      HEADLESS: true
+      AWS_S3_ACCESS_KEY_ID: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+      AWS_S3_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
+      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
 
-  services:
-    postgres:
-      image: postgres:12
-      env:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-      ports:
-        - 5432:5432
-      # needed because the postgres container does not provide a healthcheck
-      options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    redis:
-      image: redis
-      ports:
-        # Maps port 6379 on service container to the host
-        - 6379:6379
-      # Set health checks to wait until redis has started
-      options: >-
-        --health-cmd "redis-cli ping"
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
-    # Perhaps we should consider not using brew in CI (though it sure is nice!)
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis
+        ports:
+          # Maps port 6379 on service container to the host
+          - 6379:6379
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
+      # Perhaps we should consider not using brew in CI (though it sure is nice!)
 
-    - name: Set up Homebrew environment
-      uses: Homebrew/actions/setup-homebrew@master
+      - name: Set up Homebrew environment
+        uses: Homebrew/actions/setup-homebrew@master
 
-    - name: Install Firefox
-      uses: browser-actions/setup-firefox@latest
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@latest
 
-    - name: Setup Ruby and install gems
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
 
-    - name: Increase the amount of inotify watchers
-      run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      - name: Increase the amount of inotify watchers
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-    - name: Allow Ruby process to access port 80
-      run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
+      - name: Allow Ruby process to access port 80
+        run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
 
-    - name: Setup CI database.yml
-      run: cp config/database.yml.github-actions config/database.yml
+      - name: Setup CI database.yml
+        run: cp config/database.yml.github-actions config/database.yml
 
-    - name: Use Development mode env
-      run: cp .env.example .env
+      - name: Use Development mode env
+        run: cp .env.example .env
 
-    # Yarn caching steps borrowed from https://github.com/actions/cache/blob/main/examples.md#node---yarn
-    - name: Get yarn cache directory path
-      id: yarn-cache-dir-path
-      run: echo "::set-output name=dir::$(yarn cache dir)"
+      # Yarn caching steps borrowed from https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-      with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
-    - name: Get brew cache path
-      id: brew-cache-path
-      run: echo "::set-output name=path::$(brew --cache)"
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Get brew cache path
+        id: brew-cache-path
+        run: echo "::set-output name=path::$(brew --cache)"
 
-    - name: Configure Homebrew cache
-      uses: actions/cache@v2
-      with:
-        path: ${{ steps.brew-cache-path.outputs.path }}
-        key: ${{ runner.os }}-brew-${{ hashFiles('bin/setup') }}
-        restore-keys: ${{ runner.os }}-brew-
+      - name: Configure Homebrew cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.brew-cache-path.outputs.path }}
+          key: ${{ runner.os }}-brew-${{ hashFiles('bin/setup') }}
+          restore-keys: ${{ runner.os }}-brew-
 
-    - name: Setup test environment
-      run: |
-        sudo chown -R $USER /usr/local/lib/node_modules
-        sudo chown -R $USER /usr/local/bin/
-        bin/setup
-    - name: Start Rails server
-      run: |
-        export PATH=$PATH:~/bin
-        bin/run &
-    - name: Run Tests
-      run: |
-        # To wait for asset built
-        # TODO: Start server in production mode
-        curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 40 --retry-connrefused localhost:3000 1> /dev/null
-        yarn run test
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v2
-      if: failure()
-      with:
-        name: feature-test-failed-screenshot
-        path: features/test_reports/*.png
+      - name: Setup test environment
+        run: |
+          sudo chown -R $USER /usr/local/lib/node_modules
+          sudo chown -R $USER /usr/local/bin/
+          bin/setup
+      - name: Start Rails server
+        run: |
+          export PATH=$PATH:~/bin
+          bin/run &
+      - name: Run Tests
+        run: |
+          # To wait for asset built
+          # TODO: Start server in production mode
+          curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 40 --retry-connrefused localhost:3000 1> /dev/null
+          yarn run test
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: feature-test-failed-screenshot
+          path: features/test_reports/*.png
