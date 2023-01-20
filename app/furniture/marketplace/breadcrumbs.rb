@@ -22,7 +22,6 @@ crumb :marketplace_order do |order|
   link "Order from #{order.created_at.to_fs(:long_ordinal)}", order.location
 end
 
-
 crumb :marketplace_products do |marketplace|
   parent :edit_marketplace, marketplace
   link t("marketplace.product.index"), marketplace.location(child: :products)

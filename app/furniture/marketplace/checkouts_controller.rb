@@ -4,7 +4,7 @@ class Marketplace
       authorize(checkout)
       if params[:stripe_session_id].present?
         checkout.complete(stripe_session_id: params[:stripe_session_id])
-        flash[:notice] = t('.success')
+        flash[:notice] = t(".success")
       end
       redirect_to checkout.becomes(Order).location
     end
