@@ -45,6 +45,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
+      # Perhaps we should consider not using brew in CI (though it sure is nice!)
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
@@ -76,6 +77,10 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - name: Get brew cache path
+        id: brew-cache-path
+        run: echo "::set-output name=path::$(brew --cache)"
+        run: echo "::set-output name=path::$(brew --cache)"
 
       - name: Setup test environment
         run: |
@@ -131,6 +136,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
+      # Perhaps we should consider not using brew in CI (though it sure is nice!)
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
@@ -162,6 +168,9 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - name: Get brew cache path
+        id: brew-cache-path
+        run: echo "::set-output name=path::$(brew --cache)"
 
       - name: Setup test environment
         run: |
@@ -229,6 +238,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
+      # Perhaps we should consider not using brew in CI (though it sure is nice!)
 
       - name: Install Firefox
         uses: browser-actions/setup-firefox@latest
@@ -263,6 +273,9 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+      - name: Get brew cache path
+        id: brew-cache-path
+        run: echo "::set-output name=path::$(brew --cache)"
 
       - name: Setup test environment
         run: |
