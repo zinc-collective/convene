@@ -4,15 +4,15 @@ connected: false
 filename: docs/erd
 filetype: png
 direct: false
-inheritance: true
+inheritance: false
 markup: true
 notation: simple
-polymorphism: true
-sort: false
+polymorphism: false
+sort: true
 prepend_primary: false
-cluster: false
+cluster: true
 splines: spline
-exclude: 
+exclude:
  - Record
  - ActionMailbox::Record
  - ActionText::Record
