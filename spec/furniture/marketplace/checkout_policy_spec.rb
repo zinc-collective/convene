@@ -10,9 +10,9 @@ RSpec.describe Marketplace::CheckoutPolicy, type: :policy do
 
   let(:marketplace) { create(:marketplace) }
 
-  let(:member_checkout) { build(:marketplace_checkout, :with_cart, :with_shopper, marketplace: marketplace, person: member) }
-  let(:guest_checkout) { build(:marketplace_checkout, :with_cart, :with_shopper, marketplace: marketplace) }
-  let(:non_member_checkout) { build(:marketplace_checkout, :with_cart, :with_shopper, marketplace: marketplace, person: non_member) }
+  let(:member_checkout) { build(:marketplace_checkout, :with_cart, marketplace: marketplace, person: member) }
+  let(:guest_checkout) { build(:marketplace_checkout, :with_cart, marketplace: marketplace) }
+  let(:non_member_checkout) { build(:marketplace_checkout, :with_cart, marketplace: marketplace, person: non_member) }
 
   permissions :new? do
     it { is_expected.to permit(member, member_checkout) }

@@ -6,7 +6,7 @@ class Marketplace
 
     has_many :products, inverse_of: :marketplace, dependent: :destroy
     has_many :carts, inverse_of: :marketplace, dependent: :destroy
-    has_many :orders, through: :carts
+    has_many :orders, inverse_of: :marketplace
 
     # The Secret Stripe API key belonging to the owner of the Marketplace
     def stripe_api_key=(key)

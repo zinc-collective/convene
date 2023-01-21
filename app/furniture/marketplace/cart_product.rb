@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class CartProduct < ApplicationRecord
+  class CartProduct < Record
     self.table_name = "marketplace_cart_products"
 
     belongs_to :cart, inverse_of: :cart_products
@@ -14,14 +14,10 @@ class Marketplace
 
     attribute :quantity, :integer, default: 0
 
-    def self.model_name
-      @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
-    end
-
     private
 
     def editable_cart
-      return unless cart&.checked_out?
+      return if cart&.pre_checkout?
 
       errors.add(:base, "Can't edit a checked-out cart!")
     end

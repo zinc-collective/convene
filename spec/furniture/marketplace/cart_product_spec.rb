@@ -13,7 +13,7 @@ RSpec.describe Marketplace::CartProduct, type: :model do
 
     it "can't be edited for a checked_out cart" do
       cart.cart_products.first.update!(quantity: 42)
-      cart.checked_out!
+      cart.paid!
       expect { cart.cart_products.first.update!(quantity: 17) }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
