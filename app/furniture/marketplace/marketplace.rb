@@ -14,11 +14,11 @@ class Marketplace
     end
 
     def stripe_account
-      settings['stripe_account']
+      settings["stripe_account"]
     end
 
     def stripe_account=stripe_account
-      settings['stripe_account']=stripe_account
+      settings["stripe_account"] = stripe_account
     end
 
     def self.model_name
