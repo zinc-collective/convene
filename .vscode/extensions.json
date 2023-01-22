@@ -8,6 +8,8 @@
     "esbenp.prettier-vscode",
     "rebornix.ruby",
     "wingrunr21.vscode-ruby",
-    "valentjn.vscode-ltex"
+    "valentjn.vscode-ltex",
+    "bierner.markdown-mermaid",
+    "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
   ]
 }
