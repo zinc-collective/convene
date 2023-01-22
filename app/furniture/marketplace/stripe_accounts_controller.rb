@@ -2,14 +2,18 @@ class Marketplace
   class StripeAccountsController < FurnitureController
     def create
       authorize(marketplace, :edit?)
-      account = Stripe::Account.create({type: "standard"}, {
-        api_key: marketplace.stripe_api_key
-      })
+      if marketplace.stripe_account.blank?
+        account = Stripe::Account.create({type: "standard"}, {
+          api_key: marketplace.stripe_api_key
+        })
+        marketplace.update(stripe_account: account.id)
+      end
+
       account_link = Stripe::AccountLink.create(
         {
-          account: account.id,
+          account: marketplace.stripe_account_id,
           refresh_url: "https://example.com/reauth",
-          return_url: "https://example.com/return",
+          return_url: polymorphic_url(marketplace.location(child: :stripe_account)),
           type: "account_onboarding"
         },
         {

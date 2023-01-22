@@ -9,15 +9,16 @@ class Marketplace
     has_many :orders, inverse_of: :marketplace
 
     # The Secret Stripe API key belonging to the owner of the Marketplace
-    def stripe_api_key=(key)
-      settings["stripe_api_key"] = key
+    def stripe_api_key
+      space.utility_hookups.find_by!(utility_slug: :stripe).utility.api_token
     end
 
     def stripe_account
+      settings['stripe_account']
     end
 
-    def stripe_api_key
-      settings["stripe_api_key"]
+    def stripe_account=stripe_account
+      settings['stripe_account']=stripe_account
     end
 
     def self.model_name
