@@ -4,7 +4,9 @@
 
 ### Shopper Purchases Products
 
-<!-- it would be cool if someone could Mermaid this -->
+<!-- Chart created with Mermaid see: docs/checkout_flow_diagram_mermaid.txt -->
+
+![](../../../docs/checkout_flow_diagram.png)
 
 1. `Shopper` links `Product`s to their `Cart` by creating a `CartProduct` record which keeps track of things like quantity, discounts, special requests, etc.
 2. `Shopper` creates a `Checkout`, which directs them to the `Distributor`'s Payment Processor (Stripe, for now).
