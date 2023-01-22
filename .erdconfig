@@ -8,7 +8,7 @@ inheritance: false
 markup: true
 notation: simple
 polymorphism: false
-sort: true
+sort: false
 prepend_primary: false
 cluster: true
 splines: spline

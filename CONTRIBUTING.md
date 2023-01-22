@@ -1,5 +1,9 @@
 - [1. Getting Oriented.](#1-getting-oriented)
+  - [1.1. Architecture](#11-architecture)
+  - [1.2. Design](#12-design)
 - [2. Machine Setup.](#2-machine-setup)
+  - [2.1. Developer Setup and Documentation.](#21-developer-setup-and-documentation)
+  - [2.2. Infrastructure Setup and Documentation.](#22-infrastructure-setup-and-documentation)
 
 ## 1. Getting Oriented.
 
