@@ -6,7 +6,16 @@
 
 <!-- Chart created with Mermaid see: docs/checkout_flow_diagram_mermaid.txt -->
 
-![](../../../docs/checkout_flow_diagram.png)
+```mermaid
+flowchart TD
+    A[Shopper] -- 1. adds Products to Cart --> B(Product)  --> C(Cart)
+    C(Cart) --> D[CartProduct]
+    B(Product)  --> D[CartProduct] -. contains .- id1>quantity, discounts, etc]
+    A[Shopper] -- 2. goes thru Checkout flow --> E(Checkout) --a.  process this payment --> F(Payment Processor)
+    F(Payment Processor) -- b. Payment Successfully processed ----> E(Checkout)
+    E(Checkout) -- c. updated with payment processor details --> E(Checkout)
+    A[Shopper] -- 3. Successsfully purchased items in Cart --> G(Order) -.- id2>read-only Cart]
+```
 
 1. `Shopper` links `Product`s to their `Cart` by creating a `CartProduct` record which keeps track of things like quantity, discounts, special requests, etc.
 2. `Shopper` creates a `Checkout`, which directs them to the `Distributor`'s Payment Processor (Stripe, for now).
