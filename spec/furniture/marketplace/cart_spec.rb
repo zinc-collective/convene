@@ -9,8 +9,6 @@ RSpec.describe Marketplace::Cart, type: :model do
 
   it { is_expected.to belong_to(:shopper).inverse_of(:carts) }
 
-  it { is_expected.to have_one(:checkout).inverse_of(:cart) }
-
   describe "#price_total" do
     subject(:price_total) { cart.price_total }
 

@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class Product < ApplicationRecord
+  class Product < Record
     self.table_name = "marketplace_products"
-    include WithinLocation
     self.location_parent = :marketplace
 
     extend StripsNamespaceFromModelName
@@ -13,6 +12,9 @@ class Marketplace
 
     has_many :cart_products, inverse_of: :product, dependent: :destroy
     has_many :carts, through: :cart_products, inverse_of: :products
+
+    has_many :ordered_products, inverse_of: :product, dependent: :destroy
+    has_many :orders, through: :ordered_products, inverse_of: :products
 
     attribute :name, :string
     validates :name, presence: true

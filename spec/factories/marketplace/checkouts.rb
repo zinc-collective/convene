@@ -1,19 +1,13 @@
 FactoryBot.define do
   factory :marketplace_checkout, class: "Marketplace::Checkout" do
-    trait :with_shopper do
-      transient do
-        person { nil }
-      end
-
-      shopper { build(:marketplace_shopper, person: person) }
-    end
-
     trait :with_cart do
       transient do
         marketplace { nil }
+        person { nil }
       end
-      before(:build) do |checkout, evaluator|
-        build(:marketplace_cart, marketplace: marketplace, checkout: checkout, shopper: checkout.shopper)
+      after(:build) do |checkout, evaluator|
+        shopper = build(:marketplace_shopper, person: evaluator.person)
+        checkout.cart = build(:marketplace_cart, marketplace: evaluator.marketplace, shopper: shopper)
       end
     end
   end

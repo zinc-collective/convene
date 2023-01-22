@@ -27,5 +27,4 @@ app/assets/builds/
 /swagger
 
 /storage
-.vscode/settings.json
 .yardoc
