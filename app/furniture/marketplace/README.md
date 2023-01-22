@@ -4,8 +4,6 @@
 
 ### Shopper Purchases Products
 
-<!-- Chart created with Mermaid see: docs/checkout_flow_diagram_mermaid.txt -->
-
 ```mermaid
 flowchart TD
     A[Shopper] -- 1. adds Products to Cart --> B(Product)  --> C(Cart)
