@@ -120,7 +120,7 @@ jobs:
   test-features:
     name: Run Browser Tests
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [call-build-app-workflow]
 
     env:
       POSTGRES_USER: postgres
