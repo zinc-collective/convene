@@ -14,8 +14,6 @@ class Marketplace
     end
 
     def stripe_account
-
-
     end
 
     def stripe_api_key
