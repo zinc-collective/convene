@@ -1,29 +1,14 @@
 class Marketplace
-  class Checkout < ApplicationRecord
-    self.table_name = "marketplace_checkouts"
-    include WithinLocation
-    self.location_parent = :marketplace
-
-    belongs_to :cart, inverse_of: :checkout
-    delegate :marketplace, to: :cart
-
-    has_many :ordered_products, through: :cart, source: :cart_products, class_name: "Marketplace::OrderedProduct"
-
-    belongs_to :shopper, inverse_of: :checkouts
+  class Checkout < Model
+    self.location_parent = :cart
+    include ActiveModel::Validations
+    attr_accessor :cart
+    delegate :shopper, :marketplace, to: :cart
 
     # It would be nice to validate instead the presence of :ordered_products, but my attempts at this raise:
     #  ActiveRecord::HasManyThroughCantAssociateThroughHasOneOrManyReflection:
     #   Cannot modify association 'Marketplace::Checkout#ordered_products' because the source reflection class 'CartProduct' is associated to 'Cart' via :has_many.
     validates :stripe_line_items, presence: true
-
-    enum status: {
-      pre_checkout: "pre_checkout",
-      paid: "paid"
-    }
-
-    def self.model_name
-      @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
-    end
 
     def create_stripe_session(success_url:, cancel_url:)
       Stripe::Checkout::Session.create({
@@ -32,7 +17,7 @@ class Marketplace
         success_url: success_url,
         cancel_url: cancel_url,
         payment_intent_data: {
-          transfer_group: id
+          transfer_group: cart.id
         }
       }, {
         api_key: marketplace.stripe_api_key
@@ -40,14 +25,17 @@ class Marketplace
     end
 
     def complete(stripe_session_id:)
-      update!(status: :paid, stripe_session_id: stripe_session_id)
-      cart.update!(status: :checked_out)
+      cart.update!(status: :paid, stripe_session_id: stripe_session_id)
+    end
+
+    def persisted?
+      true
     end
 
     private
 
     def stripe_line_items
-      return [] unless cart.present?
+      return [] if cart.blank?
 
       cart.cart_products.map do |cart_product|
         {
