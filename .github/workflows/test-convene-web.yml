@@ -3,7 +3,7 @@ on: push
 
 jobs:
   call-workflow-2-in-local-repo:
-    uses: build-convene-web.yml
+    uses: ./build-convene-web.yml
 
   test-rspec:
     name: Run Unit Tests
