@@ -10,7 +10,7 @@ class Marketplace
           marketplace.update(stripe_account: account.id)
         end
       else
-        Stripe::Account.find(marketplace.stripe_api_key)
+        Stripe::Account.find(marketplace.stripe_account)
       end
 
       account_link = if account.details_submitted?
@@ -26,7 +26,7 @@ class Marketplace
           }
         )
       else
-         Stripe::AccountLink.create(
+        Stripe::AccountLink.create(
           {
             account: marketplace.stripe_account_id,
             refresh_url: polymorphic_url(marketplace.location(:edit)),
