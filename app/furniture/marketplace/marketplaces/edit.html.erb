@@ -4,7 +4,7 @@
 <%- if marketplace.stripe_account.blank? %>
   <%= button_to t('.connect_stripe'), marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
 <%- else %>
-  STripe COnnectd!
+  <%= t('.stripe_connected') %>
 <%- end %>
 
 <%- if policy(marketplace.products.new).create? %>

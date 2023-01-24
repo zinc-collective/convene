@@ -1,4 +1,4 @@
-RSpec.describe Marketplace::StripeAccountController, type: :request do
+RSpec.describe Marketplace::StripeAccountsController, type: :request do
 
   describe "#create" do
 
