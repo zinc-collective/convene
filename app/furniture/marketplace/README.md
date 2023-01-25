@@ -17,18 +17,6 @@ journey
     Receives Order: 0: Shopper
 ```
 
-
-```mermaid
-flowchart TD
-    A[Shopper] -- 1. adds Products to Cart --> B(Product)  --> C(Cart)
-    C(Cart) --> D[CartProduct]
-    B(Product)  --> D[CartProduct] -. contains .- id1>quantity, discounts, etc]
-    A[Shopper] -- 2. goes thru Checkout flow --> E(Checkout) --a.  process this payment --> F(Payment Processor)
-    F(Payment Processor) -- b. Payment Successfully processed ----> E(Checkout)
-    E(Checkout) -- c. updated with payment processor details --> E(Checkout)
-    A[Shopper] -- 3. Successsfully purchased items in Cart --> G(Order) -.- id2>read-only Cart]
-```
-
 ```mermaid
 ---
 title: Shopper Begins Shopping
