@@ -44,4 +44,16 @@ class UtilityHookup < ApplicationRecord
   def self.from_utility_hookup(utility_hookup)
     utility_hookup.becomes(self)
   end
+
+  def form_template
+    "#{self.class.name.demodulize.underscore.pluralize}/form"
+  end
+
+  def has_form?
+    form_template != utility.form_template
+  end
+
+  def display_name
+    model_name.human.titleize
+  end
 end

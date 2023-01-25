@@ -7,9 +7,11 @@
     </h4>
   </header>
 
-  <div>
-    <%= render partial: utility_hookup.utility.form_template, locals: { form: form } %>
-  </div>
+  <%- if utility_hookup.has_form? %>
+    <div>
+      <%= render partial: utility_hookup.utility.form_template, locals: { form: form } %>
+    </div>
+  <%- end %>
 
   <footer>
     <%- if utility_hookup.utility.attribute_names.present? %>
