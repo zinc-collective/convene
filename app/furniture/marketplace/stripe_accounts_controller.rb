@@ -6,17 +6,19 @@ class Marketplace
       account = if marketplace.stripe_account.blank?
         Stripe::Account.create({type: "standard"}, {
           api_key: marketplace.stripe_api_key
-        }).tap do
+        }).tap do |account|
           marketplace.update(stripe_account: account.id)
         end
       else
-        Stripe::Account.find(marketplace.stripe_account)
+        Stripe::Account.retrieve(marketplace.stripe_account, {
+          api_key: marketplace.stripe_api_key
+        })
       end
 
       account_link = if account.details_submitted?
         Stripe::AccountLink.create(
           {
-            account: marketplace.stripe_account_id,
+            account: marketplace.stripe_account,
             refresh_url: polymorphic_url(marketplace.location(:edit)),
             return_url: polymorphic_url(marketplace.location(:edit)),
             type: "account_update"
@@ -28,7 +30,7 @@ class Marketplace
       else
         Stripe::AccountLink.create(
           {
-            account: marketplace.stripe_account_id,
+            account: marketplace.stripe_account,
             refresh_url: polymorphic_url(marketplace.location(:edit)),
             return_url: polymorphic_url(marketplace.location(:edit)),
             type: "account_onboarding"

@@ -6,8 +6,7 @@ RSpec.describe Marketplace::Checkout, type: :request do
   let(:room) { marketplace.room }
   let!(:cart) { create(:marketplace_cart, :with_products, marketplace: marketplace) }
   let(:checkout) { build(:marketplace_checkout, cart: cart) }
-  let!(:stripe) { create(:utility_hookup, :stripe, space: space)  }
-
+  let!(:stripe) { create(:utility_hookup, :stripe, space: space) }
 
   describe "#show" do
     context "when a stripe_session_id is in the params" do

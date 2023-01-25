@@ -1,12 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Marketplace::StripeAccountsController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
   let(:member) { create(:membership, space: space).member }
-  let!(:stripe) { create(:utility_hookup, :stripe, space: space, stripe_api_key: "asdf")  }
-  let(:account_link) { double(Stripe::AccountLink, url: "http://example.com/")}
+  let!(:stripe) { create(:utility_hookup, :stripe, space: space, stripe_api_key: "asdf") }
+  let(:account_link) { double(Stripe::AccountLink, url: "http://example.com/") }
+
   before do
     allow(Stripe::AccountLink).to receive(:create).and_return(account_link)
   end
