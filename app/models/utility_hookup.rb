@@ -9,7 +9,7 @@ class UtilityHookup < ApplicationRecord
   # has multiple {UtilityHookup}s.
   # @return [String]
   attribute :name, :string
-  validates :name, presence: :true, uniqueness: {scope: :space_id}
+  validates :name, presence: true, uniqueness: {scope: :space_id}
 
   def name
     self[:name] ||= utility_slug.to_s.humanize
@@ -25,7 +25,6 @@ class UtilityHookup < ApplicationRecord
   attribute :status, :string, default: "unavailable"
   validates :status, presence: true, inclusion: {in: %w[ready unavailable]}
 
-  validates_associated :utility
   has_encrypted :configuration, type: :json
 
   after_initialize do
@@ -40,5 +39,21 @@ class UtilityHookup < ApplicationRecord
   def utility_attributes=(attributes)
     self.configuration ||= {}
     utility.attributes = attributes
+  end
+
+  def self.from_utility_hookup(utility_hookup)
+    utility_hookup.becomes(self)
+  end
+
+  def form_template
+    "#{self.class.name.demodulize.underscore.pluralize}/form"
+  end
+
+  def has_form?
+    form_template != utility.form_template
+  end
+
+  def display_name
+    model_name.human.titleize
   end
 end
