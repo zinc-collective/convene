@@ -21,6 +21,15 @@ class Marketplace
       settings["stripe_account"] = stripe_account
     end
 
+    def delivery_fee_cents= delivery_fee_cents
+      settings["delivery_fee_cents"] = delivery_fee_cents
+    end
+
+    def delivery_fee_cents
+      settings["delivery_fee_cents"] || 0
+    end
+    monetize :delivery_fee_cents
+
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
     end

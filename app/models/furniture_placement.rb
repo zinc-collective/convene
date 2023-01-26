@@ -42,4 +42,10 @@ class FurniturePlacement < ApplicationRecord
   def configurable?
     furniture.form_template != "furniture_placements/noop"
   end
+
+  def write_attribute(name, value)
+    super
+  rescue ActiveModel::MissingAttributeError => _e
+    settings[name] = value
+  end
 end
