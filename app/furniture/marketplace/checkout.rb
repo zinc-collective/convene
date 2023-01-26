@@ -8,7 +8,7 @@ class Marketplace
     # It would be nice to validate instead the presence of :ordered_products, but my attempts at this raise:
     #  ActiveRecord::HasManyThroughCantAssociateThroughHasOneOrManyReflection:
     #   Cannot modify association 'Marketplace::Checkout#ordered_products' because the source reflection class 'CartProduct' is associated to 'Cart' via :has_many.
-    validates :stripe_line_items, presence: true
+    validates :stripe_cart_products_line_items, presence: true
 
     def create_stripe_session(success_url:, cancel_url:)
       Stripe::Checkout::Session.create({
