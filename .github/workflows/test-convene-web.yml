@@ -83,7 +83,7 @@ jobs:
         run: cp config/database.yml.github-actions config/database.yml
 
       - name: Prepare database
-        run: bundle exec db:test:prepare
+        run: bundle exec rails db:test:prepare
 
       - name: Run Tests
         run: bundle exec rspec
