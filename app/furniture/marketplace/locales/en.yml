@@ -7,6 +7,9 @@ en:
     marketplace:
       edit: "Configure Marketplace"
     marketplaces:
+      edit:
+        connect_stripe: "Connect to Stripe"
+        stripe_connected: "Stripe Connected!"
       update:
         success: "Marketplace updated successfully!"
         failure: "Marketplace could not be updated."

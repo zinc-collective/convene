@@ -1,11 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Checkout, type: :request do
-  let(:marketplace) { create(:marketplace, stripe_api_key: "fake-stripe-key") }
+  let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
   let!(:cart) { create(:marketplace_cart, :with_products, marketplace: marketplace) }
   let(:checkout) { build(:marketplace_checkout, cart: cart) }
+  let!(:stripe) { create(:utility_hookup, :stripe, space: space) }
 
   describe "#show" do
     context "when a stripe_session_id is in the params" do
