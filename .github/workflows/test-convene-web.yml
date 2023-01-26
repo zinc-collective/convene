@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
@@ -63,7 +63,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
@@ -82,8 +82,8 @@ jobs:
       - name: Setup CI database.yml
         run: cp config/database.yml.github-actions config/database.yml
 
-      - name: Prepare database
-        run: bundle exec rails db:test:prepare
+      - name: Setup rails
+        run: bin/setup-rails
 
       - name: Run Tests
         run: bundle exec rspec
@@ -123,9 +123,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      # Temporary mitigation for https://github.com/actions/runner-images/issues/6283
-      # Perhaps we should consider not using brew in CI (though it sure is nice!)
+        uses: actions/checkout@v3
 
       - name: Set up Homebrew environment
         uses: Homebrew/actions/setup-homebrew@master
