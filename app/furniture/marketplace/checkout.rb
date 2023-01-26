@@ -37,6 +37,10 @@ class Marketplace
     def stripe_line_items
       return [] if cart.blank?
 
+      stripe_cart_products_line_items + stripe_delivery_fee_line_items
+    end
+
+    private def stripe_cart_products_line_items
       cart.cart_products.map do |cart_product|
         {
           price_data: {
@@ -47,14 +51,18 @@ class Marketplace
           quantity: cart_product.quantity,
           adjustable_quantity: {enabled: true}
         }
-      end + [
-        {quantity: 1,
-         price_data: {
-           currency: "USD",
-           unit_amount: marketplace.delivery_fee_cents,
-           product_data: {name: "Delivery"}
-         }}
-      ]
+      end
+
+      private def stripe_delivery_fee_line_items
+        [
+          {quantity: 1,
+           price_data: {
+             currency: "USD",
+             unit_amount: marketplace.delivery_fee_cents,
+             product_data: {name: "Delivery"}
+           }}
+        ]
+      end
     end
   end
 end
