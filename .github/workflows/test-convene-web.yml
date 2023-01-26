@@ -29,11 +29,14 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Install and Setup Node with cache
+      - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'yarn'
+
+      - name: Install Node dependencies
+        run: yarn install
 
   test-rspec:
     name: Run Unit Tests
@@ -70,11 +73,14 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Install and Setup Node with cache
+      - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'yarn'
+
+      - name: Install Node dependencies
+        run: yarn install
 
       - name: Allow Ruby process to access port 80
         run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
@@ -87,13 +93,6 @@ jobs:
 
       - name: Run Tests
         run: bundle exec rspec
-
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: feature-test-failed-screenshot
-          path: features/test_reports/*.png
 
   test-features:
     name: Run Browser Tests
@@ -125,16 +124,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Homebrew environment
-        uses: Homebrew/actions/setup-homebrew@master
-
-      - name: Install Firefox
-        uses: browser-actions/setup-firefox@latest
-
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
+      - name: Setup Node with cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install Node dependencies
+        run: yarn install
+
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@latest
 
       - name: Increase the amount of inotify watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
@@ -148,39 +153,22 @@ jobs:
       - name: Use Development mode env
         run: cp .env.example .env
 
-      # Yarn caching steps borrowed from https://github.com/actions/cache/blob/main/examples.md#node---yarn
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Get brew cache path
-        id: brew-cache-path
-        run: echo "::set-output name=path::$(brew --cache)"
-
-      - name: Configure Homebrew cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.brew-cache-path.outputs.path }}
-          key: ${{ runner.os }}-brew-${{ hashFiles('bin/setup') }}
-          restore-keys: ${{ runner.os }}-brew-
-
-      - name: Setup test environment
+      - name: Install Overmind
         run: |
-          sudo chown -R $USER /usr/local/lib/node_modules
-          sudo chown -R $USER /usr/local/bin/
-          bin/setup
+          wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz
+          gunzip -d overmind-v2.3.0-linux-386.gz
+          mv overmind-v2.3.0-linux-386 overmind
+          chmod +x overmind
+
+      - name: Install Maildev
+        run: yarn global add maildev
+
       - name: Start Rails server
         run: |
-          export PATH=$PATH:~/bin
+          export PATH=$PATH:~/bin:.
+          bin/setup-rails
           bin/run &
+
       - name: Run Tests
         run: |
           # To wait for asset built
