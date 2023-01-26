@@ -17,25 +17,12 @@ journey
     Receives Order: 0: Shopper
 ```
 
-
-```mermaid
-flowchart TD
-    A[Shopper] -- 1. adds Products to Cart --> B(Product)  --> C(Cart)
-    C(Cart) --> D[CartProduct]
-    B(Product)  --> D[CartProduct] -. contains .- id1>quantity, discounts, etc]
-    A[Shopper] -- 2. goes thru Checkout flow --> E(Checkout) --a.  process this payment --> F(Payment Processor)
-    F(Payment Processor) -- b. Payment Successfully processed ----> E(Checkout)
-    E(Checkout) -- c. updated with payment processor details --> E(Checkout)
-    A[Shopper] -- 3. Successsfully purchased items in Cart --> G(Order) -.- id2>read-only Cart]
-```
-
 ```mermaid
 ---
 title: Shopper Begins Shopping
 ---
 flowchart LR
   A([Shopper]) -- Visits --> B[Marketplace] -- Creates --> C[Cart]
-
 ```
 
 ```mermaid
@@ -48,8 +35,28 @@ flowchart LR
 ```
 
 1. `Shopper` links `Product`s to their `Cart` by creating a `CartProduct` record which keeps track of things like quantity, discounts, special requests, etc.
+
+```mermaid
+---
+title: Shopper Goes Through Checkout Flow
+---
+flowchart LR
+  A([Shopper]) -- goes to Checkout Page --> B[Checkout] -- directs to --> C[Distributor] --> D[Payment Processor]
+```
+
 2. `Shopper` creates a `Checkout`, which directs them to the `Distributor`'s Payment Processor (Stripe, for now).
+
+```mermaid
+---
+title: Shopper Completes Checkout
+---
+flowchart LR
+  C[Distributor] --> D[Payment Processor]
+  D[Payment Processor] -- payment successful --> D[Payment Processor] -- redirects --> E[Convene Order Page]
+```
+
 3. `Shopper` completes the Payment Processor's flow, which directs them back to Convene and updates the `Checkout` with payment processor details.
+
 4. `Shopper` is redirected to the `Order`, which represents the `Cart` to the `Shopper` in a read-only manner.
 
 ## Architecture
