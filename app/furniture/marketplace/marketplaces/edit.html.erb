@@ -1,5 +1,7 @@
 <%- breadcrumb :edit_marketplace, marketplace %>
 
+<%= render "form", marketplace: marketplace %>
+
 <%- if marketplace.stripe_account.blank? %>
   <%= button_to t('.connect_stripe'), marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
 <%- else %>

@@ -10,7 +10,7 @@ class Marketplace
     end
 
     def update
-      if marketplace.update(params[:marketplace].permit([:stripe_api_key]))
+      if marketplace.update(marketplace_params)
         redirect_to marketplace.location(:edit), notice: t(".success")
       else
         flash[:alert] = t(".failure")
@@ -20,6 +20,10 @@ class Marketplace
 
     helper_method def marketplace
       authorize(Marketplace.find(params[:id]))
+    end
+
+    def marketplace_params
+      params.require(:marketplace).permit([:delivery_fee])
     end
   end
 end

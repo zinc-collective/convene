@@ -8,7 +8,7 @@
   <tr>
     <td></td>
     <th> <%= button_to("checkout", cart.location(child: :checkout), data: { turbo: false }) %> </th>
-    <th scope="row" class="text-right px-1 py-3.5">Total: </th>
+    <th></th>
     <td class="text-left px-3 py-3.5 font-bold">
       <%= render "marketplace/carts/total", cart: cart %>
     </td>
