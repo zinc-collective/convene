@@ -38,7 +38,7 @@ jobs:
   test-rspec:
     name: Run Unit Tests
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [setup]
 
     services:
       postgres:
@@ -136,7 +136,7 @@ jobs:
   test-features:
     name: Run Browser Tests
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [setup]
 
     services:
       postgres:
