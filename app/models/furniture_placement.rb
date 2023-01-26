@@ -45,7 +45,7 @@ class FurniturePlacement < ApplicationRecord
 
   def write_attribute(name, value)
     super
-  rescue ActiveModel::MissingAttributeError => e
+  rescue ActiveModel::MissingAttributeError => _e
     settings[name] = value
   end
 end

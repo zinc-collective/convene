@@ -52,17 +52,17 @@ class Marketplace
           adjustable_quantity: {enabled: true}
         }
       end
+    end
 
-      private def stripe_delivery_fee_line_items
-        [
-          {quantity: 1,
-           price_data: {
-             currency: "USD",
-             unit_amount: marketplace.delivery_fee_cents,
-             product_data: {name: "Delivery"}
-           }}
-        ]
-      end
+    private def stripe_delivery_fee_line_items
+      [
+        {quantity: 1,
+         price_data: {
+           currency: "USD",
+           unit_amount: marketplace.delivery_fee_cents,
+           product_data: {name: "Delivery"}
+         }}
+      ]
     end
   end
 end
