@@ -79,9 +79,6 @@ jobs:
           node-version: 16
           cache: 'yarn'
 
-      - name: Install Node dependencies
-        run: yarn install
-
       - name: Allow Ruby process to access port 80
         run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
 
@@ -134,9 +131,6 @@ jobs:
         with:
           node-version: 16
           cache: 'yarn'
-
-      - name: Install Node dependencies
-        run: yarn install
 
       - name: Install Firefox
         uses: browser-actions/setup-firefox@latest
