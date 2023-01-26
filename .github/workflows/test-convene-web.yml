@@ -83,7 +83,7 @@ jobs:
         run: cp config/database.yml.github-actions config/database.yml
 
       - name: Setup rails
-        run: bin/setup-rails
+        run: bin/setup-rails && bin/rails assets:precompile
 
       - name: Run Tests
         run: bundle exec rspec
