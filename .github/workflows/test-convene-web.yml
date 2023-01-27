@@ -135,9 +135,6 @@ jobs:
       - name: Install Firefox
         uses: browser-actions/setup-firefox@latest
 
-      - name: Increase the amount of inotify watchers
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
       - name: Allow Ruby process to access port 80
         run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
 
