@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [setup]
 
-    services: &services_config
+    services:
       postgres:
         image: postgres:12
         env:
@@ -96,7 +96,27 @@ jobs:
     runs-on: ubuntu-latest
     needs: [setup]
 
-    services: *services_config
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis
+        ports:
+          # Maps port 6379 on service container to the host
+          - 6379:6379
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
