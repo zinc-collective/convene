@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <%= form_with model: [waiting_room.room.space, waiting_room.room, waiting_room], class: "access-code-form", local: true do |form| %>
+  <%= form_with model: waiting_room.location, class: "access-code-form", local: true do |form| %>
     <%= render "password_field", form: form, attribute: :access_code%>
 
     <%= form.hidden_field :redirect_url %>
