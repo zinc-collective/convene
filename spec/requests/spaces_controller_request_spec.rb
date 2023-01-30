@@ -12,7 +12,7 @@ RSpec.describe SpacesController, type: :request do
       it "links to the domain" do
         get polymorphic_path(space)
 
-        expect(response.body).to include "//beta.example.com/"
+        expect(response).to redirect_to "http://beta.example.com"
       end
     end
   end
