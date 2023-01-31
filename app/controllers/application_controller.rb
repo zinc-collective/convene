@@ -70,8 +70,8 @@ class ApplicationController < ActionController::Base
   # @todo this should be tested 🙃 halp me
   def ensure_on_byo_domain
 
-    if request.get? && current_space.branded_domain.present? && request.domain != current_space.branded_domain
-      Rails.logger.debug("Request Domain: #{request.domain}")
+    if request.get? && current_space.branded_domain.present? && request.host != current_space.branded_domain
+      Rails.logger.debug("Request Host: #{request.host}")
       redirect_url = URI(request.url)
       redirect_url.host = current_space.branded_domain
       redirect_url.path = redirect_url.path.gsub("/spaces/#{current_space.slug}","")
