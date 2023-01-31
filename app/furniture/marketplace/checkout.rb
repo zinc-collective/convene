@@ -16,6 +16,9 @@ class Marketplace
         mode: "payment",
         success_url: success_url,
         cancel_url: cancel_url,
+        shipping_address_collection: {
+          allowed_countries: ["US"],
+        },
         payment_intent_data: {
           transfer_group: cart.id
         }
