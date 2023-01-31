@@ -43,31 +43,14 @@ class Marketplace
         })
       end
 
-      account_link = if account.details_submitted?
-        Stripe::AccountLink.create(
-          {
-            account: stripe_account,
-            refresh_url: refresh_url,
-            return_url: return_url,
-            type: "account_update"
-          },
-          {
-            api_key: stripe_api_key
-          }
-        )
-      else
-        Stripe::AccountLink.create(
-          {
-            account: stripe_account,
-            refresh_url: refresh_url,
-            return_url: return_url,
-            type: "account_onboarding"
-          },
-          {
-            api_key: stripe_api_key
-          }
-        )
-      end
+      Stripe::AccountLink.create({
+        account: stripe_account,
+        refresh_url: refresh_url,
+        return_url: return_url,
+        type: account.details_submitted? ? "account_update" : "account_onboarding"
+      }, {
+        api_key: stripe_api_key
+      })
     end
 
     def self.model_name
