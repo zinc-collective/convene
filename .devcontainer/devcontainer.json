@@ -24,4 +24,17 @@
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
+
+    "extensions": [
+        "alexkrechik.cucumberautocomplete",
+        "ms-azuretools.vscode-docker",
+        "editorconfig.editorconfig",
+        "hashicorp.terraform",
+        "yzhang.markdown-all-in-one",
+        "esbenp.prettier-vscode",
+        "rebornix.ruby",
+        "wingrunr21.vscode-ruby",
+        "valentjn.vscode-ltex"
+    ]
+
 }
