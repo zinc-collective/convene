@@ -37,7 +37,7 @@ gem "rswag-ui"
 # View Layer
 #
 # Allows us to render .markdown.erb files
-gem "redcarpet", "~> 3.5"
+gem "redcarpet", "~> 3.6"
 # Breadcrumbs!
 gem "gretel", "~> 4.4"
 # Better UI components
@@ -63,7 +63,7 @@ gem "rotp", "~> 6.2"
 gem "pg", "~> 1.4"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.118", require: false
+gem "aws-sdk-s3", "~> 1.119", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -72,7 +72,7 @@ gem "tzinfo-data", "~> 1.2021", platforms: %i[mingw mswin x64_mingw jruby]
 # Performance Optimization
 #
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", "~> 1.15", require: false
+gem "bootsnap", "~> 1.16", require: false
 
 # Permissions and policies
 gem "pundit", "~> 2.3"

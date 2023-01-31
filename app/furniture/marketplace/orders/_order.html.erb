@@ -23,7 +23,7 @@
         <td></td>
         <th scope="row" class="text-right px-1 py-3.5">Total: </th>
         <td class="text-left px-3 py-3.5 font-bold">
-          <%= render "marketplace/carts/total", cart: order.cart %>
+          <%= humanized_money_with_symbol(order.price_total) %>
         </td>
       </tr>
     </tfoot>

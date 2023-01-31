@@ -3,6 +3,9 @@
 # Default controller for new resources; ensures requests fulfill authentication
 # and authorization requirements, as well as exposes common helper methods.
 class ApplicationController < ActionController::Base
+  before_action :ensure_on_byo_domain
+
+
   include Pundit::Authorization
   after_action :verify_authorized
   after_action :verify_policy_scoped
@@ -62,6 +65,18 @@ class ApplicationController < ActionController::Base
     end
 
     super
+  end
+
+
+  # @todo this should be tested 🙃 halp me
+  def ensure_on_byo_domain
+    if request.get? && current_space.branded_domain.present? && request.domain != current_space.branded_domain
+
+      redirect_url = URI(request.url)
+      redirect_url.host = current_space.branded_domain
+      redirect_url.path = redirect_url.path.gsub("/spaces/#{current_space.slug}","")
+      redirect_to redirect_url.to_s, allow_other_host: true
+    end
   end
 
   private

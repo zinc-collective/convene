@@ -6,16 +6,29 @@ class Marketplace
 
     has_many :products, inverse_of: :marketplace, dependent: :destroy
     has_many :carts, inverse_of: :marketplace, dependent: :destroy
-    has_many :orders, through: :carts
+    has_many :orders, inverse_of: :marketplace
 
     # The Secret Stripe API key belonging to the owner of the Marketplace
-    def stripe_api_key=(key)
-      settings["stripe_api_key"] = key
+    def stripe_api_key
+      space.utility_hookups.find_by!(utility_slug: :stripe).utility.api_token
     end
 
-    def stripe_api_key
-      settings["stripe_api_key"]
+    def stripe_account
+      settings["stripe_account"]
     end
+
+    def stripe_account=stripe_account
+      settings["stripe_account"] = stripe_account
+    end
+
+    def delivery_fee_cents= delivery_fee_cents
+      settings["delivery_fee_cents"] = delivery_fee_cents
+    end
+
+    def delivery_fee_cents
+      settings["delivery_fee_cents"] || 0
+    end
+    monetize :delivery_fee_cents
 
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)

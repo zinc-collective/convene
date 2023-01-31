@@ -6,13 +6,13 @@ class Marketplace
         checkout.complete(stripe_session_id: params[:stripe_session_id])
         flash[:notice] = t(".success")
       end
-      redirect_to checkout.becomes(Order).location
+      redirect_to order.location
     end
 
     def create
       authorize(checkout)
 
-      if checkout.save
+      if checkout.valid?
         stripe_session = checkout.create_stripe_session(
           success_url: "#{polymorphic_url(checkout.location)}?stripe_session_id={CHECKOUT_SESSION_ID}",
           cancel_url: polymorphic_url(marketplace.location)
@@ -28,15 +28,19 @@ class Marketplace
     end
 
     helper_method def checkout
-      @checkout ||= if params[:id]
-        Checkout.find(params[:id])
-      else
-        cart.checkout || cart.build_checkout(shopper: shopper)
-      end
+      @checkout ||= Checkout.new(cart: cart)
     end
 
     helper_method def cart
-      @cart ||= marketplace.carts.find_or_create_by(shopper: shopper, status: :pre_checkout)
+      @cart ||= if params[:cart_id]
+        marketplace.carts.find(params[:cart_id])
+      else
+        marketplace.carts.find_or_create_by(shopper: shopper)
+      end
+    end
+
+    def order
+      @order ||= cart.becomes(Order)
     end
   end
 end

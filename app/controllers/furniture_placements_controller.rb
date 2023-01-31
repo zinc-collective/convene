@@ -34,7 +34,7 @@ class FurniturePlacementsController < ApplicationController
   end
 
   def destroy
-    furniture_placement.destroy!
+    furniture_placement.furniture.destroy!
     respond_to do |format|
       format.html do
         redirect_to(

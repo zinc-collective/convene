@@ -10,7 +10,7 @@
 # @see features/utilities/
 module Utilities
   REGISTRY = {
-    stripe: Stripe::StripeUtility
+    stripe: ::StripeUtility
   }.freeze
 
   # @param utility_hookup [UtilityHookup]
@@ -25,6 +25,6 @@ module Utilities
   end
 
   def self.fetch(slug)
-    REGISTRY.fetch(slug&.to_sym, NullUtility)
+    REGISTRY.fetch(slug&.to_sym, UtilityHookup)
   end
 end

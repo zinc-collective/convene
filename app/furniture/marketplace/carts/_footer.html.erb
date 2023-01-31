@@ -6,11 +6,10 @@
 
 <tfoot id="cart-footer-<%= cart.id%>" class="bg-gray-50">
   <tr>
-    <td></td>
-    <th> <%= button_to("checkout", [space, room, marketplace, :checkouts], data: { turbo: false }) %> </th>
-    <th scope="row" class="text-right px-1 py-3.5">Total: </th>
-    <td class="text-left px-3 py-3.5 font-bold">
+    <td class="text-left px-3 py-3.5 text-right" colspan="8">
       <%= render "marketplace/carts/total", cart: cart %>
+      <%= button_to("Checkout", cart.location(child: :checkout), data: { turbo: false }) %>
     </td>
+
   </tr>
 </tfoot>
