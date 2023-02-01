@@ -56,7 +56,7 @@ gem "ranked-model", "~> 0.4.8"
 gem "friendly_id", "~> 5.5.0"
 # Hashing / Encrypting data at rest
 gem "bcrypt", "~> 3.1.18"
-gem "lockbox", "1.1.1"
+gem "lockbox", "1.1.2"
 gem "rotp", "~> 6.2"
 
 # Use postgresql for data persistence
