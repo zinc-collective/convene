@@ -3,39 +3,24 @@ class DemoSpace
     {
       name: "Zee's Desk",
       publicity_level: :listed,
-      furniture_placements: {
-        video_bridge: {}
-      }
     },
     {
       name: "Vivek's Desk",
       publicity_level: :listed,
-      furniture_placements: {
-        video_bridge: {}
-      }
     },
     {
       name: "Water Cooler",
       publicity_level: :listed,
-      furniture_placements: {
-        video_bridge: {}
-      }
     },
     {
       name: "The Ada Lovelace Room",
       publicity_level: :listed,
-      furniture_placements: {
-        video_bridge: {}
-      }
     },
     {
       name: "Locked Room",
       publicity_level: :listed,
       access_level: :locked,
       access_code: :friends,
-      furniture_placements: {
-        video_bridge: {}
-      }
     }
   ].freeze
 
