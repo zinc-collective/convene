@@ -30,6 +30,29 @@ class Marketplace
     end
     monetize :delivery_fee_cents
 
+    def stripe_account_link(refresh_url:, return_url:)
+      account = if stripe_account.blank?
+        Stripe::Account.create({type: "standard"}, {
+          api_key: stripe_api_key
+        }).tap do |account|
+          update(stripe_account: account.id)
+        end
+      else
+        Stripe::Account.retrieve(stripe_account, {
+          api_key: stripe_api_key
+        })
+      end
+
+      Stripe::AccountLink.create({
+        account: stripe_account,
+        refresh_url: refresh_url,
+        return_url: return_url,
+        type: account.details_submitted? ? "account_update" : "account_onboarding"
+      }, {
+        api_key: stripe_api_key
+      })
+    end
+
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
     end
