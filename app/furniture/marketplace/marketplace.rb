@@ -30,6 +30,14 @@ class Marketplace
       settings["stripe_webhook_endpoint"] = stripe_webhook_endpoint
     end
 
+    def stripe_webhook_endpoint_secret
+      settings["stripe_webhook_endpoint_secret"]
+    end
+
+    def stripe_webhook_endpoint_secret=stripe_webhook_endpoint_secret
+      settings["stripe_webhook_endpoint_secret"] = stripe_webhook_endpoint_secret
+    end
+
     def delivery_fee_cents= delivery_fee_cents
       settings["delivery_fee_cents"] = delivery_fee_cents
     end
@@ -67,7 +75,7 @@ class Marketplace
         enabled_events: ["checkout.session.completed"],
         url: webhook_url
       }, { api_key: stripe_api_key }).tap do |stripe_webhook_endpoint|
-        update(stripe_webhook_endpoint: stripe_webhook_endpoint.id)
+        update(stripe_webhook_endpoint: stripe_webhook_endpoint.id, stripe_webhook_endpoint_secret: stripe_webhook_endpoint.secret)
       end
     end
 

@@ -8,7 +8,7 @@ RSpec.describe Marketplace::StripeAccountsController, type: :request do
   let!(:stripe) { create(:utility_hookup, :stripe, space: space, configuration: { "api_token" => "asdf" }) }
   let(:stripe_account_link) { double(Stripe::AccountLink, url: "http://example.com/") }
   let(:stripe_account) { double(Stripe::Account, id: "ac_1234", details_submitted?: false)}
-  let(:stripe_webhook_endpoint) { double(Stripe::WebhookEndpoint, id: "whe_1234")}
+  let(:stripe_webhook_endpoint) { double(Stripe::WebhookEndpoint, id: "whe_1234", secret: "oooooooooooo")}
 
   before do
     allow(Stripe::Account).to receive(:create).and_return(stripe_account)
@@ -28,6 +28,7 @@ RSpec.describe Marketplace::StripeAccountsController, type: :request do
     end
 
     specify { expect { call }.to change { marketplace.reload.stripe_webhook_endpoint }.to(stripe_webhook_endpoint.id) }
+    specify { expect { call }.to change { marketplace.reload.stripe_webhook_endpoint_secret }.to(stripe_webhook_endpoint.secret) }
     it { is_expected.to redirect_to(stripe_account_link.url) }
     # Not sure how to test this: status: :see_other, allow_other_hosts: true
   end
