@@ -26,6 +26,22 @@ FactoryBot.define do
     end
   end
 
+  factory :marketplace_order, class: "Marketplace::Order" do
+    marketplace
+    status { :paid }
+    association(:shopper, factory: :marketplace_shopper)
+
+    trait :with_products
+    after(:build) do |order, _evaluator|
+      build(:marketplace_ordered_product, order: order)
+    end
+  end
+
+  factory :marketplace_ordered_product, class: "Marketplace::OrderedProduct" do
+    association(:product, factory: :marketplace_product)
+    association(:order, factory: :marketplace_order)
+  end
+
   factory :marketplace_shopper, class: "Marketplace::Shopper" do
   end
 end

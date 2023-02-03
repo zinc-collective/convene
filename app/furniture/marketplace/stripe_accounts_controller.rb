@@ -5,7 +5,7 @@ class Marketplace
       authorize(marketplace, :edit?)
       stripe_account_link = marketplace.stripe_account_link(
         refresh_url: polymorphic_url(marketplace.location(:edit)),
-        return_url: polymorphic_url(marketplace.location(:edit)),
+        return_url: polymorphic_url(marketplace.location(:edit))
       )
 
       marketplace.create_stripe_webhook_endpoint(webhook_url: polymorphic_url(marketplace.location(child: :stripe_events)))

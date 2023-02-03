@@ -7,8 +7,8 @@ class Marketplace
     def create
       skip_authorization
       payload = request.body.read
-      signature = request.env['HTTP_STRIPE_SIGNATURE'];
-      event = Stripe::Event.construct_from(params, signature, marketplace.stripe_webhook_endpoint_secret)
+      signature = request.env["HTTP_STRIPE_SIGNATURE"]
+      event = Stripe::Webhook.construct_event(params, signature, marketplace.stripe_webhook_endpoint_secret)
 
       case event.type
 

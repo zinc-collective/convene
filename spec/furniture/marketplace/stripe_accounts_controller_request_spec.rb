@@ -3,12 +3,11 @@ require "rails_helper"
 RSpec.describe Marketplace::StripeAccountsController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
-  let(:room) { marketplace.room }
   let(:member) { create(:membership, space: space).member }
-  let!(:stripe) { create(:utility_hookup, :stripe, space: space, configuration: { "api_token" => "asdf" }) }
+  let!(:stripe) { create(:utility_hookup, :stripe, space: space, configuration: {"api_token" => "asdf"}) }
   let(:stripe_account_link) { double(Stripe::AccountLink, url: "http://example.com/") }
-  let(:stripe_account) { double(Stripe::Account, id: "ac_1234", details_submitted?: false)}
-  let(:stripe_webhook_endpoint) { double(Stripe::WebhookEndpoint, id: "whe_1234", secret: "oooooooooooo")}
+  let(:stripe_account) { double(Stripe::Account, id: "ac_1234", details_submitted?: false) }
+  let(:stripe_webhook_endpoint) { double(Stripe::WebhookEndpoint, id: "whe_1234", secret: "oooooooooooo") }
 
   before do
     allow(Stripe::Account).to receive(:create).and_return(stripe_account)
@@ -16,7 +15,8 @@ RSpec.describe Marketplace::StripeAccountsController, type: :request do
     allow(Stripe::WebhookEndpoint).to receive(:create)
       .with({
         enabled_events: ["checkout.session.completed"],
-        url: polymorphic_url(marketplace.location(child: :stripe_events)) }, { api_key: marketplace.stripe_api_key })
+        url: polymorphic_url(marketplace.location(child: :stripe_events))
+      }, {api_key: marketplace.stripe_api_key})
       .and_return(stripe_webhook_endpoint)
   end
 
