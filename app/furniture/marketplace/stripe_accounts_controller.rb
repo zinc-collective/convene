@@ -10,7 +10,11 @@ class Marketplace
 
       marketplace.create_stripe_webhook_endpoint(webhook_url: polymorphic_url(marketplace.location(child: :stripe_events)))
 
-      redirect_to stripe_account_link.url, status: :see_other, allow_other_host: true
+      if stripe_account_link.present?
+        redirect_to stripe_account_link.url, status: :see_other, allow_other_host: true
+      else
+        redirect_to marketplace.location(:edit), notice: "Stripe Re-Connected!"
+      end
     end
 
     helper_method def marketplace
