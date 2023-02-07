@@ -1,7 +1,11 @@
 <section class="max-w-3xl mx-auto">
   <div class="flex flex-wrap">
-    <%= render policy_scope(journal.entries.recent) %>
+    <%- @pagy, @records = pagy(policy_scope(journal.entries.recent)) %>
+
+    <%= render @records %>
   </div>
+
+  <%== pagy_nav(@pagy, nav_extra: 'flex justify-between') %>
 
   <%- new_entry = journal.entries.new %>
   <%- if policy(new_entry).new? %>
