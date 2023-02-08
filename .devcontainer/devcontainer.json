@@ -22,6 +22,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "`#install overmind` wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz && gunzip -d overmind-v2.3.0-linux-386.gz && mv overmind-v2.3.0-linux-386 /usr/local/bin/overmind && chmod a+x /usr/local/bin/overmind  `#install tmux` && sudo apt-get update && sudo apt-get install -y tmux",
+    "postStartCommand": "docker compose up && bin/setup && bin/run &",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
