@@ -6,7 +6,11 @@
 	"service": "app",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "node": {
+            "version": "16",
+            "nodeGypDependencies": true
+        }
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
