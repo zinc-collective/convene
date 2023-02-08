@@ -23,9 +23,3 @@ RUN su vscode -c "sudo wget https://github.com/DarthSim/overmind/releases/downlo
                     && sudo mkdir -p ~/.local/bin/overmind \
                     && sudo mv overmind-v2.3.0-linux-386 ~/.local/bin/overmind \
                     && sudo chmod +x overmind" 2>&1
-
-## Grab yarn
-RUN su vscode -c "sudo apt-get update \
-                    && sudo apt-get install -y npm \
-                    && source /usr/local/share/nvm/nvm.sh \
-                    && sudo npm install -g yarn" 2>&1
