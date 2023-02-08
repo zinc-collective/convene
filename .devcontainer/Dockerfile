@@ -16,10 +16,3 @@ ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.git
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
-
-## Installing overmind
-RUN su vscode -c "sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz \
-                    && sudo gunzip -d overmind-v2.3.0-linux-386.gz \
-                    && sudo mkdir -p ~/.local/bin/overmind \
-                    && sudo mv overmind-v2.3.0-linux-386 ~/.local/bin/overmind \
-                    && sudo chmod +x overmind" 2>&1
