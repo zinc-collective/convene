@@ -1,4 +1,6 @@
 <%= form_with model: marketplace.location do |f| %>
   <%= render "money_field", { attribute: :delivery_fee, form: f, min: 0, step: 0.01} %>
+  <%= render "text_field", { attribute: :notify_emails, form: f } %>
+
   <%= f.submit %>
 <% end %>

@@ -19,6 +19,14 @@ class Marketplace
       false
     end
 
+    def notify_emails
+      settings["notify_emails"]
+    end
+
+    def notify_emails=(notify_emails)
+      settings["notify_emails"] = notify_emails
+    end
+
     def stripe_account
       settings["stripe_account"]
     end
