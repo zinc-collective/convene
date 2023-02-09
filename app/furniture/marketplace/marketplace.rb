@@ -21,6 +21,22 @@ class Marketplace
       settings["stripe_account"] = stripe_account
     end
 
+    def stripe_webhook_endpoint
+      settings["stripe_webhook_endpoint"]
+    end
+
+    def stripe_webhook_endpoint=stripe_webhook_endpoint
+      settings["stripe_webhook_endpoint"] = stripe_webhook_endpoint
+    end
+
+    def stripe_webhook_endpoint_secret
+      settings["stripe_webhook_endpoint_secret"]
+    end
+
+    def stripe_webhook_endpoint_secret=stripe_webhook_endpoint_secret
+      settings["stripe_webhook_endpoint_secret"] = stripe_webhook_endpoint_secret
+    end
+
     def delivery_fee_cents= delivery_fee_cents
       settings["delivery_fee_cents"] = delivery_fee_cents
     end
@@ -51,6 +67,20 @@ class Marketplace
       }, {
         api_key: stripe_api_key
       })
+    rescue Stripe::InvalidRequestError => e
+      Rails.logger.error({summary: "Stripe account creation is sad!", detail: e.message})
+      nil
+    end
+
+    def create_stripe_webhook_endpoint(webhook_url:)
+      return if stripe_webhook_endpoint.present?
+
+      Stripe::WebhookEndpoint.create({
+        enabled_events: ["checkout.session.completed"],
+        url: webhook_url
+      }, {api_key: stripe_api_key}).tap do |stripe_webhook_endpoint|
+        update(stripe_webhook_endpoint: stripe_webhook_endpoint.id, stripe_webhook_endpoint_secret: stripe_webhook_endpoint.secret)
+      end
     end
 
     def self.model_name

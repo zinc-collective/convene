@@ -2,11 +2,10 @@
 
 <%= render "form", marketplace: marketplace %>
 
-<%- if marketplace.stripe_account.blank? %>
-  <%= button_to t('.connect_stripe'), marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
-<%- else %>
+<%- if marketplace.stripe_account.present? %>
   <%= t('.stripe_connected') %>
 <%- end %>
+<%= button_to t('.connect_stripe'), marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
 
 <%- if policy(marketplace.products.new).create? %>
   <%= link_to t('marketplace.product.index'), marketplace.location(child: :products) %>

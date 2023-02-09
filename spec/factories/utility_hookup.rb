@@ -7,5 +7,9 @@ FactoryBot.define do
     trait :stripe do
       utility_slug { "stripe" }
     end
+
+    factory :stripe_utility do
+      utility_slug { "stripe" }
+    end
   end
 end

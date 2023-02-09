@@ -7,7 +7,6 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
   let(:membership) { create(:membership, space: space) }
   let!(:person) { membership.member }
 
-
   path "/spaces/{space_slug}/rooms/{room_slug}" do
     parameter name: :space_slug, in: :path, type: :string
     parameter name: :room_slug, in: :path, type: :string
@@ -131,8 +130,12 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
   end
 
   describe "#create" do
+    subject(:do_request) {
+      post path, params: {room: room_params}
+      response
+    }
+
     let(:path) { polymorphic_path(space.location(child: :rooms)) }
-    subject(:do_request) { post path, params: {room: room_params}; response }
     let(:room_params) { attributes_for(:room, :with_slug, space: space) }
 
     context "when the person is a guest" do
@@ -147,14 +150,15 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
       let!(:person) { membership.member }
 
       before { sign_in(space, person) }
-      specify { expect { do_request }.to(change{ space.rooms.count }.by(1)) }
+
+      specify { expect { do_request }.to(change { space.rooms.count }.by(1)) }
       it { is_expected.to redirect_to(polymorphic_path(space.rooms.last.location(:edit))) }
 
       context "when the space has an entrance" do
         before { space.update(entrance: create(:room, space: space)) }
 
-        specify { expect { do_request }.to(change{ space.rooms.count }.by(1)) }
-        it { is_expected.to redirect_to(polymorphic_path(space.rooms.last.location(:edit))) }
+        specify { expect { do_request }.to(change { space.rooms.count }.by(1)) }
+        it { is_expected.to redirect_to(polymorphic_path(space.rooms.order(created_at: :desc).first.location(:edit))) }
       end
     end
   end
