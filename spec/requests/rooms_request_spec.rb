@@ -4,6 +4,8 @@ require "swagger_helper"
 
 RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
   let(:space) { create(:space) }
+  let(:membership) { create(:membership, space: space) }
+  let!(:person) { membership.member }
 
   path "/spaces/{space_slug}/rooms/{room_slug}" do
     parameter name: :space_slug, in: :path, type: :string
@@ -79,8 +81,9 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
       end
     end
   end
-  describe "GET /spaces/:space_slug/rooms/new" do
-    let(:path) { new_space_room_path(space) }
+
+  describe "#new" do
+    let(:path) { polymorphic_path(space.location(:new, child: :room)) }
 
     context "when the person is a guest" do
       it "does not allow access to the new room form" do
@@ -90,9 +93,6 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
     end
 
     context "when the person is a space member" do
-      let(:membership) { create(:membership, space: space) }
-      let!(:person) { membership.member }
-
       before { sign_in(space, person) }
 
       it "allows access to the new room form" do
@@ -102,7 +102,7 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
     end
   end
 
-  describe "DELETE /spaces/:space_slug/rooms/:room_slug" do
+  describe "#destroy" do
     let(:room) { create(:room, space: space) }
     let(:path) { space_room_path(room.space, room) }
 
@@ -129,10 +129,13 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
     end
   end
 
-  describe "POST /spaces/:space_slug/room" do
-    subject(:do_request) { post path, params: {room: room_params} }
+  describe "#create" do
+    subject(:do_request) {
+      post path, params: {room: room_params}
+      response
+    }
 
-    let(:path) { space_rooms_path(space) }
+    let(:path) { polymorphic_path(space.location(child: :rooms)) }
     let(:room_params) { attributes_for(:room, :with_slug, space: space) }
 
     context "when the person is a guest" do
@@ -148,13 +151,14 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
 
       before { sign_in(space, person) }
 
-      it "creates a new room" do
-        expect { do_request }.to change(Room, :count).by(1)
-      end
+      specify { expect { do_request }.to(change { space.rooms.count }.by(1)) }
+      it { is_expected.to redirect_to(polymorphic_path(space.rooms.last.location(:edit))) }
 
-      it "redirects to the edit path for the new room" do
-        do_request
-        expect(response).to redirect_to(edit_space_room_path(space, room_params[:slug]))
+      context "when the space has an entrance" do
+        before { space.update(entrance: create(:room, space: space)) }
+
+        specify { expect { do_request }.to(change { space.rooms.count }.by(1)) }
+        it { is_expected.to redirect_to(polymorphic_path(space.rooms.order(created_at: :desc).first.location(:edit))) }
       end
     end
   end

@@ -1,6 +1,11 @@
 FactoryBot.define do
   factory :marketplace, class: "Marketplace::Marketplace" do
     room
+    trait :with_stripe_utility do
+      after(:create) do |marketplace|
+        create(:stripe_utility, space: marketplace.room.space)
+      end
+    end
   end
 
   factory :marketplace_product, class: "Marketplace::Product" do
@@ -24,6 +29,23 @@ FactoryBot.define do
         build(:marketplace_cart_product, cart: cart)
       end
     end
+  end
+
+  factory :marketplace_order, class: "Marketplace::Order" do
+    marketplace
+    status { :paid }
+    association(:shopper, factory: :marketplace_shopper)
+
+    trait :with_products
+    after(:build) do |order, _evaluator|
+      build(:marketplace_ordered_product, order: order)
+    end
+  end
+
+  factory :marketplace_ordered_product, class: "Marketplace::OrderedProduct" do
+    association(:product, factory: :marketplace_product)
+    association(:order, factory: :marketplace_order)
+    quantity { 1 }
   end
 
   factory :marketplace_shopper, class: "Marketplace::Shopper" do
