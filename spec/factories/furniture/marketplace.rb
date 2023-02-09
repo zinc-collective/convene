@@ -45,12 +45,18 @@ FactoryBot.define do
 
   factory :marketplace_order, class: "Marketplace::Order" do
     marketplace
+    id { SecureRandom.uuid }
     status { :paid }
     association(:shopper, factory: :marketplace_shopper)
 
-    trait :with_products
-    after(:build) do |order, _evaluator|
-      build(:marketplace_ordered_product, order: order)
+    trait :with_products do
+      transient do
+        product_count { 1 }
+      end
+
+      after(:build) do |order, evaluator|
+        build_list(:marketplace_ordered_product, evaluator.product_count, order: order)
+      end
     end
   end
 

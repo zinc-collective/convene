@@ -13,6 +13,7 @@ class Marketplace
       when "checkout.session.completed"
         payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
         order = Order.find(payment_intent.transfer_group)
+        OrderReceivedMailer.notification(order).deliver_later
 
         Stripe::Transfer.create({
           amount: order.price_total.cents,

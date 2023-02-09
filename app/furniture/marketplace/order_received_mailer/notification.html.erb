@@ -1,0 +1,9 @@
+<h3>Order #<%= order.id %></h3>
+
+<ul>
+<%- order.ordered_products.each do |ordered_product|%>
+  <li><%= ordered_product.name %> (<%= ordered_product.quantity %>) - <%= humanized_money_with_symbol(ordered_product.price) %></li>
+<%- end %>
+</ul>
+
+<p>Total: <%= humanized_money_with_symbol(order.price_total) %></p>
