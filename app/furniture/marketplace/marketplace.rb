@@ -68,7 +68,7 @@ class Marketplace
         api_key: stripe_api_key
       })
     rescue Stripe::InvalidRequestError => e
-      Rails.logger.error({ summary: "Stripe account creation is sad!", detail: e.message})
+      Rails.logger.error({summary: "Stripe account creation is sad!", detail: e.message})
       nil
     end
 
