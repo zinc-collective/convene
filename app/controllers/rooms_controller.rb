@@ -59,7 +59,11 @@ class RoomsController < ApplicationController
   end
 
   helper_method def room
-    @room ||= (current_room || current_space.rooms.new(room_params)).tap do |room|
+    @room ||= if params[:id]
+      current_space.rooms.friendly.find(params[:id])
+    else
+      current_space.rooms.new(room_params)
+    end.tap do |room|
       authorize(room)
     end
   end
