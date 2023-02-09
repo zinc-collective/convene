@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped
   before_action :prepend_theme_views
 
+  include Pagy::Backend
+
   rescue_from Pundit::NotAuthorizedError, with: :render_not_found
   prepend_view_path "app/utilities"
   prepend_view_path "app/furniture"

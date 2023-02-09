@@ -207,6 +207,7 @@ GEM
     nokogiri (1.14.1)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
+    pagy (6.0.1)
     parallel (1.22.1)
     parser (3.2.0.0)
       ast (~> 2.4.1)
@@ -432,6 +433,7 @@ DEPENDENCIES
   listen (~> 3.8)
   lockbox (= 1.1.2)
   money-rails
+  pagy (~> 6.0)
   pg (~> 1.4)
   pry-byebug
   puma (~> 6.0)
