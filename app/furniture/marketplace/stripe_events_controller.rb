@@ -2,8 +2,6 @@ class Marketplace
   class StripeEventsController < Controller
     skip_before_action :verify_authenticity_token
 
-    # @todo add signing check using the stripe webhook signing secret
-    # @see https://stripe.com/docs/webhooks/quickstart
     def create
       skip_authorization
       payload = request.body.read
@@ -22,6 +20,8 @@ class Marketplace
           destination: marketplace.stripe_account,
           transfer_group: order.id
         }, {api_key: marketplace.stripe_api_key})
+      else
+        raise UnexpectedStripeEventTypeError, event.type
       end
     end
   end

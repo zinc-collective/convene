@@ -26,5 +26,11 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     end
 
     specify { call && expect(Stripe::Transfer).to(have_received(:create).with({amount: order.price_total.cents, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key})) }
+
+    context "when stripe sends us an event we can't handle" do
+      let(:stripe_event) { double(Stripe::Event, type: "a.weird.event") }
+
+      specify { expect { call }.to raise_error(Marketplace::UnexpectedStripeEventTypeError) }
+    end
   end
 end
