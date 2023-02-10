@@ -6,6 +6,18 @@ FactoryBot.define do
         create(:stripe_utility, space: marketplace.room.space)
       end
     end
+
+    trait :with_orders do
+      transient do
+        order_quantity { 1 }
+      end
+
+      after(:build) do |marketplace, evaluator|
+        evaluator.order_quantity.times do
+          build(:marketplace_order, marketplace: marketplace)
+        end
+      end
+    end
   end
 
   factory :marketplace_product, class: "Marketplace::Product" do
