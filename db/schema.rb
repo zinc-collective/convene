@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_20_234526) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_10_204421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -134,15 +134,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_234526) do
     t.index ["product_id"], name: "index_marketplace_cart_products_on_product_id"
   end
 
-  create_table "marketplace_carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "marketplace_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "marketplace_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "shopper_id"
     t.string "status", default: "pre_checkout", null: false
     t.string "stripe_session_id"
-    t.index ["marketplace_id"], name: "index_marketplace_carts_on_marketplace_id"
-    t.index ["shopper_id"], name: "index_marketplace_carts_on_shopper_id"
+    t.index ["marketplace_id"], name: "index_marketplace_orders_on_marketplace_id"
+    t.index ["shopper_id"], name: "index_marketplace_orders_on_shopper_id"
   end
 
   create_table "marketplace_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -223,10 +223,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_234526) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "journal_entries", "furniture_placements", column: "journal_id"
-  add_foreign_key "marketplace_cart_products", "marketplace_carts", column: "cart_id"
+  add_foreign_key "marketplace_cart_products", "marketplace_orders", column: "cart_id"
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
-  add_foreign_key "marketplace_carts", "furniture_placements", column: "marketplace_id"
-  add_foreign_key "marketplace_carts", "marketplace_shoppers", column: "shopper_id"
+  add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id"
   add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
   add_foreign_key "marketplace_shoppers", "people"
   add_foreign_key "memberships", "invitations"
