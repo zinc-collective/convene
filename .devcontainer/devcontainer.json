@@ -21,7 +21,7 @@
 	// "forwardPorts": [3000, 5432],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-    // "postStartCommand": "nohup bash -c 'docker compose up &> docker_compose_up_output.txt & sleep 10 &  bin/setup &> bin_setup_output.txt ; bin/run &> bin_run_output.txt &'",
+    "postStartCommand": "nohup bash -c 'docker compose up &> docker_compose_up_output.txt & sleep 10 &  cp .env.example .env && sed -i '/^# PG/s/^# //g' .env && bin/setup &>> bin_setup_output.txt; bin/run &> bin_run_output.txt &'",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
