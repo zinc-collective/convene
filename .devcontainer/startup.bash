@@ -3,7 +3,6 @@
 echo "See files in `.devcontainer/output` for errors and other info"
 
 echo "Starup containers"
-mkdir .devcontainer/output
 docker compose up &> .devcontainer/output/docker_compose_up.out &
 
 sleep 10
