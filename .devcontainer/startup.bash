@@ -5,21 +5,14 @@ echo "See files in '.devcontainer/output' for errors and other info"
 echo "Startup containers"
 docker compose up &> .devcontainer/output/docker_compose_up.out &
 
-sleep 20
+sleep 40
 
 if [ ! -f .env ]; then 
     cp .env.example .env 
     sed -i "/^# PG/s/^# //g" .env 
 fi 
 echo "Run 'bin/setup'"
-if bin/setup &> .devcontainer/output/bin_setup.out ; then
-    echo "'bin/setup' failed; sleeping for 20s then trying again"
-    sleep 20
-    if bin/setup &> .devcontainer/output/bin_setup.out ; then
-        echo "Could not complete 'bin/setup'!"
-        exit 1
-    fi
-fi
+bin/setup &> .devcontainer/output/bin_setup.out
 
 rm -f .overmind.sock 
 echo "Run 'bin/run'"
