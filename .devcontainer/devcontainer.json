@@ -21,7 +21,7 @@
 	// "forwardPorts": [3000, 5432],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-    "postStartCommand": "nohup bash -c 'mkdir .devcontainer/output && docker compose up &> .devcontainer/output/docker_compose_up.txt & sleep 10 &  cp .env.example .env && \"sed -i /^# PG/s/^# //g\" .env && bin/setup &> .devcontainer/output/bin_setup_output.txt; bin/run &> .devcontainer/output/bin_run_output.txt &'",
+    "postStartCommand": "nohup bash -c 'mkdir .devcontainer/output && docker compose up &> .devcontainer/output/docker_compose_up.out & sleep 10 &  cp .env.example .env && sed -i \"/^# PG/s/^# //g\" .env && bin/setup &> .devcontainer/output/bin_setup_output.out; rm -f .overmind.sock ; bin/run &> .devcontainer/output/bin_run_output.txt &' &> .devcontainer/output/nohup.out",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
