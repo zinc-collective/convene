@@ -16,7 +16,7 @@ bin/setup &> .devcontainer/output/bin_setup.out
 
 rm -f .overmind.sock 
 echo "Run `bin/run`"
-bin/run &> .devcontainer/output/bin_run.txt &
+bin/run &> .devcontainer/output/bin_run.out &
 
 echo "App should be running soon!"
 echo "To access the app in your browser:"
