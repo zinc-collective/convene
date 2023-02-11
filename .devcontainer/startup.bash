@@ -2,7 +2,7 @@
 
 echo "See files in `.devcontainer/output` for errors and other info"
 
-echo "Starup containers"
+echo "Startup containers"
 docker compose up &> .devcontainer/output/docker_compose_up.out &
 
 sleep 10
