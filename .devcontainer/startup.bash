@@ -12,10 +12,14 @@ if [ ! -f .env ]; then
     sed -i "/^# PG/s/^# //g" .env 
 fi 
 echo "Run 'bin/setup'"
-bin/setup &> .devcontainer/output/bin_setup.out \
-    || bin/setup &> .devcontainer/output/bin_setup.out \
-    || echo "Could not complete 'bin/setup'!"; exit 1
-
+if bin/setup &> .devcontainer/output/bin_setup.out ; then
+    echo "'bin/setup' failed; sleeping for 20s then trying again"
+    sleep 20
+    if bin/setup &> .devcontainer/output/bin_setup.out ; then
+        echo "Could not complete 'bin/setup'!"
+        exit 1
+    fi
+fi
 
 rm -f .overmind.sock 
 echo "Run 'bin/run'"
