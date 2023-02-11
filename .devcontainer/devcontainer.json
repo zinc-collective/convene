@@ -21,7 +21,7 @@
 	// "forwardPorts": [3000, 5432],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-    "postStartCommand": "mkdir .devcontainer/output ; nohup bash -c 'chmod +x .devcontainer/startup.bash && .devcontainer/startup.bash' | tee .devcontainer/output/nohup-errs.out",
+    "postStartCommand": "rm -rf .devcontainer/output ; mkdir .devcontainer/output ; nohup bash -c 'chmod +x .devcontainer/startup.bash && .devcontainer/startup.bash' | tee .devcontainer/output/nohup.out",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
