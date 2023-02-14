@@ -17,7 +17,7 @@ gem "rails", "~> 7.0"
 # Data Transport
 #
 # Use Puma as the app server
-gem "puma", "~> 6.0"
+gem "puma", "~> 6.1"
 
 # Browser Layer
 gem "cssbundling-rails"
