@@ -72,3 +72,13 @@ The Marketplace uses Stripe, we anticipate that we will want to use the "Connect
 Stripe provides test API keys and testing credit card numbers, see:
 * https://stripe.com/docs/keys#obtain-api-keys
 * https://stripe.com/docs/testing
+
+### On Local Environments
+You will need to use the [`stripe` cli](https://stripe.com/docs/stripe-cli) to forward events to your local server.
+
+The `--forward-to` url can be found for a particular marketplace by using `polymorphic_url(marketplace.location(child: :stripe_events)` from within a controller or view debug session.
+
+You will then need to update the `marketplace#stripe_webhook_endpoint_secret` to match the webhook secret provided by the stripe cli.
+
+### On Github CodeSpaces
+If you are using a Github CodeSpace, you will want to mark the web-server port as `public` so that Stripe can send it events.
