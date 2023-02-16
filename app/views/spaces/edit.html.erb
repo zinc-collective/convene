@@ -45,7 +45,7 @@
 
 
 <fieldset>
-  <h3>Utility Hookups</h3>
+  <h3>Utilities</h3>
   <%- space.utility_hookups.each do |utility_hookup| %>
     <%- if policy(utility_hookup).edit? %>
       <%= render partial: "utility_hookups/form", locals: { utility_hookup: utility_hookup } %>
