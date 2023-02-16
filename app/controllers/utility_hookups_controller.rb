@@ -22,7 +22,7 @@ class UtilityHookupsController < ApplicationController
   end
 
   def update
-    if utility_hookup.update(utility_hookup_params)
+    if utility_hookup.utility.update(utility_hookup_params)
       redirect_to [:edit, space]
     else
       render :edit
