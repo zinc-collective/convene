@@ -29,8 +29,7 @@ RSpec.describe UtilityHookup do
 
   describe "#configuration" do
     it "starts as an empty hash" do
-      uh = create(:stripe_utility)
-      expect(uh.configuration).to eq({})
+      expect(build(:utility_hookup).configuration).to eq({})
     end
 
     it "is encrypted" do
