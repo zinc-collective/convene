@@ -40,9 +40,12 @@ class UtilityHookupPolicy < ApplicationPolicy
   end
 
   def permitted_attributes(params)
-    utility_permitted_attributes =
-      policy!(Utilities.fetch(params[:utility_slug]))
-        &.permitted_attributes(params)
+    utility_model = Utilities.fetch(params[:utility_slug])
+    utility_permitted_attributes = if utility_model != UtilityHookup
+      policy!(utility_model)&.permitted_attributes(params)
+    else
+      []
+    end
 
     [:name, :utility_slug] + utility_permitted_attributes
   end
