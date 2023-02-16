@@ -1,6 +1,6 @@
-<% required ||= required | false %>
-<% min = local_assigns[:min] %>
-<% step = local_assigns[:step] %>
+<% required = local_assigns[:required] || false %>
+<% min = local_assigns[:min] || 0 %>
+<% step = local_assigns[:step] || 0.01 %>
 <div>
   <%= form.label attribute, class: "block text-sm font-medium text-gray-700"%>
   <div class="relative mt-1 rounded-md shadow-sm">
