@@ -13,6 +13,12 @@ class Marketplace
       space.utility_hookups.find_by!(utility_slug: :stripe).utility.api_token
     end
 
+    def stripe_api_key?
+      stripe_api_key.present?
+    rescue ActiveRecord::RecordNotFound
+      false
+    end
+
     def stripe_account
       settings["stripe_account"]
     end
