@@ -2,11 +2,18 @@
 
 <%= render "form", marketplace: marketplace %>
 
-<%- if marketplace.stripe_account.present? %>
-  <%= t('.stripe_connected') %>
-<%- end %>
-<%= button_to t('.connect_stripe'), marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
+<%- if marketplace.stripe_api_key? %>
+  <%- if marketplace.stripe_account.present? %>
+    <%= t('.stripe_connected') %>
+  <%- end %>
+  <%= button_to t('.connect_stripe'),
+      marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
+<% else %>
+  <%= button_to t('.add_stripe_hookup_key', space_name: space.name),
+      space.location(:edit), method: :get, data: { turbo: false } %>
+<% end %>
 
 <%- if policy(marketplace.products.new).create? %>
-  <%= link_to t('marketplace.product.index'), marketplace.location(child: :products) %>
+  <%= button_to t('marketplace.product.index'),
+      marketplace.location(child: :products), method: :get, data: { turbo: false } %>
 <%- end %>
