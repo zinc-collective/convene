@@ -1,0 +1,4 @@
+en:
+  stripe_utilities:
+    form:
+      api_key_help: You can find your Stripe API key in the Stripe Developer Dashboard
