@@ -4,12 +4,10 @@ FactoryBot.define do
     association(:space)
 
     utility_slug { "null" }
-    trait :stripe do
-      utility_slug { "stripe" }
-    end
+  end
 
-    factory :stripe_utility do
-      utility_slug { "stripe" }
-    end
+  factory :stripe_utility do
+    utility_slug { "stripe" }
+    api_token { "not_real" }
   end
 end

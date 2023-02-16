@@ -1,3 +1,5 @@
 {
-  "markdown.extension.toc.levels": "2..3"
+  "markdown.extension.toc.levels": "2..3",
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true
 }

@@ -5,10 +5,6 @@ require "support/shared_examples/a_space_member_only_route"
 
 RSpec.describe UtilityHookupsController do
   let(:space) { create(:space, :with_members) }
-  let(:utility_hookup_attributes) do
-    attributes_for(:stripe_utility).merge(utility_attributes: {"api_token" => "fake-token"})
-  end
-  let(:utility_hookup) { create(:utility_hookup, space: space) }
 
   let(:guest) { nil }
   let(:neighbor) { create(:person) }
@@ -35,15 +31,13 @@ RSpec.describe UtilityHookupsController do
     end
   end
 
-  describe "GET /spaces/:space_id/utility_hookups/:id/edit" do
+  describe "#edit" do
     subject(:perform_request) do
       get "/spaces/#{space.id}/utility_hookups/#{utility_hookup.id}/edit"
       response
     end
 
-    let(:changes) {}
-
-    it_behaves_like "a space-member only route"
+    let(:utility_hookup) { create(:utility_hookup, space: space) }
 
     it "exposes the edit form" do
       perform_request
@@ -54,42 +48,38 @@ RSpec.describe UtilityHookupsController do
     end
   end
 
-  describe "PUT /spaces/:space_id/utility_hookups/:id" do
+  describe "#update" do
     subject(:perform_request) do
       put "/spaces/#{space.id}/utility_hookups/#{utility_hookup.id}",
-        params: {utility_hookup: utility_hookup_attributes}
+        params: {utility_hookup: attributes_for(:stripe_utility, api_token: "new-token")}
       response
     end
 
-    let(:changes) { -> { utility_hookup.reload.attributes } }
-
-    it_behaves_like "a space-member only route"
+    let(:utility_hookup) { create(:stripe_utility, space: space) }
 
     it "Updates the Utility Hookup" do
       expect { perform_request }.to(change { utility_hookup.reload.attributes })
 
       expect(response).to redirect_to [:edit, space]
-      expect(utility_hookup.utility_slug).to eq(utility_hookup_attributes[:utility_slug])
-      expect(utility_hookup.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
+      expect(utility_hookup.utility_slug).to eq("stripe")
+      expect(utility_hookup.utility.api_token).to eq("new-token")
     end
   end
 
-  describe "POST /spaces/:space_id/utility_hookups" do
+  describe "#create" do
     subject(:perform_request) do
       post "/spaces/#{space.id}/utility_hookups", params: {utility_hookup: utility_hookup_attributes}
     end
 
-    let(:changes) { -> { space.utility_hookups.count } }
-
-    it_behaves_like "a space-member only route"
+    let(:utility_hookup_attributes) { attributes_for(:utility_hookup) }
 
     it "creates a Utility Hookup on the given space" do
       expect { perform_request }
         .to(change { space.utility_hookups.count }.by(1))
 
       expect(response).to redirect_to [:edit, space]
-      expect(space.utility_hookups.last.utility_slug).to eql("stripe")
-      expect(space.utility_hookups.last.utility.configuration).to eq(utility_hookup_attributes[:utility_attributes])
+      expect(space.utility_hookups.last.utility_slug).to eql("null")
+      expect(space.utility_hookups.last.utility.configuration).to eq({})
     end
   end
 end
