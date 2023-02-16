@@ -1,6 +1,6 @@
 class Marketplace
   class Order < Record
-    self.table_name = "marketplace_carts"
+    self.table_name = "marketplace_orders"
     self.location_parent = :marketplace
 
     belongs_to :marketplace, inverse_of: :orders

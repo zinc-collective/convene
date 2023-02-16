@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe "/spaces/:space_slug/rooms/:room_slug/furniture_placements", type: :request do
+RSpec.describe FurniturePlacementsController do
   let(:placement) { create(:furniture_placement, room: room) }
   let(:room) { create(:room) }
   let(:space) { room.space }
 
-  describe "POST /spaces/:space_slug/rooms/:room_slug/furniture_placements" do
+  describe "#create" do
     let(:membership) { create(:membership, space: space) }
     let!(:person) { membership.member }
 
@@ -13,7 +13,7 @@ RSpec.describe "/spaces/:space_slug/rooms/:room_slug/furniture_placements", type
 
     it "creates a furniture placement of the kind of furniture provided within the room" do
       expect do
-        post space_room_furniture_placements_path(space, room), params: {furniture_placement: {furniture_kind: :markdown_text_block}}
+        post polymorphic_path(room.location(child: :furniture_placements)), params: {furniture_placement: {furniture_kind: :markdown_text_block}}
       end.to change { room.furniture_placements.count }.by(1)
 
       placement = room.furniture_placements.last
@@ -23,8 +23,8 @@ RSpec.describe "/spaces/:space_slug/rooms/:room_slug/furniture_placements", type
     end
   end
 
-  describe "PATCH /spaces/:space_slug/rooms/:room_slug/furniture_placements/:id" do
-    let(:placement_path) { space_room_furniture_placement_path(space, room, placement) }
+  describe "#update" do
+    let(:placement_path) { polymorphic_path(placement.location) }
 
     context "when the person is a guest" do
       it "does not allow updating placements" do
@@ -47,12 +47,12 @@ RSpec.describe "/spaces/:space_slug/rooms/:room_slug/furniture_placements", type
     end
   end
 
-  describe "DELETE /spaces/:space_slug/rooms/:room_slug/furniture_placements/:id" do
-    let(:placement_path) { space_room_furniture_placement_path(space, room, placement) }
+  describe "#destroy" do
+    let(:placement_path) { polymorphic_path(placement.location) }
 
     context "when the person is a guest" do
       it "does not allow destroying placements" do
-        patch placement_path, params: {furniture_placement: {furniture_attributes: {content: "updated content"}}}
+        delete placement_path
         expect(response).not_to have_http_status(:success)
         expect(placement.reload).to be_present
       end

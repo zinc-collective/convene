@@ -21,7 +21,7 @@ module Furniture
 
   # @return [FurniturePlacement]
   def self.from_placement(placement)
-    furniture_class = REGISTRY[placement.furniture_kind.to_sym]
+    furniture_class = REGISTRY.fetch(placement.furniture_kind.to_sym)
     furniture_class.from_placement(placement)
   end
 end
