@@ -1041,10 +1041,10 @@ autoprefixer@^10.4.13:
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
 
-axios-case-converter@^0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/axios-case-converter/-/axios-case-converter-0.11.1.tgz#69671f3adc435af8b61d86effd5f4a58f0559c51"
-  integrity sha512-i5hrkBg7SE9jsm2Q+ClznR5DsKcYXChH6Cc3Rhx2p4gdIfJwvvO5/ATcAg/vN2UVzGE2B1eR1O4VuEGkICdJdQ==
+axios-case-converter@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/axios-case-converter/-/axios-case-converter-1.0.1.tgz#e9c6fee32b37bad84051e080feb9711593a60a0c"
+  integrity sha512-Mk6JK13OwYd0pmWHtF2Kn3awIObRGvxdCjZwMOElrBk1DoyOjVHLdSthD6eSbNwPzxnhV4W2Fa7283iozqD1wQ==
   dependencies:
     camel-case "^4.1.1"
     header-case "^2.0.3"
