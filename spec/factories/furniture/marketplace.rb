@@ -22,7 +22,7 @@ FactoryBot.define do
 
   factory :marketplace_product, class: "Marketplace::Product" do
     name { Faker::TvShows::DrWho.specie }
-    price_cents { Random.rand(1_00..999_999) }
+    price_cents { Random.rand(1_00..999_99) }
 
     marketplace
   end

@@ -15,10 +15,16 @@ class Marketplace
       paid: "paid"
     }
 
-    def price_total
+    def product_total
       ordered_products.sum(0) do |ordered_product|
         ordered_product.product.price * ordered_product.quantity
       end
+    end
+
+    delegate :delivery_fee, to: :marketplace
+
+    def price_total
+      product_total + delivery_fee
     end
   end
 end
