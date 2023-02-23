@@ -29,7 +29,7 @@ class Marketplace
         OrderReceivedMailer.notification(order).deliver_later
 
         Stripe::Transfer.create({
-        amount: order.price_total.cents,
+        amount: order.product_total.cents,
           currency: "usd",
           destination: marketplace.stripe_account,
           transfer_group: order.id
