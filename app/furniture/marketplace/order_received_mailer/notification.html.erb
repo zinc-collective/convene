@@ -1,0 +1,12 @@
+<h3>Order #<%= order.id %></h3>
+
+<ul>
+  <%- order.ordered_products.each do |ordered_product|%>
+    <li><%= ordered_product.name %> (<%= ordered_product.quantity %>) - <%= humanized_money_with_symbol(ordered_product.price) %></li>
+  <%- end %>
+  <li>Delivery Fee: <%= humanized_money_with_symbol(order.delivery_fee) %>
+</ul>
+
+<p>Total: <%= humanized_money_with_symbol(order.price_total) %></p>
+<p>Deliver To: <%= order.delivery_address %>
+<p>Contact Email: <%= order.contact_email %>
