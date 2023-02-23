@@ -7,6 +7,5 @@
   <li>Delivery Fee: <%= humanized_money_with_symbol(order.delivery_fee) %>
 </ul>
 
-
-
 <p>Total: <%= humanized_money_with_symbol(order.price_total) %></p>
+<p>Deliver To: <%= order.delivery_address %>
