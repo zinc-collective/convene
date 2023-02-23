@@ -14,6 +14,7 @@ class Marketplace
     attribute :delivery_address, :string
 
     enum status: {
+      pre_checkout: "pre_checkout",
       paid: "paid"
     }
 

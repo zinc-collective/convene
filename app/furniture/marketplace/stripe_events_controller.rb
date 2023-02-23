@@ -20,10 +20,9 @@ class Marketplace
         shipping_address = event.data.object.shipping.address
         delivery_address =
           [event.data.object.shipping.name,
-           shipping_address.line1,
-           shipping_address.line2,
-           "#{shipping_address.city}, #{shipping_address.state} #{shipping_address.postal_code}",
-        ].compact.join("\n")
+            shipping_address.line1,
+            shipping_address.line2,
+            "#{shipping_address.city}, #{shipping_address.state} #{shipping_address.postal_code}"].compact.join("\n")
         order.update(delivery_address: delivery_address,
           status: :paid,
           contact_email: event.data.object.customer_details.email)
@@ -31,7 +30,7 @@ class Marketplace
         OrderReceivedMailer.notification(order).deliver_later
 
         Stripe::Transfer.create({
-        amount: order.product_total.cents,
+          amount: order.product_total.cents,
           currency: "usd",
           destination: marketplace.stripe_account,
           transfer_group: order.id

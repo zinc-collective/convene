@@ -4,9 +4,15 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
   let(:marketplace) { create(:marketplace, :with_stripe_utility, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234") }
   let(:space) { marketplace.space }
   let(:member) { create(:membership, space: space).member }
-  let(:order) { create(:marketplace_order, :with_products) }
+  let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout) }
 
-  let(:stripe_event) { double(Stripe::Event, type: "checkout.session.completed", data: double(object: double(payment_intent: "pi_1234"))) }
+  let(:stripe_event) do
+    double(Stripe::Event, type: "checkout.session.completed",
+      data: double(object: double(payment_intent: "pi_1234",
+        customer_details: double(email: "test@example.com"),
+        shipping: double(name: "Test",
+          address: double(line1: "123 N West", line2: "apt 1", city: "Oakland", state: "CA", postal_code: "94609")))))
+  end
 
   let(:payment_intent) { double(Stripe::PaymentIntent, transfer_group: order.id) }
 
