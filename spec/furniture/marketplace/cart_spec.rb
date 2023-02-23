@@ -24,4 +24,19 @@ RSpec.describe Marketplace::Cart, type: :model do
 
     it { is_expected.to eql(product_a.price + product_b.price + product_b.price + marketplace.delivery_fee) }
   end
+
+  describe "#product_total" do
+    subject(:product_total) { cart.product_total }
+
+    let(:cart) { create(:marketplace_cart) }
+    let(:product_a) { create(:marketplace_product, marketplace: cart.marketplace) }
+    let(:product_b) { create(:marketplace_product, marketplace: cart.marketplace) }
+
+    before do
+      cart.cart_products.create!(product: product_a, quantity: 3)
+      cart.cart_products.create!(product: product_b, quantity: 2)
+    end
+
+    it { is_expected.to eql(product_a.price * 3 + product_b.price * 2) }
+  end
 end
