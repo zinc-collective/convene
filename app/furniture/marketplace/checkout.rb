@@ -3,7 +3,7 @@ class Marketplace
     self.location_parent = :cart
     include ActiveModel::Validations
     attr_accessor :cart
-    delegate :shopper, :marketplace, to: :cart
+    delegate :shopper, :marketplace, :persisted?, to: :cart
 
     # It would be nice to validate instead the presence of :ordered_products, but my attempts at this raise:
     #  ActiveRecord::HasManyThroughCantAssociateThroughHasOneOrManyReflection:
@@ -25,14 +25,6 @@ class Marketplace
       }, {
         api_key: marketplace.stripe_api_key
       })
-    end
-
-    def complete(stripe_session_id:)
-      cart.update!(status: :paid, stripe_session_id: stripe_session_id)
-    end
-
-    def persisted?
-      true
     end
 
     private
