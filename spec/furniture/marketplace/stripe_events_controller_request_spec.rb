@@ -14,13 +14,19 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
           address: double(line1: "123 N West", line2: "apt 1", city: "Oakland", state: "CA", postal_code: "94609")))))
   end
 
-  let(:payment_intent) { double(Stripe::PaymentIntent, transfer_group: order.id) }
+  let(:balance_transaction) { double(Stripe::BalanceTransaction, fee: 100)}
+
+  let(:payment_intent) do
+    double(Stripe::PaymentIntent, transfer_group: order.id,
+      charges: [double(Stripe::Charge, balance_transaction: "btx_2234")])
+  end
 
   before do
     allow(Stripe::Webhook).to receive(:construct_event).with(anything, "sig_1234", marketplace.stripe_webhook_endpoint_secret).and_return(stripe_event)
 
     allow(Stripe::PaymentIntent).to receive(:retrieve).with("pi_1234", anything).and_return(payment_intent)
     allow(Stripe::Transfer).to receive(:create)
+    allow(Stripe::BalanceTransaction).to receive(:retrieve).with("btx_2234", anything).and_return(balance_transaction)
   end
 
   describe "#create" do
@@ -31,7 +37,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       response
     end
 
-    specify { call && expect(Stripe::Transfer).to(have_received(:create).with({amount: order.price_total.cents, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key})) }
+    specify { call && expect(Stripe::Transfer).to(have_received(:create).with({amount: order.price_total.cents - balance_transaction.fee, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key})) }
 
     specify { expect { call }.to have_enqueued_mail(Marketplace::OrderReceivedMailer, :notification).with(order) }
 

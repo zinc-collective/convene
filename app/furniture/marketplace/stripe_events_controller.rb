@@ -13,9 +13,13 @@ class Marketplace
 
       when "checkout.session.completed"
         payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
+
+
         order = Order.find(payment_intent.transfer_group)
 
         return if order.paid?
+
+        balance_transaction = Stripe::BalanceTransaction.retrieve(payment_intent.charges.first.balance_transaction, api_key: marketplace.stripe_api_key)
 
         shipping_address = event.data.object.shipping.address
         delivery_address =
@@ -30,7 +34,7 @@ class Marketplace
         OrderReceivedMailer.notification(order).deliver_later
 
         Stripe::Transfer.create({
-          amount: order.product_total.cents,
+          amount: order.product_total.cents - balance_transaction.fee,
           currency: "usd",
           destination: marketplace.stripe_account,
           transfer_group: order.id
