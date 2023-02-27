@@ -1,6 +1,8 @@
-<div data-access-level="<%= room.access_level %>" data-slug="<%= room.slug %>" data-model="room" data-id="<%= room.id%>" class="room-card">
-  <header>
-    <h3><%= room.name %></h3>
+<%= render CardComponent.new(data: { access_level: room.access_level, slug: room.slug, model: "room", id: room.id }) do %>
+  <header class="w-full items-center flex">
+    <h3 class="text-neutral-900 text-sm leading-5 font-medium truncate pl-8 mr-4">
+      <%= room.name %>
+    </h3>
     <%- if room.locked? %>
       <span class="icon --lock" role="img" aria-label="Locked"></span>
     <%- end %>
@@ -8,11 +10,11 @@
       <span class="icon --key" role="img" aria-label="Enterable"></span>
     <%- end %>
   </header>
-  <footer>
-    <div class="room-door_enter">
-      <%= link_to [room.space, room] do %>
-        <span class="icon --enter" role="img" aria-label="Enter <%= room.name %>">Enter Room</span>
+  <footer class="w-full flex flex-col items-center justify-center border-t border-neutral-200">
+    <div data-role="enter" class="flex justify-center text-sm leading-5 text-neutral-700 font-medium transition ease-in-out duration-150 focus:outline-none focus:ring-blue-500 focus:border-blue-300 focus:z-10 hovertext-neutral-500">
+      <%= link_to [room.space, room], class: "flex-1 inline-flex items-center justify-center py-4 no-underline" do %>
+        <span class="icon --enter pl-4" role="img" aria-label="Enter <%= room.name %>">Enter Room</span>
       <% end %>
     </div>
   </footer>
-</div>
+<%- end %>
