@@ -10,7 +10,7 @@ class SpacePolicy < ApplicationPolicy
   def update?
     return false unless person
 
-    person.member_of?(space)
+    person.member_of?(space) || person.operator?
   end
 
   alias_method :new?, :update?

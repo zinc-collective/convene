@@ -16,7 +16,7 @@ class UtilityHookupPolicy < ApplicationPolicy
   def create?
     return false unless person
 
-    person.member_of?(utility_hookup.space)
+    person.member_of?(utility_hookup.space) || person.operator?
   end
 
   def index?

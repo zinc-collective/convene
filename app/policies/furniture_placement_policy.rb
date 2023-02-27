@@ -16,7 +16,7 @@ class FurniturePlacementPolicy < ApplicationPolicy
   end
 
   def update?
-    person&.member_of?(furniture_placement.space)
+    person&.operator? || person&.member_of?(furniture_placement.space)
   end
 
   alias_method :edit?, :update?

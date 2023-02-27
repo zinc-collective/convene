@@ -6,11 +6,11 @@ class RoomPolicy < ApplicationPolicy
 
   def show?
     return true if room.unlocked? || room.locked?
-    return true if room.internal? && person&.member_of?(space)
+    return true if room.internal? && (person&.member_of?(space) || person&.operator?)
   end
 
   def create?
-    person&.member_of?(space)
+    person&.member_of?(space) || person&.operator?
   end
 
   alias_method :edit?, :create?

@@ -21,10 +21,6 @@ class Person < ApplicationRecord
     spaces.include?(space)
   end
 
-  def operator?
-    false
-  end
-
   def display_name
     return name if name.present?
 
