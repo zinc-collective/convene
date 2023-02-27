@@ -1,46 +1,47 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
 {
-	"name": "convene devcontainer",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
-        "node": {
-            "version": "16",
-            "nodeGypDependencies": true
-        }
-	},
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// This can be used to network with other containers or the host.
-	// "forwardPorts": [3000, 5432],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-    "postStartCommand": "rm -rf .devcontainer/output ; mkdir .devcontainer/output ; nohup bash -c 'chmod +x .devcontainer/startup.bash && .devcontainer/startup.bash' | tee .devcontainer/output/nohup.out",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "alexkrechik.cucumberautocomplete",
-                "ms-azuretools.vscode-docker",
-                "editorconfig.editorconfig",
-                "hashicorp.terraform",
-                "yzhang.markdown-all-in-one",
-                "esbenp.prettier-vscode",
-                "rebornix.ruby",
-                "wingrunr21.vscode-ruby",
-                "valentjn.vscode-ltex"
-            ]
-        }
+  "name": "convene devcontainer",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "node": {
+      "version": "16",
+      "nodeGypDependencies": true
     }
+  },
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // This can be used to network with other containers or the host.
+  // "forwardPorts": [3000, 5432],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postStartCommand": "rm -rf .devcontainer/output ; mkdir .devcontainer/output ; nohup bash -c 'chmod +x .devcontainer/startup.bash && .devcontainer/startup.bash' | tee .devcontainer/output/nohup.out",
+
+  // Configure tool-specific properties.
+  // "customizations": {},
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "alexkrechik.cucumberautocomplete",
+        "ms-azuretools.vscode-docker",
+        "editorconfig.editorconfig",
+        "hashicorp.terraform",
+        "yzhang.markdown-all-in-one",
+        "esbenp.prettier-vscode",
+        "rebornix.ruby",
+        "wingrunr21.vscode-ruby",
+        "valentjn.vscode-ltex",
+        "castwide.solargraph"
+      ]
+    }
+  }
 }
