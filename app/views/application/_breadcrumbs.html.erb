@@ -1,6 +1,8 @@
-<div>
-  <%- if policy(current_space).edit? %>
-    <%= link_to "", [:edit, current_space], class: "icon --configure", aria: { label: "Configure Space" }, role: "img" %>
-  <% end %>
-  <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; ", semantic: true, display_single_fragment: true %>
-</div>
+<%- if current_space.present? %>
+  <div>
+    <%- if policy(current_space).edit? %>
+      <%= link_to "", [:edit, current_space], class: "icon --configure", aria: { label: "Configure Space" }, role: "img" %>
+    <% end %>
+    <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; ", semantic: true, display_single_fragment: true %>
+  </div>
+<%- end %>

@@ -9,7 +9,7 @@ RSpec.describe SpacesController, type: :request do
     context "with a branded domain" do
       let(:space) { create(:space, branded_domain: "beta.example.com") }
 
-      it "links to the domain" do
+      it "redirects to the domain" do
         get polymorphic_path(space)
 
         expect(response).to redirect_to "http://beta.example.com"

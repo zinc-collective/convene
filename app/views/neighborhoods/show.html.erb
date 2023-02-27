@@ -1,0 +1,15 @@
+<%- @pagy, @records = pagy(policy_scope(neighborhood.spaces)) %>
+
+<section class="max-w-3xl mx-auto">
+  <div class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <%= render @records %>
+  </div>
+
+  <%== pagy_nav(@pagy, nav_extra: 'flex justify-between') %>
+
+  <%- if policy(Space).new? %>
+    <div class="text-center w-full">
+      <%= link_to "Add a Space",[:new, :space] %>
+    </div>
+  <%- end %>
+</section>

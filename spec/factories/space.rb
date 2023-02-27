@@ -4,10 +4,6 @@ FactoryBot.define do
   factory :space do
     sequence(:name) { |n| "#{Faker::Book.title} #{n}" }
 
-    trait :default do
-      slug { Neighborhood.config.default_space_slug }
-    end
-
     trait :with_members do
       transient do
         member_count { 4 }
