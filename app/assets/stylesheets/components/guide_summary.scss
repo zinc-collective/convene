@@ -1,12 +1,13 @@
 @layer components {
   .guide-summary {
-    @apply card;
+    @apply grid grid-cols-1 grid-rows-2 grid-flow-col shadow rounded-lg px-3 bg-white;
+
     header {
-      @apply card__header;
+      @apply w-full items-center;
     }
 
     footer {
-      @apply card__footer;
+      @apply w-full flex flex-col items-center justify-center border-t border-neutral-200;
     }
   }
 }

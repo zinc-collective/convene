@@ -69,7 +69,7 @@ class RoomCardComponent extends Component {
    * @returns {Component}
    */
   enterRoomButton() {
-    return this.component(".room-door_enter");
+    return this.component("*[data-role=enter]");
   }
   /**
    * @param {string | undefined } accessCode
