@@ -49,13 +49,10 @@
       },
       "addons": [
         {
-          "plan": "heroku-postgresql:hobby-dev",
-          "options": {
-            "verison": "12"
-          }
+          "plan": "heroku-postgresql:mini"
         },
         {
-          "plan": "heroku-redis:hobby-dev"
+          "plan": "heroku-redis:mini"
         }
       ]
     }
