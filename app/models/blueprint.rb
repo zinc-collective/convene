@@ -4,12 +4,6 @@
 class Blueprint
   attr_accessor :attributes
 
-  def self.prepare_clients!
-    CLIENTS.each do |client_attributes|
-      Blueprint.new(client_attributes).find_or_create!
-    end
-  end
-
   def initialize(attributes)
     @attributes = attributes
   end
@@ -156,24 +150,4 @@ class Blueprint
       ]
     }
   }.with_indifferent_access
-
-  # @todo migrate this to a private configuration file!
-  CLIENTS = [{
-    client: {
-      name: "Zinc",
-      space: {
-        name: "Convene",
-        entrance: "landing-page",
-        members: [{email: "zee@zinc.coop"}],
-        rooms: [{
-          name: "Landing Page",
-          access_level: :unlocked,
-          publicity_level: :unlisted,
-          furniture_placements: {
-            markdown_text_block: {}
-          }
-        }]
-      }
-    }
-  }].freeze
 end
