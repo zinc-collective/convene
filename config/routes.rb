@@ -16,8 +16,6 @@ Rails.application.routes.draw do
 
   resource :me, only: %i[show], controller: "me"
 
-  resources :guides, only: %i[index show]
-
   constraints DefaultSpaceConstraint.new(Space) do
     mount Rswag::Ui::Engine => "/api-docs"
     mount Rswag::Api::Engine => "/api-docs"
