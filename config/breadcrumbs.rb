@@ -42,15 +42,6 @@ crumb :new_utility_hookup do |utility_hookup|
   parent :utility_hookups, utility_hookup.space
 end
 
-crumb :guides do
-  link t("guides.title"), guides_path
-end
-
-crumb :guide do |guide|
-  link t("guides.#{guide.slug}.title"), guide_path(guide)
-  parent :guides
-end
-
 crumb :room do |room|
   link room.name, [room.space, room] unless room.entrance?
 end
