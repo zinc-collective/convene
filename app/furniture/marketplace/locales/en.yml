@@ -1,9 +1,6 @@
 
 en:
   marketplace:
-    checkouts:
-      show:
-        success: "You successfully checked out!"
     marketplace:
       edit: "Configure Marketplace"
     marketplaces:

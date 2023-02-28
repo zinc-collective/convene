@@ -9,17 +9,6 @@ RSpec.describe Marketplace::Checkout, type: :request do
 
   before { create(:stripe_utility, space: space) }
 
-  describe "#show" do
-    context "when a stripe_session_id is in the params" do
-      it "marks the cart as checked out" do
-        get polymorphic_path(checkout.location, {stripe_session_id: "12345"})
-
-        expect(cart.reload).to be_paid
-        expect(response).to redirect_to(cart.becomes(Marketplace::Order).location)
-      end
-    end
-  end
-
   describe "#create" do
     subject(:completed_request) {
       post polymorphic_path(checkout.location)

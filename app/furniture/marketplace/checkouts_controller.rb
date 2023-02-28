@@ -1,20 +1,11 @@
 class Marketplace
   class CheckoutsController < Controller
-    def show
-      authorize(checkout)
-      if params[:stripe_session_id].present?
-        checkout.complete(stripe_session_id: params[:stripe_session_id])
-        flash[:notice] = t(".success")
-      end
-      redirect_to order.location
-    end
-
     def create
       authorize(checkout)
 
       if checkout.valid?
         stripe_session = checkout.create_stripe_session(
-          success_url: "#{polymorphic_url(checkout.location)}?stripe_session_id={CHECKOUT_SESSION_ID}",
+          success_url: "#{polymorphic_url(order.location)}?stripe_session_id={CHECKOUT_SESSION_ID}",
           cancel_url: polymorphic_url(marketplace.location)
         )
         redirect_to stripe_session.url, status: :see_other, allow_other_host: true
