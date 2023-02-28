@@ -51,4 +51,6 @@ class Space < ApplicationRecord
   def parent_location
     []
   end
+
+  attr_accessor :blueprint
 end
