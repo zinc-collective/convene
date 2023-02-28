@@ -13,3 +13,23 @@
     </div>
   <%- end %>
 </section>
+
+<%- if !neighborhood.email_configured? %>
+  <p>It looks like you haven't configured Convene to send email. Check the <code>.env.example</code> file for variables named with <code>SMTP</code> and make sure each is set with your email providers configuration.</p>
+
+  <p>If you're hosting for you and your friends, you can use your current email service provider and send emails as yourself. If you want to go bigger, we recommend setting up a dedicated transactional email service, such as Mailgun.<p>
+
+<%- elsif neighborhood.operators.blank? %>
+  <p>It looks like you don't have anyone set up as an Operator yet! To make yourself an Operator:
+
+  <ol>
+    <%- if current_person&.authenticated? %>
+    <li>Open a <code>rails console</code> on your server's command line.</li>
+    <li>Find yourself: <code>me = Person.joins(:authentication_methods).find_by(authentication_methods: { contact_method: :email, contact_location: "<%= current_person.authentication_methods.via_email.first.contact_location %>" })</code></li>
+    <li>Set your operator bit to true: <code>me.update(operator: true)</code></li>
+    <li>Reload this page!</li>
+    <%- else %>
+      <li><%= link_to "Sign in!", [:new, :authenticated_session]%></li>
+    <% end%>
+  </ol>
+<%- end %>

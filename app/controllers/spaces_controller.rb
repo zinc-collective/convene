@@ -59,15 +59,15 @@ class SpacesController < ApplicationController
     @space ||= if params[:id]
       policy_scope(Space).friendly.find(params[:id])
     elsif params[:space]
-      Space.new(space_params)
+      policy_scope(Space).new(space_params)
     else
-      Space.new
+      policy_scope(Space).new
     end.tap do |space|
       authorize(space)
     end
   end
 
   helper_method def current_space
-    space
+    space.persisted? ? space : nil
   end
 end
