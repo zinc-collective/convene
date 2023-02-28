@@ -21,7 +21,7 @@ class AuthenticatedSessionsController < ApplicationController
 
   def destroy
     authenticated_session.destroy
-    redirect_to current_space
+    redirect_to(current_space.presence || :root)
   end
 
   helper_method def authenticated_session

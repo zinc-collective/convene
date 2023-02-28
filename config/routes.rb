@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => "/api-docs"
 
   resources :authentication_methods, only: %i[create]
+  resource :authenticated_session, only: %i[new create update destroy show]
 
   # get "/auth/:provider/callback", "sessions#create"
   # post "/auth/:provider/callback", "sessions#create"
