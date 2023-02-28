@@ -38,10 +38,6 @@
         }
       },
       "env": {
-        "FEATURE_DEMO": {
-          "description": "Seed demo data",
-          "value": "true"
-        },
         "FEATURE_SYSTEM_TEST": {
           "description": "Seed Test data",
           "value": "true"
