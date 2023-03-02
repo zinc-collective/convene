@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
 
   # @todo this should be tested 🙃 halp me
   def ensure_on_byo_domain
-
+    return if current_space.blank?
     if request.get? && current_space.branded_domain.present? && request.host != current_space.branded_domain
       Rails.logger.debug("Request Host: #{request.host}")
       redirect_url = URI(request.url)
@@ -114,16 +114,8 @@ class ApplicationController < ActionController::Base
       if params[:space_id]
         space_repository.friendly.find(params[:space_id])
       else
-        BrandedDomainConstraint.new(space_repository).space_for_request(request) ||
-          space_repository.friendly.find(params[:id])
+        BrandedDomainConstraint.new(space_repository).space_for_request(request)
       end
-  rescue ActiveRecord::RecordNotFound
-    begin
-      @current_space ||= space_repository.default
-    rescue ActiveRecord::RecordNotFound
-      Rails.logger.error("No default space exists!")
-      @current_space = nil
-    end
   end
 
   helper_method def current_membership
@@ -139,6 +131,8 @@ class ApplicationController < ActionController::Base
   # Retrieves the room based upon the current_space and params
   # @return [nil, Room]
   helper_method def current_room
+    return nil if current_space.blank?
+
     @current_room ||=
       policy_scope(current_space.rooms).friendly.find(
         params[:room_id] || params[:id]

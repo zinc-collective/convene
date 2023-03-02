@@ -43,8 +43,6 @@ class Space < ApplicationRecord
 
   belongs_to :entrance, class_name: "Room", optional: true
 
-  scope :default, -> { friendly.find(Neighborhood.config.default_space_slug) }
-
   # @see {Utilities}
   # @see {UtilityHookup}
   # @returns {ActiveRecord::Relation<UtilityHookups>}
@@ -53,4 +51,6 @@ class Space < ApplicationRecord
   def parent_location
     []
   end
+
+  attr_accessor :blueprint
 end

@@ -24,12 +24,4 @@ RSpec.describe Space, type: :model do
   describe "#theme" do
     it { is_expected.to validate_inclusion_of(:theme).in_array(Space::THEME_OPTIONS).allow_nil }
   end
-
-  describe ".default" do
-    subject(:default) { described_class.default }
-
-    before { FactoryBot.create(:space, :default) }
-
-    it { is_expected.to eql(Space.friendly.find(Neighborhood.config.default_space_slug)) }
-  end
 end
