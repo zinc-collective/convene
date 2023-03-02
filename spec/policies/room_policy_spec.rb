@@ -7,6 +7,7 @@ RSpec.describe RoomPolicy do
   let(:membership) { create(:membership, space: room.space) }
   let(:member) { membership.member }
   let(:non_member) { create(:person) }
+  let(:operator) { create(:person, operator: true) }
 
   describe "Internal Rooms" do
     let(:room) { create(:room, :internal) }
@@ -14,6 +15,7 @@ RSpec.describe RoomPolicy do
     permissions :show? do
       it { is_expected.not_to permit(nil, room) }
       it { is_expected.to permit(member, room) }
+      it { is_expected.to permit(operator, room) }
       it { is_expected.not_to permit(non_member, room) }
     end
   end
@@ -24,6 +26,7 @@ RSpec.describe RoomPolicy do
     permissions :show? do
       it { is_expected.to permit(nil, room) }
       it { is_expected.to permit(member, room) }
+      it { is_expected.to permit(operator, room) }
       it { is_expected.to permit(non_member, room) }
     end
   end
@@ -36,6 +39,7 @@ RSpec.describe RoomPolicy do
     permissions :show? do
       it { is_expected.to permit(nil, room) }
       it { is_expected.to permit(member, room) }
+      it { is_expected.to permit(operator, room) }
       it { is_expected.to permit(non_member, room) }
     end
   end
@@ -43,6 +47,7 @@ RSpec.describe RoomPolicy do
   permissions :new?, :create?, :update?, :edit?, :destroy? do
     it { is_expected.not_to permit(nil, room) }
     it { is_expected.to permit(member, room) }
+    it { is_expected.to permit(operator, room) }
     it { is_expected.not_to permit(non_member, room) }
   end
 
