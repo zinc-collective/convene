@@ -10,7 +10,6 @@ class SpacesController < ApplicationController
 
   def create
     skip_policy_scope
-    authorize(Client)
     authorize(Space)
 
     space = Space::Factory.create(space_params)

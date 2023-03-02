@@ -45,7 +45,7 @@ RSpec.describe SpacesController, type: :request do
       let(:Authorization) { encode_authorization_token(api_key) }
       let(:body) { {space: attributes} }
       response "201", "space created" do
-        let(:attributes) { attributes_for(:space, :with_client_attributes) }
+        let(:attributes) { attributes_for(:space) }
         run_test! do |_response|
           space = Space.find_by(name: attributes[:name])
           expect(space.rooms).to be_empty
@@ -55,7 +55,7 @@ RSpec.describe SpacesController, type: :request do
       end
 
       context "with a blueprint" do
-        let(:attributes) { attributes_for(:space, :with_client_attributes, blueprint: :system_test) }
+        let(:attributes) { attributes_for(:space, blueprint: :system_test) }
 
         response "201", "space created from the blueprint" do
           run_test! do |_response|
