@@ -14,7 +14,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
           address: double(line1: "123 N West", line2: "apt 1", city: "Oakland", state: "CA", postal_code: "94609")))))
   end
 
-  let(:balance_transaction) { double(Stripe::BalanceTransaction, fee: 100)}
+  let(:balance_transaction) { double(Stripe::BalanceTransaction, fee: 100) }
 
   let(:payment_intent) do
     double(Stripe::PaymentIntent, transfer_group: order.id,
@@ -41,8 +41,8 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
     specify { expect { call }.to have_enqueued_mail(Marketplace::OrderReceivedMailer, :notification).with(order) }
 
-    specify { expect { call }.to change { order.reload.contact_email }.to("test@example.com")}
-    specify { expect { call }.to change { order.reload.delivery_address }.to("Test\n123 N West\napt 1\nOakland, CA 94609")}
+    specify { expect { call }.to change { order.reload.contact_email }.to("test@example.com") }
+    specify { expect { call }.to change { order.reload.delivery_address }.to("Test\n123 N West\napt 1\nOakland, CA 94609") }
 
     context "when stripe sends us an event we can't handle" do
       let(:stripe_event) { double(Stripe::Event, type: "a.weird.event") }
