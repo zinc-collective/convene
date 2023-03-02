@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_02_024315) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_02_202459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -134,8 +134,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_024315) do
     t.uuid "shopper_id"
     t.string "status", default: "pre_checkout", null: false
     t.string "stripe_session_id"
-    t.string "delivery_address"
+    t.string "deprecated_delivery_address"
     t.string "contact_email"
+    t.text "delivery_address_ciphertext"
     t.index ["marketplace_id"], name: "index_marketplace_orders_on_marketplace_id"
     t.index ["shopper_id"], name: "index_marketplace_orders_on_shopper_id"
   end
