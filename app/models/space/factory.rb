@@ -8,8 +8,7 @@ class Space::Factory
 
     if blueprint_name.present?
       Blueprint.new(
-        client: {name: space.client.name,
-                 space: Blueprint::BLUEPRINTS[blueprint_name]},
+        Blueprint::BLUEPRINTS[blueprint_name],
         space: space
       ).find_or_create!
     end

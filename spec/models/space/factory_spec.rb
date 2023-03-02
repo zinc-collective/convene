@@ -5,8 +5,8 @@ require "rails_helper"
 RSpec.describe Space::Factory do
   describe ".create" do
     it "creates a Space from the given attributes" do
-      attributes = attributes_for(:space, :with_client_attributes)
-      space = Space::Factory.create(attributes)
+      attributes = attributes_for(:space)
+      space = described_class.create(attributes)
 
       expect(space).to be_persisted
       expect(space.name).to eq(attributes[:name])
@@ -17,15 +17,15 @@ RSpec.describe Space::Factory do
     it "upserts if a Space has the provided name already" do
       existing_space = create(:space)
 
-      attributes = attributes_for(:space, :with_client_attributes,
+      attributes = attributes_for(:space,
         name: existing_space.name)
-      space = Space::Factory.create(attributes)
+      space = described_class.create(attributes)
 
       expect(space).to eql(existing_space)
     end
 
     it "applies the blueprint if it's provided" do
-      space = Space::Factory.create(attributes_for(:space, :with_client_attributes,
+      space = described_class.create(attributes_for(:space,
         blueprint: :system_test))
 
       expect(space.rooms).to be_present

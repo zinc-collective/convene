@@ -5,9 +5,8 @@ RSpec.describe Room, type: :model do
 
   describe ".slug" do
     it "creates unique slugs by space scope" do
-      client = Client.create(name: "test")
-      space_1 = client.spaces.create(name: "space1")
-      space_2 = client.spaces.create(name: "space2")
+      space_1 = Space.create(name: "space1")
+      space_2 = Space.create(name: "space2")
       space_1_room = space_1.rooms.create(name: "room1", publicity_level: :listed)
       space_2_room = space_2.rooms.create(name: "room1", publicity_level: :listed)
 
@@ -18,8 +17,7 @@ RSpec.describe Room, type: :model do
 
   describe ".listed" do
     it "does not include rooms whose publicity level is unlisted" do
-      client = Client.create(name: "test")
-      space = client.spaces.create(name: "space")
+      space = Space.create(name: "space")
       listed_room = space.rooms.create(publicity_level: :listed, name: "Listed Room")
       unlisted_room = space.rooms.create(publicity_level: :unlisted, name: "Unlisted Room")
 
