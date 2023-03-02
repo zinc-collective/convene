@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/authentication_methods/", type: :request do
+RSpec.describe "/authentication_methods/" do
   path "/authentication_methods" do
     include ApiHelpers::Path
 
