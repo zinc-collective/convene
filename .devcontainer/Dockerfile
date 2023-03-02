@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/devcontainers/ruby:0-2.7
+FROM mcr.microsoft.com/devcontainers/universal:latest
 
 # Install Rails
-RUN gem install rails webdrivers 
+RUN gem install rails webdrivers
 
 # Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
-# The value is a comma-separated list of allowed domains 
+# The value is a comma-separated list of allowed domains
 ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.github.dev"
 
 # [Optional] Uncomment this section to install additional OS packages.
@@ -18,11 +18,11 @@ ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.git
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
 ## Installing overmind and tmux
-RUN su vscode -c "sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz && \
-                    sudo gunzip -d overmind-v2.3.0-linux-386.gz && \
-                    sudo mkdir -p ~/.local/bin && \
-                    sudo mv overmind-v2.3.0-linux-386 ~/.local/bin/overmind && \
-                    sudo chmod +x ~/.local/bin/overmind && \
-                    # install tmux 
-                    sudo apt-get update && \
-                    sudo apt-get install -y tmux" 2>&1
+RUN sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz && \
+        sudo gunzip -d overmind-v2.3.0-linux-386.gz && \
+        sudo mkdir -p ~/.local/bin && \
+        sudo mv overmind-v2.3.0-linux-386 ~/.local/bin/overmind && \
+        sudo chmod +x ~/.local/bin/overmind && \
+        # install tmux
+        sudo apt-get update && \
+        sudo apt-get install -y tmux
