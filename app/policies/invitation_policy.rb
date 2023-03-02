@@ -9,7 +9,7 @@ class InvitationPolicy < ApplicationPolicy
   end
 
   def create?
-    person&.member_of?(space)
+    person&.operator? || person&.member_of?(space)
   end
 
   alias_method :edit?, :create?
