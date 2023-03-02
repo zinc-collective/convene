@@ -1,4 +1,6 @@
 class FurniturePlacementsController < ApplicationController
+  include Room::ControllerMixins
+
   def edit
     respond_to do |format|
       format.turbo_stream
@@ -56,9 +58,9 @@ class FurniturePlacementsController < ApplicationController
   end
 
   def find_or_build
-    return current_room.furniture_placements.find(params[:id]) if params[:id]
+    return room.furniture_placements.find(params[:id]) if params[:id]
 
-    current_room.furniture_placements.new(furniture_placement_params)
+    room.furniture_placements.new(furniture_placement_params)
   end
 
   def furniture_placement_params

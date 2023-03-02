@@ -128,19 +128,6 @@ class ApplicationController < ActionController::Base
     policy_scope(Space.includes(:rooms, entrance: [:furniture_placements]))
   end
 
-  # Retrieves the room based upon the current_space and params
-  # @return [nil, Room]
-  helper_method def current_room
-    return nil if current_space.blank?
-
-    @current_room ||=
-      policy_scope(current_space.rooms).friendly.find(
-        params[:room_id] || params[:id]
-      )
-  rescue ActiveRecord::RecordNotFound
-    current_space.entrance
-  end
-
   helper_method def current_access_code(room)
     session.dig(room.id, "access_code")
   end

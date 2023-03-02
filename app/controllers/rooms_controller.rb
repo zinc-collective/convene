@@ -55,7 +55,7 @@ class RoomsController < ApplicationController
   end
 
   helper_method def page_title
-    ["[Convene]", current_room&.name, current_space&.name].compact.join(" - ")
+    ["[Convene]", room&.name, current_space&.name].compact.join(" - ")
   end
 
   helper_method def room
@@ -73,7 +73,7 @@ class RoomsController < ApplicationController
     return unless room.persisted?
 
     unless room.enterable?(current_access_code(room))
-      redirect_to [current_space, current_room, :waiting_room, redirect_url: after_authorization_redirect_url]
+      redirect_to [current_space, room, :waiting_room, redirect_url: after_authorization_redirect_url]
     end
   end
 

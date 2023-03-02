@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UtilityHookupsController < ApplicationController
+  include Room::ControllerMixins
+
   def index
     utility_hookup
   end

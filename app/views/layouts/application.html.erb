@@ -22,8 +22,8 @@
       <%= render partial: "breadcrumbs" %>
 
       <div>
-        <%- if current_room && policy(current_room).edit? %>
-          <%= link_to t('icons.edit'), [:edit, current_space, current_room], class: 'no-underline', aria: { label: "Configure Room"} %>
+        <%- if defined?(room) && room&.persisted? && policy(room).edit? %>
+          <%= link_to t('icons.edit'), [:edit, current_space, room], class: 'no-underline', aria: { label: "Configure Room"} %>
         <%- end %>
         <%= link_to "Convene", root_url %>: Space to Work, Play, or Simply Be
       </div>
