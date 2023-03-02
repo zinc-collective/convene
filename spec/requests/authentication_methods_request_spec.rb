@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/authentication_methods/", type: :request do
+RSpec.describe "/authentication_methods/" do
   path "/authentication_methods" do
     include ApiHelpers::Path
 
@@ -40,7 +40,7 @@ RSpec.describe "/authentication_methods/", type: :request do
           authentication_method = AuthenticationMethod.find(data[:authentication_method][:id])
           expect(authentication_method).to be_present
           expect(authentication_method.person).to be_present
-          expect(authentication_method.person).to eq(person)
+          expect(authentication_method.person).to eql(person)
 
           expect(data[:authentication_method])
             .to eq(id: authentication_method.id,
