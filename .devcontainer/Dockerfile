@@ -17,7 +17,7 @@ ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.git
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
-## Installing overmind and tmux
+## Installing overmind and other packages
 RUN sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz && \
         sudo gunzip -d overmind-v2.3.0-linux-386.gz && \
         sudo mkdir -p ~/.local/bin && \
@@ -25,4 +25,4 @@ RUN sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/over
         sudo chmod +x ~/.local/bin/overmind && \
         # install tmux
         sudo apt-get update && \
-        sudo apt-get install -y tmux
+        sudo apt-get install -y tmux firefox graphviz
