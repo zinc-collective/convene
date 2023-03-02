@@ -120,7 +120,7 @@ class ApplicationController < ActionController::Base
 
   helper_method def current_membership
     @current_membership ||= if current_space.present? && current_person.present?
-      current_space.memberships.find_by(member: current_person)
+      current_person.memberships.find_by(space: current_space)
     end
   end
 
