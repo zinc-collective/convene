@@ -33,9 +33,10 @@ class Marketplace
         OrderReceivedMailer.notification(order).deliver_later
 
         Stripe::Transfer.create({
+          # Leave the Stripe Fees in the `Distributor`'s account
           amount: order.product_total.cents - balance_transaction.fee,
           currency: "usd",
-          destination: marketplace.stripe_account,
+          destination: marketplace.vendor_stripe_account,
           transfer_group: order.id
         }, {api_key: marketplace.stripe_api_key})
       else
