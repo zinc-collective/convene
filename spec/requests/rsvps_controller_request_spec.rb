@@ -2,13 +2,13 @@
 
 require "rails_helper"
 
-RSpec.describe "/spaces/:space_id/invitations/:invitation_id/rsvp", type: :request do
+RSpec.describe RsvpsController do
   let(:space) { invitation.space }
   let(:neighbor) { create(:neighbor) }
   let(:invitation) { create(:invitation) }
 
-  describe "GET /spaces/:space_id/invitations/:invitation_id/rsvp" do
-    it "Does not require people to sign in" do
+  describe "#show" do
+    it "does not require people to sign in" do
       get space_invitation_rsvp_path(space, invitation)
 
       expect(response).to be_ok
@@ -17,7 +17,7 @@ RSpec.describe "/spaces/:space_id/invitations/:invitation_id/rsvp", type: :reque
     end
   end
 
-  describe "PUT /spaces/:space_id/invitations/:invitation_id/rsvp" do
+  describe "#update" do
     subject(:request) do
       put space_invitation_rsvp_path(space, invitation),
         params: {rsvp: rsvp_params}
@@ -25,8 +25,8 @@ RSpec.describe "/spaces/:space_id/invitations/:invitation_id/rsvp", type: :reque
 
     let(:rsvp_params) { {} }
 
-    context "as a guest" do
-      context "who does not include the one-time-code" do
+    context "when a guest" do
+      context "without the one-time-code" do
         let(:rsvp_params) { {status: :accepted} }
 
         it "doesnt complete the invitation" do
@@ -50,7 +50,7 @@ RSpec.describe "/spaces/:space_id/invitations/:invitation_id/rsvp", type: :reque
         end
       end
 
-      context "who does include the one-time code proving they are who they say they are" do
+      context "when they include the one-time code proving they are who they say they are" do
         let(:person) { create(:person, email: invitation.email) }
         let(:authentication_method) { create(:authentication_method, person: person) }
         let(:rsvp_params) do
@@ -103,12 +103,11 @@ RSpec.describe "/spaces/:space_id/invitations/:invitation_id/rsvp", type: :reque
       end
     end
 
-    context "whose email is already registered" do
+    context "when their email is already registered" do
       let(:rsvp_params) { {status: :accepted} }
       let!(:neighbor) { create(:person, email: invitation.email) }
-      let!(:authentication_method) do
-        create(:authentication_method, person: neighbor)
-      end
+
+      before { create(:authentication_method, person: neighbor) }
 
       it "does not accept the invitation until they sign in" do
         expect { request }.to have_enqueued_mail(
