@@ -24,5 +24,5 @@ RUN sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/over
         sudo mv overmind-v2.3.0-linux-386 ~/.local/bin/overmind && \
         sudo chmod +x ~/.local/bin/overmind && \
         # install tmux
-        sudo apt-get update && \
-        sudo apt-get install -y tmux firefox graphviz
+        sudo apt update && \
+        sudo apt install -y tmux firefox graphviz
