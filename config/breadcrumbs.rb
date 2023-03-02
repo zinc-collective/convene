@@ -52,7 +52,7 @@ crumb :new_room do |room|
 end
 
 crumb :edit_room do |room|
-  link t("helpers.submit.room.edit", {room_name: room.name}), [:edit, room.space, room]
+  link t("helpers.submit.room.edit", room_name: room.name), [:edit, room.space, room]
   parent :room, room
 end
 
