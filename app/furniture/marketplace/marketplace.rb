@@ -27,9 +27,11 @@ class Marketplace
       settings["notify_emails"] = notify_emails
     end
 
+    # @todo Probably want to rename this for-reals but lazy
     def stripe_account
       settings["stripe_account"]
     end
+    alias_method :vendor_stripe_account, :stripe_account
 
     def stripe_account=stripe_account
       settings["stripe_account"] = stripe_account
