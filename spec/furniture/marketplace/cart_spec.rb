@@ -27,7 +27,7 @@ RSpec.describe Marketplace::Cart, type: :model do
     context "when the #delivery_address is present" do
       let(:cart) { create(:marketplace_cart, delivery_address: "123", marketplace: marketplace) }
 
-      it { is_expected.to eql(product_a.price + product_b.price + product_b.price + marketplace.delivery_fee) }
+      it { is_expected.to eql(product_a.price + product_b.price * 2 + marketplace.delivery_fee) }
     end
   end
 
