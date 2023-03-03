@@ -5,6 +5,7 @@ require:
 
 inherit_gem:
   standard: config/base.yml
+  pundit: config/rubocop-rspec.yml
 
 AllCops:
   Exclude:
