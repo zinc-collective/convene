@@ -15,6 +15,8 @@ class Marketplace
     has_many :cart_products, dependent: :destroy, inverse_of: :cart
     has_many :products, through: :cart_products, inverse_of: :carts
 
+    has_encrypted :delivery_address, migrating: true
+
     enum status: {
       pre_checkout: "pre_checkout",
       paid: "paid"

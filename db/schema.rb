@@ -134,7 +134,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_02_202459) do
     t.uuid "shopper_id"
     t.string "status", default: "pre_checkout", null: false
     t.string "stripe_session_id"
-    t.string "deprecated_delivery_address"
+    t.string "delivery_address"
     t.string "contact_email"
     t.text "delivery_address_ciphertext"
     t.index ["marketplace_id"], name: "index_marketplace_orders_on_marketplace_id"
