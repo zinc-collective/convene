@@ -4,6 +4,7 @@
 class UtilityHookup < ApplicationRecord
   # @return [Space]
   belongs_to :space
+  self.location_parent = :space
 
   # Human-friendly name for disambiguating when a particular kind of {Hookup}
   # has multiple {UtilityHookup}s.
