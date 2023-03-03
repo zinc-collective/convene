@@ -3,7 +3,7 @@
     Products:
     <%= humanized_money_with_symbol(cart.product_total) %></span>
   <%- if cart.delivery_address.present? %>
-    <span>Delivery:
+    <span>Delivery Fee:
       <%= humanized_money_with_symbol(cart.delivery_fee) %></span>
   <%- end %>
   <span class="font-bold">

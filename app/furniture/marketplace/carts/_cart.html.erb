@@ -12,7 +12,7 @@
         Delivering to <%= cart.delivery_address %>
 
       </p>
-      <%= button_to "Change Address", cart.location, params: { cart: { delivery_address: nil } }%>
+      <%= button_to "Update Address", cart.location, params: { cart: { delivery_address: nil } }%>
     </div>
 
   <%- end %>
