@@ -1,12 +1,11 @@
 require "rails_helper"
 RSpec.describe Feature do
+  subject(:Feature) { Feature }
   describe ".enabled?(feature_name)" do
-    it "is only true when the feature name is set to 'true' in the ENV" do
-      stub_const("ENV", {"FEATURE_FOO" => "true", "FEATURE_BAR" => "yes"})
+    before { stub_const("ENV", "FEATURE_FOO" => "true", "FEATURE_BAR" => "yes") }
 
-      expect(Feature.enabled?(:foo)).to be_truthy
-      expect(Feature.enabled?(:bar)).not_to be_truthy
-      expect(Feature.enabled?(:baz)).not_to be_truthy
-    end
+    it { is_expected.to be_enabled(:foo) }
+    it { is_expected.not_to be_enabled(:bar) }
+    it { is_expected.not_to be_enabled(:baz) }
   end
 end

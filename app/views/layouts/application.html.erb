@@ -25,7 +25,7 @@
         <%- if current_room && policy(current_room).edit? %>
           <%= link_to t('icons.edit'), [:edit, current_space, current_room], class: 'no-underline', aria: { label: "Configure Room"} %>
         <%- end %>
-        <%= link_to "Convene", "https://convene.zinc.coop/" %>: Space to Work, Play, or Simply Be
+        <%= link_to "Convene", root_url %>: Space to Work, Play, or Simply Be
       </div>
       <div>
         💾&nbsp;

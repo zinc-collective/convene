@@ -14,7 +14,7 @@ class PersonPolicy < ApplicationPolicy
   alias_method :create?, :show?
 
   def permitted_attributes(_params)
-    [:name, :slug, :theme, :blueprint, client_attributes: [:name]]
+    [:name, :slug, :theme, :blueprint]
   end
 
   class Scope < ApplicationScope

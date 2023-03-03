@@ -20,6 +20,8 @@ class AuthenticationMethod < ApplicationRecord
   before_validation :set_one_time_password_secret, only: :create
   before_validation :set_person, only: :create
 
+  scope :via_email, -> { where(contact_method: :email) }
+
   def set_one_time_password_secret
     self.one_time_password_secret ||= ROTP::Base32.random
   end

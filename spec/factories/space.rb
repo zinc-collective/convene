@@ -2,16 +2,7 @@
 
 FactoryBot.define do
   factory :space do
-    client
     sequence(:name) { |n| "#{Faker::Book.title} #{n}" }
-
-    trait :default do
-      slug { Neighborhood.config.default_space_slug }
-    end
-
-    trait :with_client_attributes do
-      client_attributes { attributes_for(:client) }
-    end
 
     trait :with_members do
       transient do

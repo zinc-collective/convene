@@ -4,22 +4,17 @@ require "rails_helper"
 
 RSpec.describe Blueprint do
   EXAMPLE_CONFIG = {
-    client: {
-      name: "Client A",
-      space: {
-        name: "Client A's Space",
-        members: [{email: "client-a@example.com"}],
-        rooms: [{
-          name: "Room A",
-          access_level: :unlocked,
-          publicity_level: :listed,
-          furniture_placements: {
-            markdown_text_block: {content: "Obi Swan Kenobi"}
-          }
-        }],
-        utility_hookups: []
+    name: "Client A's Space",
+    members: [{email: "client-a@example.com"}],
+    rooms: [{
+      name: "Room A",
+      access_level: :unlocked,
+      publicity_level: :listed,
+      furniture_placements: {
+        markdown_text_block: {content: "Obi Swan Kenobi"}
       }
-    }
+    }],
+    utility_hookups: []
   }.freeze
   describe "#find_or_create" do
     it "respects the Space's current settings" do
@@ -41,7 +36,7 @@ RSpec.describe Blueprint do
     it "Updates a given space" do
       space = create(:space)
 
-      Blueprint.new(EXAMPLE_CONFIG.merge(space: space)).find_or_create!
+      Blueprint.new(EXAMPLE_CONFIG, space: space).find_or_create!
 
       expect(space.rooms.count).to be(1)
     end

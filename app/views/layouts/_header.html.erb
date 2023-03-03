@@ -7,9 +7,9 @@
       <%- if current_membership.present? %>
         <%= link_to "Account", [current_space, current_membership], title: current_membership.member.email %>
       <%- end %>
-      <%= link_to "Sign out", [current_space, :authenticated_session], data: { turbo: true, turbo_method: :delete }, class: 'sign-out' %>
+      <%= link_to "Sign out", [current_space, :authenticated_session].compact, data: { turbo: true, turbo_method: :delete }, class: 'sign-out' %>
     <%- else %>
-      <%= link_to "Sign in", [:new, current_space, :authenticated_session], class: "sign-in" %>
+      <%= link_to "Sign in", [:new, current_space, :authenticated_session].compact, class: "sign-in" %>
     <%- end %>
   </nav>
 </header>

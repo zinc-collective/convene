@@ -6,11 +6,6 @@ class Space < ApplicationRecord
   include WithinLocation
   THEME_OPTIONS = %w[purple_mountains desert_dunes].freeze
 
-  # Which client owns the space
-  belongs_to :client
-
-  accepts_nested_attributes_for :client
-
   # The fully-qualified domain to enter the space.
   # Spaces without a branded_domain are still accessible via their slug.
   # The branded_domain must be unique to ensure we don't accidentally place
@@ -48,8 +43,6 @@ class Space < ApplicationRecord
 
   belongs_to :entrance, class_name: "Room", optional: true
 
-  scope :default, -> { friendly.find(Neighborhood.config.default_space_slug) }
-
   # @see {Utilities}
   # @see {UtilityHookup}
   # @returns {ActiveRecord::Relation<UtilityHookups>}
@@ -58,4 +51,6 @@ class Space < ApplicationRecord
   def parent_location
     []
   end
+
+  attr_accessor :blueprint
 end

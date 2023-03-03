@@ -12,16 +12,12 @@ class SystemTestSpace
 
     Space.find_by(name: "System Test")&.destroy
 
-    Blueprint.new(client: {name: "System Test",
-                           space: DEFAULT_SPACE_CONFIG.merge(
-                             name: "System Test Branded Domain",
-                             branded_domain: "system-test.zinc.local"
-                           )}).find_or_create!
+    Blueprint.new(DEFAULT_SPACE_CONFIG.merge(
+      name: "System Test Branded Domain",
+      branded_domain: "system-test.zinc.local"
+    )).find_or_create!
 
-    Blueprint.new(client: {name: "System Test",
-                           space: DEFAULT_SPACE_CONFIG
-                              .merge(name: "System Test")})
-      .find_or_create!
+    Blueprint.new(DEFAULT_SPACE_CONFIG.merge(name: "System Test")).find_or_create!
   end
 
   DEFAULT_SPACE_CONFIG = Blueprint::BLUEPRINTS[:system_test]

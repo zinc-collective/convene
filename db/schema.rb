@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_27_232512) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_02_024315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -70,13 +70,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_232512) do
     t.datetime "updated_at", null: false
     t.index ["contact_method", "contact_location"], name: "index_authentication_methods_on_contact_fields", unique: true
     t.index ["person_id"], name: "index_authentication_methods_on_person_id"
-  end
-
-  create_table "clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

@@ -5,20 +5,37 @@ class SpacesController < ApplicationController
   def show
   end
 
+  def new
+    space
+  end
+
   def edit
   end
 
   def create
     skip_policy_scope
-    authorize(Client)
     authorize(Space)
 
     space = Space::Factory.create(space_params)
 
-    if space.persisted?
-      render json: Space::Serializer.new(space).to_json, status: :created
-    else
-      render json: Space::Serializer.new(space).to_json, status: :unprocessable_entity
+    respond_to do |format|
+      if space.persisted?
+        format.json do
+          render json: Space::Serializer.new(space).to_json, status: :created
+        end
+
+        format.html do
+          redirect_to space.location
+        end
+      else
+        format.json do
+          render json: Space::Serializer.new(space).to_json, status: :unprocessable_entity
+        end
+
+        format.html do
+          render :new
+        end
+      end
     end
   end
 
@@ -39,8 +56,18 @@ class SpacesController < ApplicationController
   end
 
   helper_method def space
-    @space ||= current_space.tap do |space|
+    @space ||= if params[:id]
+      policy_scope(Space).friendly.find(params[:id])
+    elsif params[:space]
+      policy_scope(Space).new(space_params)
+    else
+      policy_scope(Space).new
+    end.tap do |space|
       authorize(space)
     end
+  end
+
+  helper_method def current_space
+    space.persisted? ? space : nil
   end
 end

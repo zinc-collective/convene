@@ -3,7 +3,7 @@ class AuthenticatedSessionsController < ApplicationController
   skip_after_action :verify_policy_scoped
 
   def show
-    redirect_to current_space if authenticated_session.save
+    redirect_to(current_space.presence || :root) if authenticated_session.save
   end
 
   def new
@@ -11,7 +11,7 @@ class AuthenticatedSessionsController < ApplicationController
 
   def create
     if authenticated_session.save
-      redirect_to current_space
+      redirect_to(current_space.presence || :root)
     else
       render :create, status: :unprocessable_entity
     end
@@ -21,7 +21,7 @@ class AuthenticatedSessionsController < ApplicationController
 
   def destroy
     authenticated_session.destroy
-    redirect_to current_space
+    redirect_to(current_space.presence || :root)
   end
 
   helper_method def authenticated_session

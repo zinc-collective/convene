@@ -10,6 +10,9 @@ Feature: Entering Rooms
   However, we also want to support Reople entering a Room via
   the Room's full URI or from a short URI when a Space has a Branded Domain.
 
+  Background:
+    Given a "System Test" Space
+
   @built
   Scenario: Entering Room via Room Picker from Space Dashboard
     Given the Space Member is on the "System Test" Space Dashboard

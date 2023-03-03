@@ -4,8 +4,11 @@
 class Blueprint
   attr_accessor :attributes
 
-  def initialize(attributes)
+  attr_writer :space
+
+  def initialize(attributes, space: nil)
     @attributes = attributes
+    self.space = space
   end
 
   def find_or_create!
@@ -68,19 +71,11 @@ class Blueprint
   end
 
   def space
-    @space ||= attributes[:space] || client.spaces.find_or_create_by!(name: space_attributes[:name])
-  end
-
-  def client
-    @client ||= Client.find_or_create_by!(name: client_attributes[:name])
-  end
-
-  def client_attributes
-    attributes[:client]
+    @space ||= Space.find_or_create_by!(name: space_attributes[:name])
   end
 
   def space_attributes
-    client_attributes[:space]
+    attributes
   end
 
   # Normally, merge will clobber keys with values if there is a key with a nil
