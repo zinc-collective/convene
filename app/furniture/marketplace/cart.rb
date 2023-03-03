@@ -16,7 +16,6 @@ class Marketplace
     has_many :products, through: :cart_products, inverse_of: :carts
 
     has_encrypted :delivery_address
-    self.ignored_columns += ["delivery_address"]
 
     enum status: {
       pre_checkout: "pre_checkout",
