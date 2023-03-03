@@ -1,10 +1,12 @@
-<span id="cart-total-<%= cart.id%>" class="w-full flex flex-col">
-  <span class="text-right">
+<span id="cart-total-<%= cart.id%>" class="w-full flex flex-col sm:text-right">
+  <span>
     Products:
     <%= humanized_money_with_symbol(cart.product_total) %></span>
-  <span class="text-right">Delivery:
-    <%= humanized_money_with_symbol(cart.delivery_fee) %></span>
-  <span class="text-right font-bold">
+  <%- if cart.delivery_address.present? %>
+    <span>Delivery Fee:
+      <%= humanized_money_with_symbol(cart.delivery_fee) %></span>
+  <%- end %>
+  <span class="font-bold">
     Total: <%= humanized_money_with_symbol(cart.price_total) %>
     </span>
 </span>

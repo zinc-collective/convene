@@ -28,7 +28,11 @@ class Marketplace
       end
     end
 
-    delegate :delivery_fee, to: :marketplace
+    def delivery_fee
+      return marketplace.delivery_fee if delivery_address.present?
+
+      0
+    end
 
     def price_total
       product_total + delivery_fee
