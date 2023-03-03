@@ -11,7 +11,7 @@ class Marketplace
     has_many :ordered_products, inverse_of: :order, foreign_key: :cart_id
     has_many :products, through: :ordered_products, inverse_of: :orders
 
-    attribute :delivery_address, :string
+    has_encrypted :delivery_address, migrating: true
 
     enum status: {
       pre_checkout: "pre_checkout",
