@@ -63,6 +63,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include(AuthHelpers, type: :request)
+  config.include(DomHelpers, type: :request)
 
   config.include ViewComponent::TestHelpers, type: :component
 end

@@ -12,7 +12,7 @@
   <body>
     <%= render 'layouts/header' %>
 
-    <main>
+    <main id="<%= current_space.present? ? dom_id(current_space) : nil %>">
       <%= yield %>
     </main>
 
