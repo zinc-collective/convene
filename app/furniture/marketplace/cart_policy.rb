@@ -12,7 +12,7 @@ class Marketplace
     end
 
     def update?
-      cart.shopper.person == current_person
+      cart.shopper.person.nil? || cart.shopper.person == current_person
     end
 
     class Scope < ApplicationScope
