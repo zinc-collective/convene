@@ -101,8 +101,7 @@ class Blueprint
         {
           name: "Listed Room 1",
           publicity_level: :listed,
-          access_level: :unlocked,
-          access_code: nil,
+          access_level: :public,
           furniture_placements: {
             markdown_text_block: {content: "# Welcome!"}
           }
@@ -110,29 +109,19 @@ class Blueprint
         {
           name: "Listed Room 2",
           publicity_level: :listed,
-          access_level: :unlocked,
-          access_code: nil,
-          furniture_placements: {}
-        },
-        {
-          name: "Listed Locked Room 1",
-          publicity_level: :listed,
-          access_level: :locked,
-          access_code: :secret,
+          access_level: :public,
           furniture_placements: {}
         },
         {
           name: "Unlisted Room 1",
           publicity_level: :unlisted,
-          access_level: :unlocked,
-          access_code: nil,
+          access_level: :public,
           furniture_placements: {}
         },
         {
           name: "Unlisted Room 2",
           publicity_level: :unlisted,
-          access_level: :unlocked,
-          access_code: nil,
+          access_level: :public,
           furniture_placements: {}
         },
         {

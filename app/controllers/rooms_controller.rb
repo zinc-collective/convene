@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class RoomsController < ApplicationController
-  before_action :check_access_code
-
   def show
     respond_to do |format|
       format.html
@@ -66,23 +64,5 @@ class RoomsController < ApplicationController
     end.tap do |room|
       authorize(room)
     end
-  end
-
-  # TODO: Unit test authorize and redirect url
-  private def check_access_code
-    return unless room.persisted?
-
-    unless room.enterable?(current_access_code(room))
-      redirect_to [current_space, current_room, :waiting_room, redirect_url: after_authorization_redirect_url]
-    end
-  end
-
-  # TODO: Unit test authorize and redirect url
-  private def after_authorization_redirect_url
-    if %i[edit update].include?(action_name.to_sym)
-      return url_for([:edit, room.space, room])
-    end
-
-    url_for([room.space, room])
   end
 end

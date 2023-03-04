@@ -20,8 +20,8 @@ RSpec.describe RoomPolicy do
     end
   end
 
-  describe "Unlocked Rooms" do
-    let(:room) { create(:room, :unlocked) }
+  describe "Public Rooms" do
+    let(:room) { create(:room, :public) }
 
     permissions :show? do
       it { is_expected.to permit(nil, room) }
@@ -31,20 +31,7 @@ RSpec.describe RoomPolicy do
     end
   end
 
-  describe "Locked Rooms" do
-    let(:room) { create(:room, :locked) }
-
-    # For now, because we haven't thunked through the access code bit just
-    # yet.
-    permissions :show? do
-      it { is_expected.to permit(nil, room) }
-      it { is_expected.to permit(member, room) }
-      it { is_expected.to permit(operator, room) }
-      it { is_expected.to permit(non_member, room) }
-    end
-  end
-
-  permissions :new?, :create?, :update?, :edit?, :destroy? do
+  permissions :new?, :create?, :destroy?, :edit?, :update? do
     it { is_expected.not_to permit(nil, room) }
     it { is_expected.to permit(member, room) }
     it { is_expected.to permit(operator, room) }
@@ -55,16 +42,14 @@ RSpec.describe RoomPolicy do
     it "includes all the rooms" do
       space = create(:space)
       internal_room = create(:room, :internal, space: space)
-      locked_room = create(:room, :locked, space: space)
-      unlocked_room = create(:room, :unlocked, space: space)
+      public_rom = create(:room, :public, space: space)
       listed_room = create(:room, :listed, space: space)
       unlisted_room = create(:room, :unlisted, space: space)
 
       results = RoomPolicy::Scope.new(nil, space.rooms).resolve
 
       expect(results).to include(internal_room)
-      expect(results).to include(locked_room)
-      expect(results).to include(unlocked_room)
+      expect(results).to include(public_rom)
       expect(results).to include(unlisted_room)
       expect(results).to include(listed_room)
     end

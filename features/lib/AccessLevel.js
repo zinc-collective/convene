@@ -16,8 +16,5 @@ class AccessLevel {
   get attributeSelector() {
     return `[data-access-level="${this.level.toLowerCase()}"]`;
   }
-  isLocked() {
-    return this.level.toLowerCase() === "locked";
-  }
 }
 export default AccessLevel;

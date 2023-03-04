@@ -3,7 +3,6 @@ import Component from "./Component.js";
 import Room from "../lib/Room.js";
 import RoomPage from "./RoomPage.js";
 import RoomEditPage from "./RoomEditPage.js";
-import WaitingRoomPage from "./WaitingRoomPage.js";
 class RoomCardComponent extends Component {
   /**
    * @param {ThenableWebDriver} driver
@@ -30,41 +29,15 @@ class RoomCardComponent extends Component {
   set selector(value) {
     this._selector = value;
   }
+
   /**
-   * @returns {Promise<boolean>}
-   */
-  isLocked() {
-    return this.lockedIcon().isDisplayed();
-  }
-  /**
-   * @returns {Component}
-   */
-  lockedIcon() {
-    return this.component(".icon.--lock");
-  }
-  /**
-   * @param {AccessCode | undefined } accessCode
    * @returns {Promise<RoomPage>}
    */
-  enter(accessCode) {
+  enter() {
     return this.enterRoomButton()
       .click()
-      .then(() => this.maybeEnterAccessCode(accessCode, RoomPage));
   }
-  /**
-   * @param {string | undefined } accessCode
-   * @param {RoomPage | WaitingRoomPage} expectedPage
-   * @returns {Promise<RoomPage> | Promise<WaitingRoomPage>}
-   */
-  async maybeEnterAccessCode(accessCode, expectedPage) {
-    if (!accessCode) {
-      return new expectedPage(this.driver, this.room);
-    }
-    return new WaitingRoomPage(this.driver, this.room).submitAccessCode(
-      accessCode,
-      expectedPage
-    );
-  }
+
   /**
    * @returns {Component}
    */
@@ -72,13 +45,11 @@ class RoomCardComponent extends Component {
     return this.component("*[data-role=enter]");
   }
   /**
-   * @param {string | undefined } accessCode
    * @returns {Promise<RoomEditPage>}
    */
-  configure(accessCode) {
+  configure() {
     return this.configureRoomButton()
       .click()
-      .then(() => this.maybeEnterAccessCode(accessCode, RoomEditPage));
   }
   /**
    * @returns {Component}
