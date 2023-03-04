@@ -56,11 +56,6 @@ crumb :edit_room do |room|
   parent :room, room
 end
 
-crumb :waiting_room do |waiting_room|
-  link "Waiting Room", space_room_waiting_room_path(waiting_room.room.space, waiting_room.room)
-  parent :room, waiting_room.room
-end
-
 crumb :rsvp do |rsvp|
   link "Respond to your Invitation"
   parent :root, rsvp.space

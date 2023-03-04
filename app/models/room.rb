@@ -17,27 +17,17 @@ class Room < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :scoped, scope: :space
 
+  ACCESS_LEVELS = %i[internal public].freeze
   # A Room's Access Level indicates what a participant must know in order to gain access to the room.
-  # `unlocked` indicates that the participant does not need to know anything to gain access.
-  # `locked` indicates that only participants who know the rrooms `access_code` may access the room.
-  # `internal` indicates that only participants who are Space Members _or_ know the Spaces `access_code` may
-  # access the room.
-  attribute :access_level, :string, default: "unlocked"
-
-  # A room's Access Code is a "secret" that, when known, grants access to the room.
-  attribute :access_code, :string
-  validates :access_code, presence: {if: :locked?}
-
-  def locked?
-    access_level&.to_sym == :locked
-  end
-
-  def unlocked?
-    access_level&.to_sym == :unlocked
-  end
+  # `internal` only Members may access the Room
+  attribute :access_level, :string, default: :public
 
   def internal?
     access_level&.to_sym == :internal
+  end
+
+  def public?
+    access_level&.to_sym == :public
   end
 
   # A Room's Publicity Level indicates how visible the room is.
@@ -64,14 +54,6 @@ class Room < ApplicationRecord
 
   def full_slug
     "#{space.slug}--#{slug}"
-  end
-
-  def enterable?(access_code)
-    return true if access_level == "unlocked"
-
-    can_enter = self.access_code == access_code
-    errors.add(:base, "Invalid access code") if access_code
-    can_enter
   end
 
   def entrance?

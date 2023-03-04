@@ -141,10 +141,6 @@ class ApplicationController < ActionController::Base
     current_space.entrance
   end
 
-  helper_method def current_access_code(room)
-    session.dig(room.id, "access_code")
-  end
-
   def render_not_found
     render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
   end

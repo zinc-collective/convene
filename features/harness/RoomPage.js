@@ -8,18 +8,6 @@ class RoomPage extends Page {
     super(driver);
     this.room = room;
   }
-  /**
-   * @returns {Promise<Boolean>}
-   */
-  isWaitingRoom() {
-    return this.accessCodeForm().isDisplayed();
-  }
-  /**
-   * @returns {Component}
-   */
-  accessCodeForm() {
-    return this.component(".access-code-form");
-  }
 
   path() {
     return `/spaces/${this.room.space.slug}/rooms/${this.room.slug}`;

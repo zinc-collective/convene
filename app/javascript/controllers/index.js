@@ -6,6 +6,3 @@ import { application } from "./application.js"
 
 import MenuController from "./menu_controller.js"
 application.register("menu", MenuController)
-
-import RoomFormController from "./room_form_controller.js"
-application.register("room-form", RoomFormController)
