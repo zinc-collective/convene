@@ -1,4 +1,4 @@
-<%= form_with(model: [space, utility_hookup]) do |form| %>
+<%= form_with(model: utility_hookup.location) do |form| %>
   <%- form.object = form.object.utility %>
   <%= form.hidden_field :utility_slug %>
   <header>
