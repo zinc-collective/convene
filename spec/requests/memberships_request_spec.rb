@@ -26,7 +26,7 @@ RSpec.describe "/memberships/", type: :request do
         required: ["membership"]
       }
       let(:api_key) { ENV["OPERATOR_API_KEY"] }
-      let(:Authorization) { encode_authorization_token(api_key) }
+      let(:Authorization) { encode_authorization_token(api_key) } # rubocop:disable RSpec/VariableName
       let(:body) { {membership: attributes} }
       let(:person) { create(:person) }
       let(:space) { create(:space) }

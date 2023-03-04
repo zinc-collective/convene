@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/authentication_methods/" do
+RSpec.describe "/authentication_methods/" do # rubocop:disable RSpec/DescribeClass
   path "/authentication_methods" do
     include ApiHelpers::Path
 
@@ -28,7 +28,7 @@ RSpec.describe "/authentication_methods/" do
       }
       let(:person) { create(:person) }
       let(:api_key) { ENV["OPERATOR_API_KEY"] }
-      let(:Authorization) { encode_authorization_token(api_key) }
+      let(:Authorization) { encode_authorization_token(api_key) } # rubocop:disable RSpec/VariableName
       let(:body) { {authentication_method: attributes} }
 
       response "201", "authentication method created" do

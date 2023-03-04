@@ -11,7 +11,7 @@ RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
     parameter name: :space_slug, in: :path, type: :string
     parameter name: :room_slug, in: :path, type: :string
     let(:api_key) { ENV["OPERATOR_API_KEY"] }
-    let(:Authorization) { encode_authorization_token(api_key) }
+    let(:Authorization) { encode_authorization_token(api_key) } # rubocop:disable RSpec/VariableName
     include ApiHelpers::Path
 
     let(:space_slug) { space.slug }

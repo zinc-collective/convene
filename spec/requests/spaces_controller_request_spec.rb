@@ -30,7 +30,7 @@ RSpec.describe SpacesController do
       }
 
       let(:api_key) { ENV["OPERATOR_API_KEY"] }
-      let(:Authorization) { encode_authorization_token(api_key) }
+      let(:Authorization) { encode_authorization_token(api_key) } # rubocop:disable RSpec/VariableName
       let(:body) { {space: attributes} }
       response "201", "space created" do
         let(:attributes) { attributes_for(:space) }
