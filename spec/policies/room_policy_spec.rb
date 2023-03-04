@@ -42,14 +42,14 @@ RSpec.describe RoomPolicy do
     it "includes all the rooms" do
       space = create(:space)
       internal_room = create(:room, :internal, space: space)
-      public_rom = create(:room, :public, space: space)
+      public_room = create(:room, :public, space: space)
       listed_room = create(:room, :listed, space: space)
       unlisted_room = create(:room, :unlisted, space: space)
 
       results = RoomPolicy::Scope.new(nil, space.rooms).resolve
 
       expect(results).to include(internal_room)
-      expect(results).to include(public_rom)
+      expect(results).to include(public_room)
       expect(results).to include(unlisted_room)
       expect(results).to include(listed_room)
     end
