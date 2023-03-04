@@ -5,39 +5,6 @@ require "swagger_helper"
 RSpec.describe SpacesController do
   include ActiveJob::TestHelper
 
-  describe "#show" do
-    subject(:perform_request) do
-      get url
-      test_response
-    end
-
-    let(:space) { create(:space) }
-    let(:url) { polymorphic_url(space) }
-
-    it { is_expected.to be_ok }
-    specify { perform_request && assert_select("##{dom_id(space)}") }
-
-    context "with a branded domain" do
-      let(:space) { create(:space, branded_domain: "beta.example.com") }
-
-      context "when accessing via the neighborhood url" do
-        it { is_expected.to redirect_to "http://beta.example.com" }
-      end
-
-      context "when accessing via domain" do
-        before do
-          space
-          host! "beta.example.com"
-        end
-
-        let(:url) { "http://beta.example.com" }
-
-        it { is_expected.to be_ok }
-        specify { perform_request && assert_select("##{dom_id(space)}") }
-      end
-    end
-  end
-
   path "/spaces" do
     include ApiHelpers::Path
 
@@ -88,8 +55,42 @@ RSpec.describe SpacesController do
       end
     end
   end
+
+  describe "#show" do
+    subject(:perform_request) do
+      get url
+      test_response
+    end
+
+    let(:space) { create(:space) }
+    let(:url) { polymorphic_url(space) }
+
+    it { is_expected.to be_ok }
+    specify { perform_request && assert_select("##{dom_id(space)}") }
+
+    context "with a branded domain" do
+      let(:space) { create(:space, branded_domain: "beta.example.com") }
+
+      context "when accessing via the neighborhood url" do
+        it { is_expected.to redirect_to "http://beta.example.com" }
+      end
+
+      context "when accessing via domain" do
+        before do
+          space
+          host! "beta.example.com"
+        end
+
+        let(:url) { "http://beta.example.com" }
+
+        it { is_expected.to be_ok }
+        specify { perform_request && assert_select("##{dom_id(space)}") }
+      end
+    end
+  end
+
   describe "#destroy" do
-    context "as an Operator using the API" do
+    context "when an an Operator using the AP" do
       it "deletes the space and all it's other bits" do
         SystemTestSpace.prepare
 
@@ -129,6 +130,26 @@ RSpec.describe SpacesController do
         expect(space.reload.theme).to eq("purple_mountains")
         expect(flash[:alert]).to include("went wrong")
       end
+    end
+  end
+
+  describe "#new" do
+    subject(:result) do
+      sign_in(nil, user)
+      get polymorphic_path([:new, :space])
+      response
+    end
+
+    context "when not logged in" do
+      let(:user) { nil }
+
+      it { is_expected.to be_not_found }
+    end
+
+    context "when an Operator" do
+      let(:user) { create(:person, operator: true) }
+
+      it { is_expected.to be_ok }
     end
   end
 end
