@@ -33,7 +33,7 @@
 </fieldset>
 
 <fieldset>
-  <%= form_with(model: [space]) do |space_form| %>
+  <%= form_with(model: space.location) do |space_form| %>
     <%= render "select",
                attribute: :theme,
                include_blank: false,
