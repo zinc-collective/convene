@@ -1,7 +1,7 @@
 class CreateMarketplaceTaxRates < ActiveRecord::Migration[7.0]
   def change
     create_table :marketplace_tax_rates, id: :uuid do |t|
-      t.integer :tax_rate
+      t.float :tax_rate
       t.string :label
       t.references :marketplace, type: :uuid, foreign_key: {to_table: :furniture_placements}
       t.timestamps

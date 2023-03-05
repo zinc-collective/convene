@@ -161,7 +161,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_005417) do
   end
 
   create_table "marketplace_tax_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "tax_rate"
+    t.float "tax_rate"
     t.string "label"
     t.uuid "marketplace_id"
     t.datetime "created_at", null: false
