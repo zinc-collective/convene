@@ -1,0 +1,6 @@
+<%= form_with(model: tax_rate.location) do |tax_rate_form| %>
+  <%= render "text_field", attribute: :label, form: tax_rate_form %>
+  <%= render "number_field", attribute: :tax_rate, form: tax_rate_form, required: true, step: 1, min: 0, max: 100 %>
+
+  <%= tax_rate_form.submit %>
+<%- end %>

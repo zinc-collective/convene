@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_04_003325) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_05_005417) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -22,12 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_003325) do
     "expired",
     "ignored",
     "revoked",
-    "sent",
+    "sent"
   ], force: :cascade
 
   create_enum :membership_status, [
     "active",
-    "revoked",
+    "revoked"
   ], force: :cascade
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -148,7 +148,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_003325) do
     t.string "price_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "tax_rate_id"
     t.index ["marketplace_id"], name: "index_marketplace_products_on_marketplace_id"
+    t.index ["tax_rate_id"], name: "index_marketplace_products_on_tax_rate_id"
   end
 
   create_table "marketplace_shoppers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -156,6 +158,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_003325) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_marketplace_shoppers_on_person_id", unique: true
+  end
+
+  create_table "marketplace_tax_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "tax_rate"
+    t.string "label"
+    t.uuid "marketplace_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marketplace_id"], name: "index_marketplace_tax_rates_on_marketplace_id"
   end
 
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -222,7 +233,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_003325) do
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id"
   add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
+  add_foreign_key "marketplace_products", "marketplace_tax_rates", column: "tax_rate_id"
   add_foreign_key "marketplace_shoppers", "people"
+  add_foreign_key "marketplace_tax_rates", "furniture_placements", column: "marketplace_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
