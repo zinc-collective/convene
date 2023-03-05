@@ -1,2 +1,5 @@
 # Build artifacts
 public
+
+# Vendor directory on CI
+vendor
