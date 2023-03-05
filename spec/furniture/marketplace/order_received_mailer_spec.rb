@@ -9,6 +9,6 @@ RSpec.describe Marketplace::OrderReceivedMailer do
 
     before { marketplace.update(notify_emails: "vendor@example.com,distributor@example.com") }
 
-    specify { expect(mail.to).to eql(marketplace.notify_emails.split(',')) }
+    specify { expect(mail.to).to eql(marketplace.notify_emails.split(",")) }
   end
 end

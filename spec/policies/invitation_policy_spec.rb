@@ -17,7 +17,7 @@ RSpec.describe InvitationPolicy do
     it { is_expected.to permit(operator, invitation) }
   end
 
-  permissions :index?, :new?, :create?, :update?, :edit?, :destroy? do
+  permissions :index?, :create?, :destroy?, :edit?, :new?, :update? do
     it { is_expected.to permit(member, invitation) }
     it { is_expected.to permit(operator, invitation) }
 

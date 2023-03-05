@@ -7,7 +7,7 @@ RSpec.describe SpacePolicy do
   let(:space) { membership.space }
   let(:member) { membership.member }
   let(:non_member) { create(:person) }
-  let(:operator) { create(:person, operator: true)}
+  let(:operator) { create(:person, operator: true) }
 
   permissions :update?, :edit? do
     it { is_expected.to permit(member, space) }

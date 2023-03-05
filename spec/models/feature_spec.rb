@@ -1,6 +1,7 @@
 require "rails_helper"
 RSpec.describe Feature do
   subject(:feature) { Feature }
+
   describe ".enabled?(feature_name)" do
     before { stub_const("ENV", "FEATURE_FOO" => "true", "FEATURE_BAR" => "yes") }
 

@@ -8,7 +8,7 @@ RSpec.describe Journal::EntryPolicy, type: :policy do
   let(:member) { membership.member }
   let(:non_member) { create(:person) }
 
-  permissions :new?, :create?, :edit?, :update?, :destroy? do
+  permissions :new?, :create?, :destroy?, :edit?, :update? do
     it { is_expected.not_to permit(Guest.new, entry) }
     it { is_expected.not_to permit(nil, entry) }
     it { is_expected.not_to permit(non_member, entry) }

@@ -4,7 +4,7 @@ class Marketplace
     helper_method :order
     def notification(order)
       @order = order
-      mail(to: order.marketplace.notify_emails.split(','))
+      mail(to: order.marketplace.notify_emails.split(","))
     end
   end
 end
