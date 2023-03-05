@@ -6,9 +6,17 @@ class Marketplace
 
     def create
       if tax_rate.save
-        redirect_to marketplace.location(child: :tax_rates)
+        redirect_to marketplace.location(:edit)
       else
         render :new
+      end
+    end
+
+    def update
+      if tax_rate.update(tax_rate_params)
+        redirect_to marketplace.location(:edit)
+      else
+        render :edit
       end
     end
 

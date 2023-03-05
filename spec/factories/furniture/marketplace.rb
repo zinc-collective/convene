@@ -68,4 +68,9 @@ FactoryBot.define do
 
   factory :marketplace_shopper, class: "Marketplace::Shopper" do
   end
+
+  factory :marketplace_tax_rate, class: "Marketplace::TaxRate" do
+    label { "#{Faker::TvShows::RuPaul.queen} Tax" }
+    tax_rate { (1..45).to_a.sample }
+  end
 end
