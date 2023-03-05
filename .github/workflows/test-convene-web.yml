@@ -187,4 +187,14 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Setup Node with cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install Node dependencies
+        run: yarn install
+
       - run: bundle exec rubocop --parallel --config .rubocop.yml
+      - run: yarn prettier --check "./**/*.{scss,css,js}"
