@@ -2,14 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe IconButtonComponent, type: :component do
-  describe "render" do
-    subject { render_inline(component) }
+RSpec.describe ButtonComponent, type: :component do
+  describe "#render" do
+    subject(:output) { render_inline(component) }
 
     let(:component) { described_class.new(**params) }
     let(:params) { {label: "Some label", title: "Our Title", href: "somewhere.com"} }
 
-    let(:a_el) { subject.at_css("a") }
+    let(:a_el) { output.at_css("a") }
 
     it "renders a link with the given arguments" do
       expect(a_el).to be_present
@@ -45,8 +45,8 @@ RSpec.describe IconButtonComponent, type: :component do
       end
 
       it "renders a span with the label" do
-        expect(subject.at_css("span")).to be_present
-        expect(subject.at_css("span").text).to eq("Some label")
+        expect(output.at_css("span")).to be_present
+        expect(output.at_css("span").text).to eq("Some label")
       end
     end
   end

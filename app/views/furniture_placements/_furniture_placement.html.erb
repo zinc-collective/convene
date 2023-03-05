@@ -5,14 +5,14 @@
         <%= furniture_placement.title %>
       </h4>
       <%- if furniture_placement.configurable? %>
-        <%= render IconButtonComponent.new(
+        <%= render ButtonComponent.new(
                       label: t('icons.edit'),
                       href: [:edit, furniture_placement.room.space, furniture_placement.room, furniture_placement],
                       method: :get,
                       title: t('.edit_title', name: furniture_placement.furniture.model_name.human.titleize)) %>
       <%- end %>
 
-      <%= render IconButtonComponent.new(
+      <%= render ButtonComponent.new(
                     label: t('icons.remove'),
                     href: [furniture_placement.room.space, furniture_placement.room, furniture_placement],
                     title: t('.remove_title', name: furniture_placement.furniture.model_name.human.titleize),
