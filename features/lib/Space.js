@@ -9,7 +9,7 @@ class Space {
       space: {
         name: this.name,
         slug: this.slug,
-        blueprint: "system_test"
+        blueprint: "system_test",
       },
     };
   }
