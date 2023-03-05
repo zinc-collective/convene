@@ -7,12 +7,14 @@
       <%= cart_form.submit %>
     <%- end %>
   <%- else %>
-    <div class="flex flex-wrap">
-      <p class="p-3">
-        Delivering to <%= cart.delivery_address %>
+    <div class="flex justify-between flex-wrap">
+      <div class="w-full flex items-center justify-between text-sm">
+        <span>Delivering to:</span>
+        <%= render ButtonComponent.new(href: cart.location.concat([params: { cart: { delivery_address: nil } }]), label: "(Change)", title: "Change Address", classes: "shrink font-light text-sm m-0") %>
+      </div>
 
-      </p>
-      <%= button_to "Update Address", cart.location, params: { cart: { delivery_address: nil } }%>
+
+      <p class="grow"><%= cart.delivery_address %></p>
     </div>
 
     <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
