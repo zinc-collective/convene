@@ -87,8 +87,8 @@ Then(
   function (_a, invitation, _a2, space, _a3, status) {
     const page = new InvitationsIndexPage(this.driver, space);
     return page.visit().then(() => {
-      return assertDisplayed(page.invitation({ invitation, status }))
-    })
+      return assertDisplayed(page.invitation({ invitation, status }));
+    });
   }
 );
 Then(

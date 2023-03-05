@@ -17,7 +17,7 @@ env:
 
 jobs:
   setup:
-    name: Install and Cache dependencies
+    name: Install and cache dependencies
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,7 @@ jobs:
         run: yarn install
 
   test-rspec:
-    name: Run Unit Tests
+    name: Run tests
     runs-on: ubuntu-latest
     needs: [setup]
 
@@ -92,7 +92,7 @@ jobs:
         run: bundle exec rspec
 
   test-features:
-    name: Run Browser Tests
+    name: Run browser tests
     runs-on: ubuntu-latest
     needs: [setup]
 
@@ -160,7 +160,7 @@ jobs:
           bin/setup-rails
           bin/run &
 
-      - name: Run Tests
+      - name: Run tests
         run: |
           # To wait for asset built
           # TODO: Start server in production mode
@@ -172,3 +172,29 @@ jobs:
         with:
           name: feature-test-failed-screenshot
           path: features/test_reports/*.png
+
+  lint:
+    name: Run style checks
+    runs-on: ubuntu-latest
+    needs: [setup]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node with cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+
+      - name: Install Node dependencies
+        run: yarn install
+
+      - run: bundle exec rubocop --parallel --config .rubocop.yml
+      - run: yarn prettier --check "./**/*.{scss,css,js}"

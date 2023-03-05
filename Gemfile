@@ -43,7 +43,7 @@ gem "gretel", "~> 4.4"
 # Better UI components
 gem "view_component", "~> 2.82"
 # Pagination!
-gem 'pagy', '~> 6.0'
+gem "pagy", "~> 6.0"
 
 # Database Layer
 #

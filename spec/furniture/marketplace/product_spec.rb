@@ -11,7 +11,7 @@ RSpec.describe Marketplace::Product, type: :model do
 
   describe "#price=" do
     it("sets the price_cents") do
-      product = Marketplace::Product.new
+      product = described_class.new
       product.price = 20
       expect(product.price_cents).to be(2000)
     end

@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe AuthenticationMethod, type: :model do
-  subject(:authentication_method) { FactoryBot.build(:authentication_method) }
+RSpec.describe AuthenticationMethod do
+  subject(:authentication_method) { build(:authentication_method) }
 
   before { authentication_method.set_one_time_password_secret }
 
@@ -22,26 +22,26 @@ RSpec.describe AuthenticationMethod, type: :model do
 
   describe "#verify?(one_time_password)" do
     it "returns true when a valid, fresh OTP is used" do
-      authentication_method.last_one_time_password_at = Time.now
+      authentication_method.last_one_time_password_at = Time.zone.now
       one_time_password = authentication_method.one_time_password
 
-      expect(authentication_method.verify?(one_time_password)).to be_truthy
+      expect(authentication_method).to be_verify(one_time_password)
     end
 
     it "returns false when the OTP is stale" do
       authentication_method.last_one_time_password_at = 3.hours.ago
       one_time_password = authentication_method.one_time_password
 
-      expect(authentication_method.verify?(one_time_password)).to be_falsey
+      expect(authentication_method).not_to be_verify(one_time_password)
     end
   end
 
   describe "#send_one_time_password!(space)" do
-    let(:space) { FactoryBot.create(:space) }
+    let(:space) { create(:space) }
 
     it "increments the one time password" do
       expect { authentication_method.send_one_time_password!(space) }
-        .to(change { authentication_method.last_one_time_password_at })
+        .to(change(authentication_method, :last_one_time_password_at))
     end
 
     it "delivers a one-time-password email for the space" do

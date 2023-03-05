@@ -17,7 +17,7 @@ RSpec.describe Blueprint do
   }.freeze
   describe "#find_or_create" do
     it "respects the Space's current settings" do
-      Blueprint.new(EXAMPLE_CONFIG).find_or_create!
+      described_class.new(EXAMPLE_CONFIG).find_or_create!
 
       space = Space.find_by(name: "Client A's Space")
 
@@ -25,7 +25,7 @@ RSpec.describe Blueprint do
       # blueprint has been applied
       space.rooms.first.furniture_placements.first.update(furniture_attributes: {content: "Hey there!"})
 
-      Blueprint.new(EXAMPLE_CONFIG).find_or_create!
+      described_class.new(EXAMPLE_CONFIG).find_or_create!
 
       # @todo add other examples of confirming the changes
       # were not overwritten
@@ -35,7 +35,7 @@ RSpec.describe Blueprint do
     it "Updates a given space" do
       space = create(:space)
 
-      Blueprint.new(EXAMPLE_CONFIG, space: space).find_or_create!
+      described_class.new(EXAMPLE_CONFIG, space: space).find_or_create!
 
       expect(space.rooms.count).to be(1)
     end

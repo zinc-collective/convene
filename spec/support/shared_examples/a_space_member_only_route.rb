@@ -4,7 +4,7 @@ RSpec.shared_examples "a space-member only route" do
 
     it "is a noop 404" do
       if changes
-        expect { perform_request }.not_to(change { changes.call })
+        expect { perform_request }.not_to(change(changes, :call))
       else
         perform_request
       end
@@ -17,7 +17,7 @@ RSpec.shared_examples "a space-member only route" do
 
     it "is a no-op 404" do
       if changes
-        expect { perform_request }.not_to(change { changes.call })
+        expect { perform_request }.not_to(change(changes, :call))
       else
         perform_request
       end
@@ -29,7 +29,7 @@ RSpec.shared_examples "a space-member only route" do
     let(:actor) { space_member }
 
     it "performs the action" do
-      expect { perform_request }.to(change { changes.call }) if changes
+      expect { perform_request }.to(change(changes, :call)) if changes
       expect(response).not_to be_not_found
     end
   end

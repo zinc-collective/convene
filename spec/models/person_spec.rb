@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Person, type: :model do
+RSpec.describe Person do
   it { is_expected.to have_many(:invitations).inverse_of(:invitor).with_foreign_key(:invitor_id) }
   it { is_expected.to have_many(:authentication_methods).inverse_of(:person).dependent(:destroy_async) }
   it { is_expected.to have_many(:memberships).inverse_of(:member).dependent(:destroy_async) }

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Space, type: :model do
+RSpec.describe Space do
   it { is_expected.to have_many(:rooms) }
 
   it do

@@ -17,7 +17,7 @@ module AuthHelpers
 
   def sign_in_as_member(space)
     member = space.members.first
-    raise ArgumentError "Couldn't find a member for space #{space.slug}" unless member.present?
+    raise ArgumentError "Couldn't find a member for space #{space.slug}" if member.blank?
 
     sign_in(space, member)
   end

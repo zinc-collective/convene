@@ -6,7 +6,7 @@ RSpec.describe UtilityHookupPolicy do
   let(:space) { create(:space, :with_members) }
   let(:utility_hookup) { create(:utility_hookup, space: space) }
   let(:member) { space.members.first }
-  let(:operator) { create(:person, operator: true)}
+  let(:operator) { create(:person, operator: true) }
   let(:non_member) { create(:person) }
 
   permissions :show? do

@@ -34,8 +34,7 @@ class RoomCardComponent extends Component {
    * @returns {Promise<RoomPage>}
    */
   enter() {
-    return this.enterRoomButton()
-      .click()
+    return this.enterRoomButton().click();
   }
 
   /**
@@ -48,8 +47,7 @@ class RoomCardComponent extends Component {
    * @returns {Promise<RoomEditPage>}
    */
   configure() {
-    return this.configureRoomButton()
-      .click()
+    return this.configureRoomButton().click();
   }
   /**
    * @returns {Component}

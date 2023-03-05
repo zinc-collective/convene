@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "/spaces/:space_id/invitations", type: :request do
+RSpec.describe "/spaces/:space_id/invitations" do # rubocop:disable RSpec/DescribeClass
   describe "POST" do
     it "creates and sends an invitation for a space" do
       mail = double(deliver_later: true)
