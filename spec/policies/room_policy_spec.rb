@@ -46,7 +46,7 @@ RSpec.describe RoomPolicy do
       listed_room = create(:room, :listed, space: space)
       unlisted_room = create(:room, :unlisted, space: space)
 
-      results = RoomPolicy::Scope.new(nil, space.rooms).resolve
+      results = described_class.new(nil, space.rooms).resolve
 
       expect(results).to include(internal_room)
       expect(results).to include(public_room)

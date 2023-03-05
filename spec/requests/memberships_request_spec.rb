@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/memberships/", type: :request do
+RSpec.describe "/memberships/" do # rubocop:disable RSpec/DescribeClass
   path "/memberships" do
     include ApiHelpers::Path
     post "Creates a Membership" do

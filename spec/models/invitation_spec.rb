@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Invitation, type: :model do
+RSpec.describe Invitation do
   it { is_expected.to belong_to(:space).inverse_of(:invitations) }
   it { is_expected.to belong_to(:invitor).class_name("Person").inverse_of(:invitations) }
   it { is_expected.to validate_presence_of(:email) }
@@ -23,7 +23,7 @@ RSpec.describe Invitation, type: :model do
 
   describe "#status" do
     it "defines status as an enum" do
-      expect(subject).to define_enum_for(:status).with_values(Invitation.statuses)
+      expect(subject).to define_enum_for(:status).with_values(described_class.statuses)
         .backed_by_column_of_type(:enum)
     end
 

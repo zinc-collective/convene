@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/spaces/:space_slug/rooms/", type: :request do
+RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeClass
   let(:space) { create(:space) }
   let(:membership) { create(:membership, space: space) }
   let!(:person) { membership.member }

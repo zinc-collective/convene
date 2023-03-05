@@ -42,7 +42,7 @@ RSpec.describe SpacesController do
         end
       end
 
-      context "with a blueprint" do
+      context "with a blueprint" do # rubocop:disable RSpec/EmptyExampleGroup
         let(:attributes) { attributes_for(:space, blueprint: :system_test) }
 
         response "201", "space created from the blueprint" do

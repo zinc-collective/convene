@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Membership, type: :model do
+RSpec.describe Membership do
   subject(:membership) { build(:membership) }
 
   describe "#member" do

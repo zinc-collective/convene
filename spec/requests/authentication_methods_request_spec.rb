@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/authentication_methods/" do # rubocop:disable RSpec/DescribeClass
+RSpec.describe "/authentication_methods/" do # rubocop:disable RSpec/DescribeClass, RSpec/EmptyExampleGroup
   path "/authentication_methods" do
     include ApiHelpers::Path
 
