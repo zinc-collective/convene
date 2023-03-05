@@ -4,20 +4,20 @@
     <%= form_with model: cart.location do |cart_form| %>
       <%= render "text_field", attribute: :delivery_address, form: cart_form %>
 
-      <%= cart_form.submit %>
+      <%= cart_form.submit t('marketplace.delivery_address.edit') %>
     <%- end %>
   <%- else %>
     <div class="flex justify-between flex-wrap">
       <div class="w-full flex items-center justify-between text-sm">
         <span>Delivering to:</span>
-        <%= render ButtonComponent.new(href: cart.location.concat([params: { cart: { delivery_address: nil } }]), label: "(Change)", title: "Change Address", classes: "shrink font-light text-sm m-0") %>
+        <%= render ButtonComponent.new(href: cart.location.concat([params: { cart: { delivery_address: nil } }]), label: t('marketplace.delivery_address.edit'), title: nil, classes: "shrink font-light text-xs m-0 bg-primary-200 underline") %>
       </div>
 
 
       <p class="grow"><%= cart.delivery_address %></p>
     </div>
 
-    <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
+    <div class="-mx-4 mt-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
       <table class="min-w-full divide-y divide-gray-300 table-fixed">
         <thead class="bg-gray-50">
           <tr>
