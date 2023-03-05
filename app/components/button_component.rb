@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
-class IconButtonComponent < ViewComponent::Base
+class ButtonComponent < ViewComponent::Base
   def initialize(
     label:,
     title:,
     href:,
     method: :put,
     confirm: nil,
-    disabled: false
+    disabled: false,
+    classes: nil
   )
     @label = label
     @title = title
@@ -15,7 +16,10 @@ class IconButtonComponent < ViewComponent::Base
     @method = method
     @confirm = confirm
     @disabled = disabled
+    @classes = classes
   end
+
+  attr_accessor :classes
 
   private
 

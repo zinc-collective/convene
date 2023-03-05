@@ -75,7 +75,6 @@ RSpec/LetSetup:
 # SupportedStyles: always, named_only
 RSpec/NamedSubject:
   Exclude:
-    - 'spec/components/icon_button_component_spec.rb'
     - 'spec/models/authentication_method_spec.rb'
     - 'spec/models/invitation_spec.rb'
     - 'spec/models/membership_spec.rb'
