@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
+  mount Lookbook::Engine, at: "/components"
 
   resources :authentication_methods, only: %i[create]
   resource :authenticated_session, only: %i[new create update destroy show]
