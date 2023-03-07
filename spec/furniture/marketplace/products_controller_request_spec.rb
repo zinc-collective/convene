@@ -8,7 +8,8 @@ RSpec.describe Marketplace::ProductsController, type: :request do
 
   describe "#create" do
     it "Creates a Product in the Marketplace" do
-      attributes = attributes_for(:marketplace_product)
+      tax_rate = create(:marketplace_tax_rate, marketplace: marketplace)
+      attributes = attributes_for(:marketplace_product, tax_rate_ids: [tax_rate.id])
 
       sign_in(space, member)
 
@@ -22,6 +23,7 @@ RSpec.describe Marketplace::ProductsController, type: :request do
       expect(created_product.description).to eql(attributes[:description])
       expect(created_product.price_cents).to eql(attributes[:price_cents])
       expect(created_product.price_currency).to eql(Money.default_currency.to_s)
+      expect(created_product.tax_rates).to include(tax_rate)
     end
   end
 

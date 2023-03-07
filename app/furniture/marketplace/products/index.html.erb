@@ -9,6 +9,11 @@
         <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">
           <%= Marketplace::Product.human_attribute_name(:description) %>
         </th>
+
+        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
+          <%= Marketplace::Product.human_attribute_name(:tax_rates) %>
+        </th>
+
         <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
           <%= Marketplace::Product.human_attribute_name(:price) %>
         </th>
