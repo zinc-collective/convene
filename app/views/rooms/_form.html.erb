@@ -1,36 +1,12 @@
-<%= form_with model: [room.space, room], data: { controller: "room-form" }, local: true do |room_form| %>
+<%= form_with model: room.location do |room_form| %>
   <fieldset>
-    <div>
-      <%= room_form.label :name %>
-      <%= room_form.text_field :name %>
-      <%= render partial: "error", locals: { model: room, attribute: :name } %>
-    </div>
-
-    <div>
-      <%= room_form.label :slug %>
-      <%= room_form.text_field :slug %>
-      <%= render partial: "error", locals: { model: room, attribute: :slug } %>
-    </div>
+    <%= render "text_field", attribute: :name, form: room_form %>
+    <%= render "text_field", attribute: :slug, form: room_form %>
 
     <h3>Privacy and Security</h3>
 
-    <div>
-     <%= room_form.label :publicity_level %>
-     <%= room_form.select :publicity_level, Room::PUBLICITY_LEVELS.map(&:to_s) %>
-     <%= render partial: "error", locals: { model: room, attribute: :publicity_level } %>
-    </div>
-
-    <div>
-      <%= room_form.label :access_level %>
-      <%= room_form.select :access_level, ['locked', 'unlocked'], { class: "form-select" }, "data-action": "room-form#accessLevelToggle" %>
-      <%= render partial: "error", locals: { model: room, attribute: :access_level } %>
-    </div>
-
-    <div>
-      <%= room_form.label :access_code %>
-      <%= room_form.text_field :access_code, "data-target": "room-form.accessCode", disabled: !room.locked? %>
-      <%= render partial: "error", locals: { model: room, attribute: :access_code } %>
-    </div>
+    <%= render "select", attribute: :publicity_level, options: Room::PUBLICITY_LEVELS.map(&:to_s), form: room_form %>
+    <%= render "select", attribute: :access_level, options: Room::ACCESS_LEVELS.map(&:to_s), form: room_form %>
 
     <footer>
       <%- if policy(room).destroy? && room.persisted? %>

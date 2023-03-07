@@ -60,6 +60,8 @@ class SpacesController < ApplicationController
       policy_scope(Space).friendly.find(params[:id])
     elsif params[:space]
       policy_scope(Space).new(space_params)
+    elsif BrandedDomainConstraint.new(space_repository).space_for_request(request).present?
+      BrandedDomainConstraint.new(space_repository).space_for_request(request)
     else
       policy_scope(Space).new
     end.tap do |space|

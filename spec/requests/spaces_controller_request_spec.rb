@@ -2,20 +2,8 @@
 
 require "swagger_helper"
 
-RSpec.describe SpacesController, type: :request do
+RSpec.describe SpacesController do
   include ActiveJob::TestHelper
-
-  describe "#show" do
-    context "with a branded domain" do
-      let(:space) { create(:space, branded_domain: "beta.example.com") }
-
-      it "redirects to the domain" do
-        get polymorphic_path(space)
-
-        expect(response).to redirect_to "http://beta.example.com"
-      end
-    end
-  end
 
   path "/spaces" do
     include ApiHelpers::Path
@@ -42,7 +30,7 @@ RSpec.describe SpacesController, type: :request do
       }
 
       let(:api_key) { ENV["OPERATOR_API_KEY"] }
-      let(:Authorization) { encode_authorization_token(api_key) }
+      let(:Authorization) { encode_authorization_token(api_key) } # rubocop:disable RSpec/VariableName
       let(:body) { {space: attributes} }
       response "201", "space created" do
         let(:attributes) { attributes_for(:space) }
@@ -54,7 +42,7 @@ RSpec.describe SpacesController, type: :request do
         end
       end
 
-      context "with a blueprint" do
+      context "with a blueprint" do # rubocop:disable RSpec/EmptyExampleGroup
         let(:attributes) { attributes_for(:space, blueprint: :system_test) }
 
         response "201", "space created from the blueprint" do
@@ -67,8 +55,42 @@ RSpec.describe SpacesController, type: :request do
       end
     end
   end
+
+  describe "#show" do
+    subject(:perform_request) do
+      get url
+      test_response
+    end
+
+    let(:space) { create(:space) }
+    let(:url) { polymorphic_url(space) }
+
+    it { is_expected.to be_ok }
+    specify { perform_request && assert_select("##{dom_id(space)}") }
+
+    context "with a branded domain" do
+      let(:space) { create(:space, branded_domain: "beta.example.com") }
+
+      context "when accessing via the neighborhood url" do
+        it { is_expected.to redirect_to "http://beta.example.com" }
+      end
+
+      context "when accessing via domain" do
+        before do
+          space
+          host! "beta.example.com"
+        end
+
+        let(:url) { "http://beta.example.com" }
+
+        it { is_expected.to be_ok }
+        specify { perform_request && assert_select("##{dom_id(space)}") }
+      end
+    end
+  end
+
   describe "#destroy" do
-    context "as an Operator using the API" do
+    context "when an an Operator using the AP" do
       it "deletes the space and all it's other bits" do
         SystemTestSpace.prepare
 
@@ -108,6 +130,26 @@ RSpec.describe SpacesController, type: :request do
         expect(space.reload.theme).to eq("purple_mountains")
         expect(flash[:alert]).to include("went wrong")
       end
+    end
+  end
+
+  describe "#new" do
+    subject(:result) do
+      sign_in(nil, user)
+      get polymorphic_path([:new, :space])
+      response
+    end
+
+    context "when not logged in" do
+      let(:user) { nil }
+
+      it { is_expected.to be_not_found }
+    end
+
+    context "when an Operator" do
+      let(:user) { create(:person, operator: true) }
+
+      it { is_expected.to be_ok }
     end
   end
 end

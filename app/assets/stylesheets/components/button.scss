@@ -1,5 +1,9 @@
 @layer components {
-  [type=reset], [type=button], [type=submit], button, .button {
+  [type="reset"],
+  [type="button"],
+  [type="submit"],
+  button,
+  .button {
     @apply font-bold py-2 px-4 my-1 rounded bg-primary-500 text-white text-center transition ease-in-out duration-150;
 
     &:hover {
@@ -31,7 +35,6 @@
       &:active {
         @apply bg-neutral-200;
       }
-
     }
   }
 }

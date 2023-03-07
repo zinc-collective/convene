@@ -1,9 +1,5 @@
 <%= form_with(model: space) do |form| %>
   <%= render "text_field", attribute: :name, form: form %>
 
-  <%= form.fields_for(:client, space.client || space.build_client) do |client_form|%>
-    <%= render "text_field", attribute: :name, form: client_form %>
-  <%- end %>
-
   <%= form.submit %>
 <%- end %>

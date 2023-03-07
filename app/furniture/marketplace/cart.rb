@@ -15,6 +15,8 @@ class Marketplace
     has_many :cart_products, dependent: :destroy, inverse_of: :cart
     has_many :products, through: :cart_products, inverse_of: :carts
 
+    has_encrypted :delivery_address
+
     enum status: {
       pre_checkout: "pre_checkout",
       paid: "paid"
@@ -26,7 +28,11 @@ class Marketplace
       end
     end
 
-    delegate :delivery_fee, to: :marketplace
+    def delivery_fee
+      return marketplace.delivery_fee if delivery_address.present?
+
+      0
+    end
 
     def price_total
       product_total + delivery_fee

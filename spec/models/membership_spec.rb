@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Membership, type: :model do
+RSpec.describe Membership do
   subject(:membership) { build(:membership) }
 
   describe "#member" do
@@ -29,7 +29,7 @@ RSpec.describe Membership, type: :model do
       invitation_to_other_space = create(:invitation, invitor: membership.member)
 
       membership.member.reload
-      expect(membership.member.invitations).to match_array([invitation_to_other_space, invitation_to_this_space])
+      expect(membership.member.invitations).to contain_exactly(invitation_to_other_space, invitation_to_this_space)
 
       expect(membership.sent_invitations).to include(invitation_to_this_space)
       expect(membership.sent_invitations).not_to include(invitation_to_other_space)

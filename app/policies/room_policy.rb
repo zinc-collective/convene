@@ -5,7 +5,7 @@ class RoomPolicy < ApplicationPolicy
   delegate :space, to: :room
 
   def show?
-    return true if room.unlocked? || room.locked?
+    return true if room.public?
     return true if room.internal? && (person&.member_of?(space) || person&.operator?)
   end
 
@@ -19,7 +19,7 @@ class RoomPolicy < ApplicationPolicy
   alias_method :new?, :create?
 
   def permitted_attributes(params)
-    [:access_level, :access_code, :name, :slug, :publicity_level,
+    [:access_level, :name, :slug, :publicity_level,
       furniture_placements_attributes:
        policy(FurniturePlacement).permitted_attributes(params)]
   end

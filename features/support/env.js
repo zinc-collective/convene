@@ -11,7 +11,7 @@ import {
 import appUrl from "../lib/appUrl.js";
 import { CustomWorld } from "./CustomWorld.js";
 import { driver } from "./driver.js";
-({ config }.config());
+({ config }).config();
 setWorldConstructor(CustomWorld);
 After(function (testCase) {
   if (testCase.result.status == Status.FAILED) {

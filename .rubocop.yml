@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   - standard
   - rubocop-rails
@@ -5,11 +7,13 @@ require:
 
 inherit_gem:
   standard: config/base.yml
+  pundit: config/rubocop-rspec.yml
 
 AllCops:
   Exclude:
     - db/schema.rb
     - bin/*
+    - vendor/bundle/**/*
   NewCops: enable
 
 RSpec/MultipleExpectations:

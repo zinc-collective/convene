@@ -1,7 +1,6 @@
 import Page from "./Page.js";
 import RoomPage from "./RoomPage.js";
 import RoomEditPage from "./RoomEditPage.js";
-import WaitingRoomPage from "./WaitingRoomPage.js";
 import SpacePage from "./SpacePage.js";
 import SpaceEditPage from "./SpaceEditPage.js";
 import MembershipsIndexPage from "./MembershipsIndexPage.js";
@@ -17,7 +16,6 @@ export { SpaceEditPage };
 export { MembershipsIndexPage };
 export { InvitationsIndexPage };
 export { RoomEditPage };
-export { WaitingRoomPage };
 export default {
   Page,
   SpacePage,
@@ -26,5 +24,4 @@ export default {
   RoomPage,
   SpaceEditPage,
   RoomEditPage,
-  WaitingRoomPage,
 };

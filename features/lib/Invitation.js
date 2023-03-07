@@ -48,12 +48,11 @@ class Invitation {
    * @param {ThenableWebDriver} driver
    * @returns {Promise<InvitationResponsePage>}
    */
-   ignore(driver) {
+  ignore(driver) {
     return new InvitationResponsePage(driver, this)
       .visit()
       .then((page) => page.ignoreButton().click());
   }
-
 
   /**
    * @returns {Promise<String>}

@@ -1,7 +1,5 @@
 Feature: Rooms
-  # Rooms organize the information and functionality of a Space. Rooms can be
-  # Locked (see: features/rooms/locking-rooms.feature) or only visible to Space # Members.
-
+  # Rooms organize the information and functionality of a Space.
 
   # Adding a Room is done through the Space Edit page
   @built @unimplemented-steps @andromeda

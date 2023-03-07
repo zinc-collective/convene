@@ -11,7 +11,8 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "build:css": "postcss --config postcss.config.cjs ./app/assets/stylesheets/application.postcss.css -o ./app/assets/builds/application.css",
-    "test": "cucumber-js --format @cucumber/pretty-formatter --tags 'not @unscheduled and not @wip and not @unimplemented-steps and not @unstarted' --import features/"
+    "test": "cucumber-js --format @cucumber/pretty-formatter --tags 'not @unscheduled and not @wip and not @unimplemented-steps and not @unstarted' --import features/",
+    "autoformat": "prettier --write  './**/*.{scss,css,js}'"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "geckodriver": "^3.2.0",
     "get-urls": "^11.0.0",
     "lodash": "^4.17.21",
+    "prettier": "^2.8.4",
     "promise-retry": "^2.0.1",
     "selenium-webdriver": "^4.8.1",
     "webpack-dev-server": "^4.11.1"

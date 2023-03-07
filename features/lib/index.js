@@ -1,5 +1,4 @@
 import AccessLevel from "./AccessLevel.js";
-import AccessCode from "./AccessCode.js";
 import Room from "./Room.js";
 import Space from "./Space.js";
 import Actor from "./Actor.js";
@@ -9,7 +8,6 @@ export { Actor };
 export { Space };
 export { Room };
 export { AccessLevel };
-export { AccessCode };
 export { concatRegExp };
 export { linkParameters };
 export default {
@@ -17,7 +15,6 @@ export default {
   Space,
   Room,
   AccessLevel,
-  AccessCode,
   concatRegExp,
   linkParameters,
 };

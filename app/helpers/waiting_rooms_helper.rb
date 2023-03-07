@@ -1,2 +1,0 @@
-module WaitingRoomsHelper
-end

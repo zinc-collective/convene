@@ -72,11 +72,11 @@ class ApplicationController < ActionController::Base
   def ensure_on_byo_domain
     return if current_space.blank?
     if request.get? && current_space.branded_domain.present? && request.host != current_space.branded_domain
-      Rails.logger.debug("Request Host: #{request.host}")
+      Rails.logger.debug { "Request Host: #{request.host}" }
       redirect_url = URI(request.url)
       redirect_url.host = current_space.branded_domain
-      redirect_url.path = redirect_url.path.gsub("/spaces/#{current_space.slug}","")
-      Rails.logger.debug("Redirecting from #{request.url}")
+      redirect_url.path = redirect_url.path.gsub("/spaces/#{current_space.slug}", "")
+      Rails.logger.debug { "Redirecting from #{request.url}" }
       redirect_to redirect_url.to_s, allow_other_host: true if redirect_url != URI(request.url)
     end
   end
@@ -120,7 +120,7 @@ class ApplicationController < ActionController::Base
 
   helper_method def current_membership
     @current_membership ||= if current_space.present? && current_person.present?
-      current_space.memberships.find_by(member: current_person)
+      current_person.memberships.find_by(space: current_space)
     end
   end
 
@@ -139,10 +139,6 @@ class ApplicationController < ActionController::Base
       )
   rescue ActiveRecord::RecordNotFound
     current_space.entrance
-  end
-
-  helper_method def current_access_code(room)
-    session.dig(room.id, "access_code")
   end
 
   def render_not_found

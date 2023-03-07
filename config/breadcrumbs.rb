@@ -33,12 +33,12 @@ crumb :invitations do |space|
 end
 
 crumb :utility_hookups do |space|
-  link "Utility Hookups", [space, :utility_hookups]
+  link "Utility Hookups", space.location(child: :utility_hookups)
   parent :edit_space, space
 end
 
 crumb :new_utility_hookup do |utility_hookup|
-  link "New Utility Hookup", [:new, utility_hookup.space, :utility_hookup]
+  link "New Utility Hookup", utility_hookup.location
   parent :utility_hookups, utility_hookup.space
 end
 
@@ -54,11 +54,6 @@ end
 crumb :edit_room do |room|
   link t("helpers.submit.room.edit", room_name: room.name), [:edit, room.space, room]
   parent :room, room
-end
-
-crumb :waiting_room do |waiting_room|
-  link "Waiting Room", space_room_waiting_room_path(waiting_room.room.space, waiting_room.room)
-  parent :room, waiting_room.room
 end
 
 crumb :rsvp do |rsvp|

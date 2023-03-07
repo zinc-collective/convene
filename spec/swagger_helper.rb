@@ -24,7 +24,7 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: "#{ENV["APP_ROOT_URL"]}"
+          url: (ENV["APP_ROOT_URL"]).to_s
         }
       ],
       components: {

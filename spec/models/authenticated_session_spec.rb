@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AuthenticatedSession, type: :model do
+RSpec.describe AuthenticatedSession do
   subject(:authenticated_session) do
     described_class.new(authentication_method: authentication_method,
       contact_method: contact_method,
@@ -10,7 +10,7 @@ RSpec.describe AuthenticatedSession, type: :model do
       one_time_password: one_time_password)
   end
 
-  let(:space) { FactoryBot.build_stubbed(:space, id: SecureRandom.uuid) }
+  let(:space) { build_stubbed(:space, id: SecureRandom.uuid) }
   let(:authentication_method) { nil }
   let(:one_time_password) { nil }
   let(:contact_method) { nil }
@@ -49,7 +49,7 @@ RSpec.describe AuthenticatedSession, type: :model do
           let(:authentication_method) { nil }
 
           it "creates an authentication method and person from the provided contact info" do
-            expect { authenticated_session.save }.to change { AuthenticationMethod.count }.by(1)
+            expect { authenticated_session.save }.to change(AuthenticationMethod, :count).by(1)
 
             authentication_method = AuthenticationMethod.last
             expect(authentication_method.person.email).to eql("test@example.com")
@@ -62,13 +62,13 @@ RSpec.describe AuthenticatedSession, type: :model do
           let(:authentication_method) { nil }
 
           before do
-            FactoryBot.create(:authentication_method,
+            create(:authentication_method,
               contact_method: contact_method,
               contact_location: contact_location)
           end
 
           it "leverages the existing authentication method" do
-            expect { authenticated_session.save }.not_to change { AuthenticationMethod.count }
+            expect { authenticated_session.save }.not_to change(AuthenticationMethod, :count)
           end
         end
       end
@@ -81,7 +81,7 @@ RSpec.describe AuthenticatedSession, type: :model do
             .with(one_time_password).and_return(true)
 
           allow(authentication_method).to receive(:person)
-            .and_return(FactoryBot.build_stubbed(:person, id: SecureRandom.uuid))
+            .and_return(build_stubbed(:person, id: SecureRandom.uuid))
         end
 
         it "confirms the authentication method" do

@@ -8,7 +8,7 @@ module AuthHelpers
 
     authentication_method.bump_one_time_password!
 
-    post(space_authenticated_session_path(space),
+    post(polymorphic_path([space, :authenticated_session].compact),
       params: {authenticated_session: {
         authentication_method_id: authentication_method.id,
         one_time_password: authentication_method.one_time_password
@@ -17,7 +17,7 @@ module AuthHelpers
 
   def sign_in_as_member(space)
     member = space.members.first
-    raise ArgumentError "Couldn't find a member for space #{space.slug}" unless member.present?
+    raise ArgumentError "Couldn't find a member for space #{space.slug}" if member.blank?
 
     sign_in(space, member)
   end

@@ -6,6 +6,6 @@ FactoryBot.define do
 
     contact_method { :email }
     contact_location { person.email }
-    last_one_time_password_at { Time.now }
+    last_one_time_password_at { Time.zone.now }
   end
 end
