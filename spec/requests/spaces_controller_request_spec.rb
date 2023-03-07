@@ -111,24 +111,18 @@ RSpec.describe SpacesController do
 
   describe "#update" do
     context "when a Space Member" do
-      let(:space) { create(:space, :with_members, theme: "purple_mountains") }
+      let(:space) { create(:space, :with_members, :with_rooms) }
 
       before do
         sign_in_as_member(space)
       end
 
-      it "updates the theme" do
-        put polymorphic_path(space), params: {space: {theme: "desert_dunes"}}
+      it "updates the Space" do
+        new_entrance = space.rooms.sample
+        put polymorphic_path(space), params: {space: {entrance_id: space.rooms.sample.id}}
 
-        expect(space.reload.theme).to eq("desert_dunes")
+        expect(space.reload.entrance).to eql(new_entrance)
         expect(flash[:notice]).to include("successfully updated")
-      end
-
-      it "shows an error message with an invalid theme" do
-        put polymorphic_path(space), params: {space: {theme: "bogus_theme"}}
-
-        expect(space.reload.theme).to eq("purple_mountains")
-        expect(flash[:alert]).to include("went wrong")
       end
     end
   end

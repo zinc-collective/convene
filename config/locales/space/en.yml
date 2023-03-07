@@ -1,12 +1,4 @@
 en:
-  activerecord:
-    errors:
-      models:
-        space:
-          attributes:
-            theme:
-              inclusion: Please choose from the list of themes
-
   spaces:
     update:
       success: Space successfully updated 🎉

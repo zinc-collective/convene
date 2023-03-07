@@ -4,7 +4,6 @@
 # for collaboration
 class Space < ApplicationRecord
   include WithinLocation
-  THEME_OPTIONS = %w[purple_mountains desert_dunes].freeze
 
   # The fully-qualified domain to enter the space.
   # Spaces without a branded_domain are still accessible via their slug.
@@ -20,8 +19,6 @@ class Space < ApplicationRecord
   # The URI-friendly name for the space
   attribute :slug, :string
   validates :slug, uniqueness: true
-
-  validates :theme, inclusion: {in: THEME_OPTIONS}, if: ->(s) { s.theme.present? }
 
   # FriendlyId's does the legwork to make the slug uri-friendly
   extend FriendlyId
