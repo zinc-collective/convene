@@ -21,7 +21,6 @@
 <h3>Tax Rates</h3>
 <%= render policy_scope(marketplace.tax_rates) %>
 
-
 <%- if policy(marketplace.tax_rates.new).create? %>
   <%= link_to("Add Tax Rate", marketplace.location(:new, child: :tax_rate)) %>
 <%- end %>
