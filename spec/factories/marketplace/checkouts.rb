@@ -6,7 +6,7 @@ FactoryBot.define do
         person { nil }
       end
       after(:build) do |checkout, evaluator|
-        shopper = build(:marketplace_shopper, person: evaluator.person)
+        shopper = build(:marketplace_shopper, person: evaluator.person.is_a?(Guest) ? nil : evaluator.person)
         checkout.cart = build(:marketplace_cart, marketplace: evaluator.marketplace, shopper: shopper)
       end
     end

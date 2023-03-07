@@ -28,8 +28,12 @@ FactoryBot.define do
   end
 
   factory :marketplace_cart_product, class: "Marketplace::CartProduct" do
-    association(:product, factory: :marketplace_product)
-    association(:cart, factory: :marketplace_cart)
+    transient do
+      marketplace { nil }
+    end
+
+    product { association(:marketplace_product, marketplace: marketplace) }
+    cart { association(:marketplace_cart, marketplace: marketplace) }
   end
 
   factory :marketplace_cart, class: "Marketplace::Cart" do
@@ -37,8 +41,8 @@ FactoryBot.define do
     association(:shopper, factory: :marketplace_shopper)
 
     trait :with_products do
-      after(:build) do |cart, _evaluator|
-        build(:marketplace_cart_product, cart: cart)
+      after(:build) do |cart, evaluator|
+        build(:marketplace_cart_product, cart: cart, marketplace: evaluator.instance.marketplace)
       end
     end
   end
