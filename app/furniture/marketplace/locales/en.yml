@@ -1,6 +1,8 @@
 
 en:
   marketplace:
+    delivery_address:
+      edit: "Change Address"
     marketplace:
       edit: "Configure Marketplace"
     marketplaces:
