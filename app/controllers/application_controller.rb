@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :ensure_on_byo_domain
 
   include Pundit::Authorization
-  after_action :verify_authorized
+  after_action :verify_authorized, except: [:index] # rubocop:disable Rails/LexicallyScopedActionFilter
   after_action :verify_policy_scoped
   before_action :prepend_theme_views
 

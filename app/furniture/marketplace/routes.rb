@@ -9,6 +9,8 @@ class Marketplace
           router.resource :checkout, only: [:show, :create]
         end
 
+        router.resources :tax_rates
+
         router.resources :orders, only: [:show]
         router.resources :products
         router.resource :stripe_account

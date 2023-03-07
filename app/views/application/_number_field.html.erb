@@ -1,6 +1,9 @@
-<% required ||= required | false %>
+<% required = local_assigns[:required] || false %>
+<% min = local_assigns[:min] %>
+<% max = local_assigns[:max] %>
+<% step = local_assigns[:step] %>
 <div>
   <%= form.label attribute %>
-  <%= form.number_field attribute, required: required %>
+  <%= form.number_field attribute, required: required, min: min, max: max, step: step %>
   <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
 </div>
