@@ -25,7 +25,7 @@ class Marketplace
 
     def product_total
       cart_products.sum(0) do |cart_product|
-        cart_product.product.price * cart_product.quantity
+        cart_product.price_total
       end
     end
 
@@ -35,8 +35,14 @@ class Marketplace
       0
     end
 
+    def tax_total
+      cart_products.sum(0) do |cart_product|
+        cart_product.tax_amount
+      end
+    end
+
     def price_total
-      product_total + delivery_fee
+      product_total + delivery_fee + tax_total
     end
 
     def ready_for_delivery?
