@@ -39,6 +39,10 @@ class Marketplace
       settings["stripe_account"] = stripe_account
     end
 
+    def stripe_account_connected?
+      stripe_account.present? && stripe_webhook_endpoint.present? && stripe_webhook_endpoint_secret.present?
+    end
+
     def stripe_webhook_endpoint
       settings["stripe_webhook_endpoint"]
     end
