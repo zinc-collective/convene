@@ -1,20 +1,23 @@
 <div id="<%= dom_id(cart) %>">
 
-  <%- if cart.delivery_address.blank? %>
+  <%- if cart.delivery_address.blank? || cart.contact_phone_number.blank? %>
     <%= form_with model: cart.location do |cart_form| %>
       <%= render "text_field", attribute: :delivery_address, form: cart_form %>
+      <%= render "text_field", attribute: :contact_phone_number, form: cart_form %>
 
-      <%= cart_form.submit t('marketplace.delivery_address.edit') %>
+      <%= cart_form.submit t('marketplace.edit_delivery_info.edit') %>
     <%- end %>
   <%- else %>
     <div class="flex justify-between flex-wrap">
       <div class="w-full flex items-center justify-between text-sm">
         <span>Delivering to:</span>
+        <%= cart.delivery_address %>
         <%= render ButtonComponent.new(href: cart.location.concat([params: { cart: { delivery_address: nil } }]), label: t('marketplace.delivery_address.edit'), title: nil, classes: "shrink font-light text-xs m-0 bg-primary-200 underline") %>
+
+        <span>Contact Phone Number:</span>
+        <%= cart.contact_phone_number %>
+        <%= render ButtonComponent.new(href: cart.location.concat([params: { cart: { contact_phone_number: nil } }]), label: t('marketplace.contact_phone_number.edit'), title: nil, classes: "shrink font-light text-xs m-0 bg-primary-200 underline") %>
       </div>
-
-
-      <p class="grow"><%= cart.delivery_address %></p>
     </div>
 
     <div class="-mx-4 mt-4 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
