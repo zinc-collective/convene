@@ -19,6 +19,7 @@ RSpec.describe Marketplace::CartsController, type: :request do
 
       it { is_expected.to redirect_to(room.location) }
       specify { expect { perform_request }.to change { cart.reload.delivery_address }.from(nil).to("123 N West St") }
+      specify { expect { perform_request }.to change { cart.reload.contact_phone_number }.from(nil).to("(415)-123-4567") }
     end
 
     context "when a `Neighbor`" do
@@ -28,6 +29,7 @@ RSpec.describe Marketplace::CartsController, type: :request do
 
       it { is_expected.to redirect_to(room.location) }
       specify { expect { perform_request }.to change { cart.reload.delivery_address }.from(nil).to("123 N West St") }
+      specify { expect { perform_request }.to change { cart.reload.contact_phone_number }.from(nil).to("(415)-123-4567") }
     end
   end
 end
