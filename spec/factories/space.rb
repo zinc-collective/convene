@@ -13,5 +13,15 @@ FactoryBot.define do
         create_list(:membership, evaluator.member_count, space: space)
       end
     end
+
+    trait :with_rooms do
+      transient do
+        room_count { 2 }
+      end
+
+      after(:create) do |space, evaluator|
+        create_list(:room, evaluator.room_count, space: space)
+      end
+    end
   end
 end

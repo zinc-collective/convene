@@ -34,11 +34,6 @@
 
 <fieldset>
   <%= form_with(model: space.location) do |space_form| %>
-    <%= render "select",
-               attribute: :theme,
-               include_blank: false,
-               options: Space::THEME_OPTIONS.map { |t| [t.titleize, t] },
-               form: space_form %>
     <%= render "select", attribute: :entrance_id, include_blank: true, options: space.rooms.map { |room| [room.name, room.id] }, form: space_form %>
     <%= space_form.submit %>
   <%- end %>

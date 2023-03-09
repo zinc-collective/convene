@@ -41,3 +41,13 @@ crumb :edit_marketplace_product do |product|
   parent :marketplace_product, product
   link "Edit", product.location(:edit)
 end
+
+crumb :new_tax_rate do |tax_rate|
+  parent :edit_marketplace, tax_rate.marketplace
+  link "Add a Tax Rate", marketplace.location(:new, child: :tax_rate)
+end
+
+crumb :edit_tax_rate do |tax_rate|
+  parent :edit_marketplace, tax_rate.marketplace
+  link "Edit Tax Rate '#{tax_rate.label}'", marketplace.location(:new, child: :tax_rate)
+end

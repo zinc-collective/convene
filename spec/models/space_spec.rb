@@ -20,8 +20,4 @@ RSpec.describe Space do
   describe "#branded_domain" do
     it { is_expected.to validate_uniqueness_of(:branded_domain).allow_nil }
   end
-
-  describe "#theme" do
-    it { is_expected.to validate_inclusion_of(:theme).in_array(Space::THEME_OPTIONS).allow_nil }
-  end
 end

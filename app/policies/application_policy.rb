@@ -3,7 +3,8 @@
 # Parent class for Policies.
 # @see https://github.com/varvet/pundit#policies
 class ApplicationPolicy
-  attr_reader :person, :object
+  attr_reader :current_person, :object
+  alias_method :person, :current_person
 
   def create?
     raise NotImplementedError
@@ -29,13 +30,13 @@ class ApplicationPolicy
     true
   end
 
-  def initialize(person, object)
-    @person = person
-    @object = object
+  def show?
+    update?
   end
 
-  def current_person
-    @person
+  def initialize(current_person, object)
+    @current_person = current_person
+    @object = object
   end
 
   def permit(params)
@@ -47,10 +48,10 @@ class ApplicationPolicy
   end
 
   def policy(object)
-    Pundit.policy(person, object)
+    Pundit.policy(current_person, object)
   end
 
   def policy!(object)
-    Pundit.policy!(person, object)
+    Pundit.policy!(current_person, object)
   end
 end
