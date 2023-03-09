@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   after_action :verify_authorized, except: [:index] # rubocop:disable Rails/LexicallyScopedActionFilter
   after_action :verify_policy_scoped
-  before_action :prepend_theme_views
 
   include Pagy::Backend
 
@@ -143,14 +142,5 @@ class ApplicationController < ActionController::Base
 
   def render_not_found
     render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
-  end
-
-  # Ensure the Theme views and partials are first in the View lookup path
-  # This allows us to override Application and Furniture views in favor of
-  # the theme specific ones.
-  def prepend_theme_views
-    return if current_space&.theme.blank?
-
-    prepend_view_path "app/themes/#{current_space.theme}/"
   end
 end
