@@ -22,12 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_212232) do
     "expired",
     "ignored",
     "revoked",
-    "sent"
+    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
     "active",
-    "revoked"
+    "revoked",
   ], force: :cascade
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -140,6 +140,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_212232) do
     t.index ["shopper_id"], name: "index_marketplace_orders_on_shopper_id"
   end
 
+  create_table "marketplace_product_tax_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "tax_rate_id"
+    t.uuid "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_marketplace_product_tax_rates_on_product_id"
+    t.index ["tax_rate_id"], name: "index_marketplace_product_tax_rates_on_tax_rate_id"
+  end
+
   create_table "marketplace_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "marketplace_id"
     t.string "name"
@@ -148,9 +157,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_212232) do
     t.string "price_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "tax_rate_id"
     t.index ["marketplace_id"], name: "index_marketplace_products_on_marketplace_id"
-    t.index ["tax_rate_id"], name: "index_marketplace_products_on_tax_rate_id"
   end
 
   create_table "marketplace_shoppers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -231,8 +238,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_212232) do
   add_foreign_key "marketplace_cart_products", "marketplace_orders", column: "cart_id"
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id"
+  add_foreign_key "marketplace_product_tax_rates", "marketplace_products", column: "product_id"
+  add_foreign_key "marketplace_product_tax_rates", "marketplace_tax_rates", column: "tax_rate_id"
   add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
-  add_foreign_key "marketplace_products", "marketplace_tax_rates", column: "tax_rate_id"
   add_foreign_key "marketplace_shoppers", "people"
   add_foreign_key "marketplace_tax_rates", "furniture_placements", column: "marketplace_id"
   add_foreign_key "memberships", "invitations"
