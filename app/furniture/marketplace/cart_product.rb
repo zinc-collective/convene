@@ -5,9 +5,10 @@ class Marketplace
     self.table_name = "marketplace_cart_products"
 
     belongs_to :cart, inverse_of: :cart_products
+    delegate :shopper, to: :cart
 
     belongs_to :product, inverse_of: :cart_products
-    delegate :name, :description, :price, :price_cents, to: :product
+    delegate :name, :description, :marketplace, :price, :price_cents, to: :product
 
     validates_uniqueness_of :product, scope: :cart_id
     validate :editable_cart

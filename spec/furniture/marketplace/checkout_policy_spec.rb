@@ -3,34 +3,27 @@ require "rails_helper"
 RSpec.describe Marketplace::CheckoutPolicy, type: :policy do
   subject { described_class }
 
-  let(:membership) { create(:membership, space: marketplace.room.space) }
-  let(:member) { membership.member }
-  let(:non_member) { create(:person) }
-  let(:guest) { Guest.new }
+  include Marketplace::Policy::SpecFactories
 
-  let(:marketplace) { create(:marketplace) }
+  let(:checkout) { build(:marketplace_checkout, :with_cart, marketplace: marketplace, person: shopper_person) }
+  let(:shopper_person) { nil }
 
-  let(:member_checkout) { build(:marketplace_checkout, :with_cart, marketplace: marketplace, person: member) }
-  let(:guest_checkout) { build(:marketplace_checkout, :with_cart, marketplace: marketplace) }
-  let(:non_member_checkout) { build(:marketplace_checkout, :with_cart, marketplace: marketplace, person: non_member) }
+  permissions :new?, :create?, :destroy?, :edit?, :show?, :update? do
+    it { is_expected.to permit(member, checkout) }
+    it { is_expected.to permit(operator, checkout) }
 
-  permissions :new? do
-    it { is_expected.to permit(member, member_checkout) }
-    it { is_expected.not_to permit(non_member, member_checkout) }
-    it { is_expected.not_to permit(guest, member_checkout) }
-    it { is_expected.to permit(non_member, non_member_checkout) }
-    it { is_expected.not_to permit(member, non_member_checkout) }
-    it { is_expected.to permit(guest, guest_checkout) }
-    it { is_expected.not_to permit(member, guest_checkout) }
-  end
+    context "when the neighbor is the shopper" do
+      let(:shopper_person) { neighbor }
 
-  permissions :show? do
-    it { is_expected.to permit(member, member_checkout) }
-    it { is_expected.not_to permit(non_member, member_checkout) }
-    it { is_expected.not_to permit(guest, member_checkout) }
-    it { is_expected.to permit(non_member, non_member_checkout) }
-    it { is_expected.not_to permit(member, non_member_checkout) }
-    it { is_expected.to permit(guest, guest_checkout) }
-    it { is_expected.not_to permit(member, guest_checkout) }
+      it { is_expected.to permit(neighbor, checkout) }
+      it { is_expected.not_to permit(guest, checkout) }
+    end
+
+    context "when the shopper is a guest" do
+      let(:shopper_person) { guest }
+
+      it { is_expected.not_to permit(neighbor, checkout) }
+      it { is_expected.to permit(guest, checkout) }
+    end
   end
 end
