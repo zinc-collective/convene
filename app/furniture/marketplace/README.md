@@ -82,8 +82,8 @@ You will then need to update the `marketplace#stripe_webhook_endpoint_secret` to
 
 For the "Connect to Stripe" flow to work, you will need to have a local development URL that is recognized by Stripe as "reachable". One way to do this is:
 1. add `127.0.0.1 convene.local` to your `/etc/hosts`
-2. add `convene.local` as the `branded_domain` to whatever Space you are using for testing
 3. access the app locally through `convene.local:3000`, instead of `localhost`
+3. optionally, add `convene.local` as the `branded_domain` to whatever Space you are using for testing, to shorten the URL you use to access it
 
 ### On Github CodeSpaces
 If you are using a Github CodeSpace, you will want to mark the web-server port as `public` so that Stripe can send it events.
