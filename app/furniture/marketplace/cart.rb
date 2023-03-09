@@ -38,5 +38,9 @@ class Marketplace
     def price_total
       product_total + delivery_fee
     end
+
+    def ready_for_delivery?
+      self.delivery_address.present? && self.contact_phone_number.present? ? true: false
+    end
   end
 end
