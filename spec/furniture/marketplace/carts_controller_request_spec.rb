@@ -7,7 +7,7 @@ RSpec.describe Marketplace::CartsController, type: :request do
 
   describe "#update" do
     subject(:perform_request) do
-      put polymorphic_path(cart.location), params: {cart: {delivery_address: "123 N West St"}}
+      put polymorphic_path(cart.location), params: {cart: {delivery_address: "123 N West St", contact_phone_number: "(415)-123-4567"}}
       response
     end
 
