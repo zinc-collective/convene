@@ -39,6 +39,10 @@ class Marketplace
       settings["stripe_account"] = stripe_account
     end
 
+    def stripe_account_connected?
+      stripe_account.present? && stripe_webhook_endpoint.present? && stripe_webhook_endpoint_secret.present?
+    end
+
     def stripe_webhook_endpoint
       settings["stripe_webhook_endpoint"]
     end
@@ -64,6 +68,7 @@ class Marketplace
     end
     monetize :delivery_fee_cents
 
+    # @raises Stripe::InvalidRequestError if something is sad
     def stripe_account_link(refresh_url:, return_url:)
       account = if stripe_account.blank?
         Stripe::Account.create({type: "standard"}, {
@@ -85,9 +90,6 @@ class Marketplace
       }, {
         api_key: stripe_api_key
       })
-    rescue Stripe::InvalidRequestError => e
-      Rails.logger.error({summary: "Stripe account creation is sad!", detail: e.message})
-      nil
     end
 
     def create_stripe_webhook_endpoint(webhook_url:)

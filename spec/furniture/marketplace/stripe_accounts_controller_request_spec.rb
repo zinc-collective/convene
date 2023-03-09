@@ -29,7 +29,21 @@ RSpec.describe Marketplace::StripeAccountsController, type: :request do
 
     specify { expect { call }.to change { marketplace.reload.stripe_webhook_endpoint }.to(stripe_webhook_endpoint.id) }
     specify { expect { call }.to change { marketplace.reload.stripe_webhook_endpoint_secret }.to(stripe_webhook_endpoint.secret) }
-    it { is_expected.to redirect_to(stripe_account_link.url) }
-    # Not sure how to test this: status: :see_other, allow_other_hosts: true
+
+    it "redirects to stripe account link" do
+      expect(call).to redirect_to(stripe_account_link.url)
+      expect(call.status).to eq(303)
+      # Not sure how to test allow_other_hosts: true
+    end
+
+    context "when Stripe returns an error" do
+      before do
+        allow(Stripe::AccountLink).to receive(:create).and_raise(Stripe::InvalidRequestError.new("terribleness", :param))
+      end
+
+      it "redirects with error message" do
+        expect(call).to redirect_to(polymorphic_path(marketplace.location(:edit)))
+      end
+    end
   end
 end
