@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/universal:latest
+FROM mcr.microsoft.com/devcontainers/ruby:3.1
 
 # Install Rails
 RUN gem install rails webdrivers
