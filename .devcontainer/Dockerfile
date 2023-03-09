@@ -24,4 +24,4 @@ RUN su vscode -c "sudo wget https://github.com/DarthSim/overmind/releases/downlo
                     sudo mv overmind-v2.3.0-linux-386 ~/.local/bin/overmind && \
                     sudo chmod +x ~/.local/bin/overmind && \
                     sudo apt update && \
-                    sudo apt install -y tmux graphviz firefox" 2>&1
+                    sudo apt install -y tmux graphviz firefox-esr" 2>&1
