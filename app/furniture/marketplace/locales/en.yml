@@ -1,6 +1,10 @@
 
 en:
   marketplace:
+    delivery_info:
+      edit: "Update Delivery Info"
+    contact_phone_number:
+      edit: "Change Phone Number"
     delivery_address:
       edit: "Change Address"
     marketplace:

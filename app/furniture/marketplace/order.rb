@@ -12,6 +12,7 @@ class Marketplace
     has_many :products, through: :ordered_products, inverse_of: :orders
 
     has_encrypted :delivery_address
+    has_encrypted :contact_phone_number
 
     enum status: {
       pre_checkout: "pre_checkout",

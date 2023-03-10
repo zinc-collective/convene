@@ -4,7 +4,7 @@ class Marketplace
   class CartPolicy < Policy
     alias_method :cart, :object
     def permitted_attributes(_params = nil)
-      %i[delivery_address]
+      %i[delivery_address contact_phone_number]
     end
 
     class Scope < ApplicationScope

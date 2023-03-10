@@ -16,6 +16,7 @@ class Marketplace
     has_many :products, through: :cart_products, inverse_of: :carts
 
     has_encrypted :delivery_address
+    has_encrypted :contact_phone_number
 
     enum status: {
       pre_checkout: "pre_checkout",
@@ -36,6 +37,10 @@ class Marketplace
 
     def price_total
       product_total + delivery_fee
+    end
+
+    def ready_for_delivery?
+      (delivery_address.present? && contact_phone_number.present?)
     end
   end
 end
