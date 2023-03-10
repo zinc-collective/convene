@@ -40,7 +40,7 @@ class Marketplace
     end
 
     def ready_for_delivery?
-      self.delivery_address.present? && self.contact_phone_number.present? ? true: false
+      (delivery_address.present? && contact_phone_number.present?)
     end
   end
 end
