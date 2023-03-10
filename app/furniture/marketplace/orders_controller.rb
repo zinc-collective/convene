@@ -4,8 +4,15 @@ class Marketplace
       authorize(order)
     end
 
+    def index
+    end
+
+    helper_method def orders
+      policy_scope(marketplace.orders)
+    end
+
     helper_method def order
-      policy_scope(marketplace.orders).find(params[:id])
+      orders.find(params[:id])
     end
   end
 end

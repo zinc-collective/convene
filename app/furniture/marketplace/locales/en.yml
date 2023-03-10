@@ -17,6 +17,8 @@ en:
       update:
         success: "Marketplace updated successfully!"
         failure: "Marketplace could not be updated."
+    order:
+      index: "Order History"
     product:
       index: "Configure Products"
     products:

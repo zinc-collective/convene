@@ -1,0 +1,5 @@
+<%- breadcrumb :marketplace_orders, marketplace %>
+<%- @pagy, @records = pagy(orders) %>
+
+<%= render @records %>
+<%== pagy_nav(@pagy, nav_extra: 'flex justify-between') %>

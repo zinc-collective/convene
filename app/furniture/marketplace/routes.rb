@@ -11,7 +11,7 @@ class Marketplace
 
         router.resources :tax_rates
 
-        router.resources :orders, only: [:show]
+        router.resources :orders, only: [:show, :index]
         router.resources :products
         router.resource :stripe_account
       end
