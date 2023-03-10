@@ -16,9 +16,7 @@ class Marketplace
     attribute :quantity, :integer, default: 0
 
     def tax_amount
-      price_total * (tax_rates.sum(0) do |tax_rate|
-        tax_rate.tax_rate
-      end / 100)
+      price_total * (tax_rates.sum(0, &:tax_rate) / 100)
     end
 
     def price_total

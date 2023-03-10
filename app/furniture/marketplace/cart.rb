@@ -36,9 +36,7 @@ class Marketplace
     end
 
     def tax_total
-      cart_products.sum(0) do |cart_product|
-        cart_product.tax_amount
-      end
+      cart_products.sum(0, &:tax_amount)
     end
 
     def price_total
