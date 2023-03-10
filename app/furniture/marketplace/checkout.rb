@@ -29,7 +29,7 @@ class Marketplace
     def stripe_line_items
       return [] if cart.blank?
 
-      stripe_cart_products_line_items + stripe_delivery_fee_line_items
+      stripe_cart_products_line_items + stripe_delivery_fee_line_items + stripe_taxes_line_items
     end
 
     private def stripe_cart_products_line_items
@@ -40,8 +40,7 @@ class Marketplace
             unit_amount: cart_product.product.price_cents,
             product_data: {name: cart_product.product.name}
           },
-          quantity: cart_product.quantity,
-          adjustable_quantity: {enabled: true}
+          quantity: cart_product.quantity
         }
       end
     end
@@ -55,6 +54,15 @@ class Marketplace
            product_data: {name: "Delivery"}
          }}
       ]
+    end
+
+    private def stripe_taxes_line_items
+      [{quantity: 1,
+        price_data: {
+          currency: "USD",
+          unit_amount: cart.tax_total.cents,
+          product_data: {name: "Taxes"}
+        }}]
     end
   end
 end
