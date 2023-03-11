@@ -4,9 +4,9 @@
 # folks defining new Furniture.
 module Furniture
   REGISTRY = {
-    journal: Journal,
+    journal: Journal::Journal,
     markdown_text_block: MarkdownTextBlock,
-    marketplace: Marketplace,
+    marketplace: Marketplace::Marketplace,
     livestream: Livestream,
     embedded_form: EmbeddedForm
   }.freeze
@@ -14,14 +14,13 @@ module Furniture
   # Appends each Furnitures CRUD actions within the {Room}
   def self.append_routes(router)
     REGISTRY.each_value do |furniture|
-      furniture.append_routes(router) if furniture.respond_to?(:append_routes)
-      furniture.const_get(:Routes).append_routes(router) if furniture.const_defined?(:Routes)
+      furniture.router&.append_routes(router)
     end
   end
 
   # @return [FurniturePlacement]
   def self.from_placement(placement)
     furniture_class = REGISTRY.fetch(placement.furniture_kind.to_sym)
-    furniture_class.from_placement(placement)
+    placement.becomes(furniture_class)
   end
 end

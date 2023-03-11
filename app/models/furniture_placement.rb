@@ -48,4 +48,9 @@ class FurniturePlacement < ApplicationRecord
   rescue ActiveModel::MissingAttributeError => _e
     settings[name] = value
   end
+
+  def self.router
+    return const_get(:Routes) if const_defined?(:Routes)
+    return class_name.constantize.const_get(:Routes) if class_name.constantize.const_defined?(:Routes)
+  end
 end

@@ -35,8 +35,4 @@ class Livestream < FurniturePlacement
   def attribute_names
     %w[channel layout provider]
   end
-
-  def self.from_placement(placement)
-    placement.becomes(self)
-  end
 end
