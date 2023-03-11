@@ -1,4 +1,4 @@
-class StripeUtility < UtilityHookup
+class StripeUtility < Utility
   def api_token=api_token
     configuration["api_token"] = api_token
   end

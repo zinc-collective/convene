@@ -9,7 +9,7 @@ module SpaceRoutes
       router.resources :furnitures, only: %i[create edit update destroy]
     end
 
-    router.resources :utility_hookups
+    router.resources :utilities
 
     router.resources :memberships, only: %I[index show destroy]
   end

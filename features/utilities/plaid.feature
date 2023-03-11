@@ -4,10 +4,10 @@ Feature: Utilities: Plaid
 
   @built @unimplemented-steps @milestone-a
   Scenario: Configuring the Plaid Utility
-    Given a Space with a Plaid Utility Hookup
-    When a Space Owner sets the following Configuration for that Utility Hookup
+    Given a Space with a Plaid Utility
+    When a Space Owner sets the following Configuration for that Utility
       | field        | value                   |
       | client_id    | plaid_sandbox_client_id |
       | plaid_secret | plaid_sandbox_secret    |
       | env          | sandbox                 |
-    Then the Plaid Utility Hookup is Ready to Use
+    Then the Plaid Utility is Ready to Use

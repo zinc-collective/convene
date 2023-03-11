@@ -13,7 +13,7 @@ RSpec.describe Blueprint do
         markdown_text_block: {content: "Obi Swan Kenobi"}
       }
     }],
-    utility_hookups: []
+    utilities: []
   }.freeze
   describe "#find_or_create" do
     it "respects the Space's current settings" do

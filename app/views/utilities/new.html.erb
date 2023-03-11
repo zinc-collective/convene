@@ -1,0 +1,7 @@
+<%- breadcrumb :new_utility, utility %>
+
+<%= form_with(model: utility.location) do |form| %>
+  <%= render "select", attribute: :utility_slug, options: Utility.registry.keys, form: form %>
+  <%= render "text_field", attribute: :name, form: form %>
+  <%= form.submit %>
+<%- end %>

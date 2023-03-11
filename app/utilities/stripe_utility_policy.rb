@@ -1,4 +1,4 @@
-class StripeUtilityPolicy < UtilityHookupPolicy
+class StripeUtilityPolicy < UtilityPolicy
   def permitted_attributes(_params)
     [:name, :api_token]
   end

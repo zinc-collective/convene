@@ -1,0 +1,12 @@
+<% breadcrumb :utilities, space %>
+
+<h2>Utilities</h2>
+
+
+<%- utilities.each do |utility| %>
+  <fieldset>
+  <%- if policy(utility).edit? %>
+    <%= render partial: "utilities/form", locals: { utility: utility } %>
+  <% end %>
+  </fieldset>
+<% end %>
