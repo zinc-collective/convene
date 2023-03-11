@@ -5,8 +5,6 @@
 # as JSON, so that {Furniture} can be tweaked and configured as appropriate for
 # it's particular use case.
 class Furniture < ApplicationRecord
-  self.table_name = "furniture_placements"
-
   include RankedModel
   include WithinLocation
   self.location_parent = :room
