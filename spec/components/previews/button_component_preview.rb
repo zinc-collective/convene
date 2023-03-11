@@ -1,5 +1,5 @@
-class ButtonComponentPreview < ViewComponent::Preview
+class ButtonComponentPreview < ApplicationPreview
   def test
-    render(ButtonComponent.new(label: "Awooo!", title: "gaaa!", href: "#"))
+    render(component(:button, label: "Awooo!", title: "gaaa!", href: "#"))
   end
 end

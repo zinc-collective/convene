@@ -12,13 +12,13 @@
       <div class="sm:w-1/2 w-full flex items-center justify-between text-sm">
         <span>Delivering to:</span>
         <%= cart.delivery_address %>
-        <%= render ButtonComponent.new(href: cart.location.concat([params: { cart: { delivery_address: nil } }]), label: t('marketplace.delivery_address.edit'), title: nil, classes: "shrink font-light text-xs m-0 bg-primary-200 underline") %>
+        <%= render component(:button, href: cart.location.concat([params: { cart: { delivery_address: nil } }]), label: t('marketplace.delivery_address.edit'), title: nil, classes: "shrink font-light text-xs m-0 bg-primary-200 underline") %>
       </div>
 
       <div class="sm:w-1/2 w-full flex items-center justify-between text-sm">
         <span>Contact Phone Number:</span>
         <%= cart.contact_phone_number %>
-        <%= render ButtonComponent.new(href: cart.location.concat([params: { cart: { contact_phone_number: nil } }]), label: t('marketplace.contact_phone_number.edit'), title: nil, classes: "shrink font-light text-xs m-0 bg-primary-200 underline") %>
+        <%= render component(:button, href: cart.location.concat([params: { cart: { contact_phone_number: nil } }]), label: t('marketplace.contact_phone_number.edit'), title: nil, classes: "shrink font-light text-xs m-0 bg-primary-200 underline") %>
       </div>
     </div>
 

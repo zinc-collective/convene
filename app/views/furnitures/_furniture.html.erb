@@ -5,19 +5,17 @@
         <%= furniture.title %>
       </h4>
       <%- if furniture.configurable? %>
-        <%= render ButtonComponent.new(
-                      label: t('icons.edit'),
-                      href: [:edit, furniture.room.space, furniture.room, furniture],
-                      method: :get,
-                      title: t('.edit_title', name: furniture.furniture.model_name.human.titleize)) %>
+        <%= render component(:button, label: t('icons.edit'),
+                                      href: [:edit, furniture.room.space, furniture.room, furniture],
+                                      method: :get,
+                                      title: t('.edit_title', name: furniture.furniture.model_name.human.titleize)) %>
       <%- end %>
 
-      <%= render ButtonComponent.new(
-                    label: t('icons.remove'),
-                    href: [furniture.room.space, furniture.room, furniture],
-                    title: t('.remove_title', name: furniture.furniture.model_name.human.titleize),
-                    method: :delete,
-                    confirm: t('.confirm_destroy')) %>
+      <%= render component(:button, label: t('icons.remove'),
+                                    href: [furniture.room.space, furniture.room, furniture],
+                                    title: t('.remove_title', name: furniture.furniture.model_name.human.titleize),
+                                    method: :delete,
+                                    confirm: t('.confirm_destroy')) %>
     </header>
     <%- if local_assigns[:include_form] %>
       <%= render partial: 'furnitures/form', locals: { furniture: furniture } %>

@@ -1,4 +1,4 @@
-<%= render CardComponent.new(data: { access_level: room.access_level, slug: room.slug, model: "room", id: room.id }) do %>
+<%= render component(:card, data: { access_level: room.access_level, slug: room.slug, model: "room", id: room.id }) do %>
   <header class="w-full items-center flex">
     <h3 class="text-neutral-900 text-sm leading-5 font-medium truncate pl-8 mr-4">
       <%= room.name %>

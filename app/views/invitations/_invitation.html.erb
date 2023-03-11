@@ -27,11 +27,10 @@
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
     <%- if !invitation.revoked? && policy(invitation).destroy?  %>
-      <%= render ButtonComponent.new(
-                   label: t('icons.remove'),
-                   href: [space, invitation],
-                   title: t('invitation.destroy'),
-                   method: :delete
+      <%= render component(:button, label: t('icons.remove'),
+                                    href: [space, invitation],
+                                    title: t('invitation.destroy'),
+                                    method: :delete)
       ) %>
     <%- end %>
   </td>

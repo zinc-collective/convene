@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   prepend_view_path "app/utilities"
   prepend_view_path "app/furniture"
 
+  include ComponentHelpers
+
   protect_from_forgery with: :exception, unless: -> { api_request? }
 
   # Referenced in application layout to display page title
