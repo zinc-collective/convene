@@ -25,8 +25,4 @@ class MarkdownTextBlock < FurniturePlacement
   def form_template
     "markdown_text_blocks/form"
   end
-
-  def self.from_placement(placement)
-    placement.becomes(self)
-  end
 end

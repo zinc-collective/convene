@@ -2,7 +2,7 @@
   <h3><%= t('rooms.place_furniture_heading') %></h3>
   <%= form_with model: furniture_placement.location do | placement_form | %>
     <%= placement_form.hidden_field :slot, value: furniture_placement.room.furniture_placements.count %>
-    <%= placement_form.select :furniture_kind, Furniture::REGISTRY.keys.map { |k| [k.to_s.titleize, k] } %>
+    <%= placement_form.select :furniture_kind, FurniturePlacement.registry.keys.map { |k| [k.to_s.titleize, k] } %>
     <footer>
       <%= placement_form.submit %>
     </footer>

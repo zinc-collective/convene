@@ -25,8 +25,4 @@ class EmbeddedForm < FurniturePlacement
   def form_template
     "embedded_forms/form"
   end
-
-  def self.from_placement(placement)
-    placement.becomes(self)
-  end
 end
