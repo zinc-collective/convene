@@ -17,7 +17,6 @@ class UtilityHookup < ApplicationRecord
   end
 
   # Which type of {Utility} is connected
-  # Should match one of the keys in {Utilities::REGISTRY}
   # @return [String]
   attribute :utility_slug, :string
   validates :utility_slug, presence: true
@@ -34,16 +33,12 @@ class UtilityHookup < ApplicationRecord
 
   # @return [Utility]
   def utility
-    @utility ||= Utilities.from_utility_hookup(self)
+    becomes(UtilityHookup.fetch(utility_slug))
   end
 
   def utility_attributes=(attributes)
     self.configuration ||= {}
     utility.attributes = attributes
-  end
-
-  def self.from_utility_hookup(utility_hookup)
-    utility_hookup.becomes(self)
   end
 
   def form_template
@@ -56,5 +51,15 @@ class UtilityHookup < ApplicationRecord
 
   def display_name
     model_name.human.titleize
+  end
+
+  def self.registry
+    @registry ||= {
+      stripe: StripeUtility
+    }
+  end
+
+  def self.fetch(slug)
+    registry.fetch(slug&.to_sym, UtilityHookup)
   end
 end
