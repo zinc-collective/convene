@@ -12,7 +12,7 @@ class Marketplace
 
     # The Secret Stripe API key belonging to the owner of the Marketplace
     def stripe_api_key
-      space.utility_hookups.find_by!(utility_slug: :stripe).utility.api_token
+      space.utilities.find_by!(utility_slug: :stripe).utility.api_token
     end
 
     def stripe_api_key?

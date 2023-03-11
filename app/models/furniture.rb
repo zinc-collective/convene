@@ -31,9 +31,7 @@ class Furniture < ApplicationRecord
     furniture.model_name.human.titleize
   end
 
-  def utilities
-    space.utility_hookups
-  end
+  delegate :utilities, to: :space
 
   def form_template
     "furnitures/noop"

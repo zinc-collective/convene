@@ -178,4 +178,4 @@ Rails/UniqueValidationWithoutIndex:
   Exclude:
     - 'app/models/membership.rb'
     - 'app/models/space.rb'
-    - 'app/models/utility_hookup.rb'
+    - 'app/models/utility.rb'

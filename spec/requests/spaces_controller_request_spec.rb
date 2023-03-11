@@ -38,7 +38,7 @@ RSpec.describe SpacesController do
           space = Space.find_by(name: attributes[:name])
           expect(space.rooms).to be_empty
           expect(space.memberships).to be_empty
-          expect(space.utility_hookups).to be_empty
+          expect(space.utilities).to be_empty
         end
       end
 
@@ -102,7 +102,7 @@ RSpec.describe SpacesController do
         perform_enqueued_jobs
 
         expect(space.rooms).to be_empty
-        expect(space.utility_hookups).to be_empty
+        expect(space.utilities).to be_empty
         expect(space.invitations).to be_empty
         expect(space.memberships).to be_empty
       end

@@ -12,10 +12,10 @@ class Blueprint
   end
 
   def find_or_create!
-    space.update!(space_attributes.except(:name, :rooms, :members, :entrance, :utility_hookups))
+    space.update!(space_attributes.except(:name, :rooms, :members, :entrance, :utilities))
 
     set_rooms
-    set_utility_hookups
+    set_utilities
     set_members
     set_entrance
     space
@@ -42,12 +42,12 @@ class Blueprint
     end
   end
 
-  def set_utility_hookups
-    space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
-      utility_hookup = space.utility_hookups
-        .find_or_initialize_by(name: utility_hookup_attributes[:name])
+  def set_utilities
+    space_attributes.fetch(:utilities, []).each do |utility_attributes|
+      utility = space.utilities
+        .find_or_initialize_by(name: utility_attributes[:name])
 
-      utility_hookup.update!(merge_non_empty(utility_hookup_attributes, utility_hookup.attributes))
+      utility.update!(merge_non_empty(utility_attributes, utility.attributes))
     end
   end
 
@@ -94,7 +94,7 @@ class Blueprint
   BLUEPRINTS = {
     system_test: {
       entrance: "entrance-hall",
-      utility_hookups: [],
+      utilities: [],
       members: [{email: "space-owner@example.com"},
         {email: "space-member@example.com"}],
       rooms: [

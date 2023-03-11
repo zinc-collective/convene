@@ -5,11 +5,11 @@ Feature: Utilities: Jitsi Meet
   # @see: https://jaas.8x8.vc
 
   @unstarted @milestone-a
-  Scenario: Configuring the Jitsi Meet Utility Hookup
-    Given a Space with a Jitsi Meet Utility Hookup
-    When a Space Owner sets the following Configuration for that Utility Hookup
+  Scenario: Configuring the Jitsi Meet Utility
+    Given a Space with a Jitsi Meet Utility
+    When a Space Owner sets the following Configuration for that Utility
       | field              | value                              |
       | url                | https://jitsi-meet.example.com     |
       | application_id     | this-is-provided-by-jitsi-meet     |
       | application_secret | secret-key-used-to-generate-tokens |
-    Then the Jitsi Meet Utility Hookup is Ready For Use
+    Then the Jitsi Meet Utility is Ready For Use

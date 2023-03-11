@@ -11,7 +11,7 @@ en:
       edit: "Configure Marketplace"
     marketplaces:
       edit:
-        add_stripe_hookup_key: "Add a Stripe API key to %{space_name}"
+        missing_stripe_api_key: "Add a Stripe API key to %{space_name}"
         connect_stripe: "Connect to Stripe"
         stripe_connected: "Stripe Connected!"
       update:

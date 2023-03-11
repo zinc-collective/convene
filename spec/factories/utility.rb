@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :utility_hookup do
+  factory :utility do
     sequence(:name) { |n| "#{utility_slug.to_s.humanize} #{n}" }
     association(:space)
 

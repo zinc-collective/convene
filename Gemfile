@@ -81,7 +81,7 @@ gem "bootsnap", "~> 1.16", require: false
 # Permissions and policies
 gem "pundit", "~> 2.3"
 
-# Utility hookup support
+# Utility support
 gem "money-rails"
 gem "stripe"
 

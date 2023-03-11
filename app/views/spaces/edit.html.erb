@@ -42,11 +42,11 @@
 
 <fieldset>
   <h3>Utilities</h3>
-  <%- space.utility_hookups.each do |utility_hookup| %>
-    <%- if policy(utility_hookup).edit? %>
-      <%= render partial: "utility_hookups/form", locals: { utility_hookup: utility_hookup } %>
+  <%- space.utilities.each do |utility| %>
+    <%- if policy(utility).edit? %>
+      <%= render partial: "utilities/form", locals: { utility: utility } %>
     <%- end %>
   <%- end %>
 
-  <%= link_to "Add a Utility", [:new, space, :utility_hookup] %>
+  <%= link_to "Add a Utility", [:new, space, :utility] %>
 </fieldset>

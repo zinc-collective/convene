@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 # Links a {Utility} to a {Space}
-class UtilityHookup < ApplicationRecord
+class Utility < ApplicationRecord
+  self.table_name = "utility_hookups"
   # @return [Space]
   belongs_to :space
   self.location_parent = :space
 
-  # Human-friendly name for disambiguating when a particular kind of {Hookup}
-  # has multiple {UtilityHookup}s.
+  # Human-friendly name for disambiguating when a particular kind of {Utility}
+  # has multiple {Utility}s.
   # @return [String]
   attribute :name, :string
   validates :name, presence: true, uniqueness: {scope: :space_id}
@@ -33,7 +34,7 @@ class UtilityHookup < ApplicationRecord
 
   # @return [Utility]
   def utility
-    becomes(UtilityHookup.fetch(utility_slug))
+    becomes(Utility.fetch(utility_slug))
   end
 
   def utility_attributes=(attributes)
@@ -60,6 +61,6 @@ class UtilityHookup < ApplicationRecord
   end
 
   def self.fetch(slug)
-    registry.fetch(slug&.to_sym, UtilityHookup)
+    registry.fetch(slug&.to_sym, Utility)
   end
 end

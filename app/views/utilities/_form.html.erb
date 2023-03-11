@@ -1,0 +1,21 @@
+<%= form_with(model: utility.location) do |form| %>
+  <%- form.object = form.object.utility %>
+  <%= form.hidden_field :utility_slug %>
+  <header>
+    <h4>
+      <%= utility.utility.display_name %>
+    </h4>
+  </header>
+
+  <%- if utility.has_form? %>
+    <div>
+      <%= render partial: utility.utility.form_template, locals: { form: form } %>
+    </div>
+  <%- end %>
+
+  <footer>
+    <%- if utility.utility.attribute_names.present? %>
+      <%= form.submit "Save changes to #{utility.utility.display_name} ✔️" %>
+    <%- end %>
+  </footer>
+<%- end %>
