@@ -1,0 +1,32 @@
+<section id="<%= dom_id(furniture) %>" class="mt-4 relative">
+  <%- if local_assigns[:editing] %>
+    <header class="flex border-b border-dashed border-primary-900">
+      <h4 class="grow">
+        <%= furniture.title %>
+      </h4>
+      <%- if furniture.configurable? %>
+        <%= render ButtonComponent.new(
+                      label: t('icons.edit'),
+                      href: [:edit, furniture.room.space, furniture.room, furniture],
+                      method: :get,
+                      title: t('.edit_title', name: furniture.furniture.model_name.human.titleize)) %>
+      <%- end %>
+
+      <%= render ButtonComponent.new(
+                    label: t('icons.remove'),
+                    href: [furniture.room.space, furniture.room, furniture],
+                    title: t('.remove_title', name: furniture.furniture.model_name.human.titleize),
+                    method: :delete,
+                    confirm: t('.confirm_destroy')) %>
+    </header>
+    <%- if local_assigns[:include_form] %>
+      <%= render partial: 'furnitures/form', locals: { furniture: furniture } %>
+    <%- end %>
+  <%- elsif furniture.furniture.respond_to?(:in_room_template) %>
+    <%= render partial: furniture.furniture.in_room_template,
+              locals: { furniture: furniture.furniture, space: furniture.space, room: furniture.room,
+                        person: current_person } %>
+  <%- else %>
+    <%= render furniture.furniture %>
+  <%- end %>
+</section>

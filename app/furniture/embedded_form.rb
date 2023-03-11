@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmbeddedForm < FurniturePlacement
+class EmbeddedForm < Furniture
   def form_url=(form_url)
     settings["form_url"] = form_url
   end

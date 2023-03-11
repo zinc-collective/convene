@@ -20,15 +20,16 @@ Given(
    * @param {DataTable} dataTable
    */
   function (_a, furniture, _a2, room, space, dataTable) {
-    const furniturePlacementsAttributes = [
+    const furnituresAttributes = [
       {
         furnitureKind: furniture.type.toLowerCase(),
         furnitureAttributes: dataTableToHash(dataTable),
       },
     ];
+
     return this.api()
       .rooms(space)
-      .update(room.assign({ furniturePlacementsAttributes }));
+      .update(room.assign({ furnituresAttributes }));
   }
 );
 Then(

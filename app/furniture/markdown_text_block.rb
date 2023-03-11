@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Renders some HTML in a {Room}.
-class MarkdownTextBlock < FurniturePlacement
+class MarkdownTextBlock < Furniture
   include RendersMarkdown
 
   def to_html
