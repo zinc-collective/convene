@@ -5,7 +5,7 @@ module SpaceRoutes
       router.resource :rsvp, only: %i[show update]
     end
     router.resources :rooms, only: %i[show edit update new create destroy] do
-      Furniture.append_routes(router)
+      FurniturePlacement.append_routes(router)
       router.resources :furniture_placements, only: %i[create edit update destroy]
     end
 

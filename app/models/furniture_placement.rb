@@ -24,7 +24,7 @@ class FurniturePlacement < ApplicationRecord
   delegate :attributes=, to: :furniture, prefix: true
 
   def furniture
-    @furniture ||= Furniture.from_placement(self)
+    @furniture ||= FurniturePlacement.from_placement(self)
   end
 
   def title
@@ -52,5 +52,26 @@ class FurniturePlacement < ApplicationRecord
   def self.router
     return const_get(:Routes) if const_defined?(:Routes)
     return class_name.constantize.const_get(:Routes) if class_name.constantize.const_defined?(:Routes)
+  end
+
+  REGISTRY = {
+    journal: Journal::Journal,
+    markdown_text_block: MarkdownTextBlock,
+    marketplace: Marketplace::Marketplace,
+    livestream: Livestream,
+    embedded_form: EmbeddedForm
+  }.freeze
+
+  # Appends each Furnitures CRUD actions within the {Room}
+  def self.append_routes(router)
+    REGISTRY.each_value do |furniture|
+      furniture.router&.append_routes(router)
+    end
+  end
+
+  # @return [FurniturePlacement]
+  def self.from_placement(placement)
+    furniture_class = REGISTRY.fetch(placement.furniture_kind.to_sym)
+    placement.becomes(furniture_class)
   end
 end
