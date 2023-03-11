@@ -12,10 +12,10 @@ class Blueprint
   end
 
   def find_or_create!
-    space.update!(space_attributes.except(:name, :rooms, :members, :entrance, :utility_hookups))
+    space.update!(space_attributes.except(:name, :rooms, :members, :entrance, :utilities))
 
     set_rooms
-    set_utility_hookups
+    set_utilities
     set_members
     set_entrance
     space
@@ -26,28 +26,28 @@ class Blueprint
   def set_rooms
     space_attributes.fetch(:rooms, []).each do |room_attributes|
       room = space.rooms.find_or_initialize_by(name: room_attributes[:name])
-      room.update!(merge_non_empty(room.attributes, room_attributes).except(:name, :furniture_placements))
+      room.update!(merge_non_empty(room.attributes, room_attributes).except(:name, :furnitures))
       add_furniture(room, room_attributes)
     end
   end
 
   def add_furniture(room, room_attributes)
-    furniture_placements = room_attributes.fetch(:furniture_placements, {})
-    furniture_placements.each.with_index do |(furniture, settings), slot|
-      furniture_placement = room.furniture_placements
+    furnitures = room_attributes.fetch(:furnitures, {})
+    furnitures.each.with_index do |(furniture_kind, settings), slot|
+      furniture = room.furnitures
         .find_or_initialize_by(slot: slot)
-      furniture_placement
-        .update!(settings: merge_non_empty(settings, furniture_placement.settings),
-          furniture_kind: furniture)
+      furniture
+        .update!(settings: merge_non_empty(settings, furniture.settings),
+          furniture_kind: furniture_kind)
     end
   end
 
-  def set_utility_hookups
-    space_attributes.fetch(:utility_hookups, []).each do |utility_hookup_attributes|
-      utility_hookup = space.utility_hookups
-        .find_or_initialize_by(name: utility_hookup_attributes[:name])
+  def set_utilities
+    space_attributes.fetch(:utilities, []).each do |utility_attributes|
+      utility = space.utilities
+        .find_or_initialize_by(name: utility_attributes[:name])
 
-      utility_hookup.update!(merge_non_empty(utility_hookup_attributes, utility_hookup.attributes))
+      utility.update!(merge_non_empty(utility_attributes, utility.attributes))
     end
   end
 
@@ -94,7 +94,7 @@ class Blueprint
   BLUEPRINTS = {
     system_test: {
       entrance: "entrance-hall",
-      utility_hookups: [],
+      utilities: [],
       members: [{email: "space-owner@example.com"},
         {email: "space-member@example.com"}],
       rooms: [
@@ -102,7 +102,7 @@ class Blueprint
           name: "Listed Room 1",
           publicity_level: :listed,
           access_level: :public,
-          furniture_placements: {
+          furnitures: {
             markdown_text_block: {content: "# Welcome!"}
           }
         },
@@ -110,24 +110,24 @@ class Blueprint
           name: "Listed Room 2",
           publicity_level: :listed,
           access_level: :public,
-          furniture_placements: {}
+          furnitures: {}
         },
         {
           name: "Unlisted Room 1",
           publicity_level: :unlisted,
           access_level: :public,
-          furniture_placements: {}
+          furnitures: {}
         },
         {
           name: "Unlisted Room 2",
           publicity_level: :unlisted,
           access_level: :public,
-          furniture_placements: {}
+          furnitures: {}
         },
         {
           name: "Entrance Hall",
           publicity_level: :unlisted,
-          furniture_placements: {
+          furnitures: {
             markdown_text_block: {content: "# Wooo!"}
           }
         }

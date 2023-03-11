@@ -1,0 +1,6 @@
+
+<%= turbo_stream.append(:furnitures) do %>
+  <%= render(furniture, { editing: true }) %>
+<%- end %>
+
+<%= turbo_stream.replace(:new_furniture, partial: 'furnitures/new', locals: { furniture: current_room.furnitures.new }) %>

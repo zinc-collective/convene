@@ -30,7 +30,7 @@ FactoryBot.define do
       end
 
       after(:create) do |room, evaluator|
-        create_list(:furniture_placement, evaluator.furniture_count, room: room)
+        create_list(:furniture, evaluator.furniture_count, room: room)
       end
     end
   end

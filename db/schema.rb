@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_212232) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_011858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -83,14 +83,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_212232) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "furniture_placements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "furnitures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "slot"
     t.string "furniture_kind"
     t.jsonb "settings"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "room_id"
-    t.index ["room_id"], name: "index_furniture_placements_on_room_id"
+    t.index ["room_id"], name: "index_furnitures_on_room_id"
   end
 
   create_table "invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -136,6 +136,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_212232) do
     t.string "stripe_session_id"
     t.string "contact_email"
     t.text "delivery_address_ciphertext"
+    t.string "contact_phone_number_ciphertext"
     t.index ["marketplace_id"], name: "index_marketplace_orders_on_marketplace_id"
     t.index ["shopper_id"], name: "index_marketplace_orders_on_shopper_id"
   end
@@ -234,15 +235,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_212232) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "journal_entries", "furniture_placements", column: "journal_id"
+  add_foreign_key "journal_entries", "furnitures", column: "journal_id"
   add_foreign_key "marketplace_cart_products", "marketplace_orders", column: "cart_id"
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id"
   add_foreign_key "marketplace_product_tax_rates", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_product_tax_rates", "marketplace_tax_rates", column: "tax_rate_id"
-  add_foreign_key "marketplace_products", "furniture_placements", column: "marketplace_id"
+  add_foreign_key "marketplace_products", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_shoppers", "people"
-  add_foreign_key "marketplace_tax_rates", "furniture_placements", column: "marketplace_id"
+  add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end

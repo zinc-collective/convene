@@ -4,10 +4,10 @@ Feature: Utilities: Stripe
 
   # @see https://stripe.com/
   @unstarted @milestone-a
-  Scenario: Configuring the Stripe Utility Hookup
-    Given a Space with a Stripe Utility Hookup
-    When a Space Owner sets the following Configuration for that Utility Hookup
+  Scenario: Configuring the Stripe Utility
+    Given a Space with a Stripe Utility
+    When a Space Owner sets the following Configuration for that Utility
       | field           | value                     |
       | publishable_key | a-publishjable-stripe-key |
       | secret_key      | a-secret-stripe-key       |
-    Then the Stripe Utility Hookup is Ready FFor Use
+    Then the Stripe Utility is Ready FFor Use

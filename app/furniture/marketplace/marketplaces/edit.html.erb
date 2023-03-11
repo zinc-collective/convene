@@ -3,13 +3,13 @@
 <%= render "form", marketplace: marketplace %>
 
 <%- if marketplace.stripe_api_key? %>
-  <%- if marketplace.stripe_account.present? %>
+  <%- if marketplace.stripe_account_connected? %>
     <%= t('.stripe_connected') %>
   <%- end %>
   <%= button_to t('.connect_stripe'),
       marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
 <% else %>
-  <%= button_to t('.add_stripe_hookup_key', space_name: space.name),
+  <%= button_to t('.missing_stripe_api_key', space_name: space.name),
       space.location(:edit), method: :get, data: { turbo: false } %>
 <% end %>
 

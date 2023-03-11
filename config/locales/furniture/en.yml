@@ -1,0 +1,18 @@
+en:
+  furnitures:
+    update:
+      success: Furniture '%{name}' successfully updated! 🎉
+    create:
+      success: Furniture '%{name}' successfully placed! 🎉
+    destroy:
+      success: Furniture '%{name}' successfully removed! 🎉
+    form:
+      destroy: "Remove Furniture 🗑️"
+    furniture:
+      edit_title: "Configure %{name}"
+      remove_title: "Remove %{name}"
+      confirm_destroy: "This Removes the Furniture and all its Data"
+  helpers:
+    submit:
+      furniture:
+        create: Add Furniture ➕

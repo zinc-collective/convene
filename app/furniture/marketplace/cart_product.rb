@@ -8,12 +8,20 @@ class Marketplace
     delegate :shopper, to: :cart
 
     belongs_to :product, inverse_of: :cart_products
-    delegate :name, :description, :marketplace, :price, :price_cents, to: :product
+    delegate :name, :description, :marketplace, :price, :price_cents, :tax_rates, to: :product
 
     validates_uniqueness_of :product, scope: :cart_id
     validate :editable_cart
 
     attribute :quantity, :integer, default: 0
+
+    def tax_amount
+      price_total * (tax_rates.sum(0, &:tax_rate) / 100)
+    end
+
+    def price_total
+      product.price * quantity
+    end
 
     private
 

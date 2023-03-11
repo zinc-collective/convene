@@ -26,7 +26,7 @@ class Room extends Model {
       room: {
         name: this.name,
         slug: this.slug,
-        furniturePlacementsAttributes: this.furniturePlacementsAttributes,
+        furnituresAttributes: this.furnituresAttributes,
       },
     };
   }

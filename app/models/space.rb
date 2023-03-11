@@ -40,10 +40,9 @@ class Space < ApplicationRecord
 
   belongs_to :entrance, class_name: "Room", optional: true
 
-  # @see {Utilities}
-  # @see {UtilityHookup}
-  # @returns {ActiveRecord::Relation<UtilityHookups>}
-  has_many :utility_hookups, dependent: :destroy_async
+  # @see {Utility}
+  # @returns {ActiveRecord::Relation<Utilities>}
+  has_many :utilities, dependent: :destroy_async
 
   def parent_location
     []

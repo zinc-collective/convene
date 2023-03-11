@@ -1,18 +1,24 @@
 
 en:
   marketplace:
+    delivery_info:
+      edit: "Update Delivery Info"
+    contact_phone_number:
+      edit: "Change Phone Number"
     delivery_address:
       edit: "Change Address"
     marketplace:
       edit: "Configure Marketplace"
     marketplaces:
       edit:
-        add_stripe_hookup_key: "Add a Stripe API key to %{space_name}"
+        missing_stripe_api_key: "Add a Stripe API key to %{space_name}"
         connect_stripe: "Connect to Stripe"
         stripe_connected: "Stripe Connected!"
       update:
         success: "Marketplace updated successfully!"
         failure: "Marketplace could not be updated."
+    order:
+      index: "Order History"
     product:
       index: "Configure Products"
     products:

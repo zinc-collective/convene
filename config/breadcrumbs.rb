@@ -32,14 +32,14 @@ crumb :invitations do |space|
   parent :memberships, space
 end
 
-crumb :utility_hookups do |space|
-  link "Utility Hookups", space.location(child: :utility_hookups)
+crumb :utilities do |space|
+  link "Utilities", space.location(child: :utilities)
   parent :edit_space, space
 end
 
-crumb :new_utility_hookup do |utility_hookup|
-  link "New Utility Hookup", utility_hookup.location
-  parent :utility_hookups, utility_hookup.space
+crumb :new_utility do |utility|
+  link "New Utility", utility.location
+  parent :utilities, utility.space
 end
 
 crumb :room do |room|
@@ -61,7 +61,7 @@ crumb :rsvp do |rsvp|
   parent :root, rsvp.space
 end
 
-crumb :edit_furniture_placement do |furniture_placement|
-  link "Configure #{furniture_placement.title}"
-  parent :edit_room, furniture_placement.room
+crumb :edit_furniture do |furniture|
+  link "Configure #{furniture.title}"
+  parent :edit_room, furniture.room
 end

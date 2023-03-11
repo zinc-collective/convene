@@ -1,0 +1,3 @@
+<%= turbo_stream.replace(furniture) do %>
+  <%= render furniture, editing: true, include_form: local_assigns.fetch(:include_form, true) %>
+ <%- end %>

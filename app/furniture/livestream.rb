@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Renders a Twitch Livestream in a Room
-class Livestream < FurniturePlacement
+class Livestream < Furniture
   def channel=(channel)
     settings["channel"] = channel
   end
@@ -34,9 +34,5 @@ class Livestream < FurniturePlacement
   # and the `settings.fetch` bits?
   def attribute_names
     %w[channel layout provider]
-  end
-
-  def self.from_placement(placement)
-    placement.becomes(self)
   end
 end

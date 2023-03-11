@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Renders some HTML in a {Room}.
-class MarkdownTextBlock < FurniturePlacement
+class MarkdownTextBlock < Furniture
   include RendersMarkdown
 
   def to_html
@@ -24,9 +24,5 @@ class MarkdownTextBlock < FurniturePlacement
 
   def form_template
     "markdown_text_blocks/form"
-  end
-
-  def self.from_placement(placement)
-    placement.becomes(self)
   end
 end
