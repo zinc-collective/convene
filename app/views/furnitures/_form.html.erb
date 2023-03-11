@@ -1,0 +1,20 @@
+<section id="<%= dom_id(furniture) %>">
+  <%- if policy(furniture).edit? %>
+    <%= form_with(model: [furniture.room.space, furniture.room, furniture], local: true) do |form| %>
+      <div>
+        <%= render partial: furniture.furniture.form_template, locals: { form: form } %>
+      </div>
+      <footer>
+        <%- if policy(furniture).destroy? %>
+          <%= form.button name: "_method", value: "delete", class: "--danger" do %>
+            <%=t('.destroy')%>
+          <%- end %>
+        <%- end %>
+
+        <%- if furniture.furniture.attribute_names.present? %>
+          <%= form.submit %>
+        <%- end %>
+      <%- end %>
+    </footer>
+  <%- end %>
+</section>

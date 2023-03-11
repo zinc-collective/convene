@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class FurniturePlacementPolicy < ApplicationPolicy
-  alias_method :furniture_placement, :object
-  delegate :space, to: :furniture_placement
+class FurniturePolicy < ApplicationPolicy
+  alias_method :furniture, :object
+  delegate :space, to: :furniture
 
   class Scope < ApplicationScope
     def resolve
@@ -16,7 +16,7 @@ class FurniturePlacementPolicy < ApplicationPolicy
   end
 
   def update?
-    person&.operator? || person&.member_of?(furniture_placement.space)
+    person&.operator? || person&.member_of?(furniture.space)
   end
 
   alias_method :edit?, :update?
@@ -29,6 +29,6 @@ class FurniturePlacementPolicy < ApplicationPolicy
   end
 
   def furniture_params
-    FurniturePlacement.registry.values.flat_map { |f| f.new.try(:attribute_names) }.compact
+    Furniture.registry.values.flat_map { |f| f.new.try(:attribute_names) }.compact
   end
 end

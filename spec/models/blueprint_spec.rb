@@ -9,7 +9,7 @@ RSpec.describe Blueprint do
     rooms: [{
       name: "Room A",
       publicity_level: :listed,
-      furniture_placements: {
+      furnitures: {
         markdown_text_block: {content: "Obi Swan Kenobi"}
       }
     }],
@@ -23,13 +23,13 @@ RSpec.describe Blueprint do
 
       # @todo add other examples of changing data after the
       # blueprint has been applied
-      space.rooms.first.furniture_placements.first.update(furniture_attributes: {content: "Hey there!"})
+      space.rooms.first.furnitures.first.update(furniture_attributes: {content: "Hey there!"})
 
       described_class.new(EXAMPLE_CONFIG).find_or_create!
 
       # @todo add other examples of confirming the changes
       # were not overwritten
-      expect(space.rooms.first.furniture_placements.first.furniture.content).to eql("Hey there!")
+      expect(space.rooms.first.furnitures.first.furniture.content).to eql("Hey there!")
     end
 
     it "Updates a given space" do

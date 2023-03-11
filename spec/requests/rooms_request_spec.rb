@@ -28,12 +28,12 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
       response "200", "Room retrieved" do
         run_test! do |response|
           data = response_data(response)
-          furniture_data = room.furniture_placements
-            .map(&FurniturePlacement::Serializer.method(:new))
+          furniture_data = room.furnitures
+            .map(&Furniture::Serializer.method(:new))
             .map(&:to_json)
           expect(data[:room]).to eq(id: room.id, name: room.name,
             slug: room.slug,
-            furniture_placements: furniture_data)
+            furnitures: furniture_data)
         end
       end
     end
@@ -52,7 +52,7 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
             properties: {
               name: {type: :string, example: "Fancy Room"},
               slug: {type: :string, example: "fancy-room"},
-              furniture_placements_attributes: {
+              furnitures_attributes: {
                 type: :array,
                 items: {
                   type: :object,
@@ -70,13 +70,13 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
       response "200", "Room updated with furniture" do
         let(:room) { create(:room, space: space) }
         let(:attributes) do
-          {name: "A new name", furniture_placements_attributes: [attributes_for(:furniture_placement)]}
+          {name: "A new name", furnitures_attributes: [attributes_for(:furniture)]}
         end
 
         run_test! do
           data = response_data(response)
           expect(data[:room][:name]).to eq("A new name")
-          expect(data[:room][:furniture_placements]).to be_present
+          expect(data[:room][:furnitures]).to be_present
         end
       end
     end

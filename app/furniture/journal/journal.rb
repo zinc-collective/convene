@@ -1,4 +1,4 @@
-class Journal::Journal < FurniturePlacement
+class Journal::Journal < Furniture
   self.location_parent = :room
 
   extend StripsNamespaceFromModelName

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class Marketplace < FurniturePlacement
+  class Marketplace < Furniture
     self.location_parent = :room
 
     has_many :products, inverse_of: :marketplace, dependent: :destroy

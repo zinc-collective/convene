@@ -4,7 +4,7 @@
 # {Furniture} is configured using the {#settings} attribute, which is structured
 # as JSON, so that {Furniture} can be tweaked and configured as appropriate for
 # it's particular use case.
-class FurniturePlacement < ApplicationRecord
+class Furniture < ApplicationRecord
   include RankedModel
   include WithinLocation
   self.location_parent = :room
@@ -24,7 +24,7 @@ class FurniturePlacement < ApplicationRecord
   delegate :attributes=, to: :furniture, prefix: true
 
   def furniture
-    @furniture ||= FurniturePlacement.from_placement(self)
+    @furniture ||= Furniture.from_placement(self)
   end
 
   def title
@@ -36,11 +36,11 @@ class FurniturePlacement < ApplicationRecord
   end
 
   def form_template
-    "furniture_placements/noop"
+    "furnitures/noop"
   end
 
   def configurable?
-    furniture.form_template != "furniture_placements/noop"
+    furniture.form_template != "furnitures/noop"
   end
 
   def write_attribute(name, value)
@@ -71,7 +71,7 @@ class FurniturePlacement < ApplicationRecord
     end
   end
 
-  # @return [FurniturePlacement]
+  # @return [Furniture]
   def self.from_placement(placement)
     furniture_class = registry.fetch(placement.furniture_kind.to_sym)
     placement.becomes(furniture_class)

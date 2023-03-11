@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Renders a Twitch Livestream in a Room
-class Livestream < FurniturePlacement
+class Livestream < Furniture
   def channel=(channel)
     settings["channel"] = channel
   end

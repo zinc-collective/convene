@@ -61,7 +61,7 @@ crumb :rsvp do |rsvp|
   parent :root, rsvp.space
 end
 
-crumb :edit_furniture_placement do |furniture_placement|
-  link "Configure #{furniture_placement.title}"
-  parent :edit_room, furniture_placement.room
+crumb :edit_furniture do |furniture|
+  link "Configure #{furniture.title}"
+  parent :edit_room, furniture.room
 end

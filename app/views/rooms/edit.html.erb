@@ -3,13 +3,13 @@
 <%= render partial: 'form', locals: { room: room } %>
 
 
-<section id="furniture_placements">
-  <%= render room.furniture_placements.rank(:slot), editing: true %>
+<section id="furnitures">
+  <%= render room.furnitures.rank(:slot), editing: true %>
 </section>
 
-<%- new_furniture_placement = room.furniture_placements.new %>
+<%- new_furniture = room.furnitures.new %>
 
-<%- if policy(new_furniture_placement).new? %>
-  <%= render "furniture_placements/new", furniture_placement: new_furniture_placement %>
+<%- if policy(new_furniture).new? %>
+  <%= render "furnitures/new", furniture: new_furniture %>
 
 <%- end %>
