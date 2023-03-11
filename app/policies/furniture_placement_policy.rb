@@ -29,6 +29,6 @@ class FurniturePlacementPolicy < ApplicationPolicy
   end
 
   def furniture_params
-    Furniture::REGISTRY.values.flat_map { |f| f.new.try(:attribute_names) }.compact
+    FurniturePlacement.registry.values.flat_map { |f| f.new.try(:attribute_names) }.compact
   end
 end
