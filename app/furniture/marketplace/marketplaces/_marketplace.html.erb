@@ -12,4 +12,8 @@ end %>
   <%- if policy(marketplace).edit? %>
     <%= link_to t('marketplace.marketplace.edit'), marketplace.location(:edit) %>
   <%- end %>
+
+  <%- if policy(marketplace.orders).index? %>
+  <%= link_to t('marketplace.order.index'), marketplace.location(child: :orders) %>
+  <%- end %>
 </div>

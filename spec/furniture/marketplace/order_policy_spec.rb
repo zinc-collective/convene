@@ -31,4 +31,35 @@ RSpec.describe Marketplace::OrderPolicy, type: :policy do
     it { is_expected.to permit(member, Marketplace::Order) }
     it { is_expected.to permit(operator, Marketplace::Order) }
   end
+
+  describe Marketplace::OrderPolicy::Scope do
+    subject(:results) { described_class.new(actor, Marketplace::Order).resolve }
+
+    let!(:guest_order) { create(:marketplace_order, marketplace: marketplace, shopper: create(:marketplace_shopper)) }
+    let!(:neighbor_order) { create(:marketplace_order, marketplace: marketplace, shopper: create(:marketplace_shopper, person: neighbor)) }
+
+    context "when an operator" do
+      let(:actor) { operator }
+
+      it { is_expected.to contain_exactly(guest_order, neighbor_order) }
+    end
+
+    context "when the neighbor who placed the order" do
+      let(:actor) { neighbor }
+
+      it { is_expected.to contain_exactly(neighbor_order) }
+    end
+
+    context "when a guest" do
+      let(:actor) { guest }
+
+      it { is_expected.to be_empty }
+    end
+
+    context "when a member of the space" do
+      let(:actor) { member }
+
+      it { is_expected.to contain_exactly(guest_order, neighbor_order) }
+    end
+  end
 end
