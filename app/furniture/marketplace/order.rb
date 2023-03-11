@@ -8,7 +8,7 @@ class Marketplace
 
     belongs_to :shopper, inverse_of: :orders
 
-    has_many :ordered_products, inverse_of: :order, foreign_key: :cart_id
+    has_many :ordered_products, inverse_of: :order, foreign_key: :cart_id, dependent: :destroy
     has_many :products, through: :ordered_products, inverse_of: :orders
 
     has_encrypted :delivery_address
@@ -20,15 +20,17 @@ class Marketplace
     }
 
     def product_total
-      ordered_products.sum(0) do |ordered_product|
-        ordered_product.product.price * ordered_product.quantity
-      end
+      ordered_products.sum(0, &:price_total)
+    end
+
+    def tax_total
+      ordered_products.sum(0, &:tax_amount)
     end
 
     delegate :delivery_fee, to: :marketplace
 
     def price_total
-      product_total + delivery_fee
+      product_total + delivery_fee + tax_total
     end
   end
 end

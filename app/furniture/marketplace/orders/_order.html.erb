@@ -1,4 +1,7 @@
-<h1>Ordered on <%= order.created_at.to_fs(:long_ordinal) %>
+<h1>
+  Ordered on
+    <%= link_to(order.created_at.to_fs(:long_ordinal), order.location) %>
+</h1>
 <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
   <table class="min-w-full divide-y divide-gray-300 table-fixed">
     <thead class="bg-gray-50">
@@ -6,13 +9,9 @@
         <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
           <%= Marketplace::Product.human_attribute_name(:name) %>
         </th>
-        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">
-          <%= Marketplace::Product.human_attribute_name(:description) %>
-        </th>
-        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
           <%= Marketplace::Product.human_attribute_name(:price) %>
         </th>
-        <th  scope="col" class="w-48">&nbsp;</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-200 bg-white">
@@ -21,9 +20,18 @@
     <tfoot id="checkout-footer-<%= order.id%>" class="bg-gray-50">
       <tr>
         <td></td>
-        <th scope="row" class="text-right px-1 py-3.5">Total: </th>
-        <td class="text-left px-3 py-3.5 font-bold">
-          <%= humanized_money_with_symbol(order.price_total) %>
+        <td class="text-left px-3 py-3.5">
+          <p>
+          Products:
+          <%= humanized_money_with_symbol(order.product_total) %></p>
+          <p>
+            Taxes:
+            <%= humanized_money_with_symbol(order.tax_total) %></p>
+          <p>Delivery Fee:
+            <%= humanized_money_with_symbol(order.delivery_fee) %></p>
+
+          <p class="font-bold">
+            Total: <%= humanized_money_with_symbol(order.price_total) %></span>
         </td>
       </tr>
     </tfoot>

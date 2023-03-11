@@ -24,9 +24,7 @@ class Marketplace
     }
 
     def product_total
-      cart_products.sum(0) do |cart_product|
-        cart_product.price_total
-      end
+      cart_products.sum(0, &:price_total)
     end
 
     def delivery_fee
