@@ -15,10 +15,18 @@ RSpec.describe Furniture do
 
   describe "#slot" do
     let(:room) { create(:room) }
-    let!(:placements) { create_list(:furniture, 3, room: room) }
+    let(:placements) { create_list(:furniture, 3, room: room) }
+    let(:placement1) { placements[0] }
+    let(:placement2) { placements[1] }
+    let(:placement3) { placements[2] }
+
+    before {
+      placement1
+      placement2
+      placement3
+    }
 
     it "inserts new placement between existing slots" do
-      placement1, placement2, placement3 = placements
       new_placement = create(:furniture, room: room, slot_position: 1)
       expect(placement1.slot_rank).to eq(0)
       expect(new_placement.slot_rank).to eq(1)
