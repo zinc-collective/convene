@@ -51,7 +51,7 @@ RSpec.describe Journal::EntryPolicy, type: :policy do
 
     let!(:unpublished_entry) { create(:journal_entry, journal: published_entry.journal) }
 
-    context "When a Guest" do
+    context "when a Guest" do
       let(:user) { Guest.new }
 
       it { is_expected.not_to include(unpublished_entry) }

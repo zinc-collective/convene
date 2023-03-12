@@ -6,16 +6,19 @@ RSpec.describe FurnituresController do
   let(:space) { room.space }
 
   describe "#create" do
+    subject(:perform_request) do
+      post polymorphic_path(room.location(child: :furnitures)), params: {furniture: {furniture_kind: :markdown_text_block}}
+    end
+
     let(:membership) { create(:membership, space: space) }
     let!(:person) { membership.member }
 
     before { sign_in(space, person) }
 
-    it "creates a furniture placement of the kind of furniture provided within the room" do
-      expect do
-        post polymorphic_path(room.location(child: :furnitures)), params: {furniture: {furniture_kind: :markdown_text_block}}
-      end.to change { room.furnitures.count }.by(1)
+    specify { expect { perform_request }.to change { room.furnitures.count }.by(1) }
 
+    it "creates a furniture placement of the kind of furniture provided within the room" do
+      perform_request
       placement = room.furnitures.last
       expect(placement.furniture).to be_a(MarkdownTextBlock)
       expect(placement.slot).to be(0)

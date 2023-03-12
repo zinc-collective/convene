@@ -1,15 +1,17 @@
 require "rails_helper"
 
+# rubocop:disable Rspec/VerifiedDoubles
 RSpec.describe Marketplace::StripeAccountsController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:member) { create(:membership, space: space).member }
-  let!(:stripe) { create(:stripe_utility, space: space, configuration: {"api_token" => "asdf"}) }
+
   let(:stripe_account_link) { double(Stripe::AccountLink, url: "http://example.com/") }
   let(:stripe_account) { double(Stripe::Account, id: "ac_1234", details_submitted?: false) }
   let(:stripe_webhook_endpoint) { double(Stripe::WebhookEndpoint, id: "whe_1234", secret: "oooooooooooo") }
 
   before do
+    create(:stripe_utility, space: space, configuration: {"api_token" => "asdf"})
     allow(Stripe::Account).to receive(:create).and_return(stripe_account)
     allow(Stripe::AccountLink).to receive(:create).and_return(stripe_account_link)
     allow(Stripe::WebhookEndpoint).to receive(:create)
@@ -47,3 +49,4 @@ RSpec.describe Marketplace::StripeAccountsController, type: :request do
     end
   end
 end
+# rubocop:enable Rspec/VerifiedDoubles
