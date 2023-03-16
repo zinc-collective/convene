@@ -1,23 +1,27 @@
+<% edit_href = nil %>
+<% edit_href = furniture.location(:edit) if furniture.configurable? %>
+<% edit_href = furniture.to_kind_class.location(:edit) if furniture.to_kind_class.has_controller_edit? %>
+
 <section id="<%= dom_id(furniture) %>" class="mt-4 relative">
   <%- if local_assigns[:editing] %>
-    <header class="flex border-b border-dashed border-primary-900">
-      <h4 class="grow">
-        <%= furniture.title %>
-      </h4>
-      <%- if furniture.configurable? %>
-        <%= render ButtonComponent.new(
-                      label: t('icons.edit'),
-                      href: [:edit, furniture.room.space, furniture.room, furniture],
-                      method: :get,
-                      title: t('.edit_title', name: furniture.furniture.model_name.human.titleize)) %>
-      <%- end %>
+    <header class="flex border-b border-dashed border-primary-900 justify-between">
+      <h4><%= furniture.title %></h4>
+      <div>
+        <%- if edit_href.present? %>
+          <%= render ButtonComponent.new(
+                        label: t('icons.edit'),
+                        href: edit_href,
+                        method: :get,
+                        title: t('.edit_title', name: furniture.furniture.model_name.human.titleize)) %>
+        <%- end %>
 
-      <%= render ButtonComponent.new(
-                    label: t('icons.remove'),
-                    href: [furniture.room.space, furniture.room, furniture],
-                    title: t('.remove_title', name: furniture.furniture.model_name.human.titleize),
-                    method: :delete,
-                    confirm: t('.confirm_destroy')) %>
+        <%= render ButtonComponent.new(
+                      label: t('icons.remove'),
+                      href: [furniture.room.space, furniture.room, furniture],
+                      title: t('.remove_title', name: furniture.furniture.model_name.human.titleize),
+                      method: :delete,
+                      confirm: t('.confirm_destroy')) %>
+        </div>
     </header>
     <%- if local_assigns[:include_form] %>
       <%= render partial: 'furnitures/form', locals: { furniture: furniture } %>
