@@ -41,6 +41,11 @@ class Furniture < ApplicationRecord
     furniture.form_template != "furnitures/noop"
   end
 
+  # @returns true if this Furniture kind has its own controller with an :edit action
+  def has_controller_edit?
+    false
+  end
+
   def write_attribute(name, value)
     super
   rescue ActiveModel::MissingAttributeError => _e
@@ -73,5 +78,9 @@ class Furniture < ApplicationRecord
   def self.from_placement(placement)
     furniture_class = registry.fetch(placement.furniture_kind.to_sym)
     placement.becomes(furniture_class)
+  end
+
+  def to_kind_class
+    becomes(Furniture.registry.fetch(furniture_kind.to_sym))
   end
 end
