@@ -68,6 +68,14 @@ class Marketplace
     end
     monetize :delivery_fee_cents
 
+    def delivery_window
+      settings["delivery_window"]
+    end
+
+    def delivery_window=(delivery_window)
+      settings["delivery_window"] = delivery_window
+    end
+
     # @raises Stripe::InvalidRequestError if something is sad
     def stripe_account_link(refresh_url:, return_url:)
       account = if stripe_account.blank?
