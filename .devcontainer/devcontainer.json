@@ -19,6 +19,9 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // This can be used to network with other containers or the host.
   // "forwardPorts": [3000, 5432],
+  "containerEnv": {
+    "DISPLAY": ":1"
+  },
 
   // Use 'postCreateCommand' to run commands after the container is created.
   "postStartCommand": "rm -rf .devcontainer/output ; mkdir .devcontainer/output ; nohup bash -c 'chmod +x .devcontainer/startup.bash && .devcontainer/startup.bash' | tee .devcontainer/output/nohup.out",

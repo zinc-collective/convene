@@ -1,7 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/universal:latest
-
-# Install Rails
-RUN gem install rails webdrivers
+FROM mcr.microsoft.com/devcontainers/ruby:3.1
 
 # Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
 # The value is a comma-separated list of allowed domains
@@ -17,12 +14,11 @@ ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.git
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
-## Installing overmind and tmux
-RUN sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz && \
-        sudo gunzip -d overmind-v2.3.0-linux-386.gz && \
-        sudo mkdir -p ~/.local/bin && \
-        sudo mv overmind-v2.3.0-linux-386 ~/.local/bin/overmind && \
-        sudo chmod +x ~/.local/bin/overmind && \
-        # install tmux
-        sudo apt-get update && \
-        sudo apt-get install -y tmux
+## Installing overmind and other packages
+RUN su vscode -c "sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz && \
+                    sudo gunzip -d overmind-v2.3.0-linux-386.gz && \
+                    sudo mkdir -p ~/.local/bin && \
+                    sudo mv overmind-v2.3.0-linux-386 ~/.local/bin/overmind && \
+                    sudo chmod +x ~/.local/bin/overmind && \
+                    sudo apt update && \
+                    sudo apt install -y tmux graphviz firefox-esr xvfb" 2>&1

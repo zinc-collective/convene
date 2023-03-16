@@ -7,14 +7,16 @@ docker compose up &> .devcontainer/output/docker_compose_up.out &
 
 sleep 30
 
-if [ ! -f .env ]; then 
-    cp .env.example .env 
-    sed -i "/^# PG/s/^# //g" .env 
-fi 
+Xvfb $DISPLAY -ac &> .devcontainer/output/Xvfb.out &
+
+if [ ! -f .env ]; then
+    cp .env.example .env
+    sed -i "/^# PG/s/^# //g" .env
+fi
 echo "Run 'bin/setup'"
 bin/setup &> .devcontainer/output/bin_setup.out
 
-rm -f .overmind.sock 
+rm -f .overmind.sock
 echo "Run 'bin/run'"
 bin/run &> .devcontainer/output/bin_run.out &
 # echo "Now you can run 'bin/run' on the command line!"
