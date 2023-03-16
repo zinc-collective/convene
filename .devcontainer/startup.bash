@@ -28,6 +28,3 @@ echo "  - Go to 'Ports' tab of the terminal pane"
 echo "  - Wait for Port 3000 to show up in left-hand column"
 echo "  - Click on the globe 🌐 (Open in Browser) under 'Local Address"
 echo "    next to the entry for Port 3000."
-
-echo "Reminder:"
-echo "  - Before running 'yarn test', you must run or source '.devcontainer/pre-cucumber.sh'"
