@@ -2,6 +2,10 @@
 
 class Marketplace
   class MarketplacePolicy < Policy
+    def permitted_attributes(_params)
+      [:delivery_fee, :notify_emails, :delivery_window]
+    end
+
     alias_method :marketplace, :object
     def show?
       true
