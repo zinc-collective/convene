@@ -49,5 +49,8 @@
     </div>
   <%- end %>
 
-  <p class="italic text-right py-2 text-sm">Delivers on <%= cart.marketplace.delivery_window %></p>
+  <p class="italic text-right py-2 text-sm">
+    Orders placed by <%= cart.marketplace.order_by %>
+    are delivered on <%= cart.marketplace.delivery_window %>.
+  </p>
 </div>
