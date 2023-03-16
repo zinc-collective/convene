@@ -3,7 +3,7 @@
 class Marketplace
   class MarketplacePolicy < Policy
     def permitted_attributes(_params)
-      [:delivery_fee, :notify_emails, :delivery_window]
+      [:delivery_fee, :notify_emails, :delivery_window, :order_by]
     end
 
     alias_method :marketplace, :object
