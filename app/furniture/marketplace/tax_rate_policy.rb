@@ -3,7 +3,7 @@ class Marketplace
     alias_method :tax_rate, :object
 
     def create?
-      person.member_of?(tax_rate.marketplace.space)
+      person.operator? || person.member_of?(tax_rate.marketplace.space)
     end
 
     alias_method :update?, :create?

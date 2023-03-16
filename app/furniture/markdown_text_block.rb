@@ -4,6 +4,8 @@
 class MarkdownTextBlock < Furniture
   include RendersMarkdown
 
+  self.location_parent = :room
+
   def to_html
     render_markdown(content)
   end

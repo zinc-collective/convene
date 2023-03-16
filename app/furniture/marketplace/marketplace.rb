@@ -10,6 +10,10 @@ class Marketplace
 
     has_many :tax_rates, inverse_of: :marketplace
 
+    def has_controller_edit?
+      true
+    end
+
     # The Secret Stripe API key belonging to the owner of the Marketplace
     def stripe_api_key
       space.utilities.find_by!(utility_slug: :stripe).utility.api_token

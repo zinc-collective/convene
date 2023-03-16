@@ -20,14 +20,18 @@ en:
     order:
       index: "Order History"
     product:
-      index: "Configure Products"
+      index:
     products:
       index:
+        link_to: "Configure Products"
         new: Add a Product
       product:
         add: Add Product
         remove: Remove Product
         edit: Edit Product
+    tax_rates:
+      new:
+        link_to: Add Tax Rate
     cart_products:
       cart_product:
         remove: Remove from Cart

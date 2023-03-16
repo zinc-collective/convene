@@ -1,15 +1,15 @@
 <% breadcrumb :edit_room, room %>
 
+<h1>Configure <%= room.name %></h1>
+
 <%= render partial: 'form', locals: { room: room } %>
 
-
-<section id="furnitures">
+<section id="furnitures" class="overflow-hidden rounded-lg bg-white shadow p-3 mt-3">
+  <h2>Furniture</h2>
   <%= render room.furnitures.rank(:slot), editing: true %>
 </section>
 
 <%- new_furniture = room.furnitures.new %>
-
 <%- if policy(new_furniture).new? %>
   <%= render "furnitures/new", furniture: new_furniture %>
-
 <%- end %>
