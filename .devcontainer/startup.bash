@@ -10,14 +10,14 @@ sleep 30
 export DISPLAY=:1
 Xvfb $DISPLAY -ac &
 
-if [ ! -f .env ]; then 
-    cp .env.example .env 
-    sed -i "/^# PG/s/^# //g" .env 
-fi 
+if [ ! -f .env ]; then
+    cp .env.example .env
+    sed -i "/^# PG/s/^# //g" .env
+fi
 echo "Run 'bin/setup'"
 bin/setup &> .devcontainer/output/bin_setup.out
 
-rm -f .overmind.sock 
+rm -f .overmind.sock
 echo "Run 'bin/run'"
 bin/run &> .devcontainer/output/bin_run.out &
 # echo "Now you can run 'bin/run' on the command line!"
