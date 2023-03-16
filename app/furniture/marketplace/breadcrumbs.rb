@@ -29,7 +29,7 @@ end
 
 crumb :marketplace_products do |marketplace|
   parent :edit_marketplace, marketplace
-  link t("marketplace.product.index"), marketplace.location(child: :products)
+  link t("marketplace.products.index.link_to"), marketplace.location(child: :products)
 end
 
 crumb :marketplace_product do |product|

@@ -1,26 +1,25 @@
 <%- breadcrumb :edit_marketplace, marketplace %>
 
-<%= render "form", marketplace: marketplace %>
+<div class="max-w-2xl self-stretch mx-auto">
+  <%= render "form", marketplace: marketplace %>
+  <p class="flex justify-between my-5 flex-wrap">
+    <%- if policy(marketplace.products.new).create? %>
+      <%= link_to t('marketplace.products.index.link_to'), marketplace.location(child: :products) %>
+    <%- end %>
 
-<%- if marketplace.stripe_api_key? %>
-  <%- if marketplace.stripe_account_connected? %>
-    <%= t('.stripe_connected') %>
-  <%- end %>
-  <%= button_to t('.connect_stripe'),
-      marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
-<% else %>
-  <%= button_to t('.missing_stripe_api_key', space_name: space.name),
-      space.location(:edit), method: :get, data: { turbo: false } %>
-<% end %>
+    <%- if policy(marketplace.tax_rates.new).create? %>
+      <%= link_to(t("marketplace.tax_rates.new.link_to"), marketplace.location(:new, child: :tax_rate)) %>
+    <%- end %>
 
-<%- if policy(marketplace.products.new).create? %>
-  <%= button_to t('marketplace.product.index'),
-      marketplace.location(child: :products), method: :get, data: { turbo: false } %>
-<%- end %>
-
-<h3>Tax Rates</h3>
-<%= render policy_scope(marketplace.tax_rates) %>
-
-<%- if policy(marketplace.tax_rates.new).create? %>
-  <%= link_to("Add Tax Rate", marketplace.location(:new, child: :tax_rate)) %>
-<%- end %>
+    <%- if marketplace.stripe_api_key? %>
+      <%- if marketplace.stripe_account_connected? %>
+        <%= t('.stripe_connected') %>
+      <%- end %>
+      <%= button_to t('.connect_stripe'),
+          marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
+    <% else %>
+      <%= link_to t('.missing_stripe_api_key', space_name: space.name),
+          space.location(:edit), method: :get %>
+    <% end %>
+  </p>
+</div>
