@@ -7,6 +7,9 @@ docker compose up &> .devcontainer/output/docker_compose_up.out &
 
 sleep 30
 
+export DISPLAY=:1
+Xvfb $DISPLAY -ac &
+
 if [ ! -f .env ]; then 
     cp .env.example .env 
     sed -i "/^# PG/s/^# //g" .env 
