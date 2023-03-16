@@ -23,7 +23,7 @@ class Marketplace
     end
 
     def marketplace_params
-      params.require(:marketplace).permit([:delivery_fee, :notify_emails])
+      policy(Marketplace).permit(params.require(:marketplace))
     end
   end
 end

@@ -5,6 +5,8 @@ class UtilityPolicy < ApplicationPolicy
 
   class Scope < ApplicationScope
     def resolve
+      return scope.all if person.operator?
+
       scope.where(space: person.spaces)
     end
   end

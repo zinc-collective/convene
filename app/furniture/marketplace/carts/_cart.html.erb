@@ -7,6 +7,7 @@
 
       <%= cart_form.submit t('marketplace.delivery_info.edit') %>
     <%- end %>
+
   <%- else %>
     <div class="flex justify-between flex-wrap">
       <div class="sm:w-1/2 w-full flex items-center justify-between text-sm">
@@ -47,4 +48,9 @@
       </table>
     </div>
   <%- end %>
+
+  <p class="italic text-right py-2 text-sm">
+    Orders placed by <%= cart.marketplace.order_by %>
+    are delivered on <%= cart.marketplace.delivery_window %>.
+  </p>
 </div>
