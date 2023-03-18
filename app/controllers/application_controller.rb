@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   include Pagy::Backend
 
-  rescue_from Pundit::NotAuthorizedError, with: :render_not_found
+  rescue_from Pundit::NotAuthorizedError, with: :handle_unauthorized
   prepend_view_path "app/utilities"
   prepend_view_path "app/furniture"
 
@@ -138,6 +138,11 @@ class ApplicationController < ActionController::Base
       )
   rescue ActiveRecord::RecordNotFound
     current_space.entrance
+  end
+
+  def handle_unauthorized(exception)
+    Sentry.capture_exception(exception, level: :warn)
+    render_not_found
   end
 
   def render_not_found
