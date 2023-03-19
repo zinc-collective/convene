@@ -8,7 +8,7 @@ class Marketplace
     end
 
     helper_method def orders
-      policy_scope(marketplace.orders)
+      policy_scope(marketplace.orders).order(created_at: :desc)
     end
 
     helper_method def order
