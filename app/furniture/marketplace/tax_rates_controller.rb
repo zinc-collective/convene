@@ -4,9 +4,12 @@ class Marketplace
       tax_rate
     end
 
+    def index
+    end
+
     def create
       if tax_rate.save
-        redirect_to marketplace.location(:edit)
+        redirect_to marketplace.location(child: :tax_rates)
       else
         render :new
       end
@@ -14,7 +17,7 @@ class Marketplace
 
     def update
       if tax_rate.update(tax_rate_params)
-        redirect_to marketplace.location(:edit)
+        redirect_to marketplace.location(child: :tax_rates)
       else
         render :edit
       end
@@ -26,14 +29,18 @@ class Marketplace
 
     helper_method def tax_rate
       @tax_rate ||= if params[:id]
-        policy_scope(marketplace.tax_rates).find(params[:id])
+        tax_rates.find(params[:id])
       elsif params[:tax_rate]
-        marketplace.tax_rates.new(tax_rate_params)
+        tax_rates.new(tax_rate_params)
       else
-        marketplace.tax_rates.new
+        tax_rates.new
       end.tap do |tax_rate|
         authorize(tax_rate)
       end
+    end
+
+    helper_method def tax_rates
+      @tax_rates ||= policy_scope(marketplace.tax_rates)
     end
   end
 end

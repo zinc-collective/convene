@@ -8,7 +8,7 @@
     <%- end %>
 
     <%- if policy(marketplace.tax_rates.new).create? %>
-      <%= link_to(t("marketplace.tax_rates.new.link_to"), marketplace.location(:new, child: :tax_rate)) %>
+      <%= link_to(t("marketplace.tax_rates.index.link_to"), marketplace.location(child: :tax_rates)) %>
     <%- end %>
 
     <%- if marketplace.stripe_api_key? %>
