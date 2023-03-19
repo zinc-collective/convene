@@ -41,7 +41,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     specify { call && expect(Stripe::Transfer).to(have_received(:create).with({amount: order.price_total.cents - balance_transaction.fee, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key})) }
 
     specify { expect { call }.to have_enqueued_mail(Marketplace::OrderReceivedMailer, :notification).with(order) }
-
+    specify { expect { call }.to change { order.reload.placed_at }.from(nil) }
     specify { expect { call }.to change { order.reload.contact_email }.to("test@example.com") }
     specify { expect { call }.to change { order.reload.delivery_address }.to("Test\n123 N West\napt 1\nOakland, CA 94609") }
 

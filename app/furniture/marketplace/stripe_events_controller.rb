@@ -28,6 +28,7 @@ class Marketplace
             "#{shipping_address.city}, #{shipping_address.state} #{shipping_address.postal_code}"].compact.join("\n")
         order.update(delivery_address: delivery_address,
           status: :paid,
+          placed_at: DateTime.now,
           contact_email: event.data.object.customer_details.email)
 
         OrderReceivedMailer.notification(order).deliver_later
