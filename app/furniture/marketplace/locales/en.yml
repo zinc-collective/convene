@@ -30,6 +30,8 @@ en:
         remove: Remove Product
         edit: Edit Product
     tax_rates:
+      index:
+        link_to: "Tax Rates"
       new:
         link_to: Add Tax Rate
     cart_products:

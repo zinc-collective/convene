@@ -1,0 +1,6 @@
+
+<%= render CardComponent.new(classes: "py-2") do %>
+  <%= link_to tax_rate.location(:edit) do %>
+    <%= tax_rate.label %>: <%= number_to_percentage(tax_rate.tax_rate, precision: 1) %>
+  <%- end %>
+<%- end %>

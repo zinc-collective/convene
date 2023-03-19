@@ -23,7 +23,7 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
       post polymorphic_path(marketplace.location(child: :tax_rates)), params: {tax_rate: attributes_for(:marketplace_tax_rate)}
     end
 
-    it { is_expected.to redirect_to(marketplace.location(:edit)) }
+    it { is_expected.to redirect_to(marketplace.location(child: :tax_rates)) }
   end
 
   describe "#update" do
@@ -32,7 +32,7 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
       put polymorphic_path(tax_rate.location), params: {tax_rate: {label: "Hey", tax_rate: 23}}
     end
 
-    it { is_expected.to redirect_to(marketplace.location(:edit)) }
+    it { is_expected.to redirect_to(marketplace.location(child: :tax_rates)) }
     specify { expect { result }.to change { tax_rate.reload.label }.to("Hey") }
     specify { expect { result }.to change { tax_rate.reload.tax_rate }.to(23) }
   end
