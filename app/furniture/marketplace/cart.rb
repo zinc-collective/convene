@@ -27,6 +27,10 @@ class Marketplace
       cart_products.sum(0, &:price_total)
     end
 
+    def delivery_window
+      marketplace.delivery_window.presence || super
+    end
+
     def delivery_fee
       return marketplace.delivery_fee if delivery_address.present?
 
@@ -41,8 +45,9 @@ class Marketplace
       product_total + delivery_fee + tax_total
     end
 
-    def ready_for_delivery?
-      (delivery_address.present? && contact_phone_number.present?)
+    def ready_for_shopping?
+      (delivery_address.present? && contact_phone_number.present? && delivery_window.present?)
     end
+    alias_method :ready_for_delivery?, :ready_for_shopping?
   end
 end
