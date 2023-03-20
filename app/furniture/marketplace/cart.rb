@@ -48,6 +48,9 @@ class Marketplace
     def ready_for_shopping?
       (delivery_address.present? && contact_phone_number.present? && delivery_window.present?)
     end
-    alias_method :ready_for_delivery?, :ready_for_shopping?
+
+    def ready_for_checkout?
+      ready_for_shopping? && cart_products.present? && cart_products.all?(&:valid?)
+    end
   end
 end

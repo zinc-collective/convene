@@ -8,7 +8,7 @@
   <tr>
     <td class="text-left px-3 py-3.5 text-right" colspan="8">
       <%= render "marketplace/carts/total", cart: cart %>
-      <%- if cart.ready_for_delivery? %>
+      <%- if cart.ready_for_checkout? %>
         <%= button_to("Checkout", cart.location(child: :checkout), data: { turbo: false }) %>
       <%- end %>
     </td>
