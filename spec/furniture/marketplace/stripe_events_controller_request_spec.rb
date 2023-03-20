@@ -43,7 +43,6 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
     specify { expect { call }.to have_enqueued_mail(Marketplace::OrderReceivedMailer, :notification).with(order) }
     specify { expect { call }.to change { order.reload.placed_at }.from(nil) }
-    specify { expect { call }.to change { order.reload.contact_email }.to("test@example.com") }
 
     context "when stripe sends us an event we can't handle" do
       let(:stripe_event) { double(Stripe::Event, type: "a.weird.event") }

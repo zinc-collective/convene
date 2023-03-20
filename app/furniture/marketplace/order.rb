@@ -14,6 +14,9 @@ class Marketplace
     has_encrypted :delivery_address
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
+    def contact_email
+      super.presence || shopper.person&.email
+    end
 
     enum status: {
       pre_checkout: "pre_checkout",

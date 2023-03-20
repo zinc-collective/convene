@@ -15,9 +15,13 @@ class Marketplace
     has_many :cart_products, dependent: :destroy, inverse_of: :cart
     has_many :products, through: :cart_products, inverse_of: :carts
 
+    # this feels like it is starting to want to be it's own model...
     has_encrypted :delivery_address
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
+    def contact_email
+      super.presence || shopper.person&.email
+    end
 
     enum status: {
       pre_checkout: "pre_checkout",
