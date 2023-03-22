@@ -15,8 +15,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
   let(:balance_transaction) { double(Stripe::BalanceTransaction, fee: 100) }
 
   let(:payment_intent) do
-    double(Stripe::PaymentIntent, transfer_group: order.id,
-      latest_charge: "ch_1234")
+    double(Stripe::PaymentIntent, transfer_group: order.id, latest_charge: "ch_1234")
   end
 
   let(:charge) {
