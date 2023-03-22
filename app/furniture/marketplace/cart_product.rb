@@ -14,6 +14,7 @@ class Marketplace
     validate :editable_cart
 
     attribute :quantity, :integer, default: 0
+    validates :quantity, numericality: {only_integer: true, greater_than: 0}
 
     def tax_amount
       price_total * (tax_rates.sum(0, &:tax_rate) / 100)
