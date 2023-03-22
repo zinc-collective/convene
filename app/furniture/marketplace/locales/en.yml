@@ -1,6 +1,8 @@
 
 en:
   marketplace:
+    delivery_window:
+      edit: "Change Delivery Window"
     delivery_info:
       edit: "Update Delivery Info"
     contact_phone_number:
