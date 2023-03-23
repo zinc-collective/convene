@@ -10,6 +10,11 @@ class Marketplace
 
     has_many :tax_rates, inverse_of: :marketplace
 
+    setting :notify_emails
+    setting :order_by
+    setting :stripe_webhook_endpoint
+    setting :stripe_webhook_endpoint_secret
+
     def has_controller_edit?
       true
     end
@@ -25,14 +30,6 @@ class Marketplace
       false
     end
 
-    def notify_emails
-      settings["notify_emails"]
-    end
-
-    def notify_emails=(notify_emails)
-      settings["notify_emails"] = notify_emails
-    end
-
     # @todo Probably want to rename this for-reals but lazy
     def stripe_account
       settings["stripe_account"]
@@ -45,22 +42,6 @@ class Marketplace
 
     def stripe_account_connected?
       stripe_account.present? && stripe_webhook_endpoint.present? && stripe_webhook_endpoint_secret.present?
-    end
-
-    def stripe_webhook_endpoint
-      settings["stripe_webhook_endpoint"]
-    end
-
-    def stripe_webhook_endpoint=stripe_webhook_endpoint
-      settings["stripe_webhook_endpoint"] = stripe_webhook_endpoint
-    end
-
-    def stripe_webhook_endpoint_secret
-      settings["stripe_webhook_endpoint_secret"]
-    end
-
-    def stripe_webhook_endpoint_secret=stripe_webhook_endpoint_secret
-      settings["stripe_webhook_endpoint_secret"] = stripe_webhook_endpoint_secret
     end
 
     def delivery_fee_cents= delivery_fee_cents
@@ -78,14 +59,6 @@ class Marketplace
 
     def delivery_window=(delivery_window)
       settings["delivery_window"] = delivery_window
-    end
-
-    def order_by
-      settings["order_by"]
-    end
-
-    def order_by=(order_by)
-      settings["order_by"] = order_by
     end
 
     # @raises Stripe::InvalidRequestError if something is sad
