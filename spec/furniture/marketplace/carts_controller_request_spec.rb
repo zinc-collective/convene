@@ -7,7 +7,7 @@ RSpec.describe Marketplace::CartsController, type: :request do
 
   describe "#update" do
     subject(:perform_request) do
-      put polymorphic_path(cart.location), params: {cart: {delivery_address: "123 N West St", contact_phone_number: "(415)-123-4567"}}
+      put polymorphic_path(cart.location), params: {cart: {delivery_address: "123 N West St", delivery_window: "Tomorrow at 3pm", contact_phone_number: "(415)-123-4567"}}
       response
     end
 
@@ -20,6 +20,7 @@ RSpec.describe Marketplace::CartsController, type: :request do
       it { is_expected.to redirect_to(room.location) }
       specify { expect { perform_request }.to change { cart.reload.delivery_address }.from(nil).to("123 N West St") }
       specify { expect { perform_request }.to change { cart.reload.contact_phone_number }.from(nil).to("(415)-123-4567") }
+      specify { expect { perform_request }.to change { cart.reload.delivery_window }.from(nil).to("Tomorrow at 3pm") }
     end
 
     context "when a `Neighbor`" do

@@ -17,6 +17,7 @@ class Marketplace
 
     has_encrypted :delivery_address
     has_encrypted :contact_phone_number
+    has_encrypted :contact_email, migrating: true
 
     enum status: {
       pre_checkout: "pre_checkout",
@@ -25,6 +26,10 @@ class Marketplace
 
     def product_total
       cart_products.sum(0, &:price_total)
+    end
+
+    def delivery_window
+      marketplace.delivery_window.presence || super
     end
 
     def delivery_fee
@@ -41,8 +46,12 @@ class Marketplace
       product_total + delivery_fee + tax_total
     end
 
-    def ready_for_delivery?
-      (delivery_address.present? && contact_phone_number.present?)
+    def ready_for_shopping?
+      (delivery_address.present? && contact_phone_number.present? && delivery_window.present?)
+    end
+
+    def ready_for_checkout?
+      ready_for_shopping? && cart_products.present? && cart_products.all?(&:valid?)
     end
   end
 end

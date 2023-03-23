@@ -31,6 +31,7 @@ FactoryBot.define do
     transient do
       marketplace { nil }
     end
+    quantity { 1 }
 
     product { association(:marketplace_product, marketplace: marketplace) }
     cart { association(:marketplace_cart, marketplace: marketplace) }
