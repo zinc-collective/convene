@@ -9,6 +9,9 @@ en:
   invitations:
     heading: Invitations
     summary: Members Invited to '%{space_name}'
+    invited_members_heading: Invitations you've sent
+    no_invitations_sent: You haven't sent any invitations
+    send_invitations: Send new invitations
     new:
       heading: Invite Members to '%{space_name}'
     create:
