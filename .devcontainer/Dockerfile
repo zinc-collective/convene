@@ -14,6 +14,10 @@ ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.git
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
+ADD Gemfile /tmp/Gemfile
+ADD .ruby-version /tmp/.ruby-version
+RUN su vscode -c "cd /tmp && bundle install --gemfile /tmp/Gemfile && sudo rm /tmp/Gemfile /tmp/.ruby-version"
+
 ## Installing overmind and other packages
 RUN su vscode -c "sudo wget https://github.com/DarthSim/overmind/releases/download/v2.3.0/overmind-v2.3.0-linux-386.gz && \
                     sudo gunzip -d overmind-v2.3.0-linux-386.gz && \
@@ -23,4 +27,3 @@ RUN su vscode -c "sudo wget https://github.com/DarthSim/overmind/releases/downlo
                     sudo apt update && \
                     sudo apt install -y tmux graphviz firefox-esr xvfb && \
                     rm -rf /var/lib/apt/lists/*" 2>&1
-RUN bundle install; bin/setup; exit 0
