@@ -11,6 +11,9 @@ class Marketplace
     has_many :tax_rates, inverse_of: :marketplace
 
     setting :notify_emails
+    setting :order_by
+    setting :stripe_webhook_endpoint
+    setting :stripe_webhook_endpoint_secret
 
     def has_controller_edit?
       true
@@ -41,22 +44,6 @@ class Marketplace
       stripe_account.present? && stripe_webhook_endpoint.present? && stripe_webhook_endpoint_secret.present?
     end
 
-    def stripe_webhook_endpoint
-      settings["stripe_webhook_endpoint"]
-    end
-
-    def stripe_webhook_endpoint=stripe_webhook_endpoint
-      settings["stripe_webhook_endpoint"] = stripe_webhook_endpoint
-    end
-
-    def stripe_webhook_endpoint_secret
-      settings["stripe_webhook_endpoint_secret"]
-    end
-
-    def stripe_webhook_endpoint_secret=stripe_webhook_endpoint_secret
-      settings["stripe_webhook_endpoint_secret"] = stripe_webhook_endpoint_secret
-    end
-
     def delivery_fee_cents= delivery_fee_cents
       settings["delivery_fee_cents"] = delivery_fee_cents
     end
@@ -72,14 +59,6 @@ class Marketplace
 
     def delivery_window=(delivery_window)
       settings["delivery_window"] = delivery_window
-    end
-
-    def order_by
-      settings["order_by"]
-    end
-
-    def order_by=(order_by)
-      settings["order_by"] = order_by
     end
 
     # @raises Stripe::InvalidRequestError if something is sad
