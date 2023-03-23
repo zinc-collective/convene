@@ -10,7 +10,7 @@ class Marketplace
 
     has_many :tax_rates, inverse_of: :marketplace
 
-    settings_attribute :notify_emails
+    setting :notify_emails
 
     def has_controller_edit?
       true

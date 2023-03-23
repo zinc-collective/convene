@@ -41,9 +41,9 @@ RSpec.describe Furniture do
     end
   end
 
-  describe "#settings_attribute" do
+  describe "#setting" do
     class TestFurniture < described_class # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
-      settings_attribute :name
+      setting :name
     end
 
     let(:furniture) { TestFurniture.new }

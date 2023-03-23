@@ -85,7 +85,7 @@ class Furniture < ApplicationRecord
   end
 
   # Adds a writer and a reader for a value backed by `settings`
-  def self.settings_attribute(setting_name)
+  def self.setting(setting_name)
     define_method(setting_name.to_s) do
       settings[setting_name.to_s]
     end
