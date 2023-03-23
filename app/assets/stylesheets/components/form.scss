@@ -23,6 +23,7 @@
     }
 
     input[type="email"],
+    input[type="datetime-local"],
     input[type="number"],
     input[type="password"],
     input[type="search"],
@@ -46,6 +47,7 @@
 
     .field_with_errors {
       input[type="email"],
+      input[type="datetime-local"],
       input[type="number"],
       input[type="password"],
       input[type="search"],
