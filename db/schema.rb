@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_210304) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_010430) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -127,6 +127,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_210304) do
     t.index ["product_id"], name: "index_marketplace_cart_products_on_product_id"
   end
 
+  create_table "marketplace_delivery_areas", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "marketplace_id"
+    t.string "label"
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "USD", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marketplace_id"], name: "index_marketplace_delivery_areas_on_marketplace_id"
+  end
+
   create_table "marketplace_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "marketplace_id"
     t.datetime "created_at", null: false
@@ -241,6 +251,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_210304) do
   add_foreign_key "journal_entries", "furnitures", column: "journal_id"
   add_foreign_key "marketplace_cart_products", "marketplace_orders", column: "cart_id"
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
+  add_foreign_key "marketplace_delivery_areas", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id"
   add_foreign_key "marketplace_product_tax_rates", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_product_tax_rates", "marketplace_tax_rates", column: "tax_rate_id"
