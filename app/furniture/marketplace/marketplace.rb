@@ -9,6 +9,7 @@ class Marketplace
     has_many :orders, inverse_of: :marketplace
 
     has_many :tax_rates, inverse_of: :marketplace
+    has_many :delivery_areas, inverse_of: :marketplace
 
     def has_controller_edit?
       true

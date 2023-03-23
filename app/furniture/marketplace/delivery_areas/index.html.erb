@@ -1,0 +1,12 @@
+<%- breadcrumb(:marketplace_delivery_areas, marketplace) %>
+
+<section class="max-w-2xl self-stretch mx-auto">
+  <main>
+    <div class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <%= render delivery_areas %>
+    </div>
+  </main>
+  <footer class="text-center">
+    <%= link_to(t("marketplace.delivery_areas.new.link_to"), marketplace.location(:new, child: :delivery_area)) %>
+  </footer>
+</section>
