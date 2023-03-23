@@ -2,6 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
 {
   "name": "convene devcontainer",
+  //"image": "<our-docker-namespace/convene-devcontainer:latest",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
