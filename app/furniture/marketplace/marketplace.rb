@@ -10,6 +10,8 @@ class Marketplace
 
     has_many :tax_rates, inverse_of: :marketplace
 
+    settings_attribute :notify_emails
+
     def has_controller_edit?
       true
     end
@@ -23,14 +25,6 @@ class Marketplace
       stripe_api_key.present?
     rescue ActiveRecord::RecordNotFound
       false
-    end
-
-    def notify_emails
-      settings["notify_emails"]
-    end
-
-    def notify_emails=(notify_emails)
-      settings["notify_emails"] = notify_emails
     end
 
     # @todo Probably want to rename this for-reals but lazy

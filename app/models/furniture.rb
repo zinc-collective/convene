@@ -83,4 +83,15 @@ class Furniture < ApplicationRecord
   def to_kind_class
     becomes(Furniture.registry.fetch(furniture_kind.to_sym))
   end
+
+  # Adds a writer and a reader for a value backed by `settings`
+  def self.settings_attribute(setting_name)
+    define_method(setting_name.to_s) do
+      settings[setting_name.to_s]
+    end
+
+    define_method("#{setting_name}=") do |value|
+      settings[setting_name.to_s] = value
+    end
+  end
 end
