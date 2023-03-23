@@ -9,18 +9,18 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
   let(:stripe_event) do
     double(Stripe::Event, type: "checkout.session.completed",
-      data: double(object: double(payment_intent: "pi_1234",
-        customer_details: double(email: "test@example.com"),
-        shipping: double(name: "Test",
-          address: double(line1: "123 N West", line2: "apt 1", city: "Oakland", state: "CA", postal_code: "94609")))))
+      data: double(object: double(payment_intent: "pi_1234", customer_details: double(email: "test@example.com"))))
   end
 
   let(:balance_transaction) { double(Stripe::BalanceTransaction, fee: 100) }
 
   let(:payment_intent) do
-    double(Stripe::PaymentIntent, transfer_group: order.id,
-      charges: [double(Stripe::Charge, balance_transaction: "btx_2234")])
+    double(Stripe::PaymentIntent, transfer_group: order.id, latest_charge: "ch_1234")
   end
+
+  let(:charge) {
+    double(Stripe::Charge, balance_transaction: "btx_2234")
+  }
 
   before do
     allow(Stripe::Webhook).to receive(:construct_event).with(anything, "sig_1234", marketplace.stripe_webhook_endpoint_secret).and_return(stripe_event)
@@ -28,6 +28,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     allow(Stripe::PaymentIntent).to receive(:retrieve).with("pi_1234", anything).and_return(payment_intent)
     allow(Stripe::Transfer).to receive(:create)
     allow(Stripe::BalanceTransaction).to receive(:retrieve).with("btx_2234", anything).and_return(balance_transaction)
+    allow(Stripe::Charge).to receive(:retrieve).with("ch_1234", anything).and_return(charge)
   end
 
   describe "#create" do
@@ -43,7 +44,6 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     specify { expect { call }.to have_enqueued_mail(Marketplace::OrderReceivedMailer, :notification).with(order) }
     specify { expect { call }.to change { order.reload.placed_at }.from(nil) }
     specify { expect { call }.to change { order.reload.contact_email }.to("test@example.com") }
-    specify { expect { call }.to change { order.reload.delivery_address }.to("Test\n123 N West\napt 1\nOakland, CA 94609") }
 
     context "when stripe sends us an event we can't handle" do
       let(:stripe_event) { double(Stripe::Event, type: "a.weird.event") }
