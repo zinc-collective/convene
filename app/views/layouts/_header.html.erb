@@ -1,11 +1,10 @@
 <header>
   <%= render partial: "breadcrumbs" %>
 
-
   <nav aria-label="Menu" class="profile-menu" data-person-email="<%= current_person.email %>">
     <%- if current_person.authenticated? %>
       <%- if current_membership.present? %>
-        <%= link_to "Account", [current_space, current_membership], title: current_membership.member.email %>
+        <%= link_to "Your Account", [current_space, current_membership], title: current_membership.member.email %>
       <%- end %>
       <%= link_to "Sign out", [current_space, :authenticated_session].compact, data: { turbo: true, turbo_method: :delete }, class: 'sign-out' %>
     <%- else %>
