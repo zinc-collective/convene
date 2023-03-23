@@ -3,7 +3,7 @@
   <%- if !cart.ready_for_shopping? %>
     <%= form_with model: cart.location do |cart_form| %>
       <%= render "text_field", attribute: :delivery_address, form: cart_form %>
-      <%= render "text_field", attribute: :delivery_window, form: cart_form, disabled?: cart.marketplace.delivery_window.present? %>
+      <%= render "datetime_field", attribute: :delivery_window, form: cart_form, disabled?: cart.marketplace.delivery_window.present? %>
       <%= render "text_field", attribute: :contact_phone_number, form: cart_form %>
 
       <%= cart_form.submit t('marketplace.delivery_info.edit') %>
@@ -50,12 +50,12 @@
     </div>
   <%- end %>
 
-  <p class="italic text-right py-2 text-sm">
+  <p class="text-right py-2 text-sm">
     <%- if cart.marketplace.delivery_window.present? %>
       Orders placed by <%= cart.marketplace.order_by %>
-      are delivered on <%= cart.marketplace.delivery_window %>.
+      are delivered on <%= cart.marketplace.delivery_window %>
     <%- elsif cart.delivery_window.present? %>
-      Place orders <%= cart.marketplace.order_by %> to ensure an on-time delivery for <%= cart.delivery_window%>.<br />
+      Place orders <%= cart.marketplace.order_by %> to ensure an on-time delivery for <%= l(cart.delivery_window, format: :day_month_date_hour_minute) %><br />
       <%= render ButtonComponent.new(href: cart.location.concat([params: { cart: { delivery_window: nil } }]), label: t('marketplace.delivery_window.edit'), title: nil, classes: "shrink font-light text-xs m-0 bg-primary-200 underline") %>
     <%- end %>
   </p>
