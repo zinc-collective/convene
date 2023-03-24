@@ -47,11 +47,12 @@ class Furniture < ApplicationRecord
   end
 
   # Adds a writer and a reader for a value backed by `settings`
-  def self.setting(setting_name)
+  def self.setting(setting_name, options = {})
     setting_name_str = setting_name.to_s
+    default = options.fetch(:default, nil)
 
     define_method(setting_name_str) do
-      settings[setting_name_str]
+      settings.fetch(setting_name_str, default)
     end
 
     define_method("#{setting_name_str}=") do |value|
