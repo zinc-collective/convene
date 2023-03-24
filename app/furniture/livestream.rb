@@ -2,29 +2,9 @@
 
 # Renders a Twitch Livestream in a Room
 class Livestream < Furniture
-  def channel=(channel)
-    settings["channel"] = channel
-  end
-
-  def channel
-    settings.fetch("channel", "")
-  end
-
-  def provider=(provider)
-    settings["provider"] = provider
-  end
-
-  def provider
-    settings.fetch("provider", "twitch")
-  end
-
-  def layout=(layout)
-    settings["layout"] = layout
-  end
-
-  def layout
-    settings.fetch("layout", "")
-  end
+  setting :channel, default: ""
+  setting :layout, default: ""
+  setting :provider, default: "twitch"
 
   def form_template
     "livestreams/form"
