@@ -6,16 +6,10 @@ class MarkdownTextBlock < Furniture
 
   self.location_parent = :room
 
+  setting :content, default: ""
+
   def to_html
     render_markdown(content)
-  end
-
-  def content=(content)
-    settings["content"] = content
-  end
-
-  def content
-    settings.fetch("content", "")
   end
 
   # @todo can we make it so we don't need to define this?
