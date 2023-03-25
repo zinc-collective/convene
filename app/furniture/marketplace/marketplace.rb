@@ -10,8 +10,13 @@ class Marketplace
 
     has_many :tax_rates, inverse_of: :marketplace
 
+    setting :delivery_fee_cents, default: 0
+    monetize :delivery_fee_cents
+    setting :delivery_window
     setting :notify_emails
     setting :order_by
+    setting :stripe_account
+    alias_method :vendor_stripe_account, :stripe_account
     setting :stripe_webhook_endpoint
     setting :stripe_webhook_endpoint_secret
 
@@ -30,35 +35,8 @@ class Marketplace
       false
     end
 
-    # @todo Probably want to rename this for-reals but lazy
-    def stripe_account
-      settings["stripe_account"]
-    end
-    alias_method :vendor_stripe_account, :stripe_account
-
-    def stripe_account=stripe_account
-      settings["stripe_account"] = stripe_account
-    end
-
     def stripe_account_connected?
       stripe_account.present? && stripe_webhook_endpoint.present? && stripe_webhook_endpoint_secret.present?
-    end
-
-    def delivery_fee_cents= delivery_fee_cents
-      settings["delivery_fee_cents"] = delivery_fee_cents
-    end
-
-    def delivery_fee_cents
-      settings["delivery_fee_cents"] || 0
-    end
-    monetize :delivery_fee_cents
-
-    def delivery_window
-      settings["delivery_window"]
-    end
-
-    def delivery_window=(delivery_window)
-      settings["delivery_window"] = delivery_window
     end
 
     # @raises Stripe::InvalidRequestError if something is sad

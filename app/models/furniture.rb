@@ -46,6 +46,22 @@ class Furniture < ApplicationRecord
     false
   end
 
+  # Adds a writer and a reader for a value backed by `settings`
+  def self.setting(setting_name, options = {})
+    setting_name_str = setting_name.to_s
+    default = options.fetch(:default, nil)
+
+    define_method(setting_name_str) do
+      settings.fetch(setting_name_str, default)
+    end
+
+    define_method("#{setting_name_str}=") do |value|
+      settings[setting_name_str] = value
+    end
+  end
+
+  # Makes it possible to do Rails-y things like:
+  #   furniture.update(some_settings_field)
   def write_attribute(name, value)
     super
   rescue ActiveModel::MissingAttributeError => _e
@@ -82,16 +98,5 @@ class Furniture < ApplicationRecord
 
   def to_kind_class
     becomes(Furniture.registry.fetch(furniture_kind.to_sym))
-  end
-
-  # Adds a writer and a reader for a value backed by `settings`
-  def self.setting(setting_name)
-    define_method(setting_name.to_s) do
-      settings[setting_name.to_s]
-    end
-
-    define_method("#{setting_name}=") do |value|
-      settings[setting_name.to_s] = value
-    end
   end
 end
