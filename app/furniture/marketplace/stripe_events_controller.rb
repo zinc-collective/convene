@@ -18,20 +18,13 @@ class Marketplace
 
         return if order.paid?
 
-        balance_transaction = Stripe::BalanceTransaction.retrieve(payment_intent.charges.first.balance_transaction, api_key: marketplace.stripe_api_key)
+        latest_charge = Stripe::Charge.retrieve(payment_intent.latest_charge, api_key: marketplace.stripe_api_key)
+        balance_transaction = Stripe::BalanceTransaction.retrieve(latest_charge.balance_transaction, api_key: marketplace.stripe_api_key)
 
-        shipping_address = event.data.object.shipping.address
-        delivery_address =
-          [event.data.object.shipping.name,
-            shipping_address.line1,
-            shipping_address.line2,
-            "#{shipping_address.city}, #{shipping_address.state} #{shipping_address.postal_code}"].compact.join("\n")
-        order.update(delivery_address: delivery_address,
-          status: :paid,
-          placed_at: DateTime.now,
-          contact_email: event.data.object.customer_details.email)
+        order.update(status: :paid, placed_at: DateTime.now)
 
         OrderReceivedMailer.notification(order).deliver_later
+        OrderPlacedMailer.notification(order).deliver_later
 
         Stripe::Transfer.create({
           # Leave the Stripe Fees in the `Distributor`'s account

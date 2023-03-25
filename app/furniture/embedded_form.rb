@@ -1,13 +1,7 @@
 # frozen_string_literal: true
 
 class EmbeddedForm < Furniture
-  def form_url=(form_url)
-    settings["form_url"] = form_url
-  end
-
-  def form_url
-    settings["form_url"]
-  end
+  setting :form_url
 
   def embeddable_form_url
     form_id = form_url

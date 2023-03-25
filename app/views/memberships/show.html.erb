@@ -1,10 +1,19 @@
 <%- breadcrumb :show_membership, membership %>
-<h1><%= membership.member.name %></h1>
-<p><%= membership.member.email %></p>
+<%= render CardComponent.new(classes: "mt-3") do %>
+  <h1><%= membership.member.name %></h1>
+  <p><%= membership.member.email %></p>
+<% end %>
 
-<section>
+<%= render CardComponent.new(classes: "mt-3") do %>
   <h3><%= t('invitations.invited_members_heading') %></h3>
-  <ul>
-    <%= render membership.sent_invitations %>
-  </ul>
-</section>
+  <% if membership.sent_invitations.present? %>
+    <ul>
+      <%= render membership.sent_invitations %>
+    </ul>
+  <% else %>
+    <%= t('invitations.no_invitations_sent') %>
+  <% end %>
+  <p class="mt-3">
+    <%= link_to t('invitations.send_invitations'), [space, :invitations] %>
+  </p>
+<% end %>

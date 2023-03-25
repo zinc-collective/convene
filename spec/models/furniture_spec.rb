@@ -40,4 +40,26 @@ RSpec.describe Furniture do
       expect(new_placement.slot_position).to eq(:last)
     end
   end
+
+  describe "#setting" do
+    class TestFurniture < described_class # rubocop:disable Lint/ConstantDefinitionInBlock, RSpec/LeakyConstantDeclaration
+      setting :name, default: "some default value"
+    end
+
+    let(:furniture) { TestFurniture.new }
+
+    it "adds a writer for the setting" do
+      furniture.name = "fancy name"
+      expect(furniture.settings["name"]).to eq("fancy name")
+    end
+
+    it "adds a reader for the setting" do
+      furniture.settings["name"] = "fancier name"
+      expect(furniture.name).to eq("fancier name")
+    end
+
+    it "can set a default value" do
+      expect(furniture.name).to eq("some default value")
+    end
+  end
 end

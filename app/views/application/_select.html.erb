@@ -1,3 +1,6 @@
-<%= form.label attribute %>
-<%= form.select attribute, options, include_blank: local_assigns.fetch(:include_blank, true) %>
-<%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
+<div>
+  <%= form.label attribute %>
+  <%= form.select attribute, options, include_blank: local_assigns.fetch(:include_blank, true),
+      prompt: local_assigns.fetch(:prompt, false) %>
+  <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
+</div>
