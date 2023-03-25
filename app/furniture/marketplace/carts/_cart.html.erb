@@ -4,6 +4,7 @@
     <%= form_with model: cart.location do |cart_form| %>
       <%= render "text_field", attribute: :delivery_address, form: cart_form %>
       <%= render "datetime_field", attribute: :delivery_window, form: cart_form, disabled?: cart.marketplace.delivery_window.present? %>
+      <%= render "email_field", attribute: :contact_email, form: cart_form %>
       <%= render "text_field", attribute: :contact_phone_number, form: cart_form %>
 
       <%= cart_form.submit t('marketplace.delivery_info.edit') %>

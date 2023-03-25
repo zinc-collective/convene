@@ -21,6 +21,10 @@ en:
         failure: "Marketplace could not be updated."
     order:
       index: "Order History"
+    order_placed_mailer:
+      notification:
+        subject: "Order Placed at %{marketplace_name}!"
+        placed_at: "Placed At %{placed_at}"
     order_received_mailer:
       subject: "Order Received for %{marketplace_name}: %{order_id}"
     product:
