@@ -10,15 +10,18 @@ class Marketplace
 
     has_many :tax_rates, inverse_of: :marketplace
 
-    setting :delivery_fee_cents, default: 0
+    attribute :settings, ::Marketplace::Settings.to_type, default: {}
+    delegate :delivery_fee_cents, :delivery_fee_cents=,
+      :delivery_window, :delivery_window=,
+      :notify_emails, :notify_emails=,
+      :order_by, :order_by=,
+      :stripe_account, :stripe_account=,
+      :stripe_webhook_endpoint, :stripe_webhook_endpoint=,
+      :stripe_webhook_endpoint_secret, :stripe_webhook_endpoint_secret=,
+      to: :settings
+
     monetize :delivery_fee_cents
-    setting :delivery_window
-    setting :notify_emails
-    setting :order_by
-    setting :stripe_account
     alias_method :vendor_stripe_account, :stripe_account
-    setting :stripe_webhook_endpoint
-    setting :stripe_webhook_endpoint_secret
 
     def has_controller_edit?
       true

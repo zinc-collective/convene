@@ -63,4 +63,28 @@ RSpec.describe Marketplace::Cart, type: :model do
 
     it { is_expected.to eql(product_b.price * 0.05) }
   end
+
+  describe "#delivery_window" do
+    let(:cart) { create(:marketplace_cart) }
+
+    before do
+      freeze_time
+    end
+
+    context "when the Marketplace has a delivery window" do
+      before do
+        cart.marketplace.delivery_window = 1.week.from_now
+      end
+
+      it "returns the Marketplace delivery window" do
+        expect(cart.delivery_window).to eq(1.week.from_now)
+      end
+    end
+
+    it "is resilient to non-Time stored values" do
+      cart.delivery_window = "this is not a time"
+      expect(cart.delivery_window).to be_a(Time)
+      expect(cart.delivery_window - Time.zone.now).to eq(48.hours)
+    end
+  end
 end
