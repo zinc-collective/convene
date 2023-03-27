@@ -47,7 +47,6 @@ class Furniture < ApplicationRecord
   end
 
   # Adds a writer and a reader for a value backed by `settings`
-  # If you want types, validations, etc, for your `settings`, use StoreModel (see Marketplace for an example)
   def self.setting(setting_name, options = {})
     setting_name_str = setting_name.to_s
     default = options.fetch(:default, nil)
