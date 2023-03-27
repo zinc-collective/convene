@@ -1,8 +1,8 @@
 class Marketplace
   class Order
-    class PlacedMailerPreview < MailerPreview
+    class PlacedMailerPreview < ActionMailer::Preview
       def notification
-        Order::PlacedMailer.notification(full_order)
+        Order::PlacedMailer.notification(FactoryBot.build(:marketplace_order, :full))
       end
     end
   end
