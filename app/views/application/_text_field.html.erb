@@ -1,5 +1,6 @@
+<%- disabled = local_assigns.fetch(:disabled?, false)%>
 <div>
   <%= form.label attribute %>
-  <%= form.text_field attribute %>
+  <%= form.text_field attribute, disabled: disabled %>
   <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
 </div>
