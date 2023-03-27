@@ -7,6 +7,10 @@ class Marketplace
       def initialize(order)
         self.order = order
       end
+
+      def dom_id
+        super(order, :email_receipt)
+      end
     end
   end
 end

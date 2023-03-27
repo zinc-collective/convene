@@ -29,8 +29,9 @@ en:
         notification:
           subject: "Order Received for %{marketplace_name}: %{order_id}"
           placed_at: "Received At %{placed_at}"
-    product:
-      index:
+    orders:
+      show:
+        link_to: "Order %{order_id}"
     products:
       index:
         link_to: "Configure Products"
