@@ -14,4 +14,17 @@ RSpec.describe Marketplace::Marketplace, type: :model do
       specify { expect { marketplace.destroy }.not_to change(orders, :count) }
     end
   end
+
+  describe "#delivery_window" do
+    subject(:marketplace) { described_class.new }
+
+    it "defaults to nil" do
+      expect(marketplace.delivery_window).to be_nil
+    end
+
+    it "is a Time type, not just a string" do
+      marketplace.delivery_window = 2.days.from_now
+      expect(marketplace.delivery_window).to be_a(Time)
+    end
+  end
 end

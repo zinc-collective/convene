@@ -36,7 +36,7 @@ class Marketplace
       return marketplace.delivery_window if marketplace.delivery_window.present?
       return nil if super.blank?
 
-      DateTime.parse(super) || 48.hours.from_now
+      DateTime.parse(super)
     rescue Date::Error => _e
       48.hours.from_now
     end

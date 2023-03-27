@@ -23,13 +23,16 @@ RSpec.describe Marketplace::MarketplacesController, type: :request do
   end
 
   describe "#update" do
-    before { sign_in(space, member) }
+    before do
+      sign_in(space, member)
+      freeze_time
+    end
 
     it "updates the attributes" do
-      put polymorphic_path(marketplace.location), params: {marketplace: {delivery_fee: 50.00, delivery_window: "Tomorrow, mahhhhn...", order_by: "10AM"}}
+      put polymorphic_path(marketplace.location), params: {marketplace: {delivery_fee: 50.00, delivery_window: 2.hours.from_now, order_by: "10AM"}}
 
       expect(marketplace.reload.delivery_fee_cents).to eq(50_00)
-      expect(marketplace.reload.delivery_window).to eq("Tomorrow, mahhhhn...")
+      expect(marketplace.reload.delivery_window).to eq(2.hours.from_now)
       expect(marketplace.reload.order_by).to eq("10AM")
     end
   end

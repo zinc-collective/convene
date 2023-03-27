@@ -64,6 +64,7 @@ RSpec.configure do |config|
 
   config.include(AuthHelpers, type: :request)
   config.include(DomHelpers, type: :request)
+  config.include(ActiveSupport::Testing::TimeHelpers)
 
   config.include ViewComponent::TestHelpers, type: :component
 end
