@@ -33,6 +33,10 @@ class Marketplace
 
     delegate :delivery_fee, to: :marketplace
 
+    def marketplace_name
+      marketplace.room.name
+    end
+
     def price_total
       product_total + delivery_fee + tax_total
     end
