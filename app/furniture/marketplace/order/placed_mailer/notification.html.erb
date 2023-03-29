@@ -1,0 +1,5 @@
+<%= render Marketplace::Order::EmailReceiptComponent.new(order) do |receipt_component| %>
+  <% receipt_component.with_placed_at do %>
+    <%= t('.placed_at', placed_at: order.placed_at) %>
+  <%- end %>
+<%- end %>
