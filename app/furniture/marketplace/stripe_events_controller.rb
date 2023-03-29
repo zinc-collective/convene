@@ -23,8 +23,8 @@ class Marketplace
 
         order.update(status: :paid, placed_at: DateTime.now)
 
-        OrderReceivedMailer.notification(order).deliver_later
-        OrderPlacedMailer.notification(order).deliver_later
+        Order::ReceivedMailer.notification(order).deliver_later
+        Order::PlacedMailer.notification(order).deliver_later
 
         Stripe::Transfer.create({
           # Leave the Stripe Fees in the `Distributor`'s account
