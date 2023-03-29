@@ -26,4 +26,4 @@ RUN su vscode -c "sudo wget https://github.com/DarthSim/overmind/releases/downlo
                     sudo chmod +x ~/.local/bin/overmind && \
                     sudo apt update && \
                     sudo apt install -y tmux graphviz firefox-esr xvfb && \
-                    rm -rf /var/lib/apt/lists/*" 2>&1
+                    sudo rm -rf /var/lib/apt/lists/*" 2>&1
