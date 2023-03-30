@@ -14,6 +14,9 @@ if ! [ "`docker inspect -f {{.State.Running}} convene-db-1`"=="true" ] || \
 fi
 
 
+# TODO: Add timing to docker-compose up above block and bin/setup block below; report to respective files
+# TODO: Add wait to bin/run section to grep output file for trigger that is finished setting up?
+
 Xvfb $DISPLAY -ac &> .devcontainer/output/Xvfb.out &
 
 if [ ! -f .env ]; then
@@ -21,7 +24,8 @@ if [ ! -f .env ]; then
     sed -i "/^# PG/s/^# //g" .env
 fi
 echo "Run 'bin/setup'"
-bin/setup &> .devcontainer/output/bin_setup.out
+setup_out='.devcontainer/output/bin_setup.out'
+time $( bin/setup &> $setup_out ) >> $setup_out # output time to file, too
 
 rm -f .overmind.sock
 echo "Run 'bin/run'"
