@@ -2,6 +2,7 @@
 
   <%- if !cart.ready_for_shopping? %>
     <%= form_with model: cart.location do |cart_form| %>
+      <%= cart_form.hidden_field :status %>
       <%= render "text_field", attribute: :delivery_address, form: cart_form %>
       <%- if cart.marketplace.delivery_window.present? %>
         <%= render "text_field", attribute: :delivery_window, form: cart_form, disabled?: true %>

@@ -42,6 +42,9 @@ FactoryBot.define do
   factory :marketplace_cart, class: "Marketplace::Cart" do
     marketplace
     shopper { association(:marketplace_shopper) }
+    contact_email { Faker::Internet.safe_email}
+    delivery_address { Faker::Address.full_address }
+    contact_phone_number { Faker::PhoneNumber.phone_number }
 
     trait :with_products do
       transient do

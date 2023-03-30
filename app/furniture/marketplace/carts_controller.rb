@@ -1,5 +1,11 @@
 class Marketplace
   class CartsController < Controller
+    def create
+      authorize(cart)
+      cart.save
+      redirect_to cart.room.location
+    end
+
     def update
       authorize(cart)
       cart.update(cart_params)
@@ -14,7 +20,11 @@ class Marketplace
     end
 
     def cart
-      @cart ||= policy_scope(marketplace.carts).find(params[:id])
+      @cart ||= if params[:id]
+        policy_scope(marketplace.carts).find(params[:id])
+      else
+        policy_scope(marketplace.carts).new(cart_params)
+      end
     end
 
     def cart_params

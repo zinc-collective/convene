@@ -17,8 +17,11 @@ class Marketplace
 
     # this feels like it is starting to want to be it's own model...
     has_encrypted :delivery_address
+    validates :delivery_address, presence: true
     has_encrypted :contact_phone_number
+    validates :contact_phone_number, presence: true
     has_encrypted :contact_email
+    validates :contact_email, presence: true
     def contact_email
       super.presence || shopper.person&.email
     end
