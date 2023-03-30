@@ -1,6 +1,10 @@
 
 en:
   marketplace:
+    delivery_areas:
+      index:
+        link_to: "Delivery Areas"
+      new: "Add Delivery Area"
     delivery_window:
       edit: "Change Delivery Window"
     delivery_info:
