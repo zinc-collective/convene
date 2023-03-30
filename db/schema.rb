@@ -144,7 +144,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_23_010430) do
     t.uuid "shopper_id"
     t.string "status", default: "pre_checkout", null: false
     t.string "stripe_session_id"
-    t.string "contact_email"
     t.text "delivery_address_ciphertext"
     t.string "contact_phone_number_ciphertext"
     t.datetime "placed_at"

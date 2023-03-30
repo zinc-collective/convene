@@ -36,3 +36,7 @@ en:
       create: "Create ➕"
   home:
     title: "Home"
+  time:
+    formats:
+      day_month_date_year_hour_minute: "%A %B %d, %Y %l:%M%p"
+      day_month_date_hour_minute: "%A %B %d %l:%M%p"
