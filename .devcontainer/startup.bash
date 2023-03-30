@@ -3,12 +3,12 @@
 echo "See files in '.devcontainer/output' for errors and other info"
 
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
-if ! [ "`docker inspect -f {{.State.Running}} convene-db-1`"=="true" ] || \
-   ! [ "`docker inspect -f {{.State.Running}} convene-redis-1`"=="true" ]; then
+if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
+   [ "`docker inspect -f {{.State.Running}} convene-redis-1`" != "true" ]; then
     echo "Startup containers"
     docker compose up &> .devcontainer/output/docker_compose_up.out &
-    until [ "`docker inspect -f {{.State.Running}} convene-db-1`"=="true" ] && \
-        [ "`docker inspect -f {{.State.Running}} convene-redis-1`"=="true" ]; do
+    until [ "`docker inspect -f {{.State.Running}} convene-db-1`" == "true" ] && \
+        [ "`docker inspect -f {{.State.Running}} convene-redis-1`" == "true" ]; do
         sleep 0.1;
     done;
 fi
