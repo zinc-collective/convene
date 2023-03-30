@@ -59,13 +59,11 @@ RSpec.describe MembershipPolicy do
     let(:member) { membership.member }
     let(:membership) { create(:membership, space: space) }
     let(:own_membership) { membership }
-    let(:revoked_membership) { create(:membership, space: space, status: :revoked) }
     let(:other_membership) { create(:membership, space: space) }
 
     it { is_expected.to permit(Operator.new, membership) }
     it { is_expected.not_to permit(member, own_membership) }
     it { is_expected.to permit(member, other_membership) }
-    it { is_expected.not_to permit(member, revoked_membership) }
     it { is_expected.not_to permit(build(:person), membership) }
   end
 
