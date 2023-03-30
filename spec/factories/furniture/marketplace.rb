@@ -122,7 +122,7 @@ FactoryBot.define do
   end
 
   factory :marketplace_delivery_area, class: "Marketplace::DeliveryArea" do
-    label { "#{Faker::Address.city}" }
+    label { Faker::Address.city }
     price { Faker::Commerce.price }
   end
 end
