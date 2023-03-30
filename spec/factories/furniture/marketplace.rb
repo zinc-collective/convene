@@ -78,4 +78,9 @@ FactoryBot.define do
     label { "#{Faker::TvShows::RuPaul.queen} Tax" }
     tax_rate { (1..45).to_a.sample }
   end
+
+  factory :marketplace_delivery_area, class: "Marketplace::DeliveryArea" do
+    label { "#{Faker::Address.city}" }
+    price { Faker::Commerce.price }
+  end
 end
