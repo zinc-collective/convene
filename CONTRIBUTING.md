@@ -93,7 +93,8 @@ Then, run `bin/setup` to install Ruby and Node dependencies and set up the
 database.
 
 Once setup completes, configure your local development environment.
-1. Open `.env` and make any changes.
+1. Copy `.env.sample` to `.env`
+1. Update variables in `.env` as needed
 
 Once you have completed configuration; run `bin/run`. You now should be able to open
 http://localhost:3000 and see Convene.
