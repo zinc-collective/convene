@@ -16,7 +16,7 @@ class Marketplace
     has_many :ordered_products, inverse_of: :product, dependent: :destroy
     has_many :orders, through: :ordered_products, inverse_of: :products
 
-    has_many :product_tax_rates, inverse_of: :product
+    has_many :product_tax_rates, inverse_of: :product, dependent: :destroy
     has_many :tax_rates, through: :product_tax_rates, inverse_of: :products
 
     attribute :name, :string
