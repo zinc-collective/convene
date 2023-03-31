@@ -1,7 +1,7 @@
 # A Room in Convene acts as a gathering place.
 class Room < ApplicationRecord
   # The space whose settings govern the default publicity and access controls for the Room.
-  belongs_to :space
+  belongs_to :space, inverse_of: :rooms
   include WithinLocation
   self.location_parent = :space
 
@@ -49,8 +49,7 @@ class Room < ApplicationRecord
     publicity_level&.to_sym == :unlisted
   end
 
-  has_many :furnitures, dependent: :destroy_async
-  accepts_nested_attributes_for :furnitures
+  has_many :furnitures, dependent: :destroy_async, inverse_of: :room
 
   def full_slug
     "#{space.slug}--#{slug}"
