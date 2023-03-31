@@ -50,6 +50,7 @@ class Room < ApplicationRecord
   end
 
   has_many :furnitures, dependent: :destroy_async, inverse_of: :room
+  accepts_nested_attributes_for :furnitures
 
   def full_slug
     "#{space.slug}--#{slug}"
