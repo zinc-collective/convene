@@ -43,7 +43,7 @@
     "prettier": "^2.8.7",
     "promise-retry": "^2.0.1",
     "selenium-webdriver": "^4.8.2",
-    "webpack-dev-server": "^4.13.1"
+    "webpack-dev-server": "^4.13.2"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
