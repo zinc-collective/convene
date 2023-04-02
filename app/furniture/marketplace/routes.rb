@@ -7,6 +7,7 @@ class Marketplace
         router.resources :carts do
           router.resources :cart_products
           router.resource :checkout, only: [:show, :create]
+          router.resource :delivery, controller: "cart/deliveries"
         end
 
         router.resources :tax_rates
