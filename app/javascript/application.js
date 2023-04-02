@@ -1,5 +1,8 @@
 // Entry point for the build script in your package.json
 
+import { initializeSentry } from "./sentry.js";
+initializeSentry();
+
 import * as ActiveStorage from "@rails/activestorage";
 ActiveStorage.start();
 
