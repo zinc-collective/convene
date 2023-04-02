@@ -4,10 +4,6 @@
     text-decoration: none;
     @apply pr-2;
 
-    &.--enter::before {
-      content: "🚪";
-    }
-
     &.--configure::before {
       content: "⚙️";
     }
