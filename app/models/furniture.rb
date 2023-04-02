@@ -11,8 +11,8 @@ class Furniture < ApplicationRecord
 
   ranks :slot, with_same: [:room_id]
 
-  belongs_to :room
-  delegate :space, to: :room
+  belongs_to :room, inverse_of: :furnitures
+  has_one :space, through: :room, inverse_of: :furnitures
 
   attribute :furniture_kind, :string
 
