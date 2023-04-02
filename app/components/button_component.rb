@@ -8,7 +8,8 @@ class ButtonComponent < ViewComponent::Base
     method: :put,
     confirm: nil,
     disabled: false,
-    classes: nil
+    classes: nil,
+    turbo_stream: nil
   )
     @label = label
     @title = title
@@ -17,6 +18,7 @@ class ButtonComponent < ViewComponent::Base
     @confirm = confirm
     @disabled = disabled
     @classes = classes
+    @turbo_stream = turbo_stream
   end
 
   attr_accessor :classes
@@ -25,6 +27,7 @@ class ButtonComponent < ViewComponent::Base
 
   def data
     data = {turbo_method: @method, turbo: true}
+    data[:turbo_stream] = true if @turbo_stream
     if @confirm.present?
       data[:turbo_confirm] = @confirm
       data[:confirm] = @confirm
