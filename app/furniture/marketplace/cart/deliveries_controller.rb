@@ -3,34 +3,17 @@ class Marketplace
     class DeliveriesController < Controller
       def edit
         authorize(delivery)
-        respond_to do |format|
-          format.html
-          format.turbo_stream do
-            render turbo_stream: [turbo_stream.replace(dom_id(delivery), partial: "form")]
-          end
-        end
+        render turbo_stream: [turbo_stream.replace(dom_id(delivery), partial: "form")]
       end
 
       def update
         authorize(delivery)
         delivery.update(delivery_params)
-        respond_to do |format|
-
-          format.html do
-            if delivery.persisted?
-              redirect_to delivery.room.location
-            else
-              render :edit
-            end
-          end
-          format.turbo_stream do
-            render turbo_stream: [turbo_stream.replace(dom_id(delivery), delivery)]
-          end
-        end
+        render turbo_stream: [turbo_stream.replace(dom_id(delivery), delivery)]
       end
 
       helper_method def delivery
-        @delivery ||= policy_scope(marketplace.carts).find(params[:cart_id]).becomes(Delivery)
+        @delivery ||= policy_scope(marketplace.carts).find(params[:cart_id]).delivery
       end
 
       def delivery_params

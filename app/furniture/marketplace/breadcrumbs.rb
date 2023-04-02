@@ -71,8 +71,3 @@ crumb :edit_tax_rate do |tax_rate|
   parent :marketplace_tax_rates, tax_rate.marketplace
   link "Edit Tax Rate '#{tax_rate.label}'", marketplace.location(:new, child: :tax_rate)
 end
-
-crumb :edit_marketplace_cart_delivery do |delivery|
-  parent :marketplace, delivery.marketplace
-  link t("marketplace.cart.delivieres.edit.link_to")
-end

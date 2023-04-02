@@ -5,7 +5,7 @@ class Marketplace
     class DeliveryPolicy < Policy
       alias_method :delivery, :object
       def permitted_attributes(_params = nil)
-        %i[delivery_address contact_phone_number delivery_window]
+        %i[delivery_address contact_email contact_phone_number delivery_window]
       end
 
       class Scope < ApplicationScope

@@ -10,7 +10,7 @@ class Marketplace
       validates :delivery_window, presence: true
 
       def cart
-        @cart ||= self.becomes(Cart)
+        @cart ||= becomes(Cart)
       end
     end
   end
