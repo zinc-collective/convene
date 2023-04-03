@@ -1,13 +1,13 @@
 <%- breadcrumb :edit_marketplace, marketplace %>
 
-<div class="max-w-2xl self-stretch mx-auto">
+<div class="max-w-3xl self-stretch mx-auto">
   <%= render "form", marketplace: marketplace %>
   <p class="flex justify-between my-5 flex-wrap">
     <%- if policy(marketplace.products.new).create? %>
       <%= link_to t('marketplace.products.index.link_to'), marketplace.location(child: :products) %>
     <%- end %>
 
-<%- if policy(marketplace.products.new).create? %>
+    <%- if policy(marketplace.products.new).create? %>
       <%= link_to t('marketplace.delivery_areas.index.link_to'), marketplace.location(child: :delivery_areas) %>
     <%- end %>
 
