@@ -1,6 +1,6 @@
 require "rails_helper"
 
-# rubocop:disable Rspec/VerifiedDoubles
+# rubocop:disable RSpec/VerifiedDoubles
 RSpec.describe Marketplace::StripeAccountsController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
@@ -49,4 +49,4 @@ RSpec.describe Marketplace::StripeAccountsController, type: :request do
     end
   end
 end
-# rubocop:enable Rspec/VerifiedDoubles
+# rubocop:enable RSpec/VerifiedDoubles

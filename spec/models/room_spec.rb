@@ -42,7 +42,7 @@ RSpec.describe Room do
       it { is_expected.to be_listed }
     end
 
-    context "when set to 'listed'" do
+    context "when set to 'unlisted'" do
       subject { described_class.new(publicity_level: "unlisted", space: space) }
 
       it { is_expected.to be_unlisted }
