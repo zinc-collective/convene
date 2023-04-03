@@ -33,7 +33,7 @@ RSpec.describe Room do
 
   describe "#publicity_level" do
     it { is_expected.to validate_presence_of(:publicity_level) }
-    it { is_expected.to validate_inclusion_of(:publicity_level).in_array(["listed", "unlisted", :listed, :unlisted]) }
+    it { is_expected.to define_enum_for(:publicity_level).backed_by_column_of_type(:string) }
 
     context "when set to 'listed'" do
       subject { described_class.new(publicity_level: "listed", space: space) }

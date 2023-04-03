@@ -16,38 +16,23 @@ class Room < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :scoped, scope: :space
 
-  ACCESS_LEVELS = %i[internal public].freeze
   # A Room's Access Level indicates what a participant must know in order to gain access to the room.
   # `internal` only Members may access the Room
-  attribute :access_level, :string, default: :public
-
-  def internal?
-    access_level&.to_sym == :internal
-  end
-
-  def public?
-    access_level&.to_sym == :public
-  end
+  enum access_level: {
+    public: "public",
+    internal: "internal"
+  }, _suffix: :access
+  alias_method :internal?, :internal_access?
+  alias_method :public?, :public_access?
 
   # A Room's Publicity Level indicates how visible the room is.
   # `listed` - The room is discoverable by anyone in the space lobby.
   # `unlisted` - The room is not listed.
-
-  PUBLICITY_LEVELS = %i[listed unlisted].freeze
-  attribute :publicity_level, :string
-  validates :publicity_level, presence: true, inclusion: {in: PUBLICITY_LEVELS + PUBLICITY_LEVELS.map(&:to_s)}
-
-  scope :listed, -> { where(publicity_level: :listed) }
-  scope :unlisted, -> { where(publicity_level: :unlisted) }
-  scope :public_access, -> { where(access_level: :public) }
-
-  def listed?
-    publicity_level&.to_sym == :listed
-  end
-
-  def unlisted?
-    publicity_level&.to_sym == :unlisted
-  end
+  enum publicity_level: {
+    listed: "listed",
+    unlisted: "unlisted"
+  }
+  validates :publicity_level, presence: true
 
   has_many :furnitures, dependent: :destroy_async, inverse_of: :room
   accepts_nested_attributes_for :furnitures

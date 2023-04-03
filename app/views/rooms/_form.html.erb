@@ -5,8 +5,8 @@
 
     <h3>Privacy and Security</h3>
 
-    <%= render "select", attribute: :publicity_level, options: Room::PUBLICITY_LEVELS.map(&:to_s), form: room_form %>
-    <%= render "select", attribute: :access_level, options: Room::ACCESS_LEVELS.map(&:to_s), form: room_form %>
+    <%= render "radio_group", attribute: :publicity_level, options: Room::publicity_levels.values, form: room_form %>
+    <%= render "radio_group", attribute: :access_level, options: Room::access_levels.values, form: room_form %>
 
     <footer>
       <%- if policy(room).destroy? && room.persisted? %>
