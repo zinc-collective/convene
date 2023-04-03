@@ -24,17 +24,12 @@ module Spec
 
       def matches?(response)
         @response = response
-        assert_turbo_stream(action: action, target: target)
-        if rendering.present?
+        assert_turbo_stream(action: action, target: target) do
           assert_dom_equal(turbo_stream.action(action, target, content, **rendering), response.body)
         end
       rescue Minitest::Assertion => e
         self.failing_select = e
         false
-      end
-
-      private def strip_whitespace(html)
-        html.gsub(/$\s*/, "").gsub(/>\s+</, "><")
       end
 
       def assertions

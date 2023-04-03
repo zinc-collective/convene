@@ -3,16 +3,16 @@ class Marketplace
     class DeliveriesController < Controller
       def edit
         authorize(delivery)
-        render turbo_stream: [turbo_stream.replace(dom_id(delivery), partial: "form")]
+        render turbo_stream: [turbo_stream.replace(delivery, partial: "form")]
       end
 
       def update
         authorize(delivery)
         delivery.update(delivery_params)
         if delivery.errors.present?
-          render turbo_stream: [turbo_stream.replace(dom_id(delivery), partial: "form")]
+          render turbo_stream: [turbo_stream.replace(delivery, partial: "form")]
         else
-          render turbo_stream: [turbo_stream.replace(dom_id(delivery), delivery)]
+          render turbo_stream: [turbo_stream.replace(delivery)]
         end
       end
 

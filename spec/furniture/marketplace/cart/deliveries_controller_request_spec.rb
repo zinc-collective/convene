@@ -4,6 +4,19 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
+  let(:shopper) { create(:marketplace_shopper, person: person) }
+  let(:person) { nil }
+  let(:cart) { create(:marketplace_cart, marketplace: marketplace, shopper: shopper) }
+  let(:delivery) { cart.delivery }
+
+  describe "#edit" do
+    subject(:perform_request) do
+      get polymorphic_path(delivery.location(:edit), as: :turbo_stream)
+      response
+    end
+
+    it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "form") }
+  end
 
   describe "#update" do
     subject(:perform_request) do
@@ -12,14 +25,11 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
     end
 
     let(:delivery_attributes) { attributes_for(:marketplace_cart_delivery) }
-    let(:shopper) { create(:marketplace_shopper, person: person) }
-    let(:cart) { create(:marketplace_cart, marketplace: marketplace, shopper: shopper) }
-    let(:delivery) { cart.delivery }
 
     context "when a `Guest`" do
       let(:person) { nil }
 
-      it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "delivery") }
+      it { is_expected.to have_rendered_turbo_stream(:replace, delivery) }
 
       specify do
         expect { perform_request }
@@ -35,7 +45,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
 
       before { sign_in(space, person) }
 
-      it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "delivery") }
+      it { is_expected.to have_rendered_turbo_stream(:replace, delivery) }
 
       specify do
         expect { perform_request }
