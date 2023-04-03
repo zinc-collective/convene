@@ -1,22 +1,17 @@
+<div id="<%=dom_id(delivery) %>">
+  <div class="flex justify-between flex-wrap">
+    <div class="flex items-center justify-between text-sm">
+      <span>Delivering to:</span>
+      <%= delivery.delivery_address %>
+    </div>
 
-<%- if delivery.errors.present? %>
-  <%= render "form", delivery: delivery %>
-<%- else %>
-  <div id="<%=dom_id(delivery) %>">
-    <div class="flex justify-between flex-wrap">
-      <div class="flex items-center justify-between text-sm">
-        <span>Delivering to:</span>
-        <%= delivery.delivery_address %>
-      </div>
+    <div class="flex items-center justify-between text-sm">
+      <span>Contact Phone Number:</span>
+      <%= delivery.contact_phone_number %>
+    </div>
 
-      <div class="flex items-center justify-between text-sm">
-        <span>Contact Phone Number:</span>
-        <%= delivery.contact_phone_number %>
-      </div>
-
-      <div class="flex items-center justify-between text-sm">
-        <%= render Marketplace::Cart::Delivery::EditButtonComponent.new(delivery) %>
-      </div>
+    <div class="flex items-center justify-between text-sm">
+      <%= render Marketplace::Cart::Delivery::EditButtonComponent.new(delivery) %>
     </div>
   </div>
-<%- end %>
+</div>
