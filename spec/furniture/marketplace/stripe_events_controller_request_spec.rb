@@ -1,6 +1,6 @@
 require "rails_helper"
 # `Stripe` gem doesn't support verified doubles for some reason...
-# rubocop:disable Rspec/VerifiedDoubles
+# rubocop:disable RSpec/VerifiedDoubles
 RSpec.describe Marketplace::StripeEventsController, type: :request do
   let(:marketplace) { create(:marketplace, :with_stripe_utility, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234") }
   let(:space) { marketplace.space }
@@ -52,4 +52,4 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     end
   end
 end
-# rubocop:enable Rspec/VerifiedDoubles
+# rubocop:enable RSpec/VerifiedDoubles

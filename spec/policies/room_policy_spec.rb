@@ -39,19 +39,46 @@ RSpec.describe RoomPolicy do
   end
 
   describe RoomPolicy::Scope do
-    it "includes all the rooms" do
-      space = create(:space)
-      internal_room = create(:room, :internal, space: space)
-      public_room = create(:room, :public, space: space)
-      listed_room = create(:room, :listed, space: space)
-      unlisted_room = create(:room, :unlisted, space: space)
+    subject(:results) { described_class.new(person, space.rooms).resolve }
 
-      results = described_class.new(nil, space.rooms).resolve
+    let(:space) { room.space }
+    let!(:internal_room) { create(:room, :internal, space: space) }
+    let!(:public_room) { create(:room, :public, space: space) }
+    let!(:listed_room) { create(:room, :listed, space: space) }
+    let!(:unlisted_room) { create(:room, :unlisted, space: space) }
 
-      expect(results).to include(internal_room)
-      expect(results).to include(public_room)
-      expect(results).to include(unlisted_room)
-      expect(results).to include(listed_room)
+    context "when person is an operator" do
+      let(:person) { operator }
+
+      it "returns all the rooms" do
+        expect(results).to include(internal_room)
+        expect(results).to include(public_room)
+        expect(results).to include(unlisted_room)
+        expect(results).to include(listed_room)
+      end
+    end
+
+    context "when person is a member" do
+      let(:person) { member }
+
+      it "returns all the rooms" do
+        expect(results).to include(internal_room)
+        expect(results).to include(public_room)
+        expect(results).to include(unlisted_room)
+        expect(results).to include(listed_room)
+      end
+    end
+
+    context "when person is not a member" do
+      let(:person) { non_member }
+
+      it "returns only the public rooms" do
+        expect(results).to include(public_room)
+        expect(results).to include(unlisted_room)
+        expect(results).to include(listed_room)
+
+        expect(results).not_to include(internal_room)
+      end
     end
   end
 end

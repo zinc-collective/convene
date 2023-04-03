@@ -40,6 +40,7 @@ class Room < ApplicationRecord
 
   scope :listed, -> { where(publicity_level: :listed) }
   scope :unlisted, -> { where(publicity_level: :unlisted) }
+  scope :public_access, -> { where(access_level: :public) }
 
   def listed?
     publicity_level&.to_sym == :listed
