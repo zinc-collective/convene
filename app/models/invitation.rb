@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Invitation < ApplicationRecord
-  self.location_parent = :space
+  location(parent: :space)
 
   belongs_to :space, inverse_of: :invitations
 

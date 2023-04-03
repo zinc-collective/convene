@@ -3,7 +3,7 @@
 class Marketplace
   class Cart < Record
     self.table_name = "marketplace_orders"
-    self.location_parent = :marketplace
+    location(parent: :marketplace)
 
     default_scope { where(status: :pre_checkout) }
 

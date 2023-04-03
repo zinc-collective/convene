@@ -1,7 +1,6 @@
 class Journal
   class Entry < ApplicationRecord
-    include WithinLocation
-    self.location_parent = :journal
+    location(parent: :journal)
 
     self.table_name = "journal_entries"
     include RendersMarkdown

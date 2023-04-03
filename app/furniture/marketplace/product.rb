@@ -3,7 +3,7 @@
 class Marketplace
   class Product < Record
     self.table_name = "marketplace_products"
-    self.location_parent = :marketplace
+    location(parent: :marketplace)
 
     extend StripsNamespaceFromModelName
 
