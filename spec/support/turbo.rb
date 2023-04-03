@@ -1,7 +1,7 @@
 module Spec
   module Turbo
     def have_rendered_turbo_stream(action, target, content = nil, **rendering, &block)
-      HaveRenderedTurboStream.new(action, target, content, view: view, **rendering, &block)
+      HaveRenderedTurboStream.new(action, target, content, turbo_stream: controller.send(:turbo_stream), **rendering, &block)
     end
 
     class HaveRenderedTurboStream
@@ -9,16 +9,16 @@ module Spec
       include ::Turbo::TestAssertions
       include Rails::Dom::Testing::Assertions
       include ::ActionDispatch::Assertions::ResponseAssertions
-      attr_accessor :action, :target, :rendering, :view, :content, :callback, :failing_select, :response
+      attr_accessor :action, :target, :rendering, :turbo_stream, :content, :callback, :failing_select, :response
 
       attr_writer :assertions
 
-      def initialize(action, target, content = nil, view:, **rendering, &callback)
+      def initialize(action, target, content = nil, turbo_stream:, **rendering, &callback)
         self.action = action
         self.target = target
         self.content = content
         self.rendering = rendering
-        self.view = view
+        self.turbo_stream = turbo_stream
         self.callback = callback
       end
 
@@ -26,9 +26,7 @@ module Spec
         @response = response
         assert_turbo_stream(action: action, target: target)
         if rendering.present?
-          expected = Nokogiri.parse(strip_whitespace(view.render(**rendering))).canonicalize
-          actual = Nokogiri.parse(strip_whitespace(css_select("*[target='#{dom_id(target)}'] template").inner_html)).canonicalize
-          assert_dom_equal(expected, actual)
+          assert_dom_equal(turbo_stream.action(action, target, content, **rendering), response.body)
         end
       rescue Minitest::Assertion => e
         self.failing_select = e
@@ -60,5 +58,4 @@ end
 
 RSpec.configure do |config|
   config.include(Spec::Turbo, type: :request)
-  config.include(ActionView::TestCase::Behavior, type: :request)
 end
