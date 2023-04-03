@@ -7,10 +7,11 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
 
   describe "#update" do
     subject(:perform_request) do
-      put polymorphic_path(delivery.location), as: :turbo_stream, params: {delivery: {delivery_address: "123 N West St", delivery_window: "2022-01-05 15:00:00", contact_email: "contact@example.com", contact_phone_number: "(415)-123-4567"}}
-      response
+      put polymorphic_path(delivery.location), as: :turbo_stream, params: {delivery: delivery_attributes}
+      response.tap { delivery.reload }
     end
 
+    let(:delivery_attributes) { attributes_for(:marketplace_cart_delivery) }
     let(:shopper) { create(:marketplace_shopper, person: person) }
     let(:cart) { create(:marketplace_cart, marketplace: marketplace, shopper: shopper) }
     let(:delivery) { cart.delivery }
@@ -18,10 +19,15 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
     context "when a `Guest`" do
       let(:person) { nil }
 
-      it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "marketplace/cart/deliveries/delivery") }
-      specify { expect { perform_request }.to change { delivery.reload.delivery_address }.from(nil).to("123 N West St") }
-      specify { expect { perform_request }.to change { delivery.reload.contact_phone_number }.from(nil).to("(415)-123-4567") }
-      specify { expect { perform_request }.to change { delivery.reload.delivery_window }.from(nil).to(DateTime.parse("2022-01-05 15:00:00")) }
+      it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "delivery") }
+
+      specify do
+        expect { perform_request }
+          .to change(delivery, :contact_email).to(delivery_attributes[:contact_email])
+          .and change(delivery, :contact_phone_number).to(delivery_attributes[:contact_phone_number])
+          .and change(delivery, :delivery_window).to(DateTime.parse(delivery_attributes[:delivery_window]))
+          .and change(delivery, :delivery_address).to(delivery_attributes[:delivery_address])
+      end
     end
 
     context "when a `Neighbor`" do
@@ -29,13 +35,20 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
 
       before { sign_in(space, person) }
 
-      it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "marketplace/cart/deliveries/delivery") }
-      specify { expect { perform_request }.to change { delivery.reload.delivery_address }.from(nil).to("123 N West St") }
-      specify { expect { perform_request }.to change { delivery.reload.contact_phone_number }.from(nil).to("(415)-123-4567") }
+      it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "delivery") }
+
+      specify do
+        expect { perform_request }
+          .to change(delivery, :contact_email).to(delivery_attributes[:contact_email])
+          .and change(delivery, :contact_phone_number).to(delivery_attributes[:contact_phone_number])
+          .and change(delivery, :delivery_window).to(DateTime.parse(delivery_attributes[:delivery_window]))
+          .and change(delivery, :delivery_address).to(delivery_attributes[:delivery_address])
+      end
 
       context "when the delivery is invalid" do
-        # @todo this doesn't actually assert the content matches....
-        it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "marketplace/cart/deliveries/form") }
+        let(:delivery_attributes) { attributes_for(:marketplace_cart_delivery).merge(contact_phone_number: "") }
+
+        it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "form") }
       end
     end
   end

@@ -9,7 +9,11 @@ class Marketplace
       def update
         authorize(delivery)
         delivery.update(delivery_params)
-        render turbo_stream: [turbo_stream.replace(dom_id(delivery), delivery)]
+        if delivery.errors.present?
+          render turbo_stream: [turbo_stream.replace(dom_id(delivery), partial: "form")]
+        else
+          render turbo_stream: [turbo_stream.replace(dom_id(delivery), delivery)]
+        end
       end
 
       helper_method def delivery
