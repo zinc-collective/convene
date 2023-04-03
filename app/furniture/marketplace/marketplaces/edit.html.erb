@@ -1,8 +1,8 @@
 <%- breadcrumb :edit_marketplace, marketplace %>
 
-<div class="max-w-2xl self-stretch mx-auto">
+<div class="max-w-2xl self-stretch md:container md:mx-auto px-40">
   <%= render "form", marketplace: marketplace %>
-  <p class="flex justify-between my-5 flex-wrap">
+  <p class="flex my-5 flex-col">
     <%- if policy(marketplace.products.new).create? %>
       <%= link_to t('marketplace.products.index.link_to'), marketplace.location(child: :products) %>
     <%- end %>
