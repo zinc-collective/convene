@@ -2,8 +2,7 @@
 class Room < ApplicationRecord
   # The space whose settings govern the default publicity and access controls for the Room.
   belongs_to :space, inverse_of: :rooms
-  include WithinLocation
-  self.location_parent = :space
+  location(parent: :space)
 
   # Human-friendly description of the room.
   attribute :name, :string

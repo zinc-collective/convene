@@ -3,8 +3,7 @@
 # Renders some HTML in a {Room}.
 class MarkdownTextBlock < Furniture
   include RendersMarkdown
-
-  self.location_parent = :room
+  location(parent: :room)
 
   setting :content, default: ""
 

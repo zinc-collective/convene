@@ -1,7 +1,7 @@
 class Marketplace
   class Order < Record
     self.table_name = "marketplace_orders"
-    self.location_parent = :marketplace
+    location(parent: :marketplace)
 
     belongs_to :marketplace, inverse_of: :orders
     delegate :space, :room, to: :marketplace

@@ -3,8 +3,6 @@
 # A Space is a collection of infrastructure resources
 # for collaboration
 class Space < ApplicationRecord
-  include WithinLocation
-
   # The fully-qualified domain to enter the space.
   # Spaces without a branded_domain are still accessible via their slug.
   # The branded_domain must be unique to ensure we don't accidentally place

@@ -1,3 +1,5 @@
+# Builds the appropriate collection to pass to `polymorphic_url` and `polymorphic_path`
+# based upon where the given domain object lives within the object graph
 module WithinLocation
   def self.included(model)
     model.extend(ClassMethods)
@@ -33,9 +35,10 @@ module WithinLocation
 
   module ClassMethods
     attr_accessor :location_parent, :routed_as
-    def location(on:, routed_as: :resources)
-      self.location_parent = on
-      self.routed_as = routed_as
+
+    def location(parent:, routed_as: :resources)
+      @location_parent = parent
+      @routed_as = routed_as
     end
   end
 
