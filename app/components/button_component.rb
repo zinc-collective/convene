@@ -9,7 +9,7 @@ class ButtonComponent < ViewComponent::Base
     confirm: nil,
     disabled: false,
     classes: nil,
-    turbo_stream: nil
+    turbo_stream: false
   )
     @label = label
     @title = title
