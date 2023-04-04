@@ -220,7 +220,7 @@ GEM
     nokogiri (1.14.2)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    pagy (6.0.2)
+    pagy (6.0.3)
     parallel (1.22.1)
     parser (3.2.1.1)
       ast (~> 2.4.1)
