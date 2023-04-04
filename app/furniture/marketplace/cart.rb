@@ -29,8 +29,12 @@ class Marketplace
       cart_products.sum(0, &:price_total)
     end
 
+    def delivery
+      @delivery ||= becomes(Delivery)
+    end
+
     def delivery_window
-      return marketplace.delivery_window if marketplace.delivery_window.present?
+      return marketplace.delivery_window if marketplace&.delivery_window.present?
       return nil if super.blank?
 
       DateTime.parse(super) || 48.hours.from_now
