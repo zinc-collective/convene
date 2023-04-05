@@ -8,6 +8,14 @@ RSpec.describe Invitation do
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_presence_of(:name) }
 
+  describe "#email=" do
+    it "is forced to lower case" do
+      invitation = described_class.new
+      invitation.email = "User@example.Com"
+      expect(invitation.email).to eql("user@example.com")
+    end
+  end
+
   describe "#invitor_display_name" do
     it "is the invitors display name" do
       invitor = build(:person)
