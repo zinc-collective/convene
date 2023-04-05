@@ -15,6 +15,9 @@ class Marketplace
       delivery_area
     end
 
+    def edit
+    end
+
     def delivery_area_params
       policy(DeliveryArea).permit(params.require(:delivery_area))
     end
