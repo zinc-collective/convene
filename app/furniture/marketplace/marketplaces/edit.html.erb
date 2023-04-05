@@ -7,7 +7,7 @@
       <%= link_to t('marketplace.products.index.link_to'), marketplace.location(child: :products) %>
     <%- end %>
 
-    <%- if policy(marketplace.products.new).create? %>
+    <%- if policy(marketplace.delivery_areas.new).create? %>
       <%= link_to t('marketplace.delivery_areas.index.link_to'), marketplace.location(child: :delivery_areas) %>
     <%- end %>
 
