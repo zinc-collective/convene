@@ -1,7 +1,7 @@
 class Marketplace
   class Order < Record
     self.table_name = "marketplace_orders"
-    self.location_parent = :marketplace
+    location(parent: :marketplace)
 
     belongs_to :marketplace, inverse_of: :orders
     delegate :space, :room, to: :marketplace
@@ -14,9 +14,6 @@ class Marketplace
     has_encrypted :delivery_address
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
-    def contact_email
-      super.presence || shopper.person&.email
-    end
 
     enum status: {
       pre_checkout: "pre_checkout",

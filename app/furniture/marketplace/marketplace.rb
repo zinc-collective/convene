@@ -2,7 +2,7 @@
 
 class Marketplace
   class Marketplace < Furniture
-    self.location_parent = :room
+    location(parent: :room)
 
     has_many :products, inverse_of: :marketplace, dependent: :destroy
     has_many :carts, inverse_of: :marketplace, dependent: :destroy

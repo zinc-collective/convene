@@ -3,7 +3,7 @@
 class Marketplace
   class Cart < Record
     self.table_name = "marketplace_orders"
-    self.location_parent = :marketplace
+    location(parent: :marketplace)
 
     default_scope { where(status: :pre_checkout) }
 
@@ -19,9 +19,6 @@ class Marketplace
     has_encrypted :delivery_address
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
-    def contact_email
-      super.presence || shopper.person&.email
-    end
 
     enum status: {
       pre_checkout: "pre_checkout",
@@ -32,8 +29,12 @@ class Marketplace
       cart_products.sum(0, &:price_total)
     end
 
+    def delivery
+      @delivery ||= becomes(Delivery)
+    end
+
     def delivery_window
-      return marketplace.delivery_window if marketplace.delivery_window.present?
+      return marketplace.delivery_window if marketplace&.delivery_window.present?
       return nil if super.blank?
 
       DateTime.parse(super) || 48.hours.from_now

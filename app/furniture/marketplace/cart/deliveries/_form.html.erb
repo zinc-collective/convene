@@ -1,0 +1,14 @@
+<div id="<%= dom_id(delivery) %>">
+  <%= form_with model: delivery.location do |delivery_form| %>
+    <%= render "text_field", attribute: :delivery_address, form: delivery_form %>
+
+    <%- if delivery.marketplace.delivery_window.present? %>
+      <%= render "text_field", attribute: :delivery_window, form: delivery_form, disabled?: true %>
+    <%- else %>
+      <%= render "datetime_field", attribute: :delivery_window, form: delivery_form %>
+    <%- end %>
+    <%= render "email_field", attribute: :contact_email, form: delivery_form %>
+    <%= render "text_field", attribute: :contact_phone_number, form: delivery_form %>
+    <%= delivery_form.submit %>
+  <%- end %>
+</div>

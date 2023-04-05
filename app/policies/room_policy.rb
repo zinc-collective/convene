@@ -26,7 +26,13 @@ class RoomPolicy < ApplicationPolicy
 
   class Scope < ApplicationScope
     def resolve
-      scope.all
+      if person&.operator?
+        scope.all
+      elsif person&.authenticated?
+        scope.where(space: person.spaces).or(scope.public_access)
+      else
+        scope.public_access
+      end
     end
   end
 end

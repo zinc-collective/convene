@@ -125,4 +125,11 @@ FactoryBot.define do
     label { Faker::Address.city }
     price { Faker::Commerce.price }
   end
+
+  factory :marketplace_cart_delivery, class: "Marketplace::Cart::Delivery" do
+    delivery_address { Faker::Address.full_address }
+    contact_phone_number { Faker::PhoneNumber.phone_number }
+    contact_email { Faker::Internet.safe_email }
+    delivery_window { Faker::Time.forward(days: 1, period: :evening).to_s }
+  end
 end

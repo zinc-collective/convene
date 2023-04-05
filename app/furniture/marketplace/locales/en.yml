@@ -1,6 +1,10 @@
 
 en:
   marketplace:
+    cart:
+      deliveries:
+        edit:
+          link_to: "Change Delivery Details"
     delivery_areas:
       index:
         link_to: "Delivery Areas"

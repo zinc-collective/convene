@@ -1,6 +1,6 @@
 class Marketplace
   class Checkout < Model
-    self.location_parent = :cart
+    location(parent: :cart)
     include ActiveModel::Validations
     attr_accessor :cart
     delegate :shopper, :marketplace, :persisted?, to: :cart
