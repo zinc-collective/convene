@@ -15,7 +15,12 @@ class Marketplace
       delivery_area
     end
 
-    def edit
+    def update
+      if delivery_area.update(delivery_area_params)
+        redirect_to marketplace.location(child: :delivery_areas)
+      else
+        render :edit
+      end
     end
 
     def delivery_area_params
