@@ -9,7 +9,7 @@ class Marketplace
     has_many :orders, inverse_of: :marketplace
 
     has_many :tax_rates, inverse_of: :marketplace
-    has_many :delivery_areas, inverse_of: :marketplace
+    has_many :delivery_areas, inverse_of: :marketplace, dependent: :destroy
 
     setting :delivery_fee_cents, default: 0
     monetize :delivery_fee_cents
