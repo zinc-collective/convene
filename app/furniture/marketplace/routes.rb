@@ -12,7 +12,7 @@ class Marketplace
 
         router.resources :tax_rates
 
-        router.resources :delivery_areas, only: [:show, :index, :edit]
+        router.resources :delivery_areas
 
         router.resources :orders, only: [:show, :index]
         router.resources :products
