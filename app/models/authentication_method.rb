@@ -32,6 +32,10 @@ class AuthenticationMethod < ApplicationRecord
     self.person ||= Person.find_or_create_by(email: contact_location)
   end
 
+  def contact_location=(contact_location)
+    super(contact_location&.downcase)
+  end
+
   def verify?(one_time_password)
     totp.verify(one_time_password).present?
   end
