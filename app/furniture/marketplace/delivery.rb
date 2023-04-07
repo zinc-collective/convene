@@ -1,5 +1,10 @@
 class Marketplace
-  class Delivery < Order
-    attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
+  class Delivery < Record
+    self.table_name = "marketplace_orders"
+    attribute :delivery_window, WindowType.new
+
+    def window
+      delivery_window
+    end
   end
 end

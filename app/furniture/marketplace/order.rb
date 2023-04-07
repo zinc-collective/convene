@@ -12,7 +12,7 @@ class Marketplace
     has_many :products, through: :ordered_products, inverse_of: :orders
 
     has_encrypted :delivery_address
-    attribute :delivery_window, Delivery::WindowType.new
+    attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
 

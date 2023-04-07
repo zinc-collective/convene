@@ -4,6 +4,9 @@ class Marketplace
       extend StripsNamespaceFromModelName
       location(routed_as: :resource, parent: :cart)
       attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
+      def window
+        delivery_window
+      end
 
       validates :contact_email, presence: true
       validates :contact_phone_number, presence: true

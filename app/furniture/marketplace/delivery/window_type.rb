@@ -4,10 +4,14 @@ class Marketplace
       def deserialize(value)
         Window.new(value: value)
       end
-    end
 
-    def cast(value)
-      Window.value(value: value)
+      def cast(value)
+        Window.new(value: value)
+      end
+
+      def serialize(window)
+        window.value
+      end
     end
   end
 end

@@ -10,11 +10,15 @@ class Marketplace
       rescue Date::Error => _e
         @value
       end
+      delegate(:nil?, :blank?, :empty?, to: :value)
 
-      delegate :strftime, to: :value
+      def strftime(*args, **kwargs)
+        value.strftime(*args, **kwargs) if value.respond_to?(:strftime)
+        value
+      end
 
       def eql?(other)
-        value.eql?(other.value)
+        value == other.value
       end
     end
   end

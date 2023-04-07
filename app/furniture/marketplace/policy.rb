@@ -13,7 +13,7 @@ class Marketplace
     alias_method :update?, :create?
 
     def shopper
-      return object if object.is_a?(Shopper)
+      return object if object.is_a?(::Marketplace::Shopper)
 
       return object.shopper if object.respond_to?(:shopper)
     end
