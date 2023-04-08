@@ -10,13 +10,12 @@ set -x # for printing commands
 
 # persist data by actually storing in /workspaces directory
 # NOTE: This will not persist across codespace creations, just starts/stops
-postgres_data=/var/lib/postgresql/data
-redis_data=/bitnami/redis/data
+postgres_data=/var/lib/docker/volumes/convene_postgres_data/_data
+redis_data=/var/lib/docker/volumes/convene_redis_data/_data
 if ! [ -L ${postgres_data} ] || ! [ -e ${postgres_data} ]; then
     mkdir -p /workspaces/postgresql
     ln -s /workspaces/postgresql/data ${postgres_data}
 fi
-
 if ! [ -L ${redis_data} ] || ! [ -e ${redis_data} ]; then
     mkdir -p /workspaces/redis
     ln -s /workspaces/redis ${redis_data}
