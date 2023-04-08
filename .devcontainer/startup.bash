@@ -19,7 +19,7 @@ fi
 
 if ! [ -L ${redis_data} ] || ! [ -e ${redis_data} ]; then
     mkdir -p /workspaces/redis
-    ln -s /workspaces/redis ${redis_data}
+    ln -s /workspaces/redis/data ${redis_data}
 fi
 
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
