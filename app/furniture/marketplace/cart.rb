@@ -33,12 +33,7 @@ class Marketplace
     def delivery
       @delivery ||= becomes(Delivery)
     end
-
-    def delivery_fee
-      return marketplace.delivery_fee if delivery_address.present?
-
-      0
-    end
+    delegate :fee, to: :delivery, prefix: true
 
     def tax_total
       cart_products.sum(0, &:tax_amount)
