@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x # for printing commands
 
 echo "See files in '.devcontainer/output' for errors and other info"
 
@@ -7,6 +6,7 @@ if ! [ -d /workspaces ]; then
     echo "Not in CodeSpace! Exiting startup.bash ..."
     exit 1
 fi
+set -x # for printing commands
 
 # persist data by actually storing in /workspaces directory
 # NOTE: This will not persist across codespace creations, just starts/stops
@@ -33,7 +33,6 @@ if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
     done;
 fi
 
-
 # TODO: Add timing to docker-compose up above block and bin/setup block below; report to respective files
 # TODO: Add wait to bin/run section to grep output file for trigger that is finished setting up?
 
@@ -43,15 +42,16 @@ if [ ! -f .env ]; then
     cp .env.example .env
     sed -i "/^# PG/s/^# //g" .env
 fi
-echo "Run 'bin/setup'"
+
 setup_out='.devcontainer/output/bin_setup.out'
 time $( bin/setup &> $setup_out ) >> $setup_out # output time to file, too
 
 rm -f .overmind.sock
-echo "Run 'bin/run'"
 bin/run &> .devcontainer/output/bin_run.out &
 # echo "Now you can run 'bin/run' on the command line!"
 # echo "Then the app should be running soon!"
+
+set +x # stop printing commands
 
 echo "The app should be running soon!"
 echo "To access the app in your browser:"
