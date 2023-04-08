@@ -3,6 +3,11 @@ set -x # for printing commands
 
 echo "See files in '.devcontainer/output' for errors and other info"
 
+if ! [ -d /workspaces ]; then
+    echo "Not in CodeSpace! Exiting startup.bash ..."
+    exit 1
+fi
+
 # persist data by actually storing in /workspaces directory
 # NOTE: This will not persist across codespace creations, just starts/stops
 postgres_data=/var/lib/postgresql/data
