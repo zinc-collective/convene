@@ -10,15 +10,15 @@ set -x # for printing commands
 
 # persist data by actually storing in /workspaces directory
 # NOTE: This will not persist across codespace creations, just starts/stops
-postgres_data=/var/lib/docker/volumes/convene_postgres_data/_data
-redis_data=/var/lib/docker/volumes/convene_redis_data/_data
+postgres_data=/var/lib/docker/volumes/convene_postgres_data
+redis_data=/var/lib/docker/volumes/convene_redis_data
 if ! [ -L ${postgres_data} ] || ! [ -e ${postgres_data} ]; then
     mkdir -p /workspaces/postgresql
-    ln -s /workspaces/postgresql/data ${postgres_data}
+    sudo ln -s /workspaces/postgresql ${postgres_data}
 fi
 if ! [ -L ${redis_data} ] || ! [ -e ${redis_data} ]; then
     mkdir -p /workspaces/redis
-    ln -s /workspaces/redis/data ${redis_data}
+    sudo ln -s /workspaces/redis ${redis_data}
 fi
 
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
