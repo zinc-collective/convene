@@ -1,0 +1,5 @@
+<%- if window.time_like? %>
+  <%= l(window.value, format: :day_month_date_hour_minute) %>
+<%- else %>
+  <%= window.value %>
+<%- end %>

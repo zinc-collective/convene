@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Invitation < ApplicationRecord
-  self.location_parent = :space
+  location(parent: :space)
 
   belongs_to :space, inverse_of: :invitations
 
@@ -45,6 +45,10 @@ class Invitation < ApplicationRecord
 
   def expired?
     created_at.present? && created_at < EXPIRATION_PERIOD.ago
+  end
+
+  def email=(email)
+    super(email&.downcase)
   end
 
   private

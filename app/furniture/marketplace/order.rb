@@ -1,7 +1,7 @@
 class Marketplace
   class Order < Record
     self.table_name = "marketplace_orders"
-    self.location_parent = :marketplace
+    location(parent: :marketplace)
 
     belongs_to :marketplace, inverse_of: :orders
     delegate :space, :room, to: :marketplace
@@ -12,11 +12,9 @@ class Marketplace
     has_many :products, through: :ordered_products, inverse_of: :orders
 
     has_encrypted :delivery_address
+    attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
-    def contact_email
-      super.presence || shopper.person&.email
-    end
 
     enum status: {
       pre_checkout: "pre_checkout",
@@ -29,6 +27,10 @@ class Marketplace
 
     def tax_total
       ordered_products.sum(0, &:tax_amount)
+    end
+
+    def delivery
+      becomes(Delivery)
     end
 
     delegate :delivery_fee, to: :marketplace

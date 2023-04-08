@@ -6,13 +6,12 @@
 # it's particular use case.
 class Furniture < ApplicationRecord
   include RankedModel
-  include WithinLocation
-  self.location_parent = :room
+  location(parent: :room)
 
   ranks :slot, with_same: [:room_id]
 
-  belongs_to :room
-  delegate :space, to: :room
+  belongs_to :room, inverse_of: :furnitures
+  has_one :space, through: :room, inverse_of: :furnitures
 
   attribute :furniture_kind, :string
 

@@ -7,6 +7,10 @@
       <%= link_to t('marketplace.products.index.link_to'), marketplace.location(child: :products) %>
     <%- end %>
 
+    <%- if policy(marketplace.delivery_areas.new).create? %>
+      <%= link_to t('marketplace.delivery_areas.index.link_to'), marketplace.location(child: :delivery_areas) %>
+    <%- end %>
+
     <%- if policy(marketplace.tax_rates.new).create? %>
       <%= link_to(t("marketplace.tax_rates.index.link_to"), marketplace.location(child: :tax_rates)) %>
     <%- end %>

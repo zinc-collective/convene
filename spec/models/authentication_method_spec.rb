@@ -20,6 +20,13 @@ RSpec.describe AuthenticationMethod do
     end
   end
 
+  describe "#contact_location=" do
+    it "downcases passed in values" do
+      authentication_method.contact_location = "Test@Example.Com"
+      expect(authentication_method.contact_location).to eql("test@example.com")
+    end
+  end
+
   describe "#verify?(one_time_password)" do
     it "returns true when a valid, fresh OTP is used" do
       authentication_method.last_one_time_password_at = Time.zone.now

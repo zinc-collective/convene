@@ -3,7 +3,7 @@
 class Rsvp
   include ActiveModel::Model
   include WithinLocation
-  self.location_parent = :invitation
+  location(parent: :invitation)
 
   attr_accessor :invitation
 

@@ -99,7 +99,7 @@ FactoryBot.define do
 
       marketplace { association(:marketplace, :with_tax_rates, :with_delivery_fees, :with_notify_emails) }
 
-      delivery_window { 1.hour.from_now }
+      delivery_window { Marketplace::Delivery::Window.new(1.hour.from_now) }
       placed_at { 5.minutes.ago }
       delivery_address { Faker::Address.full_address }
       contact_email { Faker::Internet.safe_email }
@@ -119,5 +119,17 @@ FactoryBot.define do
   factory :marketplace_tax_rate, class: "Marketplace::TaxRate" do
     label { "#{Faker::TvShows::RuPaul.queen} Tax" }
     tax_rate { (1..45).to_a.sample }
+  end
+
+  factory :marketplace_delivery_area, class: "Marketplace::DeliveryArea" do
+    label { Faker::Address.city }
+    price { Faker::Commerce.price }
+  end
+
+  factory :marketplace_cart_delivery, class: "Marketplace::Cart::Delivery" do
+    delivery_address { Faker::Address.full_address }
+    contact_phone_number { Faker::PhoneNumber.phone_number }
+    contact_email { Faker::Internet.safe_email }
+    delivery_window { Marketplace::Delivery::Window.new(value: Faker::Time.forward(days: 1, period: :evening).to_s) }
   end
 end

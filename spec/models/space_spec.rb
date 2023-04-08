@@ -4,6 +4,7 @@ require "rails_helper"
 
 RSpec.describe Space do
   it { is_expected.to have_many(:rooms) }
+  it { is_expected.to have_many(:furnitures).through(:rooms).inverse_of(:space) }
 
   it do
     expect(subject).to belong_to(:entrance).class_name("Room")

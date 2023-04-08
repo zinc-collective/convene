@@ -1,0 +1,17 @@
+<%- breadcrumb(:marketplace_delivery_areas, marketplace) %>
+
+<section class="max-w-2xl self-stretch mx-auto">
+  <main>
+    <div class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <% delivery_areas.each do |area| %>
+      <%= render CardComponent.new(classes: "py-2") do %>
+        <%= area.label %>
+        <%= number_to_currency(area.price) %>
+      <% end %>
+    <% end %>
+  </main>
+
+  <footer class="text-center">
+    <%= link_to(t("marketplace.delivery_areas.new"), marketplace.location(:new, child: :delivery_area)) %>
+  </footer>
+</section>

@@ -67,7 +67,7 @@ gem "rotp", "~> 6.2"
 gem "pg", "~> 1.4"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.119", require: false
+gem "aws-sdk-s3", "~> 1.120", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -108,12 +108,14 @@ group :development, :test do
   gem "rswag-specs"
   gem "shoulda-matchers", "~> 5.3"
 
+  gem "capybara"
+
   # Let the robots do the request/response faking.
   gem "webmock"
 
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "standard", "~> 1.25"
+  gem "standard", "~> 1.26"
   gem "solargraph", "~> 0.48"
 end
 

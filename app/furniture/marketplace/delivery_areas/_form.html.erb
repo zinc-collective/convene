@@ -1,0 +1,6 @@
+<%= form_with(model: delivery_area.location) do |delivery_area_form| %>
+  <%= render "text_field", attribute: :label, form: delivery_area_form %>
+  <%= render "money_field", attribute: :price, form: delivery_area_form, required: true, step: 0.01, min: 0 %>
+
+  <%= delivery_area_form.submit %>
+<%- end %>

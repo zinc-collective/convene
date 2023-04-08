@@ -71,11 +71,6 @@ RSpec/NamedSubject:
     - 'spec/models/membership_spec.rb'
     - 'spec/models/space_spec.rb'
 
-# Offense count: 2
-RSpec/RepeatedExampleGroupDescription:
-  Exclude:
-    - 'spec/models/room_spec.rb'
-
 # Offense count: 15
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
 RSpec/VerifiedDoubles:

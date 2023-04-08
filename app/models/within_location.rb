@@ -1,3 +1,5 @@
+# Builds the appropriate collection to pass to `polymorphic_url` and `polymorphic_path`
+# based upon where the given domain object lives within the object graph
 module WithinLocation
   def self.included(model)
     model.extend(ClassMethods)
@@ -11,25 +13,33 @@ module WithinLocation
     end
   end
 
-  def parent_location
-    location_parent.location
+  delegate :routed_as, to: :class
+
+  def parent_location(*args, **kwargs)
+    location_parent.location(*args, **kwargs)
   end
 
   def location(action = :show, child: nil)
     root = case action
-    when :new
-      ([:new] + parent_location + [self])
-    when :edit
-      [:edit] + parent_location + [self]
+    when :new, :edit
+      if routed_as == :resource
+        [action] + parent_location(child: self.class.model_name.singular_route_key.to_sym)
+      else
+        [action] + parent_location + [self]
+      end
     else
       parent_location + [self]
     end
-
     (root + [child]).compact
   end
 
   module ClassMethods
-    attr_accessor :location_parent
+    attr_accessor :location_parent, :routed_as
+
+    def location(parent:, routed_as: :resources)
+      @location_parent = parent
+      @routed_as = routed_as
+    end
   end
 
   class MissingLocationParentError < StandardError

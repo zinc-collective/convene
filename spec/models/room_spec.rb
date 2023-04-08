@@ -3,6 +3,9 @@ require "rails_helper"
 RSpec.describe Room do
   let(:space) { Space.new }
 
+  it { is_expected.to have_many(:furnitures).inverse_of(:room) }
+  it { is_expected.to belong_to(:space).inverse_of(:rooms) }
+
   describe ".slug" do
     it "creates unique slugs by space scope" do
       space_1 = Space.create(name: "space1")
@@ -30,7 +33,7 @@ RSpec.describe Room do
 
   describe "#publicity_level" do
     it { is_expected.to validate_presence_of(:publicity_level) }
-    it { is_expected.to validate_inclusion_of(:publicity_level).in_array(["listed", "unlisted", :listed, :unlisted]) }
+    it { is_expected.to define_enum_for(:publicity_level).backed_by_column_of_type(:string) }
 
     context "when set to 'listed'" do
       subject { described_class.new(publicity_level: "listed", space: space) }
@@ -39,7 +42,7 @@ RSpec.describe Room do
       it { is_expected.to be_listed }
     end
 
-    context "when set to 'listed'" do
+    context "when set to 'unlisted'" do
       subject { described_class.new(publicity_level: "unlisted", space: space) }
 
       it { is_expected.to be_unlisted }
