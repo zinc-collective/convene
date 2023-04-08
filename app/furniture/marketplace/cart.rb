@@ -7,7 +7,7 @@ class Marketplace
 
     default_scope { where(status: :pre_checkout) }
 
-    belongs_to :marketplace, inverse_of: :carts, class_name: "Marketplace::Marketplace"
+    belongs_to :marketplace, inverse_of: :carts
     delegate :space, :room, to: :marketplace
 
     belongs_to :shopper, inverse_of: :carts
