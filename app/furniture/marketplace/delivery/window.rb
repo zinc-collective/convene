@@ -1,15 +1,7 @@
 class Marketplace
   class Delivery
     class Window < Model
-      attr_writer :value
-
-      def value
-        return nil if @value.blank?
-        return @value if time_like?
-        DateTime.iso8601(@value)
-      rescue Date::Error
-        @value
-      end
+      attr_accessor :value
       delegate(:nil?, :blank?, :empty?, to: :value)
 
       def strftime(*args, **kwargs)
@@ -23,8 +15,8 @@ class Marketplace
         value.eql?(other.value)
       end
 
-      private def time_like?
-        @value.respond_to?(:strftime)
+      def time_like?
+        value.respond_to?(:strftime)
       end
     end
   end

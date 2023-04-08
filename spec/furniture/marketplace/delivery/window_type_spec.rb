@@ -10,9 +10,17 @@ RSpec.describe Marketplace::Delivery::WindowType do
   end
 
   describe "#cast" do
-    subject(:cast) { type.cast("words") }
+    subject(:cast) { type.cast(input) }
 
-    it { is_expected.to eql(Marketplace::Delivery::Window.new(value: "words")) }
+    let(:input) { "words" }
+
+    it { is_expected.to eql(Marketplace::Delivery::Window.new(value: input)) }
+
+    context "when casting a iso8601 date" do
+      let(:input) { "2023-01-05" }
+
+      it { is_expected.to eql(Marketplace::Delivery::Window.new(value: DateTime.iso8601("2023-01-05"))) }
+    end
   end
 
   describe "#serialize" do
