@@ -1,4 +1,4 @@
-<%- if window.value.is_a?(DateTime) %>
+<%- if window.value.respond_to?(:strftime) %>
   <%= l(window.value, format: :day_month_date_hour_minute) %>
 <%- else %>
   <%= window.value %>

@@ -108,6 +108,8 @@ group :development, :test do
   gem "rswag-specs"
   gem "shoulda-matchers", "~> 5.3"
 
+  gem "capybara"
+
   # Let the robots do the request/response faking.
   gem "webmock"
 

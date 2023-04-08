@@ -5,20 +5,27 @@ class Marketplace
 
       def value
         return nil if @value.blank?
-
+        return @value if time_like?
         DateTime.iso8601(@value)
-      rescue Date::Error => _e
+
+      rescue Date::Error
         @value
       end
       delegate(:nil?, :blank?, :empty?, to: :value)
 
       def strftime(*args, **kwargs)
-        value.strftime(*args, **kwargs) if value.respond_to?(:strftime)
+        value.strftime(*args, **kwargs) if time_like?
         value
       end
 
+      alias_method :to_s, :strftime
+
       def eql?(other)
         value == other.value
+      end
+
+      private def time_like?
+        @value.respond_to?(:strftime)
       end
     end
   end
