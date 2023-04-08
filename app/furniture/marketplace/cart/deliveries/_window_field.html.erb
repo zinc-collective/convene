@@ -1,0 +1,9 @@
+<%- delivery = form.object%>
+<%- disabled = delivery.marketplace.delivery_window.present? %>
+<%- window = form.object.send(attribute) %>
+
+<%- if window.time_like? || (window.blank? && !disabled) %>
+  <%= render "datetime_field", attribute:  attribute, form: form, disabled?: disabled %>
+<%- else %>
+  <%= render "text_field", attribute: attribute, form: form, disabled?: disabled %>
+<%- end %>

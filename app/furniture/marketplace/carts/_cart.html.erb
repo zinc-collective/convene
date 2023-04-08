@@ -29,7 +29,7 @@
       Orders placed by <%= cart.marketplace.order_by %>
       are delivered on <%= cart.marketplace.delivery_window %>
     <%- elsif cart.delivery_window.present? %>
-      Place orders <%= cart.marketplace.order_by %> to ensure an on-time delivery for <%= l(cart.delivery_window, format: :day_month_date_hour_minute) %><br />
+      Place orders <%= cart.marketplace.order_by %> to ensure an on-time delivery for <%= render(cart.delivery_window) %>
       <%= render Marketplace::Cart::Delivery::EditButtonComponent.new(cart.delivery) %>
     <%- end %>
   </p>

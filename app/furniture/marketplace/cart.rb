@@ -17,6 +17,7 @@ class Marketplace
 
     # this feels like it is starting to want to be it's own model...
     has_encrypted :delivery_address
+    attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
 
@@ -31,15 +32,6 @@ class Marketplace
 
     def delivery
       @delivery ||= becomes(Delivery)
-    end
-
-    def delivery_window
-      return marketplace.delivery_window if marketplace&.delivery_window.present?
-      return nil if super.blank?
-
-      DateTime.parse(super) || 48.hours.from_now
-    rescue Date::Error => _e
-      48.hours.from_now
     end
 
     def delivery_fee
