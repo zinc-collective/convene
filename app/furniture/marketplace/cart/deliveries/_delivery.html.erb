@@ -2,15 +2,7 @@
   <div class="flex justify-between flex-wrap">
     <div class="flex items-center justify-between text-sm">
       <span>Delivering to:</span>
-      <%= delivery.delivery_address %>
-    </div>
-
-    <div class="flex items-center justify-between text-sm">
-      <span>Contact Phone Number:</span>
-      <%= delivery.contact_phone_number %>
-    </div>
-
-    <div class="flex items-center justify-between text-sm">
+      <%= render(delivery.delivery_area) if delivery.delivery_area.present? %>
       <%= render Marketplace::Cart::Delivery::EditButtonComponent.new(delivery) %>
     </div>
   </div>
