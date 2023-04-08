@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x # for printing commands
 
 echo "See files in '.devcontainer/output' for errors and other info"
 
@@ -23,7 +24,7 @@ if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
     docker compose up &> .devcontainer/output/docker_compose_up.out &
     until [ "`docker inspect -f {{.State.Running}} convene-db-1`" == "true" ] && \
         [ "`docker inspect -f {{.State.Running}} convene-redis-1`" == "true" ]; do
-        sleep 0.1;
+        sleep 1;
     done;
 fi
 
