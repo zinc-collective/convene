@@ -1,4 +1,16 @@
 en:
+  utilities:
+    help_text: "Utilities are how your Space connects to other Services, like Stripe, Airtable, Mastodon, or Owncast"
+    index:
+      link_to: "Utilities"
+    new:
+      link_to: "Add Utility"
+    edit:
+      link_to: "Edit %{utility_type} '%{name}'"
+    destroy:
+      link_to: "Destroy Utility '%{utility_type} - %{name}'"
+      success: "Destroyed Utility '%{utility_type} - '%{name}'!"
+
   activerecord:
     attributes:
       utility:

@@ -29,6 +29,11 @@ class UtilitiesController < ApplicationController
     end
   end
 
+  def destroy
+    utility.destroy
+    redirect_to space.location(:edit), notice: t(".success", name: utility.name, utility_type: utility.utility_slug)
+  end
+
   helper_method def utilities
     @utilities ||= policy_scope(space.utilities).all
   end

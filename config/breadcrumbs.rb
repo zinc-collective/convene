@@ -38,8 +38,13 @@ crumb :utilities do |space|
 end
 
 crumb :new_utility do |utility|
-  link "New Utility", utility.location
-  parent :utilities, utility.space
+  link t("utilities.new.link_to"), utility.location
+  parent :edit_space, utility.space
+end
+
+crumb :edit_utility do |utility|
+  link t("utilities.edit.link_to", name: utility.name, utility_type: utility.utility_slug)
+  parent :edit_space, utility.space
 end
 
 crumb :room do |room|
