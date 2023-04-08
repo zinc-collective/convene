@@ -2,6 +2,20 @@
 
 echo "See files in '.devcontainer/output' for errors and other info"
 
+# persist data by actually storing in /workspaces directory
+# NOTE: This will not persist across codespace creations, just starts/stops
+postgres_data=/var/lib/postgresql/data
+redis_data=/bitnami/redis/data
+if ! [ -L ${postgres_data} ] || ! [ -e ${postgres_data} ]; then
+    mkdir -p /workspaces/postgresql
+    ln -s /workspaces/postgresql/data ${postgres_data}
+fi
+
+if ! [ -L ${redis_data} ] || ! [ -e ${redis_data} ]; then
+    mkdir -p /workspaces/redis
+    ln -s /workspaces/redis ${redis_data}
+fi
+
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
 if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
    [ "`docker inspect -f {{.State.Running}} convene-redis-1`" != "true" ]; then
