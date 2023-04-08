@@ -12,8 +12,14 @@ class Marketplace
       alias_method :to_s, :strftime
 
       def eql?(other)
-        value.eql?(other.value)
+        if other.is_a?(Window)
+          value.eql?(other.value)
+        else
+          eql?(WindowType.new.cast(other))
+        end
       end
+
+      alias_method :==, :eql?
 
       def time_like?
         value.respond_to?(:strftime)

@@ -35,7 +35,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
         expect { perform_request }
           .to change(delivery, :contact_email).to(delivery_attributes[:contact_email])
           .and change(delivery, :contact_phone_number).to(delivery_attributes[:contact_phone_number])
-          .and change { delivery.reload.delivery_window.value }.to(delivery_attributes[:delivery_window])
+          .and change(delivery, :delivery_window).to(delivery_attributes[:delivery_window])
           .and change(delivery, :delivery_address).to(delivery_attributes[:delivery_address])
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
         expect { perform_request }
           .to change(delivery, :contact_email).to(delivery_attributes[:contact_email])
           .and change(delivery, :contact_phone_number).to(delivery_attributes[:contact_phone_number])
-          .and change { delivery.reload.delivery_window.value }.to(DateTime.parse(delivery_attributes[:delivery_window]))
+          .and change(delivery, :delivery_window).to(delivery_attributes[:delivery_window])
           .and change(delivery, :delivery_address).to(delivery_attributes[:delivery_address])
       end
 
