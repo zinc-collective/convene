@@ -49,7 +49,7 @@ en:
         link_to: "Order %{order_id}"
     products:
       index:
-        link_to: "Configure Products"
+        link_to: "Products"
       new:
         link_to: Add a Product
       create:
