@@ -1,3 +1,12 @@
-<%- if model.errors.messages_for(attribute).present? %>
-  <p class="field_with_errors"><%= model.errors.messages_for(attribute).join(', ') %></p>
+<% error_messages = model.errors.messages_for(attribute) %>
+<% %w(_id _ids).each do |suffix| %>
+  <%# Workaround for the fact that Rails doesn't add errors from the association foreign key to
+      the association itself. Yet. See: https://github.com/rails/rails/issues/28772 %>
+  <% attribute_str = attribute.to_s %>
+  <% next unless attribute_str.to_s.ends_with?(suffix) %>
+  <% error_messages += model.errors.messages_for(attribute_str.chomp(suffix)) %>
+<% end %>
+
+<%- if error_messages.present? %>
+  <p class="field_with_errors"><%= error_messages.join(', ') %></p>
 <%- end %>

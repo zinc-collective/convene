@@ -5,7 +5,6 @@ class Marketplace
     belongs_to :marketplace
     belongs_to :shopper
     belongs_to :delivery_area
-    validates :delivery_area_id, presence: true # rubocop:disable Rails/RedundantPresenceValidationOnBelongsTo
 
     has_encrypted :delivery_address
     attribute :delivery_window, WindowType.new
