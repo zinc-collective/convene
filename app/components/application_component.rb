@@ -8,9 +8,13 @@ class ApplicationComponent < ViewComponent::Base
     self.dom_id = dom_id
   end
 
-  # @todo this should gracefully merge left passed in data
   def attributes(classes: "")
-    tag_builder.tag_options(id: dom_id, data: data, class: self.classes(classes))
+    tag_builder.tag_options(options(extra_classes: classes))
+  end
+
+  # @todo this should gracefully merge left passed in data
+  def options(extra_classes: "")
+    {data: data, class: classes(extra_classes), id: dom_id}
   end
 
   # @todo how do we want to handle when tailwind is given conflicting classes? i.e. `mt-5 mt-3`
