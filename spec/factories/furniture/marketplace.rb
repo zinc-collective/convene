@@ -100,15 +100,15 @@ FactoryBot.define do
 
     trait :full do
       with_taxed_products
-      with_delivery_areas
 
       transient do
         product_count { (1..5).to_a.sample }
       end
 
-      marketplace { association(:marketplace, :with_tax_rates, :with_delivery_fees, :with_notify_emails) }
+      marketplace { association(:marketplace, :with_tax_rates, :with_delivery_areas, :with_delivery_fees, :with_notify_emails) }
 
-      delivery_window { Marketplace::Delivery::Window.new(1.hour.from_now) }
+      delivery_window { 1.hour.from_now }
+      delivery_area { marketplace.delivery_areas.sample }
       placed_at { 5.minutes.ago }
       delivery_address { Faker::Address.full_address }
       contact_email { Faker::Internet.safe_email }

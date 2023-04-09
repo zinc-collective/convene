@@ -8,6 +8,7 @@ RSpec.describe Marketplace::Delivery, type: :model do
 
   it { is_expected.to belong_to(:marketplace) }
   it { is_expected.to belong_to(:shopper) }
+  it { is_expected.to belong_to(:delivery_area) }
 
   describe "#delivery_window" do
     subject(:delivery_window) { delivery.delivery_window }
