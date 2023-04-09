@@ -1,5 +1,12 @@
 
 en:
+  activerecord:
+    errors:
+      models:
+        marketplace/delivery:
+          attributes:
+            delivery_area:
+              required: "can't be blank"
   marketplace:
     cart:
       deliveries:
