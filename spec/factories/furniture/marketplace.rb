@@ -135,6 +135,11 @@ FactoryBot.define do
     price { Faker::Commerce.price }
   end
 
+  factory :marketplace_delivery, class: "Marketplace::Delivery" do
+    marketplace
+    shopper { association(:marketplace_shopper) }
+  end
+
   factory :marketplace_cart_delivery, class: "Marketplace::Cart::Delivery" do
     marketplace { association(:marketplace, :with_delivery_areas) }
     delivery_address { Faker::Address.full_address }
