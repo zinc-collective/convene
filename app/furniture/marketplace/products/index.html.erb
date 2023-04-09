@@ -1,8 +1,14 @@
 <%- breadcrumb :marketplace_products, marketplace%>
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-2 sm:mt-4 max-w-prose mx-auto">
   <%= render marketplace.products %>
+
+  <div class="col-span-2 text-right">
+    <%- new_product = marketplace.products.new %>
+    <%- if policy(new_product).create? %>
+      <%= render ButtonComponent.new(
+        label: "#{t('marketplace.products.new.link_to')} #{t('icons.new')}",
+        title: t('marketplace.products.new.link_to'),
+        href: marketplace.location(:new, child: :product), method: :get) %>
+    <%- end %>
+  </div>
 </div>
-<%- new_product = marketplace.products.new %>
-<%- if policy(new_product).create? %>
-  <%= render "buttons/new", label: "#{t('.new')} #{t('icons.new')}", title: t('.new'), href: marketplace.location(:new, child: :product) %>
-<%- end %>
