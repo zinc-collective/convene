@@ -18,7 +18,7 @@
     <%= humanized_money_with_symbol(product.price) %>
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-    <%= render "buttons/edit", label: "#{t('icons.pencil')}",  title: t('.edit'), href: product.location(:edit), method: :get %>
+    <%= render ButtonComponent.new(label: "#{t('icons.pencil')}",  title: t('marketplace.products.edit.link_to', name: product.name), href: product.location(:edit), method: :get) %>
     <%= render ButtonComponent.new(label: t('icons.remove'), title: t('.remove'), href: product.location, method: :delete) %>
   </td>
 </tr>

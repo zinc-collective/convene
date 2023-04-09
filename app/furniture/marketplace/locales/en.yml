@@ -54,7 +54,8 @@ en:
       product:
         add: Add Product
         remove: Remove Product
-        edit: Edit Product
+      edit:
+        link_to: "Edit Product '%{name}'"
     tax_rates:
       index:
         link_to: "Tax Rates"
