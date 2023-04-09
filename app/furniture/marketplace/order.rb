@@ -6,6 +6,8 @@ class Marketplace
     belongs_to :marketplace, inverse_of: :orders
     delegate :space, :room, to: :marketplace
 
+    belongs_to :delivery_area, inverse_of: :orders, optional: true
+
     belongs_to :shopper, inverse_of: :orders
 
     has_many :ordered_products, inverse_of: :order, foreign_key: :cart_id, dependent: :destroy
