@@ -82,4 +82,16 @@ RSpec.describe UtilitiesController do
       expect(space.utilities.last.utility.configuration).to eq({})
     end
   end
+
+  describe "#destroy" do
+    subject(:perform_request) do
+      delete polymorphic_path(utility.location)
+      response
+    end
+
+    let(:utility) { create(:utility, space: space) }
+
+    specify { expect { perform_request }.to change { Utility.exists?(utility.id) }.from(true).to(false) }
+    it { is_expected.to redirect_to(space.location(:edit)) }
+  end
 end
