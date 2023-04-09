@@ -10,6 +10,7 @@ RSpec.describe Marketplace::ProductsController, type: :request do
     subject(:perform_request) do
       post polymorphic_path([space, room, marketplace, :products]),
         params: {product: product_attributes}
+      response
     end
 
     let(:tax_rate) { create(:marketplace_tax_rate, marketplace: marketplace) }
@@ -31,6 +32,12 @@ RSpec.describe Marketplace::ProductsController, type: :request do
       specify { expect(created_product.price_cents).to eql(product_attributes[:price_cents]) }
       specify { expect(created_product.price_currency).to eql(Money.default_currency.to_s) }
       specify { expect(created_product.tax_rates).to include(tax_rate) }
+    end
+
+    describe "when product is invalid" do
+      let(:product_attributes) { {} }
+
+      it { is_expected.to have_rendered(:new) }
     end
   end
 

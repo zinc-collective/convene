@@ -52,6 +52,8 @@ en:
         link_to: "Configure Products"
       new:
         link_to: Add a Product
+      create:
+        success: "Added Product '%{name}'"
       edit:
         link_to: "Edit Product '%{name}'"
       destroy:
