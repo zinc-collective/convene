@@ -1,21 +1,20 @@
-<%= render CardComponent.new do %>
-  <div id="<%=dom_id(product)%>">
-    <div class="flex justify-between">
-      <h3 class="py-2"><%= product.name %></h3>
-      <span class="flex justify-between">
-        <%= render ButtonComponent.new(label: "#{t('icons.pencil')}",  title: t('marketplace.products.edit.link_to', name: product.name), href: product.location(:edit), method: :get) %>
-        <%= render ButtonComponent.new(label: t('icons.remove'), title: t('marketplace.products.destroy.link_to', name: product.name), href: product.location, method: :delete) %>
-      </span>
-    </div>
-    <div class="text-sm italic">
-      <%= product.description %>
-    </div>
 
-    <div class="text-right">
-      <p><%= humanized_money_with_symbol(product.price) %></p>
-      <div class="text-xs italic">
-        <%= product.tax_rates.map { |tax_rate| "#{tax_rate.label} #{number_to_percentage(tax_rate.tax_rate, precision: 2)}" }.to_sentence %>
-      </div>
+<%= render CardComponent.new(dom_id: dom_id(product)) do %>
+  <div class="flex justify-between">
+    <h3 class="py-2"><%= product.name %></h3>
+    <span class="flex justify-between">
+      <%= render ButtonComponent.new(label: "#{t('icons.pencil')}",  title: t('marketplace.products.edit.link_to', name: product.name), href: product.location(:edit), method: :get) %>
+      <%= render ButtonComponent.new(label: t('icons.remove'), title: t('marketplace.products.destroy.link_to', name: product.name), href: product.location, method: :delete) %>
+    </span>
+  </div>
+  <div class="text-sm italic">
+    <%= product.description %>
+  </div>
+
+  <div class="text-right">
+    <p><%= humanized_money_with_symbol(product.price) %></p>
+    <div class="text-xs italic">
+      <%= product.tax_rates.map { |tax_rate| "#{tax_rate.label} #{number_to_percentage(tax_rate.tax_rate, precision: 2)}" }.to_sentence %>
     </div>
   </div>
 <%- end %>
