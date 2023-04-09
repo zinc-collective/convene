@@ -4,7 +4,7 @@
       <h3 class="py-2"><%= product.name %></h3>
       <span class="flex justify-between">
         <%= render ButtonComponent.new(label: "#{t('icons.pencil')}",  title: t('marketplace.products.edit.link_to', name: product.name), href: product.location(:edit), method: :get) %>
-        <%= render ButtonComponent.new(label: t('icons.remove'), title: t('.remove'), href: product.location, method: :delete) %>
+        <%= render ButtonComponent.new(label: t('icons.remove'), title: t('marketplace.products.destroy.link_to', name: product.name), href: product.location, method: :delete) %>
       </span>
     </div>
     <div class="text-sm italic">

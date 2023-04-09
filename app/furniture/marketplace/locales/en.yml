@@ -50,10 +50,12 @@ en:
     products:
       index:
         link_to: "Configure Products"
-      edit:
-        link_to: "Edit Product '%{name}'"
       new:
         link_to: Add a Product
+      edit:
+        link_to: "Edit Product '%{name}'"
+      destroy:
+        link_to: "Remove Product '%{name}"
     tax_rates:
       index:
         link_to: "Tax Rates"
