@@ -14,11 +14,19 @@ postgres_data=/var/lib/docker/volumes/convene_postgres_data
 redis_data=/var/lib/docker/volumes/convene_redis_data
 if ! [ -L ${postgres_data} ] || ! [ -e ${postgres_data} ]; then
     mkdir -p /workspaces/postgresql
+    sudo rm -rf ${postgres_data}
     sudo ln -s /workspaces/postgresql ${postgres_data}
+    if [ $? != 0 ]; then
+        echo "Cannot create symlink of postgres"; exit 1
+    fi
 fi
 if ! [ -L ${redis_data} ] || ! [ -e ${redis_data} ]; then
     mkdir -p /workspaces/redis
+    sudo rm -rf ${redis_data}
     sudo ln -s /workspaces/redis ${redis_data}
+    if [ $? != 0 ]; then
+        echo "Cannot create symlink of redis"; exit 1
+    fi
 fi
 
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
