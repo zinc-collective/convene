@@ -51,6 +51,12 @@
   <td class="text-right">Delivery Schedule:</td>
   <td><%= render(order.delivery_window) %></td>
 </tr>
+<%- if order.delivery_area.present? %>
+  <tr>
+    <td class="text-right">Delivering In:</td>
+    <td><%= order.delivery_area.label %></td>
+  </tr>
+<%- end %>
 <tr>
   <td class="text-right">Buyer Email:</td>
   <td colspan="2"><%= order.contact_email %></td>

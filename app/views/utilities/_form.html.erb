@@ -7,6 +7,10 @@
     </h4>
   </header>
 
+  <div>
+    <%= render "text_field", attribute: :name, form: form %>
+  </div>
+
   <%- if utility.has_form? %>
     <div>
       <%= render partial: utility.utility.form_template, locals: { form: form } %>

@@ -1,39 +1,29 @@
-<h1>
-  Ordered on
-    <%= link_to(order.created_at.to_fs(:long_ordinal), order.location) %>
-</h1>
-<div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
-  <table class="min-w-full divide-y divide-gray-300 table-fixed">
-    <thead class="bg-gray-50">
-      <tr>
-        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-          <%= Marketplace::Product.human_attribute_name(:name) %>
-        </th>
-        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
-          <%= Marketplace::Product.human_attribute_name(:price) %>
-        </th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-gray-200 bg-white">
-      <%= render order.ordered_products %>
-    </tbody>
-    <tfoot id="checkout-footer-<%= order.id%>" class="bg-gray-50">
-      <tr>
-        <td></td>
-        <td class="text-left px-3 py-3.5">
-          <p>
-          Products:
-          <%= humanized_money_with_symbol(order.product_total) %></p>
-          <p>
-            Taxes:
-            <%= humanized_money_with_symbol(order.tax_total) %></p>
-          <p>Delivery Fee:
-            <%= humanized_money_with_symbol(order.delivery_fee) %></p>
+<%= render CardComponent.new(classes: "w-full grid grid-cols-6 mt-4") do %>
+  <h3 class="col-span-6 sm:col-span-3 text-base">
+    <%= link_to((order.placed_at.presence || order.created_at).to_fs(:long_ordinal), order.location) %>
+  </h3>
 
-          <p class="font-bold">
-            Total: <%= humanized_money_with_symbol(order.price_total) %></span>
-        </td>
-      </tr>
-    </tfoot>
-  </table>
-</div>
+  <div class="col-span-6 sm:col-span-3 mb-2 sm:text-right">
+    <%= order.delivery_address %>
+  </div>
+
+
+  <%- order.ordered_products.each do |ordered_product| %>
+    <span class="col-span-2 mb-2"><%= ordered_product.name %></span>
+    <span class="col-span-2 text-sm text-center">x<%= ordered_product.quantity %></span>
+    <span class="col-span-2 text-right"><%= humanized_money_with_symbol(ordered_product.price) %></span>
+
+    <%- if ordered_product.tax_amount.positive? %>
+      <span class="col-span-4 text-sm italic mb-4">
+        <%= ordered_product.tax_rates.map(&:label).to_sentence %>
+      </span>
+      <span class="col-span-2 text-right text-sm italic"><%= humanized_money_with_symbol(ordered_product.tax_amount) %></span>
+    <%- end %>
+  <%- end %>
+  <hr class="col-span-6 mb-4" />
+  <div class="col-span-4 text-sm">Delivery to <%= order.delivery_area.label %></div>
+  <div class="col-span-2 text-sm text-right mb-4"><%= humanized_money_with_symbol(order.delivery_fee) %></div>
+  <hr class="col-span-6 mb-2" />
+  <div class="col-span-4">Total</div>
+  <div class="col-span-2 text-right"><%= humanized_money_with_symbol(order.price_total) %></div>
+<%- end %>

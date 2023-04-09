@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
-  let(:marketplace) { create(:marketplace) }
+  let(:marketplace) { create(:marketplace, :with_delivery_areas) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
   let(:shopper) { create(:marketplace_shopper, person: person) }
@@ -24,7 +24,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
       response.tap { delivery.reload }
     end
 
-    let(:delivery_attributes) { attributes_for(:marketplace_cart_delivery) }
+    let(:delivery_attributes) { attributes_for(:marketplace_cart_delivery, marketplace: marketplace) }
 
     context "when a `Guest`" do
       let(:person) { nil }
@@ -37,6 +37,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
           .and change(delivery, :contact_phone_number).to(delivery_attributes[:contact_phone_number])
           .and change(delivery, :delivery_window).to(delivery_attributes[:delivery_window])
           .and change(delivery, :delivery_address).to(delivery_attributes[:delivery_address])
+          .and change(delivery, :delivery_area_id).to(delivery_attributes[:delivery_area].id)
       end
     end
 
@@ -53,10 +54,11 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
           .and change(delivery, :contact_phone_number).to(delivery_attributes[:contact_phone_number])
           .and change(delivery, :delivery_window).to(delivery_attributes[:delivery_window])
           .and change(delivery, :delivery_address).to(delivery_attributes[:delivery_address])
+          .and change(delivery, :delivery_area_id).to(delivery_attributes[:delivery_area].id)
       end
 
       context "when the delivery is invalid" do
-        let(:delivery_attributes) { attributes_for(:marketplace_cart_delivery).merge(contact_phone_number: "") }
+        let(:delivery_attributes) { attributes_for(:marketplace_cart_delivery, marketplace: marketplace).merge(contact_phone_number: "") }
 
         it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "form") }
       end
