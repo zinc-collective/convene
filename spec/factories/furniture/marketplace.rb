@@ -30,6 +30,14 @@ FactoryBot.define do
     trait :with_delivery_fees do
       delivery_fee_cents { (10_00..25_00).to_a.sample }
     end
+
+    trait :with_delivery_areas do
+      transient do
+        delivery_area_quantity { 1 }
+      end
+
+      delivery_areas { Array.new(delivery_area_quantity) { association(:marketplace_delivery_area, marketplace: instance) } }
+    end
   end
 
   factory :marketplace_product, class: "Marketplace::Product" do
@@ -92,6 +100,7 @@ FactoryBot.define do
 
     trait :full do
       with_taxed_products
+      with_delivery_areas
 
       transient do
         product_count { (1..5).to_a.sample }
@@ -127,9 +136,12 @@ FactoryBot.define do
   end
 
   factory :marketplace_cart_delivery, class: "Marketplace::Cart::Delivery" do
+    marketplace { association(:marketplace, :with_delivery_areas) }
     delivery_address { Faker::Address.full_address }
     contact_phone_number { Faker::PhoneNumber.phone_number }
     contact_email { Faker::Internet.safe_email }
     delivery_window { Marketplace::Delivery::Window.new(value: Faker::Time.forward(days: 1, period: :evening).to_s) }
+    delivery_area { marketplace.delivery_areas.sample }
+    delivery_area_id { delivery_area.id }
   end
 end
