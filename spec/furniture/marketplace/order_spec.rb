@@ -8,6 +8,7 @@ RSpec.describe Marketplace::Order, type: :model do
   it { is_expected.to belong_to(:marketplace).class_name("Marketplace::Marketplace").inverse_of(:orders) }
 
   it { is_expected.to belong_to(:shopper).inverse_of(:orders) }
+  it { is_expected.to belong_to(:delivery_area).inverse_of(:orders).optional }
 
   describe "#price_total" do
     subject(:price_total) { order.price_total }

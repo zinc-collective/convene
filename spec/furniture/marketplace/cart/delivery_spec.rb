@@ -1,6 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Cart::Delivery, type: :model do
+  it { is_expected.to belong_to(:delivery_area) }
+  it { is_expected.to validate_presence_of(:delivery_area) }
+
   describe "#contact_email" do
     it { is_expected.to validate_presence_of(:contact_email) }
   end

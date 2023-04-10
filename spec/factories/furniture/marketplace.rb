@@ -30,6 +30,14 @@ FactoryBot.define do
     trait :with_delivery_fees do
       delivery_fee_cents { (10_00..25_00).to_a.sample }
     end
+
+    trait :with_delivery_areas do
+      transient do
+        delivery_area_quantity { 1 }
+      end
+
+      delivery_areas { Array.new(delivery_area_quantity) { association(:marketplace_delivery_area, marketplace: instance) } }
+    end
   end
 
   factory :marketplace_product, class: "Marketplace::Product" do
@@ -97,9 +105,10 @@ FactoryBot.define do
         product_count { (1..5).to_a.sample }
       end
 
-      marketplace { association(:marketplace, :with_tax_rates, :with_delivery_fees, :with_notify_emails) }
+      marketplace { association(:marketplace, :with_tax_rates, :with_delivery_areas, :with_delivery_fees, :with_notify_emails) }
 
-      delivery_window { Marketplace::Delivery::Window.new(1.hour.from_now) }
+      delivery_window { 1.hour.from_now }
+      delivery_area { marketplace.delivery_areas.sample }
       placed_at { 5.minutes.ago }
       delivery_address { Faker::Address.full_address }
       contact_email { Faker::Internet.safe_email }
@@ -126,10 +135,18 @@ FactoryBot.define do
     price { Faker::Commerce.price }
   end
 
+  factory :marketplace_delivery, class: "Marketplace::Delivery" do
+    marketplace
+    shopper { association(:marketplace_shopper) }
+  end
+
   factory :marketplace_cart_delivery, class: "Marketplace::Cart::Delivery" do
+    marketplace { association(:marketplace, :with_delivery_areas) }
     delivery_address { Faker::Address.full_address }
     contact_phone_number { Faker::PhoneNumber.phone_number }
     contact_email { Faker::Internet.safe_email }
     delivery_window { Marketplace::Delivery::Window.new(value: Faker::Time.forward(days: 1, period: :evening).to_s) }
+    delivery_area { marketplace.delivery_areas.sample }
+    delivery_area_id { delivery_area.id }
   end
 end
