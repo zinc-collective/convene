@@ -1,6 +1,8 @@
-<%= form_with(model: tax_rate.location) do |tax_rate_form| %>
-  <%= render "text_field", attribute: :label, form: tax_rate_form %>
-  <%= render "number_field", attribute: :tax_rate, form: tax_rate_form, required: true, step: 0.01, min: 0, max: 100 %>
+<%= render CardComponent.new(dom_id: dom_id(tax_rate)) do %>
+  <%= form_with(model: tax_rate.location) do |tax_rate_form| %>
+    <%= render "text_field", attribute: :label, form: tax_rate_form %>
+    <%= render "number_field", attribute: :tax_rate, form: tax_rate_form, required: true, step: 0.01, min: 0.01, max: 100 %>
 
-  <%= tax_rate_form.submit %>
+    <%= tax_rate_form.submit %>
+  <%- end %>
 <%- end %>
