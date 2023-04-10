@@ -43,8 +43,8 @@ crumb :new_marketplace_product do |product|
 end
 
 crumb :edit_marketplace_product do |product|
-  parent :marketplace_product, product
-  link "Edit", product.location(:edit)
+  parent :marketplace_products, product.marketplace
+  link t("marketplace.products.edit.link_to", name: product.name), product.location(:edit)
 end
 
 crumb :marketplace_delivery_areas do |marketplace|
