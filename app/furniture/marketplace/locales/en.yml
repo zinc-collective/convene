@@ -55,9 +55,10 @@ en:
       create:
         success: "Added Product '%{name}'"
       edit:
-        link_to: "Edit Product '%{name}'"
+        link_to: "Change"
+        link_to: "Change Product '%{name}'"
       destroy:
-        link_to: "Remove Product '%{name}"
+        link_to: "Remove"
     tax_rates:
       index:
         link_to: "Tax Rates"
