@@ -36,12 +36,12 @@ function database_symlink_setup {
     if [ -z $(sudo readlink ${symlink_location}) ]; then # workaround to check if symlink (permissions issues?)
         if [ -e ${symlink_location} ]; then
             sudo rm -rf ${symlink_location}
-fi
+        fi
         sudo ln -s ${real_location} ${symlink_location}
-    if [ $? != 0 ]; then
+        if [ $? != 0 ]; then
             echo "Cannot create symlink of ${real_location}"; exit 1
+        fi
     fi
-fi
 }
 pg_real=/workspaces/postgresql
 redis_real=/workspaces/redis
@@ -79,8 +79,8 @@ if [ ! -f .env ]; then
 fi
 
 if [ ${data_files_existed} != 0 ]; then
-setup_out='.devcontainer/output/bin_setup.out'
-time $( bin/setup &> $setup_out ) >> $setup_out # output time to file, too
+    setup_out='.devcontainer/output/bin_setup.out'
+    time $( bin/setup &> $setup_out ) >> $setup_out # output time to file, too
 fi
 
 rm -f .overmind.sock
