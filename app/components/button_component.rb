@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ButtonComponent < ViewComponent::Base
-  attr_accessor :margin, :padding, :shape, :typography, :color, :animation
+  attr_accessor :spacing, :shape, :typography, :color, :animation
 
   def initialize(
     label:,
@@ -12,8 +12,7 @@ class ButtonComponent < ViewComponent::Base
     disabled: false,
     animation: "transition ease-in-out duration-150",
     color: "bg-transparent bg-transparent hover:bg-primary-100 text-gray-700",
-    margin: "my-1",
-    padding: "py-2 px-4",
+    spacing: "my-1 py-2 px-4",
     typography: "no-underline text-center font-bold",
     shape: "rounded",
     turbo_stream: false
@@ -26,15 +25,14 @@ class ButtonComponent < ViewComponent::Base
     @disabled = disabled
     self.animation = animation
     self.color = color
-    self.margin = margin
-    self.padding = padding
+    self.spacing = spacing
     self.shape = shape
     self.typography = typography
     @turbo_stream = turbo_stream
   end
 
   def classes
-    [animation, color, margin, padding, shape, typography].compact.join(" ")
+    [animation, color, spacing, shape, typography].compact.join(" ")
   end
 
   private
