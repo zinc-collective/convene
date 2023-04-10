@@ -18,7 +18,7 @@ function database_workspace_setup {
     fi
     if [ ! -e ${real_location} ]; then
         mkdir -p ${real_location}
-        sudo chown vscode ${real_location}
+        sudo chown -R vscode ${real_location}
         false
     else
         true
