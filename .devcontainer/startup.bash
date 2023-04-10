@@ -10,24 +10,35 @@ set -x # for printing commands
 
 # persist data by actually storing in /workspaces directory
 # NOTE: This will not persist across codespace creations, just starts/stops
-postgres_data=/var/lib/docker/volumes/convene_postgres_data
-redis_data=/var/lib/docker/volumes/convene_redis_data
-if ! [ -L ${postgres_data} ] || ! [ -e ${postgres_data} ]; then
-    mkdir -p /workspaces/postgresql
-    sudo rm -rf ${postgres_data}
-    sudo ln -s /workspaces/postgresql ${postgres_data}
-    if [ $? != 0 ]; then
-        echo "Cannot create symlink of postgres"; exit 1
+function database_symlink_setup {
+    real_location=$1
+    symlink_location=$2
+    if [ -z ${real_location} ] || [ -z ${symlink_location} ]; then
+        echo "Did not supply correct args to $0 !"
+        exit 1
     fi
+
+    if [ -z $(sudo readlink ${symlink_location}) ]; then # workaround to check if symlink (permissions issues?)
+        mkdir -p ${real_location}
+        if [ -e ${symlink_location} ]; then
+            sudo rm -rf ${symlink_location}
 fi
-if ! [ -L ${redis_data} ] || ! [ -e ${redis_data} ]; then
-    mkdir -p /workspaces/redis
-    sudo rm -rf ${redis_data}
-    sudo ln -s /workspaces/redis ${redis_data}
+        sudo ln -s ${real_location} ${symlink_location}
+        sudo chown vscode ${real_location}
     if [ $? != 0 ]; then
-        echo "Cannot create symlink of redis"; exit 1
+            echo "Cannot create symlink of ${real_location}"; exit 1
     fi
+        false
+    else
+        true
 fi
+}
+
+symlinks_existed=0
+database_symlink_setup /workspaces/postgresql /var/lib/docker/volumes/convene_postgres_data
+! (( $symlinks_existed & $? )); symlinks_existed=$?
+database_symlink_setup /workspaces/redis /var/lib/docker/volumes/convene_redis_data
+! (( $symlinks_existed & $? )); symlinks_existed=$?
 
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
 if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
