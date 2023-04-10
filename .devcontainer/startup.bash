@@ -10,6 +10,21 @@ set -x # for printing commands
 
 # persist data by actually storing in /workspaces directory
 # NOTE: This will not persist across codespace creations, just starts/stops
+function database_workspace_setup {
+    real_location=$1
+    if [ -z ${real_location} ]; then
+        echo "Did not supply correct args to $0 !"
+        exit 1
+    fi
+    if [ ! -e ${real_location} ]; then
+        mkdir -p ${real_location}
+        sudo chown vscode ${real_location}
+        false
+    else
+        true
+    fi
+}
+
 function database_symlink_setup {
     real_location=$1
     symlink_location=$2
@@ -19,26 +34,28 @@ function database_symlink_setup {
     fi
 
     if [ -z $(sudo readlink ${symlink_location}) ]; then # workaround to check if symlink (permissions issues?)
-        mkdir -p ${real_location}
         if [ -e ${symlink_location} ]; then
             sudo rm -rf ${symlink_location}
 fi
         sudo ln -s ${real_location} ${symlink_location}
-        sudo chown vscode ${real_location}
     if [ $? != 0 ]; then
             echo "Cannot create symlink of ${real_location}"; exit 1
     fi
-        false
-    else
-        true
 fi
 }
+pg_real=/workspaces/postgresql
+redis_real=/workspaces/redis
+pg_old=/var/lib/docker/volumes/convene_postgres_data
+redis_old=/var/lib/docker/volumes/convene_redis_data
 
-symlinks_existed=0
-database_symlink_setup /workspaces/postgresql /var/lib/docker/volumes/convene_postgres_data
-! (( $symlinks_existed & $? )); symlinks_existed=$?
-database_symlink_setup /workspaces/redis /var/lib/docker/volumes/convene_redis_data
-! (( $symlinks_existed & $? )); symlinks_existed=$?
+data_files_existed=0
+database_workspace_setup ${pg_real}
+! (( ${data_files_existed} & $? )); data_files_existed=$?
+database_workspace_setup ${pg_real}
+! (( ${data_files_existed} & $? )); data_files_existed=$?
+
+database_symlink_setup ${pg_real} ${pg_old}
+database_symlink_setup ${redis_real} ${redis_old}
 
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
 if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
