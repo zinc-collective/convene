@@ -23,4 +23,13 @@ class ApplicationComponent < ViewComponent::Base
     return if args.blank?
     super
   end
+
+  def policy(*args, **kwargs)
+    Pundit.policy(current_person, *args, **kwargs)
+  end
+
+  attr_writer :current_person
+  def current_person
+    @current_person ||= helpers.current_person
+  end
 end
