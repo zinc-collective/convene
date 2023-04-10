@@ -1,24 +1,20 @@
-<tr id="<%=dom_id(product)%>">
-  <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-    <%= product.name %>
-    <dl class="font-normal lg:hidden">
-      <dt class="sr-only"><%= product.class.human_attribute_name(:description) %></dt>
-      <dd class="mt-1 truncate text-gray-700"><%= product.description %></dd>
-    </dl>
-  </td>
-  <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+
+<%= render CardComponent.new(dom_id: dom_id(product)) do %>
+  <div class="flex justify-between">
+    <h3 class="py-2"><%= product.name %></h3>
+    <span class="flex justify-between">
+      <%= render ButtonComponent.new(label: "#{t('icons.pencil')}",  title: t('marketplace.products.edit.link_to', name: product.name), href: product.location(:edit), method: :get) %>
+      <%= render ButtonComponent.new(label: t('icons.remove'), title: t('marketplace.products.destroy.link_to', name: product.name), href: product.location, method: :delete) %>
+    </span>
+  </div>
+  <div class="text-sm italic">
     <%= product.description %>
-  </td>
+  </div>
 
-  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-    <%= render product.tax_rates %>
-  </td>
-
-  <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
-    <%= humanized_money_with_symbol(product.price) %>
-  </td>
-  <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-    <%= render "buttons/edit", label: "#{t('icons.pencil')}",  title: t('.edit'), href: product.location(:edit), method: :get %>
-    <%= render ButtonComponent.new(label: t('icons.remove'), title: t('.remove'), href: product.location, method: :delete) %>
-  </td>
-</tr>
+  <div class="text-right">
+    <p><%= humanized_money_with_symbol(product.price) %></p>
+    <div class="text-xs italic">
+      <%= product.tax_rates.map { |tax_rate| "#{tax_rate.label} #{number_to_percentage(tax_rate.tax_rate, precision: 2)}" }.to_sentence %>
+    </div>
+  </div>
+<%- end %>

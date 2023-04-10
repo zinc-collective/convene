@@ -3,15 +3,20 @@
 class Marketplace
   class ProductsController < Controller
     def new
-      authorize(marketplace.products.new)
     end
 
     def create
       authorize(product)
-      product.save!
+      product.save
 
       respond_to do |format|
-        format.html { redirect_to marketplace.location(child: :products) }
+        format.html do
+          if product.persisted?
+            redirect_to marketplace.location(child: :products), notice: t(".success", name: product.name)
+          else
+            render :new, status: :unprocessable_entity
+          end
+        end
       end
     end
 
@@ -46,6 +51,8 @@ class Marketplace
         policy_scope(marketplace.products).find(params[:id])
       elsif params[:product]
         marketplace.products.new(product_params)
+      else
+        marketplace.products.new
       end.tap { |product| authorize(product) }
     end
 

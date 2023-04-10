@@ -1,30 +1,14 @@
 <%- breadcrumb :marketplace_products, marketplace%>
-<div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
-  <table class="min-w-full divide-y divide-gray-300">
-    <thead class="bg-gray-50">
-      <tr>
-        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-          <%= Marketplace::Product.human_attribute_name(:name) %>
-        </th>
-        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">
-          <%= Marketplace::Product.human_attribute_name(:description) %>
-        </th>
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-2 sm:mt-4 max-w-prose mx-auto">
+  <%= render marketplace.products %>
 
-        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
-          <%= Marketplace::Product.human_attribute_name(:tax_rates) %>
-        </th>
-
-        <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
-          <%= Marketplace::Product.human_attribute_name(:price) %>
-        </th>
-      </tr>
-    </thead>
-    <tbody class="divide-y divide-gray-200 bg-white">
-      <%= render marketplace.products %>
-    </tbody>
-  </table>
+  <div class="sm:col-span-2 text-right">
+    <%- new_product = marketplace.products.new %>
+    <%- if policy(new_product).create? %>
+      <%= render ButtonComponent.new(
+        label: "#{t('marketplace.products.new.link_to')} #{t('icons.new')}",
+        title: t('marketplace.products.new.link_to'),
+        href: marketplace.location(:new, child: :product), method: :get) %>
+    <%- end %>
+  </div>
 </div>
-<%- new_product = marketplace.products.new %>
-<%- if policy(new_product).create? %>
-  <%= render "buttons/new", label: "#{t('.new')} #{t('icons.new')}", title: t('.new'), href: marketplace.location(:new, child: :product) %>
-<%- end %>
