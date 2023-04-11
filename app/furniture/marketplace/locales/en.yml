@@ -63,6 +63,10 @@ en:
         link_to: "Tax Rates"
       new:
         link_to: Add Tax Rate
+      edit:
+        link_to: Edit Tax Rate '%{name}'
+      destroy:
+        link_to: Remove Tax Rate '%{name}'
     cart_products:
       cart_product:
         remove: Remove from Cart
