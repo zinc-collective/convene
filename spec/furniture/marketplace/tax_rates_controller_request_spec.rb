@@ -32,33 +32,8 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
       put polymorphic_path(tax_rate.location), params: {tax_rate: {label: "Hey", tax_rate: 23}}
     end
 
+    it { is_expected.to redirect_to(marketplace.location(child: :tax_rates)) }
     specify { expect { result }.to change { tax_rate.reload.label }.to("Hey") }
     specify { expect { result }.to change { tax_rate.reload.tax_rate }.to(23) }
-
-    it { is_expected.to redirect_to(marketplace.location(child: :tax_rates)) }
-
-    context "when a turbo steram" do
-      subject(:perform_request) do
-        put polymorphic_path(tax_rate.location), as: :turbo_stream, params: {tax_rate: {label: "Hey", tax_rate: 23}}
-        response
-      end
-
-      it { is_expected.to have_rendered_turbo_stream(:replace, tax_rate, Marketplace::TaxRateComponent.new(tax_rate: tax_rate.reload).render_in(controller.view_context)) }
-    end
-  end
-
-  describe "#destroy" do
-    subject(:perform_request) do
-      delete polymorphic_path(tax_rate.location), as: :turbo_stream
-      response
-    end
-
-    let(:tax_rate) { create(:marketplace_tax_rate, marketplace: marketplace) }
-
-    it { is_expected.to have_rendered_turbo_stream(:remove, tax_rate) }
-
-    specify do
-      expect { perform_request }.to(change { Marketplace::TaxRate.exists?(tax_rate.id) }.to(false))
-    end
   end
 end

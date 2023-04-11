@@ -15,48 +15,11 @@ class Marketplace
       end
     end
 
-    def edit
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(tax_rate, partial: "form")
-        end
-
-        format.html
-      end
-    end
-
     def update
-      tax_rate.update(tax_rate_params)
-
-      respond_to do |format|
-        format.turbo_stream do
-          if tax_rate.errors.empty?
-            render turbo_stream: turbo_stream.replace(tax_rate, TaxRateComponent.new(tax_rate: tax_rate).render_in(view_context))
-          else
-            render turbo_stream: turbo_stream.replace(tax_rate, partial: "form")
-          end
-        end
-        format.html do
-          if tax_rate.errors.empty?
-            redirect_to marketplace.location(child: :tax_rates)
-          else
-            render :edit
-          end
-        end
-      end
-    end
-
-    def destroy
-      tax_rate.destroy
-
-      respond_to do |format|
-        format.turbo_stream do
-          if tax_rate.destroyed?
-            render turbo_stream: turbo_stream.remove(tax_rate)
-          else
-            render turbo_stream: turbo_stream.replace(tax_rate)
-          end
-        end
+      if tax_rate.update(tax_rate_params)
+        redirect_to marketplace.location(child: :tax_rates)
+      else
+        render :edit
       end
     end
 
