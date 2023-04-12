@@ -4,6 +4,10 @@ class Marketplace
       variant.new(classes: "w-6 h-6 flex-none")
     end
 
+    renders_one :title, ->(content) do
+      content
+    end
+
     attr_accessor :location
 
     def initialize(location:, data: {}, classes: "")

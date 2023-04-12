@@ -6,7 +6,7 @@
         <%- if policy(marketplace).edit? %>
           <%= render Marketplace::ManagementMenuItemComponent.new(location: marketplace.location(:edit)) do |menu_item| %>
             <% menu_item.with_icon(variant: ::Icons::GearComponent) %>
-            Configuration
+            <% menu_item.with_title("Configuration") %>
           <% end %>
         <% end %>
 
@@ -17,7 +17,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
             <% end%>
-            <%= t('marketplace.products.index.link_to') %>
+            <% menu_item.with_title(t('marketplace.products.index.link_to')) %>
           <% end %>
         <% end %>
 
@@ -27,7 +27,7 @@
             <% menu_item.with_icon do %>
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
             <% end%>
-            <%= t('marketplace.delivery_areas.index.link_to') %>
+            <% menu_item.with_title(t('marketplace.delivery_areas.index.link_to')) %>
           <% end %>
         <% end %>
 
@@ -37,7 +37,7 @@
             <% menu_item.with_icon do %>
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 14.25l6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185zM9.75 9h.008v.008H9.75V9zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm4.125 4.5h.008v.008h-.008V13.5zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             <% end%>
-            <%= t('marketplace.tax_rates.index.link_to') %>
+            <% menu_item.with_title(t('marketplace.tax_rates.index.link_to')) %>
           <% end %>
         <% end %>
       </ul>
