@@ -1,6 +1,6 @@
 <%= render CardComponent.new(classes: "flex mt-3 px-0") do %>
-  <div class="flex w-1/5 flex-col">
-    <nav class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 p-5">
+  <div class="flex md:w-1/5 flex-col">
+    <nav class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 p-2 md:p-5">
       <ul role="list" class="list-none pl-0">
 
         <%- if policy(marketplace).edit? %>

@@ -1,6 +1,8 @@
 <li class="text-gray-700 hover:text-purple-700">
-  <a href="<%= polymorphic_url(location) %>" class="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold no-underline">
-    <%= icon %>
-    <%= content %>
+  <a href="<%= polymorphic_url(location) %>" class="group flex sm:gap-x-3 rounded-md py-2 text-sm sm:leading-6 font-semibold no-underline">
+    <%= icon -%>
+    <span class="hidden md:inline-block">
+      <%= content %>
+    </span>
   </a>
 </li>

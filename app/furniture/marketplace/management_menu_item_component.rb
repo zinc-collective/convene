@@ -1,7 +1,7 @@
 class Marketplace
   class ManagementMenuItemComponent < ApplicationComponent
     renders_one :icon, ->(variant: SvgComponent) do
-      variant.new(classes: "w-6 h-6")
+      variant.new(classes: "w-6 h-6 flex-none")
     end
 
     attr_accessor :location
