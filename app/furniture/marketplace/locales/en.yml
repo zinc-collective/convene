@@ -25,6 +25,8 @@ en:
     delivery_address:
       edit: "Change Address"
     marketplace:
+      manage_header: "Marketplace"
+      configuration_menu: "Configuration"
       edit: "Configure Marketplace"
     marketplaces:
       edit:

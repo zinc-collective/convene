@@ -1,3 +1,11 @@
+<div class="flex flex-wrap items-baseline">
+  <h2 class="ml-2 mt-1">
+    <%= t('marketplace.marketplace.manage_header') %>
+  </h2>
+  <p class="ml-2 mt-1 truncate text-sm text-gray-500">
+    <%= marketplace.room.name %>
+  </p>
+</div>
 <%= render CardComponent.new(classes: "flex mt-3 px-0") do %>
   <div class="flex md:w-1/5 flex-col">
     <nav class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 p-2 md:p-5">
@@ -6,7 +14,7 @@
         <%- if policy(marketplace).edit? %>
           <%= render Marketplace::ManagementMenuItemComponent.new(location: marketplace.location(:edit)) do |menu_item| %>
             <% menu_item.with_icon(variant: ::Icons::GearComponent) %>
-            <% menu_item.with_title("Configuration") %>
+            <% menu_item.with_title(t('marketplace.marketplace.configuration_menu')) %>
           <% end %>
         <% end %>
 
