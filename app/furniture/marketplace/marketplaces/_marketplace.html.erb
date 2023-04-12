@@ -9,13 +9,9 @@ end %>
 <%= render cart.delivery %>
 <%= render cart %>
 
-<div class="m-2 text-center">
+<div class="my-2 text-right">
   <%- if policy(marketplace).edit? %>
     <%= render Buttons::SecondaryComponent.new(
       label: t('marketplace.marketplace.edit'), href: marketplace.location(:edit), method: :get) %>
-  <%- end %>
-
-  <%- if policy(marketplace.orders).index? %>
-  <%= link_to t('marketplace.order.index'), marketplace.location(child: :orders) %>
   <%- end %>
 </div>

@@ -2,8 +2,8 @@ class Marketplace
   class ManagementComponent < ApplicationComponent
     attr_accessor :marketplace
 
-    def initialize(marketplace:, data: {}, classes: "")
-      super(data: data, classes: classes)
+    def initialize(marketplace:, **kwargs)
+      super(**kwargs)
 
       self.marketplace = marketplace
     end
