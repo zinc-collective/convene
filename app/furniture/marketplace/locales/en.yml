@@ -27,7 +27,7 @@ en:
     marketplace:
       manage_header: "Marketplace"
       configuration_menu: "Configuration"
-      edit: "Configure Marketplace"
+      edit: "Manage Marketplace"
     marketplaces:
       edit:
         missing_stripe_api_key: "Add a Stripe API key to %{space_name}"

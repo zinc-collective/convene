@@ -8,7 +8,7 @@
   <div class="text-center mt-3">
     <%- new_product = marketplace.products.new %>
     <%- if policy(new_product).create? %>
-      <%= render ButtonComponent.new(
+      <%= render Buttons::SecondaryComponent.new(
         label: "#{t('marketplace.products.new.link_to')} #{t('icons.new')}",
         title: t('marketplace.products.new.link_to'),
         href: marketplace.location(:new, child: :product), method: :get) %>

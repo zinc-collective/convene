@@ -11,7 +11,8 @@ end %>
 
 <div class="m-2 text-center">
   <%- if policy(marketplace).edit? %>
-    <%= link_to t('marketplace.marketplace.edit'), marketplace.location(:edit) %>
+    <%= render Buttons::SecondaryComponent.new(
+      label: t('marketplace.marketplace.edit'), href: marketplace.location(:edit), method: :get) %>
   <%- end %>
 
   <%- if policy(marketplace.orders).index? %>
