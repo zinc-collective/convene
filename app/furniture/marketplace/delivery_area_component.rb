@@ -12,12 +12,8 @@ class Marketplace
     delegate :price, to: :delivery_area
 
     def edit_button
-      return unless edit_button?
-
-      Buttons::SecondaryComponent.new(label: "#{t("icons.edit")} #{t("edit.link_to")}",
-        title: t("marketplace.delivery_areas.edit.link_to", name: delivery_area.label),
-        href: delivery_area.location(:edit), turbo_stream: true,
-        method: :get)
+      super(title: t("marketplace.delivery_areas.edit.link_to", name: delivery_area.label),
+            href: delivery_area.location(:edit))
     end
 
     def edit_button?
