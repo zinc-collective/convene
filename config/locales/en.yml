@@ -44,3 +44,4 @@ en:
     link_to: "Edit"
   destroy:
     link_to: "Remove"
+    confirm: "Removal is permenant. Are you sure?"
