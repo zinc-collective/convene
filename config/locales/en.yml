@@ -40,3 +40,7 @@ en:
     formats:
       day_month_date_year_hour_minute: "%A %B %d, %Y %l:%M%p"
       day_month_date_hour_minute: "%A %B %d %l:%M%p"
+  edit:
+    link_to: "Edit"
+  destroy:
+    link_to: "Remove"

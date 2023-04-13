@@ -54,4 +54,8 @@ class ApplicationPolicy
   def policy!(object)
     Pundit.policy!(current_person, object)
   end
+
+  def ==(other)
+    current_person == other.current_person && object == other.object && self.class == other.class
+  end
 end

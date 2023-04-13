@@ -3,11 +3,17 @@ class Marketplace
     class Delivery
       class EditButtonComponent < ButtonComponent
         attr_accessor :delivery
-        def initialize(delivery,
-          classes: "w-full sm:w-auto font-light text-xs m-0 bg-primary-200 underline",
-          label: t("marketplace.cart.deliveries.edit.link_to"))
+        def initialize(delivery, label: t("marketplace.cart.deliveries.edit.link_to"),
+          shape: "w-full sm:w-auto rounded",
+          spacing: "mb-1 mt-1 sm:mt-0 py-2 px-4",
+          typography: "no-underline font-normal text-sm text-center",
+          color: "bg-primary-100 hover:bg-primary-200 focus:bg-primary-200",
+          **kwargs)
           self.delivery = delivery
-          super(method: :get, href: delivery.location(:edit), label: label, turbo_stream: true, title: nil, classes: classes)
+          super(href: delivery.location(:edit), label: label, title: nil,
+                method: :get, turbo_stream: true,
+                spacing: spacing, typography: typography, color: color,
+                shape: shape, **kwargs)
         end
       end
     end

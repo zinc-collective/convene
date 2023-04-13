@@ -6,6 +6,8 @@ class Marketplace
       person.operator? || person.member_of?(delivery_area.marketplace.space)
     end
 
+    alias_method :update?, :create?
+
     def permitted_attributes(_)
       [:label, :price]
     end
