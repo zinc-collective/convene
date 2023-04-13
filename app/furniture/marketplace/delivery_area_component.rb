@@ -9,9 +9,7 @@ class Marketplace
       self.delivery_area = delivery_area
     end
 
-    def price
-      delivery_area.price
-    end
+    delegate :price, to: :delivery_area
 
     def edit_button
       return unless edit_button?
