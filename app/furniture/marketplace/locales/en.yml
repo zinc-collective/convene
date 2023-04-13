@@ -15,7 +15,8 @@ en:
     delivery_areas:
       index:
         link_to: "Delivery Areas"
-      new: "Add Delivery Area"
+      new:
+        link_to: "Add Delivery Area"
       edit:
         link_to: "Edit Delivery Area '%{name}'"
       destroy:
