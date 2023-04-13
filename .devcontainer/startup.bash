@@ -51,7 +51,7 @@ redis_old=/var/lib/docker/volumes/convene_redis_data
 data_files_existed=0
 database_workspace_setup ${pg_real}
 ! (( ${data_files_existed} & $? )); data_files_existed=$?
-database_workspace_setup ${pg_real}
+database_workspace_setup ${redis_real}
 ! (( ${data_files_existed} & $? )); data_files_existed=$?
 
 database_symlink_setup ${pg_real} ${pg_old}
