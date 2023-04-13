@@ -14,10 +14,10 @@ class Marketplace
     def edit_button
       return unless edit_button?
 
-      ButtonComponent.new label: "#{t("icons.edit")} #{t("edit.link_to")}",
+      Buttons::SecondaryComponent.new(label: "#{t("icons.edit")} #{t("edit.link_to")}",
         title: t("marketplace.delivery_areas.edit.link_to", name: delivery_area.label),
         href: delivery_area.location(:edit), turbo_stream: true,
-        method: :get
+        method: :get)
     end
 
     def edit_button?
@@ -27,11 +27,11 @@ class Marketplace
     def destroy_button
       return unless destroy_button?
 
-      ButtonComponent.new label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
+      Buttons::SecondaryComponent.new(label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
         title: t("marketplace.delivery_areas.destroy.link_to", name: delivery_area.label),
         href: delivery_area.location, turbo_stream: true,
         method: :delete,
-        confirm: t("destroy.confirm")
+        confirm: t("destroy.confirm"))
     end
 
     def destroy_button?
