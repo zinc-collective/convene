@@ -9,9 +9,9 @@ class Marketplace
       self.delivery_area = delivery_area
     end
 
-    # def rate
-    #   number_to_percentage(tax_rate.tax_rate, precision: 2)
-    # end
+    def price
+      delivery_area.price
+    end
 
     def edit_button
       return unless edit_button?
@@ -36,7 +36,7 @@ class Marketplace
     end
 
     def destroy_button?
-      delivery_area.persisted? && policy(delivery_area).destroy? && delivery_area.products.blank?
+      delivery_area.persisted? && policy(delivery_area).destroy?
     end
   end
 end
