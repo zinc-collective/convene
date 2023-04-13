@@ -2,10 +2,11 @@ class ApplicationComponent < ViewComponent::Base
   attr_accessor :data
   attr_writer :classes, :dom_id
 
-  def initialize(data: {}, dom_id: nil, classes: "")
+  def initialize(data: {}, dom_id: nil, classes: "", current_person: nil)
     self.data = data
     self.classes = classes
     self.dom_id = dom_id
+    self.current_person = current_person
   end
 
   def attributes(classes: "")
