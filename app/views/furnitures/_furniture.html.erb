@@ -8,14 +8,14 @@
       <h4><%= furniture.title %></h4>
       <div>
         <%- if edit_href.present? %>
-          <%= render ButtonComponent.new(
+          <%= render Buttons::SecondaryComponent.new(
                         label: t('icons.edit'),
                         href: edit_href,
                         method: :get,
                         title: t('.edit_title', name: furniture.furniture.model_name.human.titleize)) %>
         <%- end %>
 
-        <%= render ButtonComponent.new(
+        <%= render Buttons::SecondaryComponent.new(
                       label: t('icons.remove'),
                       href: [furniture.room.space, furniture.room, furniture],
                       title: t('.remove_title', name: furniture.furniture.model_name.human.titleize),
