@@ -30,6 +30,28 @@ class Marketplace
       policy(DeliveryArea).permit(params.require(:delivery_area))
     end
 
+    def destroy
+      delivery_area.destroy
+
+      respond_to do |format|
+        format.turbo_stream do
+          if delivery_area.destroyed?
+            render turbo_stream: turbo_stream.remove(delivery_area)
+          else
+            render turbo_stream: turbo_stream.replace(delivery_area)
+          end
+        end
+
+        format.html do
+          if delivery_area.destroyed?
+            redirect_to marketplace.location(child: :delivery_areas)
+          else
+            render :show
+          end
+        end
+      end
+    end
+
     helper_method def delivery_area
       @delivery_area ||= if params[:id]
         delivery_areas.find(params[:id])
