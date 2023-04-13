@@ -1,0 +1,15 @@
+
+<%= render CardComponent.new(dom_id: dom_id(delivery_area), classes: "flex flex-col justify-between gap-y-2 w-full") do %>
+  <header class="flex font-bold">
+    <%= label %>
+  </header>
+
+  <div class="italic">
+    <%= price  %>
+  </div>
+
+  <div class="flex flex-row justify-between">
+    <%= render edit_button if edit_button? %>
+    <%= render destroy_button if destroy_button?  %>
+  </div>
+<%- end %>
