@@ -59,7 +59,7 @@ end
 
 crumb :edit_delivery_area do |delivery_area|
   parent :marketplace_delivery_areas, delivery_area.marketplace
-  link "Edit a Delivery Area", marketplace.location(:edit, child: :delivery_area)
+  link t("marketplace.delivery_areas.edit.link_to", name: delivery_area.label), marketplace.location(:edit, child: :delivery_area)
 end
 
 crumb :marketplace_tax_rates do |marketplace|

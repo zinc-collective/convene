@@ -16,8 +16,10 @@ en:
       index:
         link_to: "Delivery Areas"
       new: "Add Delivery Area"
+      edit:
+        link_to: "Edit Delivery Area '%{name}'"
       destroy:
-        link_to: Remove Tax Rate '%{name}'
+        link_to: "Remove Delivery Area '%{name}'"
     delivery_window:
       edit: "Change Delivery Window"
     delivery_info:
