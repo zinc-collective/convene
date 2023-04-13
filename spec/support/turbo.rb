@@ -25,6 +25,7 @@ module Spec
       def matches?(response)
         @response = response
         assert_turbo_stream(action: action, target: target) do
+          rendering[:allow_inferred_rendering] = false if action == :remove
           assert_dom_equal(turbo_stream.action(action, target, content, **rendering), response.body)
         end
       rescue Minitest::Assertion => e
