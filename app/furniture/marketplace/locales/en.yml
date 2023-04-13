@@ -27,7 +27,9 @@ en:
     delivery_address:
       edit: "Change Address"
     marketplace:
-      edit: "Configure Marketplace"
+      manage_header: "Marketplace"
+      configuration_menu: "Configuration"
+      edit: "Manage Marketplace"
     marketplaces:
       edit:
         missing_stripe_api_key: "Add a Stripe API key to %{space_name}"
@@ -51,7 +53,7 @@ en:
         link_to: "Order %{order_id}"
     products:
       index:
-        link_to: "Configure Products"
+        link_to: "Products"
       new:
         link_to: Add a Product
       create:

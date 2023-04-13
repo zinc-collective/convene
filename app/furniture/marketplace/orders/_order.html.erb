@@ -21,7 +21,7 @@
     <%- end %>
   <%- end %>
   <hr class="col-span-6 mb-4" />
-  <div class="col-span-4 text-sm">Delivery to <%= order.delivery_area.label %></div>
+  <div class="col-span-4 text-sm">Delivery to <%= order.delivery_area&.label %></div>
   <div class="col-span-2 text-sm text-right mb-4"><%= humanized_money_with_symbol(order.delivery_fee) %></div>
   <hr class="col-span-6 mb-2" />
   <div class="col-span-4">Total</div>

@@ -1,13 +1,15 @@
 <%- breadcrumb(:marketplace_tax_rates, marketplace) %>
 
-<section class="mt-3">
-  <main>
-    <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
-      <%= render Marketplace::TaxRateComponent.with_collection(tax_rates) %>
-    </div>
-  </main>
+<%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
+  <section class="mt-3">
+    <main>
+      <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
+        <%= render Marketplace::TaxRateComponent.with_collection(tax_rates) %>
+      </div>
+    </main>
 
-  <footer class="text-center">
-    <%= link_to(t("marketplace.tax_rates.new.link_to"), marketplace.location(:new, child: :tax_rate)) %>
-  </footer>
-</section>
+    <footer class="text-center">
+      <%= link_to(t("marketplace.tax_rates.new.link_to"), marketplace.location(:new, child: :tax_rate)) %>
+    </footer>
+  </section>
+<% end %>

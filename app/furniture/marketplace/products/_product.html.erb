@@ -18,7 +18,7 @@
   </div>
 
   <footer class="mt-3 flex justify-between">
-    <%= render ButtonComponent.new(label: "#{t('icons.edit')} #{t('edit.link_to')}",  title: t('marketplace.products.edit.link_to'), href: product.location(:edit), method: :get) %>
-    <%= render ButtonComponent.new(label: "#{t('icons.destroy')} #{t('destroy.link_to')}", title: t('marketplace.products.destroy.link_to', name: product.name), href: product.location, method: :delete) %>
+    <%= render Buttons::SecondaryComponent.new(label: "#{t('icons.edit')} #{t('edit.link_to')}",  title: t('marketplace.products.edit.link_to'), href: product.location(:edit), method: :get) %>
+    <%= render Buttons::SecondaryComponent.new(label: "#{t('icons.destroy')} #{t('destroy.link_to')}", title: t('marketplace.products.destroy.link_to', name: product.name), href: product.location, method: :delete) %>
   </footer>
 <%- end %>
