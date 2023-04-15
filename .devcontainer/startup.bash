@@ -18,7 +18,6 @@ function database_workspace_setup {
     fi
     if [ ! -e ${real_location} ]; then
         mkdir -p ${real_location}
-        sudo chown -R vscode ${real_location}
         false
     else
         true
@@ -49,10 +48,14 @@ pg_old=/var/lib/docker/volumes/convene_postgres_data
 redis_old=/var/lib/docker/volumes/convene_redis_data
 
 data_files_existed=0
+
 database_workspace_setup ${pg_real}
-! (( ${data_files_existed} & $? )); data_files_existed=$?
+if [ $? != 0 ]; then data_files_existed=1; fi
+# sudo chown -R 999:999 ${pg_real}
+
 database_workspace_setup ${redis_real}
-! (( ${data_files_existed} & $? )); data_files_existed=$?
+if [ $? != 0 ]; then data_files_existed=1; fi
+sudo chown -R 999:999 ${redis_real}
 
 database_symlink_setup ${pg_real} ${pg_old}
 database_symlink_setup ${redis_real} ${redis_old}
