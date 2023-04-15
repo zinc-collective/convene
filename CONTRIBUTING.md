@@ -86,7 +86,7 @@ First, ensure your development environment has:
 1. Ruby (See [.ruby-version](./.ruby-version) for version)
 2. Node (See [.nvmrc](./.nvmrc) for version)
 3. [Yarn]
-1. [PostgreSQL 12]. (Note: For people using [Docker], a [docker-compose.yml]
+4. [PostgreSQL]. (Note: For people using [Docker], a [docker-compose.yml]
    file has been included for convenience.)
 
 Then, run `bin/setup` to install Ruby and Node dependencies and set up the

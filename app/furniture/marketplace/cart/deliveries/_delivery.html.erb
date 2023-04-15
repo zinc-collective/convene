@@ -4,5 +4,10 @@
     <%= render(delivery.delivery_area) if delivery.delivery_area.present? %>
   </span>
 
-  <%= render Marketplace::Cart::Delivery::EditButtonComponent.new(delivery) %>
+  <%= render Buttons::SecondaryComponent.new(
+        label: t("marketplace.cart.deliveries.edit.link_to"),
+        href: delivery.location(:edit),
+        method: :get,
+        turbo_stream: true
+      ) %>
 </div>

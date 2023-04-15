@@ -62,6 +62,7 @@ gem "friendly_id", "~> 5.5.0"
 gem "bcrypt", "~> 3.1.18"
 gem "lockbox", "1.2.0"
 gem "rotp", "~> 6.2"
+gem "strong_migrations", "~> 1.4"
 
 # Use postgresql for data persistence
 gem "pg", "~> 1.4"

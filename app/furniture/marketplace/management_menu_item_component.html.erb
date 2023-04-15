@@ -1,0 +1,10 @@
+<li class="text-gray-700 hover:text-purple-700">
+  <%= link_to location,
+      title: title,
+      class: "group flex sm:gap-x-3 rounded-md py-2 text-sm sm:leading-6 font-semibold no-underline" do %>
+    <%= icon %>
+    <span class="hidden md:inline-block">
+      <%= title %>
+    </span>
+  <% end %>
+</li>
