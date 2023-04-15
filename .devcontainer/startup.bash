@@ -55,7 +55,7 @@ if [ $? != 0 ]; then data_files_existed=1; fi
 
 database_workspace_setup ${redis_real}
 if [ $? != 0 ]; then data_files_existed=1; fi
-sudo chown -R 999:999 ${redis_real}
+sudo chown -R 1001:1001 ${redis_real}
 
 database_symlink_setup ${pg_real} ${pg_old}
 database_symlink_setup ${redis_real} ${redis_old}
