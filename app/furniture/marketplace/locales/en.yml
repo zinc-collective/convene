@@ -15,7 +15,12 @@ en:
     delivery_areas:
       index:
         link_to: "Delivery Areas"
-      new: "Add Delivery Area"
+      new:
+        link_to: "Add Delivery Area"
+      edit:
+        link_to: "Edit Delivery Area '%{name}'"
+      destroy:
+        link_to: "Remove Delivery Area '%{name}'"
     delivery_window:
       edit: "Change Delivery Window"
     delivery_info:
@@ -25,7 +30,9 @@ en:
     delivery_address:
       edit: "Change Address"
     marketplace:
-      edit: "Configure Marketplace"
+      manage_header: "Marketplace"
+      configuration_menu: "Configuration"
+      edit: "Manage Marketplace"
     marketplaces:
       edit:
         missing_stripe_api_key: "Add a Stripe API key to %{space_name}"
@@ -49,7 +56,7 @@ en:
         link_to: "Order %{order_id}"
     products:
       index:
-        link_to: "Configure Products"
+        link_to: "Products"
       new:
         link_to: Add a Product
       create:

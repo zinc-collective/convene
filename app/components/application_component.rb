@@ -2,10 +2,11 @@ class ApplicationComponent < ViewComponent::Base
   attr_accessor :data
   attr_writer :classes, :dom_id
 
-  def initialize(data: {}, dom_id: nil, classes: "")
+  def initialize(data: {}, dom_id: nil, classes: "", current_person: nil)
     self.data = data
     self.classes = classes
     self.dom_id = dom_id
+    self.current_person = current_person
   end
 
   def attributes(classes: "")
@@ -35,5 +36,10 @@ class ApplicationComponent < ViewComponent::Base
   attr_writer :current_person
   def current_person
     @current_person ||= helpers.current_person
+  end
+
+  def edit_button(title:, href:, label: "#{t("icons.edit")} #{t("edit.link_to")}")
+    Buttons::SecondaryComponent.new label: label, title: title,
+      href: href, turbo_stream: true, method: :get
   end
 end

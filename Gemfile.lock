@@ -148,7 +148,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faker (3.1.1)
+    faker (3.2.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     friendly_id (5.5.0)
@@ -405,6 +405,8 @@ GEM
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     stripe (8.5.0)
+    strong_migrations (1.4.4)
+      activerecord (>= 5.2)
     thor (1.2.1)
     tilt (2.1.0)
     timeout (0.3.2)
@@ -489,6 +491,7 @@ DEPENDENCIES
   standard (~> 1.26)
   stimulus-rails
   stripe
+  strong_migrations (~> 1.4)
   turbo-rails
   tzinfo-data (~> 1.2021)
   view_component (~> 2.82)

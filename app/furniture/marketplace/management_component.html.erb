@@ -1,0 +1,58 @@
+<div class="flex flex-wrap items-baseline">
+  <h2 class="ml-2 mt-1">
+    <%= t('marketplace.marketplace.manage_header') %>
+  </h2>
+  <p class="ml-2 mt-1 truncate text-sm text-gray-500">
+    <%= marketplace.room.name %>
+  </p>
+</div>
+<%= render CardComponent.new(classes: "flex mt-3 px-0") do %>
+  <div class="flex md:w-1/5 flex-col">
+    <nav class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 p-2 md:p-5">
+      <ul role="list" class="list-none pl-0">
+
+        <%- if policy(marketplace).edit? %>
+          <%= render Marketplace::ManagementMenuItemComponent.new(location: marketplace.location(:edit)) do |menu_item| %>
+            <% menu_item.with_icon(variant: ::Icons::GearComponent) %>
+            <% menu_item.with_title(t('marketplace.marketplace.configuration_menu')) %>
+          <% end %>
+        <% end %>
+
+        <%- if policy(marketplace).edit? %>
+          <%= render Marketplace::ManagementMenuItemComponent.new(
+            location: marketplace.location(child: :products)) do |menu_item| %>
+            <% menu_item.with_icon.with_content(tag) %>
+            <% menu_item.with_title(t('marketplace.products.index.link_to')) %>
+          <% end %>
+        <% end %>
+
+        <%- if policy(marketplace.delivery_areas.new).create? %>
+          <%= render Marketplace::ManagementMenuItemComponent.new(
+              location: marketplace.location(child: :delivery_areas)) do |menu_item| %>
+            <% menu_item.with_icon.with_content(map) %>
+            <% menu_item.with_title(t('marketplace.delivery_areas.index.link_to')) %>
+          <% end %>
+        <% end %>
+
+        <%- if policy(marketplace.tax_rates.new).create? %>
+          <%= render Marketplace::ManagementMenuItemComponent.new(
+              location: marketplace.location(child: :tax_rates)) do |menu_item| %>
+            <% menu_item.with_icon.with_content(receipt_percent) %>
+            <% menu_item.with_title(t('marketplace.tax_rates.index.link_to')) %>
+          <% end %>
+        <% end %>
+
+        <%- if policy(marketplace.orders).index? %>
+          <%= render Marketplace::ManagementMenuItemComponent.new(
+              location: marketplace.location(child: :orders)) do |menu_item| %>
+            <% menu_item.with_icon.with_content(cart) %>
+            <% menu_item.with_title(t('marketplace.order.index')) %>
+          <%- end %>
+        <%- end %>
+      </ul>
+    </nav>
+  </div>
+  <div class="flex flex-col grow px-5">
+    <%= content %>
+  </div>
+<% end %>
