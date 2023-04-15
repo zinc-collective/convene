@@ -4,24 +4,27 @@ require "rails_helper"
 
 RSpec.describe InvitationsController do
   describe "#create" do
-    it "creates and sends an invitation for a space" do
-      mail = double(deliver_later: true)
+    let(:mail) { instance_double(ActionMailer::MessageDelivery, deliver_later: true) }
+    let(:membership) { create(:membership) }
+    let(:space) { membership.space }
+    let(:member) { membership.member }
+    let(:invitation) {
+      space.invitations.find_by(name: "foobar",
+        email: "foobar@example.com")
+    }
+
+    before do
       allow(SpaceInvitationMailer).to receive(:space_invitation_email)
         .and_return(mail)
-
-      membership = create(:membership)
-      space = membership.space
-      member = membership.member
 
       sign_in(space, member)
 
       post space_invitations_path(space), params: {
         invitation: {name: "foobar", email: "foobar@example.com"}
       }
+    end
 
-      invitation = space.invitations.find_by(name: "foobar",
-        email: "foobar@example.com")
-
+    it "creates and sends an invitation for a space" do
       expect(invitation).to be_present
       expect(invitation.status).to eq("pending")
 

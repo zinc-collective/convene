@@ -40,7 +40,6 @@ RSpec/ExampleLength:
     - 'spec/models/room_spec.rb'
     - 'spec/policies/room_policy_spec.rb'
     - 'spec/requests/rsvps_controller_request_spec.rb'
-    - 'spec/requests/spaces/invitations_request_spec.rb'
     - 'spec/requests/spaces_controller_request_spec.rb'
     - 'spec/support/shared_examples/a_space_member_only_route.rb'
 
@@ -70,12 +69,6 @@ RSpec/NamedSubject:
     - 'spec/models/invitation_spec.rb'
     - 'spec/models/membership_spec.rb'
     - 'spec/models/space_spec.rb'
-
-# Offense count: 15
-# Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
-RSpec/VerifiedDoubles:
-  Exclude:
-    - 'spec/requests/spaces/invitations_request_spec.rb'
 
 # Offense count: 6
 # Configuration parameters: Database, Include.
