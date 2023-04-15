@@ -2,7 +2,7 @@
 
 <%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mt-3 mx-auto">
-    <%= render marketplace.products %>
+    <%= render Marketplace::ProductComponent.with_collection(marketplace.products) %>
   </div>
 
   <div class="text-center mt-3">
