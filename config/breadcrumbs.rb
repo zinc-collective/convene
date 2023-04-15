@@ -13,6 +13,11 @@ crumb :edit_space do |space|
   link "Configure Space", [:edit, space]
 end
 
+crumb :show_space_agreement do |agreement|
+  parent :root, agreement.space
+  link t("show.link_to", name: agreement.name)
+end
+
 crumb :memberships do |space|
   link "Members", [space, :memberships]
   if policy(space).edit?
