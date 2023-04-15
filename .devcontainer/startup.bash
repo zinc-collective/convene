@@ -17,7 +17,7 @@ function database_workspace_setup {
         exit 1
     fi
     if [ ! -e ${real_location} ]; then
-        mkdir -p ${real_location}
+        mkdir -p ${real_location}/_data
         false
     else
         true
