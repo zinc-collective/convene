@@ -11,7 +11,7 @@ end %>
 
 <div class="my-2 text-right">
   <%- if policy(marketplace).edit? %>
-    <%= render Buttons::SecondaryComponent.new(
+    <%= render ButtonComponent.new(scheme: :secondary,
       label: t('marketplace.marketplace.edit'), href: marketplace.location(:edit), method: :get) %>
   <%- end %>
 </div>

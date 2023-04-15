@@ -25,12 +25,13 @@ class Marketplace
     def destroy_button
       return unless destroy_button?
 
-      Buttons::SecondaryComponent.new(
+      ButtonComponent.new(
         label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
         title: t("marketplace.tax_rates.destroy.link_to", name: tax_rate.label),
         href: tax_rate.location, turbo_stream: true,
         method: :delete,
-        confirm: t("destroy.confirm")
+        confirm: t("destroy.confirm"),
+        scheme: :secondary
       )
     end
 

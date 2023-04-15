@@ -8,19 +8,21 @@
       <h4><%= furniture.title %></h4>
       <div>
         <%- if edit_href.present? %>
-          <%= render Buttons::SecondaryComponent.new(
+          <%= render ButtonComponent.new(
                         label: t('icons.edit'),
                         href: edit_href,
                         method: :get,
-                        title: t('.edit_title', name: furniture.furniture.model_name.human.titleize)) %>
+                        title: t('.edit_title', name: furniture.furniture.model_name.human.titleize),
+                        scheme: :secondary) %>
         <%- end %>
 
-        <%= render Buttons::SecondaryComponent.new(
+        <%= render ButtonComponent.new(
                       label: t('icons.remove'),
                       href: [furniture.room.space, furniture.room, furniture],
                       title: t('.remove_title', name: furniture.furniture.model_name.human.titleize),
                       method: :delete,
-                      confirm: t('.confirm_destroy')) %>
+                      confirm: t('.confirm_destroy'),
+                      scheme: :secondary) %>
         </div>
     </header>
     <%- if local_assigns[:include_form] %>

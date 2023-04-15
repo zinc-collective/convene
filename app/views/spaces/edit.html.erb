@@ -53,17 +53,19 @@
           <span class="grow"><%= utility.name %> <%= utility.utility_slug  %></span>
           <span>
             <%- if policy(utility).edit? %>
-              <%= render Buttons::SecondaryComponent.new(href: utility.location(:edit),
+              <%= render ButtonComponent.new(href: utility.location(:edit),
                                             title: t('utilities.edit.link_to', utility_type: utility.utility_slug, name: utility.name),
                                             label: t('icons.edit'),
-                                            method: :get) %>
+                                            method: :get,
+                                            scheme: :secondary) %>
             <%- end %>
 
             <%- if policy(utility).destroy? %>
-              <%= render Buttons::SecondaryComponent.new(href: utility.location,
+              <%= render ButtonComponent.new(href: utility.location,
                                             title: t('utilities.destroy.link_to', utility_type: utility.utility_slug, name: utility.name),
                                             label: t('icons.destroy'),
-                                            method: :delete) %>
+                                            method: :delete,
+                                            scheme: :secondary) %>
             <%- end %>
           </span>
         </span>
