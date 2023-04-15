@@ -2,8 +2,8 @@
 
 require "rails_helper"
 
-RSpec.describe "/spaces/:space_id/invitations" do # rubocop:disable RSpec/DescribeClass
-  describe "POST" do
+RSpec.describe InvitationsController do
+  describe "#create" do
     it "creates and sends an invitation for a space" do
       mail = double(deliver_later: true)
       allow(SpaceInvitationMailer).to receive(:space_invitation_email)
@@ -64,7 +64,7 @@ RSpec.describe "/spaces/:space_id/invitations" do # rubocop:disable RSpec/Descri
     end
   end
 
-  describe "DELETE /:invitation_id" do
+  describe "#destroy" do
     it "Revokes the Invitation" do
       membership = create(:membership)
       space = membership.space
