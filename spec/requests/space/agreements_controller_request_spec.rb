@@ -15,6 +15,27 @@ RSpec.describe Space::AgreementsController do
     it { is_expected.to render_template(:show) }
   end
 
+  describe "#new" do
+    subject(:perform_request) do
+      get polymorphic_path(space.location(:new, child: :agreement))
+      response
+    end
+
+    it { is_expected.to be_not_found }
+
+    context "when signed in as a member" do
+      before { sign_in(space, member) }
+
+      it { is_expected.to render_template(:new) }
+
+      specify do
+        perform_request
+        assert_select('input[type="text"][name="agreement[name]"]')
+        assert_select('textarea[name="agreement[body]"]')
+      end
+    end
+  end
+
   describe "#create" do
     subject(:perform_request) do
       post polymorphic_path(space.location(child: :agreements)), params: {agreement: agreement_params}

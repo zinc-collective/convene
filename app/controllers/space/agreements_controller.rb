@@ -3,6 +3,10 @@ class Space
     def show
     end
 
+    def new
+      agreement
+    end
+
     def create
       agreement.save
 
@@ -16,8 +20,10 @@ class Space
     helper_method def agreement
       @agreement ||= if params[:id]
         policy_scope(space.agreements).friendly.find(params[:id])
-      else
+      elsif params[:agreement]
         space.agreements.new(agreement_params)
+      else
+        space.agreements.new
       end.tap { |agreement| authorize(agreement) }
     end
 
