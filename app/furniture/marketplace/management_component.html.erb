@@ -13,7 +13,7 @@
 
         <%- if policy(marketplace).edit? %>
           <%= render Marketplace::ManagementMenuItemComponent.new(location: marketplace.location(:edit)) do |menu_item| %>
-            <% menu_item.with_icon(variant: ::Icons::GearComponent) %>
+            <% menu_item.with_icon(icon: :gear) %>
             <% menu_item.with_title(t('marketplace.marketplace.configuration_menu')) %>
           <% end %>
         <% end %>

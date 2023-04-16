@@ -10,8 +10,11 @@
       <%= button_to t('.connect_stripe'),
           marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
     <% else %>
-      <%= link_to t('.missing_stripe_api_key', space_name: space.name),
-          space.location(:edit), method: :get %>
+      <%= render ButtonComponent.new(
+            label: t('.missing_stripe_api_key', space_name: space.name),
+            href: space.location(:edit),
+            method: :get,
+            scheme: :primary ) %>
     <% end %>
   </p>
 <% end %>
