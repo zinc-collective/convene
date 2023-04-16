@@ -14,7 +14,7 @@ class ButtonComponent < ApplicationComponent
     confirm: nil,
     disabled: false,
     turbo_stream: false,
-    scheme: :secondary,
+    scheme: nil,
     **kwargs
   )
     @label = label
@@ -32,7 +32,11 @@ class ButtonComponent < ApplicationComponent
   private
 
   def classes
-    (base_classes + send(SCHEME_MAPPINGS[@scheme])).join(" ")
+    if @scheme.present?
+      (base_classes + send(SCHEME_MAPPINGS[@scheme])).join(" ")
+    else
+      super
+    end
   end
 
   def data
