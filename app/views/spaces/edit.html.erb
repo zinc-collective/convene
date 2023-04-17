@@ -76,7 +76,7 @@
   <p><%= link_to t('utilities.new.link_to'), space.location(:new, child: :utility) %></p>
 </fieldset>
 
-<fieldset>
+<%= render CardComponent.new do %>
   <header>
     <h3><%= t('space.agreements.index.link_to') %></h3>
     <p class="text-sm italic"><%= t('space.agreements.help_text') %></p>
@@ -88,4 +88,15 @@
       </span>
     <%- end %>
   <div>
-</fieldset>
+  <footer class="mt-4 text-center">
+    <%- new_agreement = space.agreements.build %>
+    <%- if policy(new_agreement).create? %>
+      <%= render ButtonComponent.new(
+        label: "#{t('space.agreements.new.link_to')} #{t('icons.new')}",
+        title: t('space.agreements.new.link_to'),
+        href: space.location(:new, child: :agreement),
+        method: :get,
+        scheme: :secondary) %>
+    <%- end %>
+  </footer>
+<%- end %>

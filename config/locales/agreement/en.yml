@@ -4,3 +4,7 @@ en:
       help_text: Such as Privacy Policies, Content Policies, Terms of Service, etc.
       index:
         link_to: "Agreements"
+      new:
+        link_to: "Add Agreement"
+      create:
+        success: "Added Agreement %{name}"
