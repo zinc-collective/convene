@@ -3,13 +3,21 @@ class Marketplace
     attr_accessor :delivery_area
     delegate :label, to: :delivery_area
 
-    def initialize(delivery_area:, data: {}, classes: "")
-      super(data: data, classes: classes)
+    def initialize(delivery_area:, **kwargs)
+      super(**kwargs)
 
       self.delivery_area = delivery_area
     end
 
-    delegate :price, to: :delivery_area
+    def price
+      helpers.humanized_money_with_symbol(delivery_area.price)
+    end
+
+    delegate :order_by, to: :delivery_area
+
+    def delivery_window
+      Delivery::Window.new(value: delivery_area.delivery_window)
+    end
 
     def edit_button
       super(title: t("marketplace.delivery_areas.edit.link_to", name: delivery_area.label),
@@ -23,11 +31,12 @@ class Marketplace
     def destroy_button
       return unless destroy_button?
 
-      Buttons::SecondaryComponent.new(label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
+      ButtonComponent.new(label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
         title: t("marketplace.delivery_areas.destroy.link_to", name: delivery_area.label),
         href: delivery_area.location, turbo_stream: true,
         method: :delete,
-        confirm: t("destroy.confirm"))
+        confirm: t("destroy.confirm"),
+        scheme: :secondary)
     end
 
     def destroy_button?

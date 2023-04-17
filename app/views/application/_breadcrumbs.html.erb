@@ -2,7 +2,7 @@
   <div>
     <%- if policy(current_space).edit? %>
       <%= link_to [:edit, current_space], class: "no-underline", aria: { label: "Configure Space" }, role: "img" do -%>
-        <%= render Icons::GearComponent.new(classes: "h-5 w-5 inline") %>
+        <%= render SvgComponent.new(icon: :gear, classes: "h-5 w-5 inline") %>
       <%- end %>
     <%- end %>
     <%= breadcrumbs container_tag: 'nav', fragment_class: 'crumb', separator: " &rsaquo; ", semantic: true, display_single_fragment: true %>

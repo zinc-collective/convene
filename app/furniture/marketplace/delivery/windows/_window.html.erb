@@ -1,5 +1,8 @@
+delivery
 <%- if window.time_like? %>
-  <%= l(window.value, format: :day_month_date_hour_minute) %>
+  at <%= l(window.value, format: :day_month_date_hour_minute) %>
+<%- elsif window.blank? %>
+  at your chosen time
 <%- else %>
-  <%= window.value %>
+  for <%= window.value %>
 <%- end %>

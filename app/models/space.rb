@@ -37,6 +37,8 @@ class Space < ApplicationRecord
   has_many :rooms, inverse_of: :space, dependent: :destroy_async
   has_many :furnitures, through: :rooms, inverse_of: :space
 
+  has_many :agreements, inverse_of: :space, dependent: :destroy
+
   belongs_to :entrance, class_name: "Room", optional: true
 
   # @see {Utility}

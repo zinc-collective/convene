@@ -53,17 +53,19 @@
           <span class="grow"><%= utility.name %> <%= utility.utility_slug  %></span>
           <span>
             <%- if policy(utility).edit? %>
-              <%= render Buttons::SecondaryComponent.new(href: utility.location(:edit),
+              <%= render ButtonComponent.new(href: utility.location(:edit),
                                             title: t('utilities.edit.link_to', utility_type: utility.utility_slug, name: utility.name),
                                             label: t('icons.edit'),
-                                            method: :get) %>
+                                            method: :get,
+                                            scheme: :secondary) %>
             <%- end %>
 
             <%- if policy(utility).destroy? %>
-              <%= render Buttons::SecondaryComponent.new(href: utility.location,
+              <%= render ButtonComponent.new(href: utility.location,
                                             title: t('utilities.destroy.link_to', utility_type: utility.utility_slug, name: utility.name),
                                             label: t('icons.destroy'),
-                                            method: :delete) %>
+                                            method: :delete,
+                                            scheme: :secondary) %>
             <%- end %>
           </span>
         </span>
@@ -73,3 +75,28 @@
 
   <p><%= link_to t('utilities.new.link_to'), space.location(:new, child: :utility) %></p>
 </fieldset>
+
+<%= render CardComponent.new do %>
+  <header>
+    <h3><%= t('space.agreements.index.link_to') %></h3>
+    <p class="text-sm italic"><%= t('space.agreements.help_text') %></p>
+  </header>
+  <div>
+    <%- space.agreements.each do |agreement| %>
+      <span class="flex justify-between w-full rounded border p-2 my-2 border-t-0 border-l-0">
+          <span class="grow"><%= agreement.name %></span>
+      </span>
+    <%- end %>
+  <div>
+  <footer class="mt-4 text-center">
+    <%- new_agreement = space.agreements.build %>
+    <%- if policy(new_agreement).create? %>
+      <%= render ButtonComponent.new(
+        label: "#{t('space.agreements.new.link_to')} #{t('icons.new')}",
+        title: t('space.agreements.new.link_to'),
+        href: space.location(:new, child: :agreement),
+        method: :get,
+        scheme: :secondary) %>
+    <%- end %>
+  </footer>
+<%- end %>

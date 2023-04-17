@@ -39,7 +39,7 @@ class ApplicationComponent < ViewComponent::Base
   end
 
   def edit_button(title:, href:, label: "#{t("icons.edit")} #{t("edit.link_to")}")
-    Buttons::SecondaryComponent.new label: label, title: title,
-      href: href, turbo_stream: true, method: :get
+    ButtonComponent.new label: label, title: title,
+      href: href, turbo_stream: true, method: :get, scheme: :secondary
   end
 end

@@ -23,7 +23,15 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
     let(:perform_request) { get polymorphic_path(marketplace.location(:new, child: :delivery_area)) }
 
     it { is_expected.to be_ok }
-    specify { perform_request && assert_select("form input", 3) && assert_select("#delivery_area_label") && assert_select("#delivery_area_price") }
+
+    specify do
+      perform_request
+      assert_select("form input", 5)
+      assert_select("#delivery_area_label")
+      assert_select("#delivery_area_price")
+      assert_select("#delivery_area_order_by")
+      assert_select("#delivery_area_delivery_window")
+    end
   end
 
   describe "#create" do
@@ -38,12 +46,26 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
   describe "#update" do
     let(:delivery_area) { create(:marketplace_delivery_area, marketplace: marketplace) }
     let(:perform_request) do
-      put polymorphic_path(delivery_area.location), params: {delivery_area: {label: "Dog", price: 60.00}}
+      put polymorphic_path(delivery_area.location), params: {
+        delivery_area: {
+          label: "Dog",
+          price: 60.00,
+          order_by: "3PM",
+          delivery_window: "6pm Same Day"
+        }
+      }
+
+      delivery_area.reload
     end
 
     it { is_expected.to redirect_to(marketplace.location(child: :delivery_areas)) }
-    specify { expect { result }.to change { delivery_area.reload.label }.to("Dog") }
-    specify { expect { result }.to change { delivery_area.reload.price }.to(Money.new(6000)) }
+
+    specify do
+      expect { result }.to change(delivery_area, :label).to("Dog")
+        .and(change(delivery_area, :price).to(Money.new(60_00)))
+        .and(change(delivery_area, :order_by).to("3PM"))
+        .and(change(delivery_area, :delivery_window).to("6pm Same Day"))
+    end
   end
 
   describe "#destroy" do

@@ -20,7 +20,7 @@ class Marketplace
 
     def update
       if delivery_area.update(delivery_area_params)
-        redirect_to marketplace.location(child: :delivery_areas)
+        redirect_to marketplace.location(child: :delivery_areas), notice: t(".success", name: delivery_area.label)
       else
         render :edit
       end

@@ -9,7 +9,7 @@ class Marketplace
     alias_method :update?, :create?
 
     def permitted_attributes(_)
-      [:label, :price]
+      [:label, :price, :order_by, :delivery_window]
     end
 
     class Scope < ApplicationScope

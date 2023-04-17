@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_08_033925) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_16_172045) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -134,6 +134,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_08_033925) do
     t.string "price_currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "delivery_window"
+    t.string "order_by"
     t.index ["marketplace_id"], name: "index_marketplace_delivery_areas_on_marketplace_id"
   end
 
@@ -224,6 +226,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_08_033925) do
     t.index ["space_id"], name: "index_rooms_on_space_id"
   end
 
+  create_table "space_agreements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "space_id"
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["space_id", "name"], name: "index_space_agreements_on_space_id_and_name", unique: true
+    t.index ["space_id", "slug"], name: "index_space_agreements_on_space_id_and_slug", unique: true
+    t.index ["space_id"], name: "index_space_agreements_on_space_id"
+  end
+
   create_table "spaces", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "client_id"
     t.string "name"
@@ -261,5 +275,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_08_033925) do
   add_foreign_key "marketplace_shoppers", "people"
   add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
   add_foreign_key "memberships", "invitations"
+  add_foreign_key "space_agreements", "spaces"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
