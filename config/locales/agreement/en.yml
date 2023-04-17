@@ -8,6 +8,8 @@ en:
         link_to: "Add Agreement"
       create:
         success: "Added Agreement '%{name}'"
+      edit:
+        link_to: "Edit Agreement '%{name}'"
       update:
         success: "Changed Agreement '%{name}'"
       destroy:

@@ -7,6 +7,9 @@ class Space
       agreement
     end
 
+    def edit
+    end
+
     def create
       if agreement.save
         redirect_to space.location(:edit), notice: t(".success", name: agreement.name)
