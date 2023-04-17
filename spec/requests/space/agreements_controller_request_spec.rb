@@ -15,6 +15,23 @@ RSpec.describe Space::AgreementsController do
     it { is_expected.to render_template(:show) }
   end
 
+  describe "#edit" do
+    subject(:perform_request) do
+      get polymorphic_path(agreement.location(:edit))
+      response
+    end
+
+    let(:agreement) { create(:space_agreement, space: space) }
+
+    it { is_expected.to be_not_found }
+
+    context "when signed in as a member of the space" do
+      before { sign_in(space, member) }
+
+      it { is_expected.to render_template(:edit) }
+    end
+  end
+
   describe "#new" do
     subject(:perform_request) do
       get polymorphic_path(space.location(:new, child: :agreement))

@@ -86,6 +86,13 @@
       <span class="flex justify-between w-full">
           <span class="grow"><%= agreement.name %></span>
           <span>
+            <%- if policy(agreement).edit? %>
+              <%= render ButtonComponent.new(href: agreement.location(:edit),
+                                            title: t('space.agreements.edit.link_to', name: agreement.name),
+                                            label: t('icons.edit'),
+                                            method: :get,
+                                            scheme: :secondary) %>
+            <%- end %>
             <%- if policy(agreement).destroy? %>
               <%= render ButtonComponent.new(href: agreement.location,
                                             title: t('space.agreements.destroy.link_to', name: agreement.name),
