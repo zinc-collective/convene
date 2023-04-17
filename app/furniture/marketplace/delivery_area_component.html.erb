@@ -6,10 +6,7 @@
 
   <div class="grow flex flex-col justify-between">
     <div class="text-sm">
-      <%- if order_by.present? %>
-        Place orders by <%= order_by %> to ensure an on-time
-      <%- end %>
-      <%= render(delivery_window) %>
+      <%= render Marketplace::Cart::DeliveryExpectationsComponent.new(order_by: delivery_area.order_by, delivery_window: delivery_area.delivery_window, cart: example_cart) %>
     </div>
 
     <div class="text-right mt-3 italic">

@@ -13,6 +13,10 @@ class Marketplace
       helpers.humanized_money_with_symbol(delivery_area.price)
     end
 
+    def example_cart
+      delivery_area.marketplace.carts.new
+    end
+
     delegate :order_by, to: :delivery_area
 
     def delivery_window
