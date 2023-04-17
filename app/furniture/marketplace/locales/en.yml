@@ -19,6 +19,8 @@ en:
         link_to: "Add Delivery Area"
       edit:
         link_to: "Edit Delivery Area '%{name}'"
+      update:
+        success: "Changed Delivery Area '%{name}'"
       destroy:
         link_to: "Remove Delivery Area '%{name}'"
     delivery_window:
