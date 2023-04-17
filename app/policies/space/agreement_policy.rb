@@ -10,6 +10,8 @@ class Space
       person&.operator? || person&.member_of?(agreement.space)
     end
 
+    alias_method :destroy?, :create?
+
     def permitted_attributes(_)
       %i[name body]
     end
