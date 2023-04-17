@@ -11,6 +11,7 @@ class Space
     end
 
     alias_method :destroy?, :create?
+    alias_method :update?, :create?
 
     def permitted_attributes(_)
       %i[name body]

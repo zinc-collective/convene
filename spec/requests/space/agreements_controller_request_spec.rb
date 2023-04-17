@@ -69,6 +69,35 @@ RSpec.describe Space::AgreementsController do
     end
   end
 
+  describe "#update" do
+    subject(:perform_request) do
+      put polymorphic_path(agreement.location, params: {agreement: agreement_params})
+      agreement.reload
+      response
+    end
+
+    let(:agreement_params) { {name: "Ooh"} }
+    let(:agreement) { create(:space_agreement, space: space) }
+
+    it { is_expected.to be_not_found }
+
+    describe "when signed in as a member" do
+      before { sign_in(space, member) }
+
+      it { is_expected.to redirect_to(space.location(:edit)) }
+
+      specify do
+        expect { perform_request }.to change(agreement, :name).to("Ooh")
+      end
+
+      context "when the params are invalid" do
+        let(:agreement_params) { {name: ""} }
+
+        it { is_expected.to render_template(:edit).and(be_unprocessable) }
+      end
+    end
+  end
+
   describe "#destroy" do
     subject(:perform_request) do
       delete polymorphic_path(agreement.location)
