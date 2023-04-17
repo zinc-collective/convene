@@ -7,4 +7,4 @@ en:
       new:
         link_to: "Add Agreement"
       create:
-        success: "Added Agreement %{name}"
+        success: "Added Agreement '%{name}'"

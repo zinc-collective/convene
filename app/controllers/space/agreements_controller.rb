@@ -8,12 +8,10 @@ class Space
     end
 
     def create
-      agreement.save
-
-      if agreement.errors.present?
-        render :new, status: :unprocessable_entity
-      else
+      if agreement.save
         redirect_to space.location(:edit), notice: t(".success", name: agreement.name)
+      else
+        render :new, status: :unprocessable_entity
       end
     end
 
