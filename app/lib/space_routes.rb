@@ -1,6 +1,6 @@
 module SpaceRoutes
   def self.append_routes(router)
-    router.resources :agreements, only: %i[show new create], controller: "space/agreements"
+    router.resources :agreements, only: %i[show new create destroy], controller: "space/agreements"
     router.resource :authenticated_session, only: %i[new create update destroy show]
     router.resources :invitations, only: %i[create destroy index] do
       router.resource :rsvp, only: %i[show update]

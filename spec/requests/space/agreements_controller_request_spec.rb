@@ -68,4 +68,26 @@ RSpec.describe Space::AgreementsController do
       specify { expect { perform_request }.not_to change { space.agreements.reload.count } }
     end
   end
+
+  describe "#destroy" do
+    subject(:perform_request) do
+      delete polymorphic_path(agreement.location)
+      response
+    end
+
+    let(:agreement) { create(:space_agreement, space: space) }
+
+    it { is_expected.to be_not_found }
+
+    context "when signed in as a member" do
+      before { sign_in(space, member) }
+
+      specify do
+        perform_request
+        expect(Space::Agreement).not_to exist(id: agreement.id)
+      end
+
+      it { is_expected.to redirect_to(space.location(:edit)) }
+    end
+  end
 end

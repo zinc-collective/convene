@@ -15,6 +15,11 @@ class Space
       end
     end
 
+    def destroy
+      agreement.destroy
+      redirect_to space.location(:edit), notice: t(".success", name: agreement.name)
+    end
+
     helper_method def agreement
       @agreement ||= if params[:id]
         policy_scope(space.agreements).friendly.find(params[:id])
