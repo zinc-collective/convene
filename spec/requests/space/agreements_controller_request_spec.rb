@@ -15,6 +15,23 @@ RSpec.describe Space::AgreementsController do
     it { is_expected.to render_template(:show) }
   end
 
+  describe "#edit" do
+    subject(:perform_request) do
+      get polymorphic_path(agreement.location(:edit))
+      response
+    end
+
+    let(:agreement) { create(:space_agreement, space: space) }
+
+    it { is_expected.to be_not_found }
+
+    context "when signed in as a member of the space" do
+      before { sign_in(space, member) }
+
+      it { is_expected.to render_template(:edit) }
+    end
+  end
+
   describe "#new" do
     subject(:perform_request) do
       get polymorphic_path(space.location(:new, child: :agreement))
@@ -66,6 +83,57 @@ RSpec.describe Space::AgreementsController do
 
       it { is_expected.to be_unprocessable }
       specify { expect { perform_request }.not_to change { space.agreements.reload.count } }
+    end
+  end
+
+  describe "#update" do
+    subject(:perform_request) do
+      put polymorphic_path(agreement.location, params: {agreement: agreement_params})
+      agreement.reload
+      response
+    end
+
+    let(:agreement_params) { {name: "Ooh"} }
+    let(:agreement) { create(:space_agreement, space: space) }
+
+    it { is_expected.to be_not_found }
+
+    describe "when signed in as a member" do
+      before { sign_in(space, member) }
+
+      it { is_expected.to redirect_to(space.location(:edit)) }
+
+      specify do
+        expect { perform_request }.to change(agreement, :name).to("Ooh")
+      end
+
+      context "when the params are invalid" do
+        let(:agreement_params) { {name: ""} }
+
+        it { is_expected.to render_template(:edit).and(be_unprocessable) }
+      end
+    end
+  end
+
+  describe "#destroy" do
+    subject(:perform_request) do
+      delete polymorphic_path(agreement.location)
+      response
+    end
+
+    let(:agreement) { create(:space_agreement, space: space) }
+
+    it { is_expected.to be_not_found }
+
+    context "when signed in as a member" do
+      before { sign_in(space, member) }
+
+      specify do
+        perform_request
+        expect(Space::Agreement).not_to exist(id: agreement.id)
+      end
+
+      it { is_expected.to redirect_to(space.location(:edit)) }
     end
   end
 end

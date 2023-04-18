@@ -18,10 +18,10 @@ RSpec.describe Marketplace::DeliveryAreaComponent, type: :component do
     it { is_expected.to have_content "at your chosen time" }
   end
 
-  context "when `#delivery_window`` is a string" do
+  context "when `#delivery_window` is a string" do
     let(:delivery_area) { create(:marketplace_delivery_area, delivery_window: "dinnertime same day") }
 
-    it { is_expected.to have_content "for #{delivery_area.delivery_window}" }
+    it { is_expected.to have_content delivery_area.delivery_window }
   end
 
   context "when #order_by is blank" do
@@ -31,6 +31,6 @@ RSpec.describe Marketplace::DeliveryAreaComponent, type: :component do
   context "when `#order_by` is set" do
     let(:delivery_area) { create(:marketplace_delivery_area, order_by: "noon") }
 
-    it { is_expected.to have_content "by #{delivery_area.order_by}" }
+    it { is_expected.to have_content delivery_area.order_by }
   end
 end

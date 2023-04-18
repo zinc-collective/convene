@@ -1,8 +1,3 @@
 <%- breadcrumb :new_space_agreement, agreement %>
 
-<%= form_with(model: agreement.location) do |agreement_form| %>
-  <%= render "text_field", attribute: :name,  form: agreement_form%>
-  <%= render "text_area", attribute: :body,  form: agreement_form%>
-
-  <%= agreement_form.submit %>
-<%- end %>
+<%= render "form", agreement: agreement %>

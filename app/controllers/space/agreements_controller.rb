@@ -7,14 +7,28 @@ class Space
       agreement
     end
 
-    def create
-      agreement.save
+    def edit
+    end
 
-      if agreement.errors.present?
-        render :new, status: :unprocessable_entity
-      else
+    def create
+      if agreement.save
         redirect_to space.location(:edit), notice: t(".success", name: agreement.name)
+      else
+        render :new, status: :unprocessable_entity
       end
+    end
+
+    def update
+      if agreement.update(agreement_params)
+        redirect_to space.location(:edit), notice: t(".success", name: agreement.name)
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      agreement.destroy
+      redirect_to space.location(:edit), notice: t(".success", name: agreement.name)
     end
 
     helper_method def agreement
