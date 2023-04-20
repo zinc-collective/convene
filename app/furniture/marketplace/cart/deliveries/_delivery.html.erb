@@ -1,14 +1,27 @@
 <div id="<%=dom_id(delivery) %>" class="flex flex-wrap items-center justify-between text-sm mt-1 sm:mt-2">
-  <span>
-    <span class="font-bold">Delivering to:</span>
-    <%= render(delivery.delivery_area) if delivery.delivery_area.present? %>
-  </span>
+    <span>
+      <% if delivery.details_filled_in? || delivery.delivery_area.present? %>
+        <span class="font-bold">Delivering to:</span>
+          <%= delivery.delivery_address if delivery.delivery_address.present? %>
+          <%= render(delivery.delivery_area) if delivery.delivery_area.present? %>
+      <% end %>
+    </span>
 
-  <%= render ButtonComponent.new(
-        label: t("marketplace.cart.deliveries.edit.link_to"),
+  <% if delivery.details_filled_in? %>
+    <%= render ButtonComponent.new(
+          label: t("marketplace.cart.deliveries.edit.link_to"),
+          href: delivery.location(:edit),
+          method: :get,
+          turbo_stream: true,
+          scheme: :secondary,
+        ) %>
+  <% else %>
+    <%= render ButtonComponent.new(
+        label: t("marketplace.cart.deliveries.edit.details_missing"),
         href: delivery.location(:edit),
         method: :get,
         turbo_stream: true,
-        scheme: :secondary,
+        scheme: :primary,
       ) %>
+  <% end %>
 </div>

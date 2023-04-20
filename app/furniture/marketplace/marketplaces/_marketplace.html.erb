@@ -6,7 +6,6 @@ end %>
 
 <%- cart = marketplace.carts.create_with(contact_email: shopper.person&.email, delivery_window: marketplace.delivery_window).find_or_create_by(shopper: shopper, status: :pre_checkout) %>
 
-<%= render cart.delivery %>
 <%= render cart %>
 
 <div class="my-2 text-right">

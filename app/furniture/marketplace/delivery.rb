@@ -18,5 +18,9 @@ class Marketplace
     def fee
       delivery_area&.price.presence || marketplace&.delivery_fee.presence
     end
+
+    def details_filled_in?
+      delivery_address.present? && contact_phone_number.present? && delivery_window.present?
+    end
   end
 end
