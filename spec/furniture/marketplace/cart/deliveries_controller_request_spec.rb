@@ -29,7 +29,12 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
     context "when a `Guest`" do
       let(:person) { nil }
 
-      it { is_expected.to have_rendered_turbo_stream(:replace, delivery) }
+      it "replaces the cart footer" do
+        perform_request
+        expect(response.parsed_body).to include(
+          "<turbo-stream action=\"replace\" target=\"cart-footer-#{cart.id}\""
+        )
+      end
 
       specify do
         expect { perform_request }
@@ -46,7 +51,12 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
 
       before { sign_in(space, person) }
 
-      it { is_expected.to have_rendered_turbo_stream(:replace, delivery) }
+      it "replaces the cart footer" do
+        perform_request
+        expect(response.parsed_body).to include(
+          "<turbo-stream action=\"replace\" target=\"cart-footer-#{cart.id}\""
+        )
+      end
 
       specify do
         expect { perform_request }
