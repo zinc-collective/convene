@@ -4,13 +4,13 @@ RSpec.describe Marketplace::Checkout, type: :request do
   let(:marketplace) { create(:marketplace) }
   let(:space) { marketplace.space }
   let(:room) { marketplace.room }
-  let(:cart) { create(:marketplace_cart, :with_products, marketplace: marketplace) }
+
   let(:checkout) { build(:marketplace_checkout, cart: cart) }
 
   before { create(:stripe_utility, space: space) }
 
   describe "#create" do
-    subject(:completed_request) {
+    subject(:perform_request) {
       post polymorphic_path(checkout.location)
       response
     }
@@ -21,14 +21,30 @@ RSpec.describe Marketplace::Checkout, type: :request do
 
     before do
       allow(Stripe::Checkout::Session).to receive(:create).and_return(stripe_checkout_session)
-      allow_any_instance_of(ApplicationController).to receive(:session).and_return({guest_shopper_id: cart.shopper.id})
     end
 
-    context "when a Guest checks out their Cart" do
+    context "when a Visitor checks out their Cart" do
       let(:cart) { create(:marketplace_cart, :with_products, marketplace: marketplace) }
 
+      before do
+        allow_any_instance_of(ApplicationController).to receive(:session).and_return({guest_shopper_id: cart.shopper.id})
+      end
+
       it "Redirects to Stripe" do
-        expect(completed_request).to redirect_to(stripe_checkout_session.url)
+        expect(perform_request).to redirect_to(stripe_checkout_session.url)
+      end
+    end
+
+    context "when a Neighbor checks out their Cart" do
+      let(:cart) { create(:marketplace_cart, :with_person, :with_products, marketplace: marketplace) }
+
+      it "passes the email to stripe" do
+        sign_in(space, cart.shopper.person)
+        perform_request
+        expect(Stripe::Checkout::Session).to have_received(:create).with(
+          hash_including(mode: "payment", customer_email: cart.contact_email),
+          {api_key: "not_real"}
+        )
       end
     end
 
@@ -36,7 +52,7 @@ RSpec.describe Marketplace::Checkout, type: :request do
       let(:cart) { create(:marketplace_cart, marketplace: marketplace) }
 
       it "shows an error notice" do
-        completed_request
+        perform_request
         expect(flash[:alert]).to include("line items can't be blank")
       end
     end

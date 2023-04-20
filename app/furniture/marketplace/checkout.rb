@@ -16,6 +16,7 @@ class Marketplace
         mode: "payment",
         success_url: success_url,
         cancel_url: cancel_url,
+        customer_email: cart.contact_email,
         payment_intent_data: {
           transfer_group: cart.id
         }

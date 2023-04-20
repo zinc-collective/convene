@@ -20,6 +20,9 @@ class Marketplace
     attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
+    def contact_email
+      super.presence || shopper&.email
+    end
 
     enum status: {
       pre_checkout: "pre_checkout",

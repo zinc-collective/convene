@@ -5,6 +5,8 @@ class Marketplace
     self.table_name = "marketplace_shoppers"
 
     belongs_to :person, optional: true
+    delegate :email, to: :person, allow_nil: true
+
     has_many :carts, inverse_of: :shopper
     has_many :orders, inverse_of: :shopper
   end
