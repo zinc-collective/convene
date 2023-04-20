@@ -12,12 +12,22 @@ class Marketplace
         if delivery.errors.present?
           render turbo_stream: [turbo_stream.replace(delivery, partial: "form")]
         else
-          render turbo_stream: [turbo_stream.replace(delivery)]
+          # Replace the entire cart footer so that the "Checkout" button updates as well
+          render turbo_stream: [
+            turbo_stream.replace("cart-footer-#{cart.id}",
+              partial: "marketplace/carts/footer", locals: {cart: cart})
+          ]
         end
       end
 
       helper_method def delivery
-        @delivery ||= policy_scope(marketplace.carts).find(params[:cart_id]).delivery
+        @delivery ||= cart.delivery
+      end
+
+      private
+
+      def cart
+        @cart ||= policy_scope(marketplace.carts).find(params[:cart_id])
       end
 
       def delivery_params
