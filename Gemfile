@@ -116,7 +116,7 @@ group :development, :test do
 
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "standard", "~> 1.26"
+  gem "standard", "~> 1.27"
   gem "solargraph", "~> 0.49"
 end
 
