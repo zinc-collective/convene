@@ -16,9 +16,11 @@ RSpec.describe Furniture do
   describe "#slot" do
     let(:room) { create(:room) }
     let(:placements) { create_list(:furniture, 3, room: room) }
+    # rubocop:disable RSpec/IndexedLet
     let(:placement1) { placements[0] }
     let(:placement2) { placements[1] }
     let(:placement3) { placements[2] }
+    # rubocop:enable RSpec/IndexedLet
 
     before {
       placement1
