@@ -20,6 +20,9 @@ class Marketplace
     attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
+    def contact_email
+      super.presence || shopper&.email
+    end
 
     enum status: {
       pre_checkout: "pre_checkout",
@@ -43,12 +46,8 @@ class Marketplace
       product_total + delivery_fee + tax_total
     end
 
-    def ready_for_shopping?
-      (delivery_address.present? && contact_phone_number.present? && delivery_window.present?)
-    end
-
     def ready_for_checkout?
-      ready_for_shopping? && cart_products.present? && cart_products.all?(&:valid?)
+      delivery.details_filled_in? && cart_products.present? && cart_products.all?(&:valid?)
     end
   end
 end

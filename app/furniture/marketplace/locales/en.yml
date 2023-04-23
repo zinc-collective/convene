@@ -11,7 +11,9 @@ en:
     cart:
       deliveries:
         edit:
-          link_to: "Change Delivery Details"
+          header: "Delivery Details"
+          link_to: "Change delivery details"
+          details_missing: "Add delivery details to checkout"
     delivery_areas:
       index:
         link_to: "Delivery Areas"

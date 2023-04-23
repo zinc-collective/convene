@@ -68,7 +68,7 @@ gem "strong_migrations", "~> 1.4"
 gem "pg", "~> 1.4"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.120", require: false
+gem "aws-sdk-s3", "~> 1.121", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -116,7 +116,7 @@ group :development, :test do
 
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "standard", "~> 1.26"
+  gem "standard", "~> 1.27"
   gem "solargraph", "~> 0.49"
 end
 

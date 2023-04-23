@@ -57,6 +57,13 @@ FactoryBot.define do
       end
       cart_products { Array.new(product_quantity) { association(:marketplace_cart_product, marketplace: marketplace) } }
     end
+
+    trait :with_person do
+      transient do
+        person { build(:person) }
+      end
+      shopper { association(:marketplace_shopper, person: person) }
+    end
   end
 
   factory :marketplace_cart_product, class: "Marketplace::CartProduct" do
