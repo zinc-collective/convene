@@ -44,23 +44,16 @@ function database_symlink_setup {
         echo "Symlink '${symlink_location}->${real_location}' already exists!"
     fi
 }
-pg_real=/workspaces/postgresql
-redis_real=/workspaces/redis
-pg_old=/var/lib/docker/volumes/convene_postgres_data
-redis_old=/var/lib/docker/volumes/convene_redis_data
+
+volumes_real=/workspaces/docker-volumes
+volumes_old=/var/lib/docker/volumes
 
 data_files_existed=0
 
-database_workspace_setup ${pg_real}
+database_workspace_setup ${volumes_real}
 if [ $? != 0 ]; then data_files_existed=1; fi
-# sudo chown -R 999:999 ${pg_real}
 
-database_workspace_setup ${redis_real}
-if [ $? != 0 ]; then data_files_existed=1; fi
-sudo chown -R 1001:1001 ${redis_real}
-
-database_symlink_setup ${pg_real} ${pg_old}
-database_symlink_setup ${redis_real} ${redis_old}
+database_symlink_setup ${volumes_real} ${volumes_old}
 
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
 if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
