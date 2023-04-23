@@ -40,6 +40,8 @@ function database_symlink_setup {
         if [ $? != 0 ]; then
             echo "Cannot create symlink of ${real_location}"; exit 1
         fi
+    else
+        echo "Symlink '${symlink_location}->${real_location}' already exists!"
     fi
 }
 pg_real=/workspaces/postgresql
