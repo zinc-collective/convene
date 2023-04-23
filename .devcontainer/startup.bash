@@ -60,10 +60,19 @@ if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
    [ "`docker inspect -f {{.State.Running}} convene-redis-1`" != "true" ]; then
     echo "Startup containers"
     docker compose up &> .devcontainer/output/docker_compose_up.out &
+    docker_compose_pid=$!
     until [ "`docker inspect -f {{.State.Running}} convene-db-1`" == "true" ] && \
         [ "`docker inspect -f {{.State.Running}} convene-redis-1`" == "true" ]; do
         sleep 1;
+        if [ $(ps -p ${docker_compose_pid} | wc -l) != 2 ]; then
+            echo "'docker compose up' failed!"; exit 1
+        fi
     done;
+fi
+sleep 5;
+if ! [ "`docker inspect -f {{.State.Running}} convene-db-1`" == "true" ] || \
+    ! [ "`docker inspect -f {{.State.Running}} convene-redis-1`" == "true" ]; then
+    echo "'docker compose up' failed after brief pause!"; exit 1
 fi
 
 # TODO: Add timing to docker-compose up above block and bin/setup block below; report to respective files
