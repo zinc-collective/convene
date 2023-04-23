@@ -55,8 +55,11 @@ data_files_existed=0
 
 database_workspace_setup ${volumes_real}
 if [ $? != 0 ]; then data_files_existed=1; fi
+sudo chown -R vscode ${real_location}
 
 database_symlink_setup ${volumes_real} ${volumes_old}
+sudo chown -R 999 /workspaces/docker-volumes/convene_postgres_data
+sudo chown -R 1001 /workspaces/docker-volumes/convene_redis_data
 
 # If postgres and redis aren't both running, start them up again and wait till running, otherwise, continue
 if [ "`docker inspect -f {{.State.Running}} convene-db-1`" != "true" ] || \
