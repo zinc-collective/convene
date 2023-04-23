@@ -33,7 +33,10 @@ function database_symlink_setup {
     fi
 
     if [ -z $(sudo readlink ${symlink_location}) ]; then # workaround to check if symlink (permissions issues?)
-        if [ -e ${symlink_location} ]; then
+        if sudo [ -e ${symlink_location} ]; then
+            for f in ${symlink_location}/*; do
+                rsync --ignore-existing -ra ${f} ${real_location}/${f}
+            done
             sudo rm -rf ${symlink_location}
         fi
         sudo ln -s ${real_location} ${symlink_location}
