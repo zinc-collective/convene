@@ -65,7 +65,7 @@ gem "rotp", "~> 6.2"
 gem "strong_migrations", "~> 1.4"
 
 # Use postgresql for data persistence
-gem "pg", "~> 1.4"
+gem "pg", "~> 1.5"
 
 # Use S3 for file storage
 gem "aws-sdk-s3", "~> 1.121", require: false
