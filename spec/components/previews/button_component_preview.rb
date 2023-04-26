@@ -1,10 +1,11 @@
 class ButtonComponentPreview < ViewComponent::Preview
-  def default
+  # @param classes
+  def default(classes: "font-bold bg-rose-500 text-white hover:text-red-50 p-5 no-underline")
     render(ButtonComponent.new(
       label: "I'm a basic button with custom classes",
       title: "gaaa!",
       href: "#",
-      classes: "font-bold bg-rose-500 text-white hover:text-red-50 p-5 no-underline"
+      classes: classes
     ))
   end
 
