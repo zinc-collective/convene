@@ -9,12 +9,12 @@ RSpec.describe Marketplace::Cart::DeliveryExpectationsComponent, type: :componen
   let(:marketplace) { build(:marketplace) }
 
   context "when the cart does not have a `delivery_area`" do
-    let(:cart) { build(:marketplace_cart, marketplace: marketplace, delivery_window: 1.hour.from_now) }
+    let(:cart) { build(:marketplace_cart, marketplace: marketplace) }
 
     context "when the `marketplace` has an `order_by` without a `delivery_window`" do
       let(:marketplace) { build(:marketplace, order_by: "by 8AM") }
 
-      it { is_expected.to have_content("to ensure an on-time delivery for #{I18n.l(1.hour.from_now, format: :day_month_date_hour_minute)}", normalize_ws: true) }
+      it { is_expected.to have_content("Order by 8AM") }
     end
 
     context "when the `marketplace` has a `delivery_window` without an `order_by`" do
@@ -33,8 +33,7 @@ RSpec.describe Marketplace::Cart::DeliveryExpectationsComponent, type: :componen
       let(:marketplace) { build(:marketplace) }
 
       it {
-        expect(output).to have_content("Delivering at #{I18n.l(1.hour.from_now, format: :day_month_date_hour_minute)}",
-          normalize_ws: true)
+        expect(output).to have_content("Delivers at your chosen time")
       }
     end
   end

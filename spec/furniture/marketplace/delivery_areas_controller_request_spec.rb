@@ -64,7 +64,9 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
       expect { result }.to change(delivery_area, :label).to("Dog")
         .and(change(delivery_area, :price).to(Money.new(60_00)))
         .and(change(delivery_area, :order_by).to("3PM"))
-        .and(change(delivery_area, :delivery_window).to("6pm Same Day"))
+        .and(change(delivery_area, :delivery_window).to(
+          ::Marketplace::Delivery::Window.new(value: "6pm Same Day")
+        ))
     end
   end
 

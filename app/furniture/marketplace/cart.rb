@@ -17,7 +17,6 @@ class Marketplace
 
     # this feels like it is starting to want to be it's own model...
     has_encrypted :delivery_address
-    attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
     def contact_email
@@ -36,7 +35,7 @@ class Marketplace
     def delivery
       @delivery ||= becomes(Delivery)
     end
-    delegate :fee, to: :delivery, prefix: true
+    delegate :fee, :window, to: :delivery, prefix: true
 
     def tax_total
       cart_products.sum(0, &:tax_amount)

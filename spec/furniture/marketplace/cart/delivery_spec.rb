@@ -15,8 +15,4 @@ RSpec.describe Marketplace::Cart::Delivery, type: :model do
   describe "#delivery_address" do
     it { is_expected.to validate_presence_of(:delivery_address) }
   end
-
-  describe "#delivery_window" do
-    it { is_expected.to validate_presence_of(:delivery_window) }
-  end
 end
