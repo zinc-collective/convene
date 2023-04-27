@@ -7,20 +7,20 @@ class Marketplace
     belongs_to :delivery_area
 
     has_encrypted :delivery_address
-    attribute :delivery_window, WindowType.new
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
 
-    def window
-      delivery_window
+    def delivery_window
+      delivery_area&.delivery_window
     end
+    alias_method :window, :delivery_window
 
     def fee
       delivery_area&.price.presence || marketplace&.delivery_fee.presence
     end
 
     def details_filled_in?
-      delivery_address.present? && contact_phone_number.present? && delivery_window.present?
+      delivery_address.present? && contact_phone_number.present? && delivery_area.present?
     end
   end
 end

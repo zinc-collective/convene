@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_16_172045) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_27_003441) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -149,7 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_172045) do
     t.text "delivery_address_ciphertext"
     t.string "contact_phone_number_ciphertext"
     t.datetime "placed_at"
-    t.string "delivery_window"
+    t.string "delivery_notes"
     t.string "contact_email_ciphertext"
     t.uuid "delivery_area_id"
     t.index ["delivery_area_id"], name: "index_marketplace_orders_on_delivery_area_id"

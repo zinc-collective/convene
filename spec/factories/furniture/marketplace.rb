@@ -38,6 +38,13 @@ FactoryBot.define do
 
       delivery_areas { Array.new(delivery_area_quantity) { association(:marketplace_delivery_area, marketplace: instance) } }
     end
+
+    trait :full do
+      with_tax_rates
+      with_delivery_areas
+      with_delivery_fees
+      with_notify_emails
+    end
   end
 
   factory :marketplace_product, class: "Marketplace::Product" do
@@ -112,9 +119,9 @@ FactoryBot.define do
         product_count { (1..5).to_a.sample }
       end
 
-      marketplace { association(:marketplace, :with_tax_rates, :with_delivery_areas, :with_delivery_fees, :with_notify_emails) }
+      marketplace { association(:marketplace, :full) }
 
-      delivery_window { 1.hour.from_now }
+      delivery_notes { Faker::Movies::HitchhikersGuideToTheGalaxy.marvin_quote }
       delivery_area { marketplace.delivery_areas.sample }
       placed_at { 5.minutes.ago }
       delivery_address { Faker::Address.full_address }
@@ -155,7 +162,7 @@ FactoryBot.define do
     delivery_address { Faker::Address.full_address }
     contact_phone_number { Faker::PhoneNumber.phone_number }
     contact_email { Faker::Internet.safe_email }
-    delivery_window { Marketplace::Delivery::Window.new(value: Faker::Time.forward(days: 1, period: :evening).to_s) }
+    delivery_notes { Faker::Quote.famous_last_words }
     delivery_area { marketplace.delivery_areas.sample }
     delivery_area_id { delivery_area.id }
   end

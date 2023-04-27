@@ -13,6 +13,6 @@ RSpec.describe Marketplace::Cart::DeliveryPolicy, type: :policy do
     it { is_expected.to include(:contact_phone_number) }
     it { is_expected.to include(:contact_email) }
     it { is_expected.to include(:delivery_address) }
-    it { is_expected.to include(:delivery_window) }
+    it { is_expected.to include(:delivery_notes) }
   end
 end

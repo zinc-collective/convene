@@ -4,7 +4,7 @@ RSpec.describe Marketplace::Delivery, type: :model do
   subject(:delivery) { build(:marketplace_delivery, marketplace: marketplace, delivery_area: delivery_area) }
 
   let(:marketplace) { build(:marketplace) }
-  let(:delivery_area) { nil }
+  let(:delivery_area) { build(:marketplace_delivery_area, marketplace: marketplace) }
 
   it { is_expected.to belong_to(:marketplace) }
   it { is_expected.to belong_to(:shopper) }
@@ -20,6 +20,8 @@ RSpec.describe Marketplace::Delivery, type: :model do
     subject(:fee) { delivery.fee }
 
     context "when there is not a marketplace delivery fee or a delivery area delivery fee" do
+      let(:delivery_area) { build(:marketplace_delivery_area, price_cents: nil, marketplace: marketplace) }
+
       it { is_expected.to eq(0) }
     end
 
@@ -41,6 +43,6 @@ RSpec.describe Marketplace::Delivery, type: :model do
   describe "#window" do
     subject(:window) { delivery.window }
 
-    it { is_expected.to eql(delivery.delivery_window) }
+    it { is_expected.to eql(delivery.delivery_area.delivery_window) }
   end
 end
