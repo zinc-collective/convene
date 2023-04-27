@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/ruby:3.2
 
 LABEL org.opencontainers.image.source=https://github.com/zinc-collective/convene
+LABEL org.opencontainers.image.description="Container to facilitate easier development of convene, specifically to work in GitHub CodeSpaces."
 
 # Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
 # The value is a comma-separated list of allowed domains
