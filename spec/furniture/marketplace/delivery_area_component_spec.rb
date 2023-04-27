@@ -9,7 +9,7 @@ RSpec.describe Marketplace::DeliveryAreaComponent, type: :component do
   let(:delivery_area) { create(:marketplace_delivery_area) }
 
   it { is_expected.to have_content(delivery_area.label) }
-  it { is_expected.to have_content(controller.view_context.humanized_money_with_symbol(delivery_area.price)) }
+  it { is_expected.to have_content(vc_test_controller.view_context.humanized_money_with_symbol(delivery_area.price)) }
 
   it { is_expected.to have_selector("a[href='#{polymorphic_path(delivery_area.location)}'][data-turbo=true][data-turbo-stream=true][data-turbo-method=delete][data-method=delete][data-confirm='#{I18n.t("destroy.confirm")}']") }
   it { is_expected.to have_selector("a[href='#{polymorphic_path(delivery_area.location(:edit))}'][data-turbo=true][data-turbo-method=get][data-turbo-stream=true]") }

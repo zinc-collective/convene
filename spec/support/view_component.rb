@@ -5,9 +5,7 @@ require "capybara/rspec"
 module Spec
   module Support
     module ViewComponent
-      def polymorphic_path(*args, **kwargs)
-        controller.polymorphic_path(*args, **kwargs)
-      end
+      delegate :polymorphic_path, to: :vc_test_controller
     end
   end
 end
