@@ -14,7 +14,7 @@ class Marketplace
     end
 
     def example_cart
-      delivery_area.marketplace.carts.new
+      delivery_area.marketplace.carts.new(delivery_area: delivery_area)
     end
 
     delegate :order_by, to: :delivery_area

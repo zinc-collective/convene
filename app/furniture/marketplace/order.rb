@@ -34,7 +34,9 @@ class Marketplace
       becomes(Delivery)
     end
 
-    delegate :delivery_fee, to: :marketplace
+    def delivery_fee
+      delivery_area&.price
+    end
     delegate :delivery_window, to: :delivery_area, allow_nil: true
 
     def marketplace_name
@@ -42,7 +44,7 @@ class Marketplace
     end
 
     def price_total
-      product_total + delivery_fee + tax_total
+      [product_total, delivery_fee, tax_total].compact.sum
     end
   end
 end
