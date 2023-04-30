@@ -12,6 +12,8 @@ class Marketplace
 
     belongs_to :shopper, inverse_of: :carts
 
+    belongs_to :delivery_area, inverse_of: :carts, optional: true
+
     has_many :cart_products, dependent: :destroy, inverse_of: :cart
     has_many :products, through: :cart_products, inverse_of: :carts
 
