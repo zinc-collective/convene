@@ -2,8 +2,13 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
 {
   "name": "convene devcontainer",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "app",
+  "image": "ghcr.io/zinc-collective/convene-devcontainer:latest",
+//   "dockerComposeFile": "docker-compose.yml",
+//   "service": "app",
+  "mounts": [
+    "source=${localWorkspaceFolder}/../..,target=/workspaces,type=bind,consistency=cached"
+  ],
+  "remoteUser": "vscode",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
@@ -18,7 +23,7 @@
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // This can be used to network with other containers or the host.
-  // "forwardPorts": [3000, 5432],
+  "forwardPorts": [3000, 1080],
   "containerEnv": {
     "DISPLAY": ":1"
   },
