@@ -7,6 +7,7 @@ class Marketplace
     has_many :orders, inverse_of: :delivery_area
     has_many :deliveries, inverse_of: :delivery_area
 
+    attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
     monetize :price_cents
   end
 end
