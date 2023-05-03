@@ -155,7 +155,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    gretel (4.4.0)
+    gretel (4.5.0)
       actionview (>= 5.1, < 7.1)
       railties (>= 5.1, < 7.1)
     hashdiff (1.0.1)
@@ -207,7 +207,7 @@ GEM
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.1)
+    mini_portile2 (2.8.2)
     minitest (5.18.0)
     monetize (1.12.0)
       money (~> 6.12)
@@ -464,7 +464,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   friendly_id (~> 5.5.0)
-  gretel (~> 4.4)
+  gretel (~> 4.5)
   jbuilder (~> 2.11)
   jsbundling-rails
   listen (~> 3.8)
