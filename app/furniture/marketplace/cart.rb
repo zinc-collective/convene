@@ -40,7 +40,7 @@ class Marketplace
     delegate :fee, :window, to: :delivery, prefix: true
 
     def tax_total
-      cart_products.sum(0, &:tax_amount)
+      Money.new(cart_products.sum(0, &:tax_amount))
     end
 
     def price_total
