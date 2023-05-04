@@ -261,10 +261,10 @@
   dependencies:
     regexp-match-indices "1.0.2"
 
-"@cucumber/cucumber@^9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-9.1.0.tgz#13c029f8a4b19b493bc8ae46c5496d64bffb6355"
-  integrity sha512-GFHPmRIkPgbdT5akFcBvtdQWVHRT15ElohguaC9C3nVT4sBAArmYr0Q5yN2/ClAht7KZDk09D806uuSpMupM2w==
+"@cucumber/cucumber@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-9.1.1.tgz#ccb2e33b316fb842a508f38c979a8ea5d0d30d34"
+  integrity sha512-NR+nc2Up13rIojQlLE6xwuCYT2ve5QR0TVL8AnYFwNBNUSwPtti6+mi6bn/rbyN8DWcgsLQMbU7QuaomdYBJGw==
   dependencies:
     "@cucumber/ci-environment" "9.1.0"
     "@cucumber/cucumber-expressions" "16.1.1"
@@ -304,7 +304,7 @@
     util-arity "^1.1.0"
     verror "^1.10.0"
     xmlbuilder "^15.1.1"
-    yaml "2.2.1"
+    yaml "^2.2.2"
     yup "^0.32.11"
 
 "@cucumber/gherkin-streams@5.0.1":
@@ -4663,10 +4663,10 @@ yallist@^4.0.0:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-yaml@2.2.1, yaml@^2.1.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.2.1.tgz#3014bf0482dcd15147aa8e56109ce8632cd60ce4"
-  integrity sha512-e0WHiYql7+9wr4cWMx3TVQrNwejKaEe7/rHNmQmqRjazfOP5W8PB6Jpebb5o6fIapbz9o9+2ipcaTM2ZwDI6lw==
+yaml@^2.1.1, yaml@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.2.2.tgz#ec551ef37326e6d42872dad1970300f8eb83a073"
+  integrity sha512-CBKFWExMn46Foo4cldiChEzn7S7SRV+wqiluAb6xmueD/fGyRHIhX8m14vVGgeFWjN540nKCNVj6P21eQjgTuA==
 
 yargs-parser@^21.0.0:
   version "21.0.0"
