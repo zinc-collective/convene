@@ -19,10 +19,6 @@ class Marketplace
 
     delegate :order_by, to: :delivery_area
 
-    def delivery_window
-      Delivery::Window.new(value: delivery_area.delivery_window)
-    end
-
     def edit_button
       super(title: t("marketplace.delivery_areas.edit.link_to", name: delivery_area.label),
             href: delivery_area.location(:edit))

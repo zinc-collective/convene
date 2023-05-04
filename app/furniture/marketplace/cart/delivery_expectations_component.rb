@@ -15,6 +15,10 @@ class Marketplace
       def render?
         cart.delivery_area.present?
       end
+
+      def render_delivery_window
+        render(Marketplace::Cart::DeliveryWindowComponent.new(window: delivery_window))
+      end
     end
   end
 end

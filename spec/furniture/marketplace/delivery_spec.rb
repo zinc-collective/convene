@@ -10,12 +10,6 @@ RSpec.describe Marketplace::Delivery, type: :model do
   it { is_expected.to belong_to(:shopper) }
   it { is_expected.to belong_to(:delivery_area) }
 
-  describe "#delivery_window" do
-    subject(:delivery_window) { delivery.delivery_window }
-
-    it { is_expected.to be_a(Marketplace::Delivery::Window) }
-  end
-
   describe "#fee" do
     subject(:fee) { delivery.fee }
 

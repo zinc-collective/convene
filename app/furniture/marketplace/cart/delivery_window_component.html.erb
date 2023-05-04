@@ -1,0 +1,7 @@
+<%- if time_like? %>
+  <%= l(cast_window, format: :day_month_date_hour_minute) %>
+<%- elsif window.blank? %>
+  your chosen time
+<%- else %>
+  <%= window %>
+<%- end %>

@@ -54,7 +54,7 @@
 <%- if order.delivery_area.present? %>
   <tr>
     <td class="text-right">Delivery Schedule:</td>
-    <td><%= render(order.delivery_area.delivery_window) %></td>
+    <td><%= render(Marketplace::Cart::DeliveryWindowComponent.new(window: order.delivery_area.delivery_window)) %></td>
   </tr>
   <tr>
     <td class="text-right">Delivering In:</td>
