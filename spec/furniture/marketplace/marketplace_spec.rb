@@ -16,4 +16,14 @@ RSpec.describe Marketplace::Marketplace, type: :model do
       specify { expect { marketplace.destroy }.not_to change(orders, :count) }
     end
   end
+
+  describe ".all" do
+    subject(:all) { described_class.all }
+
+    let!(:non_marketplace_furniture) { create(:journal) }
+    let!(:marketplace_furniture) { create(:marketplace) }
+
+    it { is_expected.not_to include(non_marketplace_furniture) }
+    it { is_expected.to include(marketplace_furniture) }
+  end
 end
