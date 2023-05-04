@@ -42,7 +42,7 @@ RSpec.describe Marketplace::Marketplace, type: :model do
       it { is_expected.to be_falsey }
     end
 
-    context "when there is a stripe utility, stripe account, and products but no delivery area" do
+    context "when there is a stripe utility, stripe account, and product but no delivery area" do
       let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_products, :with_stripe_account) }
 
       it { is_expected.to be_falsey }
