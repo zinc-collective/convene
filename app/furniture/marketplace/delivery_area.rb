@@ -5,6 +5,7 @@ class Marketplace
 
     belongs_to :marketplace, inverse_of: :delivery_areas
     has_many :orders, inverse_of: :delivery_area
+    has_many :carts, inverse_of: :delivery_area
     has_many :deliveries, inverse_of: :delivery_area
 
     attribute :delivery_window, ::Marketplace::Delivery::WindowType.new
