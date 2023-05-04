@@ -8,10 +8,11 @@ RSpec.describe Marketplace::Order::EmailReceiptComponent, type: :component do
   let(:order) { build(:marketplace_order, :full, marketplace: marketplace) }
 
   context "when the order has a particular time to be delivered" do
-    let(:delivery_area) { build(:marketplace_delivery_area, marketplace: marketplace, delivery_window: 3.hours.from_now) }
+    let(:delivery_window) { 3.hours.from_now }
+    let(:delivery_area) { build(:marketplace_delivery_area, marketplace: marketplace, delivery_window: delivery_window.iso8601) }
     let(:order) { build(:marketplace_order, delivery_area: delivery_area) }
 
-    it { is_expected.to have_content(I18n.l(order.delivery_window.value, format: :day_month_date_hour_minute)) }
+    it { is_expected.to have_content(I18n.l(delivery_window, format: :day_month_date_hour_minute)) }
   end
 
   context "when the order has some words for when it is delivered" do

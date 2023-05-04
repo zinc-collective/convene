@@ -1,14 +1,14 @@
 <%- if order_by.present? && delivery_window.present? %>
-  Orders placed <%= order_by %>
+  Orders placed by <%= order_by %>
   are delivered <%= delivery_window %>
 <%- elsif order_by.blank? && delivery_window.present? %>
   Orders are delivered <%= delivery_window %>
 <%- elsif order_by.present? && delivery_window.blank? && cart.delivery_window.blank? %>
-  Order <%= order_by %>
+  Order by <%= order_by %>
 <%- elsif cart.delivery_window.present? && order_by.present? %>
-  Order <%= order_by %> to ensure an on-time delivery for <%= render(cart.delivery_window) %>
+  Order by <%= order_by %> to ensure an on-time delivery for <%= render_delivery_window %>
 <%- elsif cart.delivery_window.present? %>
-  Delivering at <%= render(cart.delivery_window) %>
+  Delivering at <%= render_delivery_window %>
 <%- else %>
   Delivers at your chosen time
 <%- end %>
