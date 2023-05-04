@@ -30,31 +30,31 @@ RSpec.describe Marketplace::Marketplace, type: :model do
   describe "#ready_for_shopping?" do
     subject(:ready_for_shopping?) { marketplace.ready_for_shopping? }
 
-    context "when there is a stripe utility, products, and delivery areas" do
+    context "when there is a stripe utility, product, delivery area, and stripe account" do
       let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_products, :with_delivery_areas, :with_stripe_account) }
 
       it { is_expected.to be_truthy }
     end
 
-    context "when there is a stripe account, products and a delivery area but no stripe utility" do
+    context "when there is a stripe account, product, and delivery area but no stripe utility" do
       let(:marketplace) { create(:marketplace, :with_products, :with_delivery_areas, :with_stripe_account) }
 
       it { is_expected.to be_falsey }
     end
 
-    context "when there is a stripe uility, stripe account, and products but no delivery area" do
+    context "when there is a stripe utility, stripe account, and products but no delivery area" do
       let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_products, :with_stripe_account) }
 
       it { is_expected.to be_falsey }
     end
 
-    context "when there is a stripe utility, stirpe account and delivery area but no products" do
+    context "when there is a stripe utility, stripe account, and delivery area but no products" do
       let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_delivery_areas, :with_stripe_account) }
 
       it { is_expected.to be_falsey }
     end
 
-    context "when there is a stripe utility, delivery area, and products but no stripe account" do
+    context "when there is a stripe utility, delivery area, and product but no stripe account" do
       let(:marketplace) { create(:marketplace, :with_products, :with_stripe_utility, :with_delivery_areas) }
 
       it { is_expected.to be_falsey }
