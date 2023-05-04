@@ -22,6 +22,10 @@ class Marketplace
       true
     end
 
+    def ready_for_shopping?
+      products.present? && stripe_api_key? && delivery_areas.present? && stripe_account_connected?
+    end
+
     # The Secret Stripe API key belonging to the owner of the Marketplace
     def stripe_api_key
       space.utilities.find_by!(utility_slug: :stripe).utility.api_token

@@ -1,12 +1,14 @@
-<%- shopper = if current_person.is_a?(Guest)
-     Marketplace::Shopper.find_or_create_by(id: session[:guest_shopper_id] ||= SecureRandom.uuid)
-  else
-    Marketplace::Shopper.find_or_create_by(person: current_person)
-end %>
+<%- if marketplace.ready_for_shopping? %>
+  <%- shopper = if current_person.is_a?(Guest)
+      Marketplace::Shopper.find_or_create_by(id: session[:guest_shopper_id] ||= SecureRandom.uuid)
+    else
+      Marketplace::Shopper.find_or_create_by(person: current_person)
+  end %>
 
-<%- cart = marketplace.carts.create_with(contact_email: shopper.person&.email).find_or_create_by(shopper: shopper, status: :pre_checkout) %>
+  <%- cart = marketplace.carts.create_with(contact_email: shopper.person&.email).find_or_create_by(shopper: shopper, status: :pre_checkout) %>
 
-<%= render cart %>
+  <%= render cart %>
+<%- end %>
 
 <div class="my-2 text-right">
   <%- if policy(marketplace).edit? %>

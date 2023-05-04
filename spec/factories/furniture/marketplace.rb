@@ -35,6 +35,20 @@ FactoryBot.define do
       delivery_areas { Array.new(delivery_area_quantity) { association(:marketplace_delivery_area, marketplace: instance) } }
     end
 
+    trait :with_products do
+      transient do
+        product_quantity { 1 }
+      end
+
+      products { Array.new(product_quantity) { association(:marketplace_product, marketplace: instance) } }
+    end
+
+    trait :with_stripe_account do
+      stripe_account { "act_#{SecureRandom.hex(8)}" }
+      stripe_webhook_endpoint { "http://act_#{stripe_account}.example.com/" }
+      stripe_webhook_endpoint_secret { "SECRET_#{SecureRandom.hex(8)}" }
+    end
+
     trait :full do
       with_tax_rates
       with_delivery_areas
