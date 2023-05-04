@@ -19,24 +19,10 @@ RSpec.describe Marketplace::Delivery, type: :model do
   describe "#fee" do
     subject(:fee) { delivery.fee }
 
-    context "when there is not a marketplace delivery fee or a delivery area delivery fee" do
-      let(:delivery_area) { build(:marketplace_delivery_area, price_cents: nil, marketplace: marketplace) }
+    context "when `price_cents` is nil" do
+      let(:delivery_area) { build(:marketplace_delivery_area, marketplace: marketplace, price_cents: nil) }
 
-      it { is_expected.to eq(0) }
-    end
-
-    context "when the marketplace has a delivery fee and the delivery area has a delivery fee" do
-      let(:marketplace) { build(:marketplace, delivery_fee_cents: 25_00) }
-      let(:delivery_area) { build(:marketplace_delivery_area, price_cents: 50_00, marketplace: marketplace) }
-
-      it { is_expected.to eq(delivery_area.price) }
-    end
-
-    context "when the marketplace has a delivery fee but the delivery area does not" do
-      let(:marketplace) { build(:marketplace, delivery_fee_cents: 25_00) }
-      let(:delivery_area) { build(:marketplace_delivery_area, price_cents: nil, marketplace: marketplace) }
-
-      it { is_expected.to eq(marketplace.delivery_fee) }
+      it { is_expected.to be_zero }
     end
   end
 

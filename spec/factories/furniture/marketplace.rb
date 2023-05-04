@@ -27,10 +27,6 @@ FactoryBot.define do
       notify_emails { Array.new((1..3).to_a.sample) { Faker::Internet.email }.join(",") }
     end
 
-    trait :with_delivery_fees do
-      delivery_fee_cents { (10_00..25_00).to_a.sample }
-    end
-
     trait :with_delivery_areas do
       transient do
         delivery_area_quantity { 1 }
@@ -42,7 +38,6 @@ FactoryBot.define do
     trait :full do
       with_tax_rates
       with_delivery_areas
-      with_delivery_fees
       with_notify_emails
     end
   end

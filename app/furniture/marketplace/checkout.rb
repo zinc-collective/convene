@@ -3,7 +3,7 @@ class Marketplace
     location(parent: :cart)
     include ActiveModel::Validations
     attr_accessor :cart
-    delegate :shopper, :marketplace, :persisted?, to: :cart
+    delegate :shopper, :delivery_fee, :marketplace, :persisted?, to: :cart
 
     # It would be nice to validate instead the presence of :ordered_products, but my attempts at this raise:
     #  ActiveRecord::HasManyThroughCantAssociateThroughHasOneOrManyReflection:
@@ -25,9 +25,7 @@ class Marketplace
       })
     end
 
-    private
-
-    def stripe_line_items
+    private def stripe_line_items
       return [] if cart.blank?
 
       stripe_cart_products_line_items + stripe_delivery_fee_line_items + stripe_taxes_line_items
@@ -51,7 +49,7 @@ class Marketplace
         {quantity: 1,
          price_data: {
            currency: "USD",
-           unit_amount: marketplace.delivery_fee_cents,
+           unit_amount: delivery_fee,
            product_data: {name: "Delivery"}
          }}
       ]

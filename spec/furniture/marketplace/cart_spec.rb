@@ -14,8 +14,9 @@ RSpec.describe Marketplace::Cart, type: :model do
   describe "#price_total" do
     subject(:price_total) { cart.price_total }
 
-    let(:marketplace) { create(:marketplace, delivery_fee_cents: 1200) }
-    let(:cart) { create(:marketplace_cart, marketplace: marketplace) }
+    let(:marketplace) { create(:marketplace) }
+    let(:delivery_area) { create(:marketplace_delivery_area, price_cents: 12_00) }
+    let(:cart) { create(:marketplace_cart, marketplace: marketplace, delivery_area: delivery_area) }
     let(:product_a) { create(:marketplace_product, marketplace: cart.marketplace) }
     let(:product_b) { create(:marketplace_product, marketplace: cart.marketplace, tax_rate_ids: [sales_tax.id]) }
     let(:sales_tax) { create(:marketplace_tax_rate, marketplace: cart.marketplace, tax_rate: 5.0) }

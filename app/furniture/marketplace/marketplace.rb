@@ -12,11 +12,7 @@ class Marketplace
     has_many :tax_rates, inverse_of: :marketplace
     has_many :delivery_areas, inverse_of: :marketplace, dependent: :destroy
 
-    setting :delivery_fee_cents, default: 0
-    monetize :delivery_fee_cents
-    setting :delivery_window
     setting :notify_emails
-    setting :order_by
     setting :stripe_account
     alias_method :vendor_stripe_account, :stripe_account
     setting :stripe_webhook_endpoint
