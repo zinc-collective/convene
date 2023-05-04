@@ -26,4 +26,38 @@ RSpec.describe Marketplace::Marketplace, type: :model do
     it { is_expected.not_to include(non_marketplace_furniture) }
     it { is_expected.to include(marketplace_furniture) }
   end
+
+  describe "#ready_for_shopping?" do
+    subject(:ready_for_shopping?) { marketplace.ready_for_shopping? }
+
+    context "when there is a stripe utility, product, delivery area, and stripe account" do
+      let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_products, :with_delivery_areas, :with_stripe_account) }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context "when there is a stripe account, product, and delivery area but no stripe utility" do
+      let(:marketplace) { create(:marketplace, :with_products, :with_delivery_areas, :with_stripe_account) }
+
+      it { is_expected.to be_falsey }
+    end
+
+    context "when there is a stripe utility, stripe account, and product but no delivery area" do
+      let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_products, :with_stripe_account) }
+
+      it { is_expected.to be_falsey }
+    end
+
+    context "when there is a stripe utility, stripe account, and delivery area but no products" do
+      let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_delivery_areas, :with_stripe_account) }
+
+      it { is_expected.to be_falsey }
+    end
+
+    context "when there is a stripe utility, delivery area, and product but no stripe account" do
+      let(:marketplace) { create(:marketplace, :with_products, :with_stripe_utility, :with_delivery_areas) }
+
+      it { is_expected.to be_falsey }
+    end
+  end
 end
