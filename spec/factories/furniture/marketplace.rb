@@ -24,7 +24,7 @@ FactoryBot.define do
     end
 
     trait :with_notify_emails do
-      notify_emails { Array.new((1..3).to_a.sample) { Faker::Internet.safe_email }.join(",") }
+      notify_emails { Array.new((1..3).to_a.sample) { Faker::Internet.email }.join(",") }
     end
 
     trait :with_delivery_fees do
@@ -125,7 +125,7 @@ FactoryBot.define do
       delivery_area { marketplace.delivery_areas.sample }
       placed_at { 5.minutes.ago }
       delivery_address { Faker::Address.full_address }
-      contact_email { Faker::Internet.safe_email }
+      contact_email { Faker::Internet.email }
       contact_phone_number { Faker::PhoneNumber.cell_phone }
     end
   end
@@ -161,7 +161,7 @@ FactoryBot.define do
     marketplace { association(:marketplace, :with_delivery_areas) }
     delivery_address { Faker::Address.full_address }
     contact_phone_number { Faker::PhoneNumber.phone_number }
-    contact_email { Faker::Internet.safe_email }
+    contact_email { Faker::Internet.email }
     delivery_notes { Faker::Quote.famous_last_words }
     delivery_area { marketplace.delivery_areas.sample }
     delivery_area_id { delivery_area.id }

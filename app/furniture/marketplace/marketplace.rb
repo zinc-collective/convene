@@ -3,6 +3,7 @@
 class Marketplace
   class Marketplace < Furniture
     location(parent: :room)
+    default_scope { where(furniture_kind: "marketplace") }
 
     has_many :products, inverse_of: :marketplace, dependent: :destroy
     has_many :carts, inverse_of: :marketplace, dependent: :destroy
