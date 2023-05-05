@@ -1,0 +1,19 @@
+<div class="rounded-md <%= bg_class %> p-4">
+  <div class="flex">
+    <% if @icon.present? %>
+      <div class="flex-shrink-0">
+        <%= render SvgComponent.new(icon: @icon, classes: "h-5 w-5 inline #{icon_class}") %>
+      </div>
+    <% end %>
+    <div class="ml-3">
+      <% if @title.present? %>
+        <h3 class="text-sm font-medium <%= title_text_class %>"><%= @title %></h3>
+      <% end %>
+      <div class="mt-2 text-sm <%= content_text_class %>">
+        <p>
+          <%= content %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

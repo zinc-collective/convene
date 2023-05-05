@@ -1,4 +1,10 @@
-<%- if marketplace.ready_for_shopping? %>
+<% if !marketplace.ready_for_shopping? && policy(marketplace).edit? %>
+  <%= render AlertComponent.new(scheme: :warning, icon: :exclamation_triangle, title: t('marketplace.marketplace.config_missing_title')) do %>
+    <%= t('marketplace.marketplace.config_missing_explainer') %>
+  <% end %>
+<% end %>
+
+<%- if marketplace.ready_for_shopping? || policy(marketplace).edit? %>
   <%- shopper = if current_person.is_a?(Guest)
       Marketplace::Shopper.find_or_create_by(id: session[:guest_shopper_id] ||= SecureRandom.uuid)
     else
