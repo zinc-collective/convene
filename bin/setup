@@ -34,6 +34,9 @@ setup_package "overmind"
 setup_package "yarn"
 setup_package "redis"
 setup_package "graphviz"
+
+setup_package "vips"  # for image processing by Active Storage
+
 # Firefox web browser is used for interface testing.
 brew install --cask firefox
 yarn global add maildev

@@ -2,6 +2,8 @@
 
 class Marketplace
   class Product < Record
+    has_one_attached :photo, dependent: :destroy
+
     self.table_name = "marketplace_products"
     location(parent: :marketplace)
 
@@ -25,5 +27,15 @@ class Marketplace
     attribute :description, :string
 
     monetize :price_cents
+
+    before_commit :standardize_attachment_name
+
+    def standardize_attachment_name
+      return unless photo.attached? && photo.blob.persisted?
+      return if photo.blob.filename.to_s.start_with?(space.id.to_s)
+
+      new_name = "#{space.id}-#{photo.blob.filename}"
+      photo.blob.update(filename: new_name)
+    end
   end
 end

@@ -4,6 +4,11 @@
   </header>
 
   <div class="grow flex flex-col justify-between">
+    <% if product.photo.present? %>
+      <div>
+        <%= image_tag product.photo %>
+      </div>
+    <% end %>
     <div class="text-sm italic">
       <%= description %>
     </div>
