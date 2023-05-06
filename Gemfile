@@ -67,6 +67,9 @@ gem "strong_migrations", "~> 1.4"
 # Use postgresql for data persistence
 gem "pg", "~> 1.5"
 
+# For image manipulation in Active Storage
+gem "image_processing"
+
 # Use S3 for file storage
 gem "aws-sdk-s3", "~> 1.122", require: false
 # Date/Time and Internationalization

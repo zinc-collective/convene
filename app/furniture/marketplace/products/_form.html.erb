@@ -4,6 +4,7 @@
     <%= render "text_area", { attribute: :description, form: f} %>
     <%= render "money_field", { attribute: :price, form: f, min: 0, step: 0.01} %>
     <%= render "collection_check_boxes", { attribute: :tax_rate_ids, collection: marketplace.tax_rates, value_method: :id, text_method: :label, form: f} %>
+    <%= render "file_field", { attribute: :photo, form: f} %>
     <%= f.submit %>
   <% end %>
 <%- end %>

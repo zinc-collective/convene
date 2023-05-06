@@ -61,6 +61,10 @@ FactoryBot.define do
     price_cents { Random.rand(1_00..999_99) }
 
     marketplace
+
+    trait :with_photo do
+      photo { file_fixture_upload("cc-kitten.jpg", "image/jpeg") }
+    end
   end
 
   factory :marketplace_cart, class: "Marketplace::Cart" do
