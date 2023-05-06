@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception, unless: -> { api_request? }
 
+  # @see https://til.hashrocket.com/posts/3exmhtwqy6-setting-the-urloptions-hash-in-the-controller
+  include ActiveStorage::SetCurrent
+
   # Referenced in application layout to display page title
   # Override on a per-controller basis to display different title
   # @return [String]
