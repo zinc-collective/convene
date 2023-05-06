@@ -14,7 +14,7 @@ RSpec.describe Marketplace::ProductsController, type: :request do
     end
 
     let(:tax_rate) { create(:marketplace_tax_rate, marketplace: marketplace) }
-    let(:product_attributes) { attributes_for(:marketplace_product, tax_rate_ids: [tax_rate.id]) }
+    let(:product_attributes) { attributes_for(:marketplace_product, :with_photo, tax_rate_ids: [tax_rate.id]) }
 
     before do
       sign_in(space, member)
@@ -32,6 +32,7 @@ RSpec.describe Marketplace::ProductsController, type: :request do
       specify { expect(created_product.price_cents).to eql(product_attributes[:price_cents]) }
       specify { expect(created_product.price_currency).to eql(Money.default_currency.to_s) }
       specify { expect(created_product.tax_rates).to include(tax_rate) }
+      specify { expect(created_product.photo).to be_present }
     end
 
     describe "when product is invalid" do

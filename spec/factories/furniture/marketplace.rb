@@ -63,7 +63,7 @@ FactoryBot.define do
     marketplace
 
     trait :with_photo do
-      photo { file_fixture_upload("cc-kitten.jpg", "image/jpeg") }
+      photo { Rack::Test::UploadedFile.new("spec/fixtures/files/cc-kitten.jpg", "image/jpeg") }
     end
   end
 
