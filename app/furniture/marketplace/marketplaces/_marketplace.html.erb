@@ -1,6 +1,7 @@
 <% if !marketplace.ready_for_shopping? && policy(marketplace).edit? %>
   <%= render AlertComponent.new(scheme: :warning, icon: :exclamation_triangle, title: t('marketplace.marketplace.config_missing_title')) do %>
-    <%= t('marketplace.marketplace.config_missing_explainer') %>
+    <%= t('marketplace.marketplace.config_missing_explainer_html',
+          edit_link: link_to(t('marketplace.marketplace.edit'), marketplace.location(:edit)) ) %>
   <% end %>
 <% end %>
 
