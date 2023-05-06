@@ -37,6 +37,10 @@ en:
       manage_header: "Marketplace"
       configuration_menu: "Configuration"
       edit: "Manage Marketplace"
+      config_missing_title: "Marketplace configuration missing"
+      config_missing_explainer_html: |
+        This marketplace is not ready for shopping, and is not visible to the public.
+        Add missing configuration by going to %{edit_link}.
     marketplaces:
       edit:
         missing_stripe_api_key: "Add a Stripe API key to %{space_name}"
