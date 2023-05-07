@@ -1,0 +1,18 @@
+<% if !ready_for_shopping? && policy(marketplace).edit? %>
+  <%= render AlertComponent.new(scheme: :warning, icon: :exclamation_triangle,
+                                title: t('marketplace.marketplace.config_missing_title')) do %>
+    <%= t('marketplace.marketplace.config_missing_explainer_html',
+          edit_link: link_to(t('marketplace.marketplace.edit'), location(:edit)) ) %>
+  <% end %>
+<% end %>
+
+<%- if ready_for_shopping? || policy(marketplace).edit? %>
+  <%= render cart %>
+<%- end %>
+
+<div class="my-2 text-right">
+  <%- if policy(marketplace).edit? %>
+    <%= render ButtonComponent.new(scheme: :secondary, label: t('marketplace.marketplace.edit'),
+                                   href: location(:edit), method: :get) %>
+  <%- end %>
+</div>
