@@ -6,9 +6,7 @@
   <% end %>
 <% end %>
 
-<%- if ready_for_shopping? || policy(marketplace).edit? %>
-  <%= render cart %>
-<%- end %>
+<%= render cart %>
 
 <div class="my-2 text-right">
   <%- if policy(marketplace).edit? %>
