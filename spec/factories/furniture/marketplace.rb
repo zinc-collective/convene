@@ -54,6 +54,13 @@ FactoryBot.define do
       with_delivery_areas
       with_notify_emails
     end
+
+    trait :ready_for_shopping do
+      with_stripe_utility
+      with_products
+      with_stripe_account
+      with_delivery_areas
+    end
   end
 
   factory :marketplace_product, class: "Marketplace::Product" do
