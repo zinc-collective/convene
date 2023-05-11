@@ -13,7 +13,7 @@
       <%- if policy(new_delivery_area).create? %>
         <%= render ButtonComponent.new(
           label: "#{t('marketplace.delivery_areas.new.link_to')} #{t('icons.new')}",
-          title: t('marketplace.delivery_areas.products.new.link_to'),
+          title: t('marketplace.delivery_areas.new.link_to'),
           href: marketplace.location(:new, child: :delivery_area),
           method: :get,
           scheme: :secondary) %>
