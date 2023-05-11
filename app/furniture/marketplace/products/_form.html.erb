@@ -6,7 +6,7 @@
     <%= render "collection_check_boxes", { attribute: :tax_rate_ids, collection: marketplace.tax_rates, value_method: :id, text_method: :label, form: f} %>
     <%- if product.photo.present? %>
       <div>
-        <%= image_tag product.photo, class: "rounded-lg" %>
+        <%= image_tag product.photo.variant(resize_to_limit: [150, 150]), class: "rounded-lg" %>
       </div>
     <%- end %>
     <%= render "file_field", { attribute: :photo, form: f} %>
