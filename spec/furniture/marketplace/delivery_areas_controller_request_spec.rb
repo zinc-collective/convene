@@ -16,7 +16,7 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
     let(:perform_request) { get polymorphic_path(marketplace.location(child: :delivery_areas)) }
 
     it { is_expected.to be_ok }
-    specify { perform_request && assert_select("a", "Add Delivery Area") }
+    specify { perform_request && assert_select("a", "Add Delivery Area ➕") }
   end
 
   describe "#new" do
