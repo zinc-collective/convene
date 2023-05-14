@@ -7,6 +7,6 @@ RSpec.describe Marketplace::TaxRate, type: :model do
 
   it { is_expected.to have_many(:product_tax_rates).inverse_of(:tax_rate) }
   it { is_expected.to have_many(:products).through(:product_tax_rates).inverse_of(:tax_rates) }
-  it { is_expected.to have_one(:space).through(:marketplace) }
+  it { is_expected.to belong_to(:bazaar).inverse_of(:tax_rates) }
   it { is_expected.to belong_to(:marketplace).inverse_of(:tax_rates) }
 end

@@ -4,7 +4,8 @@ class Marketplace
     location(parent: :marketplace)
 
     belongs_to :marketplace, inverse_of: :tax_rates
-    has_one :space, through: :marketplace
+    belongs_to :bazaar, inverse_of: :tax_rates
+    delegate :space, to: :bazaar
 
     validates :tax_rate, numericality: {greater_than: 0, less_than_or_equal_to: 100}, presence: true
     validates :label, presence: true

@@ -77,16 +77,16 @@ class Marketplace
       @tax_rate ||= if params[:id]
         tax_rates.find(params[:id])
       elsif params[:tax_rate]
-        tax_rates.new(tax_rate_params)
+        tax_rates.new(tax_rate_params.merge(marketplace: marketplace))
       else
-        tax_rates.new
+        tax_rates.new(marketplace: marketplace)
       end.tap do |tax_rate|
         authorize(tax_rate)
       end
     end
 
     helper_method def tax_rates
-      @tax_rates ||= policy_scope(marketplace.tax_rates)
+      @tax_rates ||= policy_scope(bazaar.tax_rates)
     end
   end
 end

@@ -28,6 +28,10 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
     end
 
     it { is_expected.to redirect_to(marketplace.location(child: :tax_rates)) }
+
+    specify do
+      expect { perform_request }.to change { marketplace.tax_rates.count }.by(1)
+    end
   end
 
   describe "#edit" do

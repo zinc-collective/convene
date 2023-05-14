@@ -63,6 +63,10 @@ FactoryBot.define do
     end
   end
 
+  factory :marketplace_bazaar, class: "Marketplace::Bazaar" do
+    sequence(:name) { |n| "The Market of #{Faker::Fantasy::Tolkien.location} #{n}" }
+  end
+
   factory :marketplace_product, class: "Marketplace::Product" do
     name { Faker::TvShows::DrWho.specie }
     price_cents { Random.rand(1_00..999_99) }
@@ -160,9 +164,10 @@ FactoryBot.define do
   end
 
   factory :marketplace_tax_rate, class: "Marketplace::TaxRate" do
+    marketplace { association(:marketplace) }
+    bazaar { marketplace&.bazaar }
     label { "#{Faker::TvShows::RuPaul.queen} Tax" }
     tax_rate { (1..45).to_a.sample }
-    marketplace { association(:marketplace) }
   end
 
   factory :marketplace_delivery_area, class: "Marketplace::DeliveryArea" do
