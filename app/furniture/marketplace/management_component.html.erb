@@ -34,7 +34,7 @@
           <% end %>
         <% end %>
 
-        <%- if policy(marketplace.tax_rates.new).create? %>
+        <%- if policy(marketplace.bazaar.tax_rates.new(marketplace: marketplace)).create? %>
           <%= render Marketplace::ManagementMenuItemComponent.new(
               location: marketplace.location(child: :tax_rates)) do |menu_item| %>
             <% menu_item.with_icon.with_content(receipt_percent) %>
