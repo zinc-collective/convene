@@ -1,15 +1,23 @@
 <%- breadcrumb(:marketplace_delivery_areas, marketplace) %>
 
 <%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
-<section class="mt-3">
-  <main>
-    <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
-      <%= render Marketplace::DeliveryAreaComponent.with_collection(delivery_areas) %>
-    </div>
-  </main>
+  <section class="mt-3">
+    <main>
+      <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
+        <%= render Marketplace::DeliveryAreaComponent.with_collection(delivery_areas) %>
+      </div>
+    </main>
 
-    <footer class="text-center">
-      <%= link_to(t("marketplace.delivery_areas.new.link_to"), marketplace.location(:new, child: :delivery_area)) %>
-    </footer>
+    <div class="text-center mt-3">
+      <%- new_delivery_area = marketplace.delivery_areas.new %>
+      <%- if policy(new_delivery_area).create? %>
+        <%= render ButtonComponent.new(
+          label: "#{t('marketplace.delivery_areas.new.link_to')} #{t('icons.new')}",
+          title: t('marketplace.delivery_areas.new.link_to'),
+          href: marketplace.location(:new, child: :delivery_area),
+          method: :get,
+          scheme: :secondary) %>
+      <%- end %>
+    </div>
   </section>
 <% end %>

@@ -16,7 +16,7 @@ class Marketplace
     alias_method :window, :delivery_window
 
     def fee
-      delivery_area&.price.presence || 0
+      delivery_area&.price.presence || Money.new(0)
     end
 
     def details_filled_in?

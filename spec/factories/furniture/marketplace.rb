@@ -35,10 +35,31 @@ FactoryBot.define do
       delivery_areas { Array.new(delivery_area_quantity) { association(:marketplace_delivery_area, marketplace: instance) } }
     end
 
+    trait :with_products do
+      transient do
+        product_quantity { 1 }
+      end
+
+      products { Array.new(product_quantity) { association(:marketplace_product, marketplace: instance) } }
+    end
+
+    trait :with_stripe_account do
+      stripe_account { "act_#{SecureRandom.hex(8)}" }
+      stripe_webhook_endpoint { "http://act_#{stripe_account}.example.com/" }
+      stripe_webhook_endpoint_secret { "SECRET_#{SecureRandom.hex(8)}" }
+    end
+
     trait :full do
       with_tax_rates
       with_delivery_areas
       with_notify_emails
+    end
+
+    trait :ready_for_shopping do
+      with_stripe_utility
+      with_products
+      with_stripe_account
+      with_delivery_areas
     end
   end
 
@@ -47,6 +68,10 @@ FactoryBot.define do
     price_cents { Random.rand(1_00..999_99) }
 
     marketplace
+
+    trait :with_photo do
+      photo { Rack::Test::UploadedFile.new("spec/fixtures/files/cc-kitten.jpg", "image/jpeg") }
+    end
   end
 
   factory :marketplace_cart, class: "Marketplace::Cart" do

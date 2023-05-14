@@ -4,6 +4,11 @@
   </header>
 
   <div class="grow flex flex-col justify-between">
+    <% if product.photo.present? %>
+      <div>
+        <%= image_tag product.photo.variant(resize_to_limit: [150, 150]) %>
+      </div>
+    <% end %>
     <div class="text-sm italic">
       <%= description %>
     </div>

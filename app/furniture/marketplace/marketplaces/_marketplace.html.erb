@@ -1,16 +1,1 @@
-<%- shopper = if current_person.is_a?(Guest)
-     Marketplace::Shopper.find_or_create_by(id: session[:guest_shopper_id] ||= SecureRandom.uuid)
-  else
-    Marketplace::Shopper.find_or_create_by(person: current_person)
-end %>
-
-<%- cart = marketplace.carts.create_with(contact_email: shopper.person&.email).find_or_create_by(shopper: shopper, status: :pre_checkout) %>
-
-<%= render cart %>
-
-<div class="my-2 text-right">
-  <%- if policy(marketplace).edit? %>
-    <%= render ButtonComponent.new(scheme: :secondary,
-      label: t('marketplace.marketplace.edit'), href: marketplace.location(:edit), method: :get) %>
-  <%- end %>
-</div>
+<%= render Marketplace::MarketplaceComponent.new(marketplace: marketplace) %>

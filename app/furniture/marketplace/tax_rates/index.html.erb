@@ -8,8 +8,16 @@
       </div>
     </main>
 
-    <footer class="text-center">
-      <%= link_to(t("marketplace.tax_rates.new.link_to"), marketplace.location(:new, child: :tax_rate)) %>
-    </footer>
+    <div class="text-center mt-3">
+      <%- new_product = marketplace.tax_rates.new %>
+      <%- if policy(tax_rate).create? %>
+        <%= render ButtonComponent.new(
+          label: "#{t('marketplace.tax_rates.new.link_to')} #{t('icons.new')}",
+          title: t('marketplace.tax_rates.new.link_to'),
+          href: marketplace.location(:new, child: :tax_rate),
+          method: :get,
+          scheme: :secondary) %>
+      <%- end %>
+    </div>
   </section>
 <% end %>

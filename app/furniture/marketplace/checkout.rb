@@ -36,7 +36,7 @@ class Marketplace
         {
           price_data: {
             currency: "USD",
-            unit_amount: cart_product.product.price_cents,
+            unit_amount: cart_product.product.price.cents,
             product_data: {name: cart_product.product.name}
           },
           quantity: cart_product.quantity
@@ -49,7 +49,7 @@ class Marketplace
         {quantity: 1,
          price_data: {
            currency: "USD",
-           unit_amount: delivery_fee,
+           unit_amount: delivery_fee.cents,
            product_data: {name: "Delivery"}
          }}
       ]
