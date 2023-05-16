@@ -4,6 +4,9 @@ class Marketplace
       @marketplace ||= policy_scope(Marketplace).find(params[:marketplace_id])
     end
 
+    delegate :bazaar, to: :marketplace
+    helper_method :bazaar
+
     helper_method def shopper
       @shopper ||= if current_person.is_a?(Guest)
         Shopper.find_or_create_by(id: session[:guest_shopper_id] ||= SecureRandom.uuid)

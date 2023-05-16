@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_27_003441) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_174823) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -22,12 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_003441) do
     "expired",
     "ignored",
     "revoked",
-    "sent",
+    "sent"
   ], force: :cascade
 
   create_enum :membership_status, [
     "active",
-    "revoked",
+    "revoked"
   ], force: :cascade
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -190,6 +190,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_27_003441) do
     t.uuid "marketplace_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "bazaar_id"
+    t.index ["bazaar_id"], name: "index_marketplace_tax_rates_on_bazaar_id"
     t.index ["marketplace_id"], name: "index_marketplace_tax_rates_on_marketplace_id"
   end
 
