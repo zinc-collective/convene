@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_174823) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_195459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -276,6 +276,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_174823) do
   add_foreign_key "marketplace_products", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_shoppers", "people"
   add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
+  add_foreign_key "marketplace_tax_rates", "spaces", column: "bazaar_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "space_agreements", "spaces"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
