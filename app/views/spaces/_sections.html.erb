@@ -1,4 +1,4 @@
-<fieldset>
+<%= render CardComponent.new(classes: "mt-3 gap-y-3") do %>
   <header>
     <h3>Sections</h3>
   </header>
@@ -20,11 +20,9 @@
       <span class="icon --add" role="img" aria-label="Add"></span>Add New Section
     <% end %>
   </footer>
-</fieldset>
 
-<fieldset>
   <%= form_with(model: space.location) do |space_form| %>
     <%= render "select", attribute: :entrance_id, include_blank: true, options: space.rooms.map { |room| [room.name, room.id] }, form: space_form %>
     <%= space_form.submit %>
   <%- end %>
-</fieldset>
+<% end %>

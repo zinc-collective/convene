@@ -1,4 +1,4 @@
-<fieldset>
+<%= render CardComponent.new(classes: "mt-3 gap-y-3") do %>
   <header>
     <h3><%= t('utilities.index.link_to') %></h3>
     <p class="text-sm italic"><%= t('utilities.help_text') %></p>
@@ -32,4 +32,4 @@
   </ul>
 
   <p><%= link_to t('utilities.new.link_to'), space.location(:new, child: :utility) %></p>
-</fieldset>
+<% end %>
