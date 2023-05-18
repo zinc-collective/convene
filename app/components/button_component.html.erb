@@ -1,10 +1,14 @@
 <%- if @disabled %>
   <span class="<%= classes %>"><%= @label %></span>
 <%- else %>
-  <%= link_to @label,
-              @href,
-              title: @title,
+  <%= link_to @href,
+              title: @title || @label,
               method: @method,
               data: data,
-              class: classes %>
+              class: classes do %>
+    <%- if @icon.present? %>
+      <%= render SvgComponent.new(icon: @icon, classes: "w-6 h-6 inline-block") %>
+    <% end -%>
+    <%= @label %>
+  <% end %>
 <%- end %>

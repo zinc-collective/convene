@@ -25,4 +25,13 @@ class ButtonComponentPreview < ViewComponent::Preview
       scheme: :secondary
     ))
   end
+
+  def with_icon
+    render(ButtonComponent.new(
+      label: "Watch out for my icon!",
+      icon: :exclamation_triangle,
+      href: "#",
+      scheme: :primary
+    ))
+  end
 end
