@@ -1,0 +1,23 @@
+databases:
+  - name: convene-db-1
+    databaseName: convene-db-1
+    user: convene
+
+services:
+  - type: web
+    name: convene
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: mysite
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+  - type: redis
+    name: convene-redis-1
+    ipAllowList: [] # only allow internal connections
+    plan: free # optional (defaults to starter)
+    maxmemoryPolicy: noeviction
