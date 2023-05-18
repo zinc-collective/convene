@@ -2,7 +2,7 @@
   <span class="<%= classes %>"><%= @label %></span>
 <%- else %>
   <%= link_to @href,
-              title: @title,
+              title: @title || @label,
               method: @method,
               data: data,
               class: classes do %>
