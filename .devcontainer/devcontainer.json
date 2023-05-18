@@ -2,7 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres
 {
   "name": "convene devcontainer",
-  "image": "ghcr.io/zinc-collective/convene-devcontainer:latest",
+  "image": "ghcr.io/daltonrpruitt/convene-devcontainer:latest",
 //   "dockerComposeFile": "docker-compose.yml",
 //   "service": "app",
   "mounts": [
