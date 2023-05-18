@@ -1,0 +1,40 @@
+<%= render CardComponent.new(classes: "mt-3 gap-y-3") do %>
+  <header>
+    <h3><%= t('space.agreements.index.link_to') %></h3>
+    <p class="text-sm italic"><%= t('space.agreements.help_text') %></p>
+  </header>
+  <div class="flex flex-wrap gap-y-6">
+    <%- space.agreements.each do |agreement| %>
+      <span class="flex justify-between w-full">
+          <span class="grow"><%= agreement.name %></span>
+          <span>
+            <%- if policy(agreement).edit? %>
+              <%= render ButtonComponent.new(href: agreement.location(:edit),
+                                            title: t('space.agreements.edit.link_to', name: agreement.name),
+                                            label: t('icons.edit'),
+                                            method: :get,
+                                            scheme: :secondary) %>
+            <%- end %>
+            <%- if policy(agreement).destroy? %>
+              <%= render ButtonComponent.new(href: agreement.location,
+                                            title: t('space.agreements.destroy.link_to', name: agreement.name),
+                                            label: t('icons.destroy'),
+                                            method: :delete,
+                                            scheme: :secondary) %>
+            <%- end %>
+          </span>
+      </span>
+    <%- end %>
+  <div>
+  <footer>
+    <%- new_agreement = space.agreements.build %>
+    <%- if policy(new_agreement).create? %>
+      <%= render ButtonComponent.new(
+        label: "#{t('space.agreements.new.link_to')} #{t('icons.new')}",
+        title: t('space.agreements.new.link_to'),
+        href: space.location(:new, child: :agreement),
+        method: :get,
+        scheme: :secondary) %>
+    <%- end %>
+  </footer>
+<%- end %>
