@@ -3,16 +3,16 @@ en:
     no_furniture_notice: 'No furniture yet! Deck out your space and add some Furniture! 🛋️'
     place_furniture_heading: 'Add Furniture 🛋️'
     create:
-      success: You've created Room '%{room_name}' successfully! 🎉
+      success: You've created Section '%{room_name}' successfully! 🎉
     update:
-      success: You've updated Room '%{room_name}' successfully! 🎉
+      success: You've updated Section '%{room_name}' successfully! 🎉
     destroy:
-      success: You've removed Room '%{room_name}' successfully! 🎉
-      failure: We couldn't remove Room '%{room_name}'.
+      success: You've removed Section '%{room_name}' successfully! 🎉
+      failure: We couldn't remove Section '%{room_name}'.
     form:
-      destroy: "Remove Room 🗑️"
+      destroy: "Remove Section 🗑️"
   helpers:
     submit:
       room:
-        create: Add Room ➕
+        create: Add Section ➕
         edit: ⚙️ Configure '%{room_name}'
