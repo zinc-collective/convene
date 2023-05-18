@@ -1,0 +1,3 @@
+#!/bin/bash
+
+bin/rspec $(bin/list-changed-files | grep '_spec\.rb')
