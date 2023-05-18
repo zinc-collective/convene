@@ -1,6 +1,7 @@
 databases:
   - name: postgres
     ipAllowList: []
+    plan: free # optional (defaults to starter)
 
 services:
   - type: web
