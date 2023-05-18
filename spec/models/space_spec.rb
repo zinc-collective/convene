@@ -23,4 +23,22 @@ RSpec.describe Space do
   describe "#branded_domain" do
     it { is_expected.to validate_uniqueness_of(:branded_domain).allow_nil }
   end
+
+  describe "#enforce_ssl?" do
+    subject(:enforce_ssl?) { space.enforce_ssl? }
+
+    let(:space) { create(:space) }
+
+    it "is false by default" do
+      expect(enforce_ssl?).to be false
+    end
+
+    context "when set to true" do
+      before { space.update(enforce_ssl: true) }
+
+      it "is true" do
+        expect(enforce_ssl?).to be true
+      end
+    end
+  end
 end
