@@ -1,0 +1,35 @@
+<fieldset>
+  <header>
+    <h3><%= t('utilities.index.link_to') %></h3>
+    <p class="text-sm italic"><%= t('utilities.help_text') %></p>
+  </header>
+
+  <ul>
+    <%- space.utilities.each do |utility| %>
+      <li>
+        <span class="flex justify-between w-full">
+          <span class="grow"><%= utility.name %> <%= utility.utility_slug  %></span>
+          <span>
+            <%- if policy(utility).edit? %>
+              <%= render ButtonComponent.new(href: utility.location(:edit),
+                                            title: t('utilities.edit.link_to', utility_type: utility.utility_slug, name: utility.name),
+                                            label: t('icons.edit'),
+                                            method: :get,
+                                            scheme: :secondary) %>
+            <%- end %>
+
+            <%- if policy(utility).destroy? %>
+              <%= render ButtonComponent.new(href: utility.location,
+                                            title: t('utilities.destroy.link_to', utility_type: utility.utility_slug, name: utility.name),
+                                            label: t('icons.destroy'),
+                                            method: :delete,
+                                            scheme: :secondary) %>
+            <%- end %>
+          </span>
+        </span>
+      </li>
+    <%- end %>
+  </ul>
+
+  <p><%= link_to t('utilities.new.link_to'), space.location(:new, child: :utility) %></p>
+</fieldset>
