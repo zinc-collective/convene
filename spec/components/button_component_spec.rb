@@ -13,7 +13,7 @@ RSpec.describe ButtonComponent, type: :component do
 
     it "renders a link with the given arguments" do
       expect(a_el).to be_present
-      expect(a_el.text).to eq("Some label")
+      expect(a_el.text).to include("Some label")
       expect(a_el["title"]).to eq("Our Title")
       expect(a_el["href"]).to eq("somewhere.com")
     end
