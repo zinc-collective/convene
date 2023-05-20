@@ -34,7 +34,7 @@ RSpec.describe InvitationsController do
         invitee_name: invitation.name))
 
       expect(SpaceInvitationMailer).to have_received(:space_invitation_email)
-        .with(invitation)
+        .with(invitation, space)
       expect(mail).to have_received(:deliver_later)
     end
 
