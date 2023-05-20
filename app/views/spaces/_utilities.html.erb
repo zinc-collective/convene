@@ -32,4 +32,7 @@
   </ul>
 
   <p><%= link_to t('utilities.new.link_to'), space.location(:new, child: :utility) %></p>
+
+  <%= check_box_tag(:enforce_ssl) %>
+  <%= label_tag(:enforce_ssl, "Enforce SSL") %>
 <% end %>
