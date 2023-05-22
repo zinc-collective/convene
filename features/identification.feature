@@ -43,7 +43,8 @@ Feature: Identification
   # themselves.
   @built
   Scenario: Identity Verification Via Emailed Link
-    Given an unauthenticated Space Member has requested to be identified via Email
+    Given a "System Test" Space
+    And an unauthenticated Space Member has requested to be identified to the "System Test" Space via Email
     When the unauthenticated Space Member opens the Identification Verification Link emailed to them
     Then the Space Member is Verified as the Owner of that Email Address
     And the Space Member has become Authenticated
@@ -51,7 +52,8 @@ Feature: Identification
 
   @built
   Scenario: Authentication is lost on Sign out
-    Given a Space Member Authenticated Session
+    Given a "System Test" Space
+    And a Space Member Authenticated Session on the "System Test" Space
     When the Authenticated Person Signs Out
     Then the Authenticated Person becomes a Guest
 
@@ -81,7 +83,8 @@ Feature: Identification
   # themselves.
   @built
   Scenario: Identity Verification via Emailed Code
-    Given an unauthenticated Space Member has requested to be identified via Email
+    Given a "System Test" Space
+    And an unauthenticated Space Member has requested to be identified to the "System Test" Space via Email
     When the unauthenticated Space Member provides the Identification Code emailed to them
     Then the Space Member is Verified as the Owner of that Email Address
     And the Space Member has become Authenticated
