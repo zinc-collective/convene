@@ -1,7 +1,7 @@
 class SpaceInvitationMailer < ApplicationMailer
-  def space_invitation_email(invitation, space)
+  def space_invitation_email(invitation)
     @invitation = invitation
-    @space = space
-    mail(to: @invitation.email, subject: "You are invited to #{@space}")
+    @space = invitation.space
+    mail(to: @invitation.email, from: "#{@invitation.invitor_display_name} (via #{@space})", subject: "#{@invitation.invitor_display_name} invited you to #{@space}")
   end
 end

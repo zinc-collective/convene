@@ -6,7 +6,7 @@ class InvitationsController < ApplicationController
 
   def create
     if invitation.save
-      SpaceInvitationMailer.space_invitation_email(invitation, space).deliver_later
+      SpaceInvitationMailer.space_invitation_email(invitation).deliver_later
       redirect_to [invitation.space, :invitations],
         notice: t(".success", invitee_email: invitation.email,
           invitee_name: invitation.name)
