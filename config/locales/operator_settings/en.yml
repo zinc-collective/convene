@@ -1,0 +1,5 @@
+en:
+  operator_settings:
+    help_text: "Settings that only Operators can modify."
+    index:
+      link_to: "Operator Only Settings"
