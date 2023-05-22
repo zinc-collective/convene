@@ -40,7 +40,7 @@
       ) if policy(marketplace.bazaar.tax_rates.new(marketplace: marketplace)).create? %>
 
       <%= render ButtonComponent.new(
-        label: t('marketplace.tax_rates.index.link_to'),
+        label: t('marketplace.orders.index.link_to'),
         icon: :cart,
         href: marketplace.location(child: :orders),
         turbo_stream: false, method: :get, scheme: :secondary
