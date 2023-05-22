@@ -3,5 +3,5 @@
 <%= render "people", space: space %>
 <%= render "sections", space: space %>
 <%= render "utilities", space: space %>
-<%= render "operator_settings", space: space %>
+<%= render "operator_settings", space: space if current_person.operator == true %>
 <%= render "agreements", space: space %>
