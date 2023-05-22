@@ -30,7 +30,7 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
       it "Replaces the cart product, cart footer and cart total" do
         perform_request && cart.reload
 
-        assert_select("turbo-stream[action='replace'][target='cart-product-#{product.id}']") do
+        assert_select("turbo-stream[action='replace'][target='cart_product_#{product.id}']") do
           assert_select("*[data-cart-product-quantity]", text: "1")
         end
 
@@ -69,7 +69,7 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
       it "Replaces the cart product, cart footer and cart total" do
         perform_request && cart.reload
 
-        assert_select("turbo-stream[action='replace'][target='cart-product-#{product.id}']") do
+        assert_select("turbo-stream[action='replace'][target='cart_product_#{product.id}']") do
           assert_select("*[data-cart-product-quantity]", text: "5")
         end
 
@@ -104,7 +104,7 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
       it "Replaces the cart product, cart footer and cart total" do
         perform_request
 
-        assert_select("turbo-stream[action='replace'][target='cart-product-#{cart_product.product_id}']") do
+        assert_select("turbo-stream[action='replace'][target='cart_product_#{cart_product.product_id}']") do
           assert_select("*[data-cart-product-quantity]", text: "0")
         end
 

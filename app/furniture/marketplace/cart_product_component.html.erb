@@ -1,6 +1,4 @@
-<%- product = cart_product.product %>
-<%- cart = cart_product.cart %>
-<tr id="<%= "cart-product-#{product.id}"%>">
+<tr id="<%= dom_id %>">
   <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
     <%- if product.photo.present? %>
       <figure>
@@ -30,17 +28,14 @@
   </td>
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
     <div class="flex flex-row justify-between items-center">
-      <%# TODO: Extract minus and plus buttons into components %>
-      <%- minus_quantity = [cart_product.quantity - 1, 0].max %>
-      <%- minus_method = minus_quantity.zero? ? :delete : :put %>
-      <%= render "buttons/minus", method: minus_method, title: t('.remove'), disabled: cart_product.quantity.zero?, href: cart_product.location(query_params: { cart_product: { quantity: minus_quantity, product_id: product.id} }) %>
+      <%= render "buttons/minus", title: t('marketplace.cart_product_component.remove'), method: remove_method,
+                                  disabled: cart_product.quantity.zero?,
+                                  href: remove_href %>
 
+      <span data-cart-product-quantity class="py-2 px-2 my-1 text-lg"><%= quantity %></span>
 
-      <span data-cart-product-quantity class="py-2 px-2 my-1 text-lg"><%= cart_product.quantity %></span>
-
-      <%- add_quantity = cart_product.quantity + 1 %>
-      <%- add_method = add_quantity == 1 ? :post : :put %>
-      <%= render "buttons/plus", method: add_method, title: t('.add'), href: cart_product.location(query_params: { cart_product: {quantity: add_quantity, product_id: product.id} }) %>
+      <%= render "buttons/plus", method: add_method, title: t('marketplace.cart_product_component.add'),
+                                 href: add_href %>
     </div>
   </td>
 </tr>

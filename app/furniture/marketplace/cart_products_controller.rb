@@ -21,7 +21,7 @@ class Marketplace
 
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product),
+            turbo_stream.replace(cart_product_component.dom_id, cart_product_component),
             turbo_stream.replace("cart-footer-#{cart.id}",
               partial: "marketplace/carts/footer", locals: {cart: cart}),
             turbo_stream.replace("cart-total-#{cart.id}", partial: "marketplace/carts/total", locals: {cart: cart})
@@ -49,7 +49,7 @@ class Marketplace
         end
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("cart-product-#{cart_product.product_id}", cart_product),
+            turbo_stream.replace(cart_product_component.dom_id, cart_product_component),
             turbo_stream.replace("cart-footer-#{cart.id}",
               partial: "marketplace/carts/footer", locals: {cart: cart}),
             turbo_stream.replace("cart-total-#{cart.id}", partial: "marketplace/carts/total", locals: {cart: cart})
@@ -77,7 +77,7 @@ class Marketplace
 
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace("cart-product-#{cart_product.product_id}", cart.cart_products.new(product: cart_product.product)),
+            turbo_stream.replace(cart_product_component.dom_id, cart_product_component),
             turbo_stream.replace("cart-footer-#{cart.id}",
               partial: "marketplace/carts/footer", locals: {cart: cart}),
             turbo_stream.replace("cart-total-#{cart.id}", partial: "marketplace/carts/total", locals: {cart: cart})
@@ -92,6 +92,10 @@ class Marketplace
       elsif params[:cart_product]
         cart.cart_products.new(cart_product_params)
       end
+    end
+
+    def cart_product_component
+      @cart_product_component ||= CartProductComponent.new(cart_product: cart_product)
     end
 
     def cart
