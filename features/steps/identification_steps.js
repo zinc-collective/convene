@@ -4,28 +4,26 @@ import { SignInPage, SpacePage, MePage } from "../harness/Pages.js";
 import { Space, Actor } from "../lib/index.js";
 const assert = assert$0.strict;
 Given(
-  "an unauthenticated {actor} has requested to be identified via Email",
-  async function (actor) {
+  "an unauthenticated {actor} has requested to be identified to {a} {space} via Email",
+  async function (actor, _a, space) {
     this.actor = actor;
-    const space = new Space({ name: "System Test" });
     const signInPage = await new SignInPage(this.driver, space).visit();
     return signInPage.submitEmail(actor.email);
   }
 );
 Given(
   "{a} {actor} is signed in to {a} {space}",
-  function (a, actor, a2, space) {
+  function (_a, actor, _a2, space) {
     return actor
       .signOut(this.driver)
       .then(() => actor.signIn(this.driver, space));
   }
 );
 Given(
-  "a {actor} Authenticated Session",
+  "a {actor} Authenticated Session on {a} {space}",
   /** @param {Actor} actor */
-  function (actor) {
+  function (actor, _a, space) {
     this.actor = actor;
-    const space = new Space({ name: "System Test" });
     return this.actor.signIn(this.driver, space);
   }
 );
