@@ -1,6 +1,6 @@
 Hi <%= @invitation.name %>,
 
-<%= @invitation.invitor_display_name %> has invited you to join the <%= @invitation.space.name %> Space.
+<%= @invitation.invitor_display_name %> has invited you to join the <%= @invitation.space.name %>.
 
 You may view, accept or ignore this invitation at <%= polymorphic_url(@invitation.location(child: :rsvp)) %>.
 
