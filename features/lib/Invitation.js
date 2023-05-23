@@ -68,7 +68,7 @@ class Invitation {
   emails() {
     return this.emailServer().emailsWhere({
       to: this.emailAddress,
-      text: (text) => /You've been invited/.test(text),
+      text: (text) => /invited you to/.test(text),
     });
   }
   /**
