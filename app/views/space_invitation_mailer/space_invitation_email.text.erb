@@ -1,9 +1,9 @@
 Hi <%= @invitation.name %>,
 
-You've been invited to <%= @invitation.space.name %> by <%= @invitation.invitor_display_name %>.
+<%= @invitation.invitor_display_name %> has invited you to join <%= @invitation.space.name %>.
 
 You may view, accept or ignore this invitation at <%= polymorphic_url(@invitation.location(child: :rsvp)) %>.
 
-We hope to see you there! 🥳🎈🎉
+Look forward to seeing you there! 🥳🎈🎉
 
-- The <%= @invitation.space.name %> Crew
+- The <%= @invitation.space.name %> Crew on behalf of <%= @invitation.invitor_display_name %>
