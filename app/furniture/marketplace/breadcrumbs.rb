@@ -24,7 +24,7 @@ end
 
 crumb :marketplace_orders do |marketplace|
   parent :marketplace, marketplace
-  link t("marketplace.order.index"), marketplace.location(child: :orders)
+  link t("marketplace.orders.index.link_to"), marketplace.location(child: :orders)
 end
 
 crumb :marketplace_products do |marketplace|
