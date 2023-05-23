@@ -92,9 +92,8 @@ RSpec.describe SpacesController do
   describe "#destroy" do
     context "when an an Operator using the AP" do
       it "deletes the space and all it's other bits" do
-        SystemTestSpace.prepare
+        space = create(:space)
 
-        space = Space.find_by(slug: "system-test")
         delete polymorphic_path(space),
           headers: authorization_headers,
           as: :json
