@@ -19,7 +19,7 @@ module WithinLocation
     location_parent.location(*args, **kwargs)
   end
 
-  def location(action = :show, child: nil)
+  def location(action = :show, child: nil, query_params: nil)
     root = case action
     when :new, :edit
       if routed_as == :resource
@@ -30,7 +30,8 @@ module WithinLocation
     else
       parent_location + [self]
     end
-    (root + [child]).compact
+
+    (root + [child, query_params]).compact
   end
 
   module ClassMethods

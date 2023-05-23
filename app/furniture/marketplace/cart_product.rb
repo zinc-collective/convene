@@ -3,6 +3,7 @@
 class Marketplace
   class CartProduct < Record
     self.table_name = "marketplace_cart_products"
+    self.location_parent = :cart
 
     belongs_to :cart, inverse_of: :cart_products
     delegate :shopper, to: :cart
