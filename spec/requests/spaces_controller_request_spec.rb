@@ -124,6 +124,20 @@ RSpec.describe SpacesController do
         expect(flash[:notice]).to include("successfully updated")
       end
     end
+
+    # TODO: finish tests after implementing logic
+    context "when a Operator" do
+      let(:space) { create(:space, :with_members, :with_rooms) }
+      let(:operator) { create(:person, operator: true) }
+
+      it "can enables the Enforce SSL checkbox", pending: "WIP" do
+        expect(space.enforce_ssl).to be_truthy
+      end
+
+      it "can disabled the Enforce SSL checkbox", pending: "WIP" do
+        expect(space.enforce_ssl).to be_falsy
+      end
+    end
   end
 
   describe "#new" do
