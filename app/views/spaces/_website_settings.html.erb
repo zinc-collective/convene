@@ -5,8 +5,11 @@
   </header>
 
   <% # TODO: move label next to checkbox  %>
-  <%= form_with model: space.location do |form| %>
-    <%= form.check_box :enforce_ssl %>
-    <%= form.label :enforce_ssl, "Enforce SSL" %>
+  <%= form_with model: space.location do | web_settings_form | %>
+    <%= web_settings_form.label :enforce_ssl do %>
+      <%= web_settings_form.check_box :enforce_ssl %>
+        Enforce SSL - Automatically redirects all Visitor traffic to this Space to https.
+      <% end %>
+    <%= web_settings_form.submit %>
   <% end %>
 <% end %>
