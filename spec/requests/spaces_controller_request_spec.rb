@@ -125,17 +125,22 @@ RSpec.describe SpacesController do
       end
     end
 
-    # TODO: finish tests after implementing logic
     context "when a Operator" do
       let(:space) { create(:space, :with_members, :with_rooms) }
       let(:operator) { create(:person, operator: true) }
 
-      it "can enables the Enforce SSL checkbox", pending: "WIP" do
-        expect(space.enforce_ssl).to be_truthy
+      it "enables Enforce SSL on a Space" do
+        new_entrance = space.rooms.sample
+        put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id, enforce_ssl: 1}}
+
+        expect(space.enforce_ssl).to be true
       end
 
-      it "can disabled the Enforce SSL checkbox", pending: "WIP" do
-        expect(space.enforce_ssl).to be_falsy
+      it "disables Enforce SSL on a Space" do
+        new_entrance = space.rooms.sample
+        put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id, enforce_ssl: 0}}
+
+        expect(space.enforce_ssl).to be false
       end
     end
   end
