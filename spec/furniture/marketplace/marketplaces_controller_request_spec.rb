@@ -33,4 +33,13 @@ RSpec.describe Marketplace::MarketplacesController, type: :request do
       expect(marketplace.notify_emails).to eq(marketplace_attributes[:notify_emails])
     end
   end
+
+  describe "#show" do
+    it "does not show guests the edit button" do
+      get polymorphic_path(marketplace.location)
+
+      expect(response.body).not_to include(I18n.t("marketplace.marketplace.edit"))
+      expect(response).to be_ok
+    end
+  end
 end
