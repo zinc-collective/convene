@@ -4,7 +4,6 @@
     <p class="text-sm italic"><%= t('website_settings.help_text') %></p>
   </header>
 
-  <% # TODO: move label next to checkbox  %>
   <%= form_with model: space.location do | web_settings_form | %>
     <%= web_settings_form.label :enforce_ssl do %>
       <%= web_settings_form.check_box :enforce_ssl %>
