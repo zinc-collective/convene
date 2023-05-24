@@ -6,6 +6,7 @@ module Spec
   module Support
     module ViewComponent
       delegate :polymorphic_path, to: :vc_test_controller
+      delegate :helpers, to: :vc_test_controller
     end
   end
 end
