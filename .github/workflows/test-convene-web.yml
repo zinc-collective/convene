@@ -24,6 +24,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Update apt
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          sudo apt-get update -qq -o Acquire::Retries=3
+
+      - name: Install libvips
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          # we only need the library
+          sudo apt-get install --fix-missing -qq -o Acquire::Retries=3
+            libvips
+
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
@@ -67,6 +81,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Update apt
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          sudo apt-get update -qq -o Acquire::Retries=3
+
+      - name: Install libvips
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          # we only need the library
+          sudo apt-get install --fix-missing -qq -o Acquire::Retries=3
+            libvips
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1

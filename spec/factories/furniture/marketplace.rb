@@ -76,6 +76,10 @@ FactoryBot.define do
     trait :with_photo do
       photo { Rack::Test::UploadedFile.new("spec/fixtures/files/cc-kitten.jpg", "image/jpeg") }
     end
+
+    trait :with_description do
+      description { Faker::TvShows::DrWho.quote }
+    end
   end
 
   factory :marketplace_cart, class: "Marketplace::Cart" do
