@@ -8,6 +8,7 @@ en:
       success: Gizmo '%{name}' successfully updated! 🎉
     create:
       success: Gizmo '%{name}' successfully placed! 🎉
+      failure: "Could not add gizmo: %{errors}"
     destroy:
       success: Gizmo '%{name}' successfully removed! 🎉
     form:

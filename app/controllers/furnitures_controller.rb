@@ -7,8 +7,8 @@ class FurnituresController < ApplicationController
   end
 
   def create
-    respond_to do |format|
-      if furniture.save!
+    if furniture.save
+      respond_to do |format|
         format.html do
           redirect_to(
             [furniture.room.space, furniture.room],
@@ -17,6 +17,12 @@ class FurnituresController < ApplicationController
         end
         format.turbo_stream
       end
+    else
+      redirect_to(
+        [furniture.room.space, furniture.room],
+        alert: t(".failure", errors: furniture.errors.full_messages.join(", ")),
+        status: :unprocessable_entity
+      )
     end
   end
 

@@ -22,6 +22,8 @@ class Furniture < ApplicationRecord
 
   delegate :attributes=, to: :furniture, prefix: true
 
+  validates :furniture_kind, presence: true
+
   def furniture
     @furniture ||= Furniture.from_placement(self)
   end
