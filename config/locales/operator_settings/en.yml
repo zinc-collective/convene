@@ -1,0 +1,5 @@
+en:
+  website_settings:
+    help_text: "Control how people access your Space on the web."
+    index:
+      link_to: "Website Settings"
