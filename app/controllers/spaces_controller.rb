@@ -60,10 +60,6 @@ class SpacesController < ApplicationController
       policy_scope(Space).friendly.find(params[:id])
     elsif params[:space]
       policy_scope(Space).new(space_params)
-    elsif params[:enforce_ssl] == 1
-      policy_scope(Space).friendly.find(params[:id]).update(enforce_ssl: true)
-    elsif params[:enforce_ssl] == 0
-      policy_scope(Space).friendly.find(params[:id]).update(enforce_ssl: false)
     elsif BrandedDomainConstraint.new(space_repository).space_for_request(request).present?
       BrandedDomainConstraint.new(space_repository).space_for_request(request)
     else

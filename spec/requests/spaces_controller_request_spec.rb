@@ -118,29 +118,11 @@ RSpec.describe SpacesController do
 
       it "updates the Space" do
         new_entrance = space.rooms.sample
-        put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id}}
-
-        expect(space.reload.entrance).to eql(new_entrance)
-        expect(flash[:notice]).to include("successfully updated")
-      end
-    end
-
-    context "when a Operator" do
-      let(:space) { create(:space, :with_members, :with_rooms) }
-      let(:operator) { create(:person, operator: true) }
-
-      it "enables Enforce SSL on a Space" do
-        new_entrance = space.rooms.sample
         put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id, enforce_ssl: 1}}
 
-        expect(space.enforce_ssl).to be true
-      end
-
-      it "disables Enforce SSL on a Space" do
-        new_entrance = space.rooms.sample
-        put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id, enforce_ssl: 0}}
-
-        expect(space.enforce_ssl).to be false
+        expect(space.reload.entrance).to eql(new_entrance)
+        expect(space.reload.enforce_ssl).to be true
+        expect(flash[:notice]).to include("successfully updated")
       end
     end
   end
