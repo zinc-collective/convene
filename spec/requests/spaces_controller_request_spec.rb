@@ -87,6 +87,14 @@ RSpec.describe SpacesController do
         specify { perform_request && assert_select("##{dom_id(space)}") }
       end
     end
+
+    context "when a request is http" do
+      let(:space) { create(:space, enforce_ssl: true) }
+
+      it "redirect to https" do
+        expect(perform_request).to redirect_to polymorphic_url(space, protocol: "https")
+      end
+    end
   end
 
   describe "#destroy" do
