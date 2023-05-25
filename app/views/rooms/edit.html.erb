@@ -4,12 +4,19 @@
 
 <%= render partial: 'form', locals: { room: room } %>
 
-<section id="furnitures" class="overflow-hidden rounded-lg bg-white shadow p-3 mt-3">
+<%= render CardComponent.new(classes: "mt-3 gap-y-3") do %>
   <h2>Gizmos</h2>
-  <%= render room.furnitures.rank(:slot), editing: true %>
-</section>
 
-<%- new_furniture = room.furnitures.new %>
-<%- if policy(new_furniture).new? %>
-  <%= render "furnitures/new", furniture: new_furniture %>
-<%- end %>
+  <div id="furnitures">
+    <% if room.furnitures.present? %>
+      <%= render room.furnitures.rank(:slot), editing: true %>
+    <% else %>
+      <p class="text-gray-500"><%= t('rooms.no_furniture_notice') %></p>
+    <% end %>
+  </div>
+
+  <%- new_furniture = room.furnitures.new %>
+  <%- if policy(new_furniture).new? %>
+    <%= render "furnitures/new", furniture: new_furniture %>
+  <%- end %>
+<% end %>
