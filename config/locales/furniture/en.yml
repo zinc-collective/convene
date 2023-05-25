@@ -1,4 +1,8 @@
 en:
+  activerecord:
+    attributes:
+      furniture:
+        furniture_kind: Type of gizmo
   furnitures:
     update:
       success: Gizmo '%{name}' successfully updated! 🎉
