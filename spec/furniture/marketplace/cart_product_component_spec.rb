@@ -17,6 +17,7 @@ RSpec.describe Marketplace::CartProductComponent, type: :component do
   it { is_expected.to have_content(helpers.humanized_money_with_symbol(product.price)) }
   it { is_expected.to have_link(I18n.t("marketplace.cart_product_component.add")) }
   it { is_expected.to have_link(I18n.t("marketplace.cart_product_component.remove")) }
+  it { is_expected.to have_selector("img[src*='#{product.photo.filename}']") }
 
   context "when the product is not yet in the cart" do
     let(:cart_product) { build(:marketplace_cart_product, cart: cart, product: product, quantity: 0) }
