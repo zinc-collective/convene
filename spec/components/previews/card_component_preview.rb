@@ -8,4 +8,13 @@ class CardComponentPreview < ViewComponent::Preview
       HTML
     end
   end
+
+  def card_with_footer
+    render(CardComponent.new(data: {extreme: :hardcore})) do |card|
+      card.with_footer { "Some footer content" }
+      <<~HTML.chomp.html_safe # rubocop:disable Rails/OutputSafety
+        <p>Some card content.</p>
+      HTML
+    end
+  end
 end

@@ -6,53 +6,45 @@
     <%= marketplace.room.name %>
   </p>
 </div>
-<%= render CardComponent.new(classes: "flex mt-3 px-0") do %>
-  <div class="flex md:w-1/5 flex-col">
-    <nav class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 p-2 md:p-5">
-      <ul role="list" class="list-none pl-0">
+<%= render CardComponent.new(classes: "mt-3") do |card| %>
+  <%= content %>
 
-        <%- if policy(marketplace).edit? %>
-          <%= render Marketplace::ManagementMenuItemComponent.new(location: marketplace.location(:edit)) do |menu_item| %>
-            <% menu_item.with_icon(icon: :gear) %>
-            <% menu_item.with_title(t('marketplace.marketplace.configuration_menu')) %>
-          <% end %>
-        <% end %>
+  <% card.with_footer do %>
+    <nav class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3">
+      <%= render ButtonComponent.new(
+        label: t('marketplace.marketplace.configuration_menu'),
+        icon: :gear,
+        href: marketplace.location(:edit),
+        turbo_stream: false, method: :get, scheme: :secondary
+      ) if policy(marketplace).edit? %>
 
-        <%- if policy(marketplace).edit? %>
-          <%= render Marketplace::ManagementMenuItemComponent.new(
-            location: marketplace.location(child: :products)) do |menu_item| %>
-            <% menu_item.with_icon.with_content(tag) %>
-            <% menu_item.with_title(t('marketplace.products.index.link_to')) %>
-          <% end %>
-        <% end %>
+      <%= render ButtonComponent.new(
+        label: t('marketplace.products.index.link_to'),
+        icon: :tag,
+        href: marketplace.location(child: :products),
+        turbo_stream: false, method: :get, scheme: :secondary
+      ) if policy(marketplace).edit? %>
 
-        <%- if policy(marketplace.delivery_areas.new).create? %>
-          <%= render Marketplace::ManagementMenuItemComponent.new(
-              location: marketplace.location(child: :delivery_areas)) do |menu_item| %>
-            <% menu_item.with_icon.with_content(map) %>
-            <% menu_item.with_title(t('marketplace.delivery_areas.index.link_to')) %>
-          <% end %>
-        <% end %>
+      <%= render ButtonComponent.new(
+        label: t('marketplace.delivery_areas.index.link_to'),
+        icon: :map,
+        href: marketplace.location(child: :delivery_areas),
+        turbo_stream: false, method: :get, scheme: :secondary
+      ) if policy(marketplace.delivery_areas.new).create? %>
 
-        <%- if policy(marketplace.bazaar.tax_rates.new(marketplace: marketplace)).create? %>
-          <%= render Marketplace::ManagementMenuItemComponent.new(
-              location: marketplace.location(child: :tax_rates)) do |menu_item| %>
-            <% menu_item.with_icon.with_content(receipt_percent) %>
-            <% menu_item.with_title(t('marketplace.tax_rates.index.link_to')) %>
-          <% end %>
-        <% end %>
+      <%= render ButtonComponent.new(
+        label: t('marketplace.tax_rates.index.link_to'),
+        icon: :receipt_percent,
+        href: marketplace.location(child: :tax_rates),
+        turbo_stream: false, method: :get, scheme: :secondary
+      ) if policy(marketplace.bazaar.tax_rates.new(marketplace: marketplace)).create? %>
 
-        <%- if policy(marketplace.orders).index? %>
-          <%= render Marketplace::ManagementMenuItemComponent.new(
-              location: marketplace.location(child: :orders)) do |menu_item| %>
-            <% menu_item.with_icon.with_content(cart) %>
-            <% menu_item.with_title(t('marketplace.order.index')) %>
-          <%- end %>
-        <%- end %>
-      </ul>
+      <%= render ButtonComponent.new(
+        label: t('marketplace.orders.index.link_to'),
+        icon: :cart,
+        href: marketplace.location(child: :orders),
+        turbo_stream: false, method: :get, scheme: :secondary
+      ) if policy(marketplace.orders).index? %>
     </nav>
-  </div>
-  <div class="flex flex-col grow px-5">
-    <%= content %>
-  </div>
+  <% end %>
 <% end %>

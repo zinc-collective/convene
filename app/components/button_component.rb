@@ -9,6 +9,7 @@ class ButtonComponent < ApplicationComponent
   def initialize(
     label:,
     href:,
+    icon: nil,
     title: nil,
     method: :put,
     confirm: nil,
@@ -20,6 +21,7 @@ class ButtonComponent < ApplicationComponent
     @label = label
     @title = title
     @href = href
+    @icon = icon
     @method = method
     @confirm = confirm
     @disabled = disabled

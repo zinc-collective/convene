@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_195459) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_18_014356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -248,6 +248,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_195459) do
     t.datetime "updated_at", null: false
     t.string "branded_domain"
     t.uuid "entrance_id"
+    t.boolean "enforce_ssl", default: false, null: false
     t.index ["client_id"], name: "index_spaces_on_client_id"
     t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
   end

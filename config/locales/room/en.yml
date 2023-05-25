@@ -1,7 +1,7 @@
 en:
   rooms:
-    no_furniture_notice: 'No furniture yet! Deck out your space and add some Furniture! 🛋️'
-    place_furniture_heading: 'Add Furniture 🛋️'
+    no_furniture_notice: 'No gizmos yet! Deck out your space and add some Gizmos! 🛋️'
+    place_furniture_heading: 'Add Gizmo 🛋️'
     create:
       success: You've created Section '%{room_name}' successfully! 🎉
     update:
