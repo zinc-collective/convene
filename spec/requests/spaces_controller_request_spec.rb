@@ -87,6 +87,14 @@ RSpec.describe SpacesController do
         specify { perform_request && assert_select("##{dom_id(space)}") }
       end
     end
+
+    context "when a request is http" do
+      let(:space) { create(:space, enforce_ssl: true) }
+
+      it "redirect to https" do
+        expect(perform_request).to redirect_to polymorphic_url(space, protocol: "https")
+      end
+    end
   end
 
   describe "#destroy" do
@@ -118,9 +126,10 @@ RSpec.describe SpacesController do
 
       it "updates the Space" do
         new_entrance = space.rooms.sample
-        put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id}}
+        put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id, enforce_ssl: 1}}
 
         expect(space.reload.entrance).to eql(new_entrance)
+        expect(space.reload.enforce_ssl).to be true
         expect(flash[:notice]).to include("successfully updated")
       end
     end
