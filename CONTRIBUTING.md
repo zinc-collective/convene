@@ -1,6 +1,8 @@
 - [1. Getting Oriented.](#1-getting-oriented)
-  - [1.1. Architecture](#11-architecture)
-  - [1.2. Design](#12-design)
+  - [1.1 General Design and Architecture.](#11-general-design-and-architecture)
+  - [1.2 Users and Stakeholders.](#12-users-and-stakeholders)
+  - [1.3 Specific Dependencies](#13-specific-dependencies)
+  - [1.4 Entity Relationship Diagram (ERD).](#14-entity-relationship-diagram-erd)
 - [2. Machine Setup.](#2-machine-setup)
   - [2.1. Developer Setup and Documentation.](#21-developer-setup-and-documentation)
   - [2.2. Infrastructure Setup and Documentation.](#22-infrastructure-setup-and-documentation)
@@ -8,48 +10,39 @@
 
 ## 1. Getting Oriented.
 
-We're currently working towards our
-[1.0 Andromeda Release](https://github.com/zinc-collective/convene/milestone/1).
-The issues in the milestone are ordered by rough priority.
-
-Each issue labeled `epic` is pretty big. We tend to use checkboxes to decompose
-big issues into smaller pieces of work for people to bite off. We don't expect
-contributors to complete all the work before submitting their first patch.
-Instead, we prefer Contributors to take little bites and submit small patches so
-that we can develop tight, asynchronous feedback loops.
-
-We use labels like `design`, `documentation`, `test`, `code`, `infrastructure`,
-and `security` to indicate what kind of work is remaining on the issue.
-
-We tend to “merge quickly and often” so long as the patch is safe to apply. If
-you prefer your patch not get merged, please mark the
-[PR as a draft](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests#draft-pull-requests).
-
 New contributors may want to review
-[the Zinc contribution guide](https://www.zinc.coop/contributing/) for an
-overview of the norms we follow across projects.
+[the Zinc contribution guide](https://www.zinc.coop/contributing/) to ground themselves in the norms we try to follow across projects.
 
-### 1.1. Architecture
+### 1.1 General Design and Architecture.
+[`Convene`] is as a multi-user, multi-application web-first Operating System.
 
-At present, Convene is split into three modules:
+Convene's design strategy leans heavily into [Outcome-Driven Innovation](https://en.wikipedia.org/wiki/Outcome-Driven_Innovation), [Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility), [Usability](https://en.wikipedia.org/wiki/Usability), and [Data Portability](https://en.wikipedia.org/wiki/Data_portability).
+Interoperability is offered by embracing open protocols like [Hypermedia as the Engine of Application State (HATEOAS)](https://en.wikipedia.org/wiki/HATEOAS). Quality and Changeability is maintained by performing [Test-Oriented Development](https://en.wikipedia.org/wiki/Test-driven_development), [Continuous Deployment](https://en.wikipedia.org/wiki/Continuous_deployment), and [Domain Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design).
 
-The root directory provides the human and programmatic interface for Convene
-as well as data-persistence; with two additional submodules.
 
-- `infrastructure`, which contains infrastructure management code for Packer,
-  Terraform and Ansible.
-- `features`, which includes the high-level test definitions for the Convene
-  experience.
+### 1.2 Users and Stakeholders.
+Stakeholders for `Convene` fall into one or more of the following categories:
 
-#### Architecture Overview
+- [`Clients`], who are the legal owners of the data of their [`Spaces`] in a [`Neighborhood`].
+- [`Members`], have broad authority over [`Spaces`] and their [`Furniture`]. They are also responsible for [`Visitor`: Support], [`Visitor`: Trust & Safety], [`Member`: Support], and [`Member`: Trust & Safety].
+- [`Visitors`], who access [`Spaces`] and their [`Furniture`] according to [`Member`] specification.
+- [`Operators`], who steward the [`Neighborhood`: Infrastructure], [`Neighborhood`: Trust & Safety], and [`Client`: Support] responsibilities
+- [`Contributors`] and [`Maintainers`], who design and build [`Furniture`].
 
-_Last updated: Dec 2022_
 
-![](./docs/convene-architecture-overview.jpg)
+### 1.3 Specific Dependencies
 
-Original on Miro: https://miro.com/app/board/o9J_lLrbz1g=/
+#### 1.3.a. Upstream Dependencies
 
-#### ERD
+Contributing to Convene benefits from fluency with the following tools:
+
+- For Data Storage and Retrieval: [PostgreSQL], [Redis], and an [S3-compatible] file store.
+- Servicing HTTP Requests is done with [Ruby on Rails].
+- Background Jobs are performed by [Sidekiq].
+- The User Interface is Server-Side Rendered [`Components`] implemented using [ViewComponent] styled by [Tailwind] and with interactivity provided by [Turbo] and [StimulusJS].
+### 1.4 Entity Relationship Diagram (ERD).
+
+We auto-generate an ERD from our Domain Model.
 
 ![Entity Relationship Diagram of Convene, Showing an Overview of our Core Models and Associations](./docs/erd.png)
 
@@ -57,22 +50,6 @@ Generate an updated ERD via:
 ```bash
 bin/erd
 ```
-
-### 1.2. Design
-
-We encourage everyone to read the
-[Convene Experience Brief](https://docs.google.com/document/d/1cqnQa3NhRxY1gkGekGokeuXKTxS9oMGm3fH1cNasYOo/edit?usp=drive_web&ouid=109885491663234077023)
-to orient themselves on our target emotional and experience design.
-
-We have a
-[set of Personas and a Glossary](https://docs.google.com/spreadsheets/d/1BOBCT0yrgrbCuQFTx_hIQak0FSQjnjjFZVA3YksEv8s/edit#gid=622652343)
-that guide our design and development.
-
-We also have a
-[set of inspirational Wireframes](https://xd.adobe.com/view/fd425dbe-5384-44c9-997a-eeee6e886a86-a811/grid).
-
-Designers who have agreed to protect the privacy of our clients may access our
-[Customer Research Interviews](https://drive.google.com/drive/u/2/folders/1gncYSkVIAj4CnlUZM9KPQlFdj_aqulDl)
 
 ## 2. Machine Setup.
 
@@ -116,5 +93,14 @@ Infrastructure engineers may want to look at the
 how to configure your local machine or a virtual machine as a video bridge host.
 
 ### 2.3. Using the devcontainer.
-We have setup a developer container environment using VS Code's Dev Containers extension. 
+We have setup a developer container environment using VS Code's Dev Containers extension.
 Please see [this document](docs/devcontainer-usage.md) for instructions on using.
+
+
+[`Clients`]: https://github.com/zinc-collective/convene/issues/1475
+[`Convene`]: https://github.com/zinc-collective/convene
+[`Operators`]: https://github.com/zinc-collective/convene/issues/103
+[`Neighborhood`]: https://github.com/zinc-collective/convene/issues/892
+[`Neighborhoods`]: https://github.com/zinc-collective/convene/issues/892
+[`Space`]: https://github.com/zinc-collective/convene/issues/1154
+[`Spaces`]: https://github.com/zinc-collective/convene/issues/1154
