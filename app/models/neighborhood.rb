@@ -19,6 +19,18 @@ class Neighborhood
     Person.where(operator: true)
   end
 
+  def url
+    ENV.fetch("APP_ROOT_URL")
+  end
+
+  def name
+    ENV.fetch("NEIGHBORHOOD_NAME", "Convene")
+  end
+
+  def tagline
+    ENV.fetch("NEIGHBORHOOD_TAGLINE", "Space to Work, Play, or Simply Be")
+  end
+
   def email_configuration
     {
       address: ENV["SMTP_ADDRESS"],
