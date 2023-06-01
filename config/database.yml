@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: convene_web_production
-  username: convene_web
-  password: <%= ENV['CONVENE_WEB_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
