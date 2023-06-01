@@ -84,17 +84,17 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.760.0)
-    aws-sdk-core (3.171.1)
+    aws-partitions (1.772.0)
+    aws-sdk-core (3.174.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.64.0)
-      aws-sdk-core (~> 3, >= 3.165.0)
+    aws-sdk-kms (1.65.0)
+      aws-sdk-core (~> 3, >= 3.174.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.122.0)
-      aws-sdk-core (~> 3, >= 3.165.0)
+    aws-sdk-s3 (1.123.0)
+      aws-sdk-core (~> 3, >= 3.174.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
     aws-sigv4 (1.5.2)
@@ -189,7 +189,7 @@ GEM
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    lookbook (2.0.3)
+    lookbook (2.0.4)
       activemodel
       css_parser
       htmlbeautifier (~> 1.3)
@@ -233,7 +233,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.1)
+    nokogiri (1.15.2)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pagy (6.0.4)
@@ -248,7 +248,7 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.1)
-    puma (6.2.2)
+    puma (6.3.0)
       nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
@@ -282,8 +282,9 @@ GEM
       activesupport (>= 4.2)
       choice (~> 0.2.0)
       ruby-graphviz (~> 1.2)
-    rails-html-sanitizer (1.5.0)
-      loofah (~> 2.19, >= 2.19.1)
+    rails-html-sanitizer (1.6.0)
+      loofah (~> 2.21)
+      nokogiri (~> 1.14)
     railties (7.0.4.3)
       actionpack (= 7.0.4.3)
       activesupport (= 7.0.4.3)
@@ -316,7 +317,7 @@ GEM
     rspec-mocks (3.12.5)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
-    rspec-rails (6.0.2)
+    rspec-rails (6.0.3)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
@@ -409,7 +410,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    standard (1.28.3)
+    standard (1.28.4)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
       rubocop (~> 1.50.2)
@@ -435,7 +436,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
-    view_component (3.0.0)
+    view_component (3.1.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -462,7 +463,7 @@ PLATFORMS
 DEPENDENCIES
   active_record_extended (~> 3.2)
   activerecord-postgres_enum (~> 2.0)
-  aws-sdk-s3 (~> 1.122)
+  aws-sdk-s3 (~> 1.123)
   bcrypt (~> 3.1.18)
   better_errors
   binding_of_caller
@@ -484,7 +485,7 @@ DEPENDENCIES
   pagy (~> 6.0)
   pg (~> 1.5)
   pry-byebug
-  puma (~> 6.2)
+  puma (~> 6.3)
   pundit (~> 2.3)
   rails (~> 7.0)
   rails-controller-testing
@@ -492,7 +493,7 @@ DEPENDENCIES
   ranked-model (~> 0.4.8)
   redcarpet (~> 3.6)
   rotp (~> 6.2)
-  rspec-rails (~> 6.0.2)
+  rspec-rails (~> 6.0.3)
   rswag-api
   rswag-specs
   rswag-ui
@@ -513,7 +514,7 @@ DEPENDENCIES
   strong_migrations (~> 1.4)
   turbo-rails
   tzinfo-data (~> 1.2021)
-  view_component (~> 3.0)
+  view_component (~> 3.1)
   web-console (~> 4.2)
   webmock
 

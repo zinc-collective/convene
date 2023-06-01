@@ -31,7 +31,7 @@
         <%- if current_room && policy(current_room).edit? %>
           <%= link_to t('icons.edit'), [:edit, current_space, current_room], class: 'no-underline', aria: { label: "Configure Section"} %>
         <%- end %>
-        <%= link_to "Convene", root_url %>: Space to Work, Play, or Simply Be
+        <%= render Neighborhood::LinkComponent.new %>
       </div>
       <div>
         💾&nbsp;

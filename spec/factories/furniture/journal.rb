@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :journal, class: "Journal::Journal" do
     room
+    furniture_kind { :journal }
   end
 
   factory :journal_entry, class: "Journal::Entry" do

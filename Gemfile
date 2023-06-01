@@ -17,7 +17,7 @@ gem "rails", "~> 7.0"
 # Data Transport
 #
 # Use Puma as the app server
-gem "puma", "~> 6.2"
+gem "puma", "~> 6.3"
 
 # Browser Layer
 gem "cssbundling-rails"
@@ -42,7 +42,7 @@ gem "redcarpet", "~> 3.6"
 gem "gretel", "~> 4.5"
 # Better UI components
 gem "lookbook", ">= 2.0.0.beta.4"
-gem "view_component", "~> 3.0"
+gem "view_component", "~> 3.1"
 
 # Pagination!
 gem "pagy", "~> 6.0"
@@ -71,7 +71,7 @@ gem "pg", "~> 1.5"
 gem "image_processing"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.122", require: false
+gem "aws-sdk-s3", "~> 1.123", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -108,7 +108,7 @@ group :development, :test do
 
   # Our preferred testing library for Ruby and Rails projects
   gem "rails-controller-testing"
-  gem "rspec-rails", "~> 6.0.2"
+  gem "rspec-rails", "~> 6.0.3"
   gem "rswag-specs"
   gem "shoulda-matchers", "~> 5.3"
 
