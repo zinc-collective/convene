@@ -25,16 +25,16 @@ class Space < ApplicationRecord
 
   # Joins People to spaces for permissioning and
   # other purposes
-  has_many :memberships, inverse_of: :space, dependent: :destroy_async
+  has_many :memberships, inverse_of: :space, dependent: :destroy
 
   # The People with permissions for the Space
   has_many :members, through: :memberships
 
   # Inviting new members
-  has_many :invitations, inverse_of: :space, dependent: :destroy_async
+  has_many :invitations, inverse_of: :space, dependent: :destroy
 
   # The Rooms within this Space
-  has_many :rooms, inverse_of: :space, dependent: :destroy_async
+  has_many :rooms, inverse_of: :space, dependent: :destroy
   has_many :furnitures, through: :rooms, inverse_of: :space
 
   has_many :agreements, inverse_of: :space, dependent: :destroy
@@ -43,7 +43,7 @@ class Space < ApplicationRecord
 
   # @see {Utility}
   # @returns {ActiveRecord::Relation<Utilities>}
-  has_many :utilities, dependent: :destroy_async
+  has_many :utilities, inverse_of: :space, dependent: :destroy
 
   def parent_location
     []

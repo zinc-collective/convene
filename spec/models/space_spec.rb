@@ -3,17 +3,21 @@
 require "rails_helper"
 
 RSpec.describe Space do
-  it { is_expected.to have_many(:rooms) }
+  subject(:space) { described_class.new }
+
+  it { is_expected.to have_many(:rooms).dependent(:destroy) }
   it { is_expected.to have_many(:furnitures).through(:rooms).inverse_of(:space) }
+  it { is_expected.to have_many(:utilities).inverse_of(:space).dependent(:destroy) }
 
   it { is_expected.to have_many(:agreements).inverse_of(:space).dependent(:destroy) }
 
   it do
-    expect(subject).to belong_to(:entrance).class_name("Room")
+    expect(space).to belong_to(:entrance).class_name("Room")
       .optional(true).dependent(false)
   end
 
-  it { is_expected.to have_many(:invitations).inverse_of(:space) }
+  it { is_expected.to have_many(:memberships).inverse_of(:space).dependent(:destroy) }
+  it { is_expected.to have_many(:invitations).inverse_of(:space).dependent(:destroy) }
 
   describe "#name" do
     it { is_expected.to validate_presence_of(:name) }

@@ -34,7 +34,7 @@ class Room < ApplicationRecord
   }
   validates :publicity_level, presence: true
 
-  has_many :furnitures, dependent: :destroy_async, inverse_of: :room
+  has_many :furnitures, dependent: :destroy, inverse_of: :room
   accepts_nested_attributes_for :furnitures
 
   def full_slug
