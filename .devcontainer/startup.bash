@@ -8,6 +8,9 @@ if ! [ -d /workspaces ]; then
 fi
 set -x # for printing commands
 
+echo "source /usr/share/bash-completion/completions/git" >> ~/.bashrc
+source /usr/share/bash-completion/completions/git
+
 # persist data by actually storing in /workspaces directory
 # NOTE: This will not persist across codespace creations, just starts/stops
 function database_workspace_setup {
