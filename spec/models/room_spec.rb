@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Room do
   let(:space) { Space.new }
 
-  it { is_expected.to have_many(:furnitures).inverse_of(:room) }
+  it { is_expected.to have_many(:furnitures).inverse_of(:room).dependent(:destroy) }
   it { is_expected.to belong_to(:space).inverse_of(:rooms) }
 
   describe ".slug" do
