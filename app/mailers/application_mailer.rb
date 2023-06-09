@@ -1,5 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV.fetch("EMAIL_DEFAULT_FROM", "from@example.com")
+  DEFAULT_FROM = ENV.fetch("EMAIL_DEFAULT_FROM", "convene-support@example.com")
+
+  default from: DEFAULT_FROM
   prepend_view_path "app/furniture"
 
   layout "mailer"
