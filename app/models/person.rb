@@ -5,17 +5,17 @@ class Person < ApplicationRecord
   validates :email, presence: true, uniqueness: {case_sensitive: false}
 
   # Ways for the person to sign in
-  has_many :authentication_methods, inverse_of: :person, dependent: :destroy_async
+  has_many :authentication_methods, inverse_of: :person, dependent: :destroy
 
   # Joins the person to the spaces they are part of
-  has_many :memberships, inverse_of: :member, foreign_key: :member_id, dependent: :destroy_async
-  has_many :active_memberships, -> { active }, class_name: :Membership, inverse_of: :member, foreign_key: :member_id
+  has_many :memberships, inverse_of: :member, foreign_key: :member_id, dependent: :destroy
+  has_many :active_memberships, -> { active }, class_name: :Membership, inverse_of: :member, foreign_key: :member_id, dependent: :destroy
 
   # The Spaces the Person is part of
   has_many :spaces, through: :active_memberships
   has_many :rooms, through: :spaces
 
-  has_many :invitations, inverse_of: :invitor, foreign_key: :invitor_id
+  has_many :invitations, inverse_of: :invitor, foreign_key: :invitor_id, dependent: :destroy
 
   def member_of?(space)
     spaces.include?(space)

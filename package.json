@@ -37,12 +37,12 @@
     "change-case": "^4.1.2",
     "dotenv": "^16.1.4",
     "fs-extra": "^11.1.1",
-    "geckodriver": "^4.0.3",
+    "geckodriver": "^4.0.4",
     "get-urls": "^11.0.0",
     "lodash": "^4.17.21",
     "prettier": "^2.8.8",
     "promise-retry": "^2.0.1",
-    "selenium-webdriver": "^4.9.2",
+    "selenium-webdriver": "^4.10.0",
     "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {

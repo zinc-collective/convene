@@ -2090,10 +2090,10 @@ gauge@^4.0.3:
     strip-ansi "^6.0.1"
     wide-align "^1.1.5"
 
-geckodriver@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/geckodriver/-/geckodriver-4.0.3.tgz#418aa6e22bcce9bddaa6993d6217a2a5a647356e"
-  integrity sha512-C3rjlQXYijKJ7KNzjI4rWgqQV51cIaH/wyjv0j7A95URHnQ0vIQ6VtSu8gH8OWHy6/JBiFB6gUt9e2Kkjr/c5g==
+geckodriver@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/geckodriver/-/geckodriver-4.0.4.tgz#0a7685e4a801e0ecc032053bb58b1013fa0a0f58"
+  integrity sha512-WoNn5wy576YKWOfUf7Hi4g5jWPKvMmN6zOt9KpDlCkr1mUbdqP056/eZKapyG5xfJQVDKC/sBx6ejH2xdt2BGg==
   dependencies:
     "@wdio/logger" "^8.6.6"
     decamelize "^6.0.0"
@@ -3978,10 +3978,10 @@ select-hose@^2.0.0:
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
   integrity sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=
 
-selenium-webdriver@^4.9.2:
-  version "4.9.2"
-  resolved "https://registry.yarnpkg.com/selenium-webdriver/-/selenium-webdriver-4.9.2.tgz#81a9f3840a5d5dfcb2681418b8592979230900ad"
-  integrity sha512-0gDswAgVn6qbCYckZetQQvQK9tWW1r7LaumhiqY1/Wl/7JEWG0JANsTbZKnmGc3+cUU76zAi5/p0P8LUweXlig==
+selenium-webdriver@^4.10.0:
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/selenium-webdriver/-/selenium-webdriver-4.10.0.tgz#0508cdfbb5ad8470d8fd19db1a69d3e87f474b79"
+  integrity sha512-hSQPw6jgc+ej/UEcdQPG/iBwwMeCEgZr9HByY/J8ToyXztEqXzU9aLsIyrlj1BywBcStO4JQK/zMUWWrV8+riA==
   dependencies:
     jszip "^3.10.1"
     tmp "^0.2.1"
