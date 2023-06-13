@@ -436,7 +436,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
-    view_component (3.1.0)
+    view_component (3.2.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -514,7 +514,7 @@ DEPENDENCIES
   strong_migrations (~> 1.4)
   turbo-rails
   tzinfo-data (~> 1.2021)
-  view_component (~> 3.1)
+  view_component (~> 3.2)
   web-console (~> 4.2)
   webmock
 

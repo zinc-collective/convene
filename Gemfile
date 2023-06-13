@@ -42,7 +42,7 @@ gem "redcarpet", "~> 3.6"
 gem "gretel", "~> 4.5"
 # Better UI components
 gem "lookbook", ">= 2.0.0.beta.4"
-gem "view_component", "~> 3.1"
+gem "view_component", "~> 3.2"
 
 # Pagination!
 gem "pagy", "~> 6.0"
