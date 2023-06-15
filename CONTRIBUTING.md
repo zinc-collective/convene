@@ -107,6 +107,8 @@ For more information about Rails's ActionMailers, see [this guide](https://guide
 
 To run `pry` or `byebug`, run `bin/connect web`.
 
+Guides: [`pry`](http://pry.github.io/) |  [`byebug`](https://github.com/deivid-rodriguez/byebug/blob/master/GUIDE.md)
+
 ### 2.3. Using the devcontainer.
 We have setup a developer container environment using VS Code's Dev Containers extension.
 Please see [this document](docs/devcontainer-usage.md) for instructions on using.
