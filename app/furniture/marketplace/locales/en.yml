@@ -61,12 +61,6 @@ en:
         notification:
           subject: "Order Received for %{marketplace_name}: %{order_id}"
           placed_at: "Received At %{placed_at}"
-    orders:
-      index:
-        link_to: "Order History"
-      show:
-        link_to: "Order %{order_id}"
-    order:
       notification_methods:
         index:
           link_to: "Order Notifications"
@@ -76,6 +70,11 @@ en:
           success: "Order Notification '%{contact_location}' Saved!"
         new:
           link_to: "Add Order Notification"
+    orders:
+      index:
+        link_to: "Order History"
+      show:
+        link_to: "Order %{order_id}"
     products:
       index:
         link_to: "Products"
