@@ -12,8 +12,8 @@
       <%- order_notification_methods = marketplace.order_notification_methods.new %>
       <%- if policy(order_notification_methods).create? %>
         <%= render ButtonComponent.new(
-          label: "#{t('marketplace.order_notification_methods.new.link_to')} #{t('icons.new')}",
-          title: t('marketplace.order_notification_methods.new.link_to'),
+          label: "#{t('marketplace.order.notification_methods.new.link_to')} #{t('icons.new')}",
+          title: t('marketplace.order.notification_methods.new.link_to'),
           href: marketplace.location(:new, child: :order_notification_method),
           method: :get,
           scheme: :secondary) %>

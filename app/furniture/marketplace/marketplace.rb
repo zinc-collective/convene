@@ -15,7 +15,7 @@ class Marketplace
 
     has_many :delivery_areas, inverse_of: :marketplace, dependent: :destroy
 
-    has_many :order_notification_methods, inverse_of: :marketplace, dependent: :destroy
+    has_many :order_notification_methods, inverse_of: :marketplace, dependent: :destroy, class_name: "Order::NotificationMethod"
 
     setting :notify_emails
     setting :stripe_account
