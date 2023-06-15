@@ -16,6 +16,7 @@
       <%= render button({child: :delivery_areas}, icon: :map)  if policy(marketplace.delivery_areas).index? %>
       <%= render button({child: :tax_rates}, icon: :receipt_percent)  if policy(marketplace.tax_rates).index? %>
       <%= render button({child: :orders}, icon: :cart)  if policy(marketplace.orders).index? %>
+      <%= render button({child: :order_notification_methods}, icon: :bell)  if policy(marketplace.order_notification_methods).index? %>
     </nav>
   <% end %>
 <% end %>

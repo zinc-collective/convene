@@ -1,7 +1,6 @@
 <%- breadcrumb :edit_marketplace, marketplace %>
 
 <%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
-  <%= render "form", marketplace: marketplace %>
   <p class="flex justify-between my-5 flex-wrap">
     <%- if marketplace.stripe_api_key? %>
       <%- if marketplace.stripe_account_connected? %>
