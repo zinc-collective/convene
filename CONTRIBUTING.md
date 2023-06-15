@@ -101,6 +101,8 @@ Set [SMTP\_\* environment variables to configure Action Mailer](.env.example).
 
 To preview mailers, visit http://localhost:3000/rails/mailers/
 
+For more information about Rails's ActionMailers, see [this guide](https://guides.rubyonrails.org/action_mailer_basics.html).
+
 ### 2.2.2 Debugger
 
 To run `pry` or `byebug`, run `bin/connect web`.
