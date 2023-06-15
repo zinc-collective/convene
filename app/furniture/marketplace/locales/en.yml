@@ -1,6 +1,9 @@
 
 en:
   activerecord:
+    attributes:
+      marketplace/order_notification_method:
+        contact_location: "Email Address"
     errors:
       models:
         marketplace/delivery:
@@ -63,6 +66,16 @@ en:
         link_to: "Order History"
       show:
         link_to: "Order %{order_id}"
+    order_notification_methods:
+      index:
+        link_to: "Order Notifications"
+      edit:
+        link_to: "Edit Order Notification '%{contact_location}'"
+      update:
+        success: "Order Notification '%{contact_location}' Saved!"
+
+      new:
+        link_to: "Add Order Notification"
     products:
       index:
         link_to: "Products"

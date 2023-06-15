@@ -6,6 +6,7 @@ class SvgComponent < ApplicationComponent
     gear: :gear,
     map: :map,
     receipt_percent: :receipt_percent,
+    letter: :receipt_percent,
     tag: :tag
   }.with_indifferent_access.freeze
 

@@ -45,6 +45,14 @@
         href: marketplace.location(child: :orders),
         turbo_stream: false, method: :get, scheme: :secondary
       ) if policy(marketplace.orders).index? %>
+
+
+      <%= render ButtonComponent.new(
+        label: t("marketplace.order_notification_methods.index.link_to"),
+        icon: :letter,
+        href: marketplace.location(child: :order_notification_methods),
+        method: :get, turbo_stream: false, scheme: :secondary
+      ) if policy(marketplace.order_notification_methods).index? %>
     </nav>
   <% end %>
 <% end %>
