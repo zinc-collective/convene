@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_18_014356) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_15_002110) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -137,6 +137,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_014356) do
     t.string "delivery_window"
     t.string "order_by"
     t.index ["marketplace_id"], name: "index_marketplace_delivery_areas_on_marketplace_id"
+  end
+
+  create_table "marketplace_order_notification_methods", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "marketplace_id"
+    t.string "contact_method", default: "email", null: false
+    t.string "contact_location_ciphertext", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marketplace_id"], name: "index_marketplace_order_notification_methods_on_marketplace_id"
   end
 
   create_table "marketplace_orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -270,6 +279,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_18_014356) do
   add_foreign_key "marketplace_cart_products", "marketplace_orders", column: "cart_id"
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_delivery_areas", "furnitures", column: "marketplace_id"
+  add_foreign_key "marketplace_order_notification_methods", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_orders", "marketplace_delivery_areas", column: "delivery_area_id"
   add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id"
   add_foreign_key "marketplace_product_tax_rates", "marketplace_products", column: "product_id"
