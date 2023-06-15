@@ -6,7 +6,10 @@
 - [2. Machine Setup.](#2-machine-setup)
   - [2.1. Developer Setup and Documentation.](#21-developer-setup-and-documentation)
   - [2.2. Infrastructure Setup and Documentation.](#22-infrastructure-setup-and-documentation)
+  - [2.2.1 Developing Mailers.](#221-developing-mailers)
+  - [2.2.2 Debugger](#222-debugger)
   - [2.3. Using the devcontainer.](#23-using-the-devcontainer)
+  - [2.4. Testing](#24-testing)
 
 ## 1. Getting Oriented.
 
@@ -92,10 +95,26 @@ Infrastructure engineers may want to look at the
 [`infrastructure` module's `README`](./infrastructure/README.md), which includes
 how to configure your local machine or a virtual machine as a video bridge host.
 
+### 2.2.1 Developing Mailers.
+
+Set [SMTP\_\* environment variables to configure Action Mailer](.env.example).
+
+To preview mailers, visit http://localhost:3000/rails/mailers/
+
+For more information about Rails's ActionMailers, see [this guide](https://guides.rubyonrails.org/action_mailer_basics.html).
+
+### 2.2.2 Debugger
+
+To run `pry` or `byebug`, run `bin/connect web`.
+
+Guides: [`pry`](http://pry.github.io/) |  [`byebug`](https://github.com/deivid-rodriguez/byebug/blob/master/GUIDE.md)
+
 ### 2.3. Using the devcontainer.
 We have setup a developer container environment using VS Code's Dev Containers extension.
 Please see [this document](docs/devcontainer-usage.md) for instructions on using.
 
+### 2.4. Testing
+See the [Testing documentation](docs/testing.md).
 
 [`Clients`]: https://github.com/zinc-collective/convene/issues/1475
 [`Convene`]: https://github.com/zinc-collective/convene
