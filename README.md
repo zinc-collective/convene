@@ -8,6 +8,7 @@ Convene secure, affordable, always-available digital Spaces where anyone can
   - [Purchasing a Convene Operator License.](#purchasing-a-convene-operator-license)
   - [Help and Support](#help-and-support)
 - [Contributing to Convene](#contributing-to-convene)
+- [Operating a Convene neighborhood](#operating-a-convene-neighborhood)
 - [About The Zinc Collective](#about-the-zinc-collective)
 
 ## Overview
@@ -70,6 +71,10 @@ Paid support is available for \$135 USD per hour<sup>[1][footnote-1]</sup>.
 
 We're always excited for new contributors! Read more in our
 [guide to contributing, located in CONTRIBUTING.md](./CONTRIBUTING.md)
+
+## Operating a Convene neighborhood
+
+See our [operator documentation](./operator.md).
 
 ## About The Zinc Collective
 

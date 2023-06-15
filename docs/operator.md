@@ -1,4 +1,10 @@
-# Deploying Convene
+# Operating Convene
+
+- [Deploying Convene](#deploying-convene)
+  - [Deploying to Heroku](#deploying-to-heroku)
+- [Adding a new Space](#adding-a-new-space)
+
+## Deploying Convene
 
 A `convene` Neighborhood will eventually be deployable in several ways.
 Currently, we support deploying to:
@@ -7,9 +13,9 @@ Currently, we support deploying to:
 
 Each of these methods is discussed in detail below:
 
-## Deploying to Heroku
+### Deploying to Heroku
 
-### GitHub
+#### GitHub
 Deploying from GitHub is perhaps arguably the easiest way to deploy to Heroku,
 as it can be done entirely using their GUIs through Heroku-GitHub integration. \
 An overview is discussed below,
@@ -38,3 +44,25 @@ but please see the [GitHub Integration](https://devcenter.heroku.com/articles/gi
       2.  go to the app's "`Deploy`" tab and click the "`Deploy Branch`" button at the bottom of the page.
 
 If you run into issues with this process that are not resolved with a bit of research, please do not hesitate to [contact us](https://www.zinc.coop/contact-us/)!
+
+## Adding a new Space
+
+Information you'll need:
+* email address(es) of the initial Space Member(s)
+* name of the Space (this will be converted to a slug)
+* if they will be using a branded domain, what is the name of the domain?
+
+Once you have this information:
+1. Logged into your Convene operator account, go to the root of your Convene neighborhood (e.g.https://neighborhood.zinc.coop/)
+2. Click on "Add a Space", enter the space name and hit "Create". The name will be slugified to create the slug for the Space.
+3. Click on the gear to the left of the space name on the top left, to go to the Space configuration page.
+4. Go to "Invitations", and add invite the initial Space Members to the Space
+5. If the Space wants a branded domain:
+   * Add the domain to the Heroku "Domains" configuration, under Settings > Domains. This will give you a DNS target, which you can give back to the client to configure their DNS to point their custom domain to your Convene Neighborhood.
+   * Add the domain to the Space via the Rails console:
+```ruby
+$ heroku run rails c -a <YOUR CONVENE DEPLOYMENT NAME>
+[...]
+irb(main):005:0> space = Space.find_by(slug: "THE-SPACE_SLUG")
+irb(main):005:0> space.update!(branded_domain: "THE_DOMAIN.NET")
+```
