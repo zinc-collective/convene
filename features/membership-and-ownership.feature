@@ -1,3 +1,6 @@
+# Note: `Room/Rooms` has been renamed to `Section/Sections`.
+# Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
+
 Feature: Membership and Ownership
   In order to build a cohesive, multi-occupant Space
   I want to grant People Membership in my Space
@@ -15,6 +18,8 @@ Feature: Membership and Ownership
 
   Furniture may also expose different Features based upon Membership. For example,
   Members may be able to include Images in Chat, while Guests may not.
+
+  Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
 
   @unstarted
   Scenario: Removing a Member

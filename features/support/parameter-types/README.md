@@ -27,6 +27,10 @@ The core nouns in Convene are:
    purposes.
 4. [Furniture] for human/computer interaction within a space.
 
+Note: `Room/Rooms` has been renamed to `Section/Sections`.
+
+Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
+
 [actors]: ./actors.js
 [rooms]: ./rooms.js
 [spaces]: ./spaces.js

@@ -1,4 +1,7 @@
 Feature: Utilities
+
+# Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
+
 # Utilities connect a Space to the broader Internet, and allow Furniture
 # within the Space to leverage other Services or Websites. A Space connects
 # to Utilities via a Utility; which can be used by Furniture or
