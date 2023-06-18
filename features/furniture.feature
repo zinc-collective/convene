@@ -1,3 +1,5 @@
+# Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
+
 Feature: Furniture
   In order to customize Rooms to fit their purpose,
   I would like to place Furniture in the Room.

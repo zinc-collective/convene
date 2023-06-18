@@ -1,5 +1,9 @@
 # Furniture: Spotlight!
 
+Note: `Room/Rooms` has been renamed to `Section/Sections`.
+
+Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
+
 Instagram and Signal have Stories, eCommerce sites have "Featured Items", Product Landing Pages have
 "Highlighted Value Propositions." Each of these "Spotlight" something on the Web, and bring it to the
 front of a Visitors attention.

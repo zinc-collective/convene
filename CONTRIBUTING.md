@@ -32,6 +32,7 @@ Stakeholders for `Convene` fall into one or more of the following categories:
 - [`Operators`], who steward the [`Neighborhood`: Infrastructure], [`Neighborhood`: Trust & Safety], and [`Client`: Support] responsibilities
 - [`Contributors`] and [`Maintainers`], who design and build [`Furniture`].
 
+Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
 
 ### 1.3 Specific Dependencies
 

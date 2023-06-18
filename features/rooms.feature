@@ -1,6 +1,8 @@
 Feature: Rooms
   # Rooms organize the information and functionality of a Space.
 
+  # Note: `Room/Rooms` has been renamed to `Section/Sections`.
+
   # Adding a Room is done through the Space Edit page
   @built @unimplemented-steps @andromeda
   Scenario: Adding a Room

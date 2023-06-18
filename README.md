@@ -26,6 +26,8 @@ with _Furniture_ to meet their collective digital needs. For example:
 - A Farmer's Market could provide professionally designed websites and social media presences for their vendors.
 - A Co-operative Startup Incubator could keep capitalization tables, Patronage Records and other logistical records.
 
+Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
+
 You can see more in the [Zinc neighborhood](https://convene.zinc.coop).
 
 We have two milestones we are working towards:

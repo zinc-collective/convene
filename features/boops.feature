@@ -1,4 +1,7 @@
 Feature: Boops
+
+  Note: `Furniture` has been renamed to `Gizmo/Gizmos`.
+
   In order to equitably invoice for the costs incurred in providing co-owned digital infrastucture
   Operators want a way to account for costs of interactions/behaviors/etc.
 
