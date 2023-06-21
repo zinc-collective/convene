@@ -1,4 +1,5 @@
 <section class="max-w-3xl mx-auto">
+  <%- new_entry = journal.entries.new %>
   <%- if policy(new_entry).new? %>
     <div class="text-center p-2">
       <%= link_to "New Journal Entry", journal.location(:new, child: :entry) %>
@@ -13,7 +14,6 @@
 
   <%== pagy_nav(@pagy, nav_extra: 'flex justify-between') %>
 
-  <%- new_entry = journal.entries.new %>
   <%- if policy(new_entry).new? %>
     <footer class="text-center p-2">
       <%= link_to "New Journal Entry", journal.location(:new, child: :entry) %>
