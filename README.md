@@ -76,7 +76,7 @@ We're always excited for new contributors! Read more in our
 
 ## Operating a Convene neighborhood
 
-See our [operator documentation](./operator.md).
+See our [operator documentation](./docs/operator.md).
 
 ## About The Zinc Collective
 
