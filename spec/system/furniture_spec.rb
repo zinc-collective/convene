@@ -5,7 +5,6 @@ describe "Furniture" do
   include ActiveJob::TestHelper
   it "Managing Furniture" do
     space = create(:space, :with_entrance, :with_members, member_count: 1)
-    # Sign in to the Space
     sign_in(space.members.first, space)
 
     add_gizmo("Markdown Text Block", room: space.entrance)
