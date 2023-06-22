@@ -12,6 +12,7 @@
                         label: t('icons.edit'),
                         href: edit_href,
                         method: :get,
+                        turbo_stream: true,
                         title: t('.edit_title', name: furniture.furniture.model_name.human.titleize),
                         scheme: :secondary) %>
         <%- end %>
