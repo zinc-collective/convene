@@ -36,6 +36,7 @@ class Room < ApplicationRecord
 
   has_many :furnitures, dependent: :destroy, inverse_of: :room
   accepts_nested_attributes_for :furnitures
+  alias_method :gizmos, :furnitures
 
   def full_slug
     "#{space.slug}--#{slug}"

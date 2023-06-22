@@ -4,6 +4,10 @@ FactoryBot.define do
   factory :space do
     sequence(:name) { |n| "#{Faker::Book.title} #{n}" }
 
+    trait :with_entrance do
+      entrance { association(:room, space: instance) }
+    end
+
     trait :with_members do
       transient do
         member_count { 4 }
