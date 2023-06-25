@@ -113,6 +113,7 @@ group :development, :test do
   gem "shoulda-matchers", "~> 5.3"
 
   gem "capybara"
+  gem "selenium-webdriver"
 
   # Let the robots do the request/response faking.
   gem "webmock"
