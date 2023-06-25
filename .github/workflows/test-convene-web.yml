@@ -120,6 +120,8 @@ jobs:
         run: bin/setup-rails && bin/rails assets:precompile
 
       - name: Run Tests
+        env:
+          HEADLESS: true
         run: bundle exec rspec
 
   test-features:

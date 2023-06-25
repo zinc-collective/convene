@@ -2,5 +2,6 @@ require "capybara/rails"
 require "selenium/webdriver"
 
 RSpec.configure do |config|
-  config.before(type: :system) { driven_by :selenium, using: :firefox }
+  browser = (ENV["HEADLESS"] == "true") ? :selenium_headless : :selenium
+  config.before(type: :system) { driven_by browser, using: :firefox }
 end
