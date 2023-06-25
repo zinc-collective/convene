@@ -59,7 +59,7 @@ gem "ranked-model", "~> 0.4.8"
 # Slug-based model lookup
 gem "friendly_id", "~> 5.5.0"
 # Hashing / Encrypting data at rest
-gem "bcrypt", "~> 3.1.18"
+gem "bcrypt", "~> 3.1.19"
 gem "lockbox", "1.2.0"
 gem "rotp", "~> 6.2"
 gem "strong_migrations", "~> 1.4"
