@@ -12,6 +12,10 @@
   <% end %>
 
   <%= form_with model: space.location do | web_settings_form | %>
+    <%= web_settings_form.label :branded_domain %>
+    <%= space.branded_domain %>
+    <%= web_settings_form.text_field :branded_domain %>
+
     <%= web_settings_form.label :enforce_ssl do %>
       <%= web_settings_form.check_box :enforce_ssl %>
         Enforce SSL - Automatically redirects all Visitor traffic to this Space to https.
