@@ -4,6 +4,13 @@
     <p class="text-sm italic"><%= t('website_settings.help_text') %></p>
   </header>
 
+  <h4 class="text-base"> Domain </h4>
+  <% if space.branded_domain.present? %>
+    <p class="text-sm"><%= space.branded_domain %></p>
+  <% else %>
+    <p class="text-sm"> No domain </p>
+  <% end %>
+
   <%= form_with model: space.location do | web_settings_form | %>
     <%= web_settings_form.label :enforce_ssl do %>
       <%= web_settings_form.check_box :enforce_ssl %>
