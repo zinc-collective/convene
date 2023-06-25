@@ -10,8 +10,8 @@ class Furniture < ApplicationRecord
 
   ranks :slot, with_same: [:room_id]
 
-  belongs_to :room, inverse_of: :furnitures
-  has_one :space, through: :room, inverse_of: :furnitures
+  belongs_to :room, inverse_of: :gizmos
+  has_one :space, through: :room, inverse_of: :gizmos
 
   attribute :furniture_kind, :string
 
@@ -20,16 +20,17 @@ class Furniture < ApplicationRecord
   # The order in which {Furniture} is rendered in a Room. Lower is higher.
   attribute :slot, :integer
 
-  delegate :attributes=, to: :furniture, prefix: true
+  delegate :attributes=, to: :gizmo, prefix: true
 
   validates :furniture_kind, presence: true
 
-  def furniture
-    @furniture ||= Furniture.from_placement(self)
+  def gizmo
+    @gizmo ||= Furniture.from_placement(self)
   end
+  alias_method :furniture, :gizmo
 
   def title
-    furniture.model_name.human.titleize
+    gizmo.model_name.human.titleize
   end
 
   delegate :utilities, to: :space

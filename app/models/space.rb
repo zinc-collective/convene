@@ -35,7 +35,7 @@ class Space < ApplicationRecord
 
   # The Rooms within this Space
   has_many :rooms, inverse_of: :space, dependent: :destroy
-  has_many :furnitures, through: :rooms, inverse_of: :space
+  has_many :gizmos, through: :rooms, inverse_of: :space
 
   has_many :agreements, inverse_of: :space, dependent: :destroy
 
