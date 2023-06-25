@@ -123,6 +123,12 @@ jobs:
         env:
           HEADLESS: true
         run: bundle exec rspec
+      - name: Upload RSpec Screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: rspec-failed-screenshot
+          path: tmp/capybara/*.png
 
   test-features:
     name: Run browser tests
