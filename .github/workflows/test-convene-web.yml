@@ -119,7 +119,7 @@ jobs:
       - name: Setup rails
         run: bin/setup-rails && bin/rails assets:precompile
 
-      - name: Run tests
+      - name: Run Tests
         env:
           HEADLESS: true
         run: bundle exec rspec
