@@ -96,6 +96,9 @@ jobs:
           sudo apt-get install --fix-missing -qq -o Acquire::Retries=3
             libvips
 
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@latest
+
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
