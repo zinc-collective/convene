@@ -38,10 +38,6 @@
         }
       },
       "env": {
-        "FEATURE_SYSTEM_TEST": {
-          "description": "Seed Test data",
-          "value": "true"
-        },
         "LOCKBOX_MASTER_KEY": {
           "description": "Encrypts data within the database",
           "generator": "secret"
