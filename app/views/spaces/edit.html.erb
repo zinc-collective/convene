@@ -1,6 +1,6 @@
 <% breadcrumb :edit_space, space %>
 
-<% if space.entrance_id.blank? || space.rooms.blank? || space.members.blank? %>
+<% if space.rooms.blank? || space.entrance_id.blank? || space.members.blank? || space.entrance.furnitures.blank? %>
   <%= render AlertComponent.new(scheme: :warning, icon: :exclamation_triangle,
     title: t('spaces.edit.config_missing_title')) do %>
     <%= t('spaces.edit.config_missing_explainer_html' ) %>
