@@ -24,7 +24,7 @@
         </li>
       <% end %>
 
-      <% if space.entrance&.furnitures.blank? %>
+      <% if space.entrance_id.present? && space.entrance&.furnitures.blank? %>
         <li>
           <%= t('spaces.edit.config_missing_entrance_furniture_text_html', room_name: link_to(space.entrance.name, space.entrance.location(:edit) )) %>
         </li>
