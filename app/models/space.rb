@@ -49,5 +49,9 @@ class Space < ApplicationRecord
     []
   end
 
+  def configured?(current_space)
+    current_space.rooms.blank? || current_space.entrance_id.blank? || current_space.members.blank? || current_space.entrance&.furnitures.blank?
+  end
+
   attr_accessor :blueprint
 end
