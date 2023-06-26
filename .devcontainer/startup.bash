@@ -94,6 +94,10 @@ if [ ! -f .env ]; then
     sed -i "/^# PG/s/^# //g" .env
 fi
 
+if [ ! -f .env.development ]; then
+  cp .env.development.example .env.development
+fi
+
 # if [ ${data_files_existed} != 0 ]; then
     setup_out='.devcontainer/output/bin_setup.out'
     { time bin/setup &> $setup_out; } 2>> $setup_out # output time to file, too

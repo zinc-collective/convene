@@ -3,7 +3,8 @@
 class ButtonComponent < ApplicationComponent
   SCHEME_MAPPINGS = {
     primary: :primary_classes,
-    secondary: :secondary_classes
+    secondary: :secondary_classes,
+    danger: :danger_classes
   }.with_indifferent_access.freeze
 
   def initialize(
@@ -61,6 +62,7 @@ class ButtonComponent < ApplicationComponent
       "shadow-sm",
       "ring-1",
       "ring-inset",
+      "text-center",
       "no-underline",
       "focus-visible:outline",
       "focus-visible:outline-2",
@@ -76,6 +78,15 @@ class ButtonComponent < ApplicationComponent
       "ring-gray-300",
       "hover:bg-purple-100",
       "hover:text-purple-700"
+    ]
+  end
+
+  def danger_classes
+    [
+      "bg-danger-500",
+      "hover:bg-danger-700",
+      "active:bg-danger-200",
+      "text-white"
     ]
   end
 

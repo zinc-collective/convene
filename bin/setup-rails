@@ -25,6 +25,10 @@ FileUtils.chdir APP_ROOT do
     FileUtils.cp '.env.example', '.env'
   end
 
+  unless File.exist?('.env.development')
+    FileUtils.cp '.env.development.example', '.env.development'
+  end
+
   puts "\n== Preparing development database =="
   system! 'bin/rails db:prepare'
 

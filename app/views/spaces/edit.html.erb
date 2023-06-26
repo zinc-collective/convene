@@ -23,6 +23,12 @@
           <%= t('spaces.edit.config_missing_members_text_html' ) %>
         </li>
       <% end %>
+
+      <% if space.entrance.furnitures.blank? %>
+        <li>
+          <%= t('spaces.edit.config_missing_entrance_furniture_text_html', room_name: link_to(space.entrance.name, space.entrance.location(:edit) )) %>
+        </li>
+      <% end %>
     </ul>
   <% end %>
 <% end %>
