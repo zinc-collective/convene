@@ -53,7 +53,7 @@ jobs:
         run: yarn install
 
   test-rspec:
-    name: Run tests
+    name: Run Rspec tests
     runs-on: ubuntu-latest
     needs: [setup]
 
@@ -96,6 +96,9 @@ jobs:
           sudo apt-get install --fix-missing -qq -o Acquire::Retries=3
             libvips
 
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@latest
+
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
         with:
@@ -117,10 +120,18 @@ jobs:
         run: bin/setup-rails && bin/rails assets:precompile
 
       - name: Run Tests
+        env:
+          HEADLESS: true
         run: bundle exec rspec
+      - name: Upload RSpec Screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: rspec-failed-screenshot
+          path: tmp/capybara/*.png
 
   test-features:
-    name: Run browser tests
+    name: Run Cucumber tests
     runs-on: ubuntu-latest
     needs: [setup]
 

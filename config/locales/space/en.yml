@@ -1,5 +1,17 @@
 en:
   spaces:
+    edit:
+      config_missing_title: Space configuration missing 🛠️
+      config_missing_explainer_html: |
+        Don't forget to finish setting up this Space!
+      config_missing_entrance_text_html: |
+        Select a Section in the Entrance field below, to set a Section as the Space's Entrance.
+      config_missing_sections_text_html: |
+        Click the 'Add New Section' link below to add at least one Section to this Space.
+      config_missing_members_text_html: |
+        Click the 'Invitations' link below to invite people to the join this Space.
+      config_missing_entrance_furniture_text_html: |
+        Your Space's Entrance is missing a Gizmo.  Edit '%{room_name}' to add a Gizmo.
     update:
       success: Space successfully updated 🎉
       error: Something went wrong with the update 💔

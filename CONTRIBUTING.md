@@ -87,7 +87,7 @@ Finally, with the server still running (perhaps in a different terminal), run
 [PostgreSQL 12]: https://www.postgresql.org/download/
 [Docker]: https://www.docker.com
 [docker-compose.yml]: ./docker-compose.yml
-[.env.example]: ./.env.example
+[.env.development.example]: ./.env.development.example
 [Yarn]: https://yarnpkg.com/getting-started/install
 
 ### 2.2. Infrastructure Setup and Documentation.
@@ -98,7 +98,7 @@ how to configure your local machine or a virtual machine as a video bridge host.
 
 ### 2.2.1 Developing Mailers.
 
-Set [SMTP\_\* environment variables to configure Action Mailer](.env.example).
+Set [SMTP\_\* environment variables to configure Action Mailer](.env.development.example).
 
 To preview mailers, visit http://localhost:3000/rails/mailers/
 

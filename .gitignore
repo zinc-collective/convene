@@ -5,6 +5,7 @@
 *secrets.tfvars
 .env
 .env.production
+.env.development
 
 tmp/*
 node_modules/
