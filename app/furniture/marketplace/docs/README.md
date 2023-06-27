@@ -71,16 +71,15 @@ The Marketplace uses Stripe for online payments. Developers should use the ["Con
 ## Testing with Stripe
 
 Stripe provides a host of tools for developers to build and test integrations with their own applications. But deciding how to take advantage of these tools in your own development process is less straight forward. If you're totally new to Stripe, make sure to generally familiarize yourself with Stripe's test capabilities. You might start by reading or scanning these docs start to finish:
-* https://stripe.com/docs/development
-* https://stripe.com/docs/testing
+* [Developer tools](https://stripe.com/docs/development)
+* [Testing](https://stripe.com/docs/testing)
 
 
 ### Webhooks
 Almost every application integrating with a payment provider will require some form of bi-directional communication, and an architectural pattern that can handle asynchronous actions or events that occur on the provider's side. Even at their most basic, payment workflows between two systems get complicated fast. Rather than forcing you to proactively poll their system for updates, Stripe supports custom webhooks in your own application to monitor and receive messages. Our Marketplace gizmo uses Stripe webhooks, so make sure to familiarize yourself with how events and webhooks work at Stripe.
-TODO MAKE LINKS
-* https://stripe.com/docs/webhooks
-* https://stripe.com/docs/webhooks/stripe-events
-* https://stripe.com/docs/webhooks/test
+* [Use incoming webhooks to get real-time updates](https://stripe.com/docs/webhooks)
+* [Stripe webhook events overview](https://stripe.com/docs/webhooks/stripe-events)
+* [Test a webhooks integration with the Stripe CLI](https://stripe.com/docs/webhooks/test)
 
 ### Setting up your local environment
 
@@ -117,7 +116,7 @@ Next, configure Stripe to forward events to a local obtain a webhook secret key 
 1. Set stripe event forwarding to this url by executing: `$ stripe listen --forward-to <YOUR_FORWARD_TO_URL>`
 1. Copy the webhook signing secret from the output. The output from the above command should look something like:
 ```
-> Ready! You are using Stripe API Version [2022-11-15]. Your webhook signing secret is whsec_7245f44e36c4d0534d36e26c268f5869bfb030854b43cd7dab01947f43b3b43c (^C to quit)
+> Ready! You are using Stripe API Version [2022-11-15]. Your webhook signing secret is whsec_***** (^C to quit)
 ```
 1. Update the marketplace settings directly in the database by adding the `stripe_webhook_endpoint_secret` to `public.furnitures.settings`
 
