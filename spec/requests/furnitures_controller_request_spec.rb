@@ -15,11 +15,11 @@ RSpec.describe FurnituresController do
 
     before { sign_in(space, person) }
 
-    specify { expect { perform_request }.to change { room.furnitures.count }.by(1) }
+    specify { expect { perform_request }.to change { room.gizmos.count }.by(1) }
 
     it "creates a furniture placement of the kind of furniture provided within the room" do
       perform_request
-      placement = room.furnitures.last
+      placement = room.gizmos.last
       expect(placement.furniture).to be_a(MarkdownTextBlock)
       expect(placement.slot).to be(0)
       expect(response).to redirect_to([space, room])
