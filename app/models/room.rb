@@ -35,6 +35,7 @@ class Room < ApplicationRecord
   validates :publicity_level, presence: true
 
   has_many :gizmos, dependent: :destroy, inverse_of: :room, class_name: :Furniture
+  accepts_nested_attributes_for :gizmos
 
   def full_slug
     "#{space.slug}--#{slug}"

@@ -31,7 +31,7 @@ RSpec.describe FurnituresController do
 
     context "when the person is a guest" do
       it "does not allow updating placements" do
-        patch placement_path, params: {furniture: {furniture_attributes: {content: "updated content"}}}
+        patch placement_path, params: {furniture: {gizmo_attributes: {content: "updated content"}}}
         expect(response).not_to have_http_status(:success)
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe FurnituresController do
       before { sign_in(space, person) }
 
       it "allows updating a placement" do
-        patch placement_path, params: {furniture: {furniture_attributes: {content: "updated content"}}}
+        patch placement_path, params: {furniture: {gizmo_attributes: {content: "updated content"}}}
         expect(response).to have_http_status(:found)
         expect(placement.reload.settings["content"]).to eq("updated content")
       end

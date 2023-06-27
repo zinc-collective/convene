@@ -23,7 +23,7 @@ Given(
     const gizmosAttributes = [
       {
         furnitureKind: furniture.type.toLowerCase(),
-        furnitureAttributes: dataTableToHash(dataTable),
+        gizmoAttributes: dataTableToHash(dataTable),
       },
     ];
 
