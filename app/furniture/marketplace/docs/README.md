@@ -122,7 +122,7 @@ Next, using the stripe cli, configure Stripe to forward events to your local env
 
 Finally, let's connect!
 
-1. First, create a Connected account within Stripe by visiting [https://dashboard.stripe.com/test/connect/accounts/overview](https://dashboard.stripe.com/test/connect/accounts/overview) and clicking the `Create` button
+1. First, create a Connected account within Stripe by visiting [https://dashboard.stripe.com/test/connect/accounts/overview](https://dashboard.stripe.com/test/connect/accounts/overview) and clicking the `+ Create` button in the "Connected accounts" section.
   - You might name this account something like `<Space_Name> Dev`
   - [Learn more](https://stripe.com/docs/connect)
 1. Follow instructions for creating a `Standard account`
