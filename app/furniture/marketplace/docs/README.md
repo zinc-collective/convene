@@ -110,7 +110,7 @@ Next, add your secret API key:
 Next, configure Stripe to forward events to a local obtain a webhook secret key via the stripe cli:
 
 1. Install [`stripe` cli](https://stripe.com/docs/stripe-cli) if you haven't already
-1. Find the `--foward-to` url for your marketplace so by using by printing the value of  `polymorphic_url(marketplace.location(child: :stripe_events))` from within a controller or view debug session
+1. Find the `--foward-to` url for your marketplace by printing the value of  `polymorphic_url(marketplace.location(child: :stripe_events))` from within a controller or view debug session
   - Eg, from view: `<%- debug polymorphic_url(marketplace.location(child: :stripe_events)) %>`
   - [Read more](https://stripe.com/docs/webhooks/test#webhook-test-cli)
 1. Set stripe event forwarding to this url by executing: `$ stripe listen --forward-to <YOUR_FORWARD_TO_URL>`
