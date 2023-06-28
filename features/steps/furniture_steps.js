@@ -27,9 +27,7 @@ Given(
       },
     ];
 
-    return this.api()
-      .rooms(space)
-      .update(room.assign({ gizmosAttributes }));
+    return this.api().rooms(space).update(room.assign({ gizmosAttributes }));
   }
 );
 Then(
