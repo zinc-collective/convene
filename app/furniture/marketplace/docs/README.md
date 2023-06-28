@@ -105,7 +105,7 @@ Next, add your secret API key:
 1. Click on the `Developers` button next to `Test mode` in the top right of your Stripe dasbhoard
 1. Find your `Secret key` and copy it
 1. Paste the key into `Api token` field on your Stripe Utility settings page
-  - http://convene.local:3000/spaces/<space_name>/utilities/<utiltiy_id>/edit
+  - `http://convene.local:3000/spaces/<space_name>/utilities/<utiltiy_id>/edit`
 
 Next, configure Stripe to forward events to a local obtain a webhook secret key via the stripe cli:
 
