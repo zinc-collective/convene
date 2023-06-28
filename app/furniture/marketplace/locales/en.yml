@@ -39,8 +39,7 @@ en:
       edit: "Manage Marketplace"
       config_missing_title: "Marketplace configuration missing"
       config_missing_explainer_html: |
-        This marketplace is not ready for shopping, and is not visible to the public.
-        Add missing configuration by going to %{edit_link}.
+        This marketplace is not ready for shopping. You must connect Stripe and add at least one product and one delivery area. You can add missing configuration by going to %{edit_link}.
     marketplaces:
       edit:
         missing_stripe_api_key: "Add a Stripe API key to %{space_name}"
