@@ -111,7 +111,7 @@ Next, using the stripe cli, configure Stripe to forward events to your local env
 
 1. Install [`stripe` cli](https://stripe.com/docs/stripe-cli) if you haven't already
 1. Find the `--foward-to` url for your marketplace by printing the value of  `polymorphic_url(marketplace.location(child: :stripe_events))` from within a controller or view debug session
-  - Eg, from view: `<%- debug polymorphic_url(marketplace.location(child: :stripe_events)) %>`
+  - E.g. from view: `<%= debug polymorphic_url(marketplace.location(child: :stripe_events)) %>`
   - [Read more](https://stripe.com/docs/webhooks/test#webhook-test-cli)
 1. Set stripe event forwarding to this url by executing: `$ stripe listen --forward-to <YOUR_FORWARD_TO_URL>`
 1. Copy the webhook signing secret from the output. The output from the above command should look something like:
