@@ -65,7 +65,7 @@ The Marketplace uses Stripe for online payments. Developers should use the ["Con
 
 1. Build the Workflow for connecting a Stripe Account
   - Currently implemented for Space administrators with a "Connect to Stripe" button
-2. Checkout with Stripe Checkout, and include the payment_intent_data with a transfer_group: https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-transfer_group
+2. Checkout with Stripe Checkout, and include the `payment_intent_data` with a `transfer_group`: https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-transfer_group
 3. Upon completion of Checkout, we transfer the Money: https://stripe.com/docs/connect/charges-transfers
 
 ## Testing with Stripe
