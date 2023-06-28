@@ -1,9 +1,3 @@
-# Webhooks
-Almost every application integrating with a payment provider will require some form of bi-directional communication, and an architectural pattern that can handle asynchronous actions or events that occur on the provider's side. Even at their most basic, payment workflows between two systems get complicated fast. Rather than forcing you to proactively poll their system for updates, Stripe supports custom webhooks in your own application to monitor and receive messages. Our Marketplace gizmo uses Stripe webhooks, so make sure to familiarize yourself with how events and webhooks work at Stripe.
-* [Use incoming webhooks to get real-time updates](https://stripe.com/docs/webhooks)
-* [Stripe webhook events overview](https://stripe.com/docs/webhooks/stripe-events)
-* [Test a webhooks integration with the Stripe CLI](https://stripe.com/docs/webhooks/test)
-
 # Setting up your local environment
 
 Since Marketplace already implements Stripe with custom webhook endpoints, developers will only need to setup the tooling to build and test against the existing code.

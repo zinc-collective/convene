@@ -74,7 +74,15 @@ Stripe provides a host of tools for developers to build and test integrations wi
 * [Developer tools](https://stripe.com/docs/development)
 * [Testing](https://stripe.com/docs/testing)
 
+### Webhooks
+Almost every application integrating with a payment provider will require some form of bi-directional communication, and an architectural pattern that can handle asynchronous actions or events that occur on the provider's side. Even at their most basic, payment workflows between two systems get complicated fast. Rather than forcing you to proactively poll their system for updates, Stripe supports custom webhooks in your own application to monitor and receive messages. Our Marketplace gizmo uses Stripe webhooks, so make sure to familiarize yourself with how events and webhooks work at Stripe.
+* [Use incoming webhooks to get real-time updates](https://stripe.com/docs/webhooks)
+* [Stripe webhook events overview](https://stripe.com/docs/webhooks/stripe-events)
+* [Test a webhooks integration with the Stripe CLI](https://stripe.com/docs/webhooks/test)
 
+### Building and testing Stripe locally
+
+See [Working With Stripe Locally](docs/working-with-stripe-locally.md)
 
 ### On Github CodeSpaces
 If you are using a Github CodeSpace, you will want to mark the web-server port as `public` so that Stripe can send it events.
