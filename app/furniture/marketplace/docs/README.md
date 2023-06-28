@@ -125,7 +125,7 @@ Finally, let's connect!
 1. First, create a Connected account within Stripe by visiting [https://dashboard.stripe.com/test/connect/accounts/overview](https://dashboard.stripe.com/test/connect/accounts/overview) and clicking the `+ Create` button in the "Connected accounts" section.
   - You might name this account something like `<Space_Name> Dev`
   - [Learn more](https://stripe.com/docs/connect)
-1. Follow instructions for creating a `Standard account`
+1. Follow the UI prompost for creating a `Standard account` 
 1. Once your new Connected account is setup, go back into the app, visit `http://convene.local:3000/spaces/<space_name>/rooms/store/marketplaces/<furniture_id>/edit` and click the `Connect to Stripe` button
 
 
