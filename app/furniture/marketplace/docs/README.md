@@ -107,7 +107,7 @@ Next, add your secret API key:
 1. Paste the key into `Api token` field on your Stripe Utility settings page
   - `http://convene.local:3000/spaces/<space_name>/utilities/<utiltiy_id>/edit`
 
-Next, configure Stripe to forward events to a local obtain a webhook secret key via the stripe cli:
+Next, using the stripe cli, configure Stripe to forward events to your local environment by obtainining a webhook secret key:
 
 1. Install [`stripe` cli](https://stripe.com/docs/stripe-cli) if you haven't already
 1. Find the `--foward-to` url for your marketplace by printing the value of  `polymorphic_url(marketplace.location(child: :stripe_events))` from within a controller or view debug session
