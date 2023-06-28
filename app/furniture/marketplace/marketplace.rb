@@ -5,7 +5,7 @@ class Marketplace
     location(parent: :room)
     default_scope { where(furniture_kind: "marketplace") }
 
-    has_one :bazaar, through: :room, inverse_of: :furnitures, source: :space, class_name: "Bazaar"
+    has_one :bazaar, through: :room, inverse_of: :gizmos, source: :space, class_name: "Bazaar"
     # @todo replace with through :bazaar
     has_many :tax_rates, inverse_of: :marketplace
 

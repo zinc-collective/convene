@@ -1,4 +1,4 @@
-<%= form.fields_for(:furniture) do |furniture_fields| %>
+<%= form.fields_for(:gizmo) do |furniture_fields| %>
   <%= furniture_fields.label :content %>
   <%= furniture_fields.text_area :content %>
   <%= render partial: "error", locals: { model: furniture_fields.object, attribute: :content } %>

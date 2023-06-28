@@ -8,14 +8,14 @@
   <h2>Gizmos</h2>
 
   <div id="furnitures">
-    <% if room.furnitures.present? %>
-      <%= render room.furnitures.rank(:slot), editing: true %>
+    <% if room.gizmos.present? %>
+      <%= render room.gizmos.rank(:slot), editing: true %>
     <% else %>
       <p class="text-gray-500"><%= t('rooms.no_furniture_notice') %></p>
     <% end %>
   </div>
 
-  <%- new_furniture = room.furnitures.new %>
+  <%- new_furniture = room.gizmos.new %>
   <%- if policy(new_furniture).new? %>
     <%= render "furnitures/new", furniture: new_furniture %>
   <%- end %>
