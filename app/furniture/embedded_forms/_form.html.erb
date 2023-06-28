@@ -2,6 +2,6 @@
 # @todo expect a `form` that is already using the fields for,
 # so we don't do it every time
 %>
-<%= form.fields_for(:furniture) do |furniture_fields| %>
+<%= form.fields_for(:gizmo) do |furniture_fields| %>
   <%= render "url_field", attribute: :form_url, form: furniture_fields %>
 <%- end %>

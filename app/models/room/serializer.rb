@@ -11,7 +11,7 @@ class Room::Serializer < ApplicationSerializer
         id: room.id,
         slug: room.slug,
         name: room.name,
-        furnitures: room.furnitures.map(&Furniture::Serializer.method(:new)).map(&:to_json)
+        furnitures: room.gizmos.map(&Furniture::Serializer.method(:new)).map(&:to_json)
       }
     )
   end

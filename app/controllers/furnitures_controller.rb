@@ -62,9 +62,9 @@ class FurnituresController < ApplicationController
   end
 
   def find_or_build
-    return current_room.furnitures.find(params[:id]) if params[:id]
+    return current_room.gizmos.find(params[:id]) if params[:id]
 
-    current_room.furnitures.new(furniture_params)
+    current_room.gizmos.new(furniture_params)
   end
 
   def furniture_params

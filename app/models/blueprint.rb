@@ -34,7 +34,7 @@ class Blueprint
   def add_furniture(room, room_attributes)
     furnitures = room_attributes.fetch(:furnitures, {})
     furnitures.each.with_index do |(furniture_kind, settings), slot|
-      furniture = room.furnitures
+      furniture = room.gizmos
         .find_or_initialize_by(slot: slot)
       furniture
         .update!(settings: merge_non_empty(settings, furniture.settings),

@@ -1,4 +1,4 @@
-<%= form.fields_for(:furniture) do |furniture_fields| %>
+<%= form.fields_for(:gizmo) do |furniture_fields| %>
   <%= render "text_field", form: furniture_fields, attribute: :channel %>
   <%= render "select", form: furniture_fields, attribute: :layout, options: ['video', 'video_with_chat'], include_blank: false %>
 
