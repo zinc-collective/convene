@@ -7,5 +7,17 @@ class Marketplace
 
       self.marketplace = marketplace
     end
+
+    def button_to(location, icon:)
+      label, href = if location.is_a?(Symbol)
+        [t("marketplace.marketplace.#{location}.link_to"),
+          marketplace.location(location)]
+      else
+        [t("marketplace.#{location[:child]}.index.link_to"),
+          marketplace.location(**location)]
+      end
+
+      ButtonComponent.new(label: label, icon: icon, href: href, turbo_stream: false, method: :get, scheme: :secondary)
+    end
   end
 end
