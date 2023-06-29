@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
   end
 
   def space_repository
-    policy_scope(Space.includes(:rooms, entrance: [:furnitures]))
+    policy_scope(Space.includes(:rooms, entrance: [:gizmos]))
   end
 
   # Retrieves the room based upon the current_space and params

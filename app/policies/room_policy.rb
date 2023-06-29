@@ -20,7 +20,7 @@ class RoomPolicy < ApplicationPolicy
 
   def permitted_attributes(params)
     [:access_level, :name, :slug, :publicity_level,
-      furnitures_attributes:
+      gizmos_attributes:
        policy(Furniture).permitted_attributes(params)]
   end
 

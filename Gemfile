@@ -42,7 +42,7 @@ gem "redcarpet", "~> 3.6"
 gem "gretel", "~> 4.5"
 # Better UI components
 gem "lookbook", ">= 2.0.0.beta.4"
-gem "view_component", "~> 3.2"
+gem "view_component", "~> 3.3"
 
 # Pagination!
 gem "pagy", "~> 6.0"
@@ -71,7 +71,7 @@ gem "pg", "~> 1.5"
 gem "image_processing"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.126", require: false
+gem "aws-sdk-s3", "~> 1.127", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

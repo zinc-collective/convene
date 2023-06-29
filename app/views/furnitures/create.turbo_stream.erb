@@ -3,4 +3,4 @@
   <%= render(furniture, { editing: true }) %>
 <%- end %>
 
-<%= turbo_stream.replace(:new_furniture, partial: 'furnitures/new', locals: { furniture: current_room.furnitures.new }) %>
+<%= turbo_stream.replace(:new_furniture, partial: 'furnitures/new', locals: { furniture: current_room.gizmos.new }) %>

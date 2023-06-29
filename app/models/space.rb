@@ -35,7 +35,7 @@ class Space < ApplicationRecord
 
   # The Rooms within this Space
   has_many :rooms, inverse_of: :space, dependent: :destroy
-  has_many :furnitures, through: :rooms, inverse_of: :space
+  has_many :gizmos, through: :rooms, inverse_of: :space
 
   has_many :agreements, inverse_of: :space, dependent: :destroy
 
@@ -47,6 +47,10 @@ class Space < ApplicationRecord
 
   def parent_location
     []
+  end
+
+  def configured?(current_space)
+    current_space.rooms.blank? || current_space.entrance_id.blank? || current_space.members.blank? || current_space.entrance&.gizmos.blank?
   end
 
   attr_accessor :blueprint
