@@ -20,8 +20,6 @@ gem "rails", "~> 7.0"
 gem "puma", "~> 6.3"
 
 # Browser Layer
-gem "cssbundling-rails"
-gem "jsbundling-rails"
 gem "sprockets-rails"
 # Turbo lets us swap chunks of HTML without page reloads: https://github.com/hotwired/turbo-rails
 gem "stimulus-rails"
