@@ -8,7 +8,7 @@ class Marketplace
       self.marketplace = marketplace
     end
 
-    def button_to(location, icon:)
+    def button(location, icon:)
       label, href = if location.is_a?(Symbol)
         [t("marketplace.marketplace.#{location}.link_to"),
           marketplace.location(location)]

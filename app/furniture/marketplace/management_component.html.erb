@@ -11,11 +11,11 @@
 
   <% card.with_footer do %>
     <nav class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-      <%= render button_to(:edit, icon: :gear) if policy(marketplace).edit? %>
-      <%= render button_to({child: :products}, icon: :tag)  if policy(marketplace.products).index? %>
-      <%= render button_to({child: :delivery_areas}, icon: :map)  if policy(marketplace.delivery_areas).index? %>
-      <%= render button_to({child: :tax_rates}, icon: :receipt_percent)  if policy(marketplace.tax_rates).index? %>
-      <%= render button_to({child: :orders}, icon: :cart)  if policy(marketplace.orders).index? %>
+      <%= render button(:edit, icon: :gear) if policy(marketplace).edit? %>
+      <%= render button({child: :products}, icon: :tag)  if policy(marketplace.products).index? %>
+      <%= render button({child: :delivery_areas}, icon: :map)  if policy(marketplace.delivery_areas).index? %>
+      <%= render button({child: :tax_rates}, icon: :receipt_percent)  if policy(marketplace.tax_rates).index? %>
+      <%= render button({child: :orders}, icon: :cart)  if policy(marketplace.orders).index? %>
     </nav>
   <% end %>
 <% end %>
