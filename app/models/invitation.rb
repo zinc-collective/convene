@@ -3,6 +3,8 @@
 class Invitation < ApplicationRecord
   location(parent: :space)
 
+  strip_attributes only: [:email]
+
   belongs_to :space, inverse_of: :invitations
 
   belongs_to :invitor, class_name: :Person, inverse_of: :invitations

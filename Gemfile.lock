@@ -429,6 +429,8 @@ GEM
       rubocop-performance (~> 1.18.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    strip_attributes (1.13.0)
+      activemodel (>= 3.0, < 8.0)
     stripe (8.5.0)
     strong_migrations (1.4.4)
       activerecord (>= 5.2)
@@ -518,6 +520,7 @@ DEPENDENCIES
   sprockets-rails
   standard (~> 1.29)
   stimulus-rails
+  strip_attributes (~> 1.13)
   stripe
   strong_migrations (~> 1.4)
   turbo-rails

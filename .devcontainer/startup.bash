@@ -89,14 +89,8 @@ fi
 
 Xvfb $DISPLAY -ac &> .devcontainer/output/Xvfb.out &
 
-if [ ! -f .env ]; then
-    cp .env.example .env
-    sed -i "/^# PG/s/^# //g" .env
-fi
-
-if [ ! -f .env.development ]; then
-  cp .env.development.example .env.development
-fi
+bin/copy-example-envs
+sed -i "/^# PG/s/^# //g" .env # Make sure postgres env vars aren't commented out
 
 # if [ ${data_files_existed} != 0 ]; then
     setup_out='.devcontainer/output/bin_setup.out'

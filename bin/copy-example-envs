@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if test -f ".env"; then
+  echo "Found .env, leaving it in place!"
+else
+  echo "Copying .env.example to .env"
+  cp .env.example .env
+fi
+
+if test -f ".env.development"; then
+  echo "Found .env.development, leaving it in place!"
+else
+  echo "Copying .env.development.example to .env.development"
+  cp .env.development.example .env.development
+fi
