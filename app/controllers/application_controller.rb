@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     if current_space.present?
       "Convene - #{current_space.name}"
     else
-      "Convene - Video Meeting Spaces"
+      "Convene"
     end
   end
 
