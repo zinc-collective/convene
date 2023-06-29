@@ -32,6 +32,18 @@ RSpec.describe Person do
     end
   end
 
+  describe "#email" do
+    it "automatically loses extra whitespace" do
+      person = create(:person, email: " virgo@oakland.org ")
+      expect(person.email).to eq("virgo@oakland.org")
+    end
+
+    it "is automatically downcased" do
+      person = create(:person, email: "sOlOud@geez.ORG")
+      expect(person.email).to eq("soloud@geez.org")
+    end
+  end
+
   describe "#member_of?" do
     subject(:person) { membership.member }
 

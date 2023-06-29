@@ -14,6 +14,11 @@ RSpec.describe Invitation do
       invitation.email = "User@example.Com"
       expect(invitation.email).to eql("user@example.com")
     end
+
+    it "is stripped of whitespace" do
+      invitation = create(:invitation, email: " orca@yachtkillerz.org ")
+      expect(invitation.email).to eql("orca@yachtkillerz.org")
+    end
   end
 
   describe "#invitor_display_name" do
