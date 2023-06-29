@@ -2,6 +2,8 @@
 
 # A representation of a human
 class Person < ApplicationRecord
+  strip_attributes only: [:email]
+
   validates :email, presence: true, uniqueness: {case_sensitive: false}
 
   # Ways for the person to sign in

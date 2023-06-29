@@ -32,6 +32,13 @@ RSpec.describe Person do
     end
   end
 
+  describe "#email" do
+    it "automatically removes extra whitespace" do
+      person = create(:person, email: " virgo@oakland.org ")
+      expect(person.email).to eq("virgo@oakland.org")
+    end
+  end
+
   describe "#member_of?" do
     subject(:person) { membership.member }
 
