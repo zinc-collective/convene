@@ -42,7 +42,7 @@ class SpacesController < ApplicationController
   def update
     if space.update(space_params)
       flash[:notice] = t(".success")
-      redirect_to space
+      redirect_to space, allow_other_host: true
     else
       flash.now[:alert] = t(".error")
       render :edit
