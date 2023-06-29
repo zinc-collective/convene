@@ -21,13 +21,7 @@ FileUtils.chdir APP_ROOT do
   system!('bin/yarn')
 
   puts "\n== Copying sample files =="
-  unless File.exist?('.env')
-    FileUtils.cp '.env.example', '.env'
-  end
-
-  unless File.exist?('.env.development')
-    FileUtils.cp '.env.development.example', '.env.development'
-  end
+  system!('bin/copy-example-envs')
 
   puts "\n== Preparing development database =="
   system! 'bin/rails db:prepare'

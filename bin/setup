@@ -41,19 +41,7 @@ setup_package "vips"  # for image processing by Active Storage
 brew install --cask firefox
 yarn global add maildev
 
-if test -f ".env"; then
-  echo "Found .env, leaving it in place!"
-else
-  echo "Copying .env.example to .env"
-  cp .env.example .env
-fi
-
-if test -f ".env.development"; then
-  echo "Found .env.development, leaving it in place!"
-else
-  echo "Copying .env.development.example to .env.development"
-  cp .env.development.example .env
-fi
+bin/copy-example-envs
 
 # TODO: Figure out how to lock node version, asset building depends on min nodejs version of 12.20.0
 # see https://github.com/postcss/postcss-cli/issues/404 for details
