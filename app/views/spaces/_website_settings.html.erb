@@ -6,7 +6,7 @@
 
   <h4 class="text-base"> Domain </h4>
   <% if space.branded_domain.present? %>
-    <p class="text-sm"><%= space.branded_domain %></p>
+    <p class="text-sm"><%=  space.branded_domain.presence || "No Domain" %></p>
   <% else %>
     <p class="text-sm"> No domain </p>
   <% end %>
