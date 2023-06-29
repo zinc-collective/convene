@@ -19,6 +19,8 @@ class Person < ApplicationRecord
 
   has_many :invitations, inverse_of: :invitor, foreign_key: :invitor_id, dependent: :destroy
 
+  before_save :downcase_email, if: :email_changed?
+
   def member_of?(space)
     spaces.include?(space)
   end
@@ -31,5 +33,11 @@ class Person < ApplicationRecord
 
   def authenticated?
     true
+  end
+
+  private
+
+  def downcase_email
+    self.email = email&.downcase
   end
 end
