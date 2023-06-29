@@ -11,5 +11,5 @@ if test -f ".env.development"; then
   echo "Found .env.development, leaving it in place!"
 else
   echo "Copying .env.development.example to .env.development"
-  cp .env.development.example .env
+  cp .env.development.example .env.development
 fi
