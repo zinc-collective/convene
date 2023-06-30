@@ -14,6 +14,7 @@ class UtilitiesController < ApplicationController
   end
 
   def create
+    binding.pry
     if utility.save
       redirect_to [:edit, space]
     else
@@ -22,6 +23,7 @@ class UtilitiesController < ApplicationController
   end
 
   def update
+    binding.pry
     if utility.utility.update(utility_params)
       redirect_to [:edit, space]
     else
