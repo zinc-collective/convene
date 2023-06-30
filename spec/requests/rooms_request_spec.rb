@@ -28,7 +28,7 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
       response "200", "Room retrieved" do
         run_test! do |response|
           data = response_data(response)
-          furniture_data = room.furnitures
+          furniture_data = room.gizmos
             .map(&Furniture::Serializer.method(:new))
             .map(&:to_json)
           expect(data[:room]).to eq(id: room.id, name: room.name,
@@ -52,7 +52,7 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
             properties: {
               name: {type: :string, example: "Fancy Room"},
               slug: {type: :string, example: "fancy-room"},
-              furnitures_attributes: {
+              gizmos_attributes: {
                 type: :array,
                 items: {
                   type: :object,
@@ -70,7 +70,7 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
       response "200", "Room updated with furniture" do
         let(:room) { create(:room, space: space) }
         let(:attributes) do
-          {name: "A new name", furnitures_attributes: [attributes_for(:furniture)]}
+          {name: "A new name", gizmos_attributes: [attributes_for(:furniture)]}
         end
 
         run_test! do

@@ -61,29 +61,28 @@ flowchart LR
 
 ## Architecture
 
-The Marketplace uses Stripe, we anticipate that we will want to use the "Connect then Transfer" workflow: https://stripe.com/docs/connect/collect-then-transfer-guide
+The Marketplace uses Stripe for online payments. Developers should use the ["Connect then Transfer" workflow](https://stripe.com/docs/connect/collect-then-transfer-guide) as a guide to the overall architectural pattern. At a high level, implementing this pattern boils down to three areas of concern:
 
 1. Build the Workflow for connecting a Stripe Account
-2. Checkout with Stripe Checkout, and include the payment_intent_data with a transfer_group: https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-transfer_group
+  - Currently implemented for Space administrators with a "Connect to Stripe" button
+2. Checkout with Stripe Checkout, and include the `payment_intent_data` with a `transfer_group`: https://stripe.com/docs/api/checkout/sessions/create#create_checkout_session-payment_intent_data-transfer_group
 3. Upon completion of Checkout, we transfer the Money: https://stripe.com/docs/connect/charges-transfers
 
 ## Testing with Stripe
 
-Stripe provides test API keys and testing credit card numbers, see:
-* https://stripe.com/docs/keys#obtain-api-keys
-* https://stripe.com/docs/testing
+Stripe provides a host of tools for developers to build and test integrations with their own applications. But deciding how to take advantage of these tools in your own development process is less straight forward. If you're totally new to Stripe, make sure to generally familiarize yourself with Stripe's test capabilities. You might start by reading or scanning these docs start to finish:
+* [Developer tools](https://stripe.com/docs/development)
+* [Testing](https://stripe.com/docs/testing)
 
-### On Local Environments
-You will need to use the [`stripe` cli](https://stripe.com/docs/stripe-cli) to forward events to your local server.
+### Webhooks
+Almost every application integrating with a payment provider will require some form of bi-directional communication, and an architectural pattern that can handle asynchronous actions or events that occur on the provider's side. Even at their most basic, payment workflows between two systems get complicated fast. Rather than forcing you to proactively poll their system for updates, Stripe supports custom webhooks in your own application to monitor and receive messages. Our Marketplace gizmo uses Stripe webhooks, so make sure to familiarize yourself with how events and webhooks work at Stripe.
+* [Use incoming webhooks to get real-time updates](https://stripe.com/docs/webhooks)
+* [Stripe webhook events overview](https://stripe.com/docs/webhooks/stripe-events)
+* [Test a webhooks integration with the Stripe CLI](https://stripe.com/docs/webhooks/test)
 
-The `--forward-to` url can be found for a particular marketplace by using `polymorphic_url(marketplace.location(child: :stripe_events)` from within a controller or view debug session.
+### Building and testing Stripe locally
 
-You will then need to update the `marketplace#stripe_webhook_endpoint_secret` to match the webhook secret provided by the stripe cli, via the Rails console or directly in the database.
-
-For the "Connect to Stripe" flow to work, you will need to have a local development URL that is recognized by Stripe as "reachable". One way to do this is:
-1. add `127.0.0.1 convene.local` to your `/etc/hosts`
-3. access the app locally through `convene.local:3000`, instead of `localhost`
-3. optionally, add `convene.local` as the `branded_domain` to whatever Space you are using for testing, to shorten the URL you use to access it
+See [Working With Stripe Locally](docs/working-with-stripe-locally.md)
 
 ### On Github CodeSpaces
 If you are using a Github CodeSpace, you will want to mark the web-server port as `public` so that Stripe can send it events.

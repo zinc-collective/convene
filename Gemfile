@@ -64,6 +64,9 @@ gem "lockbox", "1.2.0"
 gem "rotp", "~> 6.2"
 gem "strong_migrations", "~> 1.4"
 
+# ActiveModel extension to remove extra whitespace from attributes
+gem "strip_attributes", "~> 1.13"
+
 # Use postgresql for data persistence
 gem "pg", "~> 1.5"
 
@@ -71,7 +74,7 @@ gem "pg", "~> 1.5"
 gem "image_processing"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.126", require: false
+gem "aws-sdk-s3", "~> 1.127", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

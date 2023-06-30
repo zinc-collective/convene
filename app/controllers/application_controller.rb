@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     if current_space.present?
       "Convene - #{current_space.name}"
     else
-      "Convene - Video Meeting Spaces"
+      "Convene"
     end
   end
 
@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
   end
 
   def space_repository
-    policy_scope(Space.includes(:rooms, entrance: [:furnitures]))
+    policy_scope(Space.includes(:rooms, entrance: [:gizmos]))
   end
 
   # Retrieves the room based upon the current_space and params

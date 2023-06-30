@@ -6,7 +6,7 @@ RSpec.describe Space do
   subject(:space) { described_class.new }
 
   it { is_expected.to have_many(:rooms).dependent(:destroy) }
-  it { is_expected.to have_many(:furnitures).through(:rooms).inverse_of(:space) }
+  it { is_expected.to have_many(:gizmos).through(:rooms).inverse_of(:space) }
   it { is_expected.to have_many(:utilities).inverse_of(:space).dependent(:destroy) }
 
   it { is_expected.to have_many(:agreements).inverse_of(:space).dependent(:destroy) }

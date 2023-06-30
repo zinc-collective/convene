@@ -34,9 +34,8 @@ class Room < ApplicationRecord
   }
   validates :publicity_level, presence: true
 
-  has_many :furnitures, dependent: :destroy, inverse_of: :room
-  accepts_nested_attributes_for :furnitures
-  alias_method :gizmos, :furnitures
+  has_many :gizmos, dependent: :destroy, inverse_of: :room, class_name: :Furniture
+  accepts_nested_attributes_for :gizmos
 
   def full_slug
     "#{space.slug}--#{slug}"

@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Furniture do
-  it { is_expected.to belong_to(:room).inverse_of(:furnitures) }
-  it { is_expected.to have_one(:space).through(:room).inverse_of(:furnitures) }
+  it { is_expected.to belong_to(:room).inverse_of(:gizmos) }
+  it { is_expected.to have_one(:space).through(:room).inverse_of(:gizmos) }
 
   describe "#furniture" do
     it "returns the configured piece of furniture" do

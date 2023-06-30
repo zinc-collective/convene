@@ -5,7 +5,6 @@
   - [1.4 Entity Relationship Diagram (ERD).](#14-entity-relationship-diagram-erd)
 - [2. Machine Setup.](#2-machine-setup)
   - [2.1. Developer Setup and Documentation.](#21-developer-setup-and-documentation)
-  - [2.2. Infrastructure Setup and Documentation.](#22-infrastructure-setup-and-documentation)
   - [2.2.1 Developing Mailers.](#221-developing-mailers)
   - [2.2.2 Debugger](#222-debugger)
   - [2.3. Using the devcontainer.](#23-using-the-devcontainer)
@@ -89,12 +88,6 @@ Finally, with the server still running (perhaps in a different terminal), run
 [docker-compose.yml]: ./docker-compose.yml
 [.env.development.example]: ./.env.development.example
 [Yarn]: https://yarnpkg.com/getting-started/install
-
-### 2.2. Infrastructure Setup and Documentation.
-
-Infrastructure engineers may want to look at the
-[`infrastructure` module's `README`](./infrastructure/README.md), which includes
-how to configure your local machine or a virtual machine as a video bridge host.
 
 ### 2.2.1 Developing Mailers.
 
