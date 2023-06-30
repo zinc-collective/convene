@@ -29,7 +29,7 @@ class Utility < ApplicationRecord
   # Encrypts all Utility configuration values by default
   # Implemented with: [https://github.com/ankane/lockbox](https://github.com/ankane/lockbox)
   #
-  # Child classes must set setters and getters for configuration settings. For example:
+  # Child classes must declare setters and getters for configuration settings. For example:
   # ```
   # class UtilityWithSecret < Utility
   #   def api_token=api_token
