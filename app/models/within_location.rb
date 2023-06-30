@@ -1,5 +1,29 @@
-# Builds the appropriate collection to pass to `polymorphic_url` and `polymorphic_path`
-# based upon where the given domain object lives within the object graph
+# Provides a convenience method that builds an array for use in url and path construction that
+# represents a Record's position within an object graph. Designed for use with `polymorphic_url` and
+# `polymorphic_path` helpers specifically.
+#
+# Usage:
+# ```
+# # Within a record model you can define a parent explicitly:
+# self.location_parent = :[PARENT_NAME]
+#
+# # Record models can declare the `location` array as a class method to expose it to other class
+# methods:
+# ```
+# class Furniture < ApplicationRecord
+#   location(parent: :[PARENT_NAME])
+#   ...
+# end
+# ```
+#
+# # You can send the `location` message to Records from objects or views:
+# ```
+# <%= button_to("checkout", cart.location(child: :checkout), data: { turbo: false }) %>
+# ```
+# Without this method, you'd have to do:
+# ```
+# <%= button_to("checkout", [space, room, marketplace, :checkouts], data: { turbo: false }) %>
+# ```
 module WithinLocation
   def self.included(model)
     model.extend(ClassMethods)
