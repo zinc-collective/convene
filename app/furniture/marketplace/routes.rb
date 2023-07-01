@@ -4,7 +4,7 @@ class Marketplace
       router.resources :marketplaces, only: [:show, :edit, :update], module: "marketplace" do
         router.resources :stripe_events
 
-        router.resources :order_notification_methods, controller: "order/notification_methods"
+        router.resources :notification_methods
 
         router.resources :carts, only: [] do
           router.resources :cart_products

@@ -27,21 +27,21 @@ crumb :marketplace_orders do |marketplace|
   link t("marketplace.orders.index.link_to"), marketplace.location(child: :orders)
 end
 
-crumb :marketplace_order_notification_methods do |marketplace|
+crumb :marketplace_notification_methods do |marketplace|
   parent :edit_marketplace, marketplace
-  link t("marketplace.order.notification_methods.index.link_to"), marketplace.location(child: :order_notification_methods)
+  link t("marketplace.notification_methods.index.link_to"), marketplace.location(child: :notification_methods)
 end
 
-crumb :new_marketplace_order_notification_method do |order_notification_method|
-  parent :marketplace_order_notification_methods, order_notification_method.marketplace
-  link t("marketplace.order.notification_methods.new.link_to"),
-    order_notification_method.marketplace.location(child: :order_notification_methods)
+crumb :new_marketplace_notification_method do |notification_method|
+  parent :marketplace_notification_methods, notification_method.marketplace
+  link t("marketplace.notification_methods.new.link_to"),
+    notification_method.marketplace.location(child: :notification_methods)
 end
 
-crumb :edit_marketplace_order_notification_method do |order_notification_method|
-  parent :marketplace_order_notification_methods, order_notification_method.marketplace
-  link t("marketplace.order.notification_methods.edit.link_to", contact_location: order_notification_method.contact_location)
-  order_notification_method.marketplace.location(child: :order_notification_methods)
+crumb :edit_marketplace_notification_method do |notification_method|
+  parent :marketplace_notification_methods, notification_method.marketplace
+  link t("marketplace.notification_methods.edit.link_to", contact_location: notification_method.contact_location)
+  notification_method.marketplace.location(child: :notification_methods)
 end
 
 crumb :marketplace_products do |marketplace|
