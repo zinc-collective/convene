@@ -9,7 +9,7 @@ end
 
 crumb :edit_marketplace do |marketplace|
   parent :room, marketplace.room
-  link t("marketplace.marketplace.edit"), marketplace.location(:edit)
+  link t("marketplace.marketplace.edit.link_to"), marketplace.location(:edit)
 end
 
 crumb :marketplace_checkout do |checkout|
