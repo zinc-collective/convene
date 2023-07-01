@@ -1,9 +1,6 @@
 class Marketplace
   class Controller < FurnitureController
-    helper_method def marketplace
-      @marketplace ||= policy_scope(Marketplace).find(params[:marketplace_id])
-    end
-
+    expose :marketplace, scope: -> { policy_scope(Marketplace) }
     delegate :bazaar, to: :marketplace
     helper_method :bazaar
 
