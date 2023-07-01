@@ -34,7 +34,7 @@ end
 
 crumb :new_marketplace_order_notification_method do |order_notification_method|
   parent :marketplace_order_notification_methods, order_notification_method.marketplace
-  link t("marketplace.order.notification_methods.index.link_to"),
+  link t("marketplace.order.notification_methods.new.link_to"),
     order_notification_method.marketplace.location(child: :order_notification_methods)
 end
 
