@@ -1,0 +1,6 @@
+<%= form_with(model: notification_method.location) do |form| %>
+
+<%= render "email_field", attribute: :contact_location, form: form %>
+<%= form.submit %>
+
+<%- end %>

@@ -1,6 +1,9 @@
 
 en:
   activerecord:
+    attributes:
+      marketplace/notification_method:
+        contact_location: "Email Address"
     errors:
       models:
         marketplace/delivery:
@@ -49,6 +52,17 @@ en:
       update:
         success: "Marketplace updated successfully!"
         failure: "Marketplace could not be updated."
+    notification_methods:
+      new:
+        link_to: "Add Order Notification"
+      index:
+        link_to: "Order Notifications"
+      edit:
+        link_to: "Edit Order Notification '%{contact_location}'"
+      update:
+        success: "Order Notification '%{contact_location}' Saved!"
+      destroy:
+        success: "Order Notification to '%{contact_location}' Removed!"
     order:
       placed_mailer:
         notification:
