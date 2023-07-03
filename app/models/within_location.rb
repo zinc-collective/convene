@@ -22,7 +22,7 @@
 # ```
 # Without this method, you'd have to do:
 # ```
-# <%= button_to("checkout", [space, room, marketplace, :checkouts], data: { turbo: false }) %>
+# <%= button_to("checkout", [space, room, marketplace, :checkout], data: { turbo: false }) %>
 # ```
 module WithinLocation
   def self.included(model)
