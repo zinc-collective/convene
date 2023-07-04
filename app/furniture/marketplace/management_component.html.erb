@@ -10,41 +10,13 @@
   <%= content %>
 
   <% card.with_footer do %>
-    <nav class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3">
-      <%= render ButtonComponent.new(
-        label: t('marketplace.marketplace.configuration_menu'),
-        icon: :gear,
-        href: marketplace.location(:edit),
-        turbo_stream: false, method: :get, scheme: :secondary
-      ) if policy(marketplace).edit? %>
-
-      <%= render ButtonComponent.new(
-        label: t('marketplace.products.index.link_to'),
-        icon: :tag,
-        href: marketplace.location(child: :products),
-        turbo_stream: false, method: :get, scheme: :secondary
-      ) if policy(marketplace).edit? %>
-
-      <%= render ButtonComponent.new(
-        label: t('marketplace.delivery_areas.index.link_to'),
-        icon: :map,
-        href: marketplace.location(child: :delivery_areas),
-        turbo_stream: false, method: :get, scheme: :secondary
-      ) if policy(marketplace.delivery_areas.new).create? %>
-
-      <%= render ButtonComponent.new(
-        label: t('marketplace.tax_rates.index.link_to'),
-        icon: :receipt_percent,
-        href: marketplace.location(child: :tax_rates),
-        turbo_stream: false, method: :get, scheme: :secondary
-      ) if policy(marketplace.bazaar.tax_rates.new(marketplace: marketplace)).create? %>
-
-      <%= render ButtonComponent.new(
-        label: t('marketplace.orders.index.link_to'),
-        icon: :cart,
-        href: marketplace.location(child: :orders),
-        turbo_stream: false, method: :get, scheme: :secondary
-      ) if policy(marketplace.orders).index? %>
+    <nav class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+      <%= render button(:edit, icon: :gear) if policy(marketplace).edit? %>
+      <%= render button({child: :products}, icon: :tag)  if policy(marketplace.products).index? %>
+      <%= render button({child: :delivery_areas}, icon: :map)  if policy(marketplace.delivery_areas).index? %>
+      <%= render button({child: :tax_rates}, icon: :receipt_percent)  if policy(marketplace.tax_rates).index? %>
+      <%= render button({child: :orders}, icon: :cart)  if policy(marketplace.orders).index? %>
+      <%= render button({child: :notification_methods}, icon: :bell)  if policy(marketplace.notification_methods).index? %>
     </nav>
   <% end %>
 <% end %>

@@ -9,7 +9,7 @@ end
 
 crumb :edit_marketplace do |marketplace|
   parent :room, marketplace.room
-  link t("marketplace.marketplace.edit"), marketplace.location(:edit)
+  link t("marketplace.marketplace.edit.link_to"), marketplace.location(:edit)
 end
 
 crumb :marketplace_checkout do |checkout|
@@ -25,6 +25,23 @@ end
 crumb :marketplace_orders do |marketplace|
   parent :marketplace, marketplace
   link t("marketplace.orders.index.link_to"), marketplace.location(child: :orders)
+end
+
+crumb :marketplace_notification_methods do |marketplace|
+  parent :edit_marketplace, marketplace
+  link t("marketplace.notification_methods.index.link_to"), marketplace.location(child: :notification_methods)
+end
+
+crumb :new_marketplace_notification_method do |notification_method|
+  parent :marketplace_notification_methods, notification_method.marketplace
+  link t("marketplace.notification_methods.new.link_to"),
+    notification_method.marketplace.location(child: :notification_methods)
+end
+
+crumb :edit_marketplace_notification_method do |notification_method|
+  parent :marketplace_notification_methods, notification_method.marketplace
+  link t("marketplace.notification_methods.edit.link_to", contact_location: notification_method.contact_location)
+  notification_method.marketplace.location(child: :notification_methods)
 end
 
 crumb :marketplace_products do |marketplace|

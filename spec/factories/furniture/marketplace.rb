@@ -111,6 +111,11 @@ FactoryBot.define do
     cart { association(:marketplace_cart, marketplace: marketplace) }
   end
 
+  factory :marketplace_notification_method, class: "Marketplace::NotificationMethod" do
+    marketplace
+    contact_location { Faker::Internet.email }
+  end
+
   factory :marketplace_order, class: "Marketplace::Order" do
     marketplace
     shopper { association(:marketplace_shopper) }

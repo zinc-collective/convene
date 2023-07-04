@@ -11,17 +11,17 @@ RSpec.describe Marketplace::MarketplaceComponent, type: :component do
     let(:current_person) { create(:person, operator: true) }
 
     it { is_expected.not_to have_content(I18n.t("marketplace.marketplace.config_missing_explainer_html")) }
-    it { is_expected.to have_link(I18n.t("marketplace.marketplace.edit"), href: polymorphic_path(marketplace.location(:edit))) }
+    it { is_expected.to have_link(I18n.t("marketplace.marketplace.edit.link_to"), href: polymorphic_path(marketplace.location(:edit))) }
 
     context "when the marketplace is not fully configured" do
       let(:marketplace) { create(:marketplace) }
 
-      it { is_expected.to have_content(I18n.t("marketplace.marketplace.config_missing_explainer_html", edit_link: I18n.t("marketplace.marketplace.edit"))) }
+      it { is_expected.to have_content(I18n.t("marketplace.marketplace.config_missing_explainer_html", edit_link: I18n.t("marketplace.marketplace.edit.link_to"))) }
     end
   end
 
   context "when the current person cannot edit the marketplace" do
-    it { is_expected.not_to have_link(I18n.t("marketplace.marketplace.edit"), href: polymorphic_path(marketplace.location(:edit))) }
+    it { is_expected.not_to have_link(I18n.t("marketplace.marketplace.edit.link_to"), href: polymorphic_path(marketplace.location(:edit))) }
 
     context "when the marketplace is not fully configured" do
       let(:marketplace) { create(:marketplace) }

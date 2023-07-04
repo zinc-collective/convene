@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class OrderNotificationMethod < Record
-    self.table_name = :marketplace_order_notification_methods
+  class NotificationMethod < Record
+    self.table_name = :marketplace_notification_methods
     location(parent: :marketplace)
-    belongs_to :marketplace, inverse_of: :order_notification_methods
+    belongs_to :marketplace, inverse_of: :notification_methods
 
     has_encrypted :contact_location
     validates :contact_location, presence: true
