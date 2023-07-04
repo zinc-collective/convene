@@ -26,6 +26,21 @@ class Utility < ApplicationRecord
   attribute :status, :string, default: "unavailable"
   validates :status, presence: true, inclusion: {in: %w[ready unavailable]}
 
+  # Encrypts all Utility configuration values by default
+  # Implemented with: [https://github.com/ankane/lockbox](https://github.com/ankane/lockbox)
+  #
+  # Child classes must declare setters and getters for configuration settings. For example:
+  # ```
+  # class UtilityWithSecret < Utility
+  #   def api_token=api_token
+  #     configuration["api_token"] = api_token
+  #   end
+  #
+  #   def api_token
+  #     configuration["api_token"]
+  #   end
+  # end
+  # ```
   has_encrypted :configuration, type: :json
 
   after_initialize do
