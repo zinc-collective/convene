@@ -3,4 +3,5 @@ class Journal::Journal < Furniture
 
   extend StripsNamespaceFromModelName
   has_many :entries, inverse_of: :journal, dependent: :destroy
+  has_many :terms, inverse_of: :journal, dependent: :destroy
 end

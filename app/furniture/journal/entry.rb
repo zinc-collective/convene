@@ -30,6 +30,8 @@ class Journal
     belongs_to :journal, inverse_of: :entries
     has_one :room, through: :journal
     has_one :space, through: :journal
+    has_many :terms, through: :journal
+    after_save :extract_terms, if: :saved_change_to_body?
 
     def published?
       published_at.present?
@@ -48,6 +50,15 @@ class Journal
         fenced_code_blocks: true, disable_indented_code_blocks: true,
         tables: true, footnotes: true, superscript: true, quote: true
       )
+    end
+
+    def extract_terms
+      body.scan(/#(\w+)/)&.flatten&.each do |term|
+        next if journal.terms.where("aliases ILIKE ?", term)
+          .or(journal.terms.where(canonical_term: term)).exists?
+
+        journal.terms.find_or_create_by!(canonical_term: term)
+      end
     end
 
     def to_param

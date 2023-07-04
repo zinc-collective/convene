@@ -117,6 +117,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_003709) do
     t.index ["journal_id"], name: "index_journal_entries_on_journal_id"
   end
 
+  create_table "journal_terms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "journal_id"
+    t.string "canonical_term"
+    t.text "aliases"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["journal_id"], name: "index_journal_terms_on_journal_id"
+  end
+
   create_table "marketplace_cart_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "cart_id"
     t.uuid "product_id"
@@ -276,6 +285,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_003709) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "journal_entries", "furnitures", column: "journal_id"
+  add_foreign_key "journal_terms", "furnitures", column: "journal_id"
   add_foreign_key "marketplace_cart_products", "marketplace_orders", column: "cart_id"
   add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_delivery_areas", "furnitures", column: "marketplace_id"
