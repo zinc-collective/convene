@@ -1,6 +1,9 @@
-# Provides a convenience method that builds an array for use in url and path construction that
-# represents a Record's position within an object graph. Designed for use with `polymorphic_url` and
-# `polymorphic_path` helpers specifically.
+# Exposes a method that builds an array which represents a Resource's position in relation to other
+# Resources in our object graph for use in url and path construction. The `location` method is
+# specifically designed for use with custom helpers that operate like `polymorphic_url` and
+# `polymorphic_path` helpers that receive models as arguments. By enabling consistent view code
+# for polymorphic helpers, we support navigating between both branded an unbranded domain Spaces
+# seamlessly.
 #
 # Usage:
 # ```
