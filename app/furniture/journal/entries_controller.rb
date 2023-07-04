@@ -6,7 +6,7 @@ class Journal::EntriesController < FurnitureController
     if entry.save
       redirect_to [space, room]
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -17,7 +17,7 @@ class Journal::EntriesController < FurnitureController
     if entry.update(entry_params)
       redirect_to entry.location
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

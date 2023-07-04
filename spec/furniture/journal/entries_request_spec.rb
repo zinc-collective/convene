@@ -38,29 +38,50 @@ RSpec.describe Journal::EntriesController, type: :request do
     let(:journal_entry_attributes) { attributes_for(:journal_entry) }
     let(:created_journal_entry) { journal.entries.first }
 
-    specify { expect { perform_request }.to change(journal.entries, :count).by(1) }
-
     specify {
-      perform_request
+      expect { perform_request }.to change(journal.entries, :count).by(1)
+      expect(response).to redirect_to(polymorphic_path(room.location))
       expect(created_journal_entry.headline).to eql(journal_entry_attributes[:headline])
-    }
-
-    specify {
-      perform_request
       expect(created_journal_entry.body).to eql(journal_entry_attributes[:body])
     }
+
+    context "when the journal entry cannot be created" do
+      let(:journal_entry_attributes) { {headline: ""} }
+
+      specify {
+        expect { perform_request }.not_to change(journal.entries, :count)
+
+        expect(response).to be_unprocessable
+      }
+    end
   end
 
   describe "#update" do
     subject(:perform_request) do
-      put polymorphic_path(entry.location), params: {entry: {published_at: published_at}}
+      put polymorphic_path(entry.location), params: {entry: entry_params}
+      entry.reload
+      response
     end
 
-    let(:published_at) { 1.day.ago.beginning_of_day }
+    let(:entry_params) { {published_at: 1.day.ago.beginning_of_day} }
     let(:entry) { create(:journal_entry, journal: journal) }
 
     before { sign_in(space, member) }
 
-    specify { expect { perform_request }.to change { entry.reload.published_at }.from(nil).to(published_at.to_time) }
+    specify do
+      expect { perform_request }.to change(entry, :published_at).from(nil).to(entry_params[:published_at].to_time).and(change(entry, :updated_at))
+
+      expect(response).to redirect_to(entry.location)
+    end
+
+    context "when the update cannot be saved" do
+      let(:entry_params) { {headline: ""} }
+
+      specify do
+        expect { perform_request }.not_to change(entry, :updated_at)
+
+        expect(response).to be_unprocessable
+      end
+    end
   end
 end

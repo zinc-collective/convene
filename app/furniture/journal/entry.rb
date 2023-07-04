@@ -9,6 +9,7 @@ class Journal
     scope :recent, -> { order("published_at DESC NULLS FIRST") }
 
     attribute :headline, :string
+    validates :headline, presence: true
     attribute :body, :string
     validates :body, presence: true
 
