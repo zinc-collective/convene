@@ -28,3 +28,7 @@ RSpec/NestedGroups:
 
 RSpec/ExampleLength:
   Max: 10
+
+Style/TrailingCommaInArrayLiteral:
+  Exclude:
+    - db/schema.rb

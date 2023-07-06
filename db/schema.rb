@@ -22,12 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_06_003709) do
     "expired",
     "ignored",
     "revoked",
-    "sent"
+    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
     "active",
-    "revoked"
+    "revoked",
   ], force: :cascade
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
