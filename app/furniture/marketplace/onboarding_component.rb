@@ -17,5 +17,9 @@ class Marketplace
       return if marketplace.read_attribute(resource).present?
       tag_builder.p(t(".missing.#{resource}", link: link_to(t("marketplace.#{resource}.new.link_to"), location(:new, child: resource.singularize.to_sym))).html_safe)
     end
+
+    def dom_id
+      super(marketplace, :onboarding)
+    end
   end
 end

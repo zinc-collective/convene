@@ -16,6 +16,10 @@ class Marketplace
       @cart ||= carts.create_with(contact_email: shopper.person&.email).find_or_create_by(shopper: shopper, status: :pre_checkout)
     end
 
+    def onboarding_component
+      OnboardingComponent.new(marketplace: marketplace, current_person: current_person)
+    end
+
     def shopper
       if current_person.is_a?(Guest)
         Shopper.find_or_create_by(id: session[:guest_shopper_id] ||= SecureRandom.uuid)

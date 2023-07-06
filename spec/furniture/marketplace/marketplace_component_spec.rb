@@ -7,16 +7,18 @@ RSpec.describe Marketplace::MarketplaceComponent, type: :component do
   let(:marketplace) { create(:marketplace, :ready_for_shopping) }
   let(:current_person) { Guest.new }
 
+  delegate :dom_id, to: :component
+
   context "when the current person can edit the marketplace" do
     let(:current_person) { create(:person, operator: true) }
 
-    it { is_expected.not_to have_content(I18n.t("marketplace.marketplace.config_missing_explainer_html")) }
+    it { is_expected.not_to have_selector("##{dom_id(marketplace, :onboarding)}") }
     it { is_expected.to have_link(I18n.t("marketplace.marketplace.edit.link_to"), href: polymorphic_path(marketplace.location(:edit))) }
 
     context "when the marketplace is not fully configured" do
       let(:marketplace) { create(:marketplace) }
 
-      it { is_expected.to have_content(I18n.t("marketplace.marketplace.config_missing_explainer_html", edit_link: I18n.t("marketplace.marketplace.edit.link_to"))) }
+      it { is_expected.to have_selector("##{dom_id(marketplace, :onboarding)}") }
     end
   end
 

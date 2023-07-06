@@ -1,15 +1,17 @@
-<%= render AlertComponent.new(scheme: :warning, icon: :exclamation_triangle,
-                              title: t('.title')) do %>
+<section id="<%= dom_id%>">
+  <%= render AlertComponent.new(scheme: :warning, icon: :exclamation_triangle,
+                                title: t('.title')) do %>
 
 
-  <%- if !marketplace.ready_for_shopping? %>
-    <p>
-      <%== t('.marketplace_hidden', link: link_to(t('marketplace.marketplace.edit.link_to'), location(:edit)) ) %>
-    </p>
+    <%- if !marketplace.ready_for_shopping? %>
+      <p>
+        <%== t('.marketplace_hidden', link: link_to(t('marketplace.marketplace.edit.link_to'), location(:edit)) ) %>
+      </p>
+    <%- end %>
+
+    <%== onboard(:product) %>
+    <%== onboard(:notification_method) %>
+    <%== onboard(:delivery_area) %>
+    <%== onboard(:notification_method) %>
   <%- end %>
-
-  <%== onboard(:product) %>
-  <%== onboard(:notification_method) %>
-  <%== onboard(:delivery_area) %>
-  <%== onboard(:notification_method) %>
-<% end %>
+</section>
