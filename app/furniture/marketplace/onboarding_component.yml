@@ -1,0 +1,11 @@
+en:
+  title: "Marketplace configuration missing"
+  help_text: |
+    This marketplace is not ready for shopping. You must connect Stripe %{edit_link}.
+  missing:
+    notification_methods:
+      Where should we send Notifications? %{link}.
+    products:
+      What Products are you for sale? %{link}.
+    delivery_areas:
+      How are Orders delivered? %{link}.

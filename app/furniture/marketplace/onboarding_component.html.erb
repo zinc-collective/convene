@@ -1,0 +1,14 @@
+<%= render AlertComponent.new(scheme: :warning, icon: :exclamation_triangle,
+                              title: t('.title')) do %>
+
+
+  <%- if !marketplace.ready_for_shopping? %>
+    <p>
+      <%== t('.help_text', edit_link: link_to(t('marketplace.marketplace.edit.link_to'), location(:edit)) ) %>
+    </p>
+  <%- end %>
+
+  <%== onboard(:notification_methods) %>
+  <%== onboard(:products) %>
+  <%== onboard(:delivery_areas) %>
+<% end %>
