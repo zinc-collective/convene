@@ -14,7 +14,6 @@ class Marketplace
 
     def onboard(resource)
       resource = resource.to_s.pluralize
-      return if marketplace.send(resource).present?
       tag_builder.p(t(".missing.#{resource}", link: link_to(t("marketplace.#{resource}.new.link_to"), location(:new, child: resource.singularize.to_sym))).html_safe)
     end
 

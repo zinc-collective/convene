@@ -2,6 +2,8 @@ en:
   title: "Let's Get your Marketplace Ready!"
   marketplace_hidden: "We've hidden your Marketplace from visitors until it's properly configured. %{link}"
   missing:
+    stripe_accounts:
+      Whose Stripe account should receive Payments? %{link}.
     notification_methods:
       How would you like to get Notifications about Orders? %{link}.
     products:

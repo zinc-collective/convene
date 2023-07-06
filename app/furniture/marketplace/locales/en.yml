@@ -81,6 +81,8 @@ en:
       destroy:
         link_to: "Remove Product '%{name}'"
     stripe_accounts:
+      new:
+        link_to: "Add Stripe Account"
       show:
         link_to: "Stripe Account"
         missing_stripe_api_key: "Add a Stripe API key to %{space_name}"

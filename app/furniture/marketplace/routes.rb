@@ -12,7 +12,7 @@ class Marketplace
         router.resources :notification_methods
         router.resources :orders, only: [:show, :index]
         router.resources :products
-        router.resource :stripe_account
+        router.resource :stripe_account, only: [:show, :new, :create]
         router.resources :stripe_events
         router.resources :tax_rates
       end

@@ -49,6 +49,16 @@ RSpec.describe Marketplace::StripeAccountsController, type: :request do
     end
   end
 
+  describe "#new" do
+    subject(:call) do
+      sign_in(space, member)
+      get polymorphic_path(marketplace.location(:new, child: :stripe_account))
+      response
+    end
+
+    it { is_expected.to redirect_to(marketplace.location(child: :stripe_account)) }
+  end
+
   describe "#show" do
     subject(:call) do
       sign_in(space, member)
