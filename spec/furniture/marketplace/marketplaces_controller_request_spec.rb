@@ -22,18 +22,6 @@ RSpec.describe Marketplace::MarketplacesController, type: :request do
     end
   end
 
-  describe "#update" do
-    before { sign_in(space, member) }
-
-    it "updates the attributes" do
-      marketplace_attributes = attributes_for(:marketplace, notify_emails: "notify@example.com")
-      put polymorphic_path(marketplace.location), params: {marketplace: marketplace_attributes}
-      marketplace.reload
-
-      expect(marketplace.notify_emails).to eq(marketplace_attributes[:notify_emails])
-    end
-  end
-
   describe "#show" do
     it "does not show guests the edit button" do
       get polymorphic_path(marketplace.location)

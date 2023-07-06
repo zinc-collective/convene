@@ -23,10 +23,6 @@ FactoryBot.define do
       tax_rates { Array.new(tax_rate_quantity) { association(:marketplace_tax_rate) } }
     end
 
-    trait :with_notify_emails do
-      notify_emails { Array.new((1..3).to_a.sample) { Faker::Internet.email }.join(",") }
-    end
-
     trait :with_delivery_areas do
       transient do
         delivery_area_quantity { 1 }
@@ -52,7 +48,6 @@ FactoryBot.define do
     trait :full do
       with_tax_rates
       with_delivery_areas
-      with_notify_emails
     end
 
     trait :ready_for_shopping do

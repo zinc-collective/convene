@@ -17,7 +17,6 @@ class Marketplace
 
     has_many :notification_methods, inverse_of: :marketplace, dependent: :destroy
 
-    setting :notify_emails
     setting :stripe_account
     alias_method :vendor_stripe_account, :stripe_account
     setting :stripe_webhook_endpoint
