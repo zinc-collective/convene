@@ -1,5 +1,5 @@
-<div>
+<div class="<%= local_assigns[:container_classes]%>">
   <%= form.label attribute %>
-  <%= form.text_area attribute %>
+  <%= form.text_area attribute, class: local_assigns[:field_classes] %>
   <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
 </div>
