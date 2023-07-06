@@ -17,6 +17,8 @@ class Journal
     attribute :slug, :string
     validates :slug, uniqueness: {scope: :journal_id}
 
+    strip_attributes only: [:body, :headline, :slug]
+
     # FriendlyId does the legwork to make the slug uri-friendly
     extend FriendlyId
     friendly_id :headline, use: :scoped, scope: :journal

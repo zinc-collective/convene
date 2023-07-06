@@ -5,6 +5,7 @@ RSpec.describe Journal::Entry, type: :model do
 
   it { is_expected.to validate_presence_of(:headline) }
   it { is_expected.to validate_presence_of(:body) }
+  it { is_expected.to strip_attributes(:slug, :body, :headline) }
 
   describe "#to_html" do
     subject(:to_html) { entry.to_html }
