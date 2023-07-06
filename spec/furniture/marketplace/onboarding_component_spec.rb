@@ -11,7 +11,7 @@ RSpec.describe Marketplace::OnboardingComponent, type: :component do
   delegate :link_to, :t, to: :component
 
   it { is_expected.to have_content(t(".title")) }
-  it { is_expected.to have_content(t(".help_text", edit_link: t("marketplace.marketplace.edit.link_to"))) }
+  it { is_expected.to have_content(t(".marketplace_hidden", link: t("marketplace.marketplace.edit.link_to"))) }
   it { is_expected.to have_link(t("marketplace.marketplace.edit.link_to"), href: polymorphic_path(marketplace.location(:edit))) }
 
   it { is_expected.to have_content(t(".missing.notification_methods", link: t("marketplace.notification_methods.new.link_to"))) }

@@ -4,11 +4,12 @@
 
   <%- if !marketplace.ready_for_shopping? %>
     <p>
-      <%== t('.help_text', edit_link: link_to(t('marketplace.marketplace.edit.link_to'), location(:edit)) ) %>
+      <%== t('.marketplace_hidden', link: link_to(t('marketplace.marketplace.edit.link_to'), location(:edit)) ) %>
     </p>
   <%- end %>
 
-  <%== onboard(:notification_methods) %>
-  <%== onboard(:products) %>
-  <%== onboard(:delivery_areas) %>
+  <%== onboard(:product) %>
+  <%== onboard(:notification_method) %>
+  <%== onboard(:delivery_area) %>
+  <%== onboard(:notification_method) %>
 <% end %>
