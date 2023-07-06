@@ -44,10 +44,10 @@ Given(
         api
           .spaceMemberships()
           .findOrCreateBy(
-            new Membership({ space, member: authenticationMethod.person })
-          )
+            new Membership({ space, member: authenticationMethod.person }),
+          ),
       );
-  }
+  },
 );
 Given("the {actor} is on the {space} Dashboard", async function (actor, space) {
   this.space = new SpacePage(this.driver, space);
@@ -66,7 +66,7 @@ When(
   function (_a, actor, _a2, space) {
     this.space = new SpacePage(this.driver, space);
     return this.space.visit();
-  }
+  },
 );
 Given(
   "the {actor} is in the {space} and in the {room}",
@@ -75,7 +75,7 @@ Given(
     return this.space
       .visit()
       .then((spacePage) => spacePage.roomCard(room).enter());
-  }
+  },
 );
 When("a {actor} adds a {room}", function (actor, room) {
   const { space } = linkParameters({ actor, room });
@@ -88,14 +88,14 @@ When(
     this.space = new SpacePage(this.driver, space);
     room.space = space;
     return new RoomPage(this.driver, room).visit();
-  }
+  },
 );
 Then(
   "the {space} is available at the {string} domain",
   function (space, string) {
     // Write code here that turns the phrase above into concrete actions
     return "pending";
-  }
+  },
 );
 Then("there is a {space}", function (space) {
   // Write code here that turns the phrase above into concrete actions

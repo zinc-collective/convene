@@ -45,7 +45,7 @@ class InvitationsIndexPage extends Page {
 
   invitation({ invitation, status }) {
     return this.component(
-      `*[data-invitation-status="${status}"][data-invitation-email="${invitation.emailAddress}"]`
+      `*[data-invitation-status="${status}"][data-invitation-email="${invitation.emailAddress}"]`,
     );
   }
 
@@ -54,7 +54,7 @@ class InvitationsIndexPage extends Page {
    */
   inviteAll(invitations) {
     return Promise.all(
-      invitations.map((invitation) => this.invite(invitation))
+      invitations.map((invitation) => this.invite(invitation)),
     ).finally(() => this);
   }
 

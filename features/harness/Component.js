@@ -73,7 +73,7 @@ class Component {
   component(selector, componentClass = Component) {
     return new componentClass(
       this.driver,
-      `${this.selector.value} ${selector}`
+      `${this.selector.value} ${selector}`,
     );
   }
   /**

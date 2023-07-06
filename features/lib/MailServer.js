@@ -16,16 +16,16 @@ class MailServer {
       (retry) => {
         return this.emails()
           .then((emails) =>
-            filter(emails, (email) => email.headers.to === query.to)
+            filter(emails, (email) => email.headers.to === query.to),
           )
           .then((emails) =>
             filter(emails, (email) =>
-              query.text ? query.text(email.text) : true
-            )
+              query.text ? query.text(email.text) : true,
+            ),
           )
           .then((emails) => (emails.length > 0 ? emails : retry()));
       },
-      { maxRetryTime: 2000 }
+      { maxRetryTime: 2000 },
     ).catch(() => {
       throw `Couldn't find email ${JSON.stringify(query)}`;
     });

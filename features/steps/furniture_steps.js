@@ -28,7 +28,7 @@ Given(
     ];
 
     return this.api().rooms(space).update(room.assign({ gizmosAttributes }));
-  }
+  },
 );
 Then(
   "{a} {furniture} is rendered with:",
@@ -42,8 +42,8 @@ Then(
     return assertDisplayed(
       new FurnitureComponent(
         this.driver,
-        furniture.assign(dataTableTohash(dataTable.hashes()))
-      )
+        furniture.assign(dataTableTohash(dataTable.hashes())),
+      ),
     );
-  }
+  },
 );

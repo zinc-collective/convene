@@ -8,7 +8,7 @@ Then(
       new LiveStreamFurnitureComponent(this.driver, {
         provider: provider.toLowerCase(),
         channel: channel.toLowerCase(),
-      })
+      }),
     );
-  }
+  },
 );

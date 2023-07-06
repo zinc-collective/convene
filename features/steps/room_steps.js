@@ -26,7 +26,7 @@ Given(
       .spaces()
       .create(space)
       .then((space) => (this.spaces[space.name] = space));
-  }
+  },
 );
 
 When("the {actor} taps the {room} in the Room Picker", function (actor, room) {
@@ -50,7 +50,7 @@ Then(
   async function (actor, room) {
     const card = new RoomCardComponent(this.driver, room);
     assert(!(await card.isDisplayed()));
-  }
+  },
 );
 Then("{a} {room} is {accessLevel}", async function (_a, room, accessLevel) {
   const { space } = linkParameters({ room, accessLevel });
