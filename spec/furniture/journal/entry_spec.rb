@@ -1,10 +1,15 @@
 require "rails_helper"
 
-RSpec.describe Journal::Entry do
-  subject(:entry) { build(:journal_entry, body: body) }
+RSpec.describe Journal::Entry, type: :model do
+  subject(:entry) { build(:journal_entry) }
+
+  it { is_expected.to validate_presence_of(:headline) }
+  it { is_expected.to validate_presence_of(:body) }
 
   describe "#to_html" do
     subject(:to_html) { entry.to_html }
+
+    let(:entry) { build(:journal_entry, body: body) }
 
     context "when #body is 'https://www.google.com @zee@weirder.earth'" do
       let(:body) { "https://www.google.com @zee@weirder.earth" }
