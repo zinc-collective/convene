@@ -19,7 +19,7 @@ class Api {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-      })
+      }),
     );
   }
   /**

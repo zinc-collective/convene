@@ -10,7 +10,7 @@ export default (function (api) {
         '`BABEL_ENV` environment variables. Valid values are "development", ' +
         '"test", and "production". Instead, received: ' +
         JSON.stringify(currentEnv) +
-        "."
+        ".",
     );
   }
   return {

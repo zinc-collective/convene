@@ -40,7 +40,7 @@ class Actor {
    */
   authenticationUrl() {
     return this.authenticationEmail().then(
-      (email) => getUrls(email.text).values().next().value
+      (email) => getUrls(email.text).values().next().value,
     );
   }
   /**
@@ -49,7 +49,7 @@ class Actor {
    */
   async authenticationCode() {
     return this.authenticationEmail().then(
-      (email) => email.text.match(/password is (\d+)/)[1]
+      (email) => email.text.match(/password is (\d+)/)[1],
     );
   }
   /**
@@ -57,7 +57,7 @@ class Actor {
    */
   authenticationEmail() {
     return this.emails({ text: (t) => t.match(/password is (\d+)/) }).then(
-      last
+      last,
     );
   }
   /**

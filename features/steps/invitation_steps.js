@@ -36,7 +36,7 @@ When(
       .signIn(this.driver, space)
       .then(() => new InvitationsIndexPage(this.driver, space))
       .then((page) => page.inviteAll(toSend));
-  }
+  },
 );
 When(
   "{a} {invitation} for {a} {space} is accepted by {a} {actor}",
@@ -58,7 +58,7 @@ When(
           .catch((e) => console.error(e));
       }
     });
-  }
+  },
 );
 
 Then(
@@ -66,7 +66,7 @@ Then(
   function (string, a, space) {
     // Write code here that turns the phrase above into concrete actions
     return "pending";
-  }
+  },
 );
 
 Then(
@@ -77,7 +77,7 @@ Then(
   async function (invitation, _a, space) {
     assert(await invitation.wasDelivered());
     assert(await invitation.rsvpLink());
-  }
+  },
 );
 Then(
   "{a} {invitation} for {a} {space} has {a} status of {string}",
@@ -89,7 +89,7 @@ Then(
     return page.visit().then(() => {
       return assertDisplayed(page.invitation({ invitation, status }));
     });
-  }
+  },
 );
 Then(
   "{a} {actor} becomes {a} {actor} of {a} {space}",
@@ -104,11 +104,11 @@ Then(
         // @todo Refactor to live in the harness
         .then(() =>
           assertDisplayed(
-            new Component(this.driver, '*[aria-label="Configure Space"]')
-          )
+            new Component(this.driver, '*[aria-label="Configure Space"]'),
+          ),
         )
     );
-  }
+  },
 );
 Then(
   "{a} {actor} does not become {a} {actor} of {a} {space}",
@@ -122,12 +122,12 @@ Then(
           refuteDisplayed(
             new Component(
               this.driver,
-              'header a.--configure[aria_label="Configure Space"]'
-            )
-          )
+              'header a.--configure[aria_label="Configure Space"]',
+            ),
+          ),
         )
     );
-  }
+  },
 );
 Then(
   "all other Invitations to {actor} for {a} {space} no longer have {a} status of {string}",
@@ -142,7 +142,7 @@ Then(
       .then(() => new MembershipsIndexPage(this.driver, space).visit())
       .then((page) => page.invitations({ to: actor }))
       .then((invitations) =>
-        assert(invitations.every((i) => i.status !== status))
+        assert(invitations.every((i) => i.status !== status)),
       );
-  }
+  },
 );

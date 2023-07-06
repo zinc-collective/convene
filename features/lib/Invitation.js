@@ -59,7 +59,7 @@ class Invitation {
    */
   rsvpLink() {
     return this.latestDelivery().then((email) =>
-      findUrl(email.text, /spaces\/.*\/invitations\/.*\/rsvp/)
+      findUrl(email.text, /spaces\/.*\/invitations\/.*\/rsvp/),
     );
   }
   /**

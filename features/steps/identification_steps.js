@@ -9,7 +9,7 @@ Given(
     this.actor = actor;
     const signInPage = await new SignInPage(this.driver, space).visit();
     return signInPage.submitEmail(actor.email);
-  }
+  },
 );
 Given(
   "{a} {actor} is signed in to {a} {space}",
@@ -17,7 +17,7 @@ Given(
     return actor
       .signOut(this.driver)
       .then(() => actor.signIn(this.driver, space));
-  }
+  },
 );
 Given(
   "a {actor} Authenticated Session on {a} {space}",
@@ -25,14 +25,14 @@ Given(
   function (actor, _a, space) {
     this.actor = actor;
     return this.actor.signIn(this.driver, space);
-  }
+  },
 );
 When(
   "the unauthenticated {actor} opens the Identification Verification Link emailed to them",
   /** @param {Actor} actor */
   function (actor) {
     return actor.authenticationUrl().then((url) => this.driver.get(url));
-  }
+  },
 );
 When(
   "the unauthenticated {actor} provides the Identification Code emailed to them",
@@ -40,7 +40,7 @@ When(
     return actor
       .authenticationCode()
       .then((code) => new SignInPage(this.driver).submitCode(code));
-  }
+  },
 );
 When("the Authenticated Person Signs Out", function () {
   return this.actor.signOut(this.driver);
@@ -52,7 +52,7 @@ Then(
     await mePage.visit();
     const person = await mePage.person();
     assert.strictEqual(await person.email, this.actor.email);
-  }
+  },
 );
 Then("the {actor} has become Authenticated", async function (actor) {
   const mePage = new MePage(this.driver);

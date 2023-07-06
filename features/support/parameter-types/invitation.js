@@ -5,7 +5,7 @@ defineParameterType({
   regexp: /Invitation( to "[^"]*")?/,
   transformer: function (a, b, c) {
     let emailAddress = this.upsertTestId(
-      a ? a.match(/to "([^"]*)"/)[1] : undefined
+      a ? a.match(/to "([^"]*)"/)[1] : undefined,
     );
     return new Invitation(emailAddress);
   },
