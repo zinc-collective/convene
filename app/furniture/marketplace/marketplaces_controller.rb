@@ -2,15 +2,14 @@
 
 class Marketplace
   class MarketplacesController < FurnitureController
+    expose(:marketplace, model: Marketplace)
+
     def show
+      authorize(marketplace)
     end
 
     def edit
-      marketplace
-    end
-
-    helper_method def marketplace
-      authorize(Marketplace.find(params[:id]))
+      authorize(marketplace)
     end
   end
 end

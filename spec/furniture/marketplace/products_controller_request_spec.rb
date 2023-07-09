@@ -36,7 +36,7 @@ RSpec.describe Marketplace::ProductsController, type: :request do
     end
 
     describe "when product is invalid" do
-      let(:product_attributes) { {} }
+      let(:product_attributes) { {description: "test"} }
 
       it { is_expected.to have_rendered(:new) }
     end
@@ -44,10 +44,11 @@ RSpec.describe Marketplace::ProductsController, type: :request do
 
   describe "#edit" do
     it "Shows the form to edit a Marketplace Product" do
+      sign_in(space, member)
       product = create(:marketplace_product, marketplace: marketplace)
 
-      get polymorphic_path([:edit, space, room, marketplace, product])
-      expect(response).to render_template(:edit)
+      get polymorphic_path(product.location(:edit))
+      expect(response).to have_rendered(:edit)
     end
   end
 end

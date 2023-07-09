@@ -1,18 +1,14 @@
 class Marketplace
   class OrdersController < Controller
+    expose :order, scope: -> { orders }, model: Order
+    expose :orders, -> { policy_scope(marketplace.orders).order(created_at: :desc) }
+
     def show
       authorize(order)
     end
 
     def index
-    end
-
-    helper_method def orders
-      policy_scope(marketplace.orders).order(created_at: :desc)
-    end
-
-    helper_method def order
-      orders.find(params[:id])
+      skip_authorization
     end
   end
 end

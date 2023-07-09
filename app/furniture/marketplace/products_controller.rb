@@ -2,12 +2,15 @@
 
 class Marketplace
   class ProductsController < Controller
+    expose :product, scope: -> { products }, model: Product
+    expose :products, -> { policy_scope(marketplace.products) }
+
     def new
+      authorize(product)
     end
 
     def create
-      authorize(product)
-      product.save
+      authorize(product).save
 
       respond_to do |format|
         format.html do
@@ -22,7 +25,7 @@ class Marketplace
 
     def destroy
       respond_to do |format|
-        if product.destroy
+        if authorize(product).destroy
           format.turbo_stream { render turbo_stream: turbo_stream.remove(product) }
           format.html { redirect_to marketplace.location(child: :products) }
         else
@@ -36,24 +39,15 @@ class Marketplace
     end
 
     def edit
+      authorize(product)
     end
 
     def update
-      if product.update(product_params)
+      if authorize(product).update(product_params)
         redirect_to marketplace.location(child: :products)
       else
         render :edit
       end
-    end
-
-    helper_method def product
-      @product ||= if params[:id]
-        policy_scope(marketplace.products).find(params[:id])
-      elsif params[:product]
-        marketplace.products.new(product_params)
-      else
-        marketplace.products.new
-      end.tap { |product| authorize(product) }
     end
 
     def product_params

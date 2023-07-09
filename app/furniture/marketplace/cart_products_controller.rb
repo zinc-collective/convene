@@ -1,8 +1,10 @@
 class Marketplace
   class CartProductsController < Controller
+    expose :cart, scope: -> { policy_scope(marketplace.carts) }, model: Cart
+    expose :cart_product, scope: -> { policy_scope(cart.cart_products) }, model: CartProduct
+
     def create
-      authorize(cart_product)
-      cart_product.save
+      authorize(cart_product).save
 
       respond_to do |format|
         format.html do
@@ -31,8 +33,7 @@ class Marketplace
     end
 
     def update
-      authorize(cart_product)
-      cart_product.update(cart_product_params)
+      authorize(cart_product).update(cart_product_params)
       respond_to do |format|
         format.html do
           if cart_product.errors.empty?
@@ -59,8 +60,7 @@ class Marketplace
     end
 
     def destroy
-      authorize(cart_product)
-      cart_product.destroy
+      authorize(cart_product).destroy
       respond_to do |format|
         format.html do
           if cart_product.destroyed?
@@ -86,20 +86,8 @@ class Marketplace
       end
     end
 
-    def cart_product
-      @cart_product ||= if params[:id]
-        cart.cart_products.find(params[:id])
-      elsif params[:cart_product]
-        cart.cart_products.new(cart_product_params)
-      end
-    end
-
     def cart_product_component
       @cart_product_component ||= CartProductComponent.new(cart_product: cart_product)
-    end
-
-    def cart
-      marketplace.carts.find(params[:cart_id])
     end
 
     def cart_product_params
