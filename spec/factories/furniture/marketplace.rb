@@ -31,6 +31,14 @@ FactoryBot.define do
       delivery_areas { Array.new(delivery_area_quantity) { association(:marketplace_delivery_area, marketplace: instance) } }
     end
 
+    trait :with_notification_methods do
+      transient do
+        notification_method_quantity { 1 }
+      end
+
+      notification_methods { Array.new(notification_method_quantity) { association(:marketplace_notification_method, marketplace: instance) } }
+    end
+
     trait :with_products do
       transient do
         product_quantity { 1 }
@@ -55,6 +63,7 @@ FactoryBot.define do
       with_products
       with_stripe_account
       with_delivery_areas
+      with_notification_methods
     end
   end
 

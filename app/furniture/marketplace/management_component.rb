@@ -8,6 +8,10 @@ class Marketplace
       self.marketplace = marketplace
     end
 
+    def onboarding_component
+      OnboardingComponent.new(marketplace: marketplace)
+    end
+
     def button(location, icon:)
       label, href = if location.is_a?(Symbol)
         [t("marketplace.marketplace.#{location}.link_to"),

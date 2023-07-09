@@ -1,0 +1,10 @@
+en:
+  title: "Let's Get your Marketplace Ready!"
+  marketplace_hidden: "We've hidden your Marketplace from visitors until it's properly configured. %{link}"
+  missing:
+    notification_methods:
+      How would you like to get Notifications about Orders? %{link}.
+    products:
+      What Products are you selling? %{link}.
+    delivery_areas:
+      How are Orders Delivered? %{link}.
