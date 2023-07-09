@@ -1,15 +1,18 @@
 class Marketplace
   class NotificationMethodsController < Controller
+    expose :notification_method, model: NotificationMethod, scope: -> { notification_methods }
+    expose :notification_methods, -> { policy_scope(marketplace.notification_methods) }
+
     def new
-      notification_method
+      authorize(notification_method)
     end
 
     def edit
-      notification_method
+      authorize(notification_method)
     end
 
     def update
-      if notification_method.update(notification_method_params)
+      if authorize(notification_method).update(notification_method_params)
         redirect_to marketplace.location(child: :notification_methods), notice: t(".success", contact_location: notification_method.contact_location)
       else
         render :edit, status: :unprocessable_entity
@@ -17,7 +20,7 @@ class Marketplace
     end
 
     def create
-      if notification_method.save
+      if authorize(notification_method).save
         redirect_to marketplace.location(child: :notification_methods)
       else
         render :new, status: :unprocessable_entity
@@ -25,25 +28,9 @@ class Marketplace
     end
 
     def destroy
-      notification_method.destroy
+      authorize(notification_method).destroy
 
       redirect_to marketplace.location(child: :notification_methods), notice: t(".success", contact_location: notification_method.contact_location)
-    end
-
-    helper_method def notification_methods
-      @notification_methods ||= marketplace.notification_methods
-    end
-
-    helper_method def notification_method
-      @notification_method ||= if params[:id]
-        notification_methods.find(params[:id])
-      elsif params[:notification_method]
-        notification_methods.new(notification_method_params)
-      else
-        notification_methods.new
-      end.tap do |notification_method|
-        authorize(notification_method)
-      end
     end
 
     def notification_method_params
