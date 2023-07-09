@@ -1,6 +1,7 @@
 class Marketplace
   class TaxRatesController < Controller
-    expose :tax_rate, model: TaxRate, scope: -> { tax_rates }
+    expose :tax_rate, model: TaxRate, scope: -> { tax_rates },
+      build: ->(params, scope) { scope.new(params.merge(marketplace: marketplace)) }
     expose :tax_rates, -> { policy_scope(bazaar.tax_rates) }
 
     def new

@@ -41,7 +41,7 @@ RSpec.describe Marketplace::NotificationMethodsController, type: :request do
     end
 
     describe "when request is invalid" do
-      let(:notification_method_attributes) { {} }
+      let(:notification_method_attributes) { {contact_method: "email"} }
 
       it { is_expected.to have_rendered(:new) }
     end
