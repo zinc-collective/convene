@@ -74,7 +74,7 @@ gem "pg", "~> 1.5"
 gem "image_processing"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.127", require: false
+gem "aws-sdk-s3", "~> 1.128", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -123,7 +123,7 @@ group :development, :test do
 
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "standard", "~> 1.29"
+  gem "standard", "~> 1.30"
   gem "solargraph", "~> 0.49"
 end
 
