@@ -15,6 +15,11 @@ class Marketplace
       redirect_to marketplace.location(:edit), alert: "Something went wrong! #{e.message}"
     end
 
+    def new
+      authorize(marketplace, :edit?)
+      redirect_to marketplace.location(child: :stripe_account)
+    end
+
     def show
       authorize(marketplace, :edit?)
     end

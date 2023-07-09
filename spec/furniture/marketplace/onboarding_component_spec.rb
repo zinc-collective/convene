@@ -43,4 +43,14 @@ RSpec.describe Marketplace::OnboardingComponent, type: :component do
     it { is_expected.not_to have_content(t(".missing.delivery_areas", link: t("marketplace.delivery_areas.new.link_to"))) }
     it { is_expected.not_to have_link(t("marketplace.delivery_areas.new.link_to"), href: polymorphic_path(marketplace.location(:new, child: :delivery_area))) }
   end
+
+  it { is_expected.to have_content(t(".missing.stripe_accounts", link: t("marketplace.stripe_accounts.new.link_to"))) }
+  it { is_expected.to have_link(t("marketplace.stripe_accounts.new.link_to"), href: polymorphic_path(marketplace.location(:new, child: :stripe_account))) }
+
+  context "when the Marketplace has a StripeAccount" do
+    let(:marketplace) { create(:marketplace, :with_stripe_account) }
+
+    it { is_expected.not_to have_content(t(".missing.stripe_accounts", link: t("marketplace.stripe_accounts.new.link_to"))) }
+    it { is_expected.not_to have_link(t("marketplace.stripe_accounts.new.link_to"), href: polymorphic_path(marketplace.location(:new, child: :stripe_account))) }
+  end
 end
