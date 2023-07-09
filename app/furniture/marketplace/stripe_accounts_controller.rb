@@ -15,6 +15,10 @@ class Marketplace
       redirect_to marketplace.location(:edit), alert: "Something went wrong! #{e.message}"
     end
 
+    def show
+      authorize(marketplace, :edit?)
+    end
+
     helper_method def marketplace
       @marketplace ||= policy_scope(Marketplace).find(params[:marketplace_id])
     end

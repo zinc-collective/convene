@@ -48,5 +48,15 @@ RSpec.describe Marketplace::StripeAccountsController, type: :request do
       end
     end
   end
+
+  describe "#show" do
+    subject(:call) do
+      sign_in(space, member)
+      get polymorphic_path(marketplace.location(child: :stripe_account))
+      response
+    end
+
+    it { is_expected.to render_template(:show) }
+  end
 end
 # rubocop:enable RSpec/VerifiedDoubles

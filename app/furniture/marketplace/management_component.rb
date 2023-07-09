@@ -16,8 +16,11 @@ class Marketplace
       label, href = if location.is_a?(Symbol)
         [t("marketplace.marketplace.#{location}.link_to"),
           marketplace.location(location)]
-      else
+      elsif location[:child].to_s.pluralize == location[:child].to_s
         [t("marketplace.#{location[:child]}.index.link_to"),
+          marketplace.location(**location)]
+      else
+        [t("marketplace.#{location[:child].to_s.pluralize}.show.link_to"),
           marketplace.location(**location)]
       end
 

@@ -1,4 +1,3 @@
-
 en:
   activerecord:
     attributes:
@@ -42,10 +41,6 @@ en:
       edit:
         link_to: "Manage Marketplace"
     marketplaces:
-      edit:
-        missing_stripe_api_key: "Add a Stripe API key to %{space_name}"
-        connect_stripe: "Connect to Stripe"
-        stripe_connected: "Stripe Connected!"
       update:
         success: "Marketplace updated successfully!"
         failure: "Marketplace could not be updated."
@@ -85,6 +80,12 @@ en:
         link_to: "Edit Product '%{name}'"
       destroy:
         link_to: "Remove Product '%{name}'"
+    stripe_accounts:
+      show:
+        link_to: "Stripe Account"
+        missing_stripe_api_key: "Add a Stripe API key to %{space_name}"
+        connect_stripe: "Connect to Stripe"
+        stripe_connected: "Stripe Connected!"
     tax_rates:
       index:
         link_to: "Tax Rates"
