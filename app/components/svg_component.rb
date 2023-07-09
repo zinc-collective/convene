@@ -2,6 +2,10 @@ class SvgComponent < ApplicationComponent
   # { symbol: method returning path for symbol }
   ICON_MAPPINGS = {
     cart: :cart,
+    # @todo I don't know where we have been getting the SVG icons;
+    #       and I am hesitant to add one unless it's coming from
+    #       a library we are already using... - ZS
+    money: :cart,
     exclamation_triangle: :exclamation_triangle,
     gear: :gear,
     map: :map,
