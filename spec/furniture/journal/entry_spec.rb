@@ -14,11 +14,10 @@ RSpec.describe Journal::Entry, type: :model do
   describe "#to_html" do
     subject(:to_html) { entry.to_html }
 
-    context "when #body is 'https://www.google.com @zee@weirder.earth #GoodTimes'" do
-      let(:entry) { build(:journal_entry, body: "https://www.google.com @zee@weirder.earth #GoodTimes") }
+    context "when #body is 'https://www.google.com @zee@weirder.earth'" do
+      let(:entry) { build(:journal_entry, body: "https://www.google.com @zee@weirder.earth") }
 
       it { is_expected.to include('<a href="https://www.google.com">https://www.google.com</a>') }
-      # it { is_expected.to include('<a href="../terms/GoodTimes">#GoodTimes</a>') }
     end
   end
 
