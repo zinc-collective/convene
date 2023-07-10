@@ -53,12 +53,7 @@ class Journal
     end
 
     def extract_terms
-      body.scan(/#(\w+)/)&.flatten&.each do |term|
-        next if journal.terms.where("aliases ILIKE ?", term)
-          .or(journal.terms.where(canonical_term: term)).exists?
-
-        journal.terms.find_or_create_by!(canonical_term: term)
-      end
+      journal.terms.extract_and_create_from!(body)
     end
 
     def to_param
