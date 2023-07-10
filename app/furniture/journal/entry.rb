@@ -27,8 +27,9 @@ class Journal
 
     # @!attribute journal
     #   @return [Journal::Journal]
-    belongs_to :journal, class_name: "Journal::Journal", inverse_of: :entries
-    delegate :room, :space, to: :journal
+    belongs_to :journal, inverse_of: :entries
+    has_one :room, through: :journal
+    has_one :space, through: :journal
 
     def published?
       published_at.present?
