@@ -7,9 +7,9 @@
   <%- end %>
 
   <div class="flex flex-wrap">
-    <%- @pagy, @records = pagy(policy_scope(journal.entries.recent)) %>
+    <%- @pagy, @entries = pagy(policy_scope(journal.entries.recent)) %>
 
-    <%= render @records %>
+    <%= render Journal::EntryComponent.with_collection(@entries) %>
   </div>
 
   <%== pagy_nav(@pagy, nav_extra: 'flex justify-between') %>

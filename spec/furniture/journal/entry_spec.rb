@@ -10,16 +10,6 @@ RSpec.describe Journal::Entry, type: :model do
   it { is_expected.to have_one(:room).through(:journal) }
   it { is_expected.to have_one(:space).through(:journal) }
 
-  describe "#to_html" do
-    subject(:to_html) { entry.to_html }
-
-    context "when #body is 'https://www.google.com @zee@weirder.earth'" do
-      let(:entry) { build(:journal_entry, body: "https://www.google.com @zee@weirder.earth") }
-
-      it { is_expected.to include('<a href="https://www.google.com">https://www.google.com</a>') }
-    end
-  end
-
   describe "#save" do
     let(:entry) { create(:journal_entry, body: "#GoodTimes") }
     let(:journal) { entry.journal }

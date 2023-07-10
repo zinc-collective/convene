@@ -3,7 +3,6 @@ class Journal
     location(parent: :journal)
 
     self.table_name = "journal_entries"
-    include RendersMarkdown
     extend StripsNamespaceFromModelName
 
     scope :recent, -> { order("published_at DESC NULLS FIRST") }
@@ -36,21 +35,6 @@ class Journal
 
     def published?
       published_at.present?
-    end
-
-    def to_html
-      render_markdown(body)
-    end
-
-    def self.renderer
-      @_renderer ||= Redcarpet::Markdown.new(
-        Renderer.new(filter_html: true, with_toc_data: true),
-        autolink: true, strikethrough: true,
-        no_intra_emphasis: true,
-        lax_spacing: true,
-        fenced_code_blocks: true, disable_indented_code_blocks: true,
-        tables: true, footnotes: true, superscript: true, quote: true
-      )
     end
 
     def extract_keywords
