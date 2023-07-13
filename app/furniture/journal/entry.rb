@@ -30,6 +30,7 @@ class Journal
     belongs_to :journal, inverse_of: :entries
     has_one :room, through: :journal
     has_one :space, through: :journal
+    after_save :extract_keywords, if: :saved_change_to_body?
 
     def published?
       published_at.present?
@@ -48,6 +49,10 @@ class Journal
         fenced_code_blocks: true, disable_indented_code_blocks: true,
         tables: true, footnotes: true, superscript: true, quote: true
       )
+    end
+
+    def extract_keywords
+      journal.keywords.extract_and_create_from!(body)
     end
 
     def to_param
