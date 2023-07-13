@@ -25,7 +25,7 @@ RSpec.describe Journal::Entry, type: :model do
     let(:journal) { entry.journal }
 
     context "when the body is changing" do
-      it "idempotently creates `Keywords` in the `Journal`" do
+      it "idempotently creates `Keywords` in the `Journal` and `Entry`" do
         bad_apple = entry.journal.keywords.create!(canonical_keyword: "BadApple", aliases: ["BadApples"])
         good_times = entry.journal.keywords.find_by!(canonical_keyword: "GoodTimes")
         expect do
@@ -35,6 +35,7 @@ RSpec.describe Journal::Entry, type: :model do
         expect(journal.keywords.where(canonical_keyword: "GoodTimes")).to exist
         expect(journal.keywords.where(canonical_keyword: "HardCider")).to exist
         expect(journal.keywords.where(canonical_keyword: "BadApples")).not_to exist
+        expect(entry.reload.keywords).to eq(["GoodTimes", "HardCider", "BadApple"])
       end
     end
   end
