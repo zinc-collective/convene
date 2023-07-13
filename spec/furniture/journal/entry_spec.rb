@@ -9,7 +9,6 @@ RSpec.describe Journal::Entry, type: :model do
   it { is_expected.to belong_to(:journal).inverse_of(:entries) }
   it { is_expected.to have_one(:room).through(:journal) }
   it { is_expected.to have_one(:space).through(:journal) }
-  it { is_expected.to have_many(:terms).through(:journal) }
 
   describe "#to_html" do
     subject(:to_html) { entry.to_html }
@@ -23,18 +22,19 @@ RSpec.describe Journal::Entry, type: :model do
 
   describe "#save" do
     let(:entry) { create(:journal_entry, body: "#GoodTimes") }
+    let(:journal) { entry.journal }
 
     context "when the body is changing" do
-      it "idempotently creates terms in the journal" do
-        bad_apple = entry.journal.terms.create!(canonical_term: "BadApple", aliases: "BadApples")
-        good_times = entry.journal.terms.create!(canonical_term: "GoodTimes")
+      it "idempotently creates `Keywords` in the `Journal`" do
+        bad_apple = entry.journal.keywords.create!(canonical_keyword: "BadApple", aliases: ["BadApples"])
+        good_times = entry.journal.keywords.find_by!(canonical_keyword: "GoodTimes")
         expect do
           entry.update!(body: "#GoodTimes #HardCider #BadApples")
         end.not_to change { "#{bad_apple.reload.updated_at} - #{good_times.reload.updated_at}" }
 
-        expect(Journal::Term.where(canonical_term: "GoodTimes")).to exist
-        expect(Journal::Term.where(canonical_term: "HardCider")).to exist
-        expect(Journal::Term.where(canonical_term: "BadApples")).not_to exist
+        expect(journal.keywords.where(canonical_keyword: "GoodTimes")).to exist
+        expect(journal.keywords.where(canonical_keyword: "HardCider")).to exist
+        expect(journal.keywords.where(canonical_keyword: "BadApples")).not_to exist
       end
     end
   end

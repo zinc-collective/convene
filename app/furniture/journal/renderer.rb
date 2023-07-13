@@ -6,9 +6,7 @@ class Journal
     end
 
     def postprocess(doc)
-      doc
-        .gsub(/@([a-zA-Z\d]*)@(.*\.[a-zA-Z]*)/, '<a href="https://\2/@\1">@\1@\2</a>')
-      # .gsub(/#(\w+)/, '<a href="../terms/\1">#\1</a>')
+      doc.gsub(/@([a-zA-Z\d]*)@(.*\.[a-zA-Z]*)/, '<a href="https://\2/@\1">@\1@\2</a>')
     end
   end
 end

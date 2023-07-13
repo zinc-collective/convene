@@ -30,8 +30,7 @@ class Journal
     belongs_to :journal, inverse_of: :entries
     has_one :room, through: :journal
     has_one :space, through: :journal
-    has_many :terms, through: :journal
-    after_save :extract_terms, if: :saved_change_to_body?
+    after_save :extract_keywords, if: :saved_change_to_body?
 
     def published?
       published_at.present?
@@ -52,8 +51,8 @@ class Journal
       )
     end
 
-    def extract_terms
-      journal.terms.extract_and_create_from!(body)
+    def extract_keywords
+      journal.keywords.extract_and_create_from!(body)
     end
 
     def to_param
