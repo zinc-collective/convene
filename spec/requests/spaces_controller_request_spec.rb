@@ -126,10 +126,14 @@ RSpec.describe SpacesController do
 
       it "updates the Space" do
         new_entrance = space.rooms.sample
-        put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id, enforce_ssl: 1}}
+        put polymorphic_path(space), params: {space: {entrance_id: new_entrance.id, enforce_ssl: true, branded_domain: "zeespencer.com"}}
 
-        expect(space.reload.entrance).to eql(new_entrance)
-        expect(space.reload.enforce_ssl).to be true
+        space.reload
+
+        expect(space.entrance).to eql(new_entrance)
+        expect(space.enforce_ssl).to be true
+        expect(space.branded_domain).to eql("zeespencer.com")
+        expect(response).to redirect_to("http://zeespencer.com/edit")
         expect(flash[:notice]).to include("successfully updated")
       end
     end
