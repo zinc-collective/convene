@@ -55,6 +55,10 @@ class Journal
       self.keywords = journal.keywords.extract_and_create_from!(body).pluck(:canonical_keyword)
     end
 
+    def keywords=(keywords)
+      super(keywords.uniq)
+    end
+
     def to_param
       slug
     end
