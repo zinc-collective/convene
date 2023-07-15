@@ -16,6 +16,10 @@ class Journal
       journal.entries.where("keywords::text[] && ARRAY[?]::text[]", [canonical_keyword] + (aliases.presence || []))
     end
 
+    def to_param
+      canonical_keyword
+    end
+
     def self.extract_and_create_from!(body)
       body.scan(/#(\w+)/)&.flatten&.map do |keyword|
         existing_keyword = search(keyword).first
