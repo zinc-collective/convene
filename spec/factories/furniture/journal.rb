@@ -9,4 +9,8 @@ FactoryBot.define do
     body { 5.times.map { headline }.join("\n") }
     journal
   end
+
+  factory :journal_keyword, class: "Journal::Keyword" do
+    journal
+  end
 end
