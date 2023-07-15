@@ -1,6 +1,7 @@
 class Journal
   class Keyword < ApplicationRecord
     location(parent: :journal)
+    extend StripsNamespaceFromModelName
 
     self.table_name = "journal_keywords"
     validates :canonical_keyword, presence: true, uniqueness: {case_sensitive: false, scope: :journal_id}
@@ -10,6 +11,10 @@ class Journal
       where("lower(aliases::text)::text[] && ARRAY[?]::text[]", keywords.map(&:downcase))
           .or(where("lower(canonical_keyword) IN (?)", keywords.map(&:downcase)))
     end)
+
+    def entries
+      journal.entries.where("keywords::text[] && ARRAY[?]::text[]", [canonical_keyword] + (aliases.presence || []))
+    end
 
     def self.extract_and_create_from!(body)
       body.scan(/#(\w+)/)&.flatten&.map do |keyword|

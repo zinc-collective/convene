@@ -7,20 +7,8 @@ RSpec.describe Journal::KeywordsController, type: :request do
       response
     end
 
-    context "when the :id is the keyword's id" do
-      it { is_expected.to be_ok }
+    let(:keyword) { create(:journal_keyword) }
 
-      it "has a canonical entry in the head to the canonical keyword based url"
-    end
-
-    context "when the :id is a canonical keyword" do
-      it { is_expected.to be_ok }
-    end
-
-    context "when the :id is an alias" do
-      it { is_expected.to be_ok }
-
-      it "has a canonical entry in the head to the canonical keyword based url"
-    end
+    it { is_expected.to be_ok }
   end
 end

@@ -1,2 +1,12 @@
-<%= keyword.canonical_keyword %>
-<%= keyword.aliases %>
+<h1><%= keyword.canonical_keyword %></h1>
+<ul>
+<%= keyword&.aliases&.each do |aliass| %>
+  <li><%= aliass %></li>
+<% end %>
+</ul>
+
+<ul>
+  <%- policy_scope(keyword.entries).each do |entry|%>
+    <li><%= link_to(entry.headline, entry.location) %></li>
+  <%- end %>
+</ul>
