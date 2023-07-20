@@ -131,7 +131,7 @@ GEM
     crass (1.0.6)
     css_parser (1.14.0)
       addressable
-    cssbundling-rails (1.1.2)
+    cssbundling-rails (1.2.0)
       railties (>= 6.0.0)
     date (3.3.3)
     debug_inspector (1.1.0)
@@ -213,7 +213,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.2)
+    mini_portile2 (2.8.4)
     minitest (5.18.1)
     monetize (1.12.0)
       money (~> 6.12)
