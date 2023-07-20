@@ -13,7 +13,11 @@ class Journal
     end)
 
     def entries
-      journal.entries.matching_keywords([canonical_keyword] + (aliases.presence || []))
+      journal.entries.matching_keywords(canonical_with_aliases)
+    end
+
+    def canonical_with_aliases
+      [canonical_keyword] + (aliases.presence || [])
     end
 
     def to_param

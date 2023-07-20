@@ -9,10 +9,21 @@ class Journal
     end
 
     def body_html
-      render_markdown(entry.body)
+      postprocess(render_markdown(entry.body))
     end
 
-    def published_at
+    private def postprocess(text)
+      entry.keywords.map do |keyword|
+        search = keyword.canonical_with_aliases.sort.reverse.join("|")
+        text.gsub!(/\#(#{search})/i) do |match|
+          link_to(match, keyword.location)
+        end
+      end
+
+      text
+    end
+
+    private def published_at
       entry.published_at.to_fs(:long_ordinal)
     end
 

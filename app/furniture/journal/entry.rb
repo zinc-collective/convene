@@ -45,6 +45,10 @@ class Journal
       super(keywords.uniq)
     end
 
+    def keywords
+      journal.keywords.search(*super)
+    end
+
     def to_param
       slug
     end
