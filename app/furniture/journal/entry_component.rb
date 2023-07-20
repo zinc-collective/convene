@@ -14,13 +14,21 @@ class Journal
 
     private def postprocess(text)
       entry.keywords.map do |keyword|
-        search = keyword.canonical_with_aliases.sort.reverse.join("|")
-        text.gsub!(/\#(#{search})/i) do |match|
-          link_to(match, keyword.location)
-        end
+        replace_keyword(text, keyword)
       end
 
       text
+    end
+
+    private def replace_keyword(text, keyword)
+      text.gsub!(keywords_regex(keyword)) do |match|
+        link_to(match, keyword.location)
+      end
+    end
+
+    # We sort the keywords longest to shortest because regex matches groups left-to-right
+    private def keywords_regex(keyword)
+      /\#(#{keyword.canonical_with_aliases.sort.reverse.join("|")})/i
     end
 
     private def published_at
