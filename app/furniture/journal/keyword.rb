@@ -13,7 +13,7 @@ class Journal
     end)
 
     def entries
-      journal.entries.where("keywords::text[] && ARRAY[?]::text[]", [canonical_keyword] + (aliases.presence || []))
+      journal.entries.matching_keywords([canonical_keyword] + (aliases.presence || []))
     end
 
     def to_param

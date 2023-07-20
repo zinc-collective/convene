@@ -32,6 +32,8 @@ class Journal
     has_one :space, through: :journal
     before_save :extract_keywords, if: :will_save_change_to_body?
 
+    scope :matching_keywords, ->(keywords) { where("keywords::text[] && ARRAY[?]::text[]", keywords) }
+
     def published?
       published_at.present?
     end
