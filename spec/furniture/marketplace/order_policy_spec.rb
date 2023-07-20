@@ -52,8 +52,12 @@ RSpec.describe Marketplace::OrderPolicy, type: :policy do
 
     context "when a guest" do
       let(:actor) { guest }
+      let!(:old_guest_order) do
+        create(:marketplace_order, marketplace: marketplace, shopper: create(:marketplace_shopper), created_at: 2.weeks.ago)
+      end
 
-      it { is_expected.to be_empty }
+      it { is_expected.to contain_exactly(guest_order) }
+      it { is_expected.not_to include(old_guest_order) }
     end
 
     context "when a member of the space" do
