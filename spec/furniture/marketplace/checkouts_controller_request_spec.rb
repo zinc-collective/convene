@@ -43,7 +43,7 @@ RSpec.describe Marketplace::Checkout, type: :request do
         perform_request
         expect(Stripe::Checkout::Session).to have_received(:create).with(
           hash_including(mode: "payment", customer_email: cart.contact_email),
-          {api_key: "not_real"}
+          {api_key: marketplace.stripe_api_key}
         )
       end
     end
