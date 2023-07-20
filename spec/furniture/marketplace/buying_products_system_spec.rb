@@ -61,8 +61,10 @@ describe "Marketplace: Buying Products", type: :system do
 
   def with_stripe(listen_url:, &block)
     signing_secret = nil
+    waiting = 0
+    command = "stripe listen --api-key #{ENV.fetch("DEFAULT_STRIPE_API_KEY")} --forward-to #{listen_url}"
     thread = Thread.new do
-      Open3.popen3("stripe listen --forward-to #{listen_url}") do |stdin, stdout, stderr, thread|
+      Open3.popen3(command) do |stdin, stdout, stderr, thread|
         # read each stream from a new thread
         {out: stdout, err: stderr}.each do |key, stream|
           Thread.new do
@@ -74,8 +76,9 @@ describe "Marketplace: Buying Products", type: :system do
         thread.join
       end
     end
-    sleep(1) until signing_secret
+    raise "Can't connect to Stripe using command `#{command}`" if waiting > 5
 
+    sleep(1) until signing_secret
     yield(signing_secret)
     thread.kill
   end
