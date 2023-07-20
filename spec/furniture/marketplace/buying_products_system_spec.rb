@@ -78,7 +78,7 @@ describe "Marketplace: Buying Products", type: :system do
     end
 
     until signing_secret
-      raise "Can't connect to Stripe using command `#{command}`" if waiting > 5
+      raise "Can't connect to Stripe!" if waiting > 5
       waiting += 1
       sleep(1)
     end
