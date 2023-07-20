@@ -7,4 +7,5 @@ RSpec.describe Journal::EntryComponent, type: :component do
   let(:entry) { create(:journal_entry, body: "https://www.google.com @zee@weirder.earth #GoodTimes") }
 
   it { is_expected.to have_link("https://www.google.com", href: "https://www.google.com") }
+  it { is_expected.to have_link("#GoodTimes", href: polymorphic_path(entry.journal.keywords.find_by(canonical_keyword: "GoodTimes").location)) }
 end

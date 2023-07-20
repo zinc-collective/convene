@@ -9,10 +9,29 @@ class Journal
     end
 
     def body_html
-      render_markdown(entry.body)
+      postprocess(render_markdown(entry.body))
     end
 
-    def published_at
+    private def postprocess(text)
+      entry.keywords.map do |keyword|
+        replace_keyword(text, keyword)
+      end
+
+      text
+    end
+
+    private def replace_keyword(text, keyword)
+      text.gsub!(keywords_regex(keyword)) do |match|
+        link_to(match, keyword.location)
+      end
+    end
+
+    # We sort the keywords longest to shortest because regex matches groups left-to-right
+    private def keywords_regex(keyword)
+      /\#(#{keyword.canonical_with_aliases.sort.reverse.join("|")})/i
+    end
+
+    private def published_at
       entry.published_at.to_fs(:long_ordinal)
     end
 

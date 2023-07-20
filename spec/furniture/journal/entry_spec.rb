@@ -25,7 +25,7 @@ RSpec.describe Journal::Entry, type: :model do
         expect(journal.keywords.where(canonical_keyword: "GoodTimes")).to exist
         expect(journal.keywords.where(canonical_keyword: "HardCider")).to exist
         expect(journal.keywords.where(canonical_keyword: "BadApples")).not_to exist
-        expect(entry.reload.keywords).to eq(["GoodTimes", "HardCider", "BadApple"])
+        expect(entry.reload.keywords).to contain_exactly(good_times, journal.keywords.find_by(canonical_keyword: "HardCider"), bad_apple)
       end
     end
   end
