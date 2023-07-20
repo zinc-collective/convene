@@ -76,9 +76,13 @@ describe "Marketplace: Buying Products", type: :system do
         thread.join
       end
     end
-    raise "Can't connect to Stripe using command `#{command}`" if waiting > 5
 
-    sleep(1) until signing_secret
+    until signing_secret
+      raise "Can't connect to Stripe using command `#{command}`" if waiting > 5
+      waiting += 1
+      sleep(1)
+    end
+
     yield(signing_secret)
     thread.kill
   end
