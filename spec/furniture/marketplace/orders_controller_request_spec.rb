@@ -24,8 +24,9 @@ RSpec.describe Marketplace::OrdersController, type: :request do
     end
 
     context "when the order is not viewable by the current person" do
+      before { sign_in(space, create(:person)) }
+
       specify { expect { perform_request }.to raise_error(ActiveRecord::RecordNotFound) }
-      # it { is_expected.to be_not_found}
     end
   end
 end
