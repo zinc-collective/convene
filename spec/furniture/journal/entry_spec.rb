@@ -29,7 +29,7 @@ RSpec.describe Journal::Entry, type: :model do
         bad_apple = entry.journal.keywords.create!(canonical_keyword: "BadApple", aliases: ["BadApples"])
         good_times = entry.journal.keywords.find_by!(canonical_keyword: "GoodTimes")
         expect do
-          entry.update!(body: "#GoodTimes #HardCider #BadApples")
+          entry.update!(body: "#GoodTimes #HardCider #BadApple #BadApples")
         end.not_to change { "#{bad_apple.reload.updated_at} - #{good_times.reload.updated_at}" }
 
         expect(journal.keywords.where(canonical_keyword: "GoodTimes")).to exist
