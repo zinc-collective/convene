@@ -1,0 +1,11 @@
+<h1><%= keyword.canonical_keyword %></h1>
+<%- if keyword.aliases.present? %>
+  <p class="italic">Also known as <%= to_sentence(keyword.aliases) %></p>
+<%- end %>
+
+<h2>Entries about <span class="italic"><%= keyword.canonical_keyword %></span></h2>
+<ul>
+  <%- policy_scope(keyword.entries).each do |entry|%>
+    <li><%= link_to(entry.headline, entry.location) %></li>
+  <%- end %>
+</ul>

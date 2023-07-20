@@ -11,6 +11,7 @@ FactoryBot.define do
   end
 
   factory :journal_keyword, class: "Journal::Keyword" do
+    canonical_keyword { Faker::Fantasy::Tolkien.location }
     journal
   end
 end
