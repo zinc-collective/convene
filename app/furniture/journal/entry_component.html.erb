@@ -2,14 +2,14 @@
   <header class="border-b border-primary-500">
     <h2 class=" text-primary-900"><%= entry.headline %></h2>
     <%- if entry.published?%>
-      <em>Published on <%= link_to entry.published_at.to_fs(:long_ordinal), entry.location %></em>
+      <em>Published on <%= link_to published_at, entry.location %></em>
     <%- else %>
       <em>Unpublished.</em>
     <%- end %>
   </header>
 
   <div class="prose">
-    <%= entry.to_html.html_safe %>
+    <%== body_html %>
   </div>
 
   <footer class="flex justify-between my-2">

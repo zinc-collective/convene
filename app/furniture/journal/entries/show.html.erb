@@ -1,2 +1,2 @@
 <%- breadcrumb :journal_entry, entry %>
-<%= render entry %>
+<%= render Journal::EntryComponent.new(entry: entry) %>
