@@ -4,12 +4,13 @@ require "money-rails/helpers/action_view_extension"
 # @see https://github.com/zinc-collective/convene/issues/1326
 describe "Marketplace: Buying Products", type: :system do
   include MoneyRails::ActionViewExtension
+  include Spec::StripeCLI::Helpers
 
   let(:space) { create(:space, :with_entrance, :with_members) }
   let(:marketplace) { create(:marketplace, :ready_for_shopping, room: space.entrance) }
 
   around do |ex|
-    with_stripe(listen_url: polymorphic_url(marketplace.location(child: :stripe_events))) do |webhook_signing_secret|
+    stripe_listen(forward_to: polymorphic_url(marketplace.location(child: :stripe_events))) do |webhook_signing_secret|
       marketplace.update(stripe_webhook_endpoint_secret: webhook_signing_secret)
       ex.run
     end
@@ -57,33 +58,5 @@ describe "Marketplace: Buying Products", type: :system do
 
     find("label[for='enableStripePass']").click
     find("*[data-testid='hosted-payment-submit-button']").click
-  end
-
-  def with_stripe(listen_url:, &block)
-    signing_secret = nil
-    waiting = 0
-    command = "stripe listen --api-key #{ENV.fetch("DEFAULT_STRIPE_API_KEY")} --forward-to #{listen_url}"
-    thread = Thread.new do
-      Open3.popen3(command) do |_, stdout, stderr, thread|
-        # read each stream from a new thread
-        {out: stdout, err: stderr}.each do |key, stream|
-          Thread.new do
-            until (raw_line = stream.gets).nil?
-              signing_secret = raw_line[/whsec_\w+/] if raw_line.include?("webhook")
-            end
-          end
-        end
-        thread.join
-      end
-    end
-
-    until signing_secret
-      raise "Can't connect to Stripe!" if waiting > 5
-      waiting += 1
-      sleep(1)
-    end
-
-    yield(signing_secret)
-    thread.kill
   end
 end
