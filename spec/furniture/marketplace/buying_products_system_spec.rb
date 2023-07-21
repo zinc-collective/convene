@@ -64,7 +64,7 @@ describe "Marketplace: Buying Products", type: :system do
     waiting = 0
     command = "stripe listen --api-key #{ENV.fetch("DEFAULT_STRIPE_API_KEY")} --forward-to #{listen_url}"
     thread = Thread.new do
-      Open3.popen3(command) do |stdin, stdout, stderr, thread|
+      Open3.popen3(command) do |_, stdout, stderr, thread|
         # read each stream from a new thread
         {out: stdout, err: stderr}.each do |key, stream|
           Thread.new do
