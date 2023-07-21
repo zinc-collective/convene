@@ -58,7 +58,7 @@ class AuthenticationMethod < ApplicationRecord
 
   def send_one_time_password!(space)
     bump_one_time_password!
-    AuthenticatedSessionMailer.one_time_password_email(self, space).deliver_later
+    AuthenticatedSessionMailer.one_time_password_email(self).deliver_later
   end
 
   def confirm!
