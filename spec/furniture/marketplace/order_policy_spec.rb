@@ -39,25 +39,30 @@ RSpec.describe Marketplace::OrderPolicy, type: :policy do
     let!(:neighbor_order) { create(:marketplace_order, marketplace: marketplace, shopper: create(:marketplace_shopper, person: neighbor)) }
 
     context "when an operator" do
-      let(:actor) { operator }
+      let(:actor) { create(:marketplace_shopper, person: operator) }
 
       it { is_expected.to contain_exactly(guest_order, neighbor_order) }
     end
 
     context "when the neighbor who placed the order" do
-      let(:actor) { neighbor }
+      let(:actor) { neighbor_order.shopper }
 
       it { is_expected.to contain_exactly(neighbor_order) }
     end
 
     context "when a guest" do
-      let(:actor) { guest }
+      before do
+        # Creates another Guest order to prove we only load their own
+        create(:marketplace_order, marketplace: marketplace, shopper: create(:marketplace_shopper))
+      end
 
-      it { is_expected.to be_empty }
+      let(:actor) { guest_order.shopper }
+
+      it { is_expected.to contain_exactly(guest_order) }
     end
 
     context "when a member of the space" do
-      let(:actor) { member }
+      let(:actor) { create(:marketplace_shopper, person: member) }
 
       it { is_expected.to contain_exactly(guest_order, neighbor_order) }
     end
