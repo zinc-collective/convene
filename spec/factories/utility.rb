@@ -8,6 +8,6 @@ FactoryBot.define do
 
   factory :stripe_utility do
     utility_slug { "stripe" }
-    api_token { "not_real" }
+    api_token { ENV.fetch("STRIPE_API_KEY", "not_real") }
   end
 end
