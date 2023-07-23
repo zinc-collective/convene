@@ -1,5 +1,7 @@
 class Marketplace
   class MarketplaceComponent < ApplicationComponent
+    include CurrentPerson
+
     attr_accessor :marketplace
     delegate :location, :carts, :ready_for_shopping?, to: :marketplace
 
@@ -21,11 +23,7 @@ class Marketplace
     end
 
     def shopper
-      if current_person.is_a?(Guest)
-        Shopper.find_or_create_by(id: session[:guest_shopper_id] ||= SecureRandom.uuid)
-      else
-        Shopper.find_or_create_by(person: current_person)
-      end
+      current_person.find_or_create_shopper
     end
   end
 end
