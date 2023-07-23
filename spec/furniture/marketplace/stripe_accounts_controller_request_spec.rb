@@ -2,9 +2,7 @@ require "rails_helper"
 
 # rubocop:disable RSpec/VerifiedDoubles
 RSpec.describe Marketplace::StripeAccountsController, type: :request do
-  let(:marketplace) { create(:marketplace) }
-  let(:space) { marketplace.space }
-  let(:member) { create(:membership, space: space).member }
+  include Spec::Marketplace::CommonLets
 
   let(:stripe_account_link) { double(Stripe::AccountLink, url: "http://example.com/") }
   let(:stripe_account) { double(Stripe::Account, id: "ac_1234", details_submitted?: false) }

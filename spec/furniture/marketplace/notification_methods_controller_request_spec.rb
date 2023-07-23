@@ -1,10 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::NotificationMethodsController, type: :request do
-  let(:marketplace) { create(:marketplace) }
-  let(:space) { marketplace.space }
-  let(:room) { marketplace.room }
-  let(:member) { create(:membership, space: space).member }
+  include Spec::Marketplace::CommonLets
   let(:notification_method) { create(:marketplace_notification_method, marketplace: marketplace) }
 
   before do

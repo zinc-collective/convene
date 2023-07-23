@@ -1,12 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::ProductComponent, type: :component do
+  include Spec::Marketplace::CommonLets
+
   subject(:output) { render_inline(component) }
 
-  let(:operator) { create(:person, operator: true) }
-
   let(:component) { described_class.new(product: product, current_person: operator) }
-  let(:marketplace) { create(:marketplace) }
   let(:product) { create(:marketplace_product, tax_rates: [tax_rate], marketplace: marketplace) }
   let(:tax_rate) { create(:marketplace_tax_rate, marketplace: marketplace) }
 

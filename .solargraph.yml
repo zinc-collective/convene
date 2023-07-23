@@ -2,7 +2,7 @@
 include:
 - "**/*.rb"
 exclude:
-- spec/**/*
+- spec/**/*_spec.rb
 - test/**/*
 - vendor/**/*
 - ".bundle/**/*"

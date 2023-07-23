@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Order, type: :model do
+  include Spec::Marketplace::CommonLets
+
   it { is_expected.to have_many(:ordered_products).dependent(:destroy).inverse_of(:order) }
 
   it { is_expected.to have_many(:products).through(:ordered_products).inverse_of(:orders) }
@@ -13,7 +15,6 @@ RSpec.describe Marketplace::Order, type: :model do
   describe "#price_total" do
     subject(:price_total) { order.price_total }
 
-    let(:marketplace) { create(:marketplace) }
     let(:delivery_area) { create(:marketplace_delivery_area, marketplace: marketplace, price_cents: 1200) }
     let(:order) { create(:marketplace_order, marketplace: marketplace, delivery_area: delivery_area) }
     let(:product_a) { create(:marketplace_product, marketplace: order.marketplace) }

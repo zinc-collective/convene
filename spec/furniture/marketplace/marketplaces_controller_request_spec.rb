@@ -1,9 +1,6 @@
 require "rails_helper"
 RSpec.describe Marketplace::MarketplacesController, type: :request do
-  let(:marketplace) { create(:marketplace) }
-  let(:space) { marketplace.space }
-  let(:membership) { create(:membership, space: space) }
-  let(:member) { membership.member }
+  include Spec::Marketplace::CommonLets
 
   describe "#edit" do
     subject(:executed_response) {

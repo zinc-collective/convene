@@ -1,10 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::ProductsController, type: :request do
-  let(:marketplace) { create(:marketplace) }
-  let(:space) { marketplace.space }
-  let(:room) { marketplace.room }
-  let(:member) { create(:membership, space: space).member }
+  include Spec::Marketplace::CommonLets
 
   describe "#create" do
     subject(:perform_request) do

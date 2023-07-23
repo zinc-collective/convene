@@ -1,10 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::CartProductsController, type: :request do
-  let(:marketplace) { create(:marketplace) }
-  let(:space) { marketplace.space }
-  let(:room) { marketplace.room }
-  let(:member) { create(:membership, space: space).member }
+  include Spec::Marketplace::CommonLets
   let(:document_root_element) { Nokogiri::HTML::Document.parse(response.body) }
   let(:request_as) { :html }
 

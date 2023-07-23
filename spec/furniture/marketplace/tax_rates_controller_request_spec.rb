@@ -1,17 +1,17 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::TaxRatesController, type: :request do
+  include Spec::Marketplace::CommonLets
+
   subject(:result) do
     perform_request
     response
   end
 
-  before { sign_in(space, person) }
-
-  let(:space) { marketplace.space }
-  let(:marketplace) { create(:marketplace) }
-  let(:person) { create(:membership, space: space).member }
+  let(:person) { member }
   let(:as) { :html }
+
+  before { sign_in(space, person) }
 
   describe "#new" do
     let(:perform_request) do

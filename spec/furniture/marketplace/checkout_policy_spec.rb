@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Marketplace::CheckoutPolicy, type: :policy do
   subject { described_class }
 
-  include Marketplace::Policy::SpecFactories
+  include Spec::Marketplace::CommonLets
 
   let(:checkout) { build(:marketplace_checkout, :with_cart, marketplace: marketplace, person: shopper_person) }
   let(:shopper_person) { nil }

@@ -11,7 +11,7 @@ RSpec.describe Marketplace::ProductPolicy, type: :policy do
     it { is_expected.to include :price }
   end
 
-  include Marketplace::Policy::SpecFactories
+  include Spec::Marketplace::CommonLets
 
   permissions :create?, :destroy?, :edit?, :update? do
     it { is_expected.to permit(member, product) }

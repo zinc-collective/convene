@@ -1,9 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Checkout, type: :request do
-  let(:marketplace) { create(:marketplace) }
-  let(:space) { marketplace.space }
-  let(:room) { marketplace.room }
+  include Spec::Marketplace::CommonLets
 
   let(:checkout) { build(:marketplace_checkout, cart: cart) }
 

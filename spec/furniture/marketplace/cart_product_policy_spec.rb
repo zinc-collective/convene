@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Marketplace::CartProductPolicy, type: :policy do
   subject { described_class }
 
-  include Marketplace::Policy::SpecFactories
+  include Spec::Marketplace::CommonLets
 
   let(:cart) { create(:marketplace_cart, shopper: shopper, marketplace: marketplace) }
   let(:shopper) { build(:marketplace_shopper) }

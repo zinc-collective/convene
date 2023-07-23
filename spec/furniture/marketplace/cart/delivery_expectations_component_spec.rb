@@ -1,12 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Cart::DeliveryExpectationsComponent, type: :component do
+  include Spec::Marketplace::CommonLets
+
   subject(:output) { render_inline(component) }
 
-  let(:operator) { create(:person, operator: true) }
-
   let(:component) { described_class.new(cart: cart, current_person: operator) }
-  let(:marketplace) { build(:marketplace) }
 
   context "when the cart does not have a `delivery_area`" do
     let(:cart) { build(:marketplace_cart, marketplace: marketplace) }

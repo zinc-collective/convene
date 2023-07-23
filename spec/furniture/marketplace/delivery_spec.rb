@@ -1,9 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Delivery, type: :model do
+  include Spec::Marketplace::CommonLets
+
   subject(:delivery) { build(:marketplace_delivery, marketplace: marketplace, delivery_area: delivery_area) }
 
-  let(:marketplace) { build(:marketplace) }
   let(:delivery_area) { build(:marketplace_delivery_area, marketplace: marketplace) }
 
   it { is_expected.to belong_to(:marketplace) }

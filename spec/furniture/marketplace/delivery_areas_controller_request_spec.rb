@@ -1,16 +1,16 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::DeliveryAreasController, type: :request do
+  include Spec::Marketplace::CommonLets
+
   subject(:result) do
     perform_request
     test_response
   end
 
-  before { sign_in(space, person) }
+  let(:person) { member }
 
-  let(:space) { marketplace.space }
-  let(:marketplace) { create(:marketplace) }
-  let(:person) { create(:membership, space: space).member }
+  before { sign_in(space, person) }
 
   describe "#index" do
     let(:perform_request) { get polymorphic_path(marketplace.location(child: :delivery_areas)) }

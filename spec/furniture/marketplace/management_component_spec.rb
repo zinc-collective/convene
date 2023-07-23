@@ -1,12 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::ManagementComponent, type: :component do
+  include Spec::Marketplace::CommonLets
   subject(:output) { render_inline(component) }
 
-  let(:operator) { create(:person, operator: true) }
-
   let(:component) { described_class.new(marketplace: marketplace, current_person: operator) }
-  let(:marketplace) { create(:marketplace) }
 
   it { is_expected.to have_selector("a[href='#{polymorphic_path(marketplace.location(child: :products))}']", text: I18n.t("marketplace.products.index.link_to")) }
 
