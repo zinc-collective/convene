@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Delivery, type: :model do
-  include Spec::Marketplace::CommonLets
-
   subject(:delivery) { build(:marketplace_delivery, marketplace: marketplace, delivery_area: delivery_area) }
 
   let(:delivery_area) { build(:marketplace_delivery_area, marketplace: marketplace) }

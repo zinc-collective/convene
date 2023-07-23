@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::ProductsController, type: :request do
-  include Spec::Marketplace::CommonLets
-
   describe "#create" do
     subject(:perform_request) do
       post polymorphic_path([space, room, marketplace, :products]),

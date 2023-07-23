@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::ManagementComponent, type: :component do
-  include Spec::Marketplace::CommonLets
   subject(:output) { render_inline(component) }
 
   let(:component) { described_class.new(marketplace: marketplace, current_person: operator) }

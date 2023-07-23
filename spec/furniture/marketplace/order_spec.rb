@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Order, type: :model do
-  include Spec::Marketplace::CommonLets
-
   it { is_expected.to have_many(:ordered_products).dependent(:destroy).inverse_of(:order) }
 
   it { is_expected.to have_many(:products).through(:ordered_products).inverse_of(:orders) }

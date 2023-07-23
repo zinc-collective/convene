@@ -3,8 +3,6 @@ require "rails_helper"
 RSpec.describe Marketplace::OrderPolicy, type: :policy do
   subject { described_class }
 
-  include Spec::Marketplace::CommonLets
-
   let(:order) { create(:marketplace_order, shopper: shopper, marketplace: marketplace) }
   let(:shopper) { build(:marketplace_shopper) }
 

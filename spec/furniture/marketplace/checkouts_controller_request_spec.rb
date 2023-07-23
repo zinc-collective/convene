@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Checkout, type: :request do
-  include Spec::Marketplace::CommonLets
-
   let(:checkout) { build(:marketplace_checkout, cart: cart) }
 
   before { create(:stripe_utility, space: space) }

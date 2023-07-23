@@ -1,7 +1,5 @@
 require "rails_helper"
 RSpec.describe Marketplace::MarketplacesController, type: :request do
-  include Spec::Marketplace::CommonLets
-
   describe "#edit" do
     subject(:executed_response) {
       get polymorphic_path(marketplace.location(:edit))

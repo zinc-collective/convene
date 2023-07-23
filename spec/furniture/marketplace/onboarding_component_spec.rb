@@ -3,8 +3,6 @@ require "rails_helper"
 RSpec.describe Marketplace::OnboardingComponent, type: :component do
   subject(:output) { render_inline(component) }
 
-  include Spec::Marketplace::CommonLets
-
   let(:component) { described_class.new(marketplace: marketplace, current_person: operator) }
 
   delegate :link_to, :t, to: :component

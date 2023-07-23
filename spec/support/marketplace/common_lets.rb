@@ -15,3 +15,11 @@ module Spec
     end
   end
 end
+
+RSpec.configure do |config|
+  config.define_derived_metadata(file_path: %r{spec/furniture/marketplace}) do |metadata|
+    metadata[:marketplace] = true
+  end
+
+  config.include Spec::Marketplace::CommonLets, marketplace: true
+end

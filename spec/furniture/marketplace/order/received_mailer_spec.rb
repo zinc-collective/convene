@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Order::ReceivedMailer, type: :mailer do
-  include Spec::Marketplace::CommonLets
-
   let(:order) { build(:marketplace_order, placed_at: 1.hour.ago, marketplace: marketplace) }
 
   describe "#notification" do

@@ -3,8 +3,6 @@ require "rails_helper"
 RSpec.describe Marketplace::MarketplacePolicy, type: :policy do
   subject { described_class }
 
-  include Spec::Marketplace::CommonLets
-
   permissions :index?, :show? do
     it { is_expected.to permit(member, marketplace) }
     it { is_expected.to permit(neighbor, marketplace) }

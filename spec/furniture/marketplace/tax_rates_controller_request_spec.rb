@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::TaxRatesController, type: :request do
-  include Spec::Marketplace::CommonLets
-
   subject(:result) do
     perform_request
     response

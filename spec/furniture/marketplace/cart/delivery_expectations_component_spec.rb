@@ -1,8 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Cart::DeliveryExpectationsComponent, type: :component do
-  include Spec::Marketplace::CommonLets
-
   subject(:output) { render_inline(component) }
 
   let(:component) { described_class.new(cart: cart, current_person: operator) }

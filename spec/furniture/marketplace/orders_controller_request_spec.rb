@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::OrdersController, type: :request do
-  include Spec::Marketplace::CommonLets
   let(:order) { create(:marketplace_order, marketplace: marketplace, delivery_address: "123 N West St") }
 
   describe "#show" do
