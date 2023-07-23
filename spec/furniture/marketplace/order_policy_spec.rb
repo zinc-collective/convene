@@ -35,17 +35,17 @@ RSpec.describe Marketplace::OrderPolicy, type: :policy do
   describe Marketplace::OrderPolicy::Scope do
     subject(:results) { described_class.new(actor, Marketplace::Order).resolve }
 
-    let!(:guest_order) { create(:marketplace_order, marketplace: marketplace, shopper: create(:marketplace_shopper)) }
+    let!(:guest_order) { create(:marketplace_order, marketplace: marketplace, shopper: guest.find_or_create_shopper) }
     let!(:neighbor_order) { create(:marketplace_order, marketplace: marketplace, shopper: create(:marketplace_shopper, person: neighbor)) }
 
     context "when an operator" do
-      let(:actor) { create(:marketplace_shopper, person: operator) }
+      let(:actor) { operator }
 
       it { is_expected.to contain_exactly(guest_order, neighbor_order) }
     end
 
     context "when the neighbor who placed the order" do
-      let(:actor) { neighbor_order.shopper }
+      let(:actor) { neighbor }
 
       it { is_expected.to contain_exactly(neighbor_order) }
     end
@@ -56,13 +56,13 @@ RSpec.describe Marketplace::OrderPolicy, type: :policy do
         create(:marketplace_order, marketplace: marketplace, shopper: create(:marketplace_shopper))
       end
 
-      let(:actor) { guest_order.shopper }
+      let(:actor) { guest }
 
       it { is_expected.to contain_exactly(guest_order) }
     end
 
     context "when a member of the space" do
-      let(:actor) { create(:marketplace_shopper, person: member) }
+      let(:actor) { member }
 
       it { is_expected.to contain_exactly(guest_order, neighbor_order) }
     end

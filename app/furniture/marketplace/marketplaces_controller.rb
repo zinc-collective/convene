@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class MarketplacesController < FurnitureController
-    expose(:marketplace, model: Marketplace)
-
+  class MarketplacesController < Controller
     def show
       authorize(marketplace)
     end

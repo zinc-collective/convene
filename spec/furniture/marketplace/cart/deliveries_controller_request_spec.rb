@@ -47,7 +47,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
     end
 
     context "when a `Neighbor`" do
-      let(:person) { create(:person) }
+      let(:person) { create(:marketplace_person) }
 
       before { sign_in(space, person) }
 

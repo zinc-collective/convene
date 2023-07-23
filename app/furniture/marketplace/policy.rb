@@ -28,10 +28,11 @@ class Marketplace
       def self.included(spec)
         spec.let(:marketplace) { create(:marketplace) }
         spec.let(:membership) { create(:membership, space: marketplace.room.space) }
-        spec.let(:member) { membership.member }
-        spec.let(:neighbor) { create(:person) }
-        spec.let(:operator) { create(:person, operator: true) }
-        spec.let(:guest) { Guest.new }
+        spec.let(:member) { membership.member.becomes(Person) }
+        spec.let(:neighbor) { create(:marketplace_person) }
+        spec.let(:operator) { create(:marketplace_person, operator: true) }
+        spec.let(:guest) { Guest.new(session: session) }
+        spec.let(:session) { {} }
       end
     end
   end

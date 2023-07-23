@@ -2,14 +2,8 @@
 
 class Marketplace
   class OrderPolicy < Policy
-    class Scope
-      attr_accessor :scope, :shopper
-      delegate :person, to: :shopper
-
-      def initialize(shopper, scope)
-        self.scope = scope
-        self.shopper = shopper
-      end
+    class Scope < ApplicationScope
+      delegate :shopper, to: :person
 
       def resolve
         return scope.all if person&.operator?

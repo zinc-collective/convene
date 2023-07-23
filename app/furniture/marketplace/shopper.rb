@@ -4,7 +4,7 @@ class Marketplace
   class Shopper < Record
     self.table_name = "marketplace_shoppers"
 
-    belongs_to :person, optional: true
+    belongs_to :person, optional: true, inverse_of: :shopper
     delegate :email, to: :person, allow_nil: true
 
     has_many :carts, inverse_of: :shopper

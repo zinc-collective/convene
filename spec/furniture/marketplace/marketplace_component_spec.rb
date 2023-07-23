@@ -5,7 +5,7 @@ RSpec.describe Marketplace::MarketplaceComponent, type: :component do
 
   let(:component) { described_class.new(marketplace: marketplace, current_person: current_person) }
   let(:marketplace) { create(:marketplace, :ready_for_shopping) }
-  let(:current_person) { Guest.new }
+  let(:current_person) { Marketplace::Guest.new(session: {}) }
 
   delegate :dom_id, to: :component
 
