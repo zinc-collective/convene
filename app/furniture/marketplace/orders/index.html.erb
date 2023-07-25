@@ -1,5 +1,5 @@
 <%- breadcrumb :marketplace_orders, marketplace %>
-<%- @pagy, @records = pagy(orders) %>
+<%- @pagy, @records = pagy(orders.paid) %>
 
 <div class="mx-auto w-full max-w-prose">
   <%= render @records %>
