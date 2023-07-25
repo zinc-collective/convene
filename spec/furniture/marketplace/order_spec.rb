@@ -10,6 +10,14 @@ RSpec.describe Marketplace::Order, type: :model do
   it { is_expected.to belong_to(:shopper).inverse_of(:orders) }
   it { is_expected.to belong_to(:delivery_area).inverse_of(:orders).optional }
 
+  describe "#vendors_share" do
+    subject(:vendors_share) { order.vendors_share }
+
+    let(:order) { build(:marketplace_order, :with_products, payment_processor_fee: 10_00) }
+
+    it { is_expected.to eq(order.product_total - order.payment_processor_fee) }
+  end
+
   describe "#price_total" do
     subject(:price_total) { order.price_total }
 
