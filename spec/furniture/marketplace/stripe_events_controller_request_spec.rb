@@ -5,7 +5,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
   let(:marketplace) { create(:marketplace, :with_stripe_utility, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234") }
   let(:space) { marketplace.space }
   let(:member) { create(:membership, space: space).member }
-  let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout) }
+  let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, marketplace: marketplace) }
 
   let(:stripe_event) do
     double(Stripe::Event, type: "checkout.session.completed",
@@ -33,8 +33,6 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
   describe "#create" do
     subject(:call) do
-      sign_in(space, member)
-
       post polymorphic_path(marketplace.location(child: :stripe_events)), headers: {HTTP_STRIPE_SIGNATURE: "sig_1234"}
       response
     end
@@ -49,6 +47,23 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       let(:stripe_event) { double(Stripe::Event, type: "a.weird.event") }
 
       specify { expect { call }.to raise_error(Marketplace::UnexpectedStripeEventTypeError) }
+    end
+
+    context "when the order is not in the marketplace" do
+      let(:payment_intent) do
+        double(Stripe::PaymentIntent, latest_charge: "ch_1234",
+          transfer_group: create(:marketplace_order, :with_products, status: :pre_checkout).id)
+      end
+
+      it "does not transfer anything or send any emails" do
+        call
+
+        expect(response).to be_no_content
+        assert_no_enqueued_emails
+        expect(order.reload.placed_at).to be_nil
+
+        expect(Stripe::Transfer).not_to(have_received(:create))
+      end
     end
   end
 end

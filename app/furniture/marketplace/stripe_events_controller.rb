@@ -14,9 +14,9 @@ class Marketplace
       when "checkout.session.completed"
         payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
 
-        order = Order.find(payment_intent.transfer_group)
+        order = marketplace.orders.find_by(id: payment_intent.transfer_group)
 
-        return if order.paid?
+        return if order.nil? || order.paid?
 
         latest_charge = Stripe::Charge.retrieve(payment_intent.latest_charge, api_key: marketplace.stripe_api_key)
         balance_transaction = Stripe::BalanceTransaction.retrieve(latest_charge.balance_transaction, api_key: marketplace.stripe_api_key)
