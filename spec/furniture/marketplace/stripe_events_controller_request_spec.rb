@@ -2,10 +2,10 @@ require "rails_helper"
 # `Stripe` gem doesn't support verified doubles for some reason...
 # rubocop:disable RSpec/VerifiedDoubles
 RSpec.describe Marketplace::StripeEventsController, type: :request do
-  let(:marketplace) { create(:marketplace, :with_stripe_utility, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234") }
+  let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_notification_methods, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234") }
   let(:space) { marketplace.space }
   let(:member) { create(:membership, space: space).member }
-  let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, marketplace: marketplace) }
+  let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, contact_email: "test@example.com", marketplace: marketplace) }
 
   let(:stripe_event) do
     double(Stripe::Event, type: "checkout.session.completed",
@@ -38,7 +38,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       response
     end
 
-    it "notifies the shopper and vendor, as well as sends the payment" do
+    it "transfers the money automatically and notifies the buyer and seller" do
       expect { call }.to(have_enqueued_mail(Marketplace::Order::ReceivedMailer, :notification).with(order)
       .and(have_enqueued_mail(Marketplace::Order::PlacedMailer, :notification).with(order))
       .and(change(order, :placed_at).from(nil)))
@@ -47,8 +47,13 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       expect(order.events).to exist(description: "Notifications to Vendor and Distributor Sent")
       expect(order.events).to exist(description: "Notification to Buyer Sent")
 
-      expect(Stripe::Transfer).to(have_received(:create).with({amount: order.price_total.cents - balance_transaction.fee, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key}))
+      expect(order).to be_paid
+      expect(order.payment_processor_fee_cents).to(eq(balance_transaction.fee))
+
+      perform_enqueued_jobs(only: Marketplace::SplitJob)
+
       expect(order.events).to exist(description: "Payment Split")
+      expect(Stripe::Transfer).to(have_received(:create).with({amount: order.vendors_share, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key}))
     end
 
     context "when stripe sends us an event we can't handle" do
