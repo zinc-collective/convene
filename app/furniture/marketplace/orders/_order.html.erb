@@ -1,6 +1,6 @@
 <%= render CardComponent.new(classes: "w-full grid grid-cols-6 mt-4") do %>
   <h3 class="col-span-6 sm:col-span-3 text-base">
-    <%= link_to((order.placed_at.presence || order.created_at).to_fs(:long_ordinal), order.location) %>
+    <%= link_to(l(order.placed_at.presence || order.created_at, format: :long_ordinal), order.location) %>
   </h3>
 
   <div class="col-span-6 sm:col-span-3 mb-2 sm:text-right">
