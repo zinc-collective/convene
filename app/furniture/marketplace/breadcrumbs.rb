@@ -19,7 +19,7 @@ end
 
 crumb :marketplace_order do |order|
   parent :marketplace_orders, order.marketplace
-  link "Order from #{order.created_at.to_fs(:long_ordinal)}", order.location
+  link "Order from #{l(order.created_at, format: :long_ordinal)}", order.location
 end
 
 crumb :marketplace_orders do |marketplace|

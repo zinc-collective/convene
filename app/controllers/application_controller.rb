@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   after_action :verify_authorized, except: [:index] # rubocop:disable Rails/LexicallyScopedActionFilter
   after_action :verify_policy_scoped
+  include Neighborhood::TimeZoneMixin
 
   include Pagy::Backend
 
