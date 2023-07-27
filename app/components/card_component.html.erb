@@ -1,9 +1,12 @@
-<div <%== attributes(classes: card_classes) %>>
-  <%= content %>
+<div class="<%== card_classes_wrapper %>">
+  <% if content? %>
+    <div <%== attributes(classes: card_classes_content) %>">
+      <%= content %>
+    </div>
+  <% end %>
+  <% if footer? %>
+    <div class="<%== card_classes_footer %>">
+      <%= footer %>
+    </div>
+  <% end %>
 </div>
-
-<% if footer? %>
-  <div class="bg-purple-50 p-4 sm:p-6 rounded-lg rounded-t-none shadow">
-    <%= footer %>
-  </div>
-<% end %>
