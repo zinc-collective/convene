@@ -26,4 +26,8 @@
   <hr class="col-span-6 mb-2" />
   <div class="col-span-4">Total</div>
   <div class="col-span-2 text-right"><%= humanized_money_with_symbol(order.price_total) %></div>
+
+  <%- if policy(order.events).index? %>
+    <%= link_to(t('marketplace.order.events.index.link_to'), order.location(child: :events)) %>
+  <%- end %>
 <%- end %>
