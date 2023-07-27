@@ -23,7 +23,7 @@ class CardComponent < ApplicationComponent
       "bg-purple-50",
       "p-4",
       "sm:p-6",
-      ("rounded-t-none" unless content.blank?)
+      ("rounded-t-none" unless content.present?)
     ].compact.join(" ")
   end
 end
