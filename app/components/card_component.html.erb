@@ -1,5 +1,8 @@
 <div class="<%== card_classes_wrapper %>">
-  <% if content? %>
+  <%#
+    NOTE: content? is not working as described, and is returning a proc in some cases rather than a boolean
+  %>
+  <% if content.present? %>
     <div <%== attributes(classes: card_classes_content) %>">
       <%= content %>
     </div>
