@@ -9,7 +9,7 @@ class Journal
 
     attribute :headline, :string
     validates :headline, presence: true
-    attribute :body, :string
+    attribute :body, :string, default: ""
     validates :body, presence: true
 
     # URI-friendly description of the entry.
@@ -32,6 +32,11 @@ class Journal
     before_save :extract_keywords, if: :will_save_change_to_body?
 
     scope :matching_keywords, ->(keywords) { where("keywords::text[] && ARRAY[?]::text[]", keywords) }
+
+    def migrate_to(journal:, keywords: [])
+      new_body = keywords.present? ? body + "\n##{keywords.join(" #")}" : body
+      update(journal: journal, body: new_body)
+    end
 
     def published?
       published_at.present?
