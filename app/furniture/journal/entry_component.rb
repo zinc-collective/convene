@@ -13,7 +13,7 @@ class Journal
     end
 
     private def postprocess(text)
-      entry.keywords.map do |keyword|
+      entry.keywords.by_length.map do |keyword|
         linkify_keyword(text, keyword)
       end
 
@@ -22,13 +22,13 @@ class Journal
 
     private def linkify_keyword(text, keyword)
       text.gsub!(keywords_regex(keyword)) do |match|
-        link_to(match, keyword.location)
+        link_to(match.gsub("#", "&#35;").html_safe, keyword.location) # rubocop:disable Rails/OutputSafety
       end
     end
 
-    # We sort the keywords longest to shortest because regex matches groups left-to-right
+    # We sort the variants longest to shortest because regex matches groups left-to-right
     private def keywords_regex(keyword)
-      /\#(#{keyword.canonical_with_aliases.sort.reverse.join("|")})/i
+      /(\##{keyword.canonical_with_aliases.sort.join("|")})/i
     end
 
     private def published_at
