@@ -23,6 +23,7 @@ class CardComponent < ApplicationComponent
       "bg-purple-50",
       "p-4",
       "sm:p-6",
+      # content? is not always working as described, and is returning a proc in some cases rather than a boolean
       ("rounded-t-none" unless content.present?)
     ].compact.join(" ")
   end
