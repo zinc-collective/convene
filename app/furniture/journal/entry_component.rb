@@ -28,7 +28,7 @@ class Journal
 
     # We sort the variants longest to shortest because regex matches groups left-to-right
     private def keywords_regex(keyword)
-      /(\##{keyword.canonical_with_aliases.sort.reverse.join("|\#")})/i
+      /(\##{keyword.canonical_with_aliases.sort.reverse.join("|#")})/i
     end
 
     private def published_at
