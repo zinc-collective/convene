@@ -3,14 +3,14 @@ class CardComponent < ApplicationComponent
 
   private
 
-  def card_classes_content
+  def content_classes
     [
       "p-4",
       "sm:p-6"
     ].compact.join(" ")
   end
 
-  def card_classes_wrapper
+  def wrapper_classes
     [
       "shadow",
       "rounded-lg",
@@ -18,12 +18,12 @@ class CardComponent < ApplicationComponent
     ].compact.join(" ")
   end
 
-  def card_classes_footer
+  def footer_classes
     [
       "bg-purple-50",
       "p-4",
       "sm:p-6",
-      ("rounded-t-none" unless content.blank?)
+      ("rounded-t-none" if content?)
     ].compact.join(" ")
   end
 end
