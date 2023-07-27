@@ -22,9 +22,12 @@ class Marketplace
         balance_transaction = Stripe::BalanceTransaction.retrieve(latest_charge.balance_transaction, api_key: marketplace.stripe_api_key)
 
         order.update(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: balance_transaction.fee)
+        order.events.create(description: "Payment Received")
 
         Order::ReceivedMailer.notification(order).deliver_later
+        order.events.create(description: "Notifications to Vendor and Distributor Sent")
         Order::PlacedMailer.notification(order).deliver_later
+        order.events.create(description: "Notification to Buyer Sent")
 
         Stripe::Transfer.create({
           # Leave the Stripe Fees in the `Distributor`'s account
@@ -33,6 +36,7 @@ class Marketplace
           destination: marketplace.vendor_stripe_account,
           transfer_group: order.id
         }, {api_key: marketplace.stripe_api_key})
+        order.events.create(description: "Payment Split")
       else
         raise UnexpectedStripeEventTypeError, event.type
       end

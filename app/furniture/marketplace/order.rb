@@ -12,6 +12,7 @@ class Marketplace
 
     has_many :ordered_products, inverse_of: :order, foreign_key: :cart_id, dependent: :destroy
     has_many :products, through: :ordered_products, inverse_of: :orders
+    has_many :events, inverse_of: :regarding, dependent: :destroy, as: :regarding
 
     has_encrypted :delivery_address
     has_encrypted :contact_phone_number

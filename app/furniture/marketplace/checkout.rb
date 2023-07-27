@@ -22,7 +22,9 @@ class Marketplace
         }
       }, {
         api_key: marketplace.stripe_api_key
-      })
+      }).tap do |checkout_session|
+        cart.events.create(description: "Entered Checkout")
+      end
     end
 
     private def stripe_line_items

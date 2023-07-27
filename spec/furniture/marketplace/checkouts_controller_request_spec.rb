@@ -30,6 +30,11 @@ RSpec.describe Marketplace::Checkout, type: :request do
         allow_any_instance_of(ApplicationController).to receive(:session).and_return({guest_shopper_id: cart.shopper.id})
       end
 
+      it "logs that the Cart has entered the Checkout flow" do
+        perform_request
+        expect(cart.events).to exist(description: "Entered Checkout")
+      end
+
       it "Redirects to Stripe" do
         expect(perform_request).to redirect_to(stripe_checkout_session.url)
       end
