@@ -1,0 +1,8 @@
+<%= render CardComponent.new(classes: "text-lg") do %>
+  <p>
+    On no! Something went wrong!
+  </p>
+  <p>
+    If this keeps happening, please contact us at <%= ENV.fetch('EMAIL_DEFAULT_FROM')%>
+  </p>
+<% end %>
