@@ -48,8 +48,8 @@ FactoryBot.define do
     end
 
     trait :with_stripe_account do
-      stripe_account { "act_#{SecureRandom.hex(8)}" }
-      stripe_webhook_endpoint { "http://act_#{stripe_account}.example.com/" }
+      stripe_account { ENV.fetch("MARKETPLACE_VENDOR_STRIPE_ACCOUNT", "act_#{SecureRandom.hex(8)}") }
+      stripe_webhook_endpoint { "http://#{stripe_account}.example.com/" }
       stripe_webhook_endpoint_secret { "SECRET_#{SecureRandom.hex(8)}" }
     end
 
