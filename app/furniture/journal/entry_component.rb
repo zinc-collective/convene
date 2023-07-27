@@ -14,13 +14,13 @@ class Journal
 
     private def postprocess(text)
       entry.keywords.map do |keyword|
-        replace_keyword(text, keyword)
+        linkify_keyword(text, keyword)
       end
 
       text
     end
 
-    private def replace_keyword(text, keyword)
+    private def linkify_keyword(text, keyword)
       text.gsub!(keywords_regex(keyword)) do |match|
         link_to(match, keyword.location)
       end
