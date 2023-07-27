@@ -24,7 +24,7 @@ class CardComponent < ApplicationComponent
       "p-4",
       "sm:p-6",
       # content? is not always working as described, and is returning a proc in some cases rather than a boolean
-      ("rounded-t-none" unless content.present?)
+      ("rounded-t-none" if content.blank?)
     ].compact.join(" ")
   end
 end
