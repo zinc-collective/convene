@@ -22,6 +22,11 @@ class Marketplace
       paid: "paid"
     }
 
+    monetize :payment_processor_fee_cents
+    def vendors_share
+      product_total - payment_processor_fee
+    end
+
     def product_total
       ordered_products.sum(0, &:price_total)
     end

@@ -21,7 +21,7 @@ class Marketplace
         latest_charge = Stripe::Charge.retrieve(payment_intent.latest_charge, api_key: marketplace.stripe_api_key)
         balance_transaction = Stripe::BalanceTransaction.retrieve(latest_charge.balance_transaction, api_key: marketplace.stripe_api_key)
 
-        order.update(status: :paid, placed_at: DateTime.now)
+        order.update(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: balance_transaction.fee)
 
         Order::ReceivedMailer.notification(order).deliver_later
         Order::PlacedMailer.notification(order).deliver_later
