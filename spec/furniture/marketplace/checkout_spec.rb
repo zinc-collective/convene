@@ -5,7 +5,7 @@ RSpec.describe Marketplace::Checkout do
 
   describe "#create_stripe_session" do
     let(:delivery_area) { create(:marketplace_delivery_area) }
-    let(:cart) { build(:marketplace_cart, delivery_area: delivery_area, marketplace: delivery_area.marketplace) }
+    let(:cart) { create(:marketplace_cart, delivery_area: delivery_area, marketplace: delivery_area.marketplace) }
 
     before do
       allow(Stripe::Checkout::Session).to receive(:create)

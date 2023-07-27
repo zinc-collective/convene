@@ -16,6 +16,12 @@ class Marketplace
 
     has_many :cart_products, dependent: :destroy, inverse_of: :cart
     has_many :products, through: :cart_products, inverse_of: :carts
+    has_many :events, as: :regarding, inverse_of: :regarding, dependent: :destroy
+    after_create :log_creation
+
+    def log_creation
+      events.create!(description: "Cart Created")
+    end
 
     # this feels like it is starting to want to be it's own model...
     has_encrypted :delivery_address

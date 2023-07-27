@@ -34,14 +34,22 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
   describe "#create" do
     subject(:call) do
       post polymorphic_path(marketplace.location(child: :stripe_events)), headers: {HTTP_STRIPE_SIGNATURE: "sig_1234"}
+      order.reload
       response
     end
 
-    specify { call && expect(Stripe::Transfer).to(have_received(:create).with({amount: order.price_total.cents - balance_transaction.fee, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key})) }
+    it "notifies the shopper and vendor, as well as sends the payment" do
+      expect { call }.to(have_enqueued_mail(Marketplace::Order::ReceivedMailer, :notification).with(order)
+      .and(have_enqueued_mail(Marketplace::Order::PlacedMailer, :notification).with(order))
+      .and(change(order, :placed_at).from(nil)))
 
-    specify { expect { call }.to have_enqueued_mail(Marketplace::Order::ReceivedMailer, :notification).with(order) }
-    specify { expect { call }.to have_enqueued_mail(Marketplace::Order::PlacedMailer, :notification).with(order) }
-    specify { expect { call }.to change { order.reload.placed_at }.from(nil) }
+      expect(order.events).to exist(description: "Payment Received")
+      expect(order.events).to exist(description: "Notifications to Vendor and Distributor Sent")
+      expect(order.events).to exist(description: "Notification to Buyer Sent")
+
+      expect(Stripe::Transfer).to(have_received(:create).with({amount: order.price_total.cents - balance_transaction.fee, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key}))
+      expect(order.events).to exist(description: "Payment Split")
+    end
 
     context "when stripe sends us an event we can't handle" do
       let(:stripe_event) { double(Stripe::Event, type: "a.weird.event") }
