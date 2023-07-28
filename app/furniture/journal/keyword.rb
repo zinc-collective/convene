@@ -7,6 +7,8 @@ class Journal
     validates :canonical_keyword, presence: true, uniqueness: {case_sensitive: false, scope: :journal_id}
     belongs_to :journal, inverse_of: :keywords
 
+    scope(:by_length, -> { order("LENGTH(canonical_keyword) DESC") })
+
     scope(:search, lambda do |*keywords|
       where("lower(aliases::text)::text[] && ARRAY[?]::text[]", keywords.map(&:downcase))
           .or(where("lower(canonical_keyword) IN (?)", keywords.map(&:downcase)))
