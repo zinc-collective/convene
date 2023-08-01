@@ -42,7 +42,7 @@
     "lodash": "^4.17.21",
     "prettier": "^3.0.0",
     "promise-retry": "^2.0.1",
-    "selenium-webdriver": "^4.10.0",
+    "selenium-webdriver": "^4.11.1",
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
