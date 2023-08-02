@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :utility do
     sequence(:name) { |n| "#{utility_slug.to_s.humanize} #{n}" }
-    association(:space)
+    space
 
     utility_slug { "null" }
   end
