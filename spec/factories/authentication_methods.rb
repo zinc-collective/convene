@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :authentication_method do
-    association :person
+    person
 
     contact_method { :email }
     contact_location { person.email }

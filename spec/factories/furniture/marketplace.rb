@@ -99,7 +99,7 @@ FactoryBot.define do
 
     trait :with_person do
       transient do
-        person { build(:person) }
+        person { association(:person) }
       end
       shopper { association(:marketplace_shopper, person: person) }
     end
@@ -168,8 +168,8 @@ FactoryBot.define do
   end
 
   factory :marketplace_ordered_product, class: "Marketplace::OrderedProduct" do
-    association(:product, factory: :marketplace_product)
-    association(:order, factory: :marketplace_order)
+    product factory: :marketplace_product
+    order factory: :marketplace_order
     quantity { 1 }
   end
 
