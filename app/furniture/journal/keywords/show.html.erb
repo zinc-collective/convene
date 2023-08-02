@@ -4,8 +4,10 @@
 <%- end %>
 
 <h2>Entries about <span class="italic"><%= keyword.canonical_keyword %></span></h2>
+<%= render Journal::NewEntryButtonComponent.new(keyword: keyword) %>
 <ul>
   <%- policy_scope(keyword.entries).each do |entry|%>
     <li><%= link_to(entry.headline, entry.location) %></li>
   <%- end %>
 </ul>
+<%= render Journal::NewEntryButtonComponent.new(keyword: keyword) %>

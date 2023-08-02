@@ -1,10 +1,5 @@
 <section class="max-w-3xl mx-auto">
-  <%- new_entry = journal.entries.new %>
-  <%- if policy(new_entry).new? %>
-    <div class="text-center p-2">
-      <%= link_to "New Journal Entry", journal.location(:new, child: :entry) %>
-    </div>
-  <%- end %>
+  <%= render Journal::NewEntryButtonComponent.new(journal: journal) %>
 
   <div class="flex flex-wrap">
     <%- @pagy, @entries = pagy(policy_scope(journal.entries.recent)) %>
@@ -14,9 +9,5 @@
 
   <%== pagy_nav(@pagy, nav_extra: 'flex justify-between') %>
 
-  <%- if policy(new_entry).new? %>
-    <footer class="text-center p-2">
-      <%= link_to "New Journal Entry", journal.location(:new, child: :entry) %>
-    </footer>
-  <%- end %>
+  <%= render Journal::NewEntryButtonComponent.new(journal: journal) %>
 </section>

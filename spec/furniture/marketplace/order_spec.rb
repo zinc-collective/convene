@@ -9,6 +9,7 @@ RSpec.describe Marketplace::Order, type: :model do
 
   it { is_expected.to belong_to(:shopper).inverse_of(:orders) }
   it { is_expected.to belong_to(:delivery_area).inverse_of(:orders).optional }
+  it { is_expected.to have_many(:events).inverse_of(:regarding).dependent(:destroy) }
 
   describe "#vendors_share" do
     subject(:vendors_share) { order.vendors_share }

@@ -1,0 +1,5 @@
+en:
+  journal:
+    entries:
+      new:
+        link_to: "New Journal Entry"

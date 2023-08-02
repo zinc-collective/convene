@@ -10,6 +10,15 @@ RSpec.describe Marketplace::Cart, type: :model do
   it { is_expected.to belong_to(:shopper).inverse_of(:carts) }
 
   it { is_expected.to belong_to(:delivery_area).inverse_of(:carts).optional }
+  it { is_expected.to have_many(:events).inverse_of(:regarding).dependent(:destroy) }
+
+  describe ".after_create" do
+    it "logs an event telling us it was created" do
+      cart = build(:marketplace_cart)
+      cart.save
+      expect(cart.events).to exist(description: "Cart Created")
+    end
+  end
 
   describe "#price_total" do
     subject(:price_total) { cart.price_total }
