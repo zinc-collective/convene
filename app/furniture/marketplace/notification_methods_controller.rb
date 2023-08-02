@@ -20,6 +20,8 @@ class Marketplace
     end
 
     def create
+      # if notification_method.contact_method == 'square'
+      # marketplace.update()
       if authorize(notification_method).save
         redirect_to marketplace.location(child: :notification_methods)
       else

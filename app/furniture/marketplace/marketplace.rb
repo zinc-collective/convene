@@ -21,6 +21,9 @@ class Marketplace
     alias_method :vendor_stripe_account, :stripe_account
     setting :stripe_webhook_endpoint
     setting :stripe_webhook_endpoint_secret
+    setting :square_account
+    setting :square_location
+    has_encrypted :square_api_key
 
     def has_controller_edit?
       true
