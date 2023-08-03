@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_02_232010) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "room_id"
-    t.text "square_access_token_ciphertext"
+    t.text "configuration_ciphertext"
     t.index ["room_id"], name: "index_furnitures_on_room_id"
   end
 

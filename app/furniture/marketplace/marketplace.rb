@@ -25,7 +25,14 @@ class Marketplace
     # Settings for Square Order Notifications
     setting :square_account_id
     setting :square_location_id
-    has_encrypted :square_access_token
+
+    def square_access_token=square_access_token
+      configuration["square_access_token"] = square_access_token
+    end
+
+    def square_access_token
+      configuration["square_access_token"]
+    end
 
     def has_controller_edit?
       true
