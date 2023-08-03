@@ -92,6 +92,7 @@ gem "decent_exposure", "~> 3.0"
 # Utility support
 gem "money-rails"
 gem "stripe"
+gem "square.rb"
 
 # Workers and Background Jobs
 gem "sidekiq"
