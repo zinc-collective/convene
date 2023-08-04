@@ -28,7 +28,7 @@ class Furniture < ApplicationRecord
   # for a Marketplace
   has_encrypted :secrets, type: :json
 
-  # Forces consistent access, rather than having to work around a nil value
+  # Forces consistent access, rather than having to work with a nil value
   after_initialize do
     self.secrets ||= {}
   end
