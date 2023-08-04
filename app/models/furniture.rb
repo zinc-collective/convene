@@ -26,7 +26,7 @@ class Furniture < ApplicationRecord
 
   # Used by child classes that require storage of secrets, like Square API keys
   # for a Marketplace
-  has_encrypted :configuration, type: :json
+  has_encrypted :secrets, type: :json
 
   def gizmo
     @gizmo ||= Furniture.from_placement(self)

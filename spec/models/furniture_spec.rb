@@ -64,4 +64,16 @@ RSpec.describe Furniture do
       expect(furniture.name).to eq("some default value")
     end
   end
+
+  describe "#secrets" do
+    it "starts as an empty hash" do
+      expect(build(:furniture).secrets).to be_nil
+    end
+
+    it "is encrypted" do
+      utility = described_class.new(secrets: {api_key: "asdf"})
+      expect(utility.secrets).to eq("api_key" => "asdf")
+      expect(utility.secrets_ciphertext).not_to be_empty
+    end
+  end
 end

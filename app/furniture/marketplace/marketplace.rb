@@ -23,11 +23,11 @@ class Marketplace
     setting :stripe_webhook_endpoint_secret
 
     def square_access_token=square_access_token
-      configuration["square_access_token"] = square_access_token
+      secrets["square_access_token"] = square_access_token
     end
 
     def square_access_token
-      configuration["square_access_token"]
+      secrets["square_access_token"]
     end
 
     def has_controller_edit?
