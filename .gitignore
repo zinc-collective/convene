@@ -31,3 +31,6 @@ app/assets/builds/
 .yardoc
 
 .devcontainer/output
+
+# Bust A Gem VSCode extension
+TAGS
