@@ -67,7 +67,7 @@ RSpec.describe Furniture do
 
   describe "#secrets" do
     it "starts as an empty hash" do
-      expect(build(:furniture).secrets).to be_nil
+      expect(build(:furniture).secrets).to eq({})
     end
 
     it "is encrypted" do
