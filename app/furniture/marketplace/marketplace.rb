@@ -22,6 +22,17 @@ class Marketplace
     setting :stripe_webhook_endpoint
     setting :stripe_webhook_endpoint_secret
 
+    # Square order notifications integration
+    setting :square_location_id
+
+    def square_access_token=square_access_token
+      secrets["square_access_token"] = square_access_token
+    end
+
+    def square_access_token
+      secrets["square_access_token"]
+    end
+
     def has_controller_edit?
       true
     end

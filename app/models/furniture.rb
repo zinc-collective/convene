@@ -24,6 +24,15 @@ class Furniture < ApplicationRecord
 
   validates :furniture_kind, presence: true
 
+  # Used by child classes that require storage of secrets, like Square API keys
+  # for a Marketplace
+  has_encrypted :secrets, type: :json
+
+  # Forces consistent access, rather than having to work with a nil value
+  after_initialize do
+    self.secrets ||= {}
+  end
+
   def gizmo
     @gizmo ||= Furniture.from_placement(self)
   end
