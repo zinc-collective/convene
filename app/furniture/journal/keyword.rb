@@ -7,12 +7,18 @@ class Journal
     validates :canonical_keyword, presence: true, uniqueness: {case_sensitive: false, scope: :journal_id}
     belongs_to :journal, inverse_of: :keywords
 
+    attribute :aliases, default: []
+
     scope(:by_length, -> { order("LENGTH(canonical_keyword) DESC") })
 
     scope(:search, lambda do |*keywords|
       where("lower(aliases::text)::text[] && ARRAY[?]::text[]", keywords.map(&:downcase))
           .or(where("lower(canonical_keyword) IN (?)", keywords.map(&:downcase)))
     end)
+
+    def merge(other)
+      Merge.call(into: self, from: other)
+    end
 
     def entries
       journal.entries.matching_keywords(canonical_with_aliases)
