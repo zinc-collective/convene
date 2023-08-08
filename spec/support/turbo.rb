@@ -5,7 +5,7 @@ module Spec
     end
 
     class HaveRenderedTurboStream
-      include MiniTest::Assertions
+      include Minitest::Assertions
       include ::Turbo::TestAssertions
       include Rails::Dom::Testing::Assertions
       include ::ActionDispatch::Assertions::ResponseAssertions
