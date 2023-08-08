@@ -28,7 +28,7 @@ class Furniture < ApplicationRecord
   # for a Marketplace
   has_encrypted :secrets, type: :json
 
-  # Forces consistent access, rather than having to work with a nil value
+  # Setting `secrets` to an empty hash after initialization will force consistent access for developers, rather than having to code around a potential nil value
   after_initialize do
     # The `RankedModel` gem uses
     #   [`ActiveRecord::QueryMethods.select`](https://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-select)
