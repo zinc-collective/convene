@@ -10,9 +10,7 @@ class Marketplace
 
         router.resources :delivery_areas
         router.resources :notification_methods
-        router.resources :orders, only: [:show, :index] do
-          router.resources :events, only: [:index], controller: "order/events"
-        end
+        router.resources :orders, only: [:show, :index]
         router.resources :products
         router.resource :stripe_account, only: [:show, :new, :create]
         router.resources :stripe_events

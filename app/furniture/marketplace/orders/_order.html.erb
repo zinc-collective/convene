@@ -28,6 +28,16 @@
   <div class="col-span-2 text-right"><%= humanized_money_with_symbol(order.price_total) %></div>
 
   <%- if policy(order.events).index? %>
-    <%= link_to(t('marketplace.order.events.index.link_to'), order.location(child: :events)) %>
+    <hr class="col-span-6 my-4" />
+    <div class="col-span-6 text-xs">
+
+      <h3 class="mb-2 text-sm font-bold">Events</h3>
+      <div class="grid grid-cols-2">
+        <%- order.events.each do |event| %>
+          <p><%= event.description%></p>
+          <p class="italic text-right"><%= l(event.created_at, format: :long_ordinal) %></p>
+        <%- end %>
+      </div>
+    </div>
   <%- end %>
 <%- end %>
