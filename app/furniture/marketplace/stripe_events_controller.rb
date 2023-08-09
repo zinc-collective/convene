@@ -33,7 +33,7 @@ class Marketplace
         square_client.orders.create_order(order_body)
         payment_body = build_square_create_order_payment_body(order, marketplace, balance_transaction)
 
-        # NOTE: Square requires that orders are paid in order to show up in the Seller Dashboard
+        # DEV NOTE: Square requires that orders are paid in order to show up in the Seller Dashboard
         square_client.payments.create_payment(payment_body)
 
         order_to_square_order
@@ -106,7 +106,8 @@ class Marketplace
 
     def build_square_create_order_payment_body(order, marketplace, balance_transaction)
       {
-        source_id: "cnon:card-nonce-ok",
+        # TODO
+        source_id: "WHAT_GOES_HERE?",
         idempotency_key: order.idempotency_key,
         amount_money: {
           amount: balance_transaction.amount,
