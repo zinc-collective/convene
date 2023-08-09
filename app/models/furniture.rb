@@ -28,9 +28,14 @@ class Furniture < ApplicationRecord
   # for a Marketplace
   has_encrypted :secrets, type: :json
 
-  # Forces consistent access, rather than having to work with a nil value
+  # Setting `secrets` to an empty hash after initialization will force consistent access for developers, rather than having to code around a potential nil value
   after_initialize do
-    self.secrets ||= {}
+    # The `RankedModel` gem uses
+    #   [`ActiveRecord::QueryMethods.select`](https://api.rubyonrails.org/classes/ActiveRecord/QueryMethods.html#method-i-select)
+    # to do some stuff (Validation?) under the covers while keeping memory usage light... Which is good!
+    # But it also means that we don't have the ciphertext!
+    # So we can't set the secrets in that case (nor would we want to)
+    self.secrets ||= {} if has_attribute?("secrets_ciphertext")
   end
 
   def gizmo

@@ -56,7 +56,7 @@ module Spec
       end
 
       class RenderComponentMatcher
-        include MiniTest::Assertions
+        include Minitest::Assertions
         include Rails::Dom::Testing::Assertions
         attr_accessor :expected_component, :mail, :args, :kwargs, :failing_select
 

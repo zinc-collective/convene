@@ -1,0 +1,21 @@
+{
+  // Default configurations for rdbg installed by the VSCode extension.
+  // Developers may want to customize these settings based on their own
+  // environment or development setup.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "rdbg",
+      "name": "Debug current file with rdbg",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "askParameters": true
+    },
+    {
+      "type": "rdbg",
+      "name": "Attach with rdbg",
+      "request": "attach"
+    }
+  ]
+}

@@ -71,5 +71,7 @@ class SpacesController < ApplicationController
 
   helper_method def current_space
     space.persisted? ? space : nil
+  rescue Pundit::NotAuthorizedError
+    @space
   end
 end

@@ -29,6 +29,8 @@ module ConveneWeb
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.exceptions_app = ->(env) { ErrorsController.action(:show).call(env) }
+
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.session_store :cookie_store, expire_after: 7.days
