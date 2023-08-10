@@ -51,8 +51,8 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       expect(order.payment_processor_fee_cents).to(eq(balance_transaction.fee))
 
       perform_enqueued_jobs(only: Marketplace::SplitJob)
-
-      expect(order.events).to exist(description: "Payment Split")
+      expect(order.events).to exist(description: "Payment Split Attempted")
+      expect(order.events).to exist(description: "Payment Split Completed")
       expect(Stripe::Transfer).to(have_received(:create).with({amount: order.vendors_share, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key}))
     end
 

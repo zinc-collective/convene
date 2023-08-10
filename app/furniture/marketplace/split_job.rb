@@ -9,14 +9,14 @@ class Marketplace
 
     def perform(order:)
       self.order = order
-
+      order.events.create(description: "Payment Split Attempted")
       Stripe::Transfer.create({
         amount: vendors_share,
         currency: "usd",
         destination: vendor_stripe_account,
         transfer_group: order.id
       }, {api_key: stripe_api_key})
-      order.events.create(description: "Payment Split")
+      order.events.create(description: "Payment Split Completed")
     end
   end
 end
