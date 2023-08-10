@@ -2,10 +2,10 @@ require "rails_helper"
 # `Stripe` gem doesn't support verified doubles for some reason...
 # rubocop:disable RSpec/VerifiedDoubles
 RSpec.describe Marketplace::StripeEventsController, type: :request do
-  let(:marketplace) { create(:marketplace, :with_stripe_utility, :with_notification_methods, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234") }
+  let(:marketplace) { create(:marketplace, :with_stripe_utility, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234") }
   let(:space) { marketplace.space }
   let(:member) { create(:membership, space: space).member }
-  let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, contact_email: "test@example.com", marketplace: marketplace) }
+  let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, marketplace: marketplace) }
 
   let(:stripe_event) do
     double(Stripe::Event, type: "checkout.session.completed",
