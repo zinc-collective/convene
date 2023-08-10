@@ -38,7 +38,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       response
     end
 
-    it "transfers the money automatically and notifies the buyer and seller" do
+    it "transfers the money automatically and notifies the buyer and seller" do # rubocop:disable RSpec/ExampleLength
       expect { call }.to(have_enqueued_mail(Marketplace::Order::ReceivedMailer, :notification).with(order)
       .and(have_enqueued_mail(Marketplace::Order::PlacedMailer, :notification).with(order))
       .and(change(order, :placed_at).from(nil)))
