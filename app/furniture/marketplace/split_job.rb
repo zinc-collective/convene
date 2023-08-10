@@ -11,7 +11,7 @@ class Marketplace
       self.order = order
       order.events.create(description: "Payment Split Attempted")
       Stripe::Transfer.create({
-        amount: vendors_share,
+        amount: vendors_share.to_i,
         currency: "usd",
         destination: vendor_stripe_account,
         transfer_group: order.id
