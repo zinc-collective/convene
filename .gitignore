@@ -31,3 +31,5 @@ app/assets/builds/
 .yardoc
 
 .devcontainer/output
+
+TAGS
