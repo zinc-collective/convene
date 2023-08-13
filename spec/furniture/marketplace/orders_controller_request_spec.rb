@@ -16,6 +16,18 @@ RSpec.describe Marketplace::OrdersController, type: :request do
       expect(response.body).to include("123 N Paid St")
       expect(response.body).not_to include("123 W Unpaid St")
     end
+
+    it "shows the Order's Events" do
+      sign_in(space, member)
+      order = create(:marketplace_order, marketplace: marketplace, delivery_address: "123 N Paid St")
+      order.events.create(description: "Order Placed")
+      order.events.create(description: "Order Delivered")
+
+      get polymorphic_path(marketplace.location(child: :orders))
+
+      expect(response.body).to include("Order Placed")
+      expect(response.body).to include("Order Delivered")
+    end
   end
 
   describe "#show" do
