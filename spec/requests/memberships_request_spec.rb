@@ -86,7 +86,9 @@ RSpec.describe "/memberships/" do # rubocop:disable RSpec/DescribeClass
       let(:membership) { create(:membership) }
 
       it "does not delete the membership" do
-        expect { perform_request }.to raise_error(ActiveRecord::RecordNotFound)
+        perform_request
+
+        expect(response).to be_not_found
         expect(membership.reload).to be_present
         expect(membership.reload).not_to be_revoked
       end
