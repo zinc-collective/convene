@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :enforce_ssl
   before_action :ensure_on_byo_domain
 
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
   include Pundit::Authorization
   after_action :verify_authorized, except: [:index] # rubocop:disable Rails/LexicallyScopedActionFilter
   after_action :verify_policy_scoped
