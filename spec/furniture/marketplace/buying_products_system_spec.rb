@@ -64,9 +64,11 @@ describe "Marketplace: Buying Products", type: :system do
   end
 
   def set_delivery_details(delivery_address:, delivery_area:, contact_phone_number:, contact_email:)
+    select(delivery_area.label, from: "cart[delivery_area_id]")
+    click_link_or_button("Save changes")
+
     click_link_or_button("Add delivery details to checkout")
     fill_in("Delivery address", with: delivery_address)
-    select(delivery_area.label, from: "Delivery area")
     fill_in("Contact phone number", with: contact_phone_number)
     fill_in("Contact email", with: contact_email)
     click_link_or_button("Save changes")
