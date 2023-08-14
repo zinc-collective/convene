@@ -9,6 +9,9 @@ class Journal
     expose(:journal, -> { Journal.find(params[:journal_id]) })
     def show
       authorize(keyword)
+      if polymorphic_path(keyword.location) != request.path
+        redirect_to(polymorphic_path(keyword.location))
+      end
     end
   end
 end
