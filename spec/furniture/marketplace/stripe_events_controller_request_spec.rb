@@ -26,7 +26,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     allow(Stripe::Webhook).to receive(:construct_event).with(anything, "sig_1234", marketplace.stripe_webhook_endpoint_secret).and_return(stripe_event)
 
     allow(Stripe::PaymentIntent).to receive(:retrieve).with("pi_1234", anything).and_return(payment_intent)
-    allow(Stripe::Transfer).to receive(:create)
+    allow(Stripe::Transfer).to receive(:create).and_return(double(Stripe::Transfer, id: "st_fake_1234"))
     allow(Stripe::BalanceTransaction).to receive(:retrieve).with("btx_2234", anything).and_return(balance_transaction)
     allow(Stripe::Charge).to receive(:retrieve).with("ch_1234", anything).and_return(charge)
   end
@@ -51,6 +51,9 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       expect(order.payment_processor_fee_cents).to(eq(balance_transaction.fee))
 
       perform_enqueued_jobs(only: Marketplace::SplitJob)
+      order.reload
+
+      expect(order.stripe_transfer_id).to eq("st_fake_1234")
       expect(order.events).to exist(description: "Payment Split Attempted")
       expect(order.events).to exist(description: "Payment Split Completed")
       expect(Stripe::Transfer).to(have_received(:create).with({amount: order.vendors_share.to_i, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key}))
