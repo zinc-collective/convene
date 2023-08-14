@@ -29,14 +29,7 @@ class Marketplace
         Order::PlacedMailer.notification(order).deliver_later
         order.events.create(description: "Notification to Buyer Sent")
 
-        Stripe::Transfer.create({
-          # Leave the Stripe Fees in the `Distributor`'s account
-          amount: order.product_total.cents - balance_transaction.fee,
-          currency: "usd",
-          destination: marketplace.vendor_stripe_account,
-          transfer_group: order.id
-        }, {api_key: marketplace.stripe_api_key})
-        order.events.create(description: "Payment Split")
+        SplitJob.perform_later(order: order)
       else
         raise UnexpectedStripeEventTypeError, event.type
       end
