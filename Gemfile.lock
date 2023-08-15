@@ -275,7 +275,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.3)
+    nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pagy (6.0.4)
@@ -460,7 +460,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    square.rb (30.0.0.20230720)
+    square.rb (31.0.0.20230816)
       apimatic_core (~> 0.3.0)
       apimatic_core_interfaces (~> 0.2.0)
       apimatic_faraday_client_adapter (~> 0.1.0)
