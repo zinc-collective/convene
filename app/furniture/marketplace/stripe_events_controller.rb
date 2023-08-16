@@ -12,16 +12,16 @@ class Marketplace
       case event.type
 
       when "checkout.session.completed"
-        payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
+        # payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
 
-        order = marketplace.orders.find_by(id: payment_intent.transfer_group)
+        order = marketplace.orders.find_by(id: "15e346c8-e42b-4a67-a991-35870db766e1")
 
-        return if order.nil? || order.paid?
+        return if order.nil?
 
-        latest_charge = Stripe::Charge.retrieve(payment_intent.latest_charge, api_key: marketplace.stripe_api_key)
-        balance_transaction = Stripe::BalanceTransaction.retrieve(latest_charge.balance_transaction, api_key: marketplace.stripe_api_key)
+        # latest_charge = Stripe::Charge.retrieve(payment_intent.latest_charge, api_key: marketplace.stripe_api_key)
+        # balance_transaction = Stripe::BalanceTransaction.retrieve(latest_charge.balance_transaction, api_key: marketplace.stripe_api_key)
 
-        order.update!(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: balance_transaction.fee)
+        order.update!(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: 1000)
         order.events.create(description: "Payment Received")
 
         square_client = Square::Client.new(
@@ -29,44 +29,52 @@ class Marketplace
           environment: "sandbox"
         )
 
-        order_body = build_square_create_order_body(order)
-        square_client.orders.create_order(order_body)
-        payment_body = build_square_create_order_payment_body(order, marketplace, balance_transaction)
+        square_create_order_body = build_square_create_order_body(order, marketplace)
+        square_create_order_response = square_client.orders.create_order(body: square_create_order_body)
+        square_order_id = square_create_order_response.body.order[:id]
+        square_location_id = marketplace.settings["square_location_id"]
+        space_id = marketplace.space.id
+        square_create_payment_body = build_square_create_order_payment_body(
+          square_order_id,
+          square_location_id,
+          space_id,
+          {}
+        )
 
         # DEV NOTE: Square requires that orders are paid in order to show up in the Seller Dashboard
-        square_client.payments.create_payment(payment_body)
+        # TODO: Need response object?
+        square_create_payment_response = square_client.payments.create_payment(body: square_create_payment_body)
 
-        order_to_square_order
-        Order::ReceivedMailer.notification(order).deliver_later
-        order.events.create(description: "Notifications to Vendor and Distributor Sent")
-        Order::PlacedMailer.notification(order).deliver_later
-        order.events.create(description: "Notification to Buyer Sent")
+        # Order::ReceivedMailer.notification(order).deliver_later
+        # order.events.create(description: "Notifications to Vendor and Distributor Sent")
+        # Order::PlacedMailer.notification(order).deliver_later
+        # order.events.create(description: "Notification to Buyer Sent")
 
-        Stripe::Transfer.create({
-          # Leave the Stripe Fees in the `Distributor`'s account
-          amount: order.product_total.cents - balance_transaction.fee,
-          currency: "usd",
-          destination: marketplace.vendor_stripe_account,
-          transfer_group: order.id
-        }, {api_key: marketplace.stripe_api_key})
-        order.events.create(description: "Payment Split")
+        # Stripe::Transfer.create({
+        #   # Leave the Stripe Fees in the `Distributor`'s account
+        #   amount: order.product_total.cents - balance_transaction.fee,
+        #   currency: "usd",
+        #   destination: marketplace.vendor_stripe_account,
+        #   transfer_group: order.id
+        # }, {api_key: marketplace.stripe_api_key})
+        # order.events.create(description: "Payment Split")
       else
-        raise UnexpectedStripeEventTypeError, event.type
+        # raise UnexpectedStripeEventTypeError, event.type
       end
     end
 
     def build_square_create_order_body(order, marketplace)
-      idempotency_key = order.id
-      location_id = marketplace.square_location_id
+      idempotency_key = SecureRandom.uuid
+      location_id = marketplace.settings["square_location_id"]
       customer_id = order.shopper.id
-      line_items = order.products.map { |product|
+      line_items = order.ordered_products.map { |ordered_product|
         {
-          name: product.name,
-          quantity: 1,
+          name: ordered_product.name,
+          quantity: ordered_product.quantity.to_s,
           item_type: "ITEM", # ITEM|CUSTOM_AMOUNT|CGI
           base_price_money: {
-            amount: product.price_cents,
-            currency: product.price_currency
+            amount: ordered_product.price_cents,
+            currency: ordered_product.product.price_currency
           }
         }
       }
@@ -81,40 +89,49 @@ class Marketplace
               state: "PROPOSED", # PROPOSED|RESERVED|PREPARED|COMPLETED|CANCELED|FAILED
               delivery_details: {
                 recipient: {
-                  display_name: order.shopper.name,
-                  phone_number: order.contact_phone,
-                  address: order.delivery_address
+                  display_name: order.shopper.person.name || "TESTNAME",  # TODO: Missing name?
+                  phone_number: order.contact_phone_number,
+                  address: {
+                    address_line_1: order.delivery_address
+                  }
                 },
                 schedule_type: "SCHEDULED", # SCHEDULED|ASAP
-                deliver_at: DateTime.rfc3339(
-                  # TODO
-                  # Square requires this field. Until we have a delivery
-                  # calculation, let's use `now`.
-                  DateTime.now
-                )
+                # TODO
+                # Square requires this field. Until we have a delivery
+                # calculation, let's use `now`.
+                deliver_at: Time.now.to_datetime.rfc3339
               }
             }
-          ]
+          ],
+          customer_id: customer_id
         },
         idempotency_key: idempotency_key
       }
-      optional_params = {
-        customer_id: customer_id
-      }
-      required_params.merge(optional_params)
+      puts "DDDDDDDDDDDDDDD"
+
+      required_params
     end
 
-    def build_square_create_order_payment_body(order, marketplace, balance_transaction)
+    def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, balance_transaction)
+      idempotency_key = SecureRandom.uuid
       {
-        # TODO
-        source_id: "WHAT_GOES_HERE?",
-        idempotency_key: order.idempotency_key,
+        source_id: "EXTERNAL",
+        idempotency_key: idempotency_key,
         amount_money: {
           amount: balance_transaction.amount,
           currency: balance_transaction.currency
         },
-        order_id: order.id,
-        location_id: marketplace.location_id
+        order_id: square_order_id,
+        location_id: square_location_id,
+        external_details: {
+          type: "OTHER",
+          source: "CONVENE_SYSTEM_PAYMENT for Space #{space_id}"
+          # TODO: Want this?
+          # source_fee_money: {
+          #   amount: "test",
+          #   currency: "test"
+          # }
+        }
       }
     end
   end

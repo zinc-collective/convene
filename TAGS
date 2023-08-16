@@ -35,7 +35,7 @@ class Membership < ApplicationRecordMembership3,0
   belongs_to :invitation, optional: truecreate_invitation!14,0
   def member_namemember_name18,0
 
-app/models/furniture.rb,1347
+app/models/furniture.rb,1348
 class Furniture < ApplicationRecordFurniture7,0
   belongs_to :room, inverse_of: :gizmosroom13,0
   belongs_to :room, inverse_of: :gizmosroom=13,0
@@ -48,20 +48,20 @@ class Furniture < ApplicationRecordFurniture7,0
   has_one :space, through: :room, inverse_of: :gizmoscreate_space14,0
   has_one :space, through: :room, inverse_of: :gizmoscreate_space!14,0
   delegate :attributes=, to: :gizmo, prefix: truegizmo_attributes=23,0
-  def gizmogizmo36,0
-  alias_method :furniture, :gizmofurniture39,0
-  def titletitle41,0
-  delegate :utilities, to: :spaceutilities45,0
-  def form_templateform_template47,0
-  def configurable?configurable?51,0
-  def has_controller_edit?has_controller_edit?56,0
-  def self.setting(setting_name, options = {})setting61,0
-  def write_attribute(name, value)write_attribute76,0
-  def self.routerrouter82,0
-  def self.registryregistry87,0
-  def self.append_routes(router)append_routes98,0
-  def self.from_placement(placement)from_placement105,0
-  def to_kind_classto_kind_class110,0
+  def gizmogizmo41,0
+  alias_method :furniture, :gizmofurniture44,0
+  def titletitle46,0
+  delegate :utilities, to: :spaceutilities50,0
+  def form_templateform_template52,0
+  def configurable?configurable?56,0
+  def has_controller_edit?has_controller_edit?61,0
+  def self.setting(setting_name, options = {})setting66,0
+  def write_attribute(name, value)write_attribute81,0
+  def self.routerrouter87,0
+  def self.registryregistry92,0
+  def self.append_routes(router)append_routes103,0
+  def self.from_placement(placement)from_placement110,0
+  def to_kind_classto_kind_class115,0
 
 app/models/room.rb,900
 class Room < ApplicationRecordRoom2,0
@@ -643,7 +643,7 @@ class JournalJournal1,0
     def keywordskeywords53,0
     def to_paramto_param57,0
 
-app/furniture/journal/keyword.rb,779
+app/furniture/journal/keyword.rb,811
 class JournalJournal1,0
   class Keyword < ApplicationRecordKeyword2,0
   class Keyword < ApplicationRecordJournal::Keyword2,0
@@ -652,12 +652,13 @@ class JournalJournal1,0
     belongs_to :journal, inverse_of: :keywordsbuild_journal8,0
     belongs_to :journal, inverse_of: :keywordscreate_journal8,0
     belongs_to :journal, inverse_of: :keywordscreate_journal!8,0
-    scope(:by_length, -> { order("LENGTH(canonical_keyword) DESC") })by_length10,0
-    scope(:search, lambda do |*keywords|search12,0
-    def entriesentries17,0
-    def canonical_with_aliasescanonical_with_aliases21,0
-    def to_paramto_param25,0
-    def self.extract_and_create_from!(body)extract_and_create_from!29,0
+    scope(:by_length, -> { order("LENGTH(canonical_keyword) DESC") })by_length12,0
+    scope(:search, lambda do |*keywords|search14,0
+    def merge(other)merge19,0
+    def entriesentries23,0
+    def canonical_with_aliasescanonical_with_aliases27,0
+    def to_paramto_param31,0
+    def self.extract_and_create_from!(body)extract_and_create_from!35,0
 
 app/furniture/journal/entries_controller.rb,463
 class Journal::EntriesController < FurnitureControllerEntriesController1,0
@@ -704,6 +705,12 @@ class Journal::Journal < FurnitureJournal::Journal1,0
   has_many :keywords, inverse_of: :journal, dependent: :destroykeywords=6,0
   has_many :keywords, inverse_of: :journal, dependent: :destroykeyword_ids6,0
   has_many :keywords, inverse_of: :journal, dependent: :destroykeyword_ids=6,0
+
+app/furniture/journal/keyword/merge.rb,151
+class JournalJournal1,0
+  class Keyword::MergeMerge3,0
+  class Keyword::MergeJournal::Keyword::Merge3,0
+    def self.call(from:, into:)call6,0
 
 app/furniture/livestream.rb,125
 class Livestream < FurnitureLivestream4,0
@@ -1048,6 +1055,11 @@ class MarketplaceMarketplace1,0
     def showshow6,0
     def indexindex10,0
 
+app/furniture/marketplace/event_policy.rb,137
+class MarketplaceMarketplace1,0
+  class EventPolicy < PolicyEventPolicy2,0
+  class EventPolicy < PolicyMarketplace::EventPolicy2,0
+
 app/furniture/marketplace/model.rb,134
 class MarketplaceMarketplace1,0
   class ModelModel2,0
@@ -1108,12 +1120,13 @@ class MarketplaceMarketplace3,0
     def updateupdate45,0
     def product_paramsproduct_params53,0
 
-app/furniture/marketplace/stripe_events_controller.rb,297
+app/furniture/marketplace/stripe_events_controller.rb,453
 class MarketplaceMarketplace1,0
   class StripeEventsController < ControllerStripeEventsController2,0
   class StripeEventsController < ControllerMarketplace::StripeEventsController2,0
     def createcreate5,0
-    def build_square_create_order_body(order)build_square_create_order_body61,0
+    def build_square_create_order_body(order, marketplace)build_square_create_order_body66,0
+    def build_square_create_order_payment_body(square_order_id, marketplace, balance_transaction)build_square_create_order_payment_body114,0
 
 app/furniture/marketplace/policy.rb,435
 class MarketplaceMarketplace1,0
@@ -1720,6 +1733,12 @@ class UtilitiesController < ApplicationControllerUtilitiesController3,0
   helper_method def utilityutility41,0
   def utility_paramsutility_params53,0
   helper_method def spacespace58,0
+
+app/controllers/errors_controller.rb,164
+class ErrorsController < ApplicationControllerErrorsController3,0
+  def showshow6,0
+  def status_codestatus_code12,0
+  def error_templateerror_template23,0
 
 app/controllers/neighborhoods_controller.rb,152
 class NeighborhoodsController < ApplicationControllerNeighborhoodsController1,0
@@ -2353,7 +2372,7 @@ db/migrate/20220922012134_add_marketplace_products.rb,111
 class AddMarketplaceProducts < ActiveRecord::Migration[7.0]AddMarketplaceProducts1,0
   def changechange2,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe.rb,3534
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe.rb,3534
 module StripeStripe53,0
   DEFAULT_CA_BUNDLE_PATH = __dir__ + "/data/ca-certificates.crt"DEFAULT_CA_BUNDLE_PATH54,0
   DEFAULT_CA_BUNDLE_PATH = __dir__ + "/data/ca-certificates.crt"Stripe::DEFAULT_CA_BUNDLE_PATH54,0
@@ -2405,7 +2424,7 @@ module StripeStripe53,0
   def self.app_info=(info)app_info=101,0
   def self.set_app_info(name, partner_id: nil, url: nil, version: nil)set_app_info110,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_resource_test_helpers.rb,359
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_resource_test_helpers.rb,359
 module StripeStripe3,0
   class APIResourceTestHelpersAPIResourceTestHelpers10,0
   class APIResourceTestHelpersStripe::APIResourceTestHelpers10,0
@@ -2414,7 +2433,7 @@ module StripeStripe3,0
     def self.resource_urlresource_url33,0
     def resource_urlresource_url38,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/oauth.rb,537
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/oauth.rb,537
 module StripeStripe3,0
   module OAuthOAuth4,0
   module OAuthStripe::OAuth4,0
@@ -2426,7 +2445,7 @@ module StripeStripe3,0
     def self.token(params = {}, opts = {})token45,0
     def self.deauthorize(params = {}, opts = {})deauthorize55,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/stripe_configuration.rb,2350
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/stripe_configuration.rb,2350
 module StripeStripe3,0
   class StripeConfigurationStripeConfiguration27,0
   class StripeConfigurationStripe::StripeConfiguration27,0
@@ -2475,7 +2494,7 @@ module StripeStripe3,0
     def enable_telemetry?enable_telemetry?185,0
     def keykey191,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/search_result_object.rb,701
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/search_result_object.rb,701
 module StripeStripe3,0
   class SearchResultObject < StripeObjectSearchResultObject4,0
   class SearchResultObject < StripeObjectStripe::SearchResultObject4,0
@@ -2491,7 +2510,7 @@ module StripeStripe3,0
     def auto_paging_each(&blk)auto_paging_each61,0
     def next_search_result_page(params = {}, opts = {})next_search_result_page78,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/errors.rb,3714
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/errors.rb,3714
 module StripeStripe3,0
   class StripeError < StandardErrorStripeError6,0
   class StripeError < StandardErrorStripe::StripeError6,0
@@ -2554,7 +2573,7 @@ module StripeStripe3,0
     class UnsupportedResponseTypeError < OAuthErrorUnsupportedResponseTypeError174,0
     class UnsupportedResponseTypeError < OAuthErrorStripe::OAuth::UnsupportedResponseTypeError174,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/multipart_encoder.rb,646
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/multipart_encoder.rb,646
 module StripeStripe6,0
   class MultipartEncoderMultipartEncoder18,0
   class MultipartEncoderStripe::MultipartEncoder18,0
@@ -2570,7 +2589,7 @@ module StripeStripe6,0
     private def escape(str)escape104,0
     private def write_field(name, data, filename:)write_field108,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/singleton_api_resource.rb,298
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/singleton_api_resource.rb,298
 module StripeStripe3,0
   class SingletonAPIResource < APIResourceSingletonAPIResource4,0
   class SingletonAPIResource < APIResourceStripe::SingletonAPIResource4,0
@@ -2578,7 +2597,7 @@ module StripeStripe3,0
     def resource_urlresource_url16,0
     def self.retrieve(opts = {})retrieve20,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/connection_manager.rb,609
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/connection_manager.rb,609
 module StripeStripe3,0
   class ConnectionManagerConnectionManager12,0
   class ConnectionManagerStripe::ConnectionManager12,0
@@ -2592,7 +2611,7 @@ module StripeStripe3,0
     private def proxy_partsproxy_parts181,0
     private def warn_ssl_verify_nonewarn_ssl_verify_none190,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/refund.rb,765
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/refund.rb,765
 module StripeStripe4,0
   class Refund < APIResourceRefund10,0
   class Refund < APIResourceStripe::Refund10,0
@@ -2608,21 +2627,21 @@ module StripeStripe4,0
       def self.expire(refund, params = {}, opts = {})expire42,0
       def expire(params = {}, opts = {})expire51,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/balance.rb,244
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/balance.rb,244
 module StripeStripe4,0
   class Balance < SingletonAPIResourceBalance16,0
   class Balance < SingletonAPIResourceStripe::Balance16,0
     OBJECT_NAME = "balance"OBJECT_NAME17,0
     OBJECT_NAME = "balance"Stripe::Balance::OBJECT_NAME17,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/usage_record.rb,254
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/usage_record.rb,254
 module StripeStripe4,0
   class UsageRecord < APIResourceUsageRecord9,0
   class UsageRecord < APIResourceStripe::UsageRecord9,0
     OBJECT_NAME = "usage_record"OBJECT_NAME10,0
     OBJECT_NAME = "usage_record"Stripe::UsageRecord::OBJECT_NAME10,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/source.rb,462
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/source.rb,462
 module StripeStripe4,0
   class Source < APIResourceSource15,0
   class Source < APIResourceStripe::Source15,0
@@ -2633,7 +2652,7 @@ module StripeStripe4,0
     def detach(params = {}, opts = {})detach43,0
     def source_transactions(params = {}, opts = {})source_transactions56,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/invoice.rb,1242
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/invoice.rb,1242
 module StripeStripe4,0
   class Invoice < APIResourceInvoice37,0
   class Invoice < APIResourceStripe::Invoice37,0
@@ -2654,7 +2673,7 @@ module StripeStripe4,0
     def self.search(params = {}, opts = {})search154,0
     def self.search_auto_paging_each(params = {}, opts = {}, &blk)search_auto_paging_each158,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/reporting/report_type.rb,373
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/reporting/report_type.rb,373
 module StripeStripe4,0
   module ReportingReporting5,0
   module ReportingStripe::Reporting5,0
@@ -2663,7 +2682,7 @@ module StripeStripe4,0
       OBJECT_NAME = "reporting.report_type"OBJECT_NAME17,0
       OBJECT_NAME = "reporting.report_type"Stripe::Reporting::ReportType::OBJECT_NAME17,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/reporting/report_run.rb,366
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/reporting/report_run.rb,366
 module StripeStripe4,0
   module ReportingReporting5,0
   module ReportingStripe::Reporting5,0
@@ -2672,14 +2691,14 @@ module StripeStripe4,0
       OBJECT_NAME = "reporting.report_run"OBJECT_NAME18,0
       OBJECT_NAME = "reporting.report_run"Stripe::Reporting::ReportRun::OBJECT_NAME18,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/credit_note_line_item.rb,307
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/credit_note_line_item.rb,307
 module StripeStripe4,0
-  class CreditNoteLineItem < StripeObjectCreditNoteLineItem5,0
-  class CreditNoteLineItem < StripeObjectStripe::CreditNoteLineItem5,0
-    OBJECT_NAME = "credit_note_line_item"OBJECT_NAME6,0
-    OBJECT_NAME = "credit_note_line_item"Stripe::CreditNoteLineItem::OBJECT_NAME6,0
+  class CreditNoteLineItem < StripeObjectCreditNoteLineItem6,0
+  class CreditNoteLineItem < StripeObjectStripe::CreditNoteLineItem6,0
+    OBJECT_NAME = "credit_note_line_item"OBJECT_NAME7,0
+    OBJECT_NAME = "credit_note_line_item"Stripe::CreditNoteLineItem::OBJECT_NAME7,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/account.rb,1044
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/account.rb,1044
 module StripeStripe4,0
   class Account < APIResourceAccount13,0
   class Account < APIResourceStripe::Account13,0
@@ -2699,7 +2718,7 @@ module StripeStripe4,0
     def deauthorize(client_id = nil, opts = {})deauthorize157,0
     private def serialize_additional_owners(legal_entity, additional_owners)serialize_additional_owners166,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/payment_link.rb,413
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/payment_link.rb,413
 module StripeStripe4,0
   class PaymentLink < APIResourcePaymentLink10,0
   class PaymentLink < APIResourceStripe::PaymentLink10,0
@@ -2708,7 +2727,7 @@ module StripeStripe4,0
     def list_line_items(params = {}, opts = {})list_line_items17,0
     def self.list_line_items(payment_link, params = {}, opts = {})list_line_items26,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/setup_intent.rb,661
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/setup_intent.rb,661
 module StripeStripe4,0
   class SetupIntent < APIResourceSetupIntent27,0
   class SetupIntent < APIResourceStripe::SetupIntent27,0
@@ -2721,21 +2740,21 @@ module StripeStripe4,0
     def self.confirm(intent, params = {}, opts = {})confirm70,0
     def self.verify_microdeposits(intent, params = {}, opts = {})verify_microdeposits79,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/tax_code.rb,224
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/tax_code.rb,224
 module StripeStripe4,0
   class TaxCode < APIResourceTaxCode6,0
   class TaxCode < APIResourceStripe::TaxCode6,0
     OBJECT_NAME = "tax_code"OBJECT_NAME9,0
     OBJECT_NAME = "tax_code"Stripe::TaxCode::OBJECT_NAME9,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/setup_attempt.rb,261
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/setup_attempt.rb,261
 module StripeStripe4,0
   class SetupAttempt < APIResourceSetupAttempt9,0
   class SetupAttempt < APIResourceStripe::SetupAttempt9,0
     OBJECT_NAME = "setup_attempt"OBJECT_NAME12,0
     OBJECT_NAME = "setup_attempt"Stripe::SetupAttempt::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/price.rb,364
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/price.rb,364
 module StripeStripe4,0
   class Price < APIResourcePrice11,0
   class Price < APIResourceStripe::Price11,0
@@ -2744,28 +2763,28 @@ module StripeStripe4,0
     def self.search(params = {}, opts = {})search19,0
     def self.search_auto_paging_each(params = {}, opts = {}, &blk)search_auto_paging_each23,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/invoice_line_item.rb,268
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/invoice_line_item.rb,268
 module StripeStripe4,0
   class InvoiceLineItem < StripeObjectInvoiceLineItem5,0
   class InvoiceLineItem < StripeObjectStripe::InvoiceLineItem5,0
     OBJECT_NAME = "line_item"OBJECT_NAME6,0
     OBJECT_NAME = "line_item"Stripe::InvoiceLineItem::OBJECT_NAME6,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/exchange_rate.rb,263
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/exchange_rate.rb,263
 module StripeStripe4,0
   class ExchangeRate < APIResourceExchangeRate16,0
   class ExchangeRate < APIResourceStripe::ExchangeRate16,0
     OBJECT_NAME = "exchange_rate"OBJECT_NAME19,0
     OBJECT_NAME = "exchange_rate"Stripe::ExchangeRate::OBJECT_NAME19,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/usage_record_summary.rb,305
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/usage_record_summary.rb,305
 module StripeStripe4,0
   class UsageRecordSummary < StripeObjectUsageRecordSummary5,0
   class UsageRecordSummary < StripeObjectStripe::UsageRecordSummary5,0
     OBJECT_NAME = "usage_record_summary"OBJECT_NAME6,0
     OBJECT_NAME = "usage_record_summary"Stripe::UsageRecordSummary::OBJECT_NAME6,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/application_fee_refund.rb,458
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/application_fee_refund.rb,458
 module StripeStripe4,0
   class ApplicationFeeRefund < APIResourceApplicationFeeRefund10,0
   class ApplicationFeeRefund < APIResourceStripe::ApplicationFeeRefund10,0
@@ -2775,7 +2794,7 @@ module StripeStripe4,0
     def self.update(_id, _params = nil, _opts = nil)update21,0
     def self.retrieve(_id, _api_key = nil)retrieve29,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/customer.rb,1822
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/customer.rb,1822
 module StripeStripe4,0
   class Customer < APIResourceCustomer8,0
   class Customer < APIResourceStripe::Customer8,0
@@ -2802,28 +2821,28 @@ module StripeStripe4,0
       def self.fund_cash_balance(customer, params = {}, opts = {})fund_cash_balance145,0
       def fund_cash_balance(params = {}, opts = {})fund_cash_balance154,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/subscription_item.rb,289
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/subscription_item.rb,289
 module StripeStripe4,0
   class SubscriptionItem < APIResourceSubscriptionItem7,0
   class SubscriptionItem < APIResourceStripe::SubscriptionItem7,0
     OBJECT_NAME = "subscription_item"OBJECT_NAME14,0
     OBJECT_NAME = "subscription_item"Stripe::SubscriptionItem::OBJECT_NAME14,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/customer_cash_balance_transaction.rb,391
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/customer_cash_balance_transaction.rb,391
 module StripeStripe4,0
   class CustomerCashBalanceTransaction < APIResourceCustomerCashBalanceTransaction9,0
   class CustomerCashBalanceTransaction < APIResourceStripe::CustomerCashBalanceTransaction9,0
     OBJECT_NAME = "customer_cash_balance_transaction"OBJECT_NAME12,0
     OBJECT_NAME = "customer_cash_balance_transaction"Stripe::CustomerCashBalanceTransaction::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/shipping_rate.rb,261
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/shipping_rate.rb,261
 module StripeStripe4,0
-  class ShippingRate < APIResourceShippingRate8,0
-  class ShippingRate < APIResourceStripe::ShippingRate8,0
-    OBJECT_NAME = "shipping_rate"OBJECT_NAME13,0
-    OBJECT_NAME = "shipping_rate"Stripe::ShippingRate::OBJECT_NAME13,0
+  class ShippingRate < APIResourceShippingRate7,0
+  class ShippingRate < APIResourceStripe::ShippingRate7,0
+    OBJECT_NAME = "shipping_rate"OBJECT_NAME12,0
+    OBJECT_NAME = "shipping_rate"Stripe::ShippingRate::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/tax_id.rb,304
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/tax_id.rb,304
 module StripeStripe4,0
   class TaxId < APIResourceTaxId9,0
   class TaxId < APIResourceStripe::TaxId9,0
@@ -2832,7 +2851,7 @@ module StripeStripe4,0
     def resource_urlresource_url15,0
     def self.retrieve(_id, _opts = {})retrieve24,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/identity/verification_session.rb,668
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/identity/verification_session.rb,668
 module StripeStripe4,0
   module IdentityIdentity5,0
   module IdentityStripe::Identity5,0
@@ -2845,7 +2864,7 @@ module StripeStripe4,0
       def self.cancel(session, params = {}, opts = {})cancel42,0
       def self.redact(session, params = {}, opts = {})redact51,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/identity/verification_report.rb,421
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/identity/verification_report.rb,421
 module StripeStripe4,0
   module IdentityIdentity5,0
   module IdentityStripe::Identity5,0
@@ -2854,28 +2873,28 @@ module StripeStripe4,0
       OBJECT_NAME = "identity.verification_report"OBJECT_NAME20,0
       OBJECT_NAME = "identity.verification_report"Stripe::Identity::VerificationReport::OBJECT_NAME20,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/invoice_item.rb,254
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/invoice_item.rb,254
 module StripeStripe4,0
   class InvoiceItem < APIResourceInvoiceItem16,0
   class InvoiceItem < APIResourceStripe::InvoiceItem16,0
     OBJECT_NAME = "invoiceitem"OBJECT_NAME22,0
     OBJECT_NAME = "invoiceitem"Stripe::InvoiceItem::OBJECT_NAME22,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/tax_rate.rb,226
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/tax_rate.rb,226
 module StripeStripe4,0
   class TaxRate < APIResourceTaxRate8,0
   class TaxRate < APIResourceStripe::TaxRate8,0
     OBJECT_NAME = "tax_rate"OBJECT_NAME13,0
     OBJECT_NAME = "tax_rate"Stripe::TaxRate::OBJECT_NAME13,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/country_spec.rb,256
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/country_spec.rb,256
 module StripeStripe4,0
   class CountrySpec < APIResourceCountrySpec11,0
   class CountrySpec < APIResourceStripe::CountrySpec11,0
     OBJECT_NAME = "country_spec"OBJECT_NAME14,0
     OBJECT_NAME = "country_spec"Stripe::CountrySpec::OBJECT_NAME14,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/customer_balance_transaction.rb,520
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/customer_balance_transaction.rb,520
 module StripeStripe4,0
   class CustomerBalanceTransaction < APIResourceCustomerBalanceTransaction11,0
   class CustomerBalanceTransaction < APIResourceStripe::CustomerBalanceTransaction11,0
@@ -2885,7 +2904,7 @@ module StripeStripe4,0
     def self.retrieve(_id, _opts = {})retrieve25,0
     def self.update(_id, _params = nil, _opts = nil)update31,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/billing_portal/session.rb,384
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/billing_portal/session.rb,384
 module StripeStripe4,0
   module BillingPortalBillingPortal5,0
   module BillingPortalStripe::BillingPortal5,0
@@ -2894,7 +2913,7 @@ module StripeStripe4,0
       OBJECT_NAME = "billing_portal.session"OBJECT_NAME23,0
       OBJECT_NAME = "billing_portal.session"Stripe::BillingPortal::Session::OBJECT_NAME23,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/billing_portal/configuration.rb,424
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/billing_portal/configuration.rb,424
 module StripeStripe4,0
   module BillingPortalBillingPortal5,0
   module BillingPortalStripe::BillingPortal5,0
@@ -2903,7 +2922,7 @@ module StripeStripe4,0
       OBJECT_NAME = "billing_portal.configuration"OBJECT_NAME12,0
       OBJECT_NAME = "billing_portal.configuration"Stripe::BillingPortal::Configuration::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/subscription_schedule.rb,555
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/subscription_schedule.rb,555
 module StripeStripe4,0
   class SubscriptionSchedule < APIResourceSubscriptionSchedule8,0
   class SubscriptionSchedule < APIResourceStripe::SubscriptionSchedule8,0
@@ -2914,7 +2933,7 @@ module StripeStripe4,0
     def self.cancel(schedule, params = {}, opts = {})cancel33,0
     def self.release(schedule, params = {}, opts = {})release42,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/ephemeral_key.rb,315
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/ephemeral_key.rb,315
 module StripeStripe4,0
   class EphemeralKey < APIResourceEphemeralKey5,0
   class EphemeralKey < APIResourceStripe::EphemeralKey5,0
@@ -2922,14 +2941,14 @@ module StripeStripe4,0
     OBJECT_NAME = "ephemeral_key"Stripe::EphemeralKey::OBJECT_NAME9,0
     def self.create(params = {}, opts = {})create11,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/discount.rb,233
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/discount.rb,233
 module StripeStripe4,0
   class Discount < StripeObjectDiscount9,0
   class Discount < StripeObjectStripe::Discount9,0
     OBJECT_NAME = "discount"OBJECT_NAME10,0
     OBJECT_NAME = "discount"Stripe::Discount::OBJECT_NAME10,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/product.rb,378
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/product.rb,378
 module StripeStripe4,0
   class Product < APIResourceProduct13,0
   class Product < APIResourceStripe::Product13,0
@@ -2938,7 +2957,7 @@ module StripeStripe4,0
     def self.search(params = {}, opts = {})search22,0
     def self.search_auto_paging_each(params = {}, opts = {}, &blk)search_auto_paging_each26,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/cash_balance.rb,343
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/cash_balance.rb,343
 module StripeStripe4,0
   class CashBalance < APIResourceCashBalance6,0
   class CashBalance < APIResourceStripe::CashBalance6,0
@@ -2947,7 +2966,7 @@ module StripeStripe4,0
     def resource_urlresource_url9,0
     def self.retrieve(_id, _opts = {})retrieve17,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/issuing/cardholder.rb,353
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/issuing/cardholder.rb,353
 module StripeStripe4,0
   module IssuingIssuing5,0
   module IssuingStripe::Issuing5,0
@@ -2956,7 +2975,7 @@ module StripeStripe4,0
       OBJECT_NAME = "issuing.cardholder"OBJECT_NAME14,0
       OBJECT_NAME = "issuing.cardholder"Stripe::Issuing::Cardholder::OBJECT_NAME14,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/issuing/card.rb,1195
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/issuing/card.rb,1195
 module StripeStripe4,0
   module IssuingIssuing5,0
   module IssuingStripe::Issuing5,0
@@ -2978,7 +2997,7 @@ module StripeStripe4,0
         def return_card(params = {}, opts = {})return_card75,0
         def ship_card(params = {}, opts = {})ship_card84,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/issuing/authorization.rb,636
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/issuing/authorization.rb,636
 module StripeStripe4,0
   module IssuingIssuing5,0
   module IssuingStripe::Issuing5,0
@@ -2991,7 +3010,7 @@ module StripeStripe4,0
       def self.approve(authorization, params = {}, opts = {})approve35,0
       def self.decline(authorization, params = {}, opts = {})decline44,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/issuing/dispute.rb,452
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/issuing/dispute.rb,452
 module StripeStripe4,0
   module IssuingIssuing5,0
   module IssuingStripe::Issuing5,0
@@ -3002,7 +3021,7 @@ module StripeStripe4,0
       def submit(params = {}, opts = {})submit16,0
       def self.submit(dispute, params = {}, opts = {})submit25,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/issuing/transaction.rb,362
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/issuing/transaction.rb,362
 module StripeStripe4,0
   module IssuingIssuing5,0
   module IssuingStripe::Issuing5,0
@@ -3011,14 +3030,14 @@ module StripeStripe4,0
       OBJECT_NAME = "issuing.transaction"OBJECT_NAME15,0
       OBJECT_NAME = "issuing.transaction"Stripe::Issuing::Transaction::OBJECT_NAME15,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/transfer.rb,233
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/transfer.rb,233
 module StripeStripe4,0
   class Transfer < APIResourceTransfer15,0
   class Transfer < APIResourceStripe::Transfer15,0
     OBJECT_NAME = "transfer"OBJECT_NAME21,0
     OBJECT_NAME = "transfer"Stripe::Transfer::OBJECT_NAME21,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/terminal/reader.rb,1692
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/terminal/reader.rb,1692
 module StripeStripe4,0
   module TerminalTerminal5,0
   module TerminalStripe::Terminal5,0
@@ -3044,7 +3063,7 @@ module StripeStripe4,0
         def self.present_payment_method(reader, params = {}, opts = {})present_payment_method114,0
         def present_payment_method(params = {}, opts = {})present_payment_method123,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/terminal/location.rb,347
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/terminal/location.rb,347
 module StripeStripe4,0
   module TerminalTerminal5,0
   module TerminalStripe::Terminal5,0
@@ -3053,7 +3072,7 @@ module StripeStripe4,0
       OBJECT_NAME = "terminal.location"OBJECT_NAME15,0
       OBJECT_NAME = "terminal.location"Stripe::Terminal::Location::OBJECT_NAME15,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/terminal/connection_token.rb,398
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/terminal/connection_token.rb,398
 module StripeStripe4,0
   module TerminalTerminal5,0
   module TerminalStripe::Terminal5,0
@@ -3062,7 +3081,7 @@ module StripeStripe4,0
       OBJECT_NAME = "terminal.connection_token"OBJECT_NAME12,0
       OBJECT_NAME = "terminal.connection_token"Stripe::Terminal::ConnectionToken::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/terminal/configuration.rb,382
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/terminal/configuration.rb,382
 module StripeStripe4,0
   module TerminalTerminal5,0
   module TerminalStripe::Terminal5,0
@@ -3071,7 +3090,7 @@ module StripeStripe4,0
       OBJECT_NAME = "terminal.configuration"OBJECT_NAME13,0
       OBJECT_NAME = "terminal.configuration"Stripe::Terminal::Configuration::OBJECT_NAME13,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/card.rb,363
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/card.rb,363
 module StripeStripe4,0
   class Card < APIResourceCard10,0
   class Card < APIResourceStripe::Card10,0
@@ -3081,7 +3100,16 @@ module StripeStripe4,0
     def self.update(_id, _params = nil, _opts = nil)update25,0
     def self.retrieve(_id, _opts = nil)retrieve33,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/tax/settings.rb,325
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/tax/transaction_line_item.rb,386
+module StripeStripe4,0
+  module TaxTax5,0
+  module TaxStripe::Tax5,0
+    class TransactionLineItem < APIResourceTransactionLineItem6,0
+    class TransactionLineItem < APIResourceStripe::Tax::TransactionLineItem6,0
+      OBJECT_NAME = "tax.transaction_line_item"OBJECT_NAME7,0
+      OBJECT_NAME = "tax.transaction_line_item"Stripe::Tax::TransactionLineItem::OBJECT_NAME7,0
+
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/tax/settings.rb,325
 module StripeStripe4,0
   module TaxTax5,0
   module TaxStripe::Tax5,0
@@ -3090,7 +3118,16 @@ module StripeStripe4,0
       OBJECT_NAME = "tax.settings"OBJECT_NAME12,0
       OBJECT_NAME = "tax.settings"Stripe::Tax::Settings::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/tax/calculation.rb,488
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/tax/calculation_line_item.rb,386
+module StripeStripe4,0
+  module TaxTax5,0
+  module TaxStripe::Tax5,0
+    class CalculationLineItem < APIResourceCalculationLineItem6,0
+    class CalculationLineItem < APIResourceStripe::Tax::CalculationLineItem6,0
+      OBJECT_NAME = "tax.calculation_line_item"OBJECT_NAME7,0
+      OBJECT_NAME = "tax.calculation_line_item"Stripe::Tax::CalculationLineItem::OBJECT_NAME7,0
+
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/tax/calculation.rb,488
 module StripeStripe4,0
   module TaxTax5,0
   module TaxStripe::Tax5,0
@@ -3101,7 +3138,7 @@ module StripeStripe4,0
       def list_line_items(params = {}, opts = {})list_line_items14,0
       def self.list_line_items(calculation, params = {}, opts = {})list_line_items23,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/tax/transaction.rb,656
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/tax/transaction.rb,656
 module StripeStripe4,0
   module TaxTax5,0
   module TaxStripe::Tax5,0
@@ -3114,14 +3151,14 @@ module StripeStripe4,0
       def self.create_reversal(params = {}, opts = {})create_reversal30,0
       def self.list_line_items(transaction, params = {}, opts = {})list_line_items39,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/recipient_transfer.rb,296
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/recipient_transfer.rb,296
 module StripeStripe3,0
   class RecipientTransfer < StripeObjectRecipientTransfer4,0
   class RecipientTransfer < StripeObjectStripe::RecipientTransfer4,0
     OBJECT_NAME = "recipient_transfer"OBJECT_NAME5,0
     OBJECT_NAME = "recipient_transfer"Stripe::RecipientTransfer::OBJECT_NAME5,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/alipay_account.rb,424
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/alipay_account.rb,424
 module StripeStripe3,0
   class AlipayAccount < APIResourceAlipayAccount4,0
   class AlipayAccount < APIResourceStripe::AlipayAccount4,0
@@ -3131,14 +3168,14 @@ module StripeStripe3,0
     def self.update(_id, _params = nil, _opts = nil)update20,0
     def self.retrieve(_id, _opts = nil)retrieve27,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/balance_transaction.rb,303
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/balance_transaction.rb,303
 module StripeStripe4,0
   class BalanceTransaction < APIResourceBalanceTransaction9,0
   class BalanceTransaction < APIResourceStripe::BalanceTransaction9,0
     OBJECT_NAME = "balance_transaction"OBJECT_NAME12,0
     OBJECT_NAME = "balance_transaction"Stripe::BalanceTransaction::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/payment_intent.rb,1313
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/payment_intent.rb,1313
 module StripeStripe4,0
   class PaymentIntent < APIResourcePaymentIntent16,0
   class PaymentIntent < APIResourceStripe::PaymentIntent16,0
@@ -3159,7 +3196,7 @@ module StripeStripe4,0
     def self.search(params = {}, opts = {})search132,0
     def self.search_auto_paging_each(params = {}, opts = {}, &blk)search_auto_paging_each136,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/financial_connections/account.rb,870
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/financial_connections/account.rb,870
 module StripeStripe4,0
   module FinancialConnectionsFinancialConnections5,0
   module FinancialConnectionsStripe::FinancialConnections5,0
@@ -3174,7 +3211,7 @@ module StripeStripe4,0
       def self.list_owners(account, params = {}, opts = {})list_owners48,0
       def self.refresh_account(account, params = {}, opts = {})refresh_account57,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/financial_connections/account_owner.rb,475
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/financial_connections/account_owner.rb,475
 module StripeStripe4,0
   module FinancialConnectionsFinancialConnections5,0
   module FinancialConnectionsStripe::FinancialConnections5,0
@@ -3183,7 +3220,7 @@ module StripeStripe4,0
       OBJECT_NAME = "financial_connections.account_owner"OBJECT_NAME8,0
       OBJECT_NAME = "financial_connections.account_owner"Stripe::FinancialConnections::AccountOwner::OBJECT_NAME8,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/financial_connections/session.rb,438
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/financial_connections/session.rb,438
 module StripeStripe4,0
   module FinancialConnectionsFinancialConnections5,0
   module FinancialConnectionsStripe::FinancialConnections5,0
@@ -3192,7 +3229,7 @@ module StripeStripe4,0
       OBJECT_NAME = "financial_connections.session"OBJECT_NAME10,0
       OBJECT_NAME = "financial_connections.session"Stripe::FinancialConnections::Session::OBJECT_NAME10,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/financial_connections/account_ownership.rb,503
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/financial_connections/account_ownership.rb,503
 module StripeStripe4,0
   module FinancialConnectionsFinancialConnections5,0
   module FinancialConnectionsStripe::FinancialConnections5,0
@@ -3201,14 +3238,14 @@ module StripeStripe4,0
       OBJECT_NAME = "financial_connections.account_ownership"OBJECT_NAME8,0
       OBJECT_NAME = "financial_connections.account_ownership"Stripe::FinancialConnections::AccountOwnership::OBJECT_NAME8,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/mandate.rb,222
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/mandate.rb,222
 module StripeStripe4,0
   class Mandate < APIResourceMandate6,0
   class Mandate < APIResourceStripe::Mandate6,0
     OBJECT_NAME = "mandate"OBJECT_NAME7,0
     OBJECT_NAME = "mandate"Stripe::Mandate::OBJECT_NAME7,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/funding_instructions.rb,351
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/funding_instructions.rb,351
 module StripeStripe4,0
   class FundingInstructions < APIResourceFundingInstructions10,0
   class FundingInstructions < APIResourceStripe::FundingInstructions10,0
@@ -3216,14 +3253,14 @@ module StripeStripe4,0
     OBJECT_NAME = "funding_instructions"Stripe::FundingInstructions::OBJECT_NAME11,0
     def resource_urlresource_url13,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/account_link.rb,254
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/account_link.rb,254
 module StripeStripe4,0
   class AccountLink < APIResourceAccountLink9,0
   class AccountLink < APIResourceStripe::AccountLink9,0
     OBJECT_NAME = "account_link"OBJECT_NAME12,0
     OBJECT_NAME = "account_link"Stripe::AccountLink::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/capability.rb,402
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/capability.rb,402
 module StripeStripe4,0
   class Capability < APIResourceCapability8,0
   class Capability < APIResourceStripe::Capability8,0
@@ -3233,7 +3270,7 @@ module StripeStripe4,0
     def self.retrieve(_id, _opts = {})retrieve23,0
     def self.update(_id, _params = nil, _opts = nil)update30,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/file.rb,433
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/file.rb,433
 module StripeStripe4,0
   class File < APIResourceFile12,0
   class File < APIResourceStripe::File12,0
@@ -3244,7 +3281,7 @@ module StripeStripe4,0
     def self.resource_urlresource_url24,0
     def self.create(params = {}, opts = {})create28,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/checkout/session.rb,618
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/checkout/session.rb,618
 module StripeStripe4,0
   module CheckoutCheckout5,0
   module CheckoutStripe::Checkout5,0
@@ -3257,14 +3294,14 @@ module StripeStripe4,0
       def self.expire(session, params = {}, opts = {})expire44,0
       def self.list_line_items(session, params = {}, opts = {})list_line_items53,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/webhook_endpoint.rb,284
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/webhook_endpoint.rb,284
 module StripeStripe4,0
   class WebhookEndpoint < APIResourceWebhookEndpoint12,0
   class WebhookEndpoint < APIResourceStripe::WebhookEndpoint12,0
     OBJECT_NAME = "webhook_endpoint"OBJECT_NAME18,0
     OBJECT_NAME = "webhook_endpoint"Stripe::WebhookEndpoint::OBJECT_NAME18,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/sigma/scheduled_query_run.rb,426
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/sigma/scheduled_query_run.rb,426
 module StripeStripe4,0
   module SigmaSigma5,0
   module SigmaStripe::Sigma5,0
@@ -3274,7 +3311,7 @@ module StripeStripe4,0
       OBJECT_NAME = "scheduled_query_run"Stripe::Sigma::ScheduledQueryRun::OBJECT_NAME13,0
       def self.resource_urlresource_url15,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/dispute.rb,338
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/dispute.rb,338
 module StripeStripe4,0
   class Dispute < APIResourceDispute12,0
   class Dispute < APIResourceStripe::Dispute12,0
@@ -3283,7 +3320,7 @@ module StripeStripe4,0
     def close(params = {}, opts = {})close18,0
     def self.close(dispute, params = {}, opts = {})close27,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/review.rb,336
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/review.rb,336
 module StripeStripe4,0
   class Review < APIResourceReview9,0
   class Review < APIResourceStripe::Review9,0
@@ -3292,7 +3329,7 @@ module StripeStripe4,0
     def approve(params = {}, opts = {})approve14,0
     def self.approve(review, params = {}, opts = {})approve23,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/apple_pay_domain.rb,321
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/apple_pay_domain.rb,321
 module StripeStripe4,0
   class ApplePayDomain < APIResourceApplePayDomain6,0
   class ApplePayDomain < APIResourceStripe::ApplePayDomain6,0
@@ -3300,7 +3337,7 @@ module StripeStripe4,0
     OBJECT_NAME = "apple_pay_domain"Stripe::ApplePayDomain::OBJECT_NAME11,0
     def self.resource_urlresource_url13,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/quote.rb,1101
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/quote.rb,1104
 module StripeStripe4,0
   class Quote < APIResourceQuote7,0
   class Quote < APIResourceStripe::Quote7,0
@@ -3311,15 +3348,15 @@ module StripeStripe4,0
     def finalize_quote(params = {}, opts = {})finalize_quote32,0
     def list_computed_upfront_line_items(params = {}, opts = {})list_computed_upfront_line_items41,0
     def list_line_items(params = {}, opts = {})list_line_items50,0
-    def self.accept(quote, params = {}, opts = {})accept59,0
-    def self.cancel(quote, params = {}, opts = {})cancel68,0
-    def self.finalize_quote(quote, params = {}, opts = {})finalize_quote77,0
-    def self.list_computed_upfront_line_items(quote, params = {}, opts = {})list_computed_upfront_line_items86,0
-    def self.list_line_items(quote, params = {}, opts = {})list_line_items95,0
-    def pdf(params = {}, opts = {}, &read_body_chunk_block)pdf104,0
-    def self.pdf(id, params = {}, opts = {}, &read_body_chunk_block)pdf122,0
+    def pdf(params = {}, opts = {}, &read_body_chunk_block)pdf59,0
+    def self.accept(quote, params = {}, opts = {})accept71,0
+    def self.cancel(quote, params = {}, opts = {})cancel80,0
+    def self.finalize_quote(quote, params = {}, opts = {})finalize_quote89,0
+    def self.list_computed_upfront_line_items(quote, params = {}, opts = {})list_computed_upfront_line_items98,0
+    def self.list_line_items(quote, params = {}, opts = {})list_line_items107,0
+    def self.pdf(quote, params = {}, opts = {}, &read_body_chunk_block)pdf116,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/payout.rb,453
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/payout.rb,453
 module StripeStripe4,0
   class Payout < APIResourcePayout13,0
   class Payout < APIResourceStripe::Payout13,0
@@ -3330,7 +3367,7 @@ module StripeStripe4,0
     def self.cancel(payout, params = {}, opts = {})cancel38,0
     def self.reverse(payout, params = {}, opts = {})reverse47,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/credit_note.rb,546
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/credit_note.rb,546
 module StripeStripe4,0
   class CreditNote < APIResourceCreditNote8,0
   class CreditNote < APIResourceStripe::CreditNote8,0
@@ -3341,7 +3378,7 @@ module StripeStripe4,0
     def self.preview(params = {}, opts = {})preview33,0
     def self.void_credit_note(id, params = {}, opts = {})void_credit_note42,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/bank_account.rb,465
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/bank_account.rb,465
 module StripeStripe4,0
   class BankAccount < APIResourceBankAccount12,0
   class BankAccount < APIResourceStripe::BankAccount12,0
@@ -3352,7 +3389,7 @@ module StripeStripe4,0
     def self.update(_id, _params = nil, _opts = nil)update32,0
     def self.retrieve(_id, _opts = nil)retrieve41,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/charge.rb,488
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/charge.rb,488
 module StripeStripe4,0
   class Charge < APIResourceCharge9,0
   class Charge < APIResourceStripe::Charge9,0
@@ -3363,21 +3400,21 @@ module StripeStripe4,0
     def self.search(params = {}, opts = {})search35,0
     def self.search_auto_paging_each(params = {}, opts = {}, &blk)search_auto_paging_each39,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/coupon.rb,217
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/coupon.rb,217
 module StripeStripe4,0
   class Coupon < APIResourceCoupon8,0
   class Coupon < APIResourceStripe::Coupon8,0
     OBJECT_NAME = "coupon"OBJECT_NAME14,0
     OBJECT_NAME = "coupon"Stripe::Coupon::OBJECT_NAME14,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/file_link.rb,233
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/file_link.rb,233
 module StripeStripe4,0
   class FileLink < APIResourceFileLink8,0
   class FileLink < APIResourceStripe::FileLink8,0
     OBJECT_NAME = "file_link"OBJECT_NAME13,0
     OBJECT_NAME = "file_link"Stripe::FileLink::OBJECT_NAME13,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/payment_method.rb,516
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/payment_method.rb,516
 module StripeStripe4,0
   class PaymentMethod < APIResourcePaymentMethod10,0
   class PaymentMethod < APIResourceStripe::PaymentMethod10,0
@@ -3388,21 +3425,21 @@ module StripeStripe4,0
     def self.attach(payment_method, params = {}, opts = {})attach35,0
     def self.detach(payment_method, params = {}, opts = {})detach44,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/source_transaction.rb,298
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/source_transaction.rb,298
 module StripeStripe4,0
   class SourceTransaction < StripeObjectSourceTransaction9,0
   class SourceTransaction < StripeObjectStripe::SourceTransaction9,0
     OBJECT_NAME = "source_transaction"OBJECT_NAME10,0
     OBJECT_NAME = "source_transaction"Stripe::SourceTransaction::OBJECT_NAME10,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/token.rb,212
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/token.rb,212
 module StripeStripe4,0
   class Token < APIResourceToken25,0
   class Token < APIResourceStripe::Token25,0
     OBJECT_NAME = "token"OBJECT_NAME28,0
     OBJECT_NAME = "token"Stripe::Token::OBJECT_NAME28,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/person.rb,376
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/person.rb,376
 module StripeStripe4,0
   class Person < APIResourcePerson11,0
   class Person < APIResourceStripe::Person11,0
@@ -3412,7 +3449,16 @@ module StripeStripe4,0
     def self.retrieve(_id, _opts = {})retrieve25,0
     def self.update(_id, _params = nil, _opts = nil)update31,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/outbound_payment.rb,1300
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/financial_account_features.rb,461
+module StripeStripe4,0
+  module TreasuryTreasury5,0
+  module TreasuryStripe::Treasury5,0
+    class FinancialAccountFeatures < APIResourceFinancialAccountFeatures8,0
+    class FinancialAccountFeatures < APIResourceStripe::Treasury::FinancialAccountFeatures8,0
+      OBJECT_NAME = "treasury.financial_account_features"OBJECT_NAME9,0
+      OBJECT_NAME = "treasury.financial_account_features"Stripe::Treasury::FinancialAccountFeatures::OBJECT_NAME9,0
+
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/outbound_payment.rb,1300
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3434,7 +3480,7 @@ module StripeStripe4,0
         def post(params = {}, opts = {})post76,0
         def return_outbound_payment(params = {}, opts = {})return_outbound_payment85,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/debit_reversal.rb,384
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/debit_reversal.rb,384
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3443,7 +3489,7 @@ module StripeStripe4,0
       OBJECT_NAME = "treasury.debit_reversal"OBJECT_NAME11,0
       OBJECT_NAME = "treasury.debit_reversal"Stripe::Treasury::DebitReversal::OBJECT_NAME11,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/received_credit.rb,825
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/received_credit.rb,825
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3458,7 +3504,7 @@ module StripeStripe4,0
         RESOURCE_CLASS = ReceivedCreditStripe::Treasury::ReceivedCredit::TestHelpers::RESOURCE_CLASS17,0
         def self.create(params = {}, opts = {})create19,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/received_debit.rb,814
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/received_debit.rb,814
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3473,7 +3519,7 @@ module StripeStripe4,0
         RESOURCE_CLASS = ReceivedDebitStripe::Treasury::ReceivedDebit::TestHelpers::RESOURCE_CLASS17,0
         def self.create(params = {}, opts = {})create19,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/credit_reversal.rb,391
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/credit_reversal.rb,391
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3482,7 +3528,7 @@ module StripeStripe4,0
       OBJECT_NAME = "treasury.credit_reversal"OBJECT_NAME11,0
       OBJECT_NAME = "treasury.credit_reversal"Stripe::Treasury::CreditReversal::OBJECT_NAME11,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/inbound_transfer.rb,1326
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/inbound_transfer.rb,1326
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3504,7 +3550,7 @@ module StripeStripe4,0
         def return_inbound_transfer(params = {}, opts = {})return_inbound_transfer74,0
         def succeed(params = {}, opts = {})succeed83,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/transaction.rb,368
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/transaction.rb,368
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3513,7 +3559,7 @@ module StripeStripe4,0
       OBJECT_NAME = "treasury.transaction"OBJECT_NAME10,0
       OBJECT_NAME = "treasury.transaction"Stripe::Treasury::Transaction::OBJECT_NAME10,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/transaction_entry.rb,451
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/transaction_entry.rb,451
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3523,7 +3569,7 @@ module StripeStripe4,0
       OBJECT_NAME = "treasury.transaction_entry"Stripe::Treasury::TransactionEntry::OBJECT_NAME10,0
       def self.resource_urlresource_url12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/financial_account.rb,745
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/financial_account.rb,745
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3536,7 +3582,7 @@ module StripeStripe4,0
       def self.retrieve_features(financial_account, params = {}, opts = {})retrieve_features33,0
       def self.update_features(financial_account, params = {}, opts = {})update_features42,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/treasury/outbound_transfer.rb,1333
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/treasury/outbound_transfer.rb,1333
 module StripeStripe4,0
   module TreasuryTreasury5,0
   module TreasuryStripe::Treasury5,0
@@ -3558,7 +3604,7 @@ module StripeStripe4,0
         def post(params = {}, opts = {})post80,0
         def return_outbound_transfer(params = {}, opts = {})return_outbound_transfer89,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/radar/value_list_item.rb,362
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/radar/value_list_item.rb,362
 module StripeStripe4,0
   module RadarRadar5,0
   module RadarStripe::Radar5,0
@@ -3567,7 +3613,7 @@ module StripeStripe4,0
       OBJECT_NAME = "radar.value_list_item"OBJECT_NAME14,0
       OBJECT_NAME = "radar.value_list_item"Stripe::Radar::ValueListItem::OBJECT_NAME14,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/radar/early_fraud_warning.rb,392
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/radar/early_fraud_warning.rb,392
 module StripeStripe4,0
   module RadarRadar5,0
   module RadarStripe::Radar5,0
@@ -3576,7 +3622,7 @@ module StripeStripe4,0
       OBJECT_NAME = "radar.early_fraud_warning"OBJECT_NAME13,0
       OBJECT_NAME = "radar.early_fraud_warning"Stripe::Radar::EarlyFraudWarning::OBJECT_NAME13,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/radar/value_list.rb,332
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/radar/value_list.rb,332
 module StripeStripe4,0
   module RadarRadar5,0
   module RadarStripe::Radar5,0
@@ -3585,14 +3631,14 @@ module StripeStripe4,0
       OBJECT_NAME = "radar.value_list"OBJECT_NAME15,0
       OBJECT_NAME = "radar.value_list"Stripe::Radar::ValueList::OBJECT_NAME15,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/promotion_code.rb,268
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/promotion_code.rb,268
 module StripeStripe4,0
   class PromotionCode < APIResourcePromotionCode7,0
   class PromotionCode < APIResourceStripe::PromotionCode7,0
     OBJECT_NAME = "promotion_code"OBJECT_NAME12,0
     OBJECT_NAME = "promotion_code"Stripe::PromotionCode::OBJECT_NAME12,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/subscription.rb,832
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/subscription.rb,832
 module StripeStripe4,0
   class Subscription < APIResourceSubscription8,0
   class Subscription < APIResourceStripe::Subscription8,0
@@ -3607,7 +3653,7 @@ module StripeStripe4,0
     def self.search(params = {}, opts = {})search72,0
     def self.search_auto_paging_each(params = {}, opts = {}, &blk)search_auto_paging_each76,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/reversal.rb,408
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/reversal.rb,408
 module StripeStripe4,0
   class Reversal < APIResourceReversal18,0
   class Reversal < APIResourceStripe::Reversal18,0
@@ -3617,7 +3663,7 @@ module StripeStripe4,0
     def self.update(_id, _params = nil, _opts = nil)update29,0
     def self.retrieve(_id, _opts = {})retrieve36,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/test_helpers/test_clock.rb,509
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/test_helpers/test_clock.rb,509
 module StripeStripe4,0
   module TestHelpersTestHelpers5,0
   module TestHelpersStripe::TestHelpers5,0
@@ -3628,7 +3674,7 @@ module StripeStripe4,0
       def advance(params = {}, opts = {})advance16,0
       def self.advance(test_clock, params = {}, opts = {})advance25,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/apps/secret.rb,427
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/apps/secret.rb,427
 module StripeStripe4,0
   module AppsApps5,0
   module AppsStripe::Apps5,0
@@ -3639,7 +3685,7 @@ module StripeStripe4,0
       def self.delete_where(params = {}, opts = {})delete_where21,0
       def self.find(params = {}, opts = {})find30,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/login_link.rb,291
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/login_link.rb,291
 module StripeStripe4,0
   class LoginLink < APIResourceLoginLink6,0
   class LoginLink < APIResourceStripe::LoginLink6,0
@@ -3647,35 +3693,35 @@ module StripeStripe4,0
     OBJECT_NAME = "login_link"Stripe::LoginLink::OBJECT_NAME7,0
     def self.retrieve(_id, _opts = nil)retrieve9,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/line_item.rb,221
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/line_item.rb,221
 module StripeStripe4,0
   class LineItem < APIResourceLineItem6,0
   class LineItem < APIResourceStripe::LineItem6,0
     OBJECT_NAME = "item"OBJECT_NAME7,0
     OBJECT_NAME = "item"Stripe::LineItem::OBJECT_NAME7,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/application_fee.rb,273
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/application_fee.rb,273
 module StripeStripe4,0
   class ApplicationFee < APIResourceApplicationFee5,0
   class ApplicationFee < APIResourceStripe::ApplicationFee5,0
     OBJECT_NAME = "application_fee"OBJECT_NAME9,0
     OBJECT_NAME = "application_fee"Stripe::ApplicationFee::OBJECT_NAME9,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/event.rb,212
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/event.rb,212
 module StripeStripe4,0
   class Event < APIResourceEvent34,0
   class Event < APIResourceStripe::Event34,0
     OBJECT_NAME = "event"OBJECT_NAME37,0
     OBJECT_NAME = "event"Stripe::Event::OBJECT_NAME37,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/plan.rb,205
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/plan.rb,205
 module StripeStripe4,0
   class Plan < APIResourcePlan13,0
   class Plan < APIResourceStripe::Plan13,0
     OBJECT_NAME = "plan"OBJECT_NAME19,0
     OBJECT_NAME = "plan"Stripe::Plan::OBJECT_NAME19,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/resources/topup.rb,326
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/resources/topup.rb,326
 module StripeStripe4,0
   class Topup < APIResourceTopup10,0
   class Topup < APIResourceStripe::Topup10,0
@@ -3684,7 +3730,7 @@ module StripeStripe4,0
     def cancel(params = {}, opts = {})cancel17,0
     def self.cancel(topup, params = {}, opts = {})cancel26,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/stripe_response.rb,1400
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/stripe_response.rb,1400
 module StripeStripe3,0
   class StripeResponseHeadersStripeResponseHeaders8,0
   class StripeResponseHeadersStripe::StripeResponseHeaders8,0
@@ -3713,7 +3759,7 @@ module StripeStripe3,0
   class StripeHeadersOnlyResponseStripe::StripeHeadersOnlyResponse99,0
     def self.from_net_http(http_resp)from_net_http104,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_resource.rb,782
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_resource.rb,782
 module StripeStripe3,0
   class APIResource < StripeObjectAPIResource4,0
   class APIResource < StripeObjectStripe::APIResource4,0
@@ -3729,7 +3775,7 @@ module StripeStripe3,0
     def request_stripe_object(method:, path:, params:, opts: {})request_stripe_object93,0
     protected def request_stream(method:, path:, params:, opts: {},request_stream104,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/list_object.rb,798
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/list_object.rb,798
 module StripeStripe3,0
   class ListObject < StripeObjectListObject4,0
   class ListObject < StripeObjectStripe::ListObject4,0
@@ -3749,13 +3795,13 @@ module StripeStripe3,0
     def resource_urlresource_url128,0
     def reverse_each(&blk)reverse_each135,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/object_types.rb,172
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/object_types.rb,172
 module StripeStripe6,0
   module ObjectTypesObjectTypes7,0
   module ObjectTypesStripe::ObjectTypes7,0
     def self.object_names_to_classesobject_names_to_classes8,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_operations/nested_resource.rb,401
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_operations/nested_resource.rb,401
 module StripeStripe3,0
   module APIOperationsAPIOperations4,0
   module APIOperationsStripe::APIOperations4,0
@@ -3764,7 +3810,7 @@ module StripeStripe3,0
       def nested_resource_class_methods(resource, path: nil, operations: nil,nested_resource_class_methods13,0
       private def define_operation(define_operation38,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_operations/search.rb,263
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_operations/search.rb,263
 module StripeStripe3,0
   module APIOperationsAPIOperations4,0
   module APIOperationsStripe::APIOperations4,0
@@ -3772,7 +3818,7 @@ module StripeStripe3,0
     module SearchStripe::APIOperations::Search5,0
       def _search(search_url, filters = {}, opts = {})_search6,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_operations/request.rb,1426
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_operations/request.rb,1426
 module StripeStripe3,0
   module APIOperationsAPIOperations4,0
   module APIOperationsStripe::APIOperations4,0
@@ -3794,7 +3840,7 @@ module StripeStripe3,0
       private def request_stripe_object(method:, path:, params:, opts: {})request_stripe_object130,0
       alias request execute_resource_requestrequest136,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_operations/list.rb,237
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_operations/list.rb,237
 module StripeStripe3,0
   module APIOperationsAPIOperations4,0
   module APIOperationsStripe::APIOperations4,0
@@ -3802,7 +3848,7 @@ module StripeStripe3,0
     module ListStripe::APIOperations::List5,0
       def list(filters = {}, opts = {})list6,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_operations/create.rb,248
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_operations/create.rb,248
 module StripeStripe3,0
   module APIOperationsAPIOperations4,0
   module APIOperationsStripe::APIOperations4,0
@@ -3810,7 +3856,7 @@ module StripeStripe3,0
     module CreateStripe::APIOperations::Create5,0
       def create(params = {}, opts = {})create6,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_operations/save.rb,496
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_operations/save.rb,496
 module StripeStripe3,0
   module APIOperationsAPIOperations4,0
   module APIOperationsStripe::APIOperations4,0
@@ -3823,7 +3869,7 @@ module StripeStripe3,0
       def self.included(base)included79,0
       private def save_urlsave_url92,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_operations/delete.rb,469
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_operations/delete.rb,469
 module StripeStripe3,0
   module APIOperationsAPIOperations4,0
   module APIOperationsStripe::APIOperations4,0
@@ -3835,7 +3881,7 @@ module StripeStripe3,0
       def delete(params = {}, opts = {})delete30,0
       def self.included(base)included39,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/util.rb,2243
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/util.rb,2243
 module StripeStripe5,0
   module UtilUtil6,0
   module UtilStripe::Util6,0
@@ -3874,7 +3920,7 @@ module StripeStripe5,0
     def self.log_internal(message, data = {}, color:, level:, logger:, out:)log_internal380,0
     def self.wrap_logfmt_value(val)wrap_logfmt_value412,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/stripe_client.rb,6415
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/stripe_client.rb,6415
 module StripeStripe5,0
   class StripeClientStripeClient9,0
   class StripeClientStripe::StripeClient9,0
@@ -3977,19 +4023,19 @@ module StripeStripe5,0
       def initialize(request_id, request_duration_ms)initialize1058,0
       def payloadpayload1063,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/version.rb,97
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/version.rb,97
 module StripeStripe3,0
-  VERSION = "8.6.0"VERSION4,0
-  VERSION = "8.6.0"Stripe::VERSION4,0
+  VERSION = "8.7.0"VERSION4,0
+  VERSION = "8.7.0"Stripe::VERSION4,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/api_version.rb,201
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/api_version.rb,201
 module StripeStripe4,0
   module ApiVersionApiVersion5,0
   module ApiVersionStripe::ApiVersion5,0
     CURRENT = "2022-11-15"CURRENT6,0
     CURRENT = "2022-11-15"Stripe::ApiVersion::CURRENT6,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/webhook.rb,870
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/webhook.rb,870
 module StripeStripe3,0
   module WebhookWebhook4,0
   module WebhookStripe::Webhook4,0
@@ -4005,7 +4051,7 @@ module StripeStripe3,0
       def self.get_timestamp_and_signatures(header, scheme)get_timestamp_and_signatures61,0
       def self.verify_header(payload, header, secret, tolerance: nil)verify_header79,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/stripe_object.rb,1920
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/stripe_object.rb,1920
 module StripeStripe3,0
   class StripeObjectStripeObject4,0
   class StripeObjectStripe::StripeObject4,0
@@ -4046,7 +4092,7 @@ module StripeStripe3,0
     private def dirty_value!(value)dirty_value!562,0
     private def empty_values(obj)empty_values573,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/error_object.rb,688
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/error_object.rb,688
 module StripeStripe3,0
   class ErrorObject < StripeObjectErrorObject7,0
   class ErrorObject < StripeObjectStripe::ErrorObject7,0
@@ -4066,7 +4112,7 @@ module StripeStripe3,0
     def errorerror84,0
     def error_descriptionerror_description89,0
 
-/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.6.0/lib/stripe/instrumentation.rb,2249
+/Users/rosschapman/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/stripe-8.7.0/lib/stripe/instrumentation.rb,2249
 module StripeStripe3,0
   class InstrumentationInstrumentation4,0
   class InstrumentationStripe::Instrumentation4,0
