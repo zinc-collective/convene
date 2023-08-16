@@ -116,9 +116,7 @@ GEM
       aws-sigv4 (~> 1.6)
     aws-sigv4 (1.6.0)
       aws-eventstream (~> 1, >= 1.0.2)
-    backport (1.2.0)
     bcrypt (3.1.19)
-    benchmark (0.2.1)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -161,7 +159,6 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    e2mmap (0.1.0)
     erubi (1.12.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
@@ -204,7 +201,6 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    jaro_winkler (1.5.4)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -215,10 +211,6 @@ GEM
     json-pointer (0.0.1)
     json-schema (3.0.0)
       addressable (>= 2.8)
-    kramdown (2.4.0)
-      rexml
-    kramdown-parser-gfm (1.1.0)
-      kramdown (~> 2.0)
     language_server-protocol (3.17.0.3)
     lint_roller (1.1.0)
     listen (3.8.0)
@@ -275,7 +267,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.3)
+    nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     pagy (6.0.4)
@@ -343,13 +335,10 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rbs (2.8.4)
     redcarpet (3.6.0)
     redis-client (0.14.1)
       connection_pool
     regexp_parser (2.8.1)
-    reverse_markdown (2.1.1)
-      nokogiri
     rexml (3.2.6)
     rotp (6.2.2)
     rouge (4.1.2)
@@ -436,22 +425,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    solargraph (0.49.0)
-      backport (~> 1.2)
-      benchmark
-      bundler (~> 2.0)
-      diff-lcs (~> 1.4)
-      e2mmap
-      jaro_winkler (~> 1.5)
-      kramdown (~> 2.3)
-      kramdown-parser-gfm (~> 1.1)
-      parser (~> 3.0)
-      rbs (~> 2.0)
-      reverse_markdown (~> 2.0)
-      rubocop (~> 1.38)
-      thor (~> 1.0)
-      tilt (~> 2.0)
-      yard (~> 0.9, >= 0.9.24)
     spring (4.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -460,7 +433,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    square.rb (30.0.0.20230720)
+    square.rb (31.0.0.20230816)
       apimatic_core (~> 0.3.0)
       apimatic_core_interfaces (~> 0.2.0)
       apimatic_faraday_client_adapter (~> 0.1.0)
@@ -483,7 +456,6 @@ GEM
     strong_migrations (1.6.1)
       activerecord (>= 5.2)
     thor (1.2.2)
-    tilt (2.1.0)
     timeout (0.3.2)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
@@ -564,7 +536,6 @@ DEPENDENCIES
   shoulda-matchers (~> 5.3)
   sidekiq
   simplecov
-  solargraph (~> 0.49)
   spring
   spring-watcher-listen!
   sprockets-rails

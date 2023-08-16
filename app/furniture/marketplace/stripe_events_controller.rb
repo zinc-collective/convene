@@ -58,6 +58,7 @@ class Marketplace
         #   transfer_group: order.id
         # }, {api_key: marketplace.stripe_api_key})
         # order.events.create(description: "Payment Split")
+        SplitJob.perform_later(order: order)
       else
         # raise UnexpectedStripeEventTypeError, event.type
       end
