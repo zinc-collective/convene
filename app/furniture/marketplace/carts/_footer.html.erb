@@ -8,14 +8,11 @@
   <tr>
     <td class="px-3 py-3.5 text-right" colspan="8">
       <%= render "marketplace/carts/total", cart: cart %>
-      <%- if cart.ready_for_checkout? %>
-        <%= button_to("Checkout", cart.location(child: :checkout), data: { turbo: false }) %>
-      <%- end %>
     </td>
   </tr>
   <tr>
-    <td class="px-3 pb-3.5 text-right" colspan="8">
-      <%= render cart.delivery %>
+    <td class="text-right py-3.5" colspan="8">
+      <%= render ButtonComponent.new(label: "Checkout", href: cart.location(child: :checkout), scheme: :primary, method: :get) %>
     </td>
   </tr>
 </tfoot>

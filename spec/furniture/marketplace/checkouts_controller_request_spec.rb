@@ -56,10 +56,7 @@ RSpec.describe Marketplace::Checkout, type: :request do
     context "when the Cart is empty" do
       let(:cart) { create(:marketplace_cart, marketplace: marketplace) }
 
-      it "shows an error notice" do
-        perform_request
-        expect(flash[:alert]).to include("line items can't be blank")
-      end
+      it { is_expected.to render_template(:show) }
     end
   end
 end

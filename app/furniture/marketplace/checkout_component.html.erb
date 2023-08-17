@@ -1,0 +1,10 @@
+<%= render CardComponent.new do %>
+  <%= turbo_frame_tag(checkout) do %>
+    <h1>Checkout</h2>
+
+    <%= render delivery %>
+
+    <h2>Payment Details</h2>
+    <%= button_to(t('.submit'), cart.location(child: :checkout), data: { turbo: false }) %>
+  <%- end %>
+<%- end %>

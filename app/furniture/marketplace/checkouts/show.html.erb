@@ -1,0 +1,4 @@
+<%= turbo_frame_tag(checkout.marketplace) do %>
+  <%= link_to(t("marketplace.marketplaces.show.link_to"), marketplace.location) %>
+  <%= render Marketplace::CheckoutComponent.new(checkout: checkout) %>
+<%- end %>

@@ -1,33 +1,14 @@
-<div id="<%=dom_id(delivery) %>" class="flex flex-wrap items-center justify-between text-sm mt-1 sm:mt-2">
-    <span>
-      <p class="text-left px-2 sm:px-4 py-2 text-sm">
-        <span class="font-bold">Delivery Time:</span>
-        <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %>
-      </p>
-      <% if delivery.details_filled_in? || delivery.delivery_area.present? %>
-        <p class="text-left px-2 sm:px-4 py-2 text-sm">
-          <span class="font-bold">Delivering to:</span>
-            <%= delivery.delivery_address if delivery.delivery_address.present? %>
-            <%= render(delivery.delivery_area) if delivery.delivery_area.present? %>
-        </p>
-      <% end %>
-    </span>
-
-  <% if delivery.details_filled_in? %>
-    <%= render ButtonComponent.new(
-          label: t("marketplace.cart.deliveries.edit.link_to"),
-          href: delivery.location(:edit),
-          method: :get,
-          turbo_stream: true,
-          scheme: :secondary,
-        ) %>
-  <% else %>
-    <%= render ButtonComponent.new(
-        label: t("marketplace.cart.deliveries.edit.details_missing"),
-        href: delivery.location(:edit),
-        method: :get,
-        turbo_stream: true,
-        scheme: :primary,
-      ) %>
+<%= turbo_frame_tag(delivery) do %>
+  <p class="text-left py-1 text-sm">
+    <span class="font-bold">Delivery Time:</span>
+    <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %>
+  </p>
+  <% if delivery.details_filled_in? || delivery.delivery_area.present? %>
+    <p class="text-left py-1 text-sm">
+      <span class="font-bold">Delivering to:</span>
+        <%= delivery.delivery_address if delivery.delivery_address.present? %>
+        <%= render(delivery.delivery_area) if delivery.delivery_area.present? %>
+    </p>
   <% end %>
-</div>
+  <%= link_to(t("marketplace.cart.deliveries.edit.link_to"), delivery.location(:edit)) %>
+<%- end %>

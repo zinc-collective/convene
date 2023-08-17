@@ -46,6 +46,8 @@ en:
       edit:
         link_to: "Manage Marketplace"
     marketplaces:
+      show:
+        link_to: "Back"
       update:
         success: "Marketplace updated successfully!"
         failure: "Marketplace could not be updated."

@@ -1,7 +1,4 @@
-<%= render CardComponent.new(dom_id: dom_id(delivery), classes: "text-left") do %>
-  <h3>
-    <%= t("marketplace.cart.deliveries.edit.header") %>
-  </h3>
+<%= turbo_frame_tag(delivery) do %>
   <%= form_with model: delivery.location do |delivery_form| %>
     <%= render "text_field", attribute: :delivery_address, form: delivery_form %>
     <%= render "text_field", attribute: :delivery_notes, form: delivery_form %>
@@ -10,4 +7,4 @@
     <%= render "text_field", attribute: :contact_phone_number, form: delivery_form %>
     <%= delivery_form.submit %>
   <%- end %>
-<% end %>
+<%- end %>

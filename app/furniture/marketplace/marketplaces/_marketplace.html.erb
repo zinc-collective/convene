@@ -1,1 +1,3 @@
-<%= render Marketplace::MarketplaceComponent.new(marketplace: marketplace) %>
+<%= turbo_frame_tag(marketplace) do %>
+  <%= render Marketplace::MarketplaceComponent.new(marketplace: marketplace) %>
+<%- end %>
