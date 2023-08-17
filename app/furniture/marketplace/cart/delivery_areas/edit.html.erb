@@ -1,0 +1,6 @@
+<%- breadcrumb :edit_marketplace_cart_delivery_area, cart %>
+<%= render CardComponent.new do %>
+  <%= turbo_frame_tag(dom_id(cart, :delivery_area)) do %>
+    <%= render "form", cart: cart %>
+  <%- end %>
+<%- end %>

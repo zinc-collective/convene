@@ -16,6 +16,10 @@ class Marketplace
       @cart ||= carts.create_with(contact_email: shopper.person&.email).find_or_create_by(shopper: shopper, status: :pre_checkout)
     end
 
+    def delivery_area_component
+      @delivery_area_component ||= Cart::DeliveryAreaComponent.new(cart: cart)
+    end
+
     def onboarding_component
       OnboardingComponent.new(marketplace: marketplace, current_person: current_person)
     end

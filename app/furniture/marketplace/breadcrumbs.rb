@@ -12,6 +12,16 @@ crumb :edit_marketplace do |marketplace|
   link t("marketplace.marketplace.edit.link_to"), marketplace.location(:edit)
 end
 
+crumb :marketplace_cart_delivery_area do |cart|
+  parent :room, cart.room
+  link t("marketplace.cart.delivery_areas.show.link_to"), cart.location(child: :delivery_area)
+end
+
+crumb :edit_marketplace_cart_delivery_area do |cart|
+  parent :room, cart.room
+  link t("marketplace.cart.delivery_areas.edit.link_to"), cart.location(:edit, child: :delivery_area)
+end
+
 crumb :marketplace_checkout do |checkout|
   parent :marketplace, checkout.cart.marketplace
   link "Checkout", checkout.location

@@ -6,6 +6,7 @@ class Marketplace
           router.resources :cart_products
           router.resource :checkout, only: [:show, :create]
           router.resource :delivery, controller: "cart/deliveries"
+          router.resource :delivery_area, controller: "cart/delivery_areas"
         end
 
         router.resources :delivery_areas

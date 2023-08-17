@@ -1,0 +1,16 @@
+<%= render CardComponent.new do %>
+  <h3 class="w-full">Delivering To</h3>
+  <%= turbo_frame_tag(dom_id, class: "flex flex-wrap justify-between") do %>
+    <%- if delivery_area.present? %>
+      <div>
+        <%= delivery_area.label %>
+      </div>
+
+      <div class="text-right">
+        <%= link_to(t('marketplace.cart.delivery_areas.edit.link_to'), cart.location(:edit, child: :delivery_area)) %>
+      </div>
+    <%- else %>
+      <%= render "marketplace/cart/delivery_areas/form", cart: cart %>
+    <%- end %>
+  <%- end %>
+<%- end %>

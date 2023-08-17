@@ -11,6 +11,11 @@ en:
               required: "can't be blank"
   marketplace:
     cart:
+      delivery_areas:
+        show:
+          link_to: "Delivery Area"
+        edit:
+          link_to: "Change"
       deliveries:
         edit:
           header: "Delivery Details"
