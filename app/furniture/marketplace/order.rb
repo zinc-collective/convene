@@ -60,7 +60,7 @@ class Marketplace
       @square_client ||= Square::Client.new(access_token:, environment:)
     end
 
-    def send_to_square_seller_dashboard(_stripe_balance_transaction)
+    def send_to_square_seller_dashboard(stripe_balance_transaction)
       square_create_order_response = create_square_order
       square_order_id = square_create_order_response.body.order[:id]
       create_square_order_payment(square_order_id)
@@ -80,7 +80,8 @@ class Marketplace
         square_order_id,
         square_location_id,
         space_id,
-        {} # TODO: use stripe_balance_transaction?
+        # TODO: what should be canonical pricing data here: stripe_balance_transaction or order data?
+        stripe_balance_transaction
       )
 
       response = @square_client.payments.create_payment(body: square_create_payment_body)
@@ -140,6 +141,10 @@ class Marketplace
     # orders paid with Stripe --  Square recommends putting "EXTERNAL" for the
     # `source_id` and "OTHER" for the `external_details.type`.
     # See: https://developer.squareup.com/docs/payments-api/take-payments/external-payments
+    #
+    # NOTE: `amount_money` much match the price total of line items in the
+    # square order (`line_items.sum(&base_price_money[:amount])`) to be valid
+    # TODO: Add a price check?
     def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, balance_transaction)
       idempotency_key = "#{id}_#{Time.now.to_i}"
       {
