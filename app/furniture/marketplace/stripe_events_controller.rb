@@ -26,7 +26,7 @@ class Marketplace
 
         # TODO: Does this suffice as a feature flag for the time being?
         # TODO: Need better conditional abstraction here?
-        if marketplace.square_location_id?
+        if marketplace.square_location_id? && Rails.env.development?
           order.send_to_square_seller_dashboard(balance_transaction)
         end
 
