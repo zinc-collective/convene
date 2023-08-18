@@ -53,31 +53,45 @@ class Marketplace
       [product_total, delivery_fee, tax_total].compact.sum
     end
 
-    def send_to_square_seller_dashboard(stripe_balance_transaction)
-      square_client = Square::Client.new(
-        access_token: marketplace.square_access_token,
-        environment: "sandbox"
-      )
+    def square_client
+      environment = ENV.fetch("SQUARE_ENV")
+      access_token = marketplace.square_access_token
 
-      square_create_order_body = build_square_create_order_body(marketplace)
-      square_create_order_response = square_client.orders.create_order(body: square_create_order_body)
+      @square_client ||= Square::Client.new(access_token:, environment:)
+    end
+
+    def send_to_square_seller_dashboard(_stripe_balance_transaction)
+      square_create_order_response = create_square_order
       square_order_id = square_create_order_response.body.order[:id]
+      create_square_order_payment(square_order_id)
+    end
+
+    def create_square_order
+      square_create_order_body = build_square_create_order_body(marketplace)
+      @square_client.orders.create_order(body: square_create_order_body)
+    end
+
+    # NOTE: Square requires that orders are paid in order to show up in the Seller
+    # Dashboard
+    def create_square_order_payment(square_order_id)
       square_location_id = marketplace.settings["square_location_id"]
       space_id = marketplace.space.id
       square_create_payment_body = build_square_create_order_payment_body(
         square_order_id,
         square_location_id,
         space_id,
-        {}
+        {} # TODO: use stripe_balance_transaction?
       )
 
-      # DEV NOTE: Square requires that orders are paid in order to show up in the Seller Dashboard
-      # TODO: Need response object?
-      square_create_payment_response = square_client.payments.create_payment(body: square_create_payment_body)
+      response = @square_client.payments.create_payment(body: square_create_payment_body)
+      response.body
     end
 
+    # NOTE: Square requires that orders include fulfillments in order to show up
+    # in the Seller Dashboard
+    # See: https://developer.squareup.com/docs/orders-api/create-orders
     def build_square_create_order_body(marketplace)
-      idempotency_key = SecureRandom.uuid
+      idempotency_key = "#{id}_#{Time.now.to_i}"
       location_id = marketplace.settings["square_location_id"]
       customer_id = shopper.id
       line_items = ordered_products.map { |ordered_product|
@@ -94,43 +108,49 @@ class Marketplace
 
       {
         order: {
-          location_id: location_id,
-          line_items: line_items,
+          location_id:,
+          line_items:,
           fulfillments: [
             {
               type: "DELIVERY", # DELIVERY|SHIPMENT|PICKUP
               state: "PROPOSED", # PROPOSED|RESERVED|PREPARED|COMPLETED|CANCELED|FAILED
               delivery_details: {
                 recipient: {
-                  display_name: shopper.person.name || "TESTNAME",  # TODO: Missing name?
+                  # TODO: Missing name?
+                  display_name: shopper.person.display_name,
                   phone_number: contact_phone_number,
                   address: {
                     address_line_1: delivery_address
                   }
                 },
                 schedule_type: "SCHEDULED", # SCHEDULED|ASAP
-                # TODO
                 # Square requires this field. Until we have a delivery
-                # calculation, let's use `now`?
+                # calculation, let's put `now`?
                 deliver_at: Time.now.to_datetime.rfc3339
               }
             }
           ],
-          customer_id: customer_id
+          customer_id:
         },
-        idempotency_key: idempotency_key
+        idempotency_key:
       }
     end
 
+    # NOTE: For payments that are received outside of Square - such as Convene
+    # orders paid with Stripe --  Square recommends putting "EXTERNAL" for the
+    # `source_id` and "OTHER" for the `external_details.type`.
+    # See: https://developer.squareup.com/docs/payments-api/take-payments/external-payments
     def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, balance_transaction)
-      idempotency_key = SecureRandom.uuid
+      idempotency_key = "#{id}_#{Time.now.to_i}"
       {
         source_id: "EXTERNAL",
-        idempotency_key: idempotency_key,
+        idempotency_key:,
         amount_money: {
-          # TODO: FIXTURE
-          amount: 4000,
-          currency: "USD"
+          # # TODO: FIXTURE
+          # amount: 4000,
+          # currency: "USD"
+          amount: balance_transaction.amount,
+          currency: balance_transaction.currency
         },
         order_id: square_order_id,
         location_id: square_location_id,
