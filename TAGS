@@ -579,11 +579,11 @@ class JournalJournal1,0
     private def location_query_paramslocation_query_params17,0
     private def new_entrynew_entry23,0
 
-app/furniture/journal/keywords_controller.rb,201
+app/furniture/journal/keywords_controller.rb,202
 class JournalJournal1,0
   class KeywordsController < FurnitureControllerKeywordsController2,0
   class KeywordsController < FurnitureControllerJournal::KeywordsController2,0
-    def showshow7,0
+    def showshow10,0
 
 app/furniture/journal/keyword_policy.rb,373
 class JournalJournal3,0
@@ -1120,13 +1120,13 @@ class MarketplaceMarketplace3,0
     def updateupdate45,0
     def product_paramsproduct_params53,0
 
-app/furniture/marketplace/stripe_events_controller.rb,453
+app/furniture/marketplace/stripe_events_controller.rb,470
 class MarketplaceMarketplace1,0
   class StripeEventsController < ControllerStripeEventsController2,0
   class StripeEventsController < ControllerMarketplace::StripeEventsController2,0
     def createcreate5,0
-    def build_square_create_order_body(order, marketplace)build_square_create_order_body66,0
-    def build_square_create_order_payment_body(square_order_id, marketplace, balance_transaction)build_square_create_order_payment_body114,0
+    def build_square_create_order_body(order, marketplace)build_square_create_order_body67,0
+    def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, balance_transaction)build_square_create_order_payment_body116,0
 
 app/furniture/marketplace/policy.rb,435
 class MarketplaceMarketplace1,0
@@ -1139,6 +1139,18 @@ class MarketplaceMarketplace1,0
     module SpecFactoriesSpecFactories27,0
     module SpecFactoriesMarketplace::Policy::SpecFactories27,0
       def self.included(spec)included28,0
+
+app/furniture/marketplace/split_job.rb,578
+class MarketplaceMarketplace1,0
+  class SplitJob < ApplicationJobSplitJob2,0
+  class SplitJob < ApplicationJobMarketplace::SplitJob2,0
+    attr_accessor :orderorder3,0
+    attr_accessor :orderorder=3,0
+    delegate :vendors_share, :marketplace, to: :ordervendors_share4,0
+    delegate :vendors_share, :marketplace, to: :ordermarketplace4,0
+    delegate :stripe_api_key, :vendor_stripe_account, to: :marketplacestripe_api_key5,0
+    delegate :stripe_api_key, :vendor_stripe_account, to: :marketplacevendor_stripe_account5,0
+    def perform(order:)perform10,0
 
 app/furniture/marketplace/order_policy.rb,540
 class MarketplaceMarketplace3,0
@@ -1630,15 +1642,15 @@ class ApplicationComponent < ViewComponent::BaseApplicationComponent1,0
   attr_accessor :datadata=2,0
   attr_writer :classes, :dom_idclasses=3,0
   attr_writer :classes, :dom_iddom_id=3,0
-  def initialize(data: {}, dom_id: nil, classes: "", current_person: nil)initialize5,0
-  def attributes(classes: "")attributes12,0
-  def options(extra_classes: "")options17,0
-  def classes(others = "")classes22,0
-  def dom_id(*args, **kwargs)dom_id26,0
-  def policy(*args, **kwargs)policy32,0
-  attr_writer :current_personcurrent_person=36,0
-  def current_personcurrent_person37,0
-  def edit_button(title:, href:, label: "#{t("icons.edit")} #{t("edit.link_to")}")edit_button41,0
+  def initialize(data: {}, dom_id: nil, classes: "", current_person: nil)initialize6,0
+  def attributes(classes: "")attributes13,0
+  def options(extra_classes: "")options18,0
+  def classes(others = "")classes23,0
+  def dom_id(*args, **kwargs)dom_id27,0
+  def policy(*args, **kwargs)policy33,0
+  attr_writer :current_personcurrent_person=37,0
+  def current_personcurrent_person38,0
+  def edit_button(title:, href:, label: "#{t("icons.edit")} #{t("edit.link_to")}")edit_button42,0
 
 app/lib/space_routes.rb,86
 module SpaceRoutesSpaceRoutes1,0
@@ -1658,22 +1670,22 @@ class ApplicationJob < ActiveJob::BaseApplicationJob1,0
 
 app/controllers/application_controller.rb,938
 class ApplicationController < ActionController::BaseApplicationController5,0
-  helper_method def page_titlepage_title28,0
-  helper_method def url_for(options)url_for40,0
-  helper_method def polymorphic_path(options, **attributes)polymorphic_path65,0
-  def ensure_on_byo_domainensure_on_byo_domain76,0
-  def enforce_sslenforce_ssl88,0
-  OPERATOR_TOKEN = ENV["OPERATOR_API_KEY"]OPERATOR_TOKEN101,0
-  OPERATOR_TOKEN = ENV["OPERATOR_API_KEY"]ApplicationController::OPERATOR_TOKEN101,0
-  def current_personcurrent_person103,0
-  def api_request?api_request?117,0
-  def pundit_userpundit_user121,0
-  helper_method def current_spacecurrent_space127,0
-  helper_method def current_membershipcurrent_membership136,0
-  def space_repositoryspace_repository142,0
-  helper_method def current_roomcurrent_room148,0
-  def handle_unauthorized(exception)handle_unauthorized159,0
-  def render_not_foundrender_not_found164,0
+  helper_method def page_titlepage_title30,0
+  helper_method def url_for(options)url_for42,0
+  helper_method def polymorphic_path(options, **attributes)polymorphic_path67,0
+  def ensure_on_byo_domainensure_on_byo_domain78,0
+  def enforce_sslenforce_ssl90,0
+  OPERATOR_TOKEN = ENV["OPERATOR_API_KEY"]OPERATOR_TOKEN103,0
+  OPERATOR_TOKEN = ENV["OPERATOR_API_KEY"]ApplicationController::OPERATOR_TOKEN103,0
+  def current_personcurrent_person105,0
+  def api_request?api_request?119,0
+  def pundit_userpundit_user123,0
+  helper_method def current_spacecurrent_space129,0
+  helper_method def current_membershipcurrent_membership138,0
+  def space_repositoryspace_repository144,0
+  helper_method def current_roomcurrent_room150,0
+  def handle_unauthorized(exception)handle_unauthorized161,0
+  def render_not_foundrender_not_found166,0
 
 app/controllers/rooms_controller.rb,320
 class RoomsController < ApplicationControllerRoomsController3,0
@@ -2251,6 +2263,10 @@ class RenameWorkspacesToSpaces < ActiveRecord::Migration[6.0]RenameWorkspacesTo
 
 db/migrate/20201224010740_initial_furniture_architecture.rb,123
 class InitialFurnitureArchitecture < ActiveRecord::Migration[6.0]InitialFurnitureArchitecture1,0
+  def changechange2,0
+
+db/migrate/20230814180326_marketplace_add_stripe_transfer_id_to_orders.rb,143
+class MarketplaceAddStripeTransferIdToOrders < ActiveRecord::Migration[7.0]MarketplaceAddStripeTransferIdToOrders1,0
   def changechange2,0
 
 db/migrate/20230706003709_formally_rename_marketplace_order_notifications_table.rb,163

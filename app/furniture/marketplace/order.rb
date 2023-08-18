@@ -52,5 +52,98 @@ class Marketplace
     def price_total
       [product_total, delivery_fee, tax_total].compact.sum
     end
+
+    def send_to_square_seller_dashboard(stripe_balance_transaction)
+      square_client = Square::Client.new(
+        access_token: marketplace.square_access_token,
+        environment: "sandbox"
+      )
+
+      square_create_order_body = build_square_create_order_body(marketplace)
+      square_create_order_response = square_client.orders.create_order(body: square_create_order_body)
+      square_order_id = square_create_order_response.body.order[:id]
+      square_location_id = marketplace.settings["square_location_id"]
+      space_id = marketplace.space.id
+      square_create_payment_body = build_square_create_order_payment_body(
+        square_order_id,
+        square_location_id,
+        space_id,
+        {}
+      )
+
+      # DEV NOTE: Square requires that orders are paid in order to show up in the Seller Dashboard
+      # TODO: Need response object?
+      square_create_payment_response = square_client.payments.create_payment(body: square_create_payment_body)
+    end
+
+    def build_square_create_order_body(marketplace)
+      idempotency_key = SecureRandom.uuid
+      location_id = marketplace.settings["square_location_id"]
+      customer_id = shopper.id
+      line_items = ordered_products.map { |ordered_product|
+        {
+          name: ordered_product.name,
+          quantity: ordered_product.quantity.to_s,
+          item_type: "ITEM", # ITEM|CUSTOM_AMOUNT|CGI
+          base_price_money: {
+            amount: ordered_product.price_cents,
+            currency: ordered_product.product.price_currency
+          }
+        }
+      }
+
+      {
+        order: {
+          location_id: location_id,
+          line_items: line_items,
+          fulfillments: [
+            {
+              type: "DELIVERY", # DELIVERY|SHIPMENT|PICKUP
+              state: "PROPOSED", # PROPOSED|RESERVED|PREPARED|COMPLETED|CANCELED|FAILED
+              delivery_details: {
+                recipient: {
+                  display_name: shopper.person.name || "TESTNAME",  # TODO: Missing name?
+                  phone_number: contact_phone_number,
+                  address: {
+                    address_line_1: delivery_address
+                  }
+                },
+                schedule_type: "SCHEDULED", # SCHEDULED|ASAP
+                # TODO
+                # Square requires this field. Until we have a delivery
+                # calculation, let's use `now`?
+                deliver_at: Time.now.to_datetime.rfc3339
+              }
+            }
+          ],
+          customer_id: customer_id
+        },
+        idempotency_key: idempotency_key
+      }
+    end
+
+    def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, balance_transaction)
+      idempotency_key = SecureRandom.uuid
+      {
+        source_id: "EXTERNAL",
+        idempotency_key: idempotency_key,
+        amount_money: {
+          # TODO: FIXTURE
+          amount: 4000,
+          currency: "USD"
+        },
+        order_id: square_order_id,
+        location_id: square_location_id,
+        external_details: {
+          type: "OTHER",
+          source: "CONVENE_SYSTEM_PAYMENT for Space #{space_id}"
+          # TODO: Want this?
+          # source_fee_money: {
+          #   amount: "test",
+          #   currency: "test"
+          # }
+        }
+      }
+    end
   end
 end
