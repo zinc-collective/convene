@@ -64,6 +64,9 @@ class Marketplace
       square_create_order_response = create_square_order
       square_order_id = square_create_order_response.body.order[:id]
       create_square_order_payment(square_order_id)
+
+      # TODO: What to return here?
+      true
     end
 
     def create_square_order

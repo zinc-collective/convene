@@ -24,7 +24,11 @@ class Marketplace
         order.update!(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: balance_transaction.fee)
         order.events.create(description: "Payment Received")
 
-        order.send_to_square_seller_dashboard(balance_transaction)
+        # TODO: Does this suffice as a feature flag for the time being?
+        # TODO: Need better conditional abstraction here?
+        if marketplace.square_location_id?
+          order.send_to_square_seller_dashboard(balance_transaction)
+        end
 
         Order::ReceivedMailer.notification(order).deliver_later
         order.events.create(description: "Notifications to Vendor and Distributor Sent")
