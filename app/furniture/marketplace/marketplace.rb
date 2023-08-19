@@ -94,5 +94,13 @@ class Marketplace
     def self.model_name
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
     end
+
+    def square_environment
+      if Rails.env.development?
+        "sandbox"
+      end
+
+      "production"
+    end
   end
 end

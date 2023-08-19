@@ -6,6 +6,14 @@
   "configurations": [
     {
       "type": "rdbg",
+      "name": "Debug current file with rdbg",
+      "request": "launch",
+      "script": "${file}",
+      "args": [],
+      "askParameters": true
+    },
+    {
+      "type": "rdbg",
       "name": "Attach with rdbg",
       "request": "attach"
     }

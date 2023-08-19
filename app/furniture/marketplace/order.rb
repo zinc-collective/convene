@@ -54,7 +54,7 @@ class Marketplace
     end
 
     def square_client
-      @square_client ||= Square::Client.new(access_token: marketplace.square_access_token, environment: ENV.fetch("SQUARE_ENV"))
+      @square_client ||= Square::Client.new(access_token: marketplace.square_access_token, environment: marketplace.square_environment)
     end
 
     def send_to_square_seller_dashboard(stripe_balance_transaction)
@@ -65,14 +65,14 @@ class Marketplace
       true
     end
 
-    def create_square_order
+    private def create_square_order
       square_create_order_body = build_square_create_order_body(marketplace)
       @square_client.orders.create_order(body: square_create_order_body)
     end
 
     # NOTE: Square requires that orders are paid in order to show up in the Seller
     # Dashboard
-    def create_square_order_payment(square_order_id)
+    private def create_square_order_payment(square_order_id)
       square_location_id = marketplace.settings["square_location_id"]
       space_id = marketplace.space.id
       square_create_payment_body = build_square_create_order_payment_body(
@@ -90,7 +90,7 @@ class Marketplace
     # NOTE: Square requires that orders include fulfillments in order to show up
     # in the Seller Dashboard
     # See: https://developer.squareup.com/docs/orders-api/create-orders
-    def build_square_create_order_body(marketplace)
+    private def build_square_create_order_body(marketplace)
       idempotency_key = "#{id}_#{Time.now.to_i}"
       location_id = marketplace.settings["square_location_id"]
       customer_id = shopper.id
@@ -144,7 +144,7 @@ class Marketplace
     # NOTE: `amount_money` much match the price total of line items in the
     # square order (`line_items.sum(&base_price_money[:amount])`) to be valid
     # TODO: Add a price check?
-    def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, balance_transaction)
+    private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, balance_transaction)
       idempotency_key = "#{id}_#{Time.now.to_i}"
       {
         source_id: "EXTERNAL",
