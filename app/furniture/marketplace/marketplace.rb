@@ -96,11 +96,11 @@ class Marketplace
     end
 
     def square_environment
-      if Rails.env.development?
-        "sandbox"
+      if Rails.env.production?
+        "production"
       end
 
-      "production"
+      "sandbox"
     end
   end
 end
