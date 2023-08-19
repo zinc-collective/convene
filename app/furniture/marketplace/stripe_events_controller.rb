@@ -37,7 +37,7 @@ class Marketplace
 
         SplitJob.perform_later(order: order)
       else
-        # raise UnexpectedStripeEventTypeError, event.type
+        raise UnexpectedStripeEventTypeError, event.type
       end
     end
   end
