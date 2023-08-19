@@ -54,16 +54,12 @@ class Marketplace
     end
 
     def square_client
-      environment = ENV.fetch("SQUARE_ENV")
-      access_token = marketplace.square_access_token
-
-      @square_client ||= Square::Client.new(access_token:, environment:)
+      @square_client ||= Square::Client.new(access_token: marketplace.square_access_token, environment: ENV.fetch("SQUARE_ENV"))
     end
 
     def send_to_square_seller_dashboard(stripe_balance_transaction)
       square_create_order_response = create_square_order
-      square_order_id = square_create_order_response.body.order[:id]
-      create_square_order_payment(square_order_id)
+      create_square_order_payment(square_create_order_response.body.order[:id])
 
       # TODO: What to return here?
       true
