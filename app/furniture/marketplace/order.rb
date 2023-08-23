@@ -69,6 +69,10 @@ class Marketplace
       }
     end
 
+    private def square_idemp_key
+      "#{id}_#{8.times.map { rand(10) }.join}"
+    end
+
     private def create_square_order
       square_create_order_body = build_square_create_order_body(marketplace)
       square_client.orders.create_order(body: square_create_order_body)
@@ -93,10 +97,8 @@ class Marketplace
     # in the Seller Dashboard
     # See: https://developer.squareup.com/docs/orders-api/create-orders
     private def build_square_create_order_body(marketplace)
-      idempotency_key = "#{id}_#{8.times.map { rand(10) }.join}"
       location_id = marketplace.settings["square_location_id"]
       customer_id = shopper.id
-
       stripe_fee_per_line_item = (payment_processor_fee_cents / ordered_products.sum(&:quantity))
 
       line_items = ordered_products.map { |ordered_product|
@@ -147,7 +149,7 @@ class Marketplace
           ],
           customer_id:
         },
-        idempotency_key:
+        idempotency_key: square_idemp_key
       }
     end
 
@@ -161,10 +163,9 @@ class Marketplace
     #
     # TODO: Consider adding a price check?
     private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, amount)
-      idempotency_key = "#{id}_#{8.times.map { rand(10) }.join}"
       {
         source_id: "EXTERNAL",
-        idempotency_key:,
+        idempotency_key: square_idemp_key,
         amount_money: {
           amount:,
           currency: "USD"
