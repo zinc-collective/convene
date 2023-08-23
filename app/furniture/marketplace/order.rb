@@ -57,17 +57,21 @@ class Marketplace
       @square_client ||= Square::Client.new(access_token: marketplace.square_access_token, environment: marketplace.square_environment)
     end
 
-    def send_to_square_seller_dashboard(stripe_balance_transaction)
+    def send_to_square_seller_dashboard
       square_create_order_response = create_square_order
-      create_square_order_payment(square_create_order_response.body.order[:id])
+      square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id])
 
-      # TODO: What to return here?
-      true
+      # This data is intended for use in debugging, etc... until we further
+      # the Square integration productize
+      {
+        order_id: square_create_order_response.body.order[:id],
+        payment_id: square_create_payment_response.body.payment[:id]
+      }
     end
 
     private def create_square_order
       square_create_order_body = build_square_create_order_body(marketplace)
-      @square_client.orders.create_order(body: square_create_order_body)
+      square_client.orders.create_order(body: square_create_order_body)
     end
 
     # NOTE: Square requires that orders are paid in order to show up in the Seller
@@ -79,30 +83,41 @@ class Marketplace
         square_order_id,
         square_location_id,
         space_id,
-        # TODO: what should be canonical pricing data here: stripe_balance_transaction or order data?
-        stripe_balance_transaction
+        # TODO: Is this how I convert back from a
+        vendors_share_cents: vendors_share.cents
       )
 
-      response = @square_client.payments.create_payment(body: square_create_payment_body)
-      response.body
+      @square_client.payments.create_payment(body: square_create_payment_body)
     end
 
     # NOTE: Square requires that orders include fulfillments in order to show up
     # in the Seller Dashboard
     # See: https://developer.squareup.com/docs/orders-api/create-orders
     private def build_square_create_order_body(marketplace)
-      idempotency_key = "#{id}_#{Time.now.to_i}"
+      idempotency_key = "#{id}_#{8.times.map { rand(10) }.join}"
       location_id = marketplace.settings["square_location_id"]
       customer_id = shopper.id
+
+      stripe_fee_per_line_item = (payment_processor_fee_cents / ordered_products.sum(&:quantity))
+
       line_items = ordered_products.map { |ordered_product|
         {
           name: ordered_product.name,
           quantity: ordered_product.quantity.to_s,
           item_type: "ITEM", # ITEM|CUSTOM_AMOUNT|CGI
           base_price_money: {
-            amount: ordered_product.price_cents,
-            currency: ordered_product.product.price_currency
+            amount: (ordered_product.price_cents - stripe_fee_per_line_item),
+            currency: "USD"
           }
+        }
+      }
+
+      taxes = marketplace.tax_rates.map { |tax_rate|
+        {
+          uid: tax_rate.id,
+          name: tax_rate.label,
+          percentage: tax_rate.tax_rate.to_s,
+          scope: "LINE_ITEM"
         }
       }
 
@@ -110,6 +125,7 @@ class Marketplace
         order: {
           location_id:,
           line_items:,
+          taxes:,
           fulfillments: [
             {
               type: "DELIVERY", # DELIVERY|SHIPMENT|PICKUP
@@ -143,25 +159,23 @@ class Marketplace
     #
     # NOTE: `amount_money` much match the price total of line items in the
     # square order (`line_items.sum(&base_price_money[:amount])`) to be valid
-    # TODO: Add a price check?
-    private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, balance_transaction)
-      idempotency_key = "#{id}_#{Time.now.to_i}"
+    #
+    # TODO: Consider adding a price check?
+    private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, vendors_share_cents)
+      idempotency_key = "#{id}_#{8.times.map { rand(10) }.join}"
       {
         source_id: "EXTERNAL",
         idempotency_key:,
         amount_money: {
-          # # TODO: FIXTURE
-          # amount: 4000,
-          # currency: "USD"
-          amount: balance_transaction.amount,
-          currency: balance_transaction.currency
+          amount: vendors_share_cents,
+          currency: "USD"
         },
         order_id: square_order_id,
         location_id: square_location_id,
         external_details: {
           type: "OTHER",
           source: "CONVENE_SYSTEM_PAYMENT for Space #{space_id}"
-          # TODO: Want this?
+          # TODO: Need this?
           # source_fee_money: {
           #   amount: "test",
           #   currency: "test"

@@ -102,5 +102,9 @@ class Marketplace
 
       "sandbox"
     end
+
+    def square_order_notifications_enabled?
+      square_location_id.present?
+    end
   end
 end
