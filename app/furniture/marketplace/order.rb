@@ -59,7 +59,7 @@ class Marketplace
 
     def send_to_square_seller_dashboard
       square_create_order_response = create_square_order
-      square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id])
+      square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id], square_create_order_response.body.order[:total_money][:amount])
 
       # This data is intended for use in debugging, etc... until we further
       # the Square integration productize
@@ -76,15 +76,14 @@ class Marketplace
 
     # NOTE: Square requires that orders are paid in order to show up in the Seller
     # Dashboard
-    private def create_square_order_payment(square_order_id)
+    private def create_square_order_payment(square_order_id, square_order_total_price)
       square_location_id = marketplace.settings["square_location_id"]
       space_id = marketplace.space.id
       square_create_payment_body = build_square_create_order_payment_body(
         square_order_id,
         square_location_id,
         space_id,
-        # TODO: Is this how I convert back from a
-        vendors_share_cents: vendors_share.cents
+        square_order_total_price
       )
 
       @square_client.payments.create_payment(body: square_create_payment_body)
@@ -161,13 +160,13 @@ class Marketplace
     # square order (`line_items.sum(&base_price_money[:amount])`) to be valid
     #
     # TODO: Consider adding a price check?
-    private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, vendors_share_cents)
+    private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, amount)
       idempotency_key = "#{id}_#{8.times.map { rand(10) }.join}"
       {
         source_id: "EXTERNAL",
         idempotency_key:,
         amount_money: {
-          amount: vendors_share_cents,
+          amount:,
           currency: "USD"
         },
         order_id: square_order_id,
