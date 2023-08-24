@@ -131,7 +131,6 @@ class Marketplace
               state: "PROPOSED", # PROPOSED|RESERVED|PREPARED|COMPLETED|CANCELED|FAILED
               delivery_details: {
                 recipient: {
-                  # TODO: Missing name?
                   display_name: shopper.person.display_name,
                   phone_number: contact_phone_number,
                   address: {
@@ -173,7 +172,7 @@ class Marketplace
         external_details: {
           type: "OTHER",
           source: "CONVENE_SYSTEM_PAYMENT for Space #{space_id}"
-          # TODO: Need this?
+          # TODO: Need this later?
           # source_fee_money: {
           #   amount: "test",
           #   currency: "test"

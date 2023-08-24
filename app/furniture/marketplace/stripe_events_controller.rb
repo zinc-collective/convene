@@ -12,37 +12,29 @@ class Marketplace
       case event.type
 
       when "checkout.session.completed"
-        # TODO: Uncomment after demo
-        # payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
-
-        # TODO: Add back correct id lookup
+        payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
         order = marketplace.orders.find_by(id: "15e346c8-e42b-4a67-a991-35870db766e1")
 
-        return if order.nil?
-        # TODO: Uncomment after demo
-        # || order.paid?
+        return if order.nil? || order.paid?
 
-        # TODO: Uncomment after demo
-        # latest_charge = Stripe::Charge.retrieve(payment_intent.latest_charge, api_key: marketplace.stripe_api_key)
-        # balance_transaction = Stripe::BalanceTransaction.retrieve(latest_charge.balance_transaction, api_key: marketplace.stripe_api_key)
+        latest_charge = Stripe::Charge.retrieve(payment_intent.latest_charge, api_key: marketplace.stripe_api_key)
+        balance_transaction = Stripe::BalanceTransaction.retrieve(latest_charge.balance_transaction, api_key: marketplace.stripe_api_key)
 
-        # TODO: Uncomment after demo
-        # order.update!(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: balance_transaction.fee)
-        # order.events.create(description: "Payment Received")
+        order.update!(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: balance_transaction.fee)
+        order.events.create(description: "Payment Received")
 
         if marketplace.square_order_notifications_enabled?
           order.send_to_square_seller_dashboard
         end
 
-        # TODO: Uncomment after demo
-        # Order::ReceivedMailer.notification(order).deliver_later
-        # order.events.create(description: "Notifications to Vendor and Distributor Sent")
-        # Order::PlacedMailer.notification(order).deliver_later
-        # order.events.create(description: "Notification to Buyer Sent")
+        Order::ReceivedMailer.notification(order).deliver_later
+        order.events.create(description: "Notifications to Vendor and Distributor Sent")
+        Order::PlacedMailer.notification(order).deliver_later
+        order.events.create(description: "Notification to Buyer Sent")
 
-        # SplitJob.perform_later(order: order)
+        SplitJob.perform_later(order: order)
       else
-        # raise UnexpectedStripeEventTypeError, event.type
+        raise UnexpectedStripeEventTypeError, event.type
       end
     end
   end
