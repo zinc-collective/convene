@@ -1,7 +1,7 @@
 module Spec
   module Turbo
-    def have_rendered_turbo_stream(action, target, content = nil, **rendering, &block)
-      HaveRenderedTurboStream.new(action, target, content, turbo_stream: controller.send(:turbo_stream), **rendering, &block)
+    def have_rendered_turbo_stream(action, target, content = nil, **, &block)
+      HaveRenderedTurboStream.new(action, target, content, turbo_stream: controller.send(:turbo_stream), **, &block)
     end
 
     class HaveRenderedTurboStream

@@ -30,8 +30,8 @@ class ApplicationComponent < ViewComponent::Base
     super
   end
 
-  def policy(*args, **kwargs)
-    Pundit.policy(current_person, *args, **kwargs)
+  def policy(*, **)
+    Pundit.policy(current_person, *, **)
   end
 
   attr_writer :current_person

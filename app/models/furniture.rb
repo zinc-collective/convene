@@ -86,7 +86,7 @@ class Furniture < ApplicationRecord
 
   def self.router
     return const_get(:Routes) if const_defined?(:Routes)
-    return class_name.constantize.const_get(:Routes) if class_name.constantize.const_defined?(:Routes)
+    class_name.constantize.const_get(:Routes) if class_name.constantize.const_defined?(:Routes)
   end
 
   def self.registry

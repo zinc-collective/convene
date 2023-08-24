@@ -6,7 +6,7 @@ class RoomPolicy < ApplicationPolicy
 
   def show?
     return true if room.public?
-    return true if room.internal? && (person&.member_of?(space) || person&.operator?)
+    true if room.internal? && (person&.member_of?(space) || person&.operator?)
   end
 
   def create?

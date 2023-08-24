@@ -15,7 +15,7 @@ class Marketplace
     def shopper
       return object if object.is_a?(Shopper)
 
-      return object.shopper if object.respond_to?(:shopper)
+      object.shopper if object.respond_to?(:shopper)
     end
 
     def marketplace

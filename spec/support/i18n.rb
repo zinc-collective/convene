@@ -1,14 +1,14 @@
 module Spec
   module Support
     module I18n
-      def translate(lookup, *args, **kwargs)
+      def translate(lookup, *, **)
         if lookup.starts_with?(".")
           # There's probably a less hacky way to do this, but for some reason the i18n key is '/' separated,
           # not '.' separated and lookup fails?
           path = ActiveModel::Name.new(described_class).i18n_key.to_s.tr("/", ".")
-          ::I18n.t(path.concat(lookup), *args, **kwargs)
+          ::I18n.t(path.concat(lookup), *, **)
         else
-          ::I18n.t(lookup, *args, **kwargs)
+          ::I18n.t(lookup, *, **)
         end
       end
       alias_method :t, :translate
