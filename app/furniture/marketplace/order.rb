@@ -105,7 +105,7 @@ class Marketplace
           quantity: ordered_product.quantity.to_s,
           item_type: "ITEM", # ITEM|CUSTOM_AMOUNT|CGI
           base_price_money: {
-            amount: ordered_product.price_total.cents,
+            amount: ordered_product.product.price.cents,
             currency: "USD"
           }
         }
