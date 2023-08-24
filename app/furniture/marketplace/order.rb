@@ -59,7 +59,7 @@ class Marketplace
 
     def send_to_square_seller_dashboard
       square_create_order_response = create_square_order
-      square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id], square_create_order_response.body.order[:total_money][:amount])
+      square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id])
 
       # This data is intended for use in debugging, etc... until we further
       # the Square integration productize
@@ -80,14 +80,13 @@ class Marketplace
 
     # NOTE: Square requires that orders are paid in order to show up in the Seller
     # Dashboard
-    private def create_square_order_payment(square_order_id, square_order_total_price)
+    private def create_square_order_payment(square_order_id)
       square_location_id = marketplace.settings["square_location_id"]
       space_id = marketplace.space.id
       square_create_payment_body = build_square_create_order_payment_body(
         square_order_id,
         square_location_id,
-        space_id,
-        square_order_total_price
+        space_id
       )
 
       @square_client.payments.create_payment(body: square_create_payment_body)
@@ -99,7 +98,6 @@ class Marketplace
     private def build_square_create_order_body(marketplace)
       location_id = marketplace.settings["square_location_id"]
       customer_id = shopper.id
-      stripe_fee_per_line_item = (payment_processor_fee_cents / ordered_products.sum(&:quantity))
 
       line_items = ordered_products.map { |ordered_product|
         {
@@ -107,7 +105,7 @@ class Marketplace
           quantity: ordered_product.quantity.to_s,
           item_type: "ITEM", # ITEM|CUSTOM_AMOUNT|CGI
           base_price_money: {
-            amount: (ordered_product.price_cents - stripe_fee_per_line_item),
+            amount: ordered_product.price_total.cents,
             currency: "USD"
           }
         }
@@ -162,12 +160,12 @@ class Marketplace
     # square order (`line_items.sum(&base_price_money[:amount])`) to be valid
     #
     # TODO: Consider adding a price check?
-    private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id, amount)
+    private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id)
       {
         source_id: "EXTERNAL",
         idempotency_key: square_idemp_key,
         amount_money: {
-          amount:,
+          amount: product_total.cents,
           currency: "USD"
         },
         order_id: square_order_id,
