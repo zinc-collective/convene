@@ -11,12 +11,12 @@ module Spec
       visit(URI.parse(URI.extract(delivery.body.to_s)[1]).request_uri)
     end
 
-    def dom_id(*args, **kwargs)
-      ActionView::RecordIdentifier.dom_id(*args, **kwargs)
+    def dom_id(*, **)
+      ActionView::RecordIdentifier.dom_id(*, **)
     end
 
-    def t(*args, **kwargs)
-      I18n.t(*args, **kwargs)
+    def t(*, **)
+      I18n.t(*, **)
     end
   end
 end

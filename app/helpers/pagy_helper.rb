@@ -5,7 +5,7 @@ module PagyHelper
   # @todo submit a patch to Pagy which allows us to override the classes using `nav_extra`
   #       since there wasn't a tidy seam to inject tailwind classes on the container beyond
   #       copy-paste-and-replace
-  def pagy_nav(pagy, pagy_id: nil, link_extra: "", nav_extra: "", **vars)
+  def pagy_nav(pagy, pagy_id: nil, link_extra: "", nav_extra: "", **)
     p_id = %( id="#{pagy_id}") if pagy_id
     link = pagy_link_proc(pagy, link_extra: link_extra)
     p_prev = pagy.prev
@@ -17,7 +17,7 @@ module PagyHelper
     else
       %(<span class="page prev disabled">#{pagy_t("pagy.nav.prev")}</span> )
     end
-    pagy.series(**vars).each do |item| # series example: [1, :gap, 7, 8, "9", 10, 11, :gap, 36]
+    pagy.series(**).each do |item| # series example: [1, :gap, 7, 8, "9", 10, 11, :gap, 36]
       html << case item
       when Integer then %(<span class="page">#{link.call item}</span> )
       when String then %(<span class="page active">#{pagy.label_for(item)}</span> )

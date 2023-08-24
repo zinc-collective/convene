@@ -42,8 +42,8 @@ module WithinLocation
 
   delegate :routed_as, to: :class
 
-  def parent_location(*args, **kwargs)
-    location_parent.location(*args, **kwargs)
+  def parent_location(*, **)
+    location_parent.location(*, **)
   end
 
   def location(action = :show, child: nil, query_params: nil)
