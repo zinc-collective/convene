@@ -53,6 +53,7 @@ class Marketplace
       [product_total, delivery_fee, tax_total].compact.sum
     end
 
+	# TODO: Add `square_environment` attribute to database/model
     def square_client
       @square_client ||= Square::Client.new(access_token: marketplace.square_access_token, environment: marketplace.square_environment)
     end
