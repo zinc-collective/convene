@@ -23,7 +23,11 @@ class MembershipPolicy < ApplicationPolicy
 
   class Scope < ApplicationScope
     def resolve
-      scope.where(space: person.spaces)
+      if person.operator?
+        scope.all
+      else
+        scope.where(space: person.spaces)
+      end
     end
   end
 end

@@ -89,5 +89,13 @@ RSpec.describe MembershipPolicy do
     it "does not include memberships from spaces the person is not a member of" do
       expect(scope.resolve).not_to include(other_memberships)
     end
+
+    context "when the person is an Operator" do
+      let(:person) { create(:person, :operator) }
+
+      it "includes all memberships" do
+        expect(scope.resolve).to match_array(Membership.all)
+      end
+    end
   end
 end
