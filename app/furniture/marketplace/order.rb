@@ -70,6 +70,7 @@ class Marketplace
       }
     end
 
+    # Square sets max of 43 chars
     private def square_idemp_key
       "#{id}_#{8.times.map { rand(10) }.join}"
     end
