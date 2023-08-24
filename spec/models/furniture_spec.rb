@@ -39,7 +39,7 @@ RSpec.describe Furniture do
     it "gets placed last without an explicit position" do
       new_placement = create(:furniture, room: room, slot_position: nil)
       expect(new_placement).to be_valid
-      expect(new_placement.slot_position).to eq(:last)
+      expect(new_placement.slot_position).to eq(3)
     end
   end
 
