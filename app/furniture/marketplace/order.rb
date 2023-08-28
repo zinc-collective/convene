@@ -53,11 +53,6 @@ class Marketplace
       [product_total, delivery_fee, tax_total].compact.sum
     end
 
-    # TODO: Add `square_environment` attribute to database/model
-    def square_client
-      @square_client ||= Square::Client.new(access_token: marketplace.square_access_token, environment: marketplace.square_environment)
-    end
-
     def send_to_square_seller_dashboard
       square_create_order_response = create_square_order
       square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id])
@@ -77,7 +72,7 @@ class Marketplace
 
     private def create_square_order
       square_create_order_body = build_square_create_order_body(marketplace)
-      square_client.orders.create_order(body: square_create_order_body)
+      marketplace.square_client.orders.create_order(body: square_create_order_body)
     end
 
     # NOTE: Square requires that orders are paid in order to show up in the Seller
@@ -91,7 +86,7 @@ class Marketplace
         space_id
       )
 
-      @square_client.payments.create_payment(body: square_create_payment_body)
+      marketplace.square_client.payments.create_payment(body: square_create_payment_body)
     end
 
     # NOTE: Square requires that orders include fulfillments in order to show up

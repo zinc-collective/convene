@@ -98,5 +98,10 @@ class Marketplace
     def square_order_notifications_enabled?
       square_location_id.present?
     end
+
+    # TODO: Add `square_environment` attribute to database/model
+    def square_client
+      @square_client ||= Square::Client.new(access_token: square_access_token, environment: square_environment)
+    end
   end
 end
