@@ -13,7 +13,6 @@ class Marketplace
 
       when "checkout.session.completed"
         payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
-
         order = marketplace.orders.find_by(id: payment_intent.transfer_group)
 
         return if order.nil? || order.paid?
@@ -23,6 +22,10 @@ class Marketplace
 
         order.update!(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: balance_transaction.fee)
         order.events.create(description: "Payment Received")
+
+        if marketplace.square_order_notifications_enabled?
+          order.send_to_square_seller_dashboard
+        end
 
         Order::ReceivedMailer.notification(order).deliver_later
         order.events.create(description: "Notifications to Vendor and Distributor Sent")
