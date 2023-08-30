@@ -108,3 +108,8 @@ crumb :edit_tax_rate do |tax_rate|
   parent :marketplace_tax_rates, tax_rate.marketplace
   link "Edit Tax Rate '#{tax_rate.label}'", marketplace.location(:new, child: :tax_rate)
 end
+
+crumb :payment_settings do |marketplace|
+  parent :edit_marketplace, marketplace
+  link "Manage Payment Settings", marketplace.location(:index, child: :payment_settings)
+end

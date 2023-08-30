@@ -1,0 +1,14 @@
+<%= render CardComponent.new(classes: "flex flex-col h-full
+") do %>
+  <header class="flex font-bold">
+    <%= marketplace_stripe_utility.name %>
+  </header>
+  <footer class="flex flex-row justify-between mt-3">
+    <%= render ButtonComponent.new(
+      label: "View #{t('marketplace.stripe_accounts.show.link_to')}",
+      title: t('marketplace.stripe_accounts.show.link_to'),
+      href: marketplace.location(:index, child: :stripe_account),
+      method: :get,
+      scheme: :secondary) %>
+  </footer>
+<%- end %>
