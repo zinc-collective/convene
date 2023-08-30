@@ -42,7 +42,7 @@ class Marketplace
     end
 
     def stripe_utility
-      space.utilities.find_by!(utility_slug: :stripe).utility
+      @stripe_utility ||= space.utilities.find_by!(utility_slug: :stripe).utility
     end
 
     # The Secret Stripe API key belonging to the owner of the Marketplace
