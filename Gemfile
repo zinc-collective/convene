@@ -61,7 +61,7 @@ gem "friendly_id", "~> 5.5.0"
 # Hashing / Encrypting data at rest
 gem "bcrypt", "~> 3.1.19"
 gem "lockbox", "1.3.0"
-gem "rotp", "~> 6.2"
+gem "rotp", "~> 6.3"
 gem "strong_migrations", "~> 1.6"
 
 # ActiveModel extension to remove extra whitespace from attributes
