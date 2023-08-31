@@ -9,7 +9,7 @@ class RsvpPolicy < ApplicationPolicy
     true
   end
 
-  # Guests can Rsvp, as can signed-in users.
+  # Anyone with an RSVP link can RSVP
   def create?
     true
   end
