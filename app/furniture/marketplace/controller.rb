@@ -3,6 +3,7 @@ class Marketplace
     expose :marketplace, scope: -> { policy_scope(Marketplace) }
     delegate :bazaar, to: :marketplace
     helper_method :bazaar
+    layout "marketplace"
 
     helper_method def shopper
       @shopper ||= if current_person.is_a?(Guest)
