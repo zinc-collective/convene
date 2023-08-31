@@ -21,7 +21,11 @@ class InvitationPolicy < ApplicationPolicy
   class Scope < ApplicationScope
     # All invitations for an accessible space are visible.
     def resolve
-      scope.all
+      if person&.operator?
+        scope.all
+      else
+        scope.where(space: person&.spaces)
+      end
     end
   end
 end

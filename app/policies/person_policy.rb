@@ -19,7 +19,13 @@ class PersonPolicy < ApplicationPolicy
 
   class Scope < ApplicationScope
     def resolve
-      scope.all
+      return scope.none if person.blank?
+
+      if person.operator?
+        scope.all
+      else
+        scope.where(id: person.id)
+      end
     end
   end
 end
