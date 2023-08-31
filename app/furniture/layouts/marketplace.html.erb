@@ -1,0 +1,6 @@
+<%- content_for :content do %>
+  <%= turbo_frame_tag(marketplace) do %>
+    <%= yield  %>
+  <%- end %>
+<%- end %>
+<%= render template: "layouts/application" %>
