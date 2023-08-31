@@ -19,7 +19,7 @@
     <%= render 'layouts/header' %>
 
     <main id="<%= current_space.present? ? dom_id(current_space) : nil %>">
-      <%= yield %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
 
 
