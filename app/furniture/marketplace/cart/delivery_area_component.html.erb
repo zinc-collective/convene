@@ -4,6 +4,11 @@
     <%- if delivery_area.present? %>
       <div>
         <%= delivery_area.label %>
+
+        <div class="text-sm text-gray-500">
+          <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: cart)) %>
+        </div>
+
       </div>
 
       <div class="text-right">
