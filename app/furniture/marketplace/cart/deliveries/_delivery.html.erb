@@ -1,14 +1,26 @@
+<%- if delivery.delivery_area.present? %>
+  <p class="text-lg font-bold"><%= render(delivery.delivery_area) %></p>
+<%- end %>
+<p class="text-left py-1 text-sm">
+  <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %>
+</p>
 <%= turbo_frame_tag(delivery) do %>
-  <p class="text-left py-1 text-sm">
-    <span class="font-bold">Delivery Time:</span>
-    <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %>
-  </p>
-  <% if delivery.details_filled_in? || delivery.delivery_area.present? %>
-    <p class="text-left py-1 text-sm">
-      <span class="font-bold">Delivering to:</span>
-        <%= delivery.delivery_address if delivery.delivery_address.present? %>
-        <%= render(delivery.delivery_area) if delivery.delivery_area.present? %>
-    </p>
-  <% end %>
-  <%= link_to(t("marketplace.cart.deliveries.edit.link_to"), delivery.location(:edit)) %>
+  <% if delivery.details_filled_in? %>
+    <p class="font-bold">Delivering to:</p>
+    <div class="rounded p-2 bg-violet-50">
+      <p>
+        <%= delivery.contact_email %><br />
+        <%= number_to_phone(delivery.contact_phone_number) %><br />
+        <%= delivery.delivery_address %><br />
+
+        <span class="italic text-gray-800"><%= delivery.delivery_notes %></span>
+      </p>
+      <p class="text-sm">
+        <%= link_to(t("marketplace.cart.deliveries.edit.link_to"), delivery.location(:edit)) %>
+      </p>
+    </div>
+
+  <%- else %>
+    <%= render "marketplace/cart/deliveries/form", delivery: delivery %>
+  <%- end %>
 <%- end %>
