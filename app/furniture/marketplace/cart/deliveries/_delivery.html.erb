@@ -20,6 +20,8 @@
       </p>
     </div>
 
+    <h2>Payment Details</h2>
+    <%= button_to("Make Payment", delivery.cart.location(child: :checkout), data: { turbo: false }) %>
   <%- else %>
     <%= render "marketplace/cart/deliveries/form", delivery: delivery %>
   <%- end %>
