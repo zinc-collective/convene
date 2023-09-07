@@ -67,7 +67,6 @@ describe "Marketplace: Buying Products", type: :system do
   end
 
   def set_delivery_details(delivery_address:, contact_phone_number:, contact_email:)
-    click_on("Change delivery details")
     fill_in("Delivery address", with: delivery_address)
     fill_in("Contact phone number", with: contact_phone_number)
     fill_in("Contact email", with: contact_email)
