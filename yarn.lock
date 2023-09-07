@@ -283,10 +283,10 @@
   dependencies:
     regexp-match-indices "1.0.2"
 
-"@cucumber/cucumber@^9.5.0":
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-9.5.0.tgz#3a41d13f1263608e28aa634ae70dfd5b31a4f837"
-  integrity sha512-o2x9QtImzhAntLuRQtNk+HH0+TR7kKbAKO57G0/t8IvOjfdQ5eg06eTSiOaHjz4r1EI7/I9p9qSqlFM/gcKnUA==
+"@cucumber/cucumber@^9.5.1":
+  version "9.5.1"
+  resolved "https://registry.yarnpkg.com/@cucumber/cucumber/-/cucumber-9.5.1.tgz#49328c0f473ee4636f3ac27591ba0143ef94f052"
+  integrity sha512-9fRRxbRRkXxRB4D7C21ZjmEvBWI3Su7yNQDvRPfgHnd+xVKaOTvfPs/lZWN1TOiwYlnW5nupRaaCx5xV+fzurw==
   dependencies:
     "@cucumber/ci-environment" "9.2.0"
     "@cucumber/cucumber-expressions" "16.1.2"
