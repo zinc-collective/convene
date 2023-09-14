@@ -33,3 +33,7 @@ RSpec/ExampleLength:
 Style/TrailingCommaInArrayLiteral:
   Exclude:
     - db/schema.rb
+
+Rails/CreateTableWithTimestamps:
+  Exclude:
+    - db/schema.rb
