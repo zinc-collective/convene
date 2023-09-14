@@ -5,13 +5,13 @@ class EncryptUtilityHookupConfiguration < ActiveRecord::Migration[6.1]
 
     reversible do |direction|
       direction.up do
-        UtilityHookup.all.includes(:space).each do |uh|
+        UtilityHookup.includes(:space).find_each do |uh|
           uh.update(configuration: uh.old_configuration)
         end
       end
 
       direction.down do
-        UtilityHookup.all.includes(:space).each do |uh|
+        UtilityHookup.includes(:space).find_each do |uh|
           uh.update(old_configuration: uh.configuration)
         end
       end
