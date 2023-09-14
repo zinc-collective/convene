@@ -1,5 +1,5 @@
 class Marketplace
-  class StripeAccountsController < FurnitureController
+  class StripeAccountsController < Controller
     def create
       # TODO: Should we be using https://stripe.com/docs/connect/oauth-express-accounts instead?!
       authorize(marketplace, :edit?)
@@ -22,10 +22,6 @@ class Marketplace
 
     def show
       authorize(marketplace, :edit?)
-    end
-
-    helper_method def marketplace
-      @marketplace ||= policy_scope(Marketplace).find(params[:marketplace_id])
     end
   end
 end
