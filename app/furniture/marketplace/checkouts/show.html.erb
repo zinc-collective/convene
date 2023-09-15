@@ -1,0 +1,7 @@
+<%= turbo_frame_tag(checkout.marketplace) do %>
+  <%= link_to(t("marketplace.marketplaces.show.link_to"), marketplace.location) %>
+  <h1>Checkout</h2>
+  <%= render CardComponent.new do %>
+    <%= render cart.delivery %>
+  <%- end %>
+<%- end %>

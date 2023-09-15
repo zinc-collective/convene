@@ -1,33 +1,28 @@
-<div id="<%=dom_id(delivery) %>" class="flex flex-wrap items-center justify-between text-sm mt-1 sm:mt-2">
-    <span>
-      <p class="text-left px-2 sm:px-4 py-2 text-sm">
-        <span class="font-bold">Delivery Time:</span>
-        <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %>
-      </p>
-      <% if delivery.details_filled_in? || delivery.delivery_area.present? %>
-        <p class="text-left px-2 sm:px-4 py-2 text-sm">
-          <span class="font-bold">Delivering to:</span>
-            <%= delivery.delivery_address if delivery.delivery_address.present? %>
-            <%= render(delivery.delivery_area) if delivery.delivery_area.present? %>
-        </p>
-      <% end %>
-    </span>
-
+<%- if delivery.delivery_area.present? %>
+  <p class="text-lg font-bold"><%= render(delivery.delivery_area) %></p>
+<%- end %>
+<p class="text-left py-1 text-sm">
+  <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %>
+</p>
+<%= turbo_frame_tag(delivery) do %>
   <% if delivery.details_filled_in? %>
-    <%= render ButtonComponent.new(
-          label: t("marketplace.cart.deliveries.edit.link_to"),
-          href: delivery.location(:edit),
-          method: :get,
-          turbo_stream: true,
-          scheme: :secondary,
-        ) %>
-  <% else %>
-    <%= render ButtonComponent.new(
-        label: t("marketplace.cart.deliveries.edit.details_missing"),
-        href: delivery.location(:edit),
-        method: :get,
-        turbo_stream: true,
-        scheme: :primary,
-      ) %>
-  <% end %>
-</div>
+    <p class="font-bold">Delivering to:</p>
+    <div class="rounded p-2 bg-violet-50">
+      <p>
+        <%= delivery.contact_email %><br />
+        <%= number_to_phone(delivery.contact_phone_number) %><br />
+        <%= delivery.delivery_address %><br />
+
+        <span class="italic text-gray-800"><%= delivery.delivery_notes %></span>
+      </p>
+      <p class="text-sm">
+        <%= link_to(t("marketplace.cart.deliveries.edit.link_to"), delivery.location(:edit)) %>
+      </p>
+    </div>
+
+    <h2>Payment Details</h2>
+    <%= button_to("Make Payment", delivery.cart.location(child: :checkout), data: { turbo: false }) %>
+  <%- else %>
+    <%= render "marketplace/cart/deliveries/form", delivery: delivery %>
+  <%- end %>
+<%- end %>

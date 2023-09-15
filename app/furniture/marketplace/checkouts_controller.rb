@@ -10,12 +10,12 @@ class Marketplace
         )
         redirect_to stripe_session.url, status: :see_other, allow_other_host: true
       else
-        redirect_to(
-          [marketplace.room.space, marketplace.room],
-          # TODO: make this a nicer, I18ed message
-          alert: flash[:alert] = checkout.errors.full_messages.join(" ")
-        )
+        render :show, status: :unprocessable_entity
       end
+    end
+
+    def show
+      authorize(checkout)
     end
 
     helper_method def checkout

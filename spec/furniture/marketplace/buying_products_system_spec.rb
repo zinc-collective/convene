@@ -26,16 +26,19 @@ describe "Marketplace: Buying Products", type: :system do
 
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
     visit(polymorphic_path(marketplace.room.location))
-    set_delivery_details(delivery_address: "123 N West St Oakland, CA",
-      delivery_area: marketplace.delivery_areas.first,
-      contact_email: "AhsokaTano@example.com",
-      contact_phone_number: "1234567890")
+    select(marketplace.delivery_areas.first.label, from: "cart[delivery_area_id]")
+    click_on("Save changes")
 
     add_product_to_cart(marketplace.products.first)
 
     expect(page).to have_content("Total: #{humanized_money_with_symbol(marketplace.products.first.price + marketplace.delivery_areas.first.price)}")
 
-    click_link_or_button("Checkout")
+    click_on("Checkout")
+
+    set_delivery_details(delivery_address: "123 N West St Oakland, CA",
+      contact_email: "AhsokaTano@example.com",
+      contact_phone_number: "1234567890")
+
     pay(card_number: "4000000000000077", card_expiry: "1240", card_cvc: "123", billing_name: "Ahsoka Tano", email: "AhsokaTano@example.com", billing_postal_code: "12345")
 
     expect(page).to have_content("Order History", wait: 30)
@@ -59,22 +62,19 @@ describe "Marketplace: Buying Products", type: :system do
 
   def add_product_to_cart(product)
     within("##{dom_id(product).gsub("product", "cart_product")}") do
-      click_link_or_button(t("marketplace.cart_product_component.add"))
+      click_on(t("marketplace.cart_product_component.add"))
     end
   end
 
-  def set_delivery_details(delivery_address:, delivery_area:, contact_phone_number:, contact_email:)
-    select(delivery_area.label, from: "cart[delivery_area_id]")
-    click_link_or_button("Save changes")
-
-    click_link_or_button("Add delivery details to checkout")
+  def set_delivery_details(delivery_address:, contact_phone_number:, contact_email:)
     fill_in("Delivery address", with: delivery_address)
     fill_in("Contact phone number", with: contact_phone_number)
     fill_in("Contact email", with: contact_email)
-    click_link_or_button("Save changes")
+    click_on("Save changes")
   end
 
   def pay(card_number:, card_expiry:, card_cvc:, billing_name:, email:, billing_postal_code:)
+    click_on("Make Payment")
     fill_in("cardNumber", with: card_number)
     fill_in("cardExpiry", with: card_expiry)
     fill_in("cardCvc", with: card_cvc)

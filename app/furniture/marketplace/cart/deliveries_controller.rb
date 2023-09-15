@@ -1,22 +1,20 @@
 class Marketplace
   class Cart
     class DeliveriesController < Controller
+      def show
+        authorize(delivery)
+      end
+
       def edit
         authorize(delivery)
-        render turbo_stream: [turbo_stream.replace(delivery, partial: "form")]
       end
 
       def update
         authorize(delivery)
-        delivery.update(delivery_params)
-        if delivery.errors.present?
-          render turbo_stream: [turbo_stream.replace(delivery, partial: "form")]
+        if delivery.update(delivery_params)
+          redirect_to delivery.location
         else
-          # Replace the entire cart footer so that the "Checkout" button updates as well
-          render turbo_stream: [
-            turbo_stream.replace("cart-footer-#{cart.id}",
-              partial: "marketplace/carts/footer", locals: {cart: cart})
-          ]
+          render :edit, status: :unprocessable_entity
         end
       end
 

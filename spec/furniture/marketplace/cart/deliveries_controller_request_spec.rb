@@ -15,7 +15,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
       response
     end
 
-    it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "form") }
+    it { is_expected.to have_rendered(:edit) }
   end
 
   describe "#update" do
@@ -29,12 +29,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
     context "when a `Guest`" do
       let(:person) { nil }
 
-      it "replaces the cart footer" do
-        perform_request
-        expect(response.parsed_body).to include(
-          "<turbo-stream action=\"replace\" target=\"cart-footer-#{cart.id}\""
-        )
-      end
+      it { is_expected.to redirect_to(delivery.location) }
 
       specify do
         expect { perform_request }
@@ -51,12 +46,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
 
       before { sign_in(space, person) }
 
-      it "replaces the cart footer" do
-        perform_request
-        expect(response.parsed_body).to include(
-          "<turbo-stream action=\"replace\" target=\"cart-footer-#{cart.id}\""
-        )
-      end
+      it { is_expected.to redirect_to(delivery.location) }
 
       specify do
         expect { perform_request }
@@ -70,7 +60,7 @@ RSpec.describe Marketplace::Cart::DeliveriesController, type: :request do
       context "when the delivery is invalid" do
         let(:delivery_attributes) { attributes_for(:marketplace_cart_delivery, marketplace: marketplace).merge(contact_phone_number: "") }
 
-        it { is_expected.to have_rendered_turbo_stream(:replace, delivery, partial: "form") }
+        it { is_expected.to be_unprocessable }
       end
     end
   end
