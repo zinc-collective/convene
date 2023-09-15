@@ -50,7 +50,7 @@ class Marketplace
     end
 
     def price_total
-      [product_total, delivery_fee, tax_total].compact.sum
+      [product_total, delivery_fee, tax_total].compact.sum(0)
     end
 
     def send_to_square_seller_dashboard
