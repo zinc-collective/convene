@@ -456,7 +456,7 @@ GEM
       railties (>= 6.0.0)
     strip_attributes (1.13.0)
       activemodel (>= 3.0, < 8.0)
-    stripe (9.2.0)
+    stripe (9.3.0)
     strong_migrations (1.6.2)
       activerecord (>= 5.2)
     thor (1.2.2)
