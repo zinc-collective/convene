@@ -3,9 +3,13 @@ require "rails_helper"
 # rubocop:disable RSpec/VerifiedDoubles
 RSpec.describe Marketplace::StripeEventsController, type: :request do
   let(:marketplace) { create(:marketplace, :with_stripe_utility, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234") }
+  let(:marketplace_with_square) { create(:marketplace, :with_stripe_utility, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234", square_location_id: "123456789", square_environment: "sandbox", secrets: {square_access_token: "fake_square_access_token"}) }
   let(:space) { marketplace.space }
   let(:member) { create(:membership, space: space).member }
   let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, marketplace: marketplace) }
+  let(:person) { create(:person) }
+  let(:shopper) { create(:marketplace_shopper, person: person) }
+  let(:order_for_square) { create(:marketplace_order, :with_products, status: :pre_checkout, marketplace: marketplace_with_square, shopper: shopper) }
 
   let(:stripe_event) do
     double(Stripe::Event, type: "checkout.session.completed",
@@ -22,6 +26,14 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     double(Stripe::Charge, balance_transaction: "btx_2234")
   }
 
+  let(:square_client) {
+    double(Square::Client)
+  }
+
+  let(:square_orders_api) {
+    double(Square::OrdersApi)
+  }
+
   before do
     allow(Stripe::Webhook).to receive(:construct_event).with(anything, "sig_1234", marketplace.stripe_webhook_endpoint_secret).and_return(stripe_event)
 
@@ -29,11 +41,15 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     allow(Stripe::Transfer).to receive(:create).and_return(double(Stripe::Transfer, id: "st_fake_1234"))
     allow(Stripe::BalanceTransaction).to receive(:retrieve).with("btx_2234", anything).and_return(balance_transaction)
     allow(Stripe::Charge).to receive(:retrieve).with("ch_1234", anything).and_return(charge)
+    allow(Square::Client).to receive(:new).with(access_token: anything, environment: anything).and_return(square_client)
+    allow(square_client).to receive(:orders).and_return(square_orders_api)
+    allow(square_client).to receive(:payments).and_return(square_payments_api)
+    allow(square_orders_api).to receive(:create_order)
   end
 
   describe "#create" do
     subject(:call) do
-      post polymorphic_path(marketplace.location(child: :stripe_events)), headers: {HTTP_STRIPE_SIGNATURE: "sig_1234"}
+      post polymorphic_path(order.marketplace.location(child: :stripe_events)), headers: {HTTP_STRIPE_SIGNATURE: "sig_1234"}
       order.reload
       response
     end
@@ -79,6 +95,22 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
         expect(order.reload.placed_at).to be_nil
 
         expect(Stripe::Transfer).not_to(have_received(:create))
+      end
+    end
+
+    context "when Square notifications are not enabled" do
+      it "does not attempt to transfer the order to seller's Square dashboard" do
+        call
+        expect(square_client).not_to(have_received(:orders))
+      end
+    end
+
+    context "when Square notifications are enabled" do
+      let(:order) { order_for_square }
+
+      it "attempts to transfer the order to seller's Square dashboard" do
+        call
+        expect(square_client).to have_received(:orders)
       end
     end
   end

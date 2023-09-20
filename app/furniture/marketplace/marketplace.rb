@@ -21,6 +21,7 @@ class Marketplace
     alias_method :vendor_stripe_account, :stripe_account
     setting :stripe_webhook_endpoint
     setting :stripe_webhook_endpoint_secret
+    setting :square_environment
 
     # Square order notifications integration
     setting :square_location_id

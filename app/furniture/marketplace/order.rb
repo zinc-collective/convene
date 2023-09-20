@@ -55,14 +55,19 @@ class Marketplace
 
     def send_to_square_seller_dashboard
       square_create_order_response = create_square_order
-      square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id])
 
-      # This data is intended for use in debugging, etc... until we further
-      # the Square integration productize
-      {
-        order_id: square_create_order_response.body.order[:id],
-        payment_id: square_create_payment_response.body.payment[:id]
-      }
+      if square_create_order_response
+        square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id])
+
+        # This data is intended for use in debugging, etc... until we further
+        # the Square integration productize
+        {
+          order_id: square_create_order_response.body.order[:id],
+          payment_id: square_create_payment_response.body.payment[:id]
+        }
+      else
+        # TODO: Noop for now
+      end
     end
 
     # Square sets max of 43 chars
