@@ -16,6 +16,7 @@ class ButtonComponent < ApplicationComponent
     confirm: nil,
     disabled: false,
     turbo_stream: false,
+    turbo: true,
     scheme: nil,
     **kwargs
   )
@@ -27,6 +28,7 @@ class ButtonComponent < ApplicationComponent
     @confirm = confirm
     @disabled = disabled
     @turbo_stream = turbo_stream
+    @turbo = turbo
     @scheme = scheme
 
     super(data: data, **kwargs)
@@ -43,7 +45,7 @@ class ButtonComponent < ApplicationComponent
   end
 
   def data
-    data = {turbo_method: @method, turbo: true}
+    data = {turbo_method: @method, turbo: @turbo}
     data[:turbo_stream] = true if @turbo_stream
     if @confirm.present?
       data[:turbo_confirm] = @confirm
