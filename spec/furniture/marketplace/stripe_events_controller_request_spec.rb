@@ -43,7 +43,6 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     allow(Stripe::Charge).to receive(:retrieve).with("ch_1234", anything).and_return(charge)
     allow(Square::Client).to receive(:new).with(access_token: anything, environment: anything).and_return(square_client)
     allow(square_client).to receive(:orders).and_return(square_orders_api)
-    allow(square_client).to receive(:payments).and_return(square_payments_api)
     allow(square_orders_api).to receive(:create_order)
   end
 
