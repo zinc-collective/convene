@@ -1,7 +1,7 @@
 <%= render CardComponent.new(classes: "flex flex-col h-full
 ") do %>
   <header class="flex font-bold">
-    <%= marketplace_stripe_utility.name %>
+    <%= marketplace_stripe_utility&.name %>
   </header>
   <footer class="flex flex-row justify-between mt-3">
     <%= render ButtonComponent.new(

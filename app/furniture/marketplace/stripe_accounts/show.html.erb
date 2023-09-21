@@ -12,6 +12,7 @@
             label: t('.missing_stripe_api_key', space_name: space.name),
             href: space.location(:edit),
             method: :get,
+            turbo: false,
             scheme: :primary ) %>
     <% end %>
   </p>

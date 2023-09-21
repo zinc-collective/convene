@@ -7,6 +7,5 @@ class Marketplace::StripeOverviewComponent < ApplicationComponent
     super(**kwargs)
 
     @marketplace = marketplace
-    @marketplace_stripe_utility = marketplace.stripe_utility
   end
 end
