@@ -45,7 +45,7 @@ gem "lookbook", ">= 2.0.0.beta.4"
 gem "view_component", "~> 3.6"
 
 # Pagination!
-gem "pagy", "~> 6.0"
+gem "pagy", "~> 6.1"
 
 # Database Layer
 #
