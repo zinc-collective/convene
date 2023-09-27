@@ -11,7 +11,7 @@ RSpec.describe Marketplace::TaxRateComponent, type: :component do
     it { is_expected.to have_content(component.helpers.number_to_percentage(tax_rate.tax_rate, precision: 2)) }
 
     context "when current person is null" do
-      it { is_expected.not_to have_selector("a") }
+      it { is_expected.not_to have_css("a") }
     end
 
     context "when current person is a space member" do
