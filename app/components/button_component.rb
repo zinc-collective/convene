@@ -69,17 +69,17 @@ class ButtonComponent < ApplicationComponent
       "focus-visible:outline",
       "focus-visible:outline-2",
       "focus-visible:outline-offset-2",
-      "focus-visible:outline-purple-600"
+      "focus-visible:outline-orange-600"
     ]
   end
 
   def secondary_classes
     [
       "bg-white",
-      "text-purple-950",
+      "text-orange-950",
       "ring-gray-300",
-      "hover:bg-purple-100",
-      "hover:text-purple-700"
+      "hover:bg-orange-100",
+      "hover:text-orange-700"
     ]
   end
 
@@ -94,9 +94,9 @@ class ButtonComponent < ApplicationComponent
 
   def primary_classes
     [
-      "bg-purple-600",
+      "bg-orange-600",
       "text-white",
-      "hover:bg-purple-700",
+      "hover:bg-orange-700",
       "hover:text-white"
     ]
   end

@@ -5,13 +5,13 @@
   [type="submit"],
   button,
   .button {
-    @apply font-bold py-2 px-4 rounded bg-purple-500 text-white text-center transition ease-in-out duration-150;
+    @apply font-bold py-2 px-4 rounded bg-orange-500 text-white text-center transition ease-in-out duration-150;
 
     &:hover {
-      @apply bg-purple-700;
+      @apply bg-orange-700;
     }
     &:active {
-      @apply bg-purple-200;
+      @apply bg-orange-200;
     }
 
     &:focus {
