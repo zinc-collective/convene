@@ -1,18 +1,4 @@
 @layer components {
-  body > header {
-    @apply flex justify-between px-2 py-2 bg-orange-500 text-white place-items-end;
-
-    .profile-menu {
-      @apply flex flex-row relative;
-      :first-child {
-        @apply pr-0;
-      }
-      > * {
-        @apply px-2;
-      }
-    }
-  }
-
   .flash-message {
     @apply px-4 py-4;
 

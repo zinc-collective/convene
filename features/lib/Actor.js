@@ -65,7 +65,7 @@ class Actor {
    * @returns {Promise<boolean>}
    */
   isSignedIn(driver) {
-    return new PersonNavigationComponent(driver, ".profile-menu")
+    return new PersonNavigationComponent(driver, "*[aria-label='Profile Menu']")
       .signedInEmail()
       .then((email) => this.email == email);
   }
