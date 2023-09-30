@@ -14,7 +14,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        danger: colors.red,
         neutral: colors.gray,
       },
     },

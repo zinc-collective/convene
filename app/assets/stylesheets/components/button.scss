@@ -19,12 +19,12 @@
     }
 
     &.--danger {
-      @apply bg-danger-500;
+      @apply bg-red-500;
       &:hover {
-        @apply bg-danger-700;
+        @apply bg-red-700;
       }
       &:active {
-        @apply bg-danger-200;
+        @apply bg-red-200;
       }
     }
 

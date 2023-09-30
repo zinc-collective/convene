@@ -85,9 +85,9 @@ class ButtonComponent < ApplicationComponent
 
   def danger_classes
     [
-      "bg-danger-500",
-      "hover:bg-danger-700",
-      "active:bg-danger-200",
+      "bg-red-500",
+      "hover:bg-red-700",
+      "active:bg-red-200",
       "text-white"
     ]
   end
