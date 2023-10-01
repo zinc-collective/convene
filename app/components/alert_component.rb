@@ -25,7 +25,7 @@ class AlertComponent < ApplicationComponent
     when :success
       "bg-green-50"
     else
-      "bg-violet-50"
+      "bg-stone-50"
     end
   end
 
@@ -38,7 +38,7 @@ class AlertComponent < ApplicationComponent
     when :success
       "text-green-400"
     else
-      "text-violet-400"
+      "text-stone-400"
     end
   end
 
@@ -51,7 +51,7 @@ class AlertComponent < ApplicationComponent
     when :success
       "text-green-800"
     else
-      "text-violet-800"
+      "text-stone-800"
     end
   end
 
@@ -64,7 +64,7 @@ class AlertComponent < ApplicationComponent
     when :success
       "text-green-700"
     else
-      "text-violet-700"
+      "text-stone-700"
     end
   end
 end
