@@ -159,7 +159,6 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_unauthorized(exception)
-    Sentry.capture_exception(exception, level: :warn)
     render_not_found
   end
 
