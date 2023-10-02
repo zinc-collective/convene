@@ -11,15 +11,6 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js'
   ],
-  theme: {
-    extend: {
-      colors: {
-        primary: colors.purple,
-        danger: colors.red,
-        neutral: colors.gray,
-      },
-    },
-  },
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),

@@ -5,36 +5,36 @@
   [type="submit"],
   button,
   .button {
-    @apply font-bold py-2 px-4 rounded bg-primary-500 text-white text-center transition ease-in-out duration-150;
+    @apply font-bold py-2 px-4 rounded bg-orange-500 text-white text-center transition ease-in-out duration-150;
 
     &:hover {
-      @apply bg-primary-700;
+      @apply bg-orange-400;
     }
     &:active {
-      @apply bg-primary-200;
+      @apply bg-orange-200;
     }
 
     &:focus {
-      @apply outline-none border-neutral-300  ring-gray-500;
+      @apply outline-none border-gray-300  ring-gray-500;
     }
 
     &.--danger {
-      @apply bg-danger-500;
+      @apply bg-red-500;
       &:hover {
-        @apply bg-danger-700;
+        @apply bg-red-700;
       }
       &:active {
-        @apply bg-danger-200;
+        @apply bg-red-200;
       }
     }
 
     &.--neutral {
-      @apply bg-neutral-500;
+      @apply bg-gray-500;
       &:hover {
-        @apply bg-neutral-700;
+        @apply bg-gray-700;
       }
       &:active {
-        @apply bg-neutral-200;
+        @apply bg-gray-200;
       }
     }
   }

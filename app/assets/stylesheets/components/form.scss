@@ -3,7 +3,7 @@
     @apply bg-white shadow rounded-lg p-2 mt-2;
 
     legend {
-      @apply text-lg leading-6 font-medium text-neutral-900;
+      @apply text-lg leading-6 font-medium text-gray-900;
     }
   }
 
@@ -19,7 +19,7 @@
       @apply block w-full;
     }
     label {
-      @apply font-medium text-sm leading-6 text-neutral-700 mb-1;
+      @apply font-medium text-sm leading-6 text-gray-700 mb-1;
     }
 
     input[type="email"],
@@ -35,7 +35,7 @@
       @apply py-2 px-4
         rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
         ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-        focus:ring-primary-300;
+        focus:ring-orange-300;
 
       @screen sm {
         @apply leading-6 text-sm;
@@ -71,7 +71,7 @@
     select:disabled,
     textarea:disabled,
     input:disabled {
-      @apply bg-neutral-200;
+      @apply bg-gray-200;
     }
     .field_with_errors {
       @apply text-red-500;
