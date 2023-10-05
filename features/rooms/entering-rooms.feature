@@ -16,14 +16,14 @@ Feature: Entering Rooms
   @built
   Scenario: Entering Room via Room Picker from Space Dashboard
     Given the Space Member is on the "System Test" Space Dashboard
-    When the Space Member taps the "Listed Room 1" Room in the Room Picker
-    Then the Space Member is placed in the "Listed Room 1" Room
+    When the Space Member taps the "Room 1" Room in the Room Picker
+    Then the Space Member is placed in the "Room 1" Room
 
   @built
   Scenario: Entering Room via Room Picker from another Room
-    Given the Space Member is in the "System Test" Space and in the "Listed Room 1" Room
-    When the Space Member taps the "Listed Room 2" Room in the Room Picker
-    Then the Space Member is placed in the "Listed Room 2" Room
+    Given the Space Member is in the "System Test" Space and in the "Room 1" Room
+    When the Space Member taps the "Room 2" Room in the Room Picker
+    Then the Space Member is placed in the "Room 2" Room
 
   @built @unimplemented-steps
   Scenario: Entering Room via Slug on a Branded Domain
@@ -33,13 +33,13 @@ Feature: Entering Rooms
 
   @built
   Scenario: Entering Room via Room full URL
-    When the Space Member visit the "System Test" Space, "Listed Room 1" Room full URL
-    Then the Space Member is placed in the "Listed Room 1" Room
+    When the Space Member visit the "System Test" Space, "Room 1" Room full URL
+    Then the Space Member is placed in the "Room 1" Room
 
   @built @unimplemented-steps
   Scenario: Entering Room via back button
-    Given the Space Member is in the "System Test" Space and in the "Listed Room 1" Room
-    When the Space Member taps the "Listed Room 2" Room in the Room Picker
-    And the Space Member is placed in the "Listed Room 2" Room
+    Given the Space Member is in the "System Test" Space and in the "Room 1" Room
+    When the Space Member taps the "Room 2" Room in the Room Picker
+    And the Space Member is placed in the "Room 2" Room
     And the Space Member hit the back button
-    Then the Space Member is placed in the "Listed Room 1" Room
+    Then the Space Member is placed in the "Room 1" Room

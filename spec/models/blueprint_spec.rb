@@ -8,7 +8,6 @@ RSpec.describe Blueprint do
     members: [{email: "client-a@example.com"}],
     rooms: [{
       name: "Room A",
-      publicity_level: :listed,
       furnitures: {
         markdown_text_block: {content: "Obi Swan Kenobi"}
       }
