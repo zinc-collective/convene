@@ -7,7 +7,7 @@
 <%= turbo_frame_tag(delivery) do %>
   <% if delivery.details_filled_in? %>
     <p class="font-bold">Delivering to:</p>
-    <div class="rounded p-2 bg-violet-50">
+    <div class="rounded p-2 bg-orange-50">
       <p>
         <%= delivery.contact_email %><br />
         <%= number_to_phone(delivery.contact_phone_number) %><br />
