@@ -1,6 +1,5 @@
 # A Room in Convene acts as a gathering place.
 class Room < ApplicationRecord
-  self.ignored_columns += [:publicity_level]
   # The space whose settings govern the default publicity and access controls for the Room.
   belongs_to :space, inverse_of: :rooms
   location(parent: :space)
