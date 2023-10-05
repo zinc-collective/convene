@@ -1,5 +1,6 @@
 # A Room in Convene acts as a gathering place.
 class Room < ApplicationRecord
+  self.ignored_columns += [:publicity_level]
   # The space whose settings govern the default publicity and access controls for the Room.
   belongs_to :space, inverse_of: :rooms
   location(parent: :space)
@@ -24,15 +25,6 @@ class Room < ApplicationRecord
   }, _suffix: :access
   alias_method :internal?, :internal_access?
   alias_method :public?, :public_access?
-
-  # A Room's Publicity Level indicates how visible the room is.
-  # `listed` - The room is discoverable by anyone in the space lobby.
-  # `unlisted` - The room is not listed.
-  enum publicity_level: {
-    listed: "listed",
-    unlisted: "unlisted"
-  }
-  validates :publicity_level, presence: true
 
   has_many :gizmos, dependent: :destroy, inverse_of: :room, class_name: :Furniture
   accepts_nested_attributes_for :gizmos

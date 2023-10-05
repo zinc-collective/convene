@@ -5,7 +5,6 @@
 
     <h3>Privacy and Security</h3>
 
-    <%= render "radio_group", attribute: :publicity_level, options: Room::publicity_levels.values, form: room_form %>
     <%= render "radio_group", attribute: :access_level, options: Room::access_levels.values, form: room_form %>
 
     <footer>

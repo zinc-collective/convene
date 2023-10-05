@@ -44,8 +44,6 @@ RSpec.describe RoomPolicy do
     let(:space) { room.space }
     let!(:internal_room) { create(:room, :internal, space: space) }
     let!(:public_room) { create(:room, :public, space: space) }
-    let!(:listed_room) { create(:room, :listed, space: space) }
-    let!(:unlisted_room) { create(:room, :unlisted, space: space) }
 
     context "when person is an operator" do
       let(:person) { operator }
@@ -53,8 +51,6 @@ RSpec.describe RoomPolicy do
       it "returns all the rooms" do
         expect(results).to include(internal_room)
         expect(results).to include(public_room)
-        expect(results).to include(unlisted_room)
-        expect(results).to include(listed_room)
       end
     end
 
@@ -64,8 +60,6 @@ RSpec.describe RoomPolicy do
       it "returns all the rooms" do
         expect(results).to include(internal_room)
         expect(results).to include(public_room)
-        expect(results).to include(unlisted_room)
-        expect(results).to include(listed_room)
       end
     end
 
@@ -74,9 +68,6 @@ RSpec.describe RoomPolicy do
 
       it "returns only the public rooms" do
         expect(results).to include(public_room)
-        expect(results).to include(unlisted_room)
-        expect(results).to include(listed_room)
-
         expect(results).not_to include(internal_room)
       end
     end
