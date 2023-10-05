@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   # @return [String]
   helper_method def page_title
     if current_space.present?
-      "Convene - #{current_space.name}"
+      current_space.name
     else
       "Convene"
     end
