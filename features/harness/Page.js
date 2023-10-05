@@ -23,7 +23,10 @@ class Page {
    * @returns {PersonNavigationComponent}
    */
   personNavigation() {
-    return this.component(".profile-menu", PersonNavigationComponent);
+    return this.component(
+      "*[aria-label='Profile Menu']",
+      PersonNavigationComponent,
+    );
   }
   /**
    * Goes directly to the page, as defined in the path method.
