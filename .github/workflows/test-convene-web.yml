@@ -48,7 +48,7 @@ jobs:
       - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Install Node dependencies
@@ -109,7 +109,7 @@ jobs:
       - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Allow Ruby process to access port 80
@@ -177,7 +177,7 @@ jobs:
       - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Install Firefox
@@ -238,7 +238,7 @@ jobs:
       - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Install Node dependencies
