@@ -5,7 +5,7 @@
   "exports": "./index.js",
   "type": "module",
   "engines": {
-    "node": "^16.13",
+    "node": "^18.8",
     "yarn": "^1.22"
   },
   "scripts": {
