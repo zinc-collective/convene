@@ -49,7 +49,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@hotwired/turbo-rails": "^7.3.0",
-    "@rails/actioncable": "^7.1.0",
+    "@rails/actioncable": "^7.1.1",
     "@rails/activestorage": "^7.1.0",
     "@sentry/browser": "^7.73.0",
     "@tailwindcss/forms": "^0.5.6",
