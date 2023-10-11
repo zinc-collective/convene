@@ -36,7 +36,7 @@ class MailServer {
    */
   emails() {
     return axios
-      .get("http://localhost:1080/email")
+      .get("http://127.0.0.1:1080/email")
       .then((res) => res.data)
       .catch((err) => console.log(err));
   }
