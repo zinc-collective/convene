@@ -41,6 +41,15 @@ RSpec.describe AuthenticationMethod do
 
       expect(authentication_method).not_to be_verify(one_time_password)
     end
+
+    it "is false when the OTP is nil" do
+      expect(authentication_method).not_to be_verify(nil)
+    end
+
+    it "is false when the OTPS is nil" do
+      authentication_method.one_time_password_secret = nil
+      expect(authentication_method).not_to be_verify("an otp")
+    end
   end
 
   describe "#send_one_time_password!(space)" do
