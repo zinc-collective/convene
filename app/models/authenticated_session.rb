@@ -45,6 +45,16 @@ class AuthenticatedSession
     end
 
     false
+  rescue ActiveRecord::RecordInvalid
+    self.authentication_method = nil
+    if one_time_password.nil?
+      authentication_method.send_one_time_password!(space)
+      false
+    elsif authentication_method.verify?(one_time_password)
+      session[:person_id] = authentication_method.person.id
+      authentication_method.confirm!
+      true
+    end
   end
 
   # If we don't have a OTP _or_ a way of issuing one, there's nothin' we can do.
