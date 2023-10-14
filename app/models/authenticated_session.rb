@@ -35,26 +35,10 @@ class AuthenticatedSession
   def save
     return false if !valid? || !actionable?
 
-    if one_time_password.nil?
-      authentication_method.send_one_time_password!(space)
-      return false
-    elsif authentication_method.verify?(one_time_password)
-      session[:person_id] = authentication_method.person.id
-      authentication_method.confirm!
-      return true
-    end
-
-    false
+    verify_or_resend_otp
   rescue ActiveRecord::RecordInvalid
     self.authentication_method = nil
-    if one_time_password.nil?
-      authentication_method.send_one_time_password!(space)
-      false
-    elsif authentication_method.verify?(one_time_password)
-      session[:person_id] = authentication_method.person.id
-      authentication_method.confirm!
-      true
-    end
+    verify_or_resend_otp
   end
 
   # If we don't have a OTP _or_ a way of issuing one, there's nothin' we can do.
@@ -65,5 +49,16 @@ class AuthenticatedSession
   private def verify_one_time_password
     return if one_time_password.nil? || authentication_method.verify?(one_time_password)
     errors.add(:one_time_password, :invalid_one_time_password)
+  end
+
+  private def verify_or_resend_otp
+    if one_time_password.nil?
+      authentication_method.send_one_time_password!(space)
+      false
+    elsif authentication_method.verify?(one_time_password)
+      session[:person_id] = authentication_method.person.id
+      authentication_method.confirm!
+      true
+    end
   end
 end
