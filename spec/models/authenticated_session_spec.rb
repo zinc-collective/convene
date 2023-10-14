@@ -71,29 +71,46 @@ RSpec.describe AuthenticatedSession do
             expect { authenticated_session.save }.not_to change(AuthenticationMethod, :count)
           end
         end
-      end
 
-      context "and the correct otp is provided" do
-        let(:one_time_password) { "123456" }
+        context "when a race condition caused the authentication method was created in another thread" do
+          let(:authentication_method) { nil }
 
-        before do
-          allow(authentication_method).to receive(:verify?)
-            .with(one_time_password).and_return(true)
+          it "reloads the authentication method and tries again" do
+            sad_authentication_method = instance_double(AuthenticationMethod)
+            allow(sad_authentication_method).to receive(:send_one_time_password!).with(space).and_raise(ActiveRecord::RecordInvalid)
+            happy_authentication_method = instance_double(AuthenticationMethod)
+            allow(happy_authentication_method).to receive(:send_one_time_password!).with(space)
+            allow(AuthenticationMethod).to receive(:find_or_initialize_by).with(contact_method: :email, contact_location: "test@example.com").and_return(sad_authentication_method, happy_authentication_method)
 
-          allow(authentication_method).to receive(:person)
-            .and_return(build_stubbed(:person, id: SecureRandom.uuid))
+            authenticated_session.save
+
+            expect(sad_authentication_method).to have_received(:send_one_time_password!).with(space)
+            expect(happy_authentication_method).to have_received(:send_one_time_password!).with(space)
+          end
         end
 
-        it "confirms the authentication method" do
-          authenticated_session.save
+        context "and the correct otp is provided" do
+          let(:one_time_password) { "123456" }
 
-          expect(authentication_method).to have_received(:confirm!)
-        end
+          before do
+            allow(authentication_method).to receive(:verify?)
+              .with(one_time_password).and_return(true)
 
-        it "populates the persons id in the session" do
-          authenticated_session.save
+            allow(authentication_method).to receive(:person)
+              .and_return(build_stubbed(:person, id: SecureRandom.uuid))
+          end
 
-          expect(session[:person_id]).to eql(authentication_method.person.id)
+          it "confirms the authentication method" do
+            authenticated_session.save
+
+            expect(authentication_method).to have_received(:confirm!)
+          end
+
+          it "populates the persons id in the session" do
+            authenticated_session.save
+
+            expect(session[:person_id]).to eql(authentication_method.person.id)
+          end
         end
       end
     end
