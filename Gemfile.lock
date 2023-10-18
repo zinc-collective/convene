@@ -458,7 +458,7 @@ GEM
     strip_attributes (1.13.0)
       activemodel (>= 3.0, < 8.0)
     stripe (9.4.0)
-    strong_migrations (1.6.3)
+    strong_migrations (1.6.4)
       activerecord (>= 5.2)
     thor (1.2.2)
     timeout (0.3.2)
