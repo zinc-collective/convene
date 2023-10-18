@@ -1324,10 +1324,10 @@ chalk@^5.1.2:
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.2.0.tgz#249623b7d66869c673699fb66d65723e54dfcfb3"
   integrity sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==
 
-change-case@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/change-case/-/change-case-5.0.2.tgz#0f1885d310b84065a17b20e8231c7dff37207627"
-  integrity sha512-tH6YZXViaeC2/Mnt8m4gSmbZfNorC2rhwCX2bXw8SYZWr8ljCPB7iA+1TLG9t7yroWBFauc63LlOZ1gucMVCWw==
+change-case@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/change-case/-/change-case-5.1.0.tgz#49754b58fdbda90547c696b69233e6fa2795464f"
+  integrity sha512-YLRzoiIO62vpoI8Qy2Jfy3gLu++QfhIcNtMOAwCbIel5UQGp6/KbL7Yu309dwNQHwbI1ZW39uBFyhrwVzXJSJQ==
 
 chokidar@^3.3.0, chokidar@^3.5.3:
   version "3.5.3"
