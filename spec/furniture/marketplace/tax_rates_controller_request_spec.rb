@@ -11,7 +11,6 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
   let(:space) { marketplace.space }
   let(:marketplace) { create(:marketplace) }
   let(:person) { create(:membership, space: space).member }
-  let(:as) { :html }
 
   describe "#new" do
     let(:perform_request) do
@@ -36,7 +35,7 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
 
   describe "#edit" do
     let(:perform_request) do
-      get polymorphic_path(tax_rate.location(:edit)), as: as
+      get polymorphic_path(tax_rate.location(:edit))
     end
     let(:tax_rate) { create(:marketplace_tax_rate, marketplace: marketplace) }
 
@@ -52,7 +51,7 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
 
   describe "#update" do
     let(:perform_request) do
-      put(polymorphic_path(tax_rate.location), as: as, params: {tax_rate: tax_rate_params}).tap do
+      put(polymorphic_path(tax_rate.location), params: {tax_rate: tax_rate_params}).tap do
         tax_rate.reload
       end
     end
@@ -65,7 +64,11 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
     it { is_expected.to redirect_to(marketplace.location(child: :tax_rates)) }
 
     context "when a turbo stream" do
-      let(:as) { :turbo_stream }
+      let(:perform_request) do
+        put(polymorphic_path(tax_rate.location), as: :turbo_stream, params: {tax_rate: tax_rate_params}).tap do
+          tax_rate.reload
+        end
+      end
 
       it { is_expected.to have_rendered_turbo_stream(:replace, tax_rate, Marketplace::TaxRateComponent.new(tax_rate: tax_rate.reload).render_in(controller.view_context)) }
     end
@@ -76,7 +79,11 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
       it { is_expected.to render_template(:edit) }
 
       context "when a a turbo stream" do
-        let(:as) { :turbo_stream }
+        let(:perform_request) do
+          put(polymorphic_path(tax_rate.location), as: :turbo_stream, params: {tax_rate: tax_rate_params}).tap do
+            tax_rate.reload
+          end
+        end
 
         it { is_expected.to have_rendered_turbo_stream(:replace, tax_rate, partial: "form") }
       end
@@ -85,7 +92,7 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
 
   describe "#destroy" do
     let(:perform_request) do
-      delete polymorphic_path(tax_rate.location), as: as
+      delete polymorphic_path(tax_rate.location)
     end
 
     let(:tax_rate) { create(:marketplace_tax_rate, marketplace: marketplace) }
@@ -97,7 +104,9 @@ RSpec.describe Marketplace::TaxRatesController, type: :request do
     it { is_expected.to redirect_to(marketplace.location(child: :tax_rates)) }
 
     context "when a turbo_stream" do
-      let(:as) { :turbo_stream }
+      let(:perform_request) do
+        delete polymorphic_path(tax_rate.location), as: :turbo_stream
+      end
 
       it { is_expected.to have_rendered_turbo_stream(:remove, tax_rate) }
     end

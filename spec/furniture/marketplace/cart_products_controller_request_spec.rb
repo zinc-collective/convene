@@ -6,11 +6,10 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
   let(:room) { marketplace.room }
   let(:member) { create(:membership, space: space).member }
   let(:document_root_element) { Nokogiri::HTML::Document.parse(response.body) }
-  let(:request_as) { :html }
 
   describe "#create" do
     subject(:perform_request) do
-      post path, as: request_as, params: {cart_product: {product_id: product.id, quantity: 1}}
+      post path, params: {cart_product: {product_id: product.id, quantity: 1}}
       response
     end
 
@@ -25,7 +24,10 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
     end
 
     context "when a turbo stream" do
-      let(:request_as) { :turbo_stream }
+      subject(:perform_request) do
+        post path, as: :turbo_stream, params: {cart_product: {product_id: product.id, quantity: 1}}
+        response
+      end
 
       it "Replaces the cart product, cart footer and cart total" do
         perform_request && cart.reload
@@ -47,7 +49,7 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
 
   describe "#update" do
     subject(:perform_request) do
-      put path, params: params, as: request_as
+      put path, params: params
     end
 
     let(:product) { create(:marketplace_product, marketplace: marketplace) }
@@ -64,7 +66,9 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
     end
 
     context "when a turbo stream" do
-      let(:request_as) { :turbo_stream }
+      subject(:perform_request) do
+        put path, as: :turbo_stream, params: params
+      end
 
       it "Replaces the cart product, cart footer and cart total" do
         perform_request && cart.reload
@@ -86,7 +90,7 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
 
   describe "#destroy" do
     subject(:perform_request) do
-      delete path, as: request_as
+      delete path
       response
     end
 
@@ -99,7 +103,10 @@ RSpec.describe Marketplace::CartProductsController, type: :request do
     specify { expect { perform_request }.to change { Marketplace::CartProduct.exists?(cart_product.id) }.to(false) }
 
     context "when a turbo stream" do
-      let(:request_as) { :turbo_stream }
+      subject(:perform_request) do
+        delete path, as: :turbo_stream
+        response
+      end
 
       it "Replaces the cart product, cart footer and cart total" do
         perform_request
