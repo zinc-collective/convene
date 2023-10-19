@@ -8,11 +8,6 @@
     <%= render "radio_group", attribute: :access_level, options: Room::access_levels.values, form: room_form %>
 
     <footer>
-      <%- if policy(room).destroy? && room.persisted? %>
-        <%= room_form.button name: "_method", value: "delete", class: "--danger" do %>
-          <%=t('.destroy')%>
-        <%- end %>
-      <%- end %>
 
       <%= room_form.submit %>
     </footer>
