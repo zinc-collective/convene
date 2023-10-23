@@ -4,6 +4,7 @@ class Neighborhood
     # We will probably want to fall-back to the current_person, then browser, then current_space time zones once we
     # gain access to them.
     def set_time_zone(&block)
+      Rails.logger.debug { ENV }
       Time.use_zone(ENV.fetch("NEIGHBORHOOD_TIME_ZONE"), &block)
     end
 
