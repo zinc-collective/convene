@@ -19,7 +19,9 @@ describe "Marketplace: Collecting Payments", type: :system do
       end
 
       click_on("Payment Settings")
-      click_on("Stripe Account")
+      within("#stripe_overview") do
+        click_on("Add Stripe Account")
+      end
       click_on("Add a Stripe API key to #{space.name}")
       click_on("Add Utility")
       select("stripe", from: "Type")
@@ -35,7 +37,7 @@ describe "Marketplace: Collecting Payments", type: :system do
 
       visit polymorphic_path(marketplace.location(:edit))
       click_on("Payment Settings")
-      click_on("Stripe Account")
+      click_on("View Stripe Account")
       expect(page).to have_content("Connect to Stripe")
     end
 
@@ -47,7 +49,7 @@ describe "Marketplace: Collecting Payments", type: :system do
         click_on("Manage Marketplace")
       end
       click_on("Payment Settings")
-      click_on("Stripe Account")
+      click_on("View Stripe Account")
       expect(page).to have_content("Connect to Stripe")
       # @todo actually figure out how to do the connect to stripe bit :X
     end

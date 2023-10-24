@@ -1,4 +1,4 @@
-<%= render CardComponent.new(classes: "flex flex-col h-full
+<%= render CardComponent.new(dom_id: "stripe_overview", classes: "flex flex-col h-full
 ") do %>
   <%- if marketplace.stripe_api_key? %>
     <header class="flex font-bold">
@@ -7,7 +7,7 @@
     <footer class="flex flex-row justify-between mt-3">
       <%= render ButtonComponent.new(
       label: "View #{t('marketplace.stripe_accounts.show.link_to')}",
-      title: t('marketplace.stripe_accounts.show.link_to'),
+      title: "View #{t('marketplace.stripe_accounts.show.link_to')}",
       href: marketplace.location(:index, child: :stripe_account),
       method: :get,
       scheme: :secondary) %>
@@ -22,7 +22,8 @@
       title: "Add #{t('marketplace.stripe_accounts.show.link_to')}",
       href: marketplace.location(:index, child: :stripe_account),
       method: :get,
-      scheme: :secondary)
+      scheme: :secondary
+      )
       %>
     </footer>
   <%- end %>
