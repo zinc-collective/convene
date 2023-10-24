@@ -19,7 +19,9 @@ describe "Marketplace: Collecting Payments", type: :system do
       end
 
       click_on("Payment Settings")
-      click_on("View Stripe Account")
+      within("#stripe_overview") do
+        click_on("Add Stripe Account")
+      end
       click_on("Add a Stripe API key to #{space.name}")
       click_on("Add Utility")
       select("stripe", from: "Type")
