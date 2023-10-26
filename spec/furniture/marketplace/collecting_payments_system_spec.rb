@@ -15,29 +15,29 @@ describe "Marketplace: Collecting Payments", type: :system do
       visit polymorphic_path(marketplace.room.location)
 
       within("##{dom_id(marketplace, :onboarding)}") do
-        click_on("Manage Marketplace")
+        click_link("Manage Marketplace")
       end
 
-      click_on("Payment Settings")
+      click_link("Payment Settings")
       within("#stripe_overview") do
-        click_on("Add Stripe Account")
+        click_link("Add Stripe Account")
       end
-      click_on("Add a Stripe API key to #{space.name}")
-      click_on("Add Utility")
+      click_link("Add a Stripe API key to #{space.name}")
+      click_link("Add Utility")
       select("stripe", from: "Type")
       fill_in("Name", with: "Test Stripe Account")
-      click_on("Create")
-      click_on("Edit stripe 'Test Stripe Account'")
+      click_button("Create")
+      click_link("Edit stripe 'Test Stripe Account'")
       fill_in("Api token", with: ENV.fetch("STRIPE_API_KEY", "not-a-real-key"))
-      click_on("Save changes to Stripe Utility")
+      click_button("Save changes to Stripe Utility")
 
       expect(page).to have_content("Test Stripe Account")
       expect(space.utilities).to exist(utility_slug: "stripe")
       expect(space.utilities.find_by(utility_slug: "stripe").utility.api_token).to eq(ENV.fetch("STRIPE_API_KEY", "not-a-real-key"))
 
       visit polymorphic_path(marketplace.location(:edit))
-      click_on("Payment Settings")
-      click_on("View Stripe Account")
+      click_link("Payment Settings")
+      click_link("View Stripe Account")
       expect(page).to have_content("Connect to Stripe")
     end
 
@@ -46,10 +46,10 @@ describe "Marketplace: Collecting Payments", type: :system do
       visit polymorphic_path(marketplace.room.location)
 
       within("##{dom_id(marketplace, :onboarding)}") do
-        click_on("Manage Marketplace")
+        click_link("Manage Marketplace")
       end
-      click_on("Payment Settings")
-      click_on("View Stripe Account")
+      click_link("Payment Settings")
+      click_link("View Stripe Account")
       expect(page).to have_content("Connect to Stripe")
       # @todo actually figure out how to do the connect to stripe bit :X
     end
