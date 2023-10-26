@@ -2,7 +2,6 @@ FactoryBot.define do
   factory :room do
     space
     name { Faker::Book.genre }
-    publicity_level { "listed" }
 
     trait :internal do
       access_level { :internal }
@@ -10,14 +9,6 @@ FactoryBot.define do
 
     trait :public do
       access_level { :public }
-    end
-
-    trait :listed do
-      publicity_level { :listed }
-    end
-
-    trait :unlisted do
-      publicity_level { :unlisted }
     end
 
     trait :with_slug do

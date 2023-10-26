@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   # @return [String]
   helper_method def page_title
     if current_space.present?
-      "Convene - #{current_space.name}"
+      current_space.name
     else
       "Convene"
     end
@@ -64,10 +64,10 @@ class ApplicationController < ActionController::Base
 
   # Removes the root branded domain from the path builder
   # @see http://api.rubyonrails.org/classes/ActionDispatch/Routing/PolymorphicRoutes.html#method-i-polymorphic_path
-  helper_method def polymorphic_path(options, **attributes)
-    if options[0].try(:branded_domain).present? && options.length > 1
-      options.delete_at(0)
-    elsif [:edit, :new].include?(options[0]) && options.try(:branded_domain).present?
+  helper_method def polymorphic_path(record_or_hash_or_array, options = {})
+    if record_or_hash_or_array[0].try(:branded_domain).present? && record_or_hash_or_array.length > 1
+      record_or_hash_or_array.delete_at(0)
+    elsif [:edit, :new].include?(record_or_hash_or_array[0]) && record_or_hash_or_array.try(:branded_domain).present?
       options.delete_at(1)
     end
 
@@ -159,7 +159,6 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_unauthorized(exception)
-    Sentry.capture_exception(exception, level: :warn)
     render_not_found
   end
 

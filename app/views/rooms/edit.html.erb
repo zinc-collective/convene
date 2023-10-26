@@ -20,3 +20,17 @@
     <%= render "furnitures/new", furniture: new_furniture %>
   <%- end %>
 <% end %>
+
+
+<%- if policy(room).destroy? && room.persisted? && !room.entrance? %>
+  <div class="m-5">
+    <h2>Remove this Section?</h2>
+    <%- data = {} %>
+    <%- if !room.gizmos.reload.empty? %>
+      <p>Warning! Deleting this Section will also delete all Gizmos and their related data. Please be very sure you want to do this! We recommend making the Section "internal" instead.</p>
+      <%- data[:turbo_confirm] = I18n.t("rooms.destroy.confirm", room_name: room.name) %>
+    <%- end %>
+
+    <%= button_to(t('rooms.destroy.link_to'), room.location, data: data, method: :delete, class: "--danger w-full") %>
+  </div>
+<%- end %>

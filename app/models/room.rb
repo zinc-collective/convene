@@ -25,15 +25,6 @@ class Room < ApplicationRecord
   alias_method :internal?, :internal_access?
   alias_method :public?, :public_access?
 
-  # A Room's Publicity Level indicates how visible the room is.
-  # `listed` - The room is discoverable by anyone in the space lobby.
-  # `unlisted` - The room is not listed.
-  enum publicity_level: {
-    listed: "listed",
-    unlisted: "unlisted"
-  }
-  validates :publicity_level, presence: true
-
   has_many :gizmos, dependent: :destroy, inverse_of: :room, class_name: :Furniture
   accepts_nested_attributes_for :gizmos
 

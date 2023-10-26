@@ -53,7 +53,7 @@ class RoomsController < ApplicationController
   end
 
   helper_method def page_title
-    ["[Convene]", current_room&.name, current_space&.name].compact.join(" - ")
+    [current_room&.name, current_space&.name].compact.join(" - ")
   end
 
   helper_method def room

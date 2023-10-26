@@ -4,7 +4,7 @@
   <span>
     Taxes:
     <%= humanized_money_with_symbol(cart.tax_total) %></span>
-  <%- if cart.delivery_address.present? %>
+  <%- if cart.delivery_area.present? %>
     <span data-cart-delivery-fee>Delivery Fee:
       <%= humanized_money_with_symbol(cart.delivery_fee) %></span>
   <%- end %>
