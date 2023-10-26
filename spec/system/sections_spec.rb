@@ -22,7 +22,7 @@ RSpec.describe "Sections" do
 
       context "when the Section has no Gizmos" do
         it "deletes the Section from the Database" do
-          click_on(I18n.t("rooms.destroy.link_to"))
+          click_button(I18n.t("rooms.destroy.link_to"))
 
           expect(page).to have_content(I18n.t("rooms.destroy.success", room_name: section.name))
           expect(space.rooms).not_to be_exist(id: section.id)
@@ -41,7 +41,7 @@ RSpec.describe "Sections" do
         # moment - ZS 10/18/23
         it "requires confirmation" do
           accept_alert(I18n.t("rooms.destroy.confirm", room_name: section.name)) do
-            click_on(I18n.t("rooms.destroy.link_to"))
+            click_button(I18n.t("rooms.destroy.link_to"))
           end
 
           expect(page).to have_content(I18n.t("rooms.destroy.success", room_name: section.name))
