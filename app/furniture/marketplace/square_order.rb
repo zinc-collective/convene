@@ -4,7 +4,8 @@ class Marketplace
       @order = order
       @marketplace = order.marketplace
       @shopper = order.shopper
-      @space_id = order.marketplace.space.id
+      @space = order.marketplace.space
+      @ordered_products = @order.ordered_products
       @square_location_id = @marketplace.settings["square_location_id"]
     end
 
@@ -41,7 +42,7 @@ class Marketplace
       square_create_payment_body = build_square_create_order_payment_body(
         square_order_id,
         @square_location_id,
-        @space_id
+        @space.id
       )
 
       marketplace.square_client.payments.create_payment(body: square_create_payment_body)
@@ -54,7 +55,7 @@ class Marketplace
       location_id = @marketplace.settings["square_location_id"]
       customer_id = @shopper.id
 
-      line_items = @order.ordered_products.map { |ordered_product|
+      line_items = @ordered_products.map { |ordered_product|
         {
           name: ordered_product.name,
           quantity: ordered_product.quantity.to_s,
