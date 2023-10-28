@@ -1,5 +1,13 @@
 class Marketplace
   class SquareOrder
+    def initialize(order)
+      @order = order
+      @marketplace = order.marketplace
+      @shopper = order.shopper
+      @space_id = order.marketplace.space.id
+      @square_location_id = @marketplace.settings["square_location_id"]
+    end
+
     def send_to_square_seller_dashboard
       square_create_order_response = create_square_order
 
@@ -19,23 +27,21 @@ class Marketplace
 
     # Square sets max of 43 chars
     private def square_idemp_key
-      "#{id}_#{8.times.map { rand(10) }.join}"
+      "#{@order.id}_#{8.times.map { rand(10) }.join}"
     end
 
     private def create_square_order
-      square_create_order_body = build_square_create_order_body(marketplace)
-      marketplace.square_client.orders.create_order(body: square_create_order_body)
+      square_create_order_body = build_square_create_order_body(@arketplace)
+      @marketplace.square_client.orders.create_order(body: square_create_order_body)
     end
 
     # NOTE: Square requires that orders are paid in order to show up in the Seller
     # Dashboard
     private def create_square_order_payment(square_order_id)
-      square_location_id = marketplace.settings["square_location_id"]
-      space_id = marketplace.space.id
       square_create_payment_body = build_square_create_order_payment_body(
         square_order_id,
-        square_location_id,
-        space_id
+        @square_location_id,
+        @space_id
       )
 
       marketplace.square_client.payments.create_payment(body: square_create_payment_body)
@@ -45,10 +51,10 @@ class Marketplace
     # in the Seller Dashboard
     # See: https://developer.squareup.com/docs/orders-api/create-orders
     private def build_square_create_order_body(marketplace)
-      location_id = marketplace.settings["square_location_id"]
-      customer_id = shopper.id
+      location_id = @marketplace.settings["square_location_id"]
+      customer_id = @shopper.id
 
-      line_items = ordered_products.map { |ordered_product|
+      line_items = @order.ordered_products.map { |ordered_product|
         {
           name: ordered_product.name,
           quantity: ordered_product.quantity.to_s,
@@ -60,7 +66,7 @@ class Marketplace
         }
       }
 
-      taxes = marketplace.tax_rates.map { |tax_rate|
+      taxes = @marketplace.tax_rates.map { |tax_rate|
         {
           uid: tax_rate.id,
           name: tax_rate.label,
@@ -80,10 +86,10 @@ class Marketplace
               state: "PROPOSED", # PROPOSED|RESERVED|PREPARED|COMPLETED|CANCELED|FAILED
               delivery_details: {
                 recipient: {
-                  display_name: shopper.person.display_name,
-                  phone_number: contact_phone_number,
+                  display_name: @shopper.person.display_name,
+                  phone_number: @order.contact_phone_number,
                   address: {
-                    address_line_1: delivery_address
+                    address_line_1: @order.delivery_address
                   }
                 },
                 schedule_type: "SCHEDULED", # SCHEDULED|ASAP
@@ -113,7 +119,7 @@ class Marketplace
         source_id: "EXTERNAL",
         idempotency_key: square_idemp_key,
         amount_money: {
-          amount: product_total.cents,
+          amount: @order.product_total.cents,
           currency: "USD"
         },
         order_id: square_order_id,
