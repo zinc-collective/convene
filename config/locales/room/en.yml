@@ -7,10 +7,10 @@ en:
     update:
       success: You've updated Section '%{room_name}' successfully! 🎉
     destroy:
+      link_to: "Remove Section 🗑️"
+      confirm: "Removing Section '%{room_name}' is permanent and irreversible! Do you still want to proceed?"
       success: You've removed Section '%{room_name}' successfully! 🎉
       failure: We couldn't remove Section '%{room_name}'.
-    form:
-      destroy: "Remove Section 🗑️"
   helpers:
     submit:
       room:

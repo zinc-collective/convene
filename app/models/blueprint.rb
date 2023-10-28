@@ -99,34 +99,24 @@ class Blueprint
         {email: "space-member@example.com"}],
       rooms: [
         {
-          name: "Listed Room 1",
-          publicity_level: :listed,
+          name: "Room 1",
           access_level: :public,
           furnitures: {
             markdown_text_block: {content: "# Welcome!"}
           }
         },
         {
-          name: "Listed Room 2",
-          publicity_level: :listed,
+          name: "Room 2",
           access_level: :public,
           furnitures: {}
         },
         {
-          name: "Unlisted Room 1",
-          publicity_level: :unlisted,
-          access_level: :public,
-          furnitures: {}
-        },
-        {
-          name: "Unlisted Room 2",
-          publicity_level: :unlisted,
-          access_level: :public,
+          name: "Internal Room 1",
+          access_level: :internal,
           furnitures: {}
         },
         {
           name: "Entrance Hall",
-          publicity_level: :unlisted,
           furnitures: {
             markdown_text_block: {content: "# Wooo!"}
           }

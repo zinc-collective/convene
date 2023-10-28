@@ -3,13 +3,24 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::StripeOverviewComponent, type: :component do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # pending "add some examples to (or delete) #{__FILE__}"
+  subject(:output) { render_inline(component) }
 
-  # it "renders something useful" do
-  #   expect(
-  #     render_inline(described_class.new(attr: "value")) { "Hello, components!" }.css("p").to_html
-  #   ).to include(
-  #     "Hello, components!"
-  #   )
-  # end
+  let(:component) { described_class.new(marketplace: marketplace) }
+
+  context "when the Marketplace has a Stripe Utility" do
+    let(:marketplace) { create(:marketplace, :with_stripe_utility) }
+
+    it { is_expected.to have_content marketplace.stripe_utility.name }
+
+    it { is_expected.to have_link "View #{I18n.t("marketplace.stripe_accounts.show.link_to")}" }
+  end
+
+  context "when the Marketplace is missing a Stripe Utility" do
+    let(:marketplace) { create(:marketplace) }
+
+    it { is_expected.to have_link "Add #{I18n.t("marketplace.stripe_accounts.show.link_to")}" }
+
+    it { is_expected.to have_content "To start accepting payments, add your Stripe Account." }
+  end
 end

@@ -27,13 +27,13 @@ describe "Marketplace: Buying Products", type: :system do
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
     visit(polymorphic_path(marketplace.room.location))
     select(marketplace.delivery_areas.first.label, from: "cart[delivery_area_id]")
-    click_on("Save changes")
+    click_button("Save changes")
 
     add_product_to_cart(marketplace.products.first)
 
     expect(page).to have_content("Total: #{humanized_money_with_symbol(marketplace.products.first.price + marketplace.delivery_areas.first.price)}")
 
-    click_on("Checkout")
+    click_link("Checkout")
 
     set_delivery_details(delivery_address: "123 N West St Oakland, CA",
       contact_email: "AhsokaTano@example.com",
@@ -62,7 +62,7 @@ describe "Marketplace: Buying Products", type: :system do
 
   def add_product_to_cart(product)
     within("##{dom_id(product).gsub("product", "cart_product")}") do
-      click_on(t("marketplace.cart_product_component.add"))
+      click_link(t("marketplace.cart_product_component.add"))
     end
   end
 
@@ -70,11 +70,11 @@ describe "Marketplace: Buying Products", type: :system do
     fill_in("Delivery address", with: delivery_address)
     fill_in("Contact phone number", with: contact_phone_number)
     fill_in("Contact email", with: contact_email)
-    click_on("Save changes")
+    click_button("Save changes")
   end
 
   def pay(card_number:, card_expiry:, card_cvc:, billing_name:, email:, billing_postal_code:)
-    click_on("Make Payment")
+    click_button("Make Payment")
     fill_in("cardNumber", with: card_number)
     fill_in("cardExpiry", with: card_expiry)
     fill_in("cardCvc", with: card_cvc)

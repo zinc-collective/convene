@@ -16,15 +16,15 @@ describe "Furniture" do
   def add_gizmo(type, room:)
     visit(polymorphic_path(room.location(:edit)))
     select(type, from: "Type of gizmo")
-    click_link_or_button("Add Gizmo")
+    click_button("Add Gizmo")
   end
 
   def remove_gizmo(type, room:)
     visit(polymorphic_path(room.location(:edit)))
     expect(page).to have_text("Markdown Text Block")
     within("##{dom_id(room.gizmos.first)}") do
-      click_link_or_button "Configure Markdown Text Block"
+      click_link "Configure Markdown Text Block"
     end
-    click_link_or_button "Remove Gizmo"
+    click_link "Remove Gizmo"
   end
 end

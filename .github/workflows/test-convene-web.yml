@@ -48,7 +48,7 @@ jobs:
       - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Install Node dependencies
@@ -109,7 +109,7 @@ jobs:
       - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Allow Ruby process to access port 80
@@ -177,7 +177,7 @@ jobs:
       - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Install Firefox
@@ -212,7 +212,7 @@ jobs:
         run: |
           # To wait for asset built
           # TODO: Start server in production mode
-          curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 40 --retry-connrefused localhost:3000 1> /dev/null
+          curl --connect-timeout 5 --retry 5 --retry-delay 5 --retry-max-time 60 --retry-connrefused localhost:3000 1> /dev/null
           yarn run test
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
@@ -238,7 +238,7 @@ jobs:
       - name: Setup Node with cache
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
 
       - name: Install Node dependencies

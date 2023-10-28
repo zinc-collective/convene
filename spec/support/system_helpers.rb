@@ -2,7 +2,7 @@ module Spec
   module SystemHelpers
     def sign_in(user, space)
       visit(polymorphic_path(space.location))
-      click_link_or_button("Sign in")
+      click_link("Sign in")
       fill_in("authenticated_session[contact_location]", with: user.email)
       find('input[type="submit"]').click
       perform_enqueued_jobs

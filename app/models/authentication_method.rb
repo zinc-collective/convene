@@ -37,6 +37,7 @@ class AuthenticationMethod < ApplicationRecord
   end
 
   def verify?(one_time_password)
+    return false if one_time_password.blank? || one_time_password_secret.blank?
     totp.verify(one_time_password).present?
   end
 
