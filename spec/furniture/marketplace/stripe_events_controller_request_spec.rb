@@ -100,6 +100,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
       it "attempts to transfer the order to seller's Square dashboard" do
         call
+        expect(Marketplace::SquareOrder).to have_received(:new).with(order)
         expect(square_order).to have_received(:send_to_square_seller_dashboard)
       end
     end
