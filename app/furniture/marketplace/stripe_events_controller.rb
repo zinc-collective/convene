@@ -25,7 +25,7 @@ class Marketplace
 
         if marketplace.square_order_notifications_enabled?
           square_order = SquareOrder.new(order)
-          square_order.send_to_square_seller_dashboard
+          square_order.send_to_seller_dashboard
         end
 
         Order::ReceivedMailer.notification(order).deliver_later

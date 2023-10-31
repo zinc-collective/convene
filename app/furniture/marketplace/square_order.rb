@@ -1,3 +1,11 @@
+# SquareOrder is a service class for coordinating and executing interactions
+# between Convene and a seller's Square account.
+#
+# The current behavior is limited to registering an order in a seller's account
+# to syncronize record keeping between Convene and Square.
+#
+# NOTE: the simple `Markeplace > SquareOrder` namespacing was chosen
+# to avoid collision with the `Square` namespace already included by Square's gem.
 class Marketplace
   class SquareOrder
     def initialize(order)
@@ -7,19 +15,23 @@ class Marketplace
       @space = order.marketplace.space
       @ordered_products = @order.ordered_products
       @square_location_id = @marketplace.settings["square_location_id"]
+      @square_order_id = nil
+      @square_payment_id = nil
     end
 
-    def send_to_square_seller_dashboard
+    def send_to_seller_dashboard
       square_create_order_response = create_square_order
 
       if square_create_order_response
-        square_create_payment_response = create_square_order_payment(square_create_order_response.body.order[:id])
+        @square_order_id = square_create_order_response.body.order[:id]
+        square_create_payment_response = create_square_order_payment
+        @square_payment_id = square_create_payment_response.body.payment[:id]
 
         # This data is intended for use in debugging, etc... until we further
         # the Square integration productize
         {
-          order_id: square_create_order_response.body.order[:id],
-          payment_id: square_create_payment_response.body.payment[:id]
+          order_id: @square_order_id,
+          payment_id: @square_payment_id
         }
       else
         # TODO: Noop for now
@@ -32,26 +44,22 @@ class Marketplace
     end
 
     private def create_square_order
-      square_create_order_body = build_square_create_order_body(@arketplace)
+      square_create_order_body = prepare_square_create_order_body(@marketplace)
       @marketplace.square_client.orders.create_order(body: square_create_order_body)
     end
 
-    # NOTE: Square requires that orders are paid in order to show up in the Seller
-    # Dashboard
-    private def create_square_order_payment(square_order_id)
-      square_create_payment_body = build_square_create_order_payment_body(
-        square_order_id,
-        @square_location_id,
-        @space.id
-      )
+    # NOTE: Square requires that orders must have be in a state of complete
+    # payment to show up in the Seller Dashboard
+    private def create_square_order_payment
+      square_create_payment_body = prepare_square_create_order_payment_body
 
       marketplace.square_client.payments.create_payment(body: square_create_payment_body)
     end
 
-    # NOTE: Square requires that orders include fulfillments in order to show up
+    # NOTE: Square requires that orders must include fulfillments to show up
     # in the Seller Dashboard
     # See: https://developer.squareup.com/docs/orders-api/create-orders
-    private def build_square_create_order_body(marketplace)
+    private def prepare_square_create_order_body
       location_id = @marketplace.settings["square_location_id"]
       customer_id = @shopper.id
 
@@ -115,7 +123,7 @@ class Marketplace
     # square order (`line_items.sum(&base_price_money[:amount])`) to be valid
     #
     # TODO: Consider adding a price check?
-    private def build_square_create_order_payment_body(square_order_id, square_location_id, space_id)
+    private def prepare_square_create_order_payment_body
       {
         source_id: "EXTERNAL",
         idempotency_key: square_idemp_key,
@@ -123,11 +131,11 @@ class Marketplace
           amount: @order.product_total.cents,
           currency: "USD"
         },
-        order_id: square_order_id,
-        location_id: square_location_id,
+        order_id: @square_order_id,
+        location_id: @square_location_id,
         external_details: {
           type: "OTHER",
-          source: "CONVENE_SYSTEM_PAYMENT for Space #{space_id}"
+          source: "CONVENE_SYSTEM_PAYMENT for Space #{@space.id}"
           # TODO: Need this later?
           # source_fee_money: {
           #   amount: "test",

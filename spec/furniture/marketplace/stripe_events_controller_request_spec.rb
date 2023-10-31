@@ -22,7 +22,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     double(Stripe::Charge, balance_transaction: "btx_2234")
   }
 
-  let(:square_order) { instance_double(Marketplace::SquareOrder, send_to_square_seller_dashboard: nil) }
+  let(:square_order) { instance_double(Marketplace::SquareOrder, send_to_seller_dashboard: nil) }
 
   before do
     allow(Stripe::Webhook).to receive(:construct_event).with(anything, "sig_1234", marketplace.stripe_webhook_endpoint_secret).and_return(stripe_event)
@@ -88,7 +88,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     context "when Square notifications are not enabled" do
       it "does not attempt to transfer the order to seller's Square dashboard" do
         call
-        expect(square_order).not_to(have_received(:send_to_square_seller_dashboard))
+        expect(square_order).not_to(have_received(:send_to_seller_dashboard))
       end
     end
 
@@ -101,7 +101,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       it "attempts to transfer the order to seller's Square dashboard" do
         call
         expect(Marketplace::SquareOrder).to have_received(:new).with(order)
-        expect(square_order).to have_received(:send_to_square_seller_dashboard)
+        expect(square_order).to have_received(:send_to_seller_dashboard)
       end
     end
   end
