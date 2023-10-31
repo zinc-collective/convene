@@ -24,7 +24,7 @@ class Marketplace
         order.events.create(description: "Payment Received")
 
         if marketplace.square_order_notifications_enabled?
-          square_order = SquareOrder.new(order)
+          square_order = Marketplace::SquareOrder.new(order)
           square_order.send_to_seller_dashboard
         end
 
