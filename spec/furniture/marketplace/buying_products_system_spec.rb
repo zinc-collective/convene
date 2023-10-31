@@ -6,6 +6,7 @@ describe "Marketplace: Buying Products", type: :system do
   include MoneyRails::ActionViewExtension
   include ActiveJob::TestHelper
   include Spec::StripeCLI::Helpers
+  include Spec::Square::Helpers
 
   let(:space) { create(:space, :with_entrance, :with_members) }
   let(:marketplace) { create(:marketplace, :ready_for_shopping, room: space.entrance) }
@@ -58,6 +59,18 @@ describe "Marketplace: Buying Products", type: :system do
 
     expect(order_placed_notifications).to be_present
     expect(order_placed_notifications.length).to eq 1
+
+    it "Works when Square is active and Guests" do
+      let(:marketplace) {
+        create(
+          :marketplace,
+          :with_stripe_utility,
+          :ready_for_shopping,
+          :with_square
+        )
+      }
+      # TODO
+    end
   end
 
   def add_product_to_cart(product)

@@ -93,7 +93,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     end
 
     context "when Square notifications are enabled" do
-      let(:marketplace) { create(:marketplace, :with_stripe_utility, stripe_account: "sa_1234", stripe_webhook_endpoint_secret: "whsec_1234", square_location_id: "123456789", square_environment: "sandbox", secrets: {square_access_token: "fake_square_access_token"}) }
+      let(:marketplace) { create_marketplace_with_square }
       let(:person) { create(:person) }
       let(:shopper) { create(:marketplace_shopper, person: person) }
       let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, marketplace: marketplace, shopper: shopper) }
