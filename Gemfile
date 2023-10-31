@@ -83,7 +83,7 @@ gem "tzinfo-data", "~> 1.2021", platforms: %i[mingw mswin x64_mingw jruby]
 # Performance Optimization
 #
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", "~> 1.16", require: false
+gem "bootsnap", "~> 1.17", require: false
 
 # Permissions and policies
 gem "pundit", "~> 2.3"
