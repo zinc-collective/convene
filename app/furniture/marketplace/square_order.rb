@@ -20,7 +20,10 @@ class Marketplace
       @square_payment_id = nil
     end
 
-    def send_to_seller_dashboard
+    # Sends an order to Square. Will create both an order and payment in the
+    # receiving account which are requirements for the order to show up in the
+    # Seller Dashboard.
+    def send_order
       square_create_order_response = create_square_order
 
       if square_create_order_response
@@ -39,25 +42,26 @@ class Marketplace
       end
     end
 
-    # Square sets max of 43 chars
+    # Square sets max of 43 chars so this assumes an order id remains a 36-char
+    # uuid
     private def square_idemp_key
       "#{@order.id}_#{8.times.map { rand(10) }.join}"
     end
 
     private def create_square_order
       square_create_order_body = prepare_square_create_order_body(@marketplace)
-      @marketplace.square_client.orders.create_order(body: square_create_order_body)
+      @square_client.orders.create_order(body: square_create_order_body)
     end
 
     # NOTE: Square requires that orders must have be in a state of complete
-    # payment to show up in the Seller Dashboard
+    # payment to display in the Seller Dashboard
     private def create_square_order_payment
       square_create_payment_body = prepare_square_create_order_payment_body
 
-      marketplace.square_client.payments.create_payment(body: square_create_payment_body)
+      @square_client.payments.create_payment(body: square_create_payment_body)
     end
 
-    # NOTE: Square requires that orders must include fulfillments to show up
+    # NOTE: Square requires that orders must include fulfillments to display
     # in the Seller Dashboard
     # See: https://developer.squareup.com/docs/orders-api/create-orders
     private def prepare_square_create_order_body

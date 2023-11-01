@@ -100,13 +100,18 @@ class Marketplace
       @_model_name ||= ActiveModel::Name.new(self, ::Marketplace)
     end
 
-    def square_order_notifications_enabled?
-      square_location_id.present?
+    def square_connection
+      if square_order_notifications_enabled?
+        @square_client ||= Square::Client.new(access_token: square_access_token, environment: square_environment)
+      else
+        NullObject.new
+      end
     end
 
-    # TODO: Add `square_environment` attribute to database/model
-    def square_client
-      @square_client ||= Square::Client.new(access_token: square_access_token, environment: square_environment)
+    private
+
+    def square_order_notifications_enabled?
+      square_location_id.present?
     end
   end
 end
