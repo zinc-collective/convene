@@ -1,9 +1,12 @@
-# SquareOrder is a service class for coordinating and executing interactions
-# between a Convene Marketplace and a seller's Square account.
+# SquareOrder encapsulates logic for coordinating and executing interactions
+# between a Convene Marketplace and the seller's Square account. It could be
+# described as a (budding) service or process class, but current behavior is
+# limited to only registering orders in a seller's account upon
+# sale.
 #
-# Current behavior is limited to registering orders in a seller's account upon
-# sale so that we help synchronize record keeping for Marketplace owners and
-# sellers.
+# Registering orders serves to both synchronize record keeping between
+# Marketplace managers owners (eg. Pikkkup) and sellers (eg. Crumble & Wisk)
+# and automatically notify sellers of new orders.
 #
 # NOTE: the simple `Markeplace > SquareOrder` namespacing was chosen
 # to avoid collision with the `Square` namespace already included by Square's gem.
