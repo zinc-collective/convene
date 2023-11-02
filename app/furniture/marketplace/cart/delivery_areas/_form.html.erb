@@ -3,7 +3,14 @@
 <%- end %>
 <div class="mt-2 w-full">
   <%= form_with model: cart.location, url: cart.location(child: :delivery_area) do |form| %>
-    <%= render "select", options: cart.marketplace.delivery_areas.pluck(:label, :id), include_blank: false, attribute: :delivery_area_id, form: form, skip_label: true %>
+    <%= render SelectComponent.new({
+      choices: cart.marketplace.delivery_areas.pluck(:label, :id), attribute: :delivery_area_id,
+      form: form,
+      options: {
+        include_blank: false,
+        skip_label: true
+      }
+    }) %>
     <%= form.submit %>
   <%- end %>
 </div>
