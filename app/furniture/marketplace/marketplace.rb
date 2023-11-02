@@ -108,5 +108,9 @@ class Marketplace
     def square_client
       @square_client ||= Square::Client.new(access_token: square_access_token, environment: square_environment)
     end
+
+    def has_single_delivery_area?
+      delivery_areas.size == 1
+    end
   end
 end

@@ -4,18 +4,20 @@
     <%- if delivery_area.present? %>
       <div>
         <%= delivery_area.label %>
-
         <div class="text-sm text-gray-500">
           <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: cart)) %>
         </div>
-
       </div>
-
       <div class="text-right">
         <%= link_to(t('marketplace.cart.delivery_areas.edit.link_to'), cart.location(:edit, child: :delivery_area)) %>
       </div>
     <%- else %>
-      <%= render "marketplace/cart/delivery_areas/form", cart: cart %>
+      <%- if cart.marketplace.has_single_delivery_area? %>
+        <%= single_delivery_area_label %>
+        <p>If you are ordering from outside this area then 🤷.</p>
+      <% else %>
+        <%= render "marketplace/cart/delivery_areas/form", cart: cart %>
+      <%- end %>
     <%- end %>
   <%- end %>
 <%- end %>
