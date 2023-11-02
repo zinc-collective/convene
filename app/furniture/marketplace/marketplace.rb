@@ -103,17 +103,6 @@ class Marketplace
     def square_connection
       if square_order_notifications_enabled?
         @square_client ||= Square::Client.new(access_token: square_access_token, environment: square_environment)
-      else
-        #  Proposed null object pattern:
-        #
-        # class NullObject
-        #   def method_missing(*args, &block)
-        #     self
-        #   end
-        # end
-        #
-        # NullSquareClient < NullObject
-        NullSquareClient.new
       end
     end
 

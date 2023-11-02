@@ -1,8 +1,7 @@
 # SquareOrder encapsulates logic for coordinating and executing interactions
 # between a Convene Marketplace and the seller's Square account. It could be
 # described as a (budding) service or process class, but current behavior is
-# limited to only registering orders in a seller's account upon
-# sale.
+# limited to only registering orders in a seller's account upon sale.
 #
 # Registering orders serves to both synchronize record keeping between
 # Marketplace managers owners (eg. Pikkkup) and sellers (eg. Crumble & Wisk)
@@ -27,20 +26,24 @@ class Marketplace
       @square_location_id = @marketplace.settings["square_location_id"]
       @square_order_id = nil
       @square_payment_id = nil
-      # @state = "ready"
+      # @state = "READY"
     end
 
     # Sends an order to Square. Will create both an order and payment in the
     # receiving account which are requirements for the order to show up in the
     # Seller Dashboard.
     def send_order
+      Rails.logger.info("Start creating Square order")
       square_create_order_response = create_square_order
+      Rails.logger.info("Finished creating Square order")
 
       if square_create_order_response
         @square_order_id = square_create_order_response.body.order[:id]
+        Rails.logger.info("Start creating Square order payment")
         square_create_payment_response = create_square_order_payment
+        Rails.logger.info("Finished creating Square order payment")
         @square_payment_id = square_create_payment_response.body.payment[:id]
-        # @state = "order_sent"
+        # @state = "ORDER_SENT"
 
         # This data is intended for use in debugging, etc... until we further
         # the Square integration productize
@@ -61,18 +64,15 @@ class Marketplace
 
     private def create_square_order
       square_create_order_body = prepare_square_create_order_body(@marketplace)
-      Rails.logger.info("TODO")
       @square_client.orders.create_order(body: square_create_order_body)
-      Rails.logger.info("TODO")
     end
 
     # NOTE: Square requires that orders must have be in a state of complete
     # payment to display in the Seller Dashboard
     private def create_square_order_payment
       square_create_payment_body = prepare_square_create_order_payment_body
-      Rails.logger.info("TODO")
+
       @square_client.payments.create_payment(body: square_create_payment_body)
-      Rails.logger.info("TODO")
     end
 
     # NOTE: Square requires that orders must include fulfillments to display
