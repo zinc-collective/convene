@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :handle_unauthorized
   prepend_view_path "app/utilities"
   prepend_view_path "app/furniture"
-  append_view_path "app/components"
 
   protect_from_forgery with: :exception, unless: -> { api_request? }
 
