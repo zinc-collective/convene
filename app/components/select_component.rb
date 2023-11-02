@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SelectComponent < ApplicationComponent
   def initialize(config, **kwargs)
     @form = config[:form]
