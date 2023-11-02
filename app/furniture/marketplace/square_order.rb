@@ -7,6 +7,12 @@
 #
 # NOTE: the simple `Markeplace > SquareOrder` namespacing was chosen
 # to avoid collision with the `Square` namespace already included by Square's gem.
+#
+# TODOS/considerations:
+# 1. Implement validation of `order` argument on initialization
+#   Eg: if order.is_not_valid?; exit; end
+# 2. Implement state tracking
+#   Eg: READY | ORDER_SENT | etc...
 class Marketplace
   class SquareOrder
     def initialize(order)
@@ -18,6 +24,7 @@ class Marketplace
       @square_location_id = @marketplace.settings["square_location_id"]
       @square_order_id = nil
       @square_payment_id = nil
+      # @state = "ready"
     end
 
     # Sends an order to Square. Will create both an order and payment in the
@@ -30,6 +37,7 @@ class Marketplace
         @square_order_id = square_create_order_response.body.order[:id]
         square_create_payment_response = create_square_order_payment
         @square_payment_id = square_create_payment_response.body.payment[:id]
+        # @state = "order_sent"
 
         # This data is intended for use in debugging, etc... until we further
         # the Square integration productize
@@ -50,15 +58,18 @@ class Marketplace
 
     private def create_square_order
       square_create_order_body = prepare_square_create_order_body(@marketplace)
+      Rails.logger.info("TODO")
       @square_client.orders.create_order(body: square_create_order_body)
+      Rails.logger.info("TODO")
     end
 
     # NOTE: Square requires that orders must have be in a state of complete
     # payment to display in the Seller Dashboard
     private def create_square_order_payment
       square_create_payment_body = prepare_square_create_order_payment_body
-
+      Rails.logger.info("TODO")
       @square_client.payments.create_payment(body: square_create_payment_body)
+      Rails.logger.info("TODO")
     end
 
     # NOTE: Square requires that orders must include fulfillments to display
