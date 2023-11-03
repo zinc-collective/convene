@@ -2,7 +2,6 @@
   <header>
     <h3>Sections</h3>
   </header>
-
   <div>
     <%- space.rooms.each do |room| %>
       <%- if policy(room).edit? %>
@@ -14,15 +13,20 @@
       <%- end %>
     <% end %>
   </div>
-
   <footer>
     <%= link_to [:new, space, :room] do %>
       <span class="icon --add" role="img" aria-label="Add"></span>Add New Section
     <% end %>
   </footer>
-
   <%= form_with(model: space.location) do |space_form| %>
-    <%= render "select", attribute: :entrance_id, include_blank: true, options: space.rooms.map { |room| [room.name, room.id] }, form: space_form %>
+    <%= render SelectComponent.new({
+      choices: space.rooms.map { |room| [room.name, room.id] },
+      attribute: :entrance_id,
+      form: space_form,
+      options: {
+        include_blank: false,
+      }
+    }) %>
     <%= space_form.submit %>
   <%- end %>
 <% end %>

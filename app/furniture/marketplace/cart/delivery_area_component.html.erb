@@ -12,7 +12,7 @@
         <%= link_to(t('marketplace.cart.delivery_areas.edit.link_to'), cart.location(:edit, child: :delivery_area)) %>
       </div>
     <%- else %>
-      <%- if cart.marketplace.has_single_delivery_area? %>
+      <%- if single_delivery_area? %>
         <div><%= single_delivery_area_label %></div>
         <small>If you are ordering from outside this area then 🤷</small>
       <% else %>

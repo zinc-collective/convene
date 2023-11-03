@@ -1,6 +1,19 @@
 <%= form.fields_for(:gizmo) do |furniture_fields| %>
   <%= render "text_field", form: furniture_fields, attribute: :channel %>
-  <%= render "select", form: furniture_fields, attribute: :layout, options: ['video', 'video_with_chat'], include_blank: false %>
-
-  <%= render "select", form: furniture_fields, attribute: :provider, options: ['twitch'], include_blank: false %>
+  <%= render SelectComponent.new({
+      choices: ['video', 'video_with_chat'],
+      attribute: :layout,
+      form: furniture_fields,
+      options: {
+        include_blank: false,
+      }
+    }) %>
+  <%= render SelectComponent.new({
+      choices: ['twitch'],
+      attribute: :provider,
+      form: furniture_fields,
+      options: {
+        include_blank: false,
+      }
+    }) %>
 <%- end %>
