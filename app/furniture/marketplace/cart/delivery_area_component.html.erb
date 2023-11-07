@@ -9,7 +9,9 @@
         </div>
       </div>
       <div class="text-right">
-        <%= link_to(t('marketplace.cart.delivery_areas.edit.link_to'), cart.location(:edit, child: :delivery_area)) %>
+        <%- unless single_delivery_area? %>
+          <%= link_to(t('marketplace.cart.delivery_areas.edit.link_to'), cart.location(:edit, child: :delivery_area)) %>
+        <%- end %>
       </div>
     <%- else %>
       <%- if single_delivery_area? %>
