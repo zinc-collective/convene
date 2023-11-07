@@ -6,9 +6,6 @@
     <%= render SelectComponent.new({
       choices: cart.marketplace.delivery_areas.pluck(:label, :id), attribute: :delivery_area_id,
       form: form,
-      options: {
-        include_blank: false,
-      }
     }) %>
     <%= form.submit %>
   <%- end %>

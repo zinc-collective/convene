@@ -1,12 +1,12 @@
 class SelectComponent < ApplicationComponent
   def initialize(config, **kwargs)
-    @form = config[:form]
-    @attribute = config[:attribute]
-    @choices = config[:choices] || []
-    @options = config[:options] || {}
-    @html_options = config[:html_options] || {}
-    @skip_label = config[:skip_label] || true
+    @form = config.fetch(:form)
+    @attribute = config.fetch(:attribute)
+    @choices = config.fetch(:choices, [])
+    @options = config.fetch(:options, {})
+    @html_options = config.fetch(:html_options, {})
+    @skip_label = config.fetch(:skip_label, true)
 
-    super(**kwargs)
+    # super(**kwargs)
   end
 end

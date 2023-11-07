@@ -23,9 +23,6 @@
       choices: space.rooms.map { |room| [room.name, room.id] },
       attribute: :entrance_id,
       form: space_form,
-      options: {
-        include_blank: false,
-      }
     }) %>
     <%= space_form.submit %>
   <%- end %>

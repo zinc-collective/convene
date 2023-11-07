@@ -4,16 +4,10 @@
       choices: ['video', 'video_with_chat'],
       attribute: :layout,
       form: furniture_fields,
-      options: {
-        include_blank: false,
-      }
     }) %>
   <%= render SelectComponent.new({
       choices: ['twitch'],
       attribute: :provider,
       form: furniture_fields,
-      options: {
-        include_blank: false,
-      }
     }) %>
 <%- end %>
