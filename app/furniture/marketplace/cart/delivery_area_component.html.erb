@@ -14,7 +14,8 @@
     <%- else %>
       <%- if single_delivery_area? %>
         <div><%= single_delivery_area_label %></div>
-        <small>Orders with delivery addresses outside of this delivery area will be subject to cancellation.</small>
+        <small>Orders outside of this location will be subject to cancellation.
+        </small>
       <% else %>
         <%= render "marketplace/cart/delivery_areas/form", cart: cart %>
       <%- end %>
