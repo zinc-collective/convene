@@ -26,8 +26,6 @@ describe "Marketplace: Buying Products", type: :system do
 
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
     visit(polymorphic_path(marketplace.room.location))
-    select(marketplace.delivery_areas.first.label, from: "cart[delivery_area_id]")
-    click_button("Save changes")
 
     add_product_to_cart(marketplace.products.first)
 
