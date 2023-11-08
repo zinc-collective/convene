@@ -7,6 +7,6 @@ class SelectComponent < ApplicationComponent
     @html_options = config.fetch(:html_options, {})
     @skip_label = config.fetch(:skip_label, true)
 
-    # super(**kwargs)
+    super(**kwargs)
   end
 end
