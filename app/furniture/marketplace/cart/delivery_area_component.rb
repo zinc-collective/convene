@@ -11,5 +11,13 @@ class Marketplace
     def dom_id
       super(cart, :delivery_area)
     end
+
+    def single_delivery_area?
+      cart.marketplace.delivery_areas.size == 1
+    end
+
+    def single_delivery_area_label
+      cart.marketplace.delivery_areas.first.label
+    end
   end
 end
