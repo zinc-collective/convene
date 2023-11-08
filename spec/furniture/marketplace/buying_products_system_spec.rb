@@ -29,7 +29,7 @@ describe "Marketplace: Buying Products", type: :system do
 
     add_product_to_cart(marketplace.products.first)
 
-    expect(page).to have_content("Total: #{humanized_money_with_symbol(marketplace.products.first.price + marketplace.delivery_areas.first.price)}")
+    expect(page).to have_content("Total: #{humanized_money_with_symbol(marketplace.products.first.price + marketplace.delivery_areas.first.price)}", wait: 10)
 
     click_link("Checkout")
 
