@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Marketplace::SquareOrder do
-  describe "send_to_seller_dashboard" do
+  describe "send_order" do
     it "will return the correct success data" do
       # TODO
     end
