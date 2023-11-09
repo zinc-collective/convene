@@ -22,7 +22,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     double(Stripe::Charge, balance_transaction: "btx_2234")
   }
 
-  let(:square_order) { instance_double(Marketplace::SquareOrder, send_to_seller_dashboard: nil) }
+  let(:square_order) { instance_double(Marketplace::Marketplace::SquareOrder, send_to_seller_dashboard: nil) }
 
   before do
     allow(Stripe::Webhook).to receive(:construct_event).with(anything, "sig_1234", marketplace.stripe_webhook_endpoint_secret).and_return(stripe_event)
@@ -31,7 +31,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     allow(Stripe::Transfer).to receive(:create).and_return(double(Stripe::Transfer, id: "st_fake_1234"))
     allow(Stripe::BalanceTransaction).to receive(:retrieve).with("btx_2234", anything).and_return(balance_transaction)
     allow(Stripe::Charge).to receive(:retrieve).with("ch_1234", anything).and_return(charge)
-    allow(Marketplace::SquareOrder).to receive(:new).and_return(square_order)
+    allow(Marketplace::Marketplace::SquareOrder).to receive(:new).and_return(square_order)
   end
 
   describe "#create" do
@@ -100,7 +100,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
       it "attempts to transfer the order to seller's Square dashboard" do
         call
-        expect(Marketplace::SquareOrder).to have_received(:new).with(order)
+        expect(Marketplace::Marketplace::SquareOrder).to have_received(:new).with(order)
         expect(square_order).to have_received(:send_to_seller_dashboard)
       end
     end
