@@ -52,7 +52,7 @@
     "@rails/actioncable": "^7.1.2",
     "@rails/activestorage": "^7.1.1",
     "@sentry/browser": "^7.79.0",
-    "@tailwindcss/forms": "^0.5.6",
+    "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "@webpack-cli/serve": "^2.0.5",
     "autoprefixer": "^10.4.16",
