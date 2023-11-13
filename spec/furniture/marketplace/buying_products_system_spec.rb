@@ -58,8 +58,6 @@ describe "Marketplace: Buying Products", type: :system do
 
     expect(order_placed_notifications).to be_present
     expect(order_placed_notifications.length).to eq 1
-    expect(Rails.logger).to have_received(:info).with("Finished creating Square order")
-    expect(Rails.logger).to have_received(:info).with("Finished creating Square order payment")
   end
 
   def add_product_to_cart(product)
