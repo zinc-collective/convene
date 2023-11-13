@@ -24,7 +24,7 @@ describe "Marketplace: Collecting Payments", type: :system do
       end
       click_link("Add a Stripe API key to #{space.name}")
       click_link("Add Utility")
-      select("stripe", from: "Type")
+      select("stripe", from: "utility_utility_slug")
       fill_in("Name", with: "Test Stripe Account")
       click_button("Create")
       click_link("Edit stripe 'Test Stripe Account'")

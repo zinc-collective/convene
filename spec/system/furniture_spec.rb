@@ -15,7 +15,7 @@ describe "Furniture" do
 
   def add_gizmo(type, room:)
     visit(polymorphic_path(room.location(:edit)))
-    select(type, from: "Type of gizmo")
+    select(type, from: "furniture_furniture_kind")
     click_button("Add Gizmo")
   end
 
