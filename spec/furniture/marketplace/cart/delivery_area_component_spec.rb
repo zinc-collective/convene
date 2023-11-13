@@ -5,7 +5,7 @@ RSpec.describe Marketplace::Cart::DeliveryAreaComponent, type: :component do
 
   let(:component) { described_class.new(cart: cart) }
 
-  let(:cart) { create(:marketplace_cart, :with_products, marketplace: marketplace) }
+  let(:cart) { create(:marketplace_cart, marketplace: marketplace) }
 
   context "when a delivery area is present" do
     context "with a single delivery area" do
