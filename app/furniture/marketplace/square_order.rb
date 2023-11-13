@@ -17,16 +17,12 @@
 #   Eg: READY | ORDER_SENT | etc...
 class Marketplace
   class SquareOrder
+    attr_accessor :order, :square_order_id, :square_payment_id
+    delegate :shopper, :marketplace, :ordered_products, to: :order
+    delegate :space, :square_location_id, to: :marketplace
+
     def initialize(order)
       @order = order
-      @marketplace = order.marketplace
-      @shopper = order.shopper
-      @space = order.marketplace.space
-      @ordered_products = @order.ordered_products
-      @square_location_id = @marketplace.settings["square_location_id"]
-      @square_order_id = nil
-      @square_payment_id = nil
-      # @state = "READY"
     end
 
     # Sends an order to Square. Will create both an order and payment in the
@@ -35,6 +31,7 @@ class Marketplace
     def send_order
       Rails.logger.info("Start creating Square order")
       square_create_order_response = create_square_order
+      order.events.create(description: "Square Order Created")
       Rails.logger.info("Finished creating Square order")
 
       if square_create_order_response
@@ -42,6 +39,7 @@ class Marketplace
         Rails.logger.info("Start creating Square order payment")
         square_create_payment_response = create_square_order_payment
         Rails.logger.info("Finished creating Square order payment")
+        order.events.create(description: "Square Order Created")
         @square_payment_id = square_create_payment_response.body.payment[:id]
         # @state = "ORDER_SENT"
 
@@ -59,11 +57,11 @@ class Marketplace
     # Square sets max of 43 chars so this assumes an order id remains a 36-char
     # uuid
     private def square_idemp_key
-      "#{@order.id}_#{8.times.map { rand(10) }.join}"
+      "#{order.id}_#{8.times.map { rand(10) }.join}"
     end
 
     private def create_square_order
-      square_create_order_body = prepare_square_create_order_body(@marketplace)
+      square_create_order_body = prepare_square_create_order_body(marketplace)
       @square_client.orders.create_order(body: square_create_order_body)
     end
 
@@ -79,10 +77,10 @@ class Marketplace
     # in the Seller Dashboard
     # See: https://developer.squareup.com/docs/orders-api/create-orders
     private def prepare_square_create_order_body
-      location_id = @marketplace.settings["square_location_id"]
-      customer_id = @shopper.id
+      location_id = marketplace.square_location_id
+      customer_id = shopper.id
 
-      line_items = @ordered_products.map { |ordered_product|
+      line_items = ordered_products.map { |ordered_product|
         {
           name: ordered_product.name,
           quantity: ordered_product.quantity.to_s,
@@ -114,10 +112,10 @@ class Marketplace
               state: "PROPOSED", # PROPOSED|RESERVED|PREPARED|COMPLETED|CANCELED|FAILED
               delivery_details: {
                 recipient: {
-                  display_name: @shopper.person.display_name,
-                  phone_number: @order.contact_phone_number,
+                  display_name: shopper.person.display_name,
+                  phone_number: order.contact_phone_number,
                   address: {
-                    address_line_1: @order.delivery_address
+                    address_line_1: order.delivery_address
                   }
                 },
                 schedule_type: "SCHEDULED", # SCHEDULED|ASAP
@@ -147,14 +145,14 @@ class Marketplace
         source_id: "EXTERNAL",
         idempotency_key: square_idemp_key,
         amount_money: {
-          amount: @order.product_total.cents,
+          amount: order.product_total.cents,
           currency: "USD"
         },
         order_id: @square_order_id,
         location_id: @square_location_id,
         external_details: {
           type: "OTHER",
-          source: "CONVENE_SYSTEM_PAYMENT for Space #{@space.id}"
+          source: "Paid by Stripe (Charge #{order.stripe_payment_id}) via #{space.name} (#{space.id})"
           # TODO: Need this later?
           # source_fee_money: {
           #   amount: "test",
