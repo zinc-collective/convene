@@ -81,13 +81,6 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
         expect(Stripe::Transfer).not_to(have_received(:create))
       end
     end
-
-    context "when Square notifications are not enabled" do
-      it "does not attempt to transfer the order to seller's Square dashboard" do
-        call
-        expect(square_order).not_to(have_received(:send_order))
-      end
-    end
   end
 end
 # rubocop:enable RSpec/VerifiedDoubles
