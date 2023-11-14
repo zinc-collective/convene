@@ -57,7 +57,7 @@ gem "activerecord-postgres_enum", "~> 2.0"
 # Support for models with "slots" or "positions"
 gem "ranked-model", "~> 0.4.9"
 # Slug-based model lookup
-gem "friendly_id", "~> 5.5.0"
+gem "friendly_id", "~> 5.5.1"
 # Hashing / Encrypting data at rest
 gem "bcrypt", "~> 3.1.19"
 gem "lockbox", "1.3.0"
