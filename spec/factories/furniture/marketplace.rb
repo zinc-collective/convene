@@ -65,6 +65,14 @@ FactoryBot.define do
       with_delivery_areas
       with_notification_methods
     end
+
+    trait :with_square do
+      square_location_id { ENV.fetch("MARKETPLACE_VENDOR_SQUARE_LOCATION") }
+      square_environment { ENV.fetch("SQUARE_ENV", "sandbox") }
+      secrets {
+        square_access_token { ENV.fetch("MARKETPLACE_VENDOR_SQUARE_ACCESS_TOKEN") }
+      }
+    end
   end
 
   factory :marketplace_bazaar, class: "Marketplace::Bazaar" do
