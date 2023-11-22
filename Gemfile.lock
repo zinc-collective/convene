@@ -125,7 +125,7 @@ GEM
     aws-sigv4 (1.6.1)
       aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
-    bcrypt (3.1.19)
+    bcrypt (3.1.20)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -529,7 +529,7 @@ DEPENDENCIES
   active_record_extended (~> 3.2)
   activerecord-postgres_enum (~> 2.0)
   aws-sdk-s3 (~> 1.138)
-  bcrypt (~> 3.1.19)
+  bcrypt (~> 3.1.20)
   better_errors
   binding_of_caller
   bootsnap (~> 1.17)
