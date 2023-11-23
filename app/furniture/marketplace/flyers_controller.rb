@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+class Marketplace
+  class FlyersController < Controller
+    layout "nude"
+    expose :flyer, -> { marketplace.flyer }
+
+    def show
+      authorize(flyer)
+    end
+  end
+end

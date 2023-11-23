@@ -38,6 +38,10 @@ class Marketplace
       true
     end
 
+    def flyer
+      Flyer.new(self)
+    end
+
     def ready_for_shopping?
       products.present? && stripe_api_key? && delivery_areas.present? && stripe_account_connected?
     end

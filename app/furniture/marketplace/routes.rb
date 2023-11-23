@@ -9,6 +9,7 @@ class Marketplace
           router.resource :delivery_area, controller: "cart/delivery_areas"
         end
 
+        router.resource :flyer
         router.resources :delivery_areas
         router.resources :notification_methods
         router.resources :orders, only: [:show, :index]
