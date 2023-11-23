@@ -40,6 +40,9 @@ en:
       edit: "Change Phone Number"
     delivery_address:
       edit: "Change Address"
+    flyers:
+      show:
+        link_to: "Flyer"
     marketplace:
       manage_header: "Marketplace"
       configuration_menu: "Configuration"
