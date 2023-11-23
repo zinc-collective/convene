@@ -553,7 +553,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 6.4)
   pundit (~> 2.3)
-  rails (~> 7.0)
+  rails (~> 7.1)
   rails-controller-testing
   rails-erd
   ranked-model (~> 0.4.9)
