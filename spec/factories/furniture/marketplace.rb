@@ -132,7 +132,6 @@ FactoryBot.define do
     marketplace
     shopper { association(:marketplace_shopper) }
 
-    id { SecureRandom.uuid }
     status { :paid }
 
     trait :with_products do
