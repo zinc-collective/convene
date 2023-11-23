@@ -43,7 +43,7 @@ gem "gretel", "~> 4.6"
 # Better UI components
 gem "lookbook", ">= 2.0.0.beta.4"
 gem "view_component", "~> 3.7"
-# QR Code GeneratioN!
+# QR Code Generation!
 gem "rqrcode", "~> 2.2"
 
 # Pagination!
