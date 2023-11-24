@@ -2,7 +2,7 @@
 
 class Marketplace
   class FlyersController < Controller
-    layout "nude"
+    layout "minimal"
     expose :flyer, -> { marketplace.flyer }
 
     def show
