@@ -95,6 +95,7 @@ class Furniture < ApplicationRecord
       markdown_text_block: ::MarkdownTextBlock,
       marketplace: ::Marketplace::Marketplace,
       livestream: ::Livestream,
+      section_navigation: SectionNavigation::SectionNavigation,
       embedded_form: EmbeddedForm
     }
   end
