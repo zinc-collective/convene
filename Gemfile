@@ -76,7 +76,7 @@ gem "pg", "~> 1.5"
 gem "image_processing"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.140", require: false
+gem "aws-sdk-s3", "~> 1.141", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
