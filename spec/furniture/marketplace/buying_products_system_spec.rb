@@ -32,10 +32,13 @@ describe "Marketplace: Buying Products", type: :system do
     expect(page).to have_content("Total: #{humanized_money_with_symbol(marketplace.products.first.price + marketplace.delivery_areas.first.price)}")
 
     click_link("Checkout")
+    expect(page).to have_current_path(polymorphic_path(marketplace.carts.first.location(child: :checkout)))
 
     set_delivery_details(delivery_address: "123 N West St Oakland, CA",
       contact_email: "AhsokaTano@example.com",
       contact_phone_number: "1234567890")
+
+    expect(page).to have_current_path(polymorphic_path(marketplace.carts.first.location(child: :checkout)))
 
     pay(card_number: "4000000000000077", card_expiry: "1240", card_cvc: "123", billing_name: "Ahsoka Tano", email: "AhsokaTano@example.com", billing_postal_code: "12345")
 
