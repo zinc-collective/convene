@@ -66,6 +66,7 @@ RSpec.configure do |config|
   config.include(DomHelpers, type: :request)
 
   config.include ViewComponent::TestHelpers, type: :component
+  config.include ActiveSupport::Testing::TimeHelpers
 end
 
 Shoulda::Matchers.configure do |config|
