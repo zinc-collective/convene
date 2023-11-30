@@ -1,5 +1,5 @@
 <%= turbo_frame_tag(delivery) do %>
-  <%= form_with model: delivery.location do |delivery_form| %>
+  <%= form_with model: delivery, url: polymorphic_path(delivery.cart.location(child: :delivery)) do |delivery_form| %>
     <%= render "text_field", attribute: :delivery_address, form: delivery_form %>
 
     <%= render "email_field", attribute: :contact_email, form: delivery_form %>
