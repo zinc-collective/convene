@@ -1,4 +1,4 @@
 <%- breadcrumb :marketplace, marketplace %>
-<%= turbo_frame_tag(marketplace) do %>
+<%= turbo_frame_tag(marketplace, data: { turbo_action: :advance }) do %>
   <%= render Marketplace::MarketplaceComponent.new(marketplace: marketplace) %>
 <%- end %>

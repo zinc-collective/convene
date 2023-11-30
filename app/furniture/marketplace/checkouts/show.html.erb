@@ -1,4 +1,4 @@
-<%= turbo_frame_tag(checkout.marketplace) do %>
+<%= turbo_frame_tag(checkout.marketplace, data: { turbo_action: :advance }) do %>
   <%= link_to(t("marketplace.marketplaces.show.link_to"), marketplace.location) %>
   <h1>Checkout</h2>
   <%= render CardComponent.new do %>
