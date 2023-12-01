@@ -98,6 +98,10 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     end
 
     context "when Square notifications are enabled" do
+      before do
+        travel_to Time.zone.local(1994)
+      end
+
       let(:marketplace) { create(:marketplace, :with_square) }
       let(:person) { create(:person) }
       let(:shopper) { create(:marketplace_shopper, person: person) }
@@ -105,8 +109,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
       # rubocop:disable RSpec/ExampleLength
       it "sends the order to the seller's Square dashboard" do
-        srand(1) # Pin output of repeated calls to rand()
-        travel_to Time.zone.local(1994)
+        allow(Marketplace::SquareIdempotencyKey).to receive(:generate).and_return("idemp_key_1234")
 
         fake_square = instance_double(
           Square::Client,
@@ -136,7 +139,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
         expect(fake_square.orders).to have_received(:create_order).with({
           body: {
-            idempotency_key: "#{order.id}_58950017",
+            idempotency_key: "idemp_key_1234",
             order: {
               customer_id: shopper.id,
               fulfillments: [{
@@ -171,7 +174,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
         expect(fake_square.payments).to have_received(:create_payment).with({body: {
           source_id: "EXTERNAL",
-          idempotency_key: "#{order.id}_69245242",
+          idempotency_key: "idemp_key_1234",
           amount_money: {
             amount: order.product_total.cents,
             currency: "USD"
@@ -183,7 +186,6 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
             source: "Paid by Stripe (Charge ch_1234) via #{order.marketplace.space.name} (#{order.marketplace.space.id})"
           }
         }})
-        travel_back
       end
     end
   end

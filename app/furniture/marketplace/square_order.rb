@@ -59,7 +59,7 @@ class Marketplace
     # Square sets max of 43 chars so this assumes an order id remains a 36-char
     # uuid
     private def square_idemp_key
-      "#{order.id}_#{8.times.map { rand(10) }.join}"
+      SquareIdempotencyKey.generate(@order)
     end
 
     private def create_square_order
