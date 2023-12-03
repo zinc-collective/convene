@@ -4,10 +4,4 @@
       <%= render room.gizmos.rank(:slot) %>
     </section>
   </div>
-
-  <div class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center">
-    <% policy_scope(room.space.rooms).each do |room| %>
-      <%= render partial: 'spaces/room_card', locals: { room: room } %>
-    <% end %>
-  </div>
 </div>
