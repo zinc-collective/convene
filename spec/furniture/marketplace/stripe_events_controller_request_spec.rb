@@ -187,6 +187,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
           }
         }})
       end
+      # rubocop:enable RSpec/ExampleLength
     end
   end
 end
