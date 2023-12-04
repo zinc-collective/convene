@@ -30,7 +30,6 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
     allow(Stripe::Transfer).to receive(:create).and_return(double(Stripe::Transfer, id: "st_fake_1234"))
     allow(Stripe::BalanceTransaction).to receive(:retrieve).with("btx_2234", anything).and_return(balance_transaction)
     allow(Stripe::Charge).to receive(:retrieve).with("ch_1234", anything).and_return(charge)
-    # allow(Marketplace::Marketplace::SquareOrder).to receive(:new).and_return(square_order)
   end
 
   describe "#create" do
@@ -99,6 +98,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
     context "when Square notifications are enabled" do
       before do
+        # Pins clock to an arbitrary time
         travel_to Time.zone.local(1994)
       end
 
@@ -127,7 +127,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
             create_payment: instance_double(
               Square::ApiResponse,
               body: Struct.new(:payment).new({
-                id: "sq_order_id_1234"
+                id: "sq_payment_id_1234"
               })
             )
           )

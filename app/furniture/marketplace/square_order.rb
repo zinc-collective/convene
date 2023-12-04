@@ -28,9 +28,9 @@ class Marketplace
     # Sends an order to Square. Will create both an order and payment in the
     # receiving account which are requirements for the order to show up in the
     # Seller Dashboard.
-    def send_order(order, stripe_latest_charge_id)
+    def send_order(order, stripe_charge_id)
       @order = order
-      @stripe_latest_charge_id = stripe_latest_charge_id
+      @stripe_charge_id = stripe_charge_id
       Rails.logger.info("Start creating Square order")
       square_create_order_response = create_square_order
       order.events.create(description: "Square Order Created")
@@ -154,7 +154,7 @@ class Marketplace
         location_id: @square_location_id,
         external_details: {
           type: "OTHER",
-          source: "Paid by Stripe (Charge #{@stripe_latest_charge_id}) via #{space.name} (#{space.id})"
+          source: "Paid by Stripe (Charge #{@stripe_charge_id}) via #{space.name} (#{space.id})"
           # TODO: Need this later?
           # source_fee_money: {
           #   amount: "test",
