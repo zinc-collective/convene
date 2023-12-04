@@ -129,20 +129,3 @@ Then(
     );
   },
 );
-Then(
-  "all other Invitations to {actor} for {a} {space} no longer have {a} status of {string}",
-  /**
-   * @param {Actor} actor
-   * @param {Space} space
-   * @param {string} status
-   */
-  function (actor, _a, space, _a2, status) {
-    return actor
-      .signIn(this.driver, space)
-      .then(() => new MembershipsIndexPage(this.driver, space).visit())
-      .then((page) => page.invitations({ to: actor }))
-      .then((invitations) =>
-        assert(invitations.every((i) => i.status !== status)),
-      );
-  },
-);
