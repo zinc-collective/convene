@@ -1,7 +1,7 @@
 import assert$0 from "assert";
 import { Given, When, Then } from "@cucumber/cucumber";
-import { SignInPage, SpacePage, MePage } from "../harness/Pages.js";
-import { Space, Actor } from "../lib/index.js";
+import { SignInPage, MePage } from "../harness/Pages.js";
+import { Actor } from "../lib/index.js";
 const assert = assert$0.strict;
 Given(
   "an unauthenticated {actor} has requested to be identified to {a} {space} via Email",

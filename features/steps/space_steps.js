@@ -1,11 +1,11 @@
-import { Given, When, Then } from "@cucumber/cucumber";
-import { RoomPage, SpacePage, SpaceEditPage } from "../harness/Pages.js";
+import { Given, When } from "@cucumber/cucumber";
+import { SpacePage, SpaceEditPage } from "../harness/Pages.js";
 import { linkParameters, Actor, Space } from "../lib/index.js";
 import appUrl from "../lib/appUrl.js";
 import { Api } from "../lib/Api.js";
 import AuthenticationMethod from "../lib/AuthenticationMethod.js";
 import Membership from "../lib/Membership.js";
-import crypto from "crypto";
+
 Given("{a} {space}", function (_, space) {
   this.spaces = this.spaces || {};
   return this.api()
@@ -60,7 +60,7 @@ When(
    * @param {Space} space
    * @returns
    */
-  function (_a, actor, _a2, space) {
+  function (_a, _actor, _a2, space) {
     this.space = new SpacePage(this.driver, space);
     return this.space.visit();
   },
