@@ -54,7 +54,7 @@ class Marketplace
     end
 
     def ready_for_checkout?
-      delivery.details_filled_in? && cart_products.present? && cart_products.all?(&:valid?)
+      delivery_area.present? && cart_products.present? && cart_products.all?(&:valid?)
     end
   end
 end

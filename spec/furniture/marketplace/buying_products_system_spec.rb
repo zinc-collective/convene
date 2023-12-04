@@ -24,6 +24,18 @@ describe "Marketplace: Buying Products", type: :system do
     {host: server_uri.host, port: server_uri.port}
   end
 
+  context "when there is not a DeliveryArea selected" do
+    it "Prevents Checkout unless a DeliveryArea is selected" do
+      create(:marketplace_delivery_area, marketplace: marketplace)
+
+      visit(polymorphic_path(marketplace.room.location))
+
+      add_product_to_cart(marketplace.products.first)
+
+      expect { click_link("Checkout") }.to raise_error(Capybara::ElementNotFound)
+    end
+  end
+
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
     visit(polymorphic_path(marketplace.room.location))
 

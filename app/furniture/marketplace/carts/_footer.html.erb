@@ -12,7 +12,7 @@
   </tr>
   <tr>
     <td class="text-right py-3.5" colspan="8">
-      <%= render ButtonComponent.new(label: "Checkout", href: cart.location(child: :checkout), scheme: :primary, method: :get) %>
+      <%= render ButtonComponent.new(label: "Checkout", href: cart.location(child: :checkout), scheme: :primary, method: :get, disabled: !cart.ready_for_checkout?) %>
     </td>
   </tr>
 </tfoot>
