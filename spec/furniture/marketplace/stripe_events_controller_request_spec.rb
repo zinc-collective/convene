@@ -166,7 +166,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
                 name: order.ordered_products.first.name,
                 quantity: "1"
               }],
-              location_id: ENV.fetch("MARKETPLACE_VENDOR_SQUARE_LOCATION", "square_location_id_1234"),
+              location_id: order.marketplace.square_location_id,
               taxes: []
             }
           }
