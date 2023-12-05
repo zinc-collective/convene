@@ -91,6 +91,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
       it "does not attempt to transfer the order to seller's Square dashboard" do
         square_order_double = instance_double(Marketplace::SquareOrder, send_order: true)
+        allow(Marketplace::SquareOrder).to receive(:new).and_return(square_order_double)
         call
         expect(square_order_double).not_to(have_received(:send_order))
       end
