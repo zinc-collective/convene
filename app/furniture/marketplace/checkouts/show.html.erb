@@ -1,7 +1,26 @@
 <%= turbo_frame_tag(checkout.marketplace, data: { turbo_action: :advance }) do %>
   <%= link_to(t("marketplace.marketplaces.show.link_to"), marketplace.location) %>
-  <h1>Checkout</h2>
+  <h2>Checkout</h2>
   <%= render CardComponent.new do %>
+    <h3>Receipt</h3>
+    <dl class="grid grid-cols-2 gap-3 w-96">
+      <%- cart.cart_products.each do |cart_product| %>
+        <dt class="text-right"><%= cart_product.name %><br />
+        (<%=cart_product.quantity%>) x <%= humanized_money_with_symbol(cart_product.price) %></dt>
+        <dd><%= humanized_money_with_symbol(cart_product.price_total) %></dd>
+      <%- end %>
+      <dt class="font-bold text-right">Sub Total</dt>
+      <dd><%= humanized_money_with_symbol(cart.product_total) %></dd>
+      <dt class="text-right">Delivery Fee <br /> (<%= cart.delivery_area.label %>)</dt>
+      <dd><%= humanized_money_with_symbol(cart.delivery_fee) %></dd>
+      <dt class="text-right">Taxes</dt>
+      <dd><%= humanized_money_with_symbol(cart.tax_total) %></dd>
+      <dt class="text-right font-bold">Total</dt>
+      <dd><%= humanized_money_with_symbol(cart.price_total) %></dd>
+    </dl>
+  <%- end %>
+
+  <%= render CardComponent.new(classes: "mt-3") do %>
     <%= render cart.delivery %>
   <%- end %>
 <%- end %>
