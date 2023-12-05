@@ -10,9 +10,11 @@
       <%= render "marketplace/carts/total", cart: cart %>
     </td>
   </tr>
-  <tr>
-    <td class="text-right py-3.5" colspan="8">
-      <%= render ButtonComponent.new(label: "Checkout", href: cart.location(child: :checkout), scheme: :primary, method: :get, disabled: !cart.ready_for_checkout?) %>
-    </td>
-  </tr>
+  <%- if cart.ready_for_checkout? %>
+    <tr>
+      <td class="text-right py-3.5" colspan="8">
+        <%= render ButtonComponent.new(label: "Checkout", href: cart.location(child: :checkout), scheme: :primary, method: :get) %>
+      </td>
+    </tr>
+  <%- end %>
 </tfoot>
