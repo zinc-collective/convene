@@ -7,6 +7,6 @@
       choices: cart.marketplace.delivery_areas.pluck(:label, :id), attribute: :delivery_area_id,
       form: form,
     }) %>
-    <%= form.submit %>
+    <%= form.submit "Save" %>
   <%- end %>
 </div>

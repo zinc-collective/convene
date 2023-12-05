@@ -83,11 +83,11 @@ describe "Marketplace: Buying Products", type: :system do
     fill_in("Delivery address", with: delivery_address)
     fill_in("Contact phone number", with: contact_phone_number)
     fill_in("Contact email", with: contact_email)
-    click_button("Save changes")
+    click_button("Save")
   end
 
   def pay(card_number:, card_expiry:, card_cvc:, billing_name:, email:, billing_postal_code:)
-    click_button("Make Payment")
+    click_button("Place Order")
     fill_in("cardNumber", with: card_number)
     fill_in("cardExpiry", with: card_expiry)
     fill_in("cardCvc", with: card_cvc)

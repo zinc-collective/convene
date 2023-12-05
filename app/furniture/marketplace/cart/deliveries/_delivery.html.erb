@@ -1,13 +1,13 @@
-<%- if delivery.delivery_area.present? %>
-  <p class="text-lg font-bold"><%= render(delivery.delivery_area) %></p>
-<%- end %>
-<p class="text-left py-1 text-sm">
-  <%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %>
-</p>
+
 <%= turbo_frame_tag(delivery) do %>
   <% if delivery.details_filled_in? %>
-    <p class="font-bold">Delivering to:</p>
-    <div class="rounded p-2 bg-orange-50">
+    <h3 class="font-bold">Delivering to:</h3>
+    <p>
+      <%= render(delivery.delivery_area) %><br />
+      <span class="text-sm font-light italic"><%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %></span>
+    </p>
+
+    <div class="rounded p-2 bg-orange-50 mb-3">
       <p>
         <%= delivery.contact_email %><br />
         <%= number_to_phone(delivery.contact_phone_number) %><br />
@@ -20,8 +20,7 @@
       </p>
     </div>
 
-    <h2>Payment Details</h2>
-    <%= button_to("Make Payment", delivery.cart.location(child: :checkout), data: { turbo: false }) %>
+    <%= button_to("Place Order", delivery.cart.location(child: :checkout), data: { turbo: false }) %>
   <%- else %>
     <%= render "marketplace/cart/deliveries/form", delivery: delivery %>
   <%- end %>
