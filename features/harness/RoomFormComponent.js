@@ -1,6 +1,6 @@
 import Component from "./Component.js";
 import Room from "../lib/Room.js";
-class RoomCardComponent extends Component {
+class RoomFormComponent extends Component {
   /**
    * @param {ThenableWebDriver} driver
    * @param {Room} room
@@ -18,4 +18,4 @@ class RoomCardComponent extends Component {
     return this;
   }
 }
-export default RoomCardComponent;
+export default RoomFormComponent;

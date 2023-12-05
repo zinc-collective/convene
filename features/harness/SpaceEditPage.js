@@ -1,7 +1,5 @@
 import { ThenableWebDriver } from "selenium-webdriver";
 import Page from "./Page.js";
-import Room from "../lib/Room.js";
-import RoomCardComponent from "./RoomCardComponent.js";
 import Component from "./Component.js";
 class SpaceEditPage extends Page {
   /**
@@ -18,14 +16,6 @@ class SpaceEditPage extends Page {
    */
   path() {
     return `/spaces/${this.space.slug}/edit`;
-  }
-
-  /**
-   * @param {Room} room
-   * @returns {RoomCardComponent}
-   */
-  roomCard(room) {
-    return new RoomCardComponent(this.driver, room);
   }
 
   createRoom({ room }) {
