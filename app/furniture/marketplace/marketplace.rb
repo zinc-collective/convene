@@ -106,7 +106,10 @@ class Marketplace
 
     def square_connection
       if square_order_notifications_enabled?
-        @square_client ||= Square::Client.new(access_token: square_access_token, environment: square_environment)
+        SquareOrder.new(Square::Client.new(
+          access_token: square_access_token,
+          environment: square_environment
+        ))
       end
     end
 

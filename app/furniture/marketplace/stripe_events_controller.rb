@@ -23,7 +23,7 @@ class Marketplace
         order.update!(status: :paid, placed_at: DateTime.now, payment_processor_fee_cents: balance_transaction.fee)
         order.events.create(description: "Payment Received")
 
-        marketplace.square_connection&.send_order
+        marketplace.square_connection&.send_order(order, latest_charge.id)
 
         Order::ReceivedMailer.notification(order).deliver_later
         order.events.create(description: "Notifications to Vendor and Distributor Sent")

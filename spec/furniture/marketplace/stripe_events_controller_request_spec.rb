@@ -1,4 +1,5 @@
 require "rails_helper"
+# require "active_support/testing/time_helpers"
 # `Stripe` gem doesn't support verified doubles for some reason...
 # rubocop:disable RSpec/VerifiedDoubles
 RSpec.describe Marketplace::StripeEventsController, type: :request do
@@ -19,7 +20,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
   end
 
   let(:charge) {
-    double(Stripe::Charge, balance_transaction: "btx_2234")
+    double(Stripe::Charge, balance_transaction: "btx_2234", id: "ch_1234")
   }
 
   before do
@@ -80,6 +81,114 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
 
         expect(Stripe::Transfer).not_to(have_received(:create))
       end
+    end
+
+    context "when Square notifications are not enabled" do
+      let(:marketplace) { create(:marketplace) }
+      let(:person) { create(:person) }
+      let(:shopper) { create(:marketplace_shopper, person: person) }
+      let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, marketplace: marketplace, shopper: shopper) }
+
+      it "does not attempt to transfer the order to seller's Square dashboard" do
+        square_order_double = instance_double(Marketplace::SquareOrder, send_order: true)
+        allow(Marketplace::SquareOrder).to receive(:new).and_return(square_order_double)
+        call
+        expect(square_order_double).not_to(have_received(:send_order))
+      end
+    end
+
+    context "when Square notifications are enabled" do
+      before do
+        # Pins clock to an arbitrary time
+        travel_to Time.zone.local(1994)
+      end
+
+      let(:marketplace) { create(:marketplace, :with_square) }
+      let(:person) { create(:person) }
+      let(:shopper) { create(:marketplace_shopper, person: person) }
+      let(:order) { create(:marketplace_order, :with_products, status: :pre_checkout, marketplace: marketplace, shopper: shopper) }
+
+      # rubocop:disable RSpec/ExampleLength
+      it "sends the order to the seller's Square dashboard" do
+        allow(Marketplace::SquareIdempotencyKey).to receive(:generate).and_return("idemp_key_1234")
+
+        fake_square = instance_double(
+          Square::Client,
+          orders: instance_double(
+            Square::OrdersApi,
+            create_order: instance_double(
+              Square::ApiResponse,
+              body: Struct.new(:order).new({
+                id: "sq_order_id_1234"
+              })
+            )
+          ),
+          payments: instance_double(
+            Square::PaymentsApi,
+            create_payment: instance_double(
+              Square::ApiResponse,
+              body: Struct.new(:payment).new({
+                id: "sq_payment_id_1234"
+              })
+            )
+          )
+        )
+
+        allow(Square::Client).to receive(:new).and_return(fake_square)
+
+        call
+
+        expect(fake_square.orders).to have_received(:create_order).with({
+          body: {
+            idempotency_key: "idemp_key_1234",
+            order: {
+              customer_id: shopper.id,
+              fulfillments: [{
+                delivery_details: {
+                  deliver_at: "1994-01-01T00:00:00+00:00",
+                  recipient: {
+                    address: {
+                      address_line_1: nil
+                    },
+                    display_name: shopper.person.display_name,
+                    phone_number: nil
+                  },
+                  schedule_type: "SCHEDULED"
+                },
+                state: "PROPOSED",
+                type: "DELIVERY"
+              }],
+              line_items: [{
+                base_price_money: {
+                  amount: order.ordered_products.first.product.price.cents,
+                  currency: "USD"
+                },
+                item_type: "ITEM",
+                name: order.ordered_products.first.name,
+                quantity: "1"
+              }],
+              location_id: order.marketplace.square_location_id,
+              taxes: []
+            }
+          }
+        })
+
+        expect(fake_square.payments).to have_received(:create_payment).with({body: {
+          source_id: "EXTERNAL",
+          idempotency_key: "idemp_key_1234",
+          amount_money: {
+            amount: order.product_total.cents,
+            currency: "USD"
+          },
+          order_id: "sq_order_id_1234",
+          location_id: nil,
+          external_details: {
+            type: "OTHER",
+            source: "Paid by Stripe (Charge ch_1234) via #{order.marketplace.space.name} (#{order.marketplace.space.id})"
+          }
+        }})
+      end
+      # rubocop:enable RSpec/ExampleLength
     end
   end
 end

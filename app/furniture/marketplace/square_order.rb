@@ -21,14 +21,16 @@ class Marketplace
     delegate :shopper, :marketplace, :ordered_products, to: :order
     delegate :space, :square_location_id, to: :marketplace
 
-    def initialize(order)
-      @order = order
+    def initialize(square_client)
+      @square_client ||= square_client
     end
 
     # Sends an order to Square. Will create both an order and payment in the
     # receiving account which are requirements for the order to show up in the
     # Seller Dashboard.
-    def send_order
+    def send_order(order, stripe_charge_id)
+      @order = order
+      @stripe_charge_id = stripe_charge_id
       Rails.logger.info("Start creating Square order")
       square_create_order_response = create_square_order
       order.events.create(description: "Square Order Created")
@@ -57,11 +59,11 @@ class Marketplace
     # Square sets max of 43 chars so this assumes an order id remains a 36-char
     # uuid
     private def square_idemp_key
-      "#{order.id}_#{8.times.map { rand(10) }.join}"
+      @key ||= SquareIdempotencyKey.generate(@order)
     end
 
     private def create_square_order
-      square_create_order_body = prepare_square_create_order_body(marketplace)
+      square_create_order_body = prepare_square_create_order_body
       @square_client.orders.create_order(body: square_create_order_body)
     end
 
@@ -92,7 +94,7 @@ class Marketplace
         }
       }
 
-      taxes = @marketplace.tax_rates.map { |tax_rate|
+      taxes = marketplace.tax_rates.map { |tax_rate|
         {
           uid: tax_rate.id,
           name: tax_rate.label,
@@ -152,7 +154,7 @@ class Marketplace
         location_id: @square_location_id,
         external_details: {
           type: "OTHER",
-          source: "Paid by Stripe (Charge #{order.stripe_payment_id}) via #{space.name} (#{space.id})"
+          source: "Paid by Stripe (Charge #{@stripe_charge_id}) via #{space.name} (#{space.id})"
           # TODO: Need this later?
           # source_fee_money: {
           #   amount: "test",
