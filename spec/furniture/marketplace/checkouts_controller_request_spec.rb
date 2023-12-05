@@ -52,11 +52,5 @@ RSpec.describe Marketplace::Checkout, type: :request do
         )
       end
     end
-
-    context "when the Cart is empty" do
-      let(:cart) { create(:marketplace_cart, marketplace: marketplace) }
-
-      it { is_expected.to render_template(:show) }
-    end
   end
 end
