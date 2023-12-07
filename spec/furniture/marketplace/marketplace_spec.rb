@@ -44,10 +44,26 @@ RSpec.describe Marketplace::Marketplace, type: :model do
       end.to change(marketplace.carts, :count).by(1)
     end
 
-    it "sets the delivery area if one is passed" do
-      delivery_area = create(:marketplace_delivery_area, marketplace:)
-      cart = marketplace.find_or_create_cart(shopper:, delivery_area:)
-      expect(cart.delivery_area).to eq(delivery_area)
+    context "when the marketplace has exactly one delivery area" do
+      let!(:delivery_area) { create(:marketplace_delivery_area, marketplace:) }
+
+      it "sets it on the cart as the default one" do
+        expect(marketplace.delivery_areas.size).to eq(1)
+        cart = marketplace.find_or_create_cart(shopper:)
+        expect(cart.delivery_area).to eq(delivery_area)
+      end
+    end
+
+    context "when the marketplace has multiple delivery areas" do
+      before do
+        create_list(:marketplace_delivery_area, 2, marketplace:)
+      end
+
+      it "does not set a default delivery area on the cart" do
+        expect(marketplace.delivery_areas.size).to be > 1
+        cart = marketplace.find_or_create_cart(shopper:)
+        expect(cart.delivery_area).to be_nil
+      end
     end
   end
 

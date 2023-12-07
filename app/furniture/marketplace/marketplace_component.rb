@@ -13,8 +13,7 @@ class Marketplace
     end
 
     def cart
-      delivery_area = marketplace.delivery_areas.first if marketplace.delivery_areas.size == 1
-      @cart ||= marketplace.find_or_create_cart(shopper: shopper, delivery_area: delivery_area)
+      @cart ||= marketplace.find_or_create_cart(shopper: shopper)
     end
 
     def delivery_area_component
