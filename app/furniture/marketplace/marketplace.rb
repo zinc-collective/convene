@@ -26,6 +26,15 @@ class Marketplace
     # Square order notifications integration
     setting :square_location_id
 
+    def find_or_create_cart(shopper:, delivery_area: nil, cart_status: :pre_checkout)
+      carts.find_by(shopper:, status: cart_status) || carts.create(
+        shopper: shopper,
+        contact_email: shopper.person&.email,
+        delivery_area: delivery_area,
+        status: cart_status
+      )
+    end
+
     def square_access_token=square_access_token
       secrets["square_access_token"] = square_access_token
     end
