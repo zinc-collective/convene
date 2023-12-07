@@ -36,6 +36,18 @@ describe "Marketplace: Buying Products", type: :system do
     end
   end
 
+  describe "when changing DeliveryArea" do
+    it "updates the Delivery Fee" do
+      create(:marketplace_delivery_area,
+        marketplace: marketplace, label: "Oakland", price_cents: 10_00)
+
+      visit(polymorphic_path(marketplace.room.location))
+      select("Oakland", from: :cart_delivery_area_id)
+      click_button("Save")
+      expect(page).to have_content("Delivery Fee: $10.00")
+    end
+  end
+
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
     visit(polymorphic_path(marketplace.room.location))
 

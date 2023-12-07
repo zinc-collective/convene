@@ -14,7 +14,7 @@ class Marketplace
     def update
       authorize(cart)
       cart.update(cart_params)
-      redirect_to cart.location(child: :delivery_area)
+      redirect_to marketplace.location
     end
 
     def cart_params
