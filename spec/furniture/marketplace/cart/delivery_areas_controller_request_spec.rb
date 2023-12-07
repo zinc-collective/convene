@@ -12,7 +12,7 @@ RSpec.describe Marketplace::Cart::DeliveryAreasController, type: :request do
   let(:marketplace) { create(:marketplace, :with_delivery_areas) }
   let(:person) { create(:membership, space: space).member }
   let(:shopper) { create(:marketplace_shopper, person: person) }
-  let(:cart) { create(:marketplace_cart, shopper: shopper) }
+  let(:cart) { create(:marketplace_cart, shopper: shopper, marketplace: marketplace) }
 
   describe "#show" do
     let(:perform_request) do
@@ -44,7 +44,7 @@ RSpec.describe Marketplace::Cart::DeliveryAreasController, type: :request do
       response
     end
 
-    it { is_expected.to redirect_to(cart.location(child: :delivery_area)) }
+    it { is_expected.to redirect_to(marketplace.location) }
 
     specify do
       expect { result }.to change(cart, :delivery_area_id).to(marketplace.delivery_areas.first.id)
