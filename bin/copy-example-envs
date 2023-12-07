@@ -13,3 +13,10 @@ else
   echo "Copying .env.development.example to .env.development"
   cp .env.development.example .env.development
 fi
+
+if test -f ".env.test"; then
+  echo "Found .env.test, leaving it in place!"
+else
+  echo "Copying .env.test.example to .env.test"
+  cp .env.test.example .env.test
+fi
