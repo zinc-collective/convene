@@ -187,6 +187,9 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
             source: "Paid by Stripe (Charge ch_1234) via #{order.marketplace.space.name} (#{order.marketplace.space.id})"
           }
         }})
+
+        expect(order.events).to exist(description: "Square Order Created")
+        expect(order.events).to exist(description: "Square Payment Created")
       end
       # rubocop:enable RSpec/ExampleLength
     end

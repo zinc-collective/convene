@@ -31,17 +31,13 @@ class Marketplace
     def send_order(order, stripe_charge_id)
       @order = order
       @stripe_charge_id = stripe_charge_id
-      Rails.logger.info("Start creating Square order")
       square_create_order_response = create_square_order
       order.events.create(description: "Square Order Created")
-      Rails.logger.info("Finished creating Square order")
 
       if square_create_order_response
         @square_order_id = square_create_order_response.body.order[:id]
-        Rails.logger.info("Start creating Square order payment")
         square_create_payment_response = create_square_order_payment
-        Rails.logger.info("Finished creating Square order payment")
-        order.events.create(description: "Square Order Created")
+        order.events.create(description: "Square Payment Created")
         @square_payment_id = square_create_payment_response.body.payment[:id]
         # @state = "ORDER_SENT"
 
