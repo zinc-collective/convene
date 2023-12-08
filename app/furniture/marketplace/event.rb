@@ -5,7 +5,7 @@
 # the following stylistic conventions:
 #   1. Title Case
 #   2. Noun + Verb
-#   3. Past tense
+#   3. Simple past tense
 # For example: `order.events.create(description: "Payment Received")
 class Marketplace
   class Event < Record
