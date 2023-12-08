@@ -26,7 +26,7 @@ class Marketplace
     # Square order notifications integration
     setting :square_location_id
 
-    def find_or_create_cart(shopper:, cart_status: :pre_checkout)
+    def cart_for_shopper(shopper:, cart_status: :pre_checkout)
       carts.find_by(shopper:, status: cart_status) || carts.create(
         shopper: shopper,
         contact_email: shopper.person&.email,

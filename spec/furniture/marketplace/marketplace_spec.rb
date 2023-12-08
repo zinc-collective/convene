@@ -30,17 +30,17 @@ RSpec.describe Marketplace::Marketplace, type: :model do
     it { is_expected.to include(marketplace_furniture) }
   end
 
-  describe ".find_or_create_cart" do
+  describe ".cart_for_shopper" do
     let(:shopper) { create(:marketplace_shopper) }
 
     it "finds an existing cart" do
       cart = create(:marketplace_cart, marketplace:, shopper:)
-      expect(marketplace.find_or_create_cart(shopper:)).to eq(cart)
+      expect(marketplace.cart_for_shopper(shopper:)).to eq(cart)
     end
 
     it "makes a new cart if there wasn't already one, defaults to :pre_checkout" do
       expect do
-        expect(marketplace.find_or_create_cart(shopper:).status).to eq("pre_checkout")
+        expect(marketplace.cart_for_shopper(shopper:).status).to eq("pre_checkout")
       end.to change(marketplace.carts, :count).by(1)
     end
 
@@ -49,7 +49,7 @@ RSpec.describe Marketplace::Marketplace, type: :model do
 
       it "sets it on the cart as the default one" do
         expect(marketplace.delivery_areas.size).to eq(1)
-        cart = marketplace.find_or_create_cart(shopper:)
+        cart = marketplace.cart_for_shopper(shopper:)
         expect(cart.delivery_area).to eq(delivery_area)
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe Marketplace::Marketplace, type: :model do
 
       it "does not set a default delivery area on the cart" do
         expect(marketplace.delivery_areas.size).to be > 1
-        cart = marketplace.find_or_create_cart(shopper:)
+        cart = marketplace.cart_for_shopper(shopper:)
         expect(cart.delivery_area).to be_nil
       end
     end

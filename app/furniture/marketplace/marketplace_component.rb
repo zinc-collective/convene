@@ -13,7 +13,7 @@ class Marketplace
     end
 
     def cart
-      @cart ||= marketplace.find_or_create_cart(shopper: shopper)
+      @cart ||= marketplace.cart_for_shopper(shopper: shopper)
     end
 
     def delivery_area_component
