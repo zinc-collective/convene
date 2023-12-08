@@ -13,8 +13,7 @@ class Marketplace
     end
 
     def cart
-      delivery_area = marketplace.delivery_areas.first if marketplace.delivery_areas.size == 1
-      @cart ||= carts.create_with(contact_email: shopper.person&.email, delivery_area: delivery_area).find_or_create_by(shopper: shopper, status: :pre_checkout)
+      @cart ||= marketplace.cart_for_shopper(shopper: shopper)
     end
 
     def delivery_area_component

@@ -26,6 +26,15 @@ class Marketplace
     # Square order notifications integration
     setting :square_location_id
 
+    def cart_for_shopper(shopper:, cart_status: :pre_checkout)
+      carts.find_by(shopper:, status: cart_status) || carts.create(
+        shopper: shopper,
+        contact_email: shopper.person&.email,
+        delivery_area: default_delivery_area,
+        status: cart_status
+      )
+    end
+
     def square_access_token=square_access_token
       secrets["square_access_token"] = square_access_token
     end
@@ -117,6 +126,10 @@ class Marketplace
 
     def square_order_notifications_enabled?
       square_location_id.present?
+    end
+
+    def default_delivery_area
+      (delivery_areas.size == 1) ? delivery_areas.first : nil
     end
   end
 end

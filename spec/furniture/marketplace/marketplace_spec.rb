@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Marketplace, type: :model do
+  subject(:marketplace) { create(:marketplace) }
+
   it { is_expected.to have_many(:products).inverse_of(:marketplace).dependent(:destroy) }
   it { is_expected.to have_many(:orders).inverse_of(:marketplace) }
   it { is_expected.to have_many(:notification_methods).inverse_of(:marketplace).dependent(:destroy) }
@@ -26,6 +28,43 @@ RSpec.describe Marketplace::Marketplace, type: :model do
 
     it { is_expected.not_to include(non_marketplace_furniture) }
     it { is_expected.to include(marketplace_furniture) }
+  end
+
+  describe ".cart_for_shopper" do
+    let(:shopper) { create(:marketplace_shopper) }
+
+    it "finds an existing cart" do
+      cart = create(:marketplace_cart, marketplace:, shopper:)
+      expect(marketplace.cart_for_shopper(shopper:)).to eq(cart)
+    end
+
+    it "makes a new cart if there wasn't already one, defaults to :pre_checkout" do
+      expect do
+        expect(marketplace.cart_for_shopper(shopper:).status).to eq("pre_checkout")
+      end.to change(marketplace.carts, :count).by(1)
+    end
+
+    context "when the marketplace has exactly one delivery area" do
+      let!(:delivery_area) { create(:marketplace_delivery_area, marketplace:) }
+
+      it "sets it on the cart as the default one" do
+        expect(marketplace.delivery_areas.size).to eq(1)
+        cart = marketplace.cart_for_shopper(shopper:)
+        expect(cart.delivery_area).to eq(delivery_area)
+      end
+    end
+
+    context "when the marketplace has multiple delivery areas" do
+      before do
+        create_list(:marketplace_delivery_area, 2, marketplace:)
+      end
+
+      it "does not set a default delivery area on the cart" do
+        expect(marketplace.delivery_areas.size).to be > 1
+        cart = marketplace.cart_for_shopper(shopper:)
+        expect(cart.delivery_area).to be_nil
+      end
+    end
   end
 
   describe "#ready_for_shopping?" do
