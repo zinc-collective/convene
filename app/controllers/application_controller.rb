@@ -165,4 +165,12 @@ class ApplicationController < ActionController::Base
   def render_not_found
     render "errors/not_found", status: :not_found
   end
+
+  helper_method def turbo_visit_control?
+    turbo_visit_control.present?
+  end
+
+  helper_method def turbo_visit_control
+    nil
+  end
 end
