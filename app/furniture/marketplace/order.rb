@@ -1,6 +1,7 @@
 class Marketplace
   class Order < Record
     self.table_name = "marketplace_orders"
+    default_scope { where.not(status: :pre_checkout) }
     location(parent: :marketplace)
 
     belongs_to :marketplace, inverse_of: :orders
