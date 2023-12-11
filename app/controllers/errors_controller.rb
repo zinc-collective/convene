@@ -3,6 +3,10 @@
 class ErrorsController < ApplicationController
   before_action :skip_authorization
 
+  def turbo_visit_control
+    :reload
+  end
+
   def show
     render error_template, status: status_code
   end

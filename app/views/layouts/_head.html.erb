@@ -4,7 +4,11 @@
   <%# Env variables being made accessible to JavaScript %>
   <%= tag :meta, name: :sentry_dsn, content: ENV["SENTRY_DSN"] %>
   <%= tag :meta, name: :release_tag,
-      content: "#{ENV.fetch("APP-BASE", "convene")}@#{ENV.fetch("HEROKU_RELEASE_VERSION", "??")}" %>
+      content: "#{ENV.fetch("APP_BASE", "convene")}@#{ENV.fetch("HEROKU_RELEASE_VERSION", "??")}" %>
+
+  <%- if turbo_visit_control? %>
+    <%= tag :meta, name: :turbo_visit_control, content: turbo_visit_control %>
+  <%- end %>
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
