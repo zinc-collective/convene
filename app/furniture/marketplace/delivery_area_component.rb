@@ -40,7 +40,8 @@ class Marketplace
     end
 
     def destroy_button?
-      delivery_area.persisted? && policy(delivery_area).destroy?
+      delivery_area.persisted? && policy(delivery_area).destroy? &&
+        delivery_area.orders.empty?
     end
   end
 end

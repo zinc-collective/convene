@@ -12,6 +12,19 @@ RSpec.describe Marketplace::DeliveryAreaComponent, type: :component do
   it { is_expected.to have_content(vc_test_controller.view_context.humanized_money_with_symbol(delivery_area.price)) }
 
   it { is_expected.to have_selector("a[href='#{polymorphic_path(delivery_area.location)}'][data-turbo=true][data-turbo-stream=true][data-turbo-method=delete][data-method=delete][data-confirm='#{I18n.t("destroy.confirm")}']") }
+
+  context "when there is a Cart for that Delivery Area" do
+    before { create(:marketplace_cart, delivery_area:, marketplace: delivery_area.marketplace) }
+
+    it { is_expected.to have_selector("a[href='#{polymorphic_path(delivery_area.location)}'][data-turbo=true][data-turbo-stream=true][data-turbo-method=delete][data-method=delete][data-confirm='#{I18n.t("destroy.confirm")}']") }
+  end
+
+  context "when there is an Order for that DeliveryArea" do
+    before { create(:marketplace_order, delivery_area:, marketplace: delivery_area.marketplace) }
+
+    it { is_expected.not_to have_selector("a[href='#{polymorphic_path(delivery_area.location)}'][data-method=delete]") }
+  end
+
   it { is_expected.to have_selector("a[href='#{polymorphic_path(delivery_area.location(:edit))}'][data-turbo=true][data-turbo-method=get][data-turbo-stream=true]") }
 
   context "when `#delivery_window` is empty" do
