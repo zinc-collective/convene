@@ -13,6 +13,7 @@ RSpec.describe "Sections" do
       let(:section) { space.entrance }
 
       it "doesn't let you delete the entrance" do
+        expect(page).to have_content(I18n.t("rooms.destroy.blocked_by_entrance"))
         expect(page).not_to have_content(I18n.t("rooms.destroy.link_to"))
       end
     end
@@ -39,13 +40,9 @@ RSpec.describe "Sections" do
         # the deletion of a Section, or even put the Gizmos into a holding space
         # or something to be re-assigned; but that is out of scope for me at the
         # moment - ZS 10/18/23
-        it "requires confirmation" do
-          accept_alert(I18n.t("rooms.destroy.confirm", room_name: section.name)) do
-            click_button(I18n.t("rooms.destroy.link_to"))
-          end
-
-          expect(page).to have_content(I18n.t("rooms.destroy.success", room_name: section.name))
-          expect(space.rooms).not_to be_exist(id: section.id)
+        it "does not allow deletion of the Section" do
+          expect(page).to have_content(I18n.t("rooms.destroy.blocked_by_gizmos"))
+          expect(page).not_to have_content(I18n.t("rooms.destroy.link_to"))
         end
       end
     end
