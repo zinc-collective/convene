@@ -13,7 +13,7 @@ class Marketplace
 
       when "checkout.session.completed"
         payment_intent = Stripe::PaymentIntent.retrieve(event.data.object.payment_intent, {api_key: marketplace.stripe_api_key})
-        order = Order.unscoped.find_by(id: payment_intent.transfer_group, marketplace:)
+        order = marketplace.orders.find_by(id: payment_intent.transfer_group)
 
         return if order.nil? || order.paid?
 

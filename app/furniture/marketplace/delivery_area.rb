@@ -4,8 +4,8 @@ class Marketplace
     location(parent: :marketplace)
 
     belongs_to :marketplace, inverse_of: :delivery_areas
-    has_many :orders, inverse_of: :delivery_area
-    has_many :carts, inverse_of: :delivery_area
+    has_many :orders, -> { checked_out }, inverse_of: :delivery_area
+    has_many :carts, inverse_of: :delivery_area, dependent: :nullify
     has_many :deliveries, inverse_of: :delivery_area
 
     attribute :delivery_window

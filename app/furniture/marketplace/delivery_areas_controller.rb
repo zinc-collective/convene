@@ -32,11 +32,7 @@ class Marketplace
     end
 
     def destroy
-      authorize(delivery_area)
-      # rubocop:disable Rails/SkipsModelValidations
-      delivery_area.carts.update_all(delivery_area_id: nil)
-      # rubocop:enable Rails/SkipsModelValidations
-      delivery_area.destroy
+      authorize(delivery_area).destroy
 
       respond_to do |format|
         format.turbo_stream do
