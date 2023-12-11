@@ -8,7 +8,9 @@ en:
       success: You've updated Section '%{room_name}' successfully! 🎉
     destroy:
       link_to: "Remove Section 🗑️"
-      confirm: "Removing Section '%{room_name}' is permanent and irreversible! Do you still want to proceed?"
+      prompt: "Remove this Section?"
+      blocked_by_entrance: "Section '%{room_name}' cannot be deleted because it is the Entrance to your Space. Please choose another Sectiona as your Space Entrance."
+      blocked_by_gizmos: "Section '%{room_name}' cannot be deleted because it has Gizmos. Please delete any Gizmos."
       success: You've removed Section '%{room_name}' successfully! 🎉
       failure: We couldn't remove Section '%{room_name}'.
   helpers:

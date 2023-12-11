@@ -22,15 +22,15 @@
 <% end %>
 
 
-<%- if policy(room).destroy? && room.persisted? && !room.entrance? %>
+<%- if policy(room).destroy? && room.persisted? %>
   <div class="m-5">
-    <h2>Remove this Section?</h2>
-    <%- data = {} %>
+    <h2><%= t("rooms.destroy.prompt")%></h2>
     <%- if !room.gizmos.reload.empty? %>
-      <p>Warning! Deleting this Section will also delete all Gizmos and their related data. Please be very sure you want to do this! We recommend making the Section "internal" instead.</p>
-      <%- data[:turbo_confirm] = I18n.t("rooms.destroy.confirm", room_name: room.name) %>
+      <%= t('rooms.destroy.blocked_by_gizmos') %>
+    <%- elsif room.entrance? %>
+      <%= t('rooms.destroy.blocked_by_entrance') %>
+    <%- else %>
+      <%= button_to(t('rooms.destroy.link_to'), room.location, method: :delete, class: "--danger w-full") %>
     <%- end %>
-
-    <%= button_to(t('rooms.destroy.link_to'), room.location, data: data, method: :delete, class: "--danger w-full") %>
   </div>
 <%- end %>
