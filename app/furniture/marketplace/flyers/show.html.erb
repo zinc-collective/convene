@@ -1,12 +1,14 @@
-<div class="w-96 mr-auto ml-auto">
-  <div class="text-2xl text-center">
-    Catering By <%= flyer.vendor_name %>
+<%= turbo_frame_tag(flyer.marketplace) do %>
+  <div class="w-96 mr-auto ml-auto">
+    <div class="text-2xl text-center">
+      Catering By <%= flyer.vendor_name %>
+    </div>
+    <div class="inline-block">
+      <%== flyer.qr_code(url_for(marketplace.room.location)).as_svg use_path: true%>
+    </div>
+    <div class="text-2xl text-center">
+      <p>Delivered by <%= flyer.distributor_name %></p>
+      <p><%= link_to(url_for(marketplace.room.location)) %></p>
+    </div>
   </div>
-  <div class="inline-block">
-    <%== flyer.qr_code(url_for(marketplace.room.location)).as_svg use_path: true%>
-  </div>
-  <div class="text-2xl text-center">
-    <p>Delivered by <%= flyer.distributor_name %></p>
-    <p><%= link_to(url_for(marketplace.room.location)) %></p>
-  </div>
-</div>
+<%- end %>
