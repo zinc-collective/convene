@@ -40,23 +40,7 @@ class Marketplace
         delivery_area.discard
       end
 
-      respond_to do |format|
-        format.turbo_stream do
-          if delivery_area.destroyed? || delivery_area.discarded?
-            render turbo_stream: turbo_stream.remove(delivery_area)
-          else
-            render turbo_stream: turbo_stream.replace(delivery_area)
-          end
-        end
-
-        format.html do
-          if delivery_area.destroyed? || delivery_area.discarded?
-            redirect_to marketplace.location(child: :delivery_areas)
-          else
-            render :show
-          end
-        end
-      end
+      redirect_to marketplace.location(child: :delivery_areas)
     end
 
     def delivery_area_params

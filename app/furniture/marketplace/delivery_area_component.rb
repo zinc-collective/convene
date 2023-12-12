@@ -33,9 +33,7 @@ class Marketplace
 
       ButtonComponent.new(label: "#{t("icons.discard")} #{t("discard.link_to")}",
         title: t("marketplace.delivery_areas.discard.link_to", name: delivery_area.label),
-        href: delivery_area.location, turbo_stream: true,
-        method: :delete,
-        scheme: :secondary)
+        href: delivery_area.location, method: :delete, scheme: :secondary)
     end
 
     def discard_button?
@@ -47,9 +45,7 @@ class Marketplace
 
       ButtonComponent.new(label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
         title: t("marketplace.delivery_areas.destroy.link_to", name: delivery_area.label),
-        href: delivery_area.location, turbo_stream: true,
-        method: :delete,
-        confirm: t("destroy.confirm"),
+        href: delivery_area.location, method: :delete, confirm: t("destroy.confirm"),
         scheme: :secondary)
     end
 

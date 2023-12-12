@@ -1,2 +1,4 @@
 <%- breadcrumb :edit_delivery_area, delivery_area %>
-<%= render "form", delivery_area: delivery_area %>
+<%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
+  <%= render "form", delivery_area: delivery_area %>
+<%- end %>

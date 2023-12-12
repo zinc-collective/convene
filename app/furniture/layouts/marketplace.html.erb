@@ -1,5 +1,5 @@
 <%- content_for :content do %>
-  <%= turbo_frame_tag(marketplace) do %>
+  <%= turbo_frame_tag(marketplace, data: { turbo_action: :advance }) do %>
     <%= yield  %>
   <%- end %>
 <%- end %>
