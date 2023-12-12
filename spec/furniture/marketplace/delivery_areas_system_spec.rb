@@ -19,7 +19,7 @@ describe "Marketplace: Delivery Areas", type: :system do
       it "clears the Delivery Area from Carts" do
         cart = create(:marketplace_cart, delivery_area:, marketplace:)
         visit(polymorphic_path(marketplace.location(child: :delivery_areas)))
-
+        click_link("Archive")
         within("##{dom_id(delivery_area)}") do
           accept_confirm { click_link("Remove") }
         end
@@ -29,11 +29,12 @@ describe "Marketplace: Delivery Areas", type: :system do
       end
 
       it "is impossible when there is an Order" do
-        delivery_area = create(:marketplace_delivery_area, marketplace:, label: "Oakland",
+        delivery_area = create(:marketplace_delivery_area, :discarded, marketplace:, label: "Oakland",
           price_cents: 10_00)
 
         create(:marketplace_order, delivery_area:, marketplace:)
         visit(polymorphic_path(marketplace.location(child: :delivery_areas)))
+        click_link("Archive")
 
         within("##{dom_id(delivery_area)}") do
           expect(page).not_to have_content("Remove")
