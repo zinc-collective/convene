@@ -32,8 +32,7 @@ class Marketplace
 
       ButtonComponent.new label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
         title: t("marketplace.products.destroy.link_to", name: product.name),
-        href: product.location, turbo_stream: true,
-        method: :delete, confirm: t("destroy.confirm"),
+        href: product.location, method: :delete, confirm: t("destroy.confirm"),
         scheme: :secondary
     end
 
