@@ -76,8 +76,34 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
 
     let(:delivery_area) { create(:marketplace_delivery_area, marketplace: marketplace) }
 
-    specify do
-      expect { perform_request }.to(change { Marketplace::DeliveryArea.exists?(delivery_area.id) }.to(false))
+    it "discards the Delivery area" do
+      expect {
+        perform_request
+        delivery_area.reload
+      }.to change(delivery_area, :kept?).to(false)
+        .and(change(delivery_area, :discarded?).to(true))
+    end
+
+    context "when the Delivery Area was already discarded" do
+      let(:delivery_area) { create(:marketplace_delivery_area, :discarded, marketplace:) }
+
+      context "when the Delivery Area has Carts" do
+        it "clears the carts delivery area" do
+          cart = create(:marketplace_cart, marketplace:, delivery_area:)
+          expect {
+            perform_request
+            cart.reload
+          }.to change(cart, :delivery_area).to(nil)
+            .and(change { Marketplace::DeliveryArea.exists?(delivery_area.id) }.to(false))
+        end
+      end
+
+      context "when the Delivery Area has Orders" do
+        it "does not delete the Delivery Area" do
+          create(:marketplace_order, marketplace:, delivery_area:)
+          expect { perform_request }.not_to change { Marketplace::DeliveryArea.exists?(delivery_area.id) }
+        end
+      end
     end
 
     it { is_expected.to redirect_to(marketplace.location(child: :delivery_areas)) }

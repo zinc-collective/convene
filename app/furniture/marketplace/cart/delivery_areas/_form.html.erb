@@ -4,7 +4,7 @@
 <div class="mt-2 w-full">
   <%= form_with model: cart.location, url: cart.location(child: :delivery_area), data: { turbo_frame: dom_id(cart.marketplace) }  do |form| %>
     <%= render SelectComponent.new({
-      choices: cart.marketplace.delivery_areas.pluck(:label, :id), attribute: :delivery_area_id,
+      choices: cart.marketplace.delivery_areas.kept.pluck(:label, :id), attribute: :delivery_area_id,
       form: form,
     }) %>
     <%= form.submit "Save" %>

@@ -2,6 +2,7 @@ en:
   icons:
     edit: '⚙️'
     destroy: '🗑️'
+    discard: '🗄️'
     new: '➕'
     plus: '➕'
     minus: '➖'
