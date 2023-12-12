@@ -28,7 +28,7 @@
   <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
     <%- if !invitation.revoked? && policy(invitation).destroy?  %>
       <%= render ButtonComponent.new(
-                   label: t('icons.remove'),
+                   label: t('icons.destroy'),
                    href: [space, invitation],
                    title: t('invitation.destroy'),
                    method: :delete,

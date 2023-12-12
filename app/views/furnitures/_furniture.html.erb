@@ -18,7 +18,7 @@
         <%- end %>
 
         <%= render ButtonComponent.new(
-                      label: t('icons.remove'),
+                      label: t('icons.destroy'),
                       href: [furniture.room.space, furniture.room, furniture],
                       title: t('.remove_title', name: furniture.furniture.model_name.human.titleize),
                       method: :delete,
