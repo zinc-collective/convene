@@ -37,7 +37,7 @@
     "change-case": "^5.3.0",
     "dotenv": "^16.3.1",
     "fs-extra": "^11.2.0",
-    "geckodriver": "^4.2.1",
+    "geckodriver": "^4.3.0",
     "get-urls": "^12.1.0",
     "lodash": "^4.17.21",
     "prettier": "^3.1.1",
