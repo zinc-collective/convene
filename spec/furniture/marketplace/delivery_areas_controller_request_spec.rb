@@ -69,9 +69,8 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
   end
 
   describe "#destroy" do
-    let(:as) { :html }
     let(:perform_request) do
-      delete polymorphic_path(delivery_area.location), as: as
+      delete polymorphic_path(delivery_area.location)
     end
 
     let(:delivery_area) { create(:marketplace_delivery_area, marketplace: marketplace) }
@@ -107,11 +106,5 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
     end
 
     it { is_expected.to redirect_to(marketplace.location(child: :delivery_areas)) }
-
-    context "when a turbo_stream" do
-      let(:as) { :turbo_stream }
-
-      it { is_expected.to have_rendered_turbo_stream(:remove, delivery_area) }
-    end
   end
 end
