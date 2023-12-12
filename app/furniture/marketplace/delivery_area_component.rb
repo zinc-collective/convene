@@ -37,7 +37,7 @@ class Marketplace
     end
 
     def discard_button?
-      delivery_area.persisted? && !delivery_area.discarded? && policy(delivery_area).destroy?
+      delivery_area.persisted? && delivery_area.kept? && policy(delivery_area).destroy?
     end
 
     def destroy_button
