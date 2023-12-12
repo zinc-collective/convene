@@ -4,6 +4,7 @@ en:
     pencil: '✏️'
     remove: '🗑️'
     destroy: '🗑️'
+    discard: '🗄️'
     new: '➕'
     plus: '➕'
     minus: '➖'

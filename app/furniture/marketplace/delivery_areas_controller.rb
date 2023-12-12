@@ -32,11 +32,17 @@ class Marketplace
     end
 
     def destroy
-      authorize(delivery_area).destroy
+      authorize(delivery_area)
+
+      if delivery_area.discarded?
+        delivery_area.destroy if delivery_area.orders.empty?
+      else
+        delivery_area.discard
+      end
 
       respond_to do |format|
         format.turbo_stream do
-          if delivery_area.destroyed?
+          if delivery_area.destroyed? || delivery_area.discarded?
             render turbo_stream: turbo_stream.remove(delivery_area)
           else
             render turbo_stream: turbo_stream.replace(delivery_area)
@@ -44,7 +50,7 @@ class Marketplace
         end
 
         format.html do
-          if delivery_area.destroyed?
+          if delivery_area.destroyed? || delivery_area.discarded?
             redirect_to marketplace.location(child: :delivery_areas)
           else
             render :show
