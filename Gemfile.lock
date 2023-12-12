@@ -180,7 +180,7 @@ GEM
       railties (>= 5.0.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
-    faraday (2.7.11)
+    faraday (2.7.12)
       base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -471,7 +471,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    square.rb (34.0.0.20231115)
+    square.rb (34.1.0.20231213)
       apimatic_core (~> 0.3.0)
       apimatic_core_interfaces (~> 0.2.0)
       apimatic_faraday_client_adapter (~> 0.1.0)
