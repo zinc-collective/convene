@@ -48,6 +48,14 @@ describe "Marketplace: Buying Products", type: :system do
     end
   end
 
+  it "Doesn't offer discarded Products for sale" do
+    discarded_product = create(:marketplace_product, :discarded, marketplace:)
+
+    visit(polymorphic_path(marketplace.room.location))
+
+    expect(page).not_to have_content(discarded_product.name)
+  end
+
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
     visit(polymorphic_path(marketplace.room.location))
 

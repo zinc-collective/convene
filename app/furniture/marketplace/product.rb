@@ -2,6 +2,8 @@
 
 class Marketplace
   class Product < Record
+    include ::Discard::Model
+
     has_one_attached :photo, dependent: :destroy
 
     self.table_name = "marketplace_products"

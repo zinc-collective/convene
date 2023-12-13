@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <%- cart.marketplace.products.each do |product| %>
+        <%- cart.marketplace.products.kept.each do |product| %>
           <%= render Marketplace::CartProductComponent.new(cart_product: cart.cart_products.find_or_initialize_by(product: product)) %>
         <%- end %>
       </tbody>

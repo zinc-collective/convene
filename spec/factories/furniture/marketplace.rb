@@ -92,6 +92,10 @@ FactoryBot.define do
     trait :with_description do
       description { Faker::TvShows::DrWho.quote }
     end
+
+    trait :discarded do
+      discarded_at { 1.hour.ago }
+    end
   end
 
   factory :marketplace_cart, class: "Marketplace::Cart" do
