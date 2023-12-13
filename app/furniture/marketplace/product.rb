@@ -16,9 +16,14 @@ class Marketplace
 
     has_many :cart_products, inverse_of: :product, dependent: :destroy
     has_many :carts, through: :cart_products, inverse_of: :products
+    after_discard do
+      # This is redonkulus, and due to the inappropriate polymorphism where
+      # carts/orders are the same table.
+      cart_products.where(cart: carts).destroy_all
+    end
 
     has_many :ordered_products, inverse_of: :product, dependent: :destroy
-    has_many :orders, through: :ordered_products, inverse_of: :products
+    has_many :orders, -> { checked_out }, through: :ordered_products, inverse_of: :products
 
     has_many :product_tax_rates, inverse_of: :product, dependent: :destroy
     has_many :tax_rates, through: :product_tax_rates, inverse_of: :products
@@ -38,6 +43,14 @@ class Marketplace
 
       new_name = "#{space.id}-#{photo.blob.filename}"
       photo.blob.update(filename: new_name)
+    end
+
+    def discardable?
+      persisted? && kept?
+    end
+
+    def destroyable?
+      persisted? && discarded? && orders.empty?
     end
   end
 end

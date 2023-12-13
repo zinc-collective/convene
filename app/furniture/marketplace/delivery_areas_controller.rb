@@ -35,7 +35,7 @@ class Marketplace
       authorize(delivery_area)
 
       if delivery_area.discarded?
-        delivery_area.destroy if delivery_area.orders.empty?
+        delivery_area.destroy if delivery_area.destroyable?
       else
         delivery_area.discard
       end

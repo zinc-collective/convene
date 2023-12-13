@@ -21,7 +21,7 @@ describe "Marketplace: Delivery Areas", type: :system do
         visit(polymorphic_path(marketplace.location(child: :delivery_areas)))
         click_link("Archived Delivery Areas")
         within("##{dom_id(delivery_area)}") do
-          accept_confirm { click_link("Remove") }
+          accept_confirm { click_link(I18n.t("destroy.link_to")) }
         end
 
         expect(page).not_to have_content(delivery_area.label)
@@ -37,7 +37,7 @@ describe "Marketplace: Delivery Areas", type: :system do
         click_link("Archived Delivery Areas")
 
         within("##{dom_id(delivery_area)}") do
-          expect(page).not_to have_content("Remove")
+          expect(page).not_to have_content(I18n.t("destroy.link_to"))
         end
       end
     end
