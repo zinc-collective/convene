@@ -48,3 +48,5 @@ en:
   destroy:
     link_to: "Remove"
     confirm: "Removal is permanent. Are you sure?"
+  discard:
+    link_to: "Archive"

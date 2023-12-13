@@ -65,6 +65,8 @@ gem "bcrypt", "~> 3.1.20"
 gem "lockbox", "1.3.0"
 gem "rotp", "~> 6.3"
 gem "strong_migrations", "~> 1.6"
+# Soft Deletion
+gem "discard", "~> 1.2"
 
 # ActiveModel extension to remove extra whitespace from attributes
 gem "strip_attributes", "~> 1.13"

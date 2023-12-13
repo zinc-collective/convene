@@ -32,6 +32,8 @@ en:
         success: "Changed Delivery Area '%{name}'"
       destroy:
         link_to: "Remove Delivery Area '%{name}'"
+      discard:
+        link_to: "Archive Delivery Area '%{name}'"
     delivery_window:
       edit: "Change Delivery Window"
     delivery_info:

@@ -28,20 +28,29 @@ class Marketplace
       delivery_area.persisted? && policy(delivery_area).edit?
     end
 
+    def discard_button
+      return unless discard_button?
+
+      ButtonComponent.new(label: "#{t("icons.discard")} #{t("discard.link_to")}",
+        title: t("marketplace.delivery_areas.discard.link_to", name: delivery_area.label),
+        href: delivery_area.location, method: :delete, scheme: :secondary)
+    end
+
+    def discard_button?
+      delivery_area.discardable? && policy(delivery_area).destroy?
+    end
+
     def destroy_button
       return unless destroy_button?
 
       ButtonComponent.new(label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
         title: t("marketplace.delivery_areas.destroy.link_to", name: delivery_area.label),
-        href: delivery_area.location, turbo_stream: true,
-        method: :delete,
-        confirm: t("destroy.confirm"),
+        href: delivery_area.location, method: :delete, confirm: t("destroy.confirm"),
         scheme: :secondary)
     end
 
     def destroy_button?
-      delivery_area.persisted? && policy(delivery_area).destroy? &&
-        delivery_area.orders.empty?
+      delivery_area.destroyable? && policy(delivery_area).destroy?
     end
   end
 end

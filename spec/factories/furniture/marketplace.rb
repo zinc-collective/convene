@@ -195,6 +195,9 @@ FactoryBot.define do
 
     label { Faker::Address.city }
     price { Faker::Commerce.price }
+    trait :discarded do
+      discarded_at { 1.hour.ago }
+    end
   end
 
   factory :marketplace_delivery, class: "Marketplace::Delivery" do
