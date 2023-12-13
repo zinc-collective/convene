@@ -16,5 +16,13 @@ class Marketplace
 
     attribute :delivery_window
     monetize :price_cents
+
+    def discardable?
+      persisted? && kept?
+    end
+
+    def destroyable?
+      persisted? && discarded? && orders.empty?
+    end
   end
 end
