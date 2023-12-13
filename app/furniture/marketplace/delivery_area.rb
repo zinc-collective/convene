@@ -22,7 +22,15 @@ class Marketplace
     end
 
     def destroyable?
-      persisted? && discarded? && orders.empty?
+      persisted? && discarded? && unordered?
+    end
+
+    def ordered?
+      orders.present?
+    end
+
+    def unordered?
+      !ordered?
     end
   end
 end
