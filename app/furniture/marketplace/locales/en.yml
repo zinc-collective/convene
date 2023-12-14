@@ -32,7 +32,7 @@ en:
         success: "Changed Delivery Area '%{name}'"
       destroy:
         link_to: "Remove Delivery Area '%{name}'"
-      discard:
+      archive:
         link_to: "Archive Delivery Area '%{name}'"
     delivery_window:
       edit: "Change Delivery Window"
@@ -92,7 +92,7 @@ en:
         link_to: "Edit Product '%{name}'"
       destroy:
         link_to: "Remove Product '%{name}'"
-      discard:
+      archive:
         link_to: "Archive Product '%{name}'"
     stripe_accounts:
       new:

@@ -19,20 +19,20 @@ RSpec.describe Marketplace::Product, type: :model do
     end
   end
 
-  describe "#discardable?" do
+  describe "#archivable?" do
     subject(:delivery_area) { build(:marketplace_delivery_area) }
 
-    it { is_expected.not_to be_discardable }
+    it { is_expected.not_to be_archivable }
 
     context "when the delivery area is persisted" do
       subject(:delivery_area) { create(:marketplace_delivery_area) }
 
-      it { is_expected.to be_discardable }
+      it { is_expected.to be_archivable }
 
-      context "when the delivery area is discarded already" do
-        subject(:delivery_area) { create(:marketplace_delivery_area, :discarded) }
+      context "when the delivery area is archived already" do
+        subject(:delivery_area) { create(:marketplace_delivery_area, :archived) }
 
-        it { is_expected.not_to be_discardable }
+        it { is_expected.not_to be_archivable }
       end
     end
   end
@@ -47,13 +47,13 @@ RSpec.describe Marketplace::Product, type: :model do
 
       it { is_expected.not_to be_destroyable }
 
-      context "when the delivery area is discarded" do
-        subject(:product) { create(:marketplace_product, :discarded) }
+      context "when the delivery area is archived" do
+        subject(:product) { create(:marketplace_product, :archived) }
 
         it { is_expected.to be_destroyable }
 
         context "when the delivery area has orders" do
-          subject(:product) { create(:marketplace_product, :discarded) }
+          subject(:product) { create(:marketplace_product, :archived) }
 
           let(:order) { create(:marketplace_order) }
 

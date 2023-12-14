@@ -22,7 +22,7 @@ class Marketplace
     def destroy
       authorize(product)
 
-      product.discard if !product.destroy_safely
+      product.archive if !product.destroy_safely
 
       redirect_to marketplace.location(child: :products)
     end

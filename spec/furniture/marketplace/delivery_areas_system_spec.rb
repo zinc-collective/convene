@@ -12,7 +12,7 @@ describe "Marketplace: Delivery Areas", type: :system do
   describe "Deleting Delivery Areas" do
     context "when the Delivery Area is Discarded" do
       let(:delivery_area) do
-        create(:marketplace_delivery_area, :discarded, marketplace:,
+        create(:marketplace_delivery_area, :archived, marketplace:,
           label: "Oakland", price_cents: 10_00)
       end
 
@@ -29,7 +29,7 @@ describe "Marketplace: Delivery Areas", type: :system do
       end
 
       it "is impossible when there is an Order" do
-        delivery_area = create(:marketplace_delivery_area, :discarded, marketplace:, label: "Oakland",
+        delivery_area = create(:marketplace_delivery_area, :archived, marketplace:, label: "Oakland",
           price_cents: 10_00)
 
         create(:marketplace_order, delivery_area:, marketplace:)

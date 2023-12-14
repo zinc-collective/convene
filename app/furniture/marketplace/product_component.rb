@@ -27,16 +27,16 @@ class Marketplace
       product.persisted? && policy(product).edit?
     end
 
-    def discard_button
-      return unless discard_button?
+    def archive_button
+      return unless archive_button?
 
-      ButtonComponent.new(label: "#{t("icons.discard")} #{t("discard.link_to")}",
-        title: t("marketplace.products.discard.link_to", name:),
+      ButtonComponent.new(label: "#{t("icons.archive")} #{t("archive.link_to")}",
+        title: t("marketplace.products.archive.link_to", name:),
         href: product.location, method: :delete, scheme: :secondary)
     end
 
-    def discard_button?
-      product.discardable? && policy(product).destroy?
+    def archive_button?
+      product.archivable? && policy(product).destroy?
     end
 
     def destroy_button

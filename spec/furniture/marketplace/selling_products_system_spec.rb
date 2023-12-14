@@ -23,19 +23,19 @@ describe "Marketplace: Selling Products", type: :system do
 
       expect do
         within("##{dom_id(product)}") do
-          click_link(I18n.t("discard.link_to"))
+          click_link(I18n.t("archive.link_to"))
         end
       end.not_to change { marketplace.products.count }
 
       product.reload
-      expect(product).to be_discarded
+      expect(product).to be_archived
       expect(cart.products).not_to include(product)
       expect(order.products).to include(product)
     end
   end
 
   describe "Removing Products" do
-    let(:product) { create(:marketplace_product, :discarded, marketplace:) }
+    let(:product) { create(:marketplace_product, :archived, marketplace:) }
 
     before do
       cart.cart_products.create(product:, quantity: 1)

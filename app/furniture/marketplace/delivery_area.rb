@@ -1,6 +1,6 @@
 class Marketplace
   class DeliveryArea < Record
-    include Discardable
+    include Archivable
 
     self.table_name = "marketplace_delivery_areas"
     location(parent: :marketplace)

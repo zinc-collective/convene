@@ -2,7 +2,7 @@
 
 class Marketplace
   class Product < Record
-    include Discardable
+    include Archivable
 
     has_one_attached :photo, dependent: :destroy
 

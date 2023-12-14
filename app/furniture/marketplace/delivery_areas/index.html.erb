@@ -5,9 +5,9 @@
     <main>
       <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
         <%- if params[:archive] %>
-          <%= render Marketplace::DeliveryAreaComponent.with_collection(delivery_areas.discarded) %>
+          <%= render Marketplace::DeliveryAreaComponent.with_collection(delivery_areas.archived) %>
         <%- else %>
-          <%= render Marketplace::DeliveryAreaComponent.with_collection(delivery_areas.kept) %>
+          <%= render Marketplace::DeliveryAreaComponent.with_collection(delivery_areas.available) %>
         <%- end %>
       </div>
     </main>
