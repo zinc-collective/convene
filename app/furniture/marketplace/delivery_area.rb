@@ -1,6 +1,6 @@
 class Marketplace
   class DeliveryArea < Record
-    include ::Discard::Model
+    include Discardable
 
     self.table_name = "marketplace_delivery_areas"
     location(parent: :marketplace)
@@ -16,21 +16,5 @@ class Marketplace
 
     attribute :delivery_window
     monetize :price_cents
-
-    def discardable?
-      persisted? && kept?
-    end
-
-    def destroyable?
-      persisted? && discarded? && unordered?
-    end
-
-    def ordered?
-      orders.present?
-    end
-
-    def unordered?
-      !ordered?
-    end
   end
 end

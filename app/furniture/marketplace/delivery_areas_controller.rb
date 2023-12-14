@@ -34,11 +34,7 @@ class Marketplace
     def destroy
       authorize(delivery_area)
 
-      if delivery_area.discarded?
-        delivery_area.destroy if delivery_area.destroyable?
-      else
-        delivery_area.discard
-      end
+      delivery_area.discard if !delivery_area.destroy_safely
 
       redirect_to marketplace.location(child: :delivery_areas)
     end

@@ -2,7 +2,7 @@
 
 class Marketplace
   class Product < Record
-    include ::Discard::Model
+    include Discardable
 
     has_one_attached :photo, dependent: :destroy
 
@@ -43,22 +43,6 @@ class Marketplace
 
       new_name = "#{space.id}-#{photo.blob.filename}"
       photo.blob.update(filename: new_name)
-    end
-
-    def discardable?
-      persisted? && kept?
-    end
-
-    def destroyable?
-      persisted? && discarded? && unordered?
-    end
-
-    def ordered?
-      orders.present?
-    end
-
-    def unordered?
-      !ordered?
     end
   end
 end
