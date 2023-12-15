@@ -79,7 +79,7 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
       expect {
         perform_request
         delivery_area.reload
-      }.to change(delivery_area, :available?).to(false)
+      }.to change(delivery_area, :unarchived?).to(false)
         .and(change(delivery_area, :archived?).to(true))
     end
 
