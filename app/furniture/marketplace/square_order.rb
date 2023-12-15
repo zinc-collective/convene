@@ -55,7 +55,7 @@ class Marketplace
     # Square sets max of 43 chars so this assumes an order id remains a 36-char
     # uuid
     private def square_idemp_key
-      @key ||= SquareIdempotencyKey.generate(@order)
+      @key ||= SquareIdempotencyKey.generate(@order.id)
     end
 
     private def create_square_order
@@ -110,7 +110,7 @@ class Marketplace
               state: "PROPOSED", # PROPOSED|RESERVED|PREPARED|COMPLETED|CANCELED|FAILED
               delivery_details: {
                 recipient: {
-                  display_name: shopper.person.display_name,
+                  display_name: shopper.person&.display_name || "Guest Shopper",
                   phone_number: order.contact_phone_number,
                   address: {
                     address_line_1: order.delivery_address

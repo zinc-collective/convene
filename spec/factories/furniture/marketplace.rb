@@ -69,9 +69,7 @@ FactoryBot.define do
     trait :with_square do
       square_location_id { ENV.fetch("MARKETPLACE_VENDOR_SQUARE_LOCATION", "square_location_id_1234") }
       square_environment { ENV.fetch("SQUARE_ENV", "sandbox") }
-      secrets {
-        square_access_token { ENV.fetch("MARKETPLACE_VENDOR_SQUARE_ACCESS_TOKEN", "square_access_token_1234") }
-      }
+      square_access_token { ENV.fetch("MARKETPLACE_VENDOR_SQUARE_ACCESS_TOKEN", "square_access_token_1234") }
     end
   end
 

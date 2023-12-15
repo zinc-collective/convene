@@ -5,9 +5,9 @@
 class Marketplace
   class SquareIdempotencyKey
     # Combines our system's Order record id with a random value under Square's
-    # max length of 192 bytes
+    # max length of 45 chars
     def self.generate(order_id)
-      "#{order_id}_#{SecureRandom.hex(8)}"
+      "#{order_id}_#{SecureRandom.alphanumeric(8)}"
     end
   end
 end
