@@ -79,12 +79,12 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
       expect {
         perform_request
         delivery_area.reload
-      }.to change(delivery_area, :kept?).to(false)
-        .and(change(delivery_area, :discarded?).to(true))
+      }.to change(delivery_area, :unarchived?).to(false)
+        .and(change(delivery_area, :archived?).to(true))
     end
 
-    context "when the Delivery Area was already discarded" do
-      let(:delivery_area) { create(:marketplace_delivery_area, :discarded, marketplace:) }
+    context "when the Delivery Area was already archived" do
+      let(:delivery_area) { create(:marketplace_delivery_area, :archived, marketplace:) }
 
       context "when the Delivery Area has Carts" do
         it "clears the carts delivery area" do

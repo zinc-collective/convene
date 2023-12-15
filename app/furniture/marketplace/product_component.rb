@@ -27,13 +27,24 @@ class Marketplace
       product.persisted? && policy(product).edit?
     end
 
+    def archive_button
+      return unless archive_button?
+
+      ButtonComponent.new(label: "#{t("icons.archive")} #{t("archive.link_to")}",
+        title: t("marketplace.products.archive.link_to", name:),
+        href: product.location, method: :delete, scheme: :secondary)
+    end
+
+    def archive_button?
+      product.archivable? && policy(product).destroy?
+    end
+
     def destroy_button
       return unless destroy_button?
 
       ButtonComponent.new label: "#{t("icons.destroy")} #{t("destroy.link_to")}",
         title: t("marketplace.products.destroy.link_to", name: product.name),
-        href: product.location, turbo_stream: true,
-        method: :delete, confirm: t("destroy.confirm"),
+        href: product.location, method: :delete, confirm: t("destroy.confirm"),
         scheme: :secondary
     end
 

@@ -13,11 +13,11 @@ class Marketplace
     end
 
     def single_delivery_area?
-      cart.marketplace.delivery_areas.kept.size == 1
+      cart.marketplace.delivery_areas.unarchived.size == 1
     end
 
     def single_delivery_area_label
-      cart.marketplace.delivery_areas.kept.first.label
+      cart.marketplace.delivery_areas.unarchived.first.label
     end
   end
 end

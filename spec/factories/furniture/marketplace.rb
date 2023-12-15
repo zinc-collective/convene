@@ -92,6 +92,10 @@ FactoryBot.define do
     trait :with_description do
       description { Faker::TvShows::DrWho.quote }
     end
+
+    trait :archived do
+      discarded_at { 1.hour.ago }
+    end
   end
 
   factory :marketplace_cart, class: "Marketplace::Cart" do
@@ -195,7 +199,7 @@ FactoryBot.define do
 
     label { Faker::Address.city }
     price { Faker::Commerce.price }
-    trait :discarded do
+    trait :archived do
       discarded_at { 1.hour.ago }
     end
   end

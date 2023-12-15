@@ -12,26 +12,19 @@ class Marketplace
     def create
       authorize(product).save
 
-      respond_to do |format|
-        format.html do
-          if product.persisted?
-            redirect_to marketplace.location(child: :products), notice: t(".success", name: product.name)
-          else
-            render :new, status: :unprocessable_entity
-          end
-        end
+      if product.persisted?
+        redirect_to marketplace.location(child: :products), notice: t(".success", name: product.name)
+      else
+        render :new, status: :unprocessable_entity
       end
     end
 
     def destroy
-      respond_to do |format|
-        if authorize(product).destroy
-          format.turbo_stream { render turbo_stream: turbo_stream.remove(product) }
-          format.html { redirect_to marketplace.location(child: :products) }
-        else
-          format.html { redirect_to product.location }
-        end
-      end
+      authorize(product)
+
+      product.archive if !product.destroy_safely
+
+      redirect_to marketplace.location(child: :products)
     end
 
     def index
@@ -46,7 +39,7 @@ class Marketplace
       if authorize(product).update(product_params)
         redirect_to marketplace.location(child: :products)
       else
-        render :edit
+        render :edit, status: :unprocessable_entity
       end
     end
 

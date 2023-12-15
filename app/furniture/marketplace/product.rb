@@ -2,6 +2,8 @@
 
 class Marketplace
   class Product < Record
+    include Archivable
+
     has_one_attached :photo, dependent: :destroy
 
     self.table_name = "marketplace_products"
@@ -14,9 +16,14 @@ class Marketplace
 
     has_many :cart_products, inverse_of: :product, dependent: :destroy
     has_many :carts, through: :cart_products, inverse_of: :products
+    after_discard do
+      # This is redonkulus, and due to the inappropriate polymorphism where
+      # carts/orders are the same table.
+      cart_products.where(cart: carts).destroy_all
+    end
 
     has_many :ordered_products, inverse_of: :product, dependent: :destroy
-    has_many :orders, through: :ordered_products, inverse_of: :products
+    has_many :orders, -> { checked_out }, through: :ordered_products, inverse_of: :products
 
     has_many :product_tax_rates, inverse_of: :product, dependent: :destroy
     has_many :tax_rates, through: :product_tax_rates, inverse_of: :products

@@ -2,7 +2,7 @@
 <%= render CardComponent.new(dom_id: dom_id(delivery_area), classes: "flex flex-col justify-between gap-y-2 w-full") do %>
   <header class="flex font-bold">
     <%= label %>
-    <%- if delivery_area.discarded? %>
+    <%- if delivery_area.archived? %>
       <span class="italic">(archived)</span>
     <%- end %>
   </header>
@@ -19,7 +19,7 @@
 
   <footer class="mt-3 flex flex-row justify-between">
     <%= render edit_button if edit_button? %>
-    <%= render discard_button if discard_button?  %>
+    <%= render archive_button if archive_button?  %>
     <%= render destroy_button if destroy_button?  %>
   </footer>
 <%- end %>

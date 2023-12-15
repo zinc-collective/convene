@@ -48,6 +48,14 @@ describe "Marketplace: Buying Products", type: :system do
     end
   end
 
+  it "Doesn't offer archived Products for sale" do
+    archived_product = create(:marketplace_product, :archived, marketplace:)
+
+    visit(polymorphic_path(marketplace.room.location))
+
+    expect(page).not_to have_content(archived_product.name)
+  end
+
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
     visit(polymorphic_path(marketplace.room.location))
 
