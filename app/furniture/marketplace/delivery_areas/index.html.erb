@@ -24,11 +24,7 @@
       <%- end %>
     </div>
     <div class="text-center mt-3">
-      <%- if params[:archive] %>
-        <%= link_to "Active Delivery Areas", marketplace.location(child: :delivery_areas) %>
-      <%- else %>
-        <%= link_to "Archived Delivery Areas", marketplace.location(child: :delivery_areas, query_params: { archive: true }) %>
-      <%- end %>
+      <%= render Marketplace::Archivable::IndexLinkComponent.new(marketplace: marketplace, resource: :products) %>
     </div>
   </section>
 <% end %>
