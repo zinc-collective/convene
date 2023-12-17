@@ -1,6 +1,9 @@
 <%= render CardComponent.new(dom_id: dom_id(product), classes: "flex flex-col justify-between max-w-prose") do %>
   <header>
     <h3 class="py-2"><%= name %></h3>
+    <%- if product.archived? %>
+      <span class="italic">(archived)</span>
+    <%- end %>
   </header>
 
   <div class="grow flex flex-col justify-between">

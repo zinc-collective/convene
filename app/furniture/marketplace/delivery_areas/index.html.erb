@@ -24,7 +24,7 @@
       <%- end %>
     </div>
     <div class="text-center mt-3">
-      <%= render Marketplace::Archivable::IndexLinkComponent.new(marketplace: marketplace, resource: :products) %>
+      <%= render Marketplace::Archivable::IndexLinkComponent.new(marketplace: marketplace, resource: :delivery_areas, to_archive: !params[:archive]) %>
     </div>
   </section>
 <% end %>
