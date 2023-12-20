@@ -1,0 +1,7 @@
+en:
+  delivery_areas:
+    archive: "Archived Delivery Areas"
+    active: "Active Delivery Areas"
+  products:
+    archive: "Archived Products"
+    active: "Active Products"

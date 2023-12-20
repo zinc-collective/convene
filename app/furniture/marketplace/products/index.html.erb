@@ -2,7 +2,11 @@
 
 <%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mt-3 mx-auto">
-    <%= render Marketplace::ProductComponent.with_collection(marketplace.products) %>
+    <%- if params[:archive] %>
+      <%= render Marketplace::ProductComponent.with_collection(marketplace.products.archived) %>
+    <%- else %>
+      <%= render Marketplace::ProductComponent.with_collection(marketplace.products.unarchived) %>
+    <%- end %>
   </div>
 
   <div class="text-center mt-3">
@@ -15,5 +19,9 @@
         method: :get,
         scheme: :secondary) %>
     <%- end %>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= render Marketplace::Archivable::IndexLinkComponent.new(marketplace: marketplace, resource: :products, to_archive: !params[:archive]) %>
   </div>
 <% end %>
