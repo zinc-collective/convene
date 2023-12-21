@@ -10,6 +10,10 @@
     <%= tag :meta, name: :turbo_visit_control, content: turbo_visit_control %>
   <%- end %>
 
+  <%- if defined?(room) %>
+    <%= tag :meta, name: :description, content: room.description %>
+  <%- end %>
+
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
