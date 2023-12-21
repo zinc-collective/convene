@@ -1,21 +1,29 @@
 <%- breadcrumb(:marketplace_notification_methods, marketplace) %>
-
 <section class="mt-3">
   <main>
-
     <%= render Marketplace::NotificationMethodComponent.with_collection(notification_methods) %>
-
-  </main>
-
-  <div class="text-center mt-3">
-    <%- notification_methods = marketplace.notification_methods.new %>
-    <%- if policy(notification_methods).create? %>
-      <%= render ButtonComponent.new(
-        label: "#{t('marketplace.notification_methods.new.link_to')} #{t('icons.new')}",
-        title: t('marketplace.notification_methods.new.link_to'),
-        href: marketplace.location(:new, child: :notification_method),
-        method: :get,
-        scheme: :secondary) %>
+    <div class="text-center mt-3">
+      <%- notification_methods = marketplace.notification_methods.new %>
+      <%- if policy(notification_methods).create? %>
+        <%= render ButtonComponent.new(
+          label: "#{t('marketplace.notification_methods.new.link_to')} #{t('icons.new')}",
+          title: t('marketplace.notification_methods.new.link_to'),
+          href: marketplace.location(:new, child: :notification_method),
+          method: :get,
+          scheme: :secondary) %>
+      <%- end %>
+    </div>
+    <%= render CardComponent.new(dom_id: dom_id(notification_method), classes: "flex flex-col justify-between gap-y-2 w-full") do %>
+      <details <%= "open" if !marketplace.square_order_notifications_enabled? %>>
+        <summary>
+          <h1>Square Sync</h1>
+          <small>Be notified of new Convene orders directly in your Square Seller dashboard</small></summary>
+        <%= form_with model: marketplace.location do |marketplace_form| %>
+          <%= render "text_field", { attribute: :square_access_token, form: marketplace_form} %>
+          <%= render "text_field", { attribute: :square_location_id, form: marketplace_form } %>
+          <%= marketplace_form.submit %>
+        <% end %>
+      </details>
     <%- end %>
-  </div>
+  </main>
 </section>

@@ -13,6 +13,10 @@ class Marketplace
 
     alias_method :update?, :create?
 
+    def permitted_attributes(_)
+      [:square_access_token, :square_location_id]
+    end
+
     class Scope < ApplicationScope
       def resolve
         scope.all
