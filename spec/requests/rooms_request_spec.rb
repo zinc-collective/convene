@@ -136,7 +136,7 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
     }
 
     let(:path) { polymorphic_path(space.location(child: :rooms)) }
-    let(:room_params) { attributes_for(:room, :with_slug, space: space) }
+    let(:room_params) { attributes_for(:room, :with_description, :with_slug, space: space) }
 
     context "when the person is a guest" do
       it "does not allow creating a new room" do
@@ -151,8 +151,13 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
 
       before { sign_in(space, person) }
 
-      specify { expect { do_request }.to(change { space.rooms.count }.by(1)) }
-      it { is_expected.to redirect_to(polymorphic_path(space.rooms.last.location(:edit))) }
+      it "creates the room" do
+        expect { do_request }.to(change { space.rooms.count }.by(1))
+        created_room = space.rooms.last
+        expect(created_room.slug).to eql(room_params[:slug])
+        expect(created_room.description).to eql(room_params[:description])
+        expect(response).to redirect_to(polymorphic_path(space.rooms.last.location(:edit)))
+      end
 
       context "when the space has an entrance" do
         before { space.update(entrance: create(:room, space: space)) }

@@ -15,6 +15,10 @@ FactoryBot.define do
       slug { name.parameterize }
     end
 
+    trait :with_description do
+      description { Faker::TvShows::TheExpanse.quote }
+    end
+
     trait :with_furniture do
       transient do
         furniture_count { 1 }
