@@ -7,7 +7,7 @@ RSpec.describe Room do
   it { is_expected.to belong_to(:space).inverse_of(:rooms) }
 
   describe "#description" do
-    it { is_expected.to validate_length_of(:description).is_at_most(160) }
+    it { is_expected.to validate_length_of(:description).is_at_most(300) }
   end
 
   describe ".slug" do
