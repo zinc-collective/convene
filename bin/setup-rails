@@ -23,8 +23,8 @@ FileUtils.chdir APP_ROOT do
   puts "\n== Copying sample files =="
   system!('bin/copy-example-envs')
 
-  puts "\n== Creating and seeding development database =="
-  system! 'bin/rails db:setup'
+  puts "\n== Preparing seeding development database (creating, migrating and seeding as needed)=="
+  system! 'bin/rails db:prepare'
   system! 'bin/rails release:after_build'
 
   puts "\n== Preparing test database =="
