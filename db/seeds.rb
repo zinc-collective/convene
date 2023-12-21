@@ -19,26 +19,15 @@ FactoryBot.create(
 
     Cool, huh? 😎
 
-    #{Faker::Quote.famous_last_words}
+    > #{Faker::Movies::HitchhikersGuideToTheGalaxy.quote}
   MARKDOWN
 )
 
 SectionNavigation::SectionNavigation.create!(space:, room: space.entrance)
 
 marketplace_section = FactoryBot.create(:room, space: space, name: "Magnificent Marketplace")
-FactoryBot.create(
-  :marketplace,
-  :with_products,
-  :with_stripe_account,
-  :with_stripe_utility,
-  :with_delivery_areas,
-  :with_notification_methods,
-  :with_orders,
-  :with_tax_rates,
-  room: marketplace_section
-)
+FactoryBot.create(:marketplace, :full, room: marketplace_section)
 
 journal_section = FactoryBot.create(:room, space:, name: "Jazzy Journal")
 journal = FactoryBot.create(:journal, room: journal_section)
-FactoryBot.create_list(:journal_entry, 3, journal:)
-FactoryBot.create_list(:journal_keyword, 2, journal:)
+FactoryBot.create_list(:journal_entry, 7, :with_keywords, :published, journal:)
