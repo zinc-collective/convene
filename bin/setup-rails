@@ -23,12 +23,9 @@ FileUtils.chdir APP_ROOT do
   puts "\n== Copying sample files =="
   system!('bin/copy-example-envs')
 
-  puts "\n== Preparing development database =="
+  puts "\n== Preparing seeding development database (creating, migrating and seeding as needed)=="
   system! 'bin/rails db:prepare'
-
-  puts "\n== Seeding development database according to feature settings in .env =="
-  system! 'bin/rake db:seed'
-  system! 'bin/rake release:after_build'
+  system! 'bin/rails release:after_build'
 
   puts "\n== Preparing test database =="
   system! 'bin/rails db:test:prepare'
