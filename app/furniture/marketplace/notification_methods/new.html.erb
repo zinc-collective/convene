@@ -1,2 +1,5 @@
+
 <%- breadcrumb :new_marketplace_notification_method, notification_method %>
-<%= render "form", notification_method: notification_method %>
+<%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
+  <%= render "form", notification_method: notification_method %>
+<%- end %>
