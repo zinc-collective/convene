@@ -1,27 +1,25 @@
 <%- breadcrumb :marketplace_products, marketplace%>
 
-<%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mt-3 mx-auto">
-    <%- if params[:archive] %>
-      <%= render Marketplace::ProductComponent.with_collection(marketplace.products.archived) %>
-    <%- else %>
-      <%= render Marketplace::ProductComponent.with_collection(marketplace.products.unarchived) %>
-    <%- end %>
-  </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mt-3 mx-auto">
+  <%- if params[:archive] %>
+    <%= render Marketplace::ProductComponent.with_collection(marketplace.products.archived) %>
+  <%- else %>
+    <%= render Marketplace::ProductComponent.with_collection(marketplace.products.unarchived) %>
+  <%- end %>
+</div>
 
-  <div class="text-center mt-3">
-    <%- new_product = marketplace.products.new %>
-    <%- if policy(new_product).create? %>
-      <%= render ButtonComponent.new(
-        label: "#{t('marketplace.products.new.link_to')} #{t('icons.new')}",
-        title: t('marketplace.products.new.link_to'),
-        href: marketplace.location(:new, child: :product),
-        method: :get,
-        scheme: :secondary) %>
-    <%- end %>
-  </div>
+<div class="text-center mt-3">
+  <%- new_product = marketplace.products.new %>
+  <%- if policy(new_product).create? %>
+    <%= render ButtonComponent.new(
+      label: "#{t('marketplace.products.new.link_to')} #{t('icons.new')}",
+      title: t('marketplace.products.new.link_to'),
+      href: marketplace.location(:new, child: :product),
+      method: :get,
+      scheme: :secondary) %>
+  <%- end %>
+</div>
 
-  <div class="text-center mt-3">
-    <%= render Marketplace::Archivable::IndexLinkComponent.new(marketplace: marketplace, resource: :products, to_archive: !params[:archive]) %>
-  </div>
-<% end %>
+<div class="text-center mt-3">
+  <%= render Marketplace::Archivable::IndexLinkComponent.new(marketplace: marketplace, resource: :products, to_archive: !params[:archive]) %>
+</div>
