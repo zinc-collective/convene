@@ -10,9 +10,10 @@
     <%= tag :meta, name: :turbo_visit_control, content: turbo_visit_control %>
   <%- end %>
 
-  <%- if defined?(room) %>
-    <%= tag :meta, name: :description, content: room.description %>
+  <%- if current_room&.description %>
+    <%= tag :meta, name: :description, content: current_room.description %>
   <%- end %>
+
 
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
