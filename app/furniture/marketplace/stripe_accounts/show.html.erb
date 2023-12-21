@@ -1,19 +1,17 @@
 <%- breadcrumb :show_marketplace_stripe_account, marketplace %>
-<%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
-  <p class="flex justify-between my-5 flex-wrap">
-    <%- if marketplace.stripe_api_key? %>
-      <%- if marketplace.stripe_account_connected? %>
-        <%= t('.stripe_connected') %>
-      <%- end %>
-      <%= button_to t('.connect_stripe'),
-          marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
-    <% else %>
-      <%= render ButtonComponent.new(
-            label: t('.missing_stripe_api_key', space_name: space.name),
-            href: space.location(:edit),
-            method: :get,
-            turbo: false,
-            scheme: :primary ) %>
-    <% end %>
-  </p>
-<% end %>
+<p class="flex justify-between my-5 flex-wrap">
+  <%- if marketplace.stripe_api_key? %>
+    <%- if marketplace.stripe_account_connected? %>
+      <%= t('.stripe_connected') %>
+    <%- end %>
+    <%= button_to t('.connect_stripe'),
+        marketplace.location(child: :stripe_account), method: :post, data: { turbo: false } %>
+  <% else %>
+    <%= render ButtonComponent.new(
+          label: t('.missing_stripe_api_key', space_name: space.name),
+          href: space.location(:edit),
+          method: :get,
+          turbo: false,
+          scheme: :primary ) %>
+  <% end %>
+</p>

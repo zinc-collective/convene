@@ -1,23 +1,21 @@
 <%- breadcrumb(:marketplace_tax_rates, marketplace) %>
 
-<%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
-  <section class="mt-3">
-    <main>
-      <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
-        <%= render Marketplace::TaxRateComponent.with_collection(tax_rates) %>
-      </div>
-    </main>
-
-    <div class="text-center mt-3">
-      <%- new_product = marketplace.tax_rates.new %>
-      <%- if policy(tax_rate).create? %>
-        <%= render ButtonComponent.new(
-          label: "#{t('marketplace.tax_rates.new.link_to')} #{t('icons.new')}",
-          title: t('marketplace.tax_rates.new.link_to'),
-          href: marketplace.location(:new, child: :tax_rate),
-          method: :get,
-          scheme: :secondary) %>
-      <%- end %>
+<section class="mt-3">
+  <main>
+    <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
+      <%= render Marketplace::TaxRateComponent.with_collection(tax_rates) %>
     </div>
-  </section>
-<% end %>
+  </main>
+
+  <div class="text-center mt-3">
+    <%- new_product = marketplace.tax_rates.new %>
+    <%- if policy(tax_rate).create? %>
+      <%= render ButtonComponent.new(
+        label: "#{t('marketplace.tax_rates.new.link_to')} #{t('icons.new')}",
+        title: t('marketplace.tax_rates.new.link_to'),
+        href: marketplace.location(:new, child: :tax_rate),
+        method: :get,
+        scheme: :secondary) %>
+    <%- end %>
+  </div>
+</section>

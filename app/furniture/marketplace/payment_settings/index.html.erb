@@ -1,24 +1,22 @@
 <%- breadcrumb :payment_settings, marketplace %>
-<%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
-  <h1>Payment Settings</h1>
-  <main>
-    <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
-      <%= render Marketplace::StripeOverviewComponent.new(marketplace: marketplace) %>
-      <%= render CardComponent.new(classes: "flex flex-col h-full") do %>
-        <header class="flex font-bold">
-          Did we miss something?
-        </header>
-        <div class="grow flex flex-col justify-between">
-          Let us know about other payment service options that will help your marketplace to thrive.
-        </div>
-        <footer class="flex flex-row justify-between mt-3">
-          <%= render ButtonComponent.new(
-            label: "Contact Us",
-            title: "Contact Us",
-            href: "mailto:#{ApplicationMailer::DEFAULT_FROM}",
-            scheme: :secondary) %>
-        </footer>
-      <% end %>
-    </div>
-  </main>
-<% end %>
+<h1>Payment Settings</h1>
+<main>
+  <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
+    <%= render Marketplace::StripeOverviewComponent.new(marketplace: marketplace) %>
+    <%= render CardComponent.new(classes: "flex flex-col h-full") do %>
+      <header class="flex font-bold">
+        Did we miss something?
+      </header>
+      <div class="grow flex flex-col justify-between">
+        Let us know about other payment service options that will help your marketplace to thrive.
+      </div>
+      <footer class="flex flex-row justify-between mt-3">
+        <%= render ButtonComponent.new(
+          label: "Contact Us",
+          title: "Contact Us",
+          href: "mailto:#{ApplicationMailer::DEFAULT_FROM}",
+          scheme: :secondary) %>
+      </footer>
+    <% end %>
+  </div>
+</main>
