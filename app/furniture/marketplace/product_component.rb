@@ -49,7 +49,7 @@ class Marketplace
     end
 
     def destroy_button?
-      product.persisted? && policy(product).destroy? && product.orders.blank?
+      product.destroyable? && policy(product).destroy?
     end
   end
 end

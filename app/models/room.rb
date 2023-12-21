@@ -28,6 +28,8 @@ class Room < ApplicationRecord
   has_many :gizmos, dependent: :destroy, inverse_of: :room, class_name: :Furniture
   accepts_nested_attributes_for :gizmos
 
+  validates :description, length: {maximum: 300, allow_blank: true}
+
   def full_slug
     "#{space.slug}--#{slug}"
   end

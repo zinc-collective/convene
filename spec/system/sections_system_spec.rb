@@ -13,7 +13,7 @@ RSpec.describe "Sections" do
       let(:section) { space.entrance }
 
       it "doesn't let you delete the entrance" do
-        expect(page).to have_content(I18n.t("rooms.destroy.blocked_by_entrance"))
+        expect(page).to have_content(I18n.t("rooms.destroy.blocked_by_entrance", room_name: section.name))
         expect(page).not_to have_content(I18n.t("rooms.destroy.link_to"))
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe "Sections" do
         # or something to be re-assigned; but that is out of scope for me at the
         # moment - ZS 10/18/23
         it "does not allow deletion of the Section" do
-          expect(page).to have_content(I18n.t("rooms.destroy.blocked_by_gizmos"))
+          expect(page).to have_content(I18n.t("rooms.destroy.blocked_by_gizmos", room_name: section.name))
           expect(page).not_to have_content(I18n.t("rooms.destroy.link_to"))
         end
       end

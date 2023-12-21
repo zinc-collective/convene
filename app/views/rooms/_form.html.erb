@@ -3,6 +3,8 @@
     <%= render "text_field", attribute: :name, form: room_form %>
     <%= render "text_field", attribute: :slug, form: room_form %>
 
+    <%= render "text_area", attribute: :description, form: room_form %>
+
     <h3>Privacy and Security</h3>
 
     <%= render "radio_group", attribute: :access_level, options: Room::access_levels.values, form: room_form %>

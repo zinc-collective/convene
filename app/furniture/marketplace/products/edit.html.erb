@@ -1,4 +1,3 @@
 <%- breadcrumb :edit_marketplace_product, product %>
-<%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
-  <%= render "form", product: product %>
-<%- end %>
+
+<%= render "form", product: product %>

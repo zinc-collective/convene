@@ -43,6 +43,7 @@ describe "Marketplace: Selling Products", type: :system do
 
     it "Deletes the Product from the Database" do
       visit(polymorphic_path(marketplace.location(child: :products)))
+      click_link("Archived Products")
 
       within("##{dom_id(product)}") do
         accept_confirm { click_link(I18n.t("destroy.link_to")) }
@@ -60,6 +61,7 @@ describe "Marketplace: Selling Products", type: :system do
 
       it "cannot be Removed" do
         visit(polymorphic_path(marketplace.location(child: :products)))
+        click_link("Archived Products")
 
         within("##{dom_id(product)}") do
           expect(page).not_to have_content(I18n.t("destroy.link_to"))

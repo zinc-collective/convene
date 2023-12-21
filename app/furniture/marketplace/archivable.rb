@@ -5,7 +5,7 @@ class Marketplace
       model.alias_method :archive, :discard
       model.alias_method :archived?, :discarded?
       model.alias_method :unarchived?, :kept?
-      model.alias_method :retrieve, :undiscard
+      model.alias_method :unarchive, :undiscard
 
       model.scope(:archived, -> { discarded })
       model.scope(:unarchived, -> { kept })
