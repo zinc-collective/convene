@@ -1,8 +1,10 @@
 <%- breadcrumb(:marketplace_notification_methods, marketplace) %>
 <section class="mt-3">
   <main>
+    <h2>Email Notifications</h2>
+    <small>Receive email notifications for new orders</small>
     <%= render Marketplace::NotificationMethodComponent.with_collection(notification_methods) %>
-    <div class="text-center mt-3">
+    <div class="text-center mt-3 mb-10">
       <%- notification_methods = marketplace.notification_methods.new %>
       <%- if policy(notification_methods).create? %>
         <%= render ButtonComponent.new(
@@ -13,11 +15,17 @@
           scheme: :secondary) %>
       <%- end %>
     </div>
+    <h2>Square Sync</h2>
+    <small>See new orders directly in your Square Seller dashboard</small>
     <%= render CardComponent.new(dom_id: dom_id(notification_method), classes: "flex flex-col justify-between gap-y-2 w-full") do %>
       <details <%= "open" if !marketplace.square_order_notifications_enabled? %>>
         <summary>
-          <h1>Square Sync</h1>
-          <small>Be notified of new Convene orders directly in your Square Seller dashboard</small></summary>
+          <%if marketplace.square_order_notifications_enabled? %>
+            Sync is active
+          <% else %>
+            Add your credentials
+          <% end %>
+        </summary>
         <%= form_with model: marketplace.location do |marketplace_form| %>
           <%= render "text_field", { attribute: :square_access_token, form: marketplace_form} %>
           <%= render "text_field", { attribute: :square_location_id, form: marketplace_form } %>

@@ -123,7 +123,7 @@ class Marketplace
     end
 
     def square_order_notifications_enabled?
-      square_location_id.present?
+      square_location_id.present? and square_access_token.present?
     end
 
     def default_delivery_area
