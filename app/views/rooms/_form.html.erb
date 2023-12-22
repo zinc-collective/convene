@@ -1,17 +1,12 @@
-<%= form_with model: room.location do |room_form| %>
-  <fieldset>
+<%= render CardComponent.new do %>
+  <%= form_with model: room.location do |room_form| %>
     <%= render "text_field", attribute: :name, form: room_form %>
     <%= render "text_field", attribute: :slug, form: room_form %>
-
-    <%= render "text_area", attribute: :description, form: room_form %>
-
+    <%= render "text_area", attribute: :description, form: room_form, label_hint: 'Add brief summary of your section for search engines to display as snippets in results' %>
     <h3>Privacy and Security</h3>
-
     <%= render "radio_group", attribute: :access_level, options: Room::access_levels.values, form: room_form %>
-
     <footer>
-
       <%= room_form.submit %>
     </footer>
-  </fieldset>
+  <% end %>
 <% end %>
