@@ -129,7 +129,7 @@ group :development, :test do
 
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "standard", "~> 1.32"
+  gem "standard", "~> 1.33"
 end
 
 group :development do
