@@ -3,20 +3,14 @@
     <div id="<%= dom_id(room, :link_to) %>">
       <%= link_to polymorphic_path(room.location), class: "no-underline" do %>
         <%= render CardComponent.new(classes: "group self-stretch hover:bg-orange-50") do %>
-          <div class="px-4 py-5 flex items-center justify-between">
-            <h3 class="text-base font-semibold text-orange-500 group-hover:text-orange-400">
+          <div class="flex flex-col space-between">
+            <h3 class="text-lg font-semibold">
               <%= room.name %>
             </h3>
 
             <%- if room.description.present? %>
               <p><%= room.description %></p>
             <%- end %>
-
-            <button class="rounded-full bg-orange-500 p-1 ml-2 text-white shadow-sm group-hover:bg-orange-400" data-role="enter">
-              <%= render SvgComponent.new(classes: "h-5 w-5") do %>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              <% end %>
-            </button>
           </div>
         <%- end %>
       <%- end %>
