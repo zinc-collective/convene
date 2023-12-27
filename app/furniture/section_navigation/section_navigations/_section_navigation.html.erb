@@ -1,19 +1,13 @@
-<div class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center">
+<div class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
   <% policy_scope(section_navigation.rooms).each do |room| %>
-    <div id="<%= dom_id(room, :link_to) %>">
-      <%= link_to polymorphic_path(room.location), class: "no-underline" do %>
-        <%= render CardComponent.new(classes: "group self-stretch hover:bg-orange-50") do %>
-          <div class="flex flex-col space-between">
-            <h3 class="text-lg font-semibold">
-              <%= room.name %>
-            </h3>
+    <%= link_to polymorphic_path(room.location), class: "group no-underline" do %>
+      <%= render CardComponent.new(classes: "flex flex-col") do %>
+        <h3 class="text-2xl font-semibold">
+          <%= room.name %>
+        </h3>
 
-            <%- if room.description.present? %>
-              <p><%= room.description %></p>
-            <%- end %>
-          </div>
-        <%- end %>
+        <p><%= room.description %></p>
       <%- end %>
-    </div>
+    <%- end %>
   <% end %>
 </div>
