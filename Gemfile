@@ -119,7 +119,7 @@ group :development, :test do
   gem "rails-controller-testing"
   gem "rspec-rails", "~> 6.1.0"
   gem "rswag-specs"
-  gem "shoulda-matchers", "~> 5.3"
+  gem "shoulda-matchers", "~> 6.0"
 
   gem "capybara"
   gem "selenium-webdriver"
