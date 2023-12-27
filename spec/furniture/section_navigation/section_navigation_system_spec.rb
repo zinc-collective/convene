@@ -3,7 +3,7 @@ require_relative "factories"
 
 RSpec.describe SectionNavigation, type: :system do
   let(:space) { create(:space, :with_entrance) }
-  let(:rooms) { create_list(:room, 2, space:) }
+  let!(:rooms) { create_list(:room, 2, :with_description, space:) }
 
   it "includes a link to every section except the entrance" do
     create(:section_navigation, room: space.entrance)
@@ -11,9 +11,9 @@ RSpec.describe SectionNavigation, type: :system do
     visit polymorphic_path(space.entrance.location)
 
     rooms.each do |room|
+      expect(page).to have_link(room.name, href: polymorphic_path(room.location))
       within("##{dom_id(room, :link_to)}") do
-        expect(page).to have_link(room.name, href: polymorphic_path(room.location))
-        expect(page).to have_content(rooms.description)
+        expect(page).to have_content(room.description)
       end
     end
 
