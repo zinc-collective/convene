@@ -5,7 +5,7 @@
   <body>
     <%= render 'layouts/header' %>
 
-    <main id="<%= current_space.present? ? dom_id(current_space) : nil %>" class="gap-3">
+    <main id="<%= current_space.present? ? dom_id(current_space) : nil %>">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
 

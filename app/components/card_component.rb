@@ -14,7 +14,6 @@ class CardComponent < ApplicationComponent
     [
       "shadow",
       "rounded-lg",
-      "h-full",
       "bg-white"
     ].compact.join(" ")
   end
