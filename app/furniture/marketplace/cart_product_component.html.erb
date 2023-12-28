@@ -1,16 +1,7 @@
 <tr id="<%= dom_id %>">
   <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-    <%- if product.photo.present? %>
-      <figure class="w-40 text-center relative">
-        <%= image_tag product.photo.variant(resize_to_limit: [150, 150]).processed.url, class: "mx-auto h-40 overflow-hidden object-center rounded-lg"
- %>
-        <figcaption class="mt-2">
-          <%=product.name%>
-        </figcaption>
-      </figure>
-    <%- else %>
+
       <%= product.name %>
-    <%- end %>
 
     <dl class="font-normal lg:hidden">
       <dt class="sr-only"><%= product.class.human_attribute_name(:price) %></dt>
