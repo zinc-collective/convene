@@ -214,6 +214,8 @@ GEM
     htmlentities (4.3.4)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    i18n-debug (1.2.0)
+      i18n (< 2)
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
@@ -550,6 +552,7 @@ DEPENDENCIES
   faker
   friendly_id (~> 5.5.1)
   gretel (~> 4.6)
+  i18n-debug
   image_processing
   jbuilder (~> 2.11)
   jsbundling-rails
