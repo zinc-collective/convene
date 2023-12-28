@@ -19,6 +19,10 @@ class Marketplace
       orders.present?
     end
 
+    def restore=(restore)
+      unarchive
+    end
+
     def archivable?
       persisted? && unarchived?
     end
