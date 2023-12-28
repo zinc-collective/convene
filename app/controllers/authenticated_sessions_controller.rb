@@ -13,7 +13,7 @@ class AuthenticatedSessionsController < ApplicationController
     if authenticated_session.save
       redirect_to(current_space.presence || :root)
     else
-      render :create, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

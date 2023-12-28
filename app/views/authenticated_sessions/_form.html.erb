@@ -1,5 +1,5 @@
 <%= form_with model: [current_space, authenticated_session] do |form| %>
-  <fieldset>
+  <fieldset class="p-4">
     <%- if form.object.contact_location.blank? %>
       <%= form.hidden_field :contact_method, value: :email %>
       <%= render "email_field", form: form, attribute: :contact_location %>
@@ -7,10 +7,8 @@
       <p>Check your email for a one-time password to complete the sign in process</p>
       <%= form.hidden_field :contact_method %>
       <%= form.hidden_field :contact_location %>
-      <%= form.label :one_time_password %>
-      <%= form.text_field :one_time_password %>
-      <%= render partial: "error", locals: { model: form.object, attribute: :one_time_password } %>
+      <%= render "text_field", form: form, attribute: :one_time_password %>
     <% end %>
-    <%= form.submit %>
+    <p><%= form.submit %></p>
   </fieldset>
 <% end %>

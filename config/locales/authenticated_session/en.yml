@@ -2,7 +2,7 @@ en:
   helpers:
     submit:
       authenticated_session:
-        create: "Sign in"
+        update: "Sign in"
   activemodel:
     errors:
       models:
