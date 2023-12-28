@@ -1,3 +1,1 @@
-<%= turbo_frame_tag(marketplace, data: { turbo_action: :advance }) do %>
-  <%= render Marketplace::MarketplaceComponent.new(marketplace: marketplace) %>
-<%- end %>
+<%= render Marketplace::MarketplaceComponent.new(marketplace: marketplace) %>

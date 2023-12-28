@@ -5,7 +5,9 @@
         <%= yield  %>
       <%- end %>
     <%- else %>
-      <%= yield  %>
+      <%= render Marketplace::ShopperFrameComponent.new(marketplace: marketplace) do %>
+        <%= yield  %>
+      <%- end %>
     <%- end %>
   <%- end %>
 <%- end %>
