@@ -57,13 +57,6 @@ describe "Marketplace: Buying Products", type: :system do
   end
 
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
-    puts "START####################################################################################################################################################################################"
-
-    puts marketplace.square_location_id
-    puts marketplace.square_environment
-    puts marketplace.square_access_token
-
-    puts "END####################################################################################################################################################################################"
     visit(polymorphic_path(marketplace.room.location))
 
     add_product_to_cart(marketplace.products.first)
