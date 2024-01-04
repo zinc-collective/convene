@@ -14,13 +14,6 @@
 
       <%= render partial: "breadcrumbs" %>
 
-      <div>
-        <%- if current_room && policy(current_room).edit? %>
-          <%= link_to t('icons.edit'), [:edit, current_space, current_room], class: 'no-underline', aria: { label: "Configure Section"} %>
-        <%- end %>
-
-      </div>
-
       <nav class="text-sm w-full flex flex-wrap justify-center" aria-label="Profile Menu" data-person-email="<%= current_person.email %>">
         <%- if current_person.authenticated? %>
           <%- if current_membership.present? %>
