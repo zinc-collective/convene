@@ -50,3 +50,5 @@ en:
     confirm: "Removal is permanent. Are you sure?"
   archive:
     link_to: "Archive"
+  restore:
+    link_to: "Restore"

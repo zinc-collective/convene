@@ -1,2 +1,9 @@
 <%- breadcrumb :edit_delivery_area, delivery_area %>
 <%= render "form", delivery_area: delivery_area %>
+
+
+<%- if delivery_area.archived? %>
+  <%= render CardComponent.new(classes: "mt-6") do %>
+    <%= button_to("Restore", delivery_area.location, method: :put, params: { delivery_area: { restore: true } }, class: "w-full") %>
+  <%- end %>
+<%- end %>
