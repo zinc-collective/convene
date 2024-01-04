@@ -7,20 +7,22 @@
     <%- space.agreements.each do |agreement| %>
       <span class="flex justify-between w-full">
           <span class="grow"><%= agreement.name %></span>
-          <span>
+          <span class="flex gap-x-3">
             <%- if policy(agreement).edit? %>
               <%= render ButtonComponent.new(href: agreement.location(:edit),
-                                            title: t('space.agreements.edit.link_to', name: agreement.name),
-                                            label: t('icons.edit'),
-                                            method: :get,
-                                            scheme: :secondary) %>
+                                             title: t('space.agreements.edit.link_to', name: agreement.name),
+                                             label: "",
+                                             icon: :pencil,
+                                             method: :get,
+                                             scheme: :secondary) %>
             <%- end %>
             <%- if policy(agreement).destroy? %>
               <%= render ButtonComponent.new(href: agreement.location,
-                                            title: t('space.agreements.destroy.link_to', name: agreement.name),
-                                            label: t('icons.destroy'),
-                                            method: :delete,
-                                            scheme: :secondary) %>
+                                             title: t('space.agreements.destroy.link_to', name: agreement.name),
+                                             label: "",
+                                             icon: :trash,
+                                             method: :delete,
+                                             scheme: :secondary) %>
             <%- end %>
           </span>
       </span>
@@ -30,9 +32,10 @@
     <%- new_agreement = space.agreements.build %>
     <%- if policy(new_agreement).create? %>
       <%= render ButtonComponent.new(
-        label: "#{t('space.agreements.new.link_to')} #{t('icons.new')}",
+        label: t('space.agreements.new.link_to'),
         title: t('space.agreements.new.link_to'),
         href: space.location(:new, child: :agreement),
+        icon: :plus,
         method: :get,
         scheme: :secondary) %>
     <%- end %>

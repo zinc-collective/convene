@@ -1,5 +1,5 @@
 <%- if @disabled %>
-  <span class="<%= classes %>"><%= @label %></span>
+  <span class="<%= classes %>"><%= @label || @title %></span>
 <%- else %>
   <%= link_to @href,
               title: @title || @label,
