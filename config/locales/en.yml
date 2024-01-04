@@ -32,8 +32,8 @@
 en:
   helpers:
     submit:
-      update: "Save changes ✔️"
-      create: "Create ➕"
+      update: "Save changes️"
+      create: "Create"
   home:
     title: "Home"
   time:
@@ -50,3 +50,5 @@ en:
     confirm: "Removal is permanent. Are you sure?"
   archive:
     link_to: "Archive"
+  restore:
+    link_to: "Restore"

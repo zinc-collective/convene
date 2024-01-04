@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeClass
+RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
   let(:space) { create(:space) }
   let(:membership) { create(:membership, space: space) }
   let!(:person) { membership.member }
@@ -160,10 +160,12 @@ RSpec.describe "/spaces/:space_slug/rooms/" do # rubocop:disable RSpec/DescribeC
       end
 
       context "when the space has an entrance" do
-        before { space.update(entrance: create(:room, space: space)) }
+        it "still creates the room" do
+          space.update(entrance: create(:room, space: space))
 
-        specify { expect { do_request }.to(change { space.rooms.count }.by(1)) }
-        it { is_expected.to redirect_to(polymorphic_path(space.rooms.order(created_at: :desc).first.location(:edit))) }
+          expect { do_request }.to(change { space.rooms.count }.by(1))
+          expect(response).to redirect_to(polymorphic_path(space.rooms.order(created_at: :desc).first.location(:edit)))
+        end
       end
     end
   end

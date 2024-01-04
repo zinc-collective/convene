@@ -9,6 +9,26 @@ describe "Marketplace: Delivery Areas", type: :system do
     sign_in(space.members.first, space)
   end
 
+  describe "Restoring Delivery Areas" do
+    let!(:delivery_area) do
+      create(:marketplace_delivery_area, :archived, marketplace:,
+        label: "Oakland", price_cents: 10_00)
+    end
+
+    it "Makes the DeliveryArea selectable" do
+      visit(polymorphic_path(marketplace.location(child: :delivery_areas)))
+      click_link("Archived Delivery Areas")
+      within("##{dom_id(delivery_area)}") do
+        click_link("Edit")
+      end
+
+      click_button(I18n.t("restore.link_to"))
+
+      expect(page).to have_content(delivery_area.label)
+      expect(delivery_area.reload).not_to be_archived
+    end
+  end
+
   describe "Deleting Delivery Areas" do
     context "when the Delivery Area is Discarded" do
       let(:delivery_area) do

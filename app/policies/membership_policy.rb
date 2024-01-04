@@ -18,7 +18,7 @@ class MembershipPolicy < ApplicationPolicy
   end
 
   private def person_responding_to_invitation_to_space?
-    (membership.member.email == person.email && space.invitations.exists?(status: %i[pending], email: person.email))
+    membership.member.email == person.email && space.invitations.exists?(status: %i[pending], email: person.email)
   end
 
   class Scope < ApplicationScope
