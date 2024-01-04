@@ -1,30 +1,36 @@
 <% breadcrumb :edit_room, room %>
 <h1>Configure <%= room.name %></h1>
-<%= render partial: 'form', locals: { room: room } %>
-<%= render CardComponent.new(classes: "mt-3 gap-y-3") do %>
-  <h2>Gizmos</h2>
-  <div id="furnitures">
-    <% if room.gizmos.present? %>
-      <%= render room.gizmos.rank(:slot), editing: true %>
-    <% else %>
-      <p class="text-gray-500"><%= t('rooms.no_furniture_notice') %></p>
-    <% end %>
-  </div>
-  <%- new_furniture = room.gizmos.new %>
-  <%- if policy(new_furniture).new? %>
-    <%= render "furnitures/new", furniture: new_furniture %>
-  <%- end %>
-<% end %>
-<%- if policy(room).destroy? && room.persisted? %>
-  <div class="m-5">
-    <h2><%= t("rooms.destroy.prompt")%></h2>
-    <%- if !room.gizmos.reload.empty? %>
-      <%= t('rooms.destroy.blocked_by_gizmos', room_name: room.name) %>
-    <%- elsif room.entrance? %>
-      <%= t('rooms.destroy.blocked_by_entrance', room_name: room.name
-) %>
-    <%- else %>
-      <%= button_to(t('rooms.destroy.link_to'), room.location, method: :delete, class: "--danger w-full") %>
+<div class="mt-3 gap-y-3">
+  <%= render partial: 'form', locals: { room: room } %>
+</div>
+<div class="mt-3 gap-y-3">
+  <%= render CardComponent.new do %>
+    <h2>Gizmos</h2>
+    <div id="furnitures">
+      <% if room.gizmos.present? %>
+        <%= render room.gizmos.rank(:slot), editing: true %>
+      <% else %>
+        <p class="text-gray-500"><%= t('rooms.no_furniture_notice') %></p>
+      <% end %>
+    </div>
+    <%- new_furniture = room.gizmos.new %>
+    <%- if policy(new_furniture).new? %>
+      <%= render "furnitures/new", furniture: new_furniture %>
     <%- end %>
-  </div>
+  <% end %>
+</div>
+<%- if policy(room).destroy? && room.persisted? %>
+  <%= render CardComponent.new(dom_id: "furniture_destroy") do %>
+    <div class="m-5">
+      <h2><%= t("rooms.destroy.prompt")%></h2>
+      <%- if !room.gizmos.reload.empty? %>
+        <%= t('rooms.destroy.blocked_by_gizmos', room_name: room.name) %>
+      <%- elsif room.entrance? %>
+        <%= t('rooms.destroy.blocked_by_entrance', room_name: room.name
+) %>
+      <%- else %>
+        <%= button_to(t('rooms.destroy.link_to'), room.location, method: :delete, class: "--danger w-full") %>
+      <%- end %>
+    </div>
+  <% end %>
 <%- end %>
