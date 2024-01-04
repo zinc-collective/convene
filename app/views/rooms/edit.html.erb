@@ -20,15 +20,17 @@
   <% end %>
 </div>
 <%- if policy(room).destroy? && room.persisted? %>
-  <div class="m-5">
-    <h2><%= t("rooms.destroy.prompt")%></h2>
-    <%- if !room.gizmos.reload.empty? %>
-      <%= t('rooms.destroy.blocked_by_gizmos', room_name: room.name) %>
-    <%- elsif room.entrance? %>
-      <%= t('rooms.destroy.blocked_by_entrance', room_name: room.name
+  <%= render CardComponent.new(dom_id: "furniture_destroy") do %>
+    <div class="m-5">
+      <h2><%= t("rooms.destroy.prompt")%></h2>
+      <%- if !room.gizmos.reload.empty? %>
+        <%= t('rooms.destroy.blocked_by_gizmos', room_name: room.name) %>
+      <%- elsif room.entrance? %>
+        <%= t('rooms.destroy.blocked_by_entrance', room_name: room.name
 ) %>
-    <%- else %>
-      <%= button_to(t('rooms.destroy.link_to'), room.location, method: :delete, class: "--danger w-full") %>
-    <%- end %>
-  </div>
+      <%- else %>
+        <%= button_to(t('rooms.destroy.link_to'), room.location, method: :delete, class: "--danger w-full") %>
+      <%- end %>
+    </div>
+  <% end %>
 <%- end %>
