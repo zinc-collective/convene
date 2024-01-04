@@ -16,7 +16,7 @@ FactoryBot.define do
     end
 
     trait :with_description do
-      description { Faker::TvShows::TheExpanse.quote.truncate(300) }
+      description { Faker::TvShows::TheExpanse.quote.truncate(Room::DESCRIPTION_MAX_LENGTH) }
     end
 
     trait :with_furniture do
