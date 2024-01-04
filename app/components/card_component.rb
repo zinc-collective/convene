@@ -14,7 +14,9 @@ class CardComponent < ApplicationComponent
     [
       "shadow",
       "rounded-lg",
-      "bg-white"
+      "h-full",
+      "bg-white",
+      "group-hover:bg-slate-50"
     ].compact.join(" ")
   end
 
