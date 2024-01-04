@@ -34,6 +34,23 @@ describe "Marketplace: Selling Products", type: :system do
     end
   end
 
+  describe "Restoring Products" do
+    let!(:product) { create(:marketplace_product, :archived, marketplace:) }
+
+    it "Allows the Product to be added to Carts again" do
+      visit(polymorphic_path(marketplace.location(child: :products)))
+      click_link("Archived Products")
+      within("##{dom_id(product)}") do
+        click_link(I18n.t("edit.link_to"))
+      end
+
+      click_button(I18n.t("restore.link_to"))
+
+      expect(page).to have_content(product.name)
+      expect(product.reload).not_to be_archived
+    end
+  end
+
   describe "Removing Products" do
     let(:product) { create(:marketplace_product, :archived, marketplace:) }
 

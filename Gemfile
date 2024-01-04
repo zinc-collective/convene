@@ -78,7 +78,7 @@ gem "pg", "~> 1.5"
 gem "image_processing"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.141", require: false
+gem "aws-sdk-s3", "~> 1.142", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -119,7 +119,7 @@ group :development, :test do
   gem "rails-controller-testing"
   gem "rspec-rails", "~> 6.1.0"
   gem "rswag-specs"
-  gem "shoulda-matchers", "~> 5.3"
+  gem "shoulda-matchers", "~> 6.0"
 
   gem "capybara"
   gem "selenium-webdriver"
@@ -129,15 +129,17 @@ group :development, :test do
 
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "standard", "~> 1.32"
+  gem "standard", "~> 1.33"
 end
 
 group :development do
   gem "better_errors"
   gem "binding_of_caller"
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  # Outputs i18n lookup key debug logs
+  gem "i18n-debug"
   gem "listen", "~> 3.8"
   gem "rails-erd"
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", "~> 4.2"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"

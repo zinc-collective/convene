@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe MarkdownTextBlock do
-  subject(:content_block) { create(:furniture).becomes(described_class) }
+  subject(:content_block) { create(:markdown_text_block).becomes(described_class) }
 
   describe "#to_html" do
     subject(:to_html) { content_block.to_html }

@@ -12,12 +12,13 @@
     div {
       @apply mb-3;
     }
+
     label,
-    input,
     select,
     textarea {
       @apply block w-full;
     }
+
     label {
       @apply font-medium text-sm leading-6 text-gray-700 mb-1;
     }
@@ -40,6 +41,8 @@
       @screen sm {
         @apply leading-6 text-sm;
       }
+
+      @apply block w-full;
     }
     input {
       @apply appearance-none;
