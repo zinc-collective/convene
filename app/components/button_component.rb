@@ -55,49 +55,18 @@ class ButtonComponent < ApplicationComponent
   end
 
   def base_classes
-    [
-      "rounded-md",
-      "px-3.5",
-      "py-2.5",
-      "text-sm",
-      "font-semibold",
-      "shadow-sm",
-      "ring-1",
-      "ring-inset",
-      "text-center",
-      "no-underline",
-      "focus-visible:outline",
-      "focus-visible:outline-2",
-      "focus-visible:outline-offset-2",
-      "focus-visible:outline-orange-400"
-    ]
+    ["button"]
   end
 
   def secondary_classes
-    [
-      "bg-white",
-      "text-orange-950",
-      "ring-gray-300",
-      "hover:bg-orange-100",
-      "hover:text-orange-700"
-    ]
+    ["--secondary"]
   end
 
   def danger_classes
-    [
-      "bg-red-500",
-      "hover:bg-red-700",
-      "active:bg-red-200",
-      "text-white"
-    ]
+    ["--danger"]
   end
 
   def primary_classes
-    [
-      "bg-orange-500",
-      "text-white",
-      "hover:bg-orange-400",
-      "hover:text-white"
-    ]
+    ["--primary"]
   end
 end

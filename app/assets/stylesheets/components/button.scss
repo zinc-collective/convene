@@ -1,21 +1,20 @@
-/* @todo DELETE ME */
 @layer components {
   [type="reset"],
   [type="button"],
   [type="submit"],
   button,
   .button {
-    @apply font-bold py-2 px-4 rounded bg-orange-500 text-white text-center transition ease-in-out duration-150;
+    @apply rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm ring-1 ring-inset text-center no-underline;
 
     &:hover {
-      @apply bg-orange-400;
+      @apply bg-orange-100 text-orange-700;
     }
     &:active {
       @apply bg-orange-200;
     }
 
     &:focus {
-      @apply outline-none border-gray-300  ring-gray-500;
+      @apply outline outline-2 outline-offset-2 outline-orange-400;
     }
 
     &.--danger {
@@ -35,6 +34,22 @@
       }
       &:active {
         @apply bg-gray-200;
+      }
+    }
+
+    &.--primary {
+      @apply bg-orange-500 text-white;
+
+      &:hover {
+        @apply bg-orange-400 text-white;
+      }
+    }
+
+    &.--secondary {
+      @apply bg-white text-orange-950 ring-gray-300;
+
+      &:hover {
+        @apply bg-orange-100 text-orange-700;
       }
     }
   }
