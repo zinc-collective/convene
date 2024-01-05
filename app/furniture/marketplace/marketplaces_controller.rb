@@ -16,9 +16,9 @@ class Marketplace
 
         if marketplace_params[:square_access_token] || marketplace_params[:square_location_id]
           flash.notice = "Square notification settings updated succesfully!"
-          flash.alert = "Square notification settings were not upated. Please try again or contact your site administrator."
         end
       else
+        flash.alert = "Square notification settings were not upated. Please try again or contact your site administrator."
         render :edit
       end
     end
