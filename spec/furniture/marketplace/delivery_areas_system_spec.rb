@@ -44,7 +44,7 @@ describe "Marketplace: Delivery Areas", type: :system do
           accept_confirm { click_link(I18n.t("destroy.link_to")) }
         end
 
-        expect(page).not_to have_content(delivery_area.label)
+        expect(page).to have_no_content(delivery_area.label)
         expect(cart.reload.delivery_area).to be_nil
       end
 
@@ -57,7 +57,7 @@ describe "Marketplace: Delivery Areas", type: :system do
         click_link("Archived Delivery Areas")
 
         within("##{dom_id(delivery_area)}") do
-          expect(page).not_to have_content(I18n.t("destroy.link_to"))
+          expect(page).to have_no_content(I18n.t("destroy.link_to"))
         end
       end
     end

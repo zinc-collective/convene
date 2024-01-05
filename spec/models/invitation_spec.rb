@@ -63,7 +63,7 @@ RSpec.describe Invitation do
       let!(:ignored_invitation) { create(:invitation, :ignored, email: invitee.email) }
       let(:ignored_space) { ignored_invitation.space }
 
-      it "won't let you create invitations for a person who has ignored the space" do
+      it "does not let you create invitations for a person who has ignored the space" do
         invitation = build(:invitation, email: invitee.email, space: ignored_space)
         expect(invitation.save).to be(false)
         expect(invitation.errors).to be_added(:email, :invitee_ignored_space)
