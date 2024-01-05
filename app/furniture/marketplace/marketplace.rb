@@ -123,9 +123,6 @@ class Marketplace
     end
 
     def square_order_notifications_enabled?
-      puts "###################################################################################################################################################################################################"
-      puts square_location_id.present?
-      puts square_access_token
       square_location_id.present? && square_access_token.present?
     end
 
