@@ -8,7 +8,7 @@ describe "Marketplace: Buying Products", type: :system do
   include Spec::StripeCLI::Helpers
 
   let(:space) { create(:space, :with_entrance, :with_members) }
-  let(:marketplace) { create(:marketplace, :ready_for_shopping, room: space.entrance) }
+  let(:marketplace) { create(:marketplace, :ready_for_shopping, :with_square, room: space.entrance) }
 
   around do |ex|
     visit root_path
