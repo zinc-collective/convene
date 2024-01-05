@@ -8,7 +8,6 @@
 </div>
 <div class="flex flex-col space-y-3">
   <%= render onboarding_component %>
-  <%= render "flash_messages" , flash: flash %>
   <%= render CardComponent.new do |card| %>
     <%= content %>
     <% card.with_footer do %>
