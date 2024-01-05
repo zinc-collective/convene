@@ -53,7 +53,7 @@ RSpec.describe ButtonComponent, type: :component do
     context "when the scheme is `:danger`" do
       let(:component) { described_class.new(**params.merge({scheme: :danger})) }
 
-      it { expect(output.at_css(".bg-red-500")).to be_present }
+      it { expect(a_el.attributes["class"].value).to eq("button --danger") }
     end
   end
 end

@@ -9,9 +9,9 @@ en:
       create:
         success: "Added Agreement '%{name}'"
       edit:
-        link_to: "Edit Agreement '%{name}'"
+        link_to: "Edit '%{name}'"
       update:
         success: "Changed Agreement '%{name}'"
       destroy:
-        link_to: "Remove Agreement '%{name}'"
-        success: "Removed Agreement '%{name}'"
+        link_to: "Delete '%{name}'"
+        success: "Deleted Agreement '%{name}'"
