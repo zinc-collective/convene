@@ -25,6 +25,7 @@ describe "Marketplace: Configuring Square", type: :system do
 
       click_button("Save changes")
 
+      expect(page).to have_content("Square notification settings updated succesfully!")
       expect(page).to have_content("Sync is active")
       expect(page).to have_css("details:not([open])")
     end
@@ -40,6 +41,7 @@ describe "Marketplace: Configuring Square", type: :system do
       fill_in :marketplace_square_location_id, with: ""
       click_button("Save changes")
 
+      expect(page).to have_content("Square notification settings updated succesfully!")
       expect(page).to have_content("Add your credentials")
       expect(page).to have_css("details[open]")
     end

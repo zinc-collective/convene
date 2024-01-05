@@ -18,7 +18,6 @@ class Marketplace
           flash.notice = "Square notification settings updated succesfully!"
         end
       else
-        flash.alert = "Square notification settings were not upated. Please try again or contact your site administrator."
         render :edit
       end
     end
