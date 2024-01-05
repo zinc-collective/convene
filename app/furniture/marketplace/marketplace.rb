@@ -40,7 +40,7 @@ class Marketplace
     end
 
     def square_access_token
-      secrets["square_access_token"]
+      secrets && secrets["square_access_token"]
     end
 
     def has_controller_edit?
@@ -122,10 +122,8 @@ class Marketplace
       end
     end
 
-    private
-
     def square_order_notifications_enabled?
-      square_location_id.present?
+      square_location_id.present? && square_access_token.present?
     end
 
     def default_delivery_area

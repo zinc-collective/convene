@@ -100,4 +100,26 @@ RSpec.describe Marketplace::Marketplace, type: :model do
       it { is_expected.to be_falsey }
     end
   end
+
+  describe "#square_order_notifications_enabled?" do
+    subject(:square_order_notifications_enabled?) { marketplace.square_order_notifications_enabled? }
+
+    context "when no square settings have been set" do
+      let(:marketplace) { create(:marketplace) }
+
+      it { is_expected.to be_falsey }
+    end
+
+    context "when only one square setting has been set" do
+      let(:marketplace) { create(:marketplace, square_location_id: "anything") }
+
+      it { is_expected.to be_falsey }
+    end
+
+    context "when all square settings have been set" do
+      let(:marketplace) { create(:marketplace, :with_square) }
+
+      it { is_expected.to be_truthy }
+    end
+  end
 end
