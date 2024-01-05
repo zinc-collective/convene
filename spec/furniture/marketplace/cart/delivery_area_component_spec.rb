@@ -30,6 +30,6 @@ RSpec.describe Marketplace::Cart::DeliveryAreaComponent, type: :component do
 
     it { is_expected.to have_content("Where are you Ordering from?") }
     it { is_expected.to have_content "Delivery prices and times vary based upon your location" }
-    it { is_expected.not_to have_css("option") }
+    it { is_expected.to have_no_css("option") }
   end
 end

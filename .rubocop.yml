@@ -37,3 +37,6 @@ Style/TrailingCommaInArrayLiteral:
 Rails/CreateTableWithTimestamps:
   Exclude:
     - db/schema.rb
+
+Capybara/ClickLinkOrButtonStyle:
+  EnforcedStyle: strict

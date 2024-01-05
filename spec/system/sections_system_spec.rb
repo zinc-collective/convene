@@ -14,7 +14,7 @@ RSpec.describe "Sections" do
 
       it "doesn't let you delete the entrance" do
         expect(page).to have_content(I18n.t("rooms.destroy.blocked_by_entrance", room_name: section.name))
-        expect(page).not_to have_content(I18n.t("rooms.destroy.link_to"))
+        expect(page).to have_no_content(I18n.t("rooms.destroy.link_to"))
       end
     end
 
@@ -26,7 +26,7 @@ RSpec.describe "Sections" do
           click_button(I18n.t("rooms.destroy.link_to"))
 
           expect(page).to have_content(I18n.t("rooms.destroy.success", room_name: section.name))
-          expect(space.rooms).not_to be_exist(id: section.id)
+          expect(space.rooms).not_to exist(id: section.id)
         end
       end
 
@@ -42,7 +42,7 @@ RSpec.describe "Sections" do
         # moment - ZS 10/18/23
         it "does not allow deletion of the Section" do
           expect(page).to have_content(I18n.t("rooms.destroy.blocked_by_gizmos", room_name: section.name))
-          expect(page).not_to have_content(I18n.t("rooms.destroy.link_to"))
+          expect(page).to have_no_content(I18n.t("rooms.destroy.link_to"))
         end
       end
     end

@@ -18,6 +18,6 @@ RSpec.describe SectionNavigation, type: :system do
       end
     end
 
-    expect(page).not_to have_link(space.entrance.name, href: polymorphic_path(space.entrance.location))
+    expect(page).to have_no_link(space.entrance.name, href: polymorphic_path(space.entrance.location))
   end
 end

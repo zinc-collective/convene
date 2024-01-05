@@ -66,7 +66,7 @@ describe "Marketplace: Selling Products", type: :system do
         accept_confirm { click_link(I18n.t("destroy.link_to")) }
       end
 
-      expect(page).not_to have_content(product.name)
+      expect(page).to have_no_content(product.name)
       expect(marketplace.products.reload).to be_empty
       expect(cart.cart_products).not_to exist(product_id: product.id)
     end
@@ -81,7 +81,7 @@ describe "Marketplace: Selling Products", type: :system do
         click_link("Archived Products")
 
         within("##{dom_id(product)}") do
-          expect(page).not_to have_content(I18n.t("destroy.link_to"))
+          expect(page).to have_no_content(I18n.t("destroy.link_to"))
         end
       end
     end

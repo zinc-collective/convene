@@ -53,7 +53,7 @@ describe "Marketplace: Buying Products", type: :system do
 
     visit(polymorphic_path(marketplace.room.location))
 
-    expect(page).not_to have_content(archived_product.name)
+    expect(page).to have_no_content(archived_product.name)
   end
 
   it "Works for Guests" do # rubocop:disable RSpec/ExampleLength
