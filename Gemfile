@@ -64,7 +64,7 @@ gem "friendly_id", "~> 5.5.1"
 gem "bcrypt", "~> 3.1.20"
 gem "lockbox", "1.3.0"
 gem "rotp", "~> 6.3"
-gem "strong_migrations", "~> 1.6"
+gem "strong_migrations", "~> 1.7"
 # Soft Deletion
 gem "discard", "~> 1.2"
 
