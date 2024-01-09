@@ -28,5 +28,9 @@ FactoryBot.define do
         create_list(:furniture, evaluator.furniture_count, room: room)
       end
     end
+
+    trait :with_image do
+      image { Rack::Test::UploadedFile.new("spec/fixtures/files/cc-kitten.jpg", "image/jpeg") }
+    end
   end
 end

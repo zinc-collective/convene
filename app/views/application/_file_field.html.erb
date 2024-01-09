@@ -1,6 +1,11 @@
 <% required ||= required | false %>
 <div>
   <%= form.label attribute %>
+  <% if local_assigns[:label_hint] %>
+    <div>
+      <small><%= local_assigns[:label_hint] %></small>
+    </div>
+  <% end %>
   <%= form.file_field attribute, required: required %>
   <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
 </div>
