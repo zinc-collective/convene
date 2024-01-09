@@ -19,15 +19,8 @@ class RoomPolicy < ApplicationPolicy
   alias_method :new?, :create?
 
   def permitted_attributes(params)
-    [
-      :access_level,
-      :name,
-      :description,
-      :slug,
-      :image,
-      gizmos_attributes:
-         policy(Furniture).permitted_attributes(params)
-    ]
+    [:access_level, :name, :description, :slug, :image, gizmos_attributes:
+       policy(Furniture).permitted_attributes(params)]
   end
 
   class Scope < ApplicationScope
