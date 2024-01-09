@@ -2,10 +2,10 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application.js"
+import { application } from "./application.js";
 
-import MenuController from "./menu_controller.js"
-application.register("menu", MenuController)
+import MenuController from "./menu_controller.js";
+application.register("menu", MenuController);
 
-import SectionFormController from "./section_form_controller.js"
-application.register("section-form", SectionFormController)
+import SectionFormController from "./section_form_controller.js";
+application.register("section-form", SectionFormController);
