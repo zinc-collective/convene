@@ -1,9 +1,9 @@
 <% required ||= required | false %>
 <div>
-  <%= form.label attribute %>
+  <%= form.label local_assigns[:label] || attribute %>
   <% if local_assigns[:label_hint] %>
     <div>
-      <small><%= local_assigns[:label_hint] %></small>
+      <small><%= label_hint %></small>
     </div>
   <% end %>
   <%= form.file_field attribute, required: required %>
