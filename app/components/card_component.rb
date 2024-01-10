@@ -1,5 +1,11 @@
 class CardComponent < ApplicationComponent
   renders_one :footer
+  attr_accessor :image_url
+
+  def initialize(image_url: nil, **kwargs)
+    super(**kwargs)
+    self.image_url = image_url
+  end
 
   private
 
@@ -16,7 +22,8 @@ class CardComponent < ApplicationComponent
       "rounded-lg",
       "h-full",
       "bg-white",
-      "group-hover:bg-slate-50"
+      "group-hover:bg-slate-50",
+      "overflow-hidden"
     ].compact.join(" ")
   end
 

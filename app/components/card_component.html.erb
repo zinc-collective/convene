@@ -3,6 +3,9 @@
     NOTE: content? is not always working as described, and is returning a proc in some cases rather than a boolean
   %>
   <% if content.present? %>
+    <% if image_url.present? %>
+      <img class="w-full" src="<%= image_url %>" alt="Sunset in the mountains">
+    <% end %>
     <div <%== attributes(classes: card_classes_content) %>>
       <%= content %>
     </div>
