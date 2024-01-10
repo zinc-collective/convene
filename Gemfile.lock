@@ -206,7 +206,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    gretel (4.6.0)
+    gretel (5.0.0)
       actionview (>= 5.1, < 7.2)
       railties (>= 5.1, < 7.2)
     hashdiff (1.0.1)
@@ -551,7 +551,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   friendly_id (~> 5.5.1)
-  gretel (~> 4.6)
+  gretel (~> 5.0)
   i18n-debug
   image_processing
   jbuilder (~> 2.11)
