@@ -34,7 +34,7 @@
     "@cucumber/pretty-formatter": "^1.0.0",
     "axios": "^1.6.5",
     "axios-case-converter": "^1.1.0",
-    "change-case": "^5.4.0",
+    "change-case": "^5.4.1",
     "dotenv": "^16.3.1",
     "fs-extra": "^11.2.0",
     "geckodriver": "^4.3.0",
