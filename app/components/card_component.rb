@@ -1,4 +1,5 @@
 class CardComponent < ApplicationComponent
+  renders_one :header
   renders_one :footer
 
   private
