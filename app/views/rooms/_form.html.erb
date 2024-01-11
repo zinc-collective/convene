@@ -3,23 +3,26 @@
     <%= render "text_field", attribute: :name, form: room_form %>
     <%= render "text_field", attribute: :slug, form: room_form %>
     <%= render "text_area", attribute: :description, form: room_form, label_hint: 'Add brief summary of your section for search engines to display as snippets in results' %>
-    <%- if room.image.attached? %>
+    <%- if room.hero_image&.media&.attached? %>
       <div data-controller="section-form">
         <div class="relative overflow-hidden bg-gray-100 dark:bg-gray-600">
-          <%= image_tag room.image %>
+          <%= image_tag room.hero_image&.image %>
         </div>
         <%= room_form.label :remove_image, 'Remove Image' do %>
           <%= room_form.check_box :remove_image, data: { action: "click->section-form#handleMarkRemove"} %> Remove current image?
         <%- end %>
       </div>
     <% end %>
-    <%= render "file_field",
-      attribute: :image,
-      form: room_form,
-      label: "Upload a header image",
-      label_hint: "",
-      required: false
-    %>
+    <%= fields_for :hero_image, room.hero_image do | hero_image_form | %>
+      <%= render "file_field",
+        attribute: :media,
+        form: hero_image_form,
+        model: room,
+        label: "Upload a header image",
+        label_hint: "",
+        required: false
+      %>
+    <% end %>
     <h3>Privacy and Security</h3>
     <%= render "radio_group", attribute: :access_level, options: Room::access_levels.values, form: room_form %>
     <footer>

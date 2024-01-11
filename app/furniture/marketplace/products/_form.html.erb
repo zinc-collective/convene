@@ -9,7 +9,7 @@
         <%= image_tag product.photo.variant(resize_to_limit: [150, 150]), class: "rounded-lg" %>
       </div>
     <%- end %>
-    <%= render "file_field", { attribute: :photo, form: f} %>
+    <%= render "file_field", { attribute: :photo, form: f, model: product} %>
     <%= f.submit %>
   <% end %>
 <%- end %>

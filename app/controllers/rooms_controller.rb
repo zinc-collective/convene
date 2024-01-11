@@ -25,15 +25,21 @@ class RoomsController < ApplicationController
 
   def update
     respond_to do |format|
-      if params[:room][:remove_image] == "1"
-        room.image.purge
-      end
+      # if params[:room][:remove_image] == "1"
+      #   room.image.purge
+      # end
+
+      puts "##############################################"
+      puts params
 
       if room.update(room_params)
         format.html do
           redirect_to [:edit, room.space], notice: t(".success", room_name: room.name)
         end
       else
+        puts "##########################################################################################"
+
+        puts room.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
       end
 

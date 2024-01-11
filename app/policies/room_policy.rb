@@ -19,7 +19,7 @@ class RoomPolicy < ApplicationPolicy
   alias_method :new?, :create?
 
   def permitted_attributes(params)
-    [:access_level, :name, :description, :slug, :image, gizmos_attributes:
+    [:access_level, :name, :description, :slug, hero_image_attributes: [:file], gizmos_attributes:
        policy(Furniture).permitted_attributes(params)]
   end
 
