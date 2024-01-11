@@ -1,5 +1,5 @@
 class Marketplace
-  class ManagementComponent < ApplicationComponent
+  class ManagementComponent < Component
     attr_accessor :marketplace
 
     def initialize(marketplace:, **kwargs)

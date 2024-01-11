@@ -70,6 +70,10 @@ class Marketplace
       false
     end
 
+    def in_room_template
+      "marketplace/in_room_template"
+    end
+
     def stripe_account_connected?
       stripe_account.present? && stripe_webhook_endpoint.present? && stripe_webhook_endpoint_secret.present?
     end
