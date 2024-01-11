@@ -1,3 +1,12 @@
 <%= turbo_frame_tag(furniture, src: furniture.location, data: { turbo_action: :advance }) do %>
-  <%= render furniture %>
+  <section>
+    <header>
+      <h2>
+        <%= t('layouts.marketplace.header', space: furniture.space.name, room: furniture.room.name) %>
+      </h2>
+    </header>
+    <div>
+      <%= render furniture %>
+    </div>
+  </section>
 <%- end %>
