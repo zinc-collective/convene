@@ -9,6 +9,9 @@ en:
           attributes:
             delivery_area:
               required: "can't be blank"
+  layouts:
+    marketplace:
+      header: Shop %{room} on %{space}
   marketplace:
     cart:
       delivery_areas:
