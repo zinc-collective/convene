@@ -40,7 +40,7 @@
     "geckodriver": "^4.3.0",
     "get-urls": "^12.1.0",
     "lodash": "^4.17.21",
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.1",
     "promise-retry": "^2.0.1",
     "selenium-webdriver": "^4.16.0",
     "webpack-dev-server": "^4.15.1"
