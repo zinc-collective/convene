@@ -13,6 +13,14 @@ class Marketplace
       super(title: t("marketplace.products.edit.link_to", name: name), href: location(:edit))
     end
 
+    # 16:9 of 1290 is 1290:725.625
+    # We rounded up.
+    # @see https://www.ios-resolution.com/
+    FULL_WIDTH_16_BY_9 = [1290, 726]
+    def hero_image
+      product.photo.variant(resize_to_limit: FULL_WIDTH_16_BY_9)
+    end
+
     def tax_rates
       product.tax_rates.map do |tax_rate|
         "#{tax_rate.label} #{helpers.number_to_percentage(tax_rate.tax_rate, precision: 2)}"
