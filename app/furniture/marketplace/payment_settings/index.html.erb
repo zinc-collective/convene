@@ -3,20 +3,21 @@
 <main>
   <div class="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-3">
     <%= render Marketplace::StripeOverviewComponent.new(marketplace: marketplace) %>
-    <%= render CardComponent.new(classes: "flex flex-col h-full") do %>
-      <header class="flex font-bold">
-        Did we miss something?
-      </header>
-      <div class="grow flex flex-col justify-between">
-        Let us know about other payment service options that will help your marketplace to thrive.
-      </div>
-      <footer class="flex flex-row justify-between mt-3">
+    <%= render CardComponent.new do |card| %>
+      <%- card.with_header do %>
+        <h3>Did we miss something?</h3>
+      <%- end %>
+
+      <p>Let us know about other payment service options that will help your
+         marketplace to thrive.</p>
+
+      <%- card.with_footer(variant: :action_bar) do %>
         <%= render ButtonComponent.new(
           label: "Contact Us",
           title: "Contact Us",
           href: "mailto:#{ApplicationMailer::DEFAULT_FROM}",
           scheme: :secondary) %>
-      </footer>
+      <%-end %>
     <% end %>
   </div>
 </main>

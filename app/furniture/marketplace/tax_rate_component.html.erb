@@ -1,12 +1,14 @@
-<%= render CardComponent.new(dom_id: dom_id(tax_rate), classes: "flex flex-col justify-between gap-y-2 w-full") do %>
-  <header class="flex font-bold">
-    <%= label %>
-  </header>
+<%= render CardComponent.new(dom_id: dom_id(tax_rate)) do |card| %>
+  <%- card.with_header do |card| %>
+    <h3><%= label %></h3>
+  <%- end %>
+
   <div class="italic">
     <%= rate  %>
   </div>
-  <div class="flex flex-row justify-between">
+
+  <%- card.with_footer(variant: :action_bar) do %>
     <%= render edit_button if edit_button? %>
     <%= render destroy_button if destroy_button?  %>
-  </div>
+  <%- end %>
 <%- end %>
