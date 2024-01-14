@@ -1,15 +1,17 @@
 class CardComponent < ApplicationComponent
-  attr_accessor :wrapper_classes
+  HEADER_VARIANTS = {default: "p-2 sm:p-4", no_padding: ""}
+  renders_one :header, ->(variant: :default, &block) {
+    content_tag(:header, class: HEADER_VARIANTS.fetch(variant), &block)
+  }
 
-  renders_one :header
-  attr_accessor :header_classes
-
-  attr_accessor :content_classes
-
-  renders_one :footer
-  attr_accessor :footer_classes
-
-  def initialize(header_classes: "", content_classes: "", wrapper_classes: "", **kwargs)
-    super(**kwargs)
-  end
+  DEFAULT_FOOTER = "bg-slate-50 p-2 sm:p-4"
+  FOOTER_VARIANTS = {
+    default: DEFAULT_FOOTER,
+    action_bar: [DEFAULT_FOOTER, "flex flex-row justify-between"].join(" ")
+  }
+  renders_one :footer, ->(variant: :default, &block) {
+    classes = FOOTER_VARIANTS.fetch(variant)
+    classes += " rounded-t-none" unless content? || header?
+    content_tag(:footer, class: classes, &block)
+  }
 end
