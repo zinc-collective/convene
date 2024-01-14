@@ -1,33 +1,15 @@
 class CardComponent < ApplicationComponent
+  attr_accessor :wrapper_classes
+
   renders_one :header
+  attr_accessor :header_classes
+
+  attr_accessor :content_classes
+
   renders_one :footer
+  attr_accessor :footer_classes
 
-  private
-
-  def card_classes_content
-    [
-      "p-4",
-      "sm:p-6"
-    ].compact.join(" ")
-  end
-
-  def card_classes_wrapper
-    [
-      "shadow",
-      "rounded-lg",
-      "h-full",
-      "bg-white",
-      "group-hover:bg-slate-50"
-    ].compact.join(" ")
-  end
-
-  def card_classes_footer
-    [
-      "bg-orange-50",
-      "p-4",
-      "sm:p-6",
-      # content? is not always working as described, and is returning a proc in some cases rather than a boolean
-      ("rounded-t-none" if content.blank?)
-    ].compact.join(" ")
+  def initialize(header_classes: "", content_classes: "", wrapper_classes: "", **kwargs)
+    super(**kwargs)
   end
 end
