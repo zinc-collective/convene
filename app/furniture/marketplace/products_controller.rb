@@ -31,10 +31,6 @@ class Marketplace
       skip_authorization
     end
 
-    def show
-      authorize(product)
-    end
-
     def edit
       authorize(product)
     end
