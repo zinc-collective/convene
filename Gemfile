@@ -39,15 +39,15 @@ gem "rswag-ui"
 # Allows us to render .markdown.erb files
 gem "redcarpet", "~> 3.6"
 # Breadcrumbs!
-gem "gretel", "~> 4.6"
+gem "gretel", "~> 5.0"
 # Better UI components
 gem "lookbook", ">= 2.0.0.beta.4"
-gem "view_component", "~> 3.9"
+gem "view_component", "~> 3.10"
 # QR Code Generation!
 gem "rqrcode", "~> 2.2"
 
 # Pagination!
-gem "pagy", "~> 6.2"
+gem "pagy", "~> 6.4"
 
 # Database Layer
 #
@@ -62,7 +62,7 @@ gem "ranked-model", "~> 0.4.9"
 gem "friendly_id", "~> 5.5.1"
 # Hashing / Encrypting data at rest
 gem "bcrypt", "~> 3.1.20"
-gem "lockbox", "1.3.0"
+gem "lockbox", "1.3.2"
 gem "rotp", "~> 6.3"
 gem "strong_migrations", "~> 1.7"
 # Soft Deletion

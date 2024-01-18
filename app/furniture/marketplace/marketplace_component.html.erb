@@ -1,18 +1,5 @@
-<h2 class="ml-2 my-2">
-  <%= t('.header', space: marketplace.space.name, room: marketplace.room.name) %>
-</h2>
+<div class="grid grid-cols-1 gap-6">
+  <%= render delivery_area_component %>
 
-
-<%= render onboarding_component %>
-
-
-<%= render delivery_area_component %>
-
-<%= render cart %>
-
-<%- if policy(marketplace).edit? %>
-  <div class="my-2 text-right">
-    <%= render ButtonComponent.new(scheme: :secondary, label: t('marketplace.marketplace.edit.link_to'),
-                                   href: location(:edit), method: :get) %>
-  </div>
-<%- end %>
+  <%= render cart %>
+</div>
