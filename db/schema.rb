@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_20_011344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -229,6 +229,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
     t.uuid "bazaar_id"
     t.index ["bazaar_id"], name: "index_marketplace_tax_rates_on_bazaar_id"
     t.index ["marketplace_id"], name: "index_marketplace_tax_rates_on_marketplace_id"
+  end
+
+  create_table "media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
