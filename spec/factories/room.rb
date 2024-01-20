@@ -29,8 +29,10 @@ FactoryBot.define do
       end
     end
 
-    trait :with_image do
-      image { Rack::Test::UploadedFile.new("spec/fixtures/files/cc-kitten.jpg", "image/jpeg") }
+    trait :with_hero_image do
+      after(:create) do |room, evaluator|
+        create(:media, room: room)
+      end
     end
   end
 end

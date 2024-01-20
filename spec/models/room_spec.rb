@@ -6,7 +6,8 @@ RSpec.describe Room do
   it { is_expected.to have_many(:gizmos).inverse_of(:room).dependent(:destroy) }
   it { is_expected.to belong_to(:space).inverse_of(:rooms) }
 
-  it { is_expected.to have_one_attached(:image) }
+  it { is_expected.to belongs_to(:hero_image) }
+  it { is_expected.to belongs_to(:feed_image) }
 
   describe "#description" do
     it { is_expected.to validate_length_of(:description).is_at_most(300).allow_blank }

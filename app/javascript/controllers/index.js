@@ -6,6 +6,3 @@ import { application } from "./application.js";
 
 import MenuController from "./menu_controller.js";
 application.register("menu", MenuController);
-
-import SectionFormController from "./section_form_controller.js";
-application.register("section-form", SectionFormController);
