@@ -25,20 +25,23 @@ class RoomsController < ApplicationController
 
   def update
     respond_to do |format|
-      # if params[:room][:remove_image] == "1"
-      #   room.image.purge
-      # end
+      media = Media.create
+      media.upload.attach(room_params[:hero_image_upload])
+      room_params_for_update = {}.merge(
+        room_params,
+        {
+          hero_image: media
+        }
+      )
 
-      puts "##############################################"
-      puts params
+      room_params_for_update.delete("hero_image_upload")
 
-      if room.update(room_params)
+      if room.update(room_params_for_update)
         format.html do
           redirect_to [:edit, room.space], notice: t(".success", room_name: room.name)
         end
       else
-        puts "##########################################################################################"
-
+        # TODO remove log
         puts room.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
       end
