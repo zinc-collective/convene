@@ -13,7 +13,7 @@
         <%- end %>
       </div>
     <% end %>
-    <%= fields_for :hero_image, room.hero_image do | hero_image_form | %>
+    <%= room_form.fields_for :hero_image, room.hero_image.presence || room.build_hero_image do | hero_image_form | %>
       <%= render "file_field",
         attribute: :media,
         form: hero_image_form,

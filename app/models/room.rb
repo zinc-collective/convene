@@ -1,7 +1,7 @@
 # A Room in Convene acts as a gathering place.
 class Room < ApplicationRecord
-  belongs_to :hero_image, class_name: "Room::Media", optional: true
-  belongs_to :feed_image, class_name: "Room::Media", optional: true
+  belongs_to :hero_image, class_name: "Media", optional: true
+  belongs_to :feed_image, class_name: "Media", optional: true
 
   accepts_nested_attributes_for :hero_image
 
