@@ -3,10 +3,10 @@
     <%= render "text_field", attribute: :name, form: room_form %>
     <%= render "text_field", attribute: :slug, form: room_form %>
     <%= render "text_area", attribute: :description, form: room_form, label_hint: 'Add brief summary of your section for search engines to display as snippets in results' %>
-    <%- if room.hero_image&.media&.attached? %>
+    <%- if room.hero_image&.upload&.attached? %>
       <div data-controller="section-form">
         <div class="relative overflow-hidden bg-gray-100 dark:bg-gray-600">
-          <%= image_tag room.hero_image&.media %>
+          <%= image_tag room.hero_image&.upload %>
         </div>
       </div>
     <% end %>
