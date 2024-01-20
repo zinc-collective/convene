@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_20_011344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_enum :invitation_status, [
     "pending",
-    "sent",
     "accepted",
     "rejected",
     "expired",
     "ignored",
     "revoked",
+    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -231,6 +231,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
     t.index ["marketplace_id"], name: "index_marketplace_tax_rates_on_marketplace_id"
   end
 
+  create_table "media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id"
     t.uuid "space_id"
@@ -248,7 +253,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "operator", default: false, null: false
+    t.boolean "operator", default: false
     t.index ["email"], name: "index_people_on_email", unique: true
   end
 
