@@ -4,6 +4,7 @@ class Marketplace
   class Product < Record
     include Archivable
 
+    # TODO: Refactor to use Media model
     has_one_attached :photo, dependent: :destroy
 
     self.table_name = "marketplace_products"
