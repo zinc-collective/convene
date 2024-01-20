@@ -25,15 +25,14 @@ class RoomsController < ApplicationController
 
   def update
     respond_to do |format|
-      media = Media.create
-      media.upload.attach(room_params[:hero_image_upload])
+      new_media = Media.create
+      new_media.upload.attach(room_params[:hero_image_upload])
       room_params_for_update = {}.merge(
         room_params,
         {
-          hero_image: media
+          hero_image: new_media
         }
       )
-
       room_params_for_update.delete("hero_image_upload")
 
       if room.update(room_params_for_update)
