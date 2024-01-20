@@ -15,6 +15,8 @@ class RoomsController < ApplicationController
   end
 
   def create
+    # TODO: Add media handling
+
     if room.save
       flash[:notice] = t(".success", room_name: room.name)
       redirect_to [:edit, room.space, room]
@@ -27,13 +29,13 @@ class RoomsController < ApplicationController
     respond_to do |format|
       new_media = Media.create
       new_media.upload.attach(room_params[:hero_image_upload])
+      room_params.delete("hero_image_upload")
       room_params_for_update = {}.merge(
         room_params,
         {
           hero_image: new_media
         }
       )
-      room_params_for_update.delete("hero_image_upload")
 
       if room.update(room_params_for_update)
         format.html do

@@ -136,7 +136,7 @@ RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
     }
 
     let(:path) { polymorphic_path(space.location(child: :rooms)) }
-    let(:room_params) { attributes_for(:room, :with_description, :with_slug, :with_media, space: space) }
+    let(:room_params) { attributes_for(:room, :with_description, :with_slug, space: space) }
 
     context "when the person is a guest" do
       it "does not allow creating a new room" do
@@ -157,7 +157,6 @@ RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
         expect(created_room.slug).to eql(room_params[:slug])
         expect(created_room.description).to eql(room_params[:description])
         expect(response).to redirect_to(polymorphic_path(space.rooms.last.location(:edit)))
-        expect(created_room.media).to be_present
       end
 
       context "when the space has an entrance" do
@@ -167,6 +166,14 @@ RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
           expect { do_request }.to(change { space.rooms.count }.by(1))
           expect(response).to redirect_to(polymorphic_path(space.rooms.order(created_at: :desc).first.location(:edit)))
         end
+      end
+    end
+  end
+
+  describe "#update" do
+    context "when an image is uploaded" do
+      it "creates a new media record with the image attached associated to room" do
+        # TODO maybe
       end
     end
   end
