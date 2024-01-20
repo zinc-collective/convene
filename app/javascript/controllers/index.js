@@ -9,3 +9,6 @@ application.register("menu", MenuController);
 
 import SectionFormController from "./section_form_controller.js";
 application.register("section-form", SectionFormController);
+
+import SectionFormController from "./section_form_controller.js";
+application.register("section-form", SectionFormController);
