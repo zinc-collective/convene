@@ -130,7 +130,7 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
       rouge (>= 1.0.0)
-    bigdecimal (3.1.5)
+    bigdecimal (3.1.6)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
@@ -264,7 +264,7 @@ GEM
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
-    minitest (5.20.0)
+    minitest (5.21.2)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -455,7 +455,7 @@ GEM
       sentry-ruby (~> 5.16.1)
     sentry-ruby (5.16.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    shoulda-matchers (6.0.0)
+    shoulda-matchers (6.1.0)
       activesupport (>= 5.2.0)
     sidekiq (7.2.1)
       concurrent-ruby (< 2)
@@ -583,7 +583,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails
   sentry-ruby
-  shoulda-matchers (~> 6.0)
+  shoulda-matchers (~> 6.1)
   sidekiq
   simplecov
   spring
