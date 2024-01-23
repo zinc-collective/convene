@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_20_011344) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -22,7 +22,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_011344) do
     "expired",
     "ignored",
     "revoked",
-    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
@@ -77,7 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_011344) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at", precision: nil
+    t.datetime "created_at"
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -253,7 +252,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_011344) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "operator", default: false
+    t.boolean "operator", default: false, null: false
     t.index ["email"], name: "index_people_on_email", unique: true
   end
 
@@ -265,6 +264,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_011344) do
     t.datetime "updated_at", null: false
     t.uuid "space_id"
     t.string "description"
+    t.uuid "hero_image_id"
+    t.index ["hero_image_id"], name: "index_rooms_on_hero_image_id"
     t.index ["slug", "space_id"], name: "index_rooms_on_slug_and_space_id", unique: true
     t.index ["space_id"], name: "index_rooms_on_space_id"
   end
