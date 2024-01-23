@@ -265,7 +265,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     t.uuid "space_id"
     t.string "description"
     t.uuid "hero_image_id"
-    t.index ["hero_image_id"], name: "index_rooms_on_hero_image_id"
+    t.index ["hero_image_id"]
     t.index ["slug", "space_id"], name: "index_rooms_on_slug_and_space_id", unique: true
     t.index ["space_id"], name: "index_rooms_on_space_id"
   end
