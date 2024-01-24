@@ -15,8 +15,6 @@ class RoomsController < ApplicationController
   end
 
   def create
-    # TODO: Add media handling
-
     if room.save
       flash[:notice] = t(".success", room_name: room.name)
       redirect_to [:edit, room.space, room]
@@ -27,6 +25,7 @@ class RoomsController < ApplicationController
 
   def update
     respond_to do |format|
+      # TODO: Move logic for Media resource management to a dedicated controller (see: https://github.com/zinc-collective/convene/pull/2101/files#r1464115624)
       new_media = Media.create
       new_media.upload.attach(room_params[:hero_image_upload])
       room_params.delete("hero_image_upload")
@@ -42,8 +41,6 @@ class RoomsController < ApplicationController
           redirect_to [:edit, room.space], notice: t(".success", room_name: room.name)
         end
       else
-        # TODO remove log
-        puts room.errors.full_messages
         format.html { render :edit, status: :unprocessable_entity }
       end
 

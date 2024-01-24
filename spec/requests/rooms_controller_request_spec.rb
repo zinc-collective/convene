@@ -169,12 +169,4 @@ RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
       end
     end
   end
-
-  describe "#update" do
-    context "when an image is uploaded" do
-      it "creates a new media record with the image attached associated to room" do
-        # TODO maybe
-      end
-    end
-  end
 end
