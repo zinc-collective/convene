@@ -28,9 +28,8 @@ class RoomsController < ApplicationController
       # TODO: Move logic for Media resource management to a dedicated controller (see: https://github.com/zinc-collective/convene/pull/2101/files#r1464115624)
       new_media = Media.create
       new_media.upload.attach(room_params[:hero_image_upload])
-      room_params.delete("hero_image_upload")
       room_params_for_update = {}.merge(
-        room_params,
+        room_params.except(:hero_image_upload),
         {
           hero_image: new_media
         }
