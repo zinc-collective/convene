@@ -1,32 +1,17 @@
 class CardComponent < ApplicationComponent
-  renders_one :footer
+  HEADER_VARIANTS = {default: "p-2 sm:p-4", no_padding: ""}
+  renders_one :header, ->(variant: :default, &block) {
+    content_tag(:header, class: HEADER_VARIANTS.fetch(variant), &block)
+  }
 
-  private
-
-  def card_classes_content
-    [
-      "p-4",
-      "sm:p-6"
-    ].compact.join(" ")
-  end
-
-  def card_classes_wrapper
-    [
-      "shadow",
-      "rounded-lg",
-      "h-full",
-      "bg-white",
-      "group-hover:bg-slate-50"
-    ].compact.join(" ")
-  end
-
-  def card_classes_footer
-    [
-      "bg-orange-50",
-      "p-4",
-      "sm:p-6",
-      # content? is not always working as described, and is returning a proc in some cases rather than a boolean
-      ("rounded-t-none" if content.blank?)
-    ].compact.join(" ")
-  end
+  DEFAULT_FOOTER = "bg-slate-50 p-2 sm:p-4"
+  FOOTER_VARIANTS = {
+    default: DEFAULT_FOOTER,
+    action_bar: [DEFAULT_FOOTER, "flex flex-row justify-between"].join(" ")
+  }
+  renders_one :footer, ->(variant: :default, &block) {
+    classes = FOOTER_VARIANTS.fetch(variant)
+    classes += " rounded-t-none" unless content? || header?
+    content_tag(:footer, class: classes, &block)
+  }
 end

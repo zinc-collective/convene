@@ -1,22 +1,23 @@
-<%= render CardComponent.new(dom_id: "stripe_overview", classes: "flex flex-col h-full
-") do %>
+<%= render CardComponent.new(dom_id: "stripe_overview") do |card| %>
   <%- if marketplace.stripe_api_key? %>
-    <header class="flex font-bold">
-      <%= marketplace_stripe_utility.name %>
-    </header>
-    <footer class="flex flex-row justify-between mt-3">
+    <%- card.with_header do %>
+      <h3><%= marketplace_stripe_utility.name %></h3>
+    <%- end %>
+
+    <%- card.with_footer(variant: :action_bar) do %>
       <%= render ButtonComponent.new(
-      label: "View #{t('marketplace.stripe_accounts.show.link_to')}",
-      title: "View #{t('marketplace.stripe_accounts.show.link_to')}",
-      href: marketplace.location(:index, child: :stripe_account),
-      method: :get,
-      scheme: :secondary) %>
-    </footer>
+        label: "View #{t('marketplace.stripe_accounts.show.link_to')}",
+        title: "View #{t('marketplace.stripe_accounts.show.link_to')}",
+        href: marketplace.location(:index, child: :stripe_account),
+        method: :get,
+        scheme: :secondary) %>
+    <%- end %>
   <%- else %>
-    <header class="flex"
->To start accepting payments, add your Stripe Account.</header>
-    <footer class="flex flex-row justify-between mt-3
-">
+    <%- card.with_header do %>
+      <h3>To start accepting payments, add your Stripe Account.</h3>
+    <%- end %>
+
+    <%- card.with_footer(variant: :action_bar) do %>
       <%= render ButtonComponent.new(
       label: "Add #{t('marketplace.stripe_accounts.show.link_to')}",
       title: "Add #{t('marketplace.stripe_accounts.show.link_to')}",
@@ -25,6 +26,6 @@
       scheme: :secondary
       )
       %>
-    </footer>
+    <%- end %>
   <%- end %>
 <%- end %>
