@@ -1,7 +1,8 @@
 class AddHeroImageToRooms < ActiveRecord::Migration[7.1]
-  disable_ddl_transaction!
-
   def change
-    add_reference :rooms, :hero_image, null: true, type: :uuid, index: {algorithm: :concurrently}
+    safety_assured {
+      add_column :rooms, :hero_image_id, :uuid, null: true, default: nil
+      add_foreign_key :rooms, :media, column: "hero_image_id"
+    }
   end
 end
