@@ -30,9 +30,7 @@ FactoryBot.define do
     end
 
     trait :with_hero_image do
-      after(:create) do |room, evaluator|
-        create(:media, room: room)
-      end
+      hero_image factory: :media
     end
   end
 end
