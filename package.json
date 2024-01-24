@@ -28,6 +28,9 @@
     "url": "https://github.com/zinc-collective/convene/issues"
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
+  "devDependencies": {
+    "prettier": "^3.2.4"
+  },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
