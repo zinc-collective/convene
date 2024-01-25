@@ -8,7 +8,7 @@ driver = new Builder()
 driver.manage().setTimeouts({ implicit: 1000 });
 function firefoxOption() {
   return process.env.HEADLESS
-    ? new firefox.Options().addArguments('--headless')
+    ? new firefox.Options().addArguments("--headless")
     : new firefox.Options();
 }
 export { driver };
