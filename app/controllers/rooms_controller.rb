@@ -25,7 +25,17 @@ class RoomsController < ApplicationController
 
   def update
     respond_to do |format|
-      if room.update(room_params)
+      # TODO: Move logic for Media resource management to a dedicated controller (see: https://github.com/zinc-collective/convene/pull/2101/files#r1464115624)
+      new_media = Media.create
+      new_media.upload.attach(room_params[:hero_image_upload])
+      room_params_for_update = {}.merge(
+        room_params.except(:hero_image_upload),
+        {
+          hero_image: new_media
+        }
+      )
+
+      if room.update(room_params_for_update)
         format.html do
           redirect_to [:edit, room.space], notice: t(".success", room_name: room.name)
         end

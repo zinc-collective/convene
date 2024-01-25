@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     "expired",
     "ignored",
     "revoked",
+    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
@@ -322,6 +323,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
   add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_tax_rates", "spaces", column: "bazaar_id"
   add_foreign_key "memberships", "invitations"
+  add_foreign_key "rooms", "media", column: "hero_image_id"
   add_foreign_key "space_agreements", "spaces"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end

@@ -28,5 +28,9 @@ FactoryBot.define do
         create_list(:furniture, evaluator.furniture_count, room: room)
       end
     end
+
+    trait :with_hero_image do
+      hero_image factory: :media
+    end
   end
 end
