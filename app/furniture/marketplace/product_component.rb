@@ -18,7 +18,7 @@ class Marketplace
     # @see https://www.ios-resolution.com/
     FULL_WIDTH_16_BY_9 = [1290, 726]
     def hero_image
-      product.photo.variant(resize_to_limit: FULL_WIDTH_16_BY_9)
+      product.photo.variant(resize_to_fill: FULL_WIDTH_16_BY_9)
     end
 
     def tax_rates
