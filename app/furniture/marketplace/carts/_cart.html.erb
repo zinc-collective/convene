@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <%- cart.cart_products.each do |cart_product| %>
+        <%- cart.cart_products.order(created_at: :desc).each do |cart_product| %>
           <%= render Marketplace::CartProductComponent.new(cart_product:) %>
         <%- end %>
       </tbody>
