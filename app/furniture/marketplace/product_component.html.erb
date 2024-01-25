@@ -1,17 +1,20 @@
 <%= render CardComponent.new(dom_id: dom_id(product)) do |card| %>
-  <%- card.with_header do %>
-    <h3 class="py-2"><%= name %></h3>
-    <%- if product.archived? %>
-      <span class="italic">(archived)</span>
-    <%- end %>
+  <%- card.with_header(variant: :no_padding) do %>
+    <% if product.photo.present? %>
+      <figure>
+        <%= image_tag hero_image, class: "rounded-t-lg w-full" %>
+        <figcaption class="px-2 pt-4 sm:px-4">
+          <h3><%= name %></h3>
+          <%- if product.archived? %>
+            <span class="italic">(archived)</span>
+          <%- end %>
+        </figcaption>
+      </figure>
+    <%- else %>
+      <h3 class="px-4"><%= name %></h3>
+    <% end %>
   <%- end %>
 
-
-  <% if product.photo.present? %>
-    <div>
-      <%= image_tag product.photo.variant(resize_to_limit: [150, 150]) %>
-    </div>
-  <% end %>
   <div class="text-sm italic">
     <%= description %>
   </div>
@@ -22,7 +25,6 @@
     </div>
     <p><%= price %></p>
   </div>
-
 
   <%- card.with_footer(variant: :action_bar) do %>
     <%= render edit_button if edit_button? %>

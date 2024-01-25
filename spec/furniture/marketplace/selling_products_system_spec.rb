@@ -45,7 +45,6 @@ describe "Marketplace: Selling Products", type: :system do
       end
 
       click_button(I18n.t("restore.link_to"))
-
       expect(page).to have_content(product.name)
       expect(product.reload).not_to be_archived
     end
