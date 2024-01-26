@@ -25,6 +25,10 @@ class Marketplace
       product.price * quantity
     end
 
+    def quantity_picker
+      QuantityPicker.new(cart_product: self)
+    end
+
     private
 
     def editable_cart
