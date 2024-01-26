@@ -24,7 +24,7 @@
     <%- cart_product = cart.cart_products.find_by(product:) %>
 
     <%- if !cart_product %>
-      <%= button_to("Add to Cart", cart.location(child: :cart_products), method: :post,  params: { cart_product: { product_id: product.id, quantity: 1 } }) %>
+      <%= button_to("Add to Cart", cart.location(child: :cart_products), method: :post,  params: { cart_product: { product_id: product.id, quantity: 1 } }, class: "w-full --secondary") %>
     <%- else %>
       <%= render cart_product.quantity_picker %>
     <%- end %>
