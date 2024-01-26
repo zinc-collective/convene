@@ -22,7 +22,7 @@ RSpec.describe Marketplace::CartProductComponent, type: :component do
     let(:cart_product) { build(:marketplace_cart_product, cart:, product:, quantity: 0) }
 
     it { is_expected.to have_no_button("➖") }
-    it { is_expected.to have_button("➕") }
+    it { is_expected.to have_button("Add to Cart") }
   end
 
   context "when the quantity is 1" do
