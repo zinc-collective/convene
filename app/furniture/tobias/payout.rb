@@ -6,12 +6,11 @@ class Tobias
     has_many :beneficiaries, through: :trust
     has_many :payments
 
-    monetize :payout_amount_cents
+    monetize :amount_cents
 
     def issue
-      per_beneficiary_amount = (payout_amount / beneficiaries.count)
+      per_beneficiary_amount = (amount / beneficiaries.count)
       beneficiaries.each do |beneficiary|
-
         payments.create_with(amount: per_beneficiary_amount).find_or_create_by(beneficiary_id: beneficiary.id)
       end
     end

@@ -11,7 +11,7 @@ class CreateTobiasPayouts < ActiveRecord::Migration[7.1]
     end
 
     create_table :tobias_payouts, id: :uuid do |t|
-      t.monetize :payout_amount
+      t.monetize :amount
       t.references :trust, type: :uuid, foreign_key: {to_table: :tobias_trusts}
       t.timestamps
     end

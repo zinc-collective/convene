@@ -1,5 +1,5 @@
 class Tobias
-  class Beneficiary < Record
+  class Beneficiary < ApplicationRecord
     self.table_name = "tobias_beneficiaries"
 
     belongs_to :trust

@@ -1,8 +1,7 @@
 class Tobias
-  class Trust < Record
+  class Trust < ApplicationRecord
     self.table_name = "tobias_trusts"
 
     has_many :beneficiaries
-
   end
 end
