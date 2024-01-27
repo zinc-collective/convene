@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_27_063826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -295,6 +295,38 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
   end
 
+  create_table "tobias_beneficiaries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "trust_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trust_id"], name: "index_tobias_beneficiaries_on_trust_id"
+  end
+
+  create_table "tobias_payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "payout_id"
+    t.uuid "beneficiary_id"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "USD", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["beneficiary_id"], name: "index_tobias_payments_on_beneficiary_id"
+    t.index ["payout_id"], name: "index_tobias_payments_on_payout_id"
+  end
+
+  create_table "tobias_payouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "payout_amount_cents", default: 0, null: false
+    t.string "payout_amount_currency", default: "USD", null: false
+    t.uuid "trust_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trust_id"], name: "index_tobias_payouts_on_trust_id"
+  end
+
+  create_table "tobias_trusts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "utility_hookups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "space_id"
     t.string "name", null: false
@@ -326,4 +358,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
   add_foreign_key "rooms", "media", column: "hero_image_id"
   add_foreign_key "space_agreements", "spaces"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
+  add_foreign_key "tobias_beneficiaries", "tobias_trusts", column: "trust_id"
+  add_foreign_key "tobias_payments", "tobias_beneficiaries", column: "beneficiary_id"
+  add_foreign_key "tobias_payments", "tobias_payouts", column: "payout_id"
+  add_foreign_key "tobias_payouts", "tobias_trusts", column: "trust_id"
 end
