@@ -96,7 +96,7 @@ describe "Marketplace: Buying Products", type: :system do
   end
 
   def add_product_to_cart(product)
-    within("##{dom_id(product).gsub("product", "cart_product")}") do
+    within("##{dom_id(product)}") do
       click_button("Add to Cart")
     end
   end

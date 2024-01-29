@@ -1,0 +1,32 @@
+<%= render CardComponent.new(dom_id: dom_id(product)) do |card| %>
+  <%- card.with_header(variant: :no_padding) do %>
+    <% if product.photo.present? %>
+      <figure>
+        <%= image_tag hero_image, class: "rounded-t-lg w-full" %>
+        <figcaption class="px-2 pt-4 sm:px-4">
+          <h3><%= name %></h3>
+        </figcaption>
+      </figure>
+    <%- else %>
+      <h3 class="px-4"><%= name %></h3>
+    <% end %>
+  <%- end %>
+
+  <div class="text-sm italic">
+    <%= description %>
+  </div>
+
+  <div class="text-right mt-3">
+    <p><%= price %></p>
+  </div>
+
+  <%- card.with_footer do %>
+    <%- cart_product = cart.cart_products.find_by(product:) %>
+
+    <%- if !cart_product %>
+      <%= button_to("Add to Cart", cart.location(child: :cart_products), method: :post,  params: { cart_product: { product_id: product.id, quantity: 1 } }, class: "w-full --secondary") %>
+    <%- else %>
+      <%= render cart_product.quantity_picker %>
+    <%- end %>
+  <%- end %>
+<%- end %>

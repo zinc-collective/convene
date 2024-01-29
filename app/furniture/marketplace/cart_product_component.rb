@@ -11,7 +11,7 @@ class Marketplace
     end
 
     def dom_id
-      super(product).gsub("product", "cart_product")
+      super(cart_product)
     end
   end
 end
