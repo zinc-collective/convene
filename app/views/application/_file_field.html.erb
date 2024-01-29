@@ -7,5 +7,5 @@
     </div>
   <% end %>
   <%= form.file_field attribute, required: required %>
-  <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
+  <%= render partial: "error", locals: { model: form.object || local_assigns[:model], attribute: attribute } %>
 </div>
