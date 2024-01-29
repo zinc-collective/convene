@@ -1,15 +1,17 @@
-<div class="<%== card_classes_wrapper %>">
+<div <%==attributes(classes: "shadow rounded-lg bg-white group-hover:bg-slate-50 flex flex-col justify-between") %>>
+ <% if header? %>
+  <%= header%>
+ <%- end %>
   <%#
     NOTE: content? is not always working as described, and is returning a proc in some cases rather than a boolean
   %>
   <% if content.present? %>
-    <div <%== attributes(classes: card_classes_content) %>>
+    <div class="flex flex-col h-full justify-between p-2 sm:p-4">
       <%= content %>
     </div>
   <% end %>
+
   <% if footer? %>
-    <div class="<%== card_classes_footer %>">
-      <%= footer %>
-    </div>
+    <%= footer %>
   <% end %>
 </div>

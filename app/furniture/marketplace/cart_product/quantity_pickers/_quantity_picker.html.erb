@@ -1,0 +1,13 @@
+<div class="flex flex-row justify-between items-center">
+  <%- if quantity_picker.quantity < 1%>
+    <span></span>
+  <%- elsif quantity_picker.quantity == 1 %>
+    <%= button_to("🗑️", quantity_picker.location, method: :delete) %>
+  <%- else %>
+    <%= button_to("➖", quantity_picker.location, method: :put, params: { cart_product: { quantity: quantity_picker.quantity - 1 } }) %>
+  <%- end %>
+
+  <span class="py-2 px-2 my-1 text-lg"><%= quantity_picker.quantity %></span>
+
+  <%= button_to("➕", quantity_picker.location, method: :put, params: { cart_product: { quantity: quantity_picker.quantity + 1 } }) %>
+</div>

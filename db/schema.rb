@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_enum :invitation_status, [
     "pending",
-    "sent",
     "accepted",
     "rejected",
     "expired",
     "ignored",
     "revoked",
+    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
@@ -231,6 +231,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
     t.index ["marketplace_id"], name: "index_marketplace_tax_rates_on_marketplace_id"
   end
 
+  create_table "media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "memberships", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "member_id"
     t.uuid "space_id"
@@ -260,6 +265,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
     t.datetime "updated_at", null: false
     t.uuid "space_id"
     t.string "description"
+    t.uuid "hero_image_id"
     t.index ["slug", "space_id"], name: "index_rooms_on_slug_and_space_id", unique: true
     t.index ["space_id"], name: "index_rooms_on_space_id"
   end
@@ -317,6 +323,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_21_025246) do
   add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_tax_rates", "spaces", column: "bazaar_id"
   add_foreign_key "memberships", "invitations"
+  add_foreign_key "rooms", "media", column: "hero_image_id"
   add_foreign_key "space_agreements", "spaces"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
