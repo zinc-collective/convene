@@ -9,7 +9,8 @@
       <%= room_form.submit %>
     </footer>
   <% end %>
-  <%= form_with url: room_images_path(room) do |room_images_form| %>
+  <%=  %>
+  <%= form_with url:polymorphic_path(room.location(child: :images))  do |room_images_form| %>
     <%- if room.hero_image&.upload&.attached? %>
       <div class="relative overflow-hidden bg-gray-100 dark:bg-gray-600">
         <%= image_tag room.hero_image&.upload %>
