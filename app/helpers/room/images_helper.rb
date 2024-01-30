@@ -1,2 +1,0 @@
-module Room::ImagesHelper
-end
