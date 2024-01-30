@@ -3,8 +3,7 @@ class Room
     def create
       new_media = Media.create
       new_media.upload.attach(params[:hero_image_upload])
-
-      if room.update({hero_image: new_media})
+      if room.update(hero_image: new_media)
         flash[:notice] = t(".success", room_name: room.name)
         redirect_to [:edit, room.space, room]
       else

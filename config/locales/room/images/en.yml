@@ -1,0 +1,6 @@
+en:
+  room:
+    images:
+      create:
+        success: "'%{room_name}'"
+        failure: "'%{room_name}'"
