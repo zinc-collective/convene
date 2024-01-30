@@ -124,9 +124,6 @@ en:
       update:
         success: "Changed %{quantity} %{product} on Cart"
         failure: "Could not change %{quantity} %{product} on Cart"
-    cart_product_component:
-      remove: Remove from Cart
-      add: Add to Cart
     payment_settings:
       index:
         link_to: "Payment Settings"

@@ -16,8 +16,8 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200 bg-white">
-        <%- cart.marketplace.products.unarchived.each do |product| %>
-          <%= render Marketplace::CartProductComponent.new(cart_product: cart.cart_products.find_or_initialize_by(product: product)) %>
+        <%- cart.cart_products.order(created_at: :desc).each do |cart_product| %>
+          <%= render Marketplace::CartProductComponent.new(cart_product:) %>
         <%- end %>
       </tbody>
       <%= render "marketplace/carts/footer", cart: cart %>
