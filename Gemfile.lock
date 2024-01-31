@@ -158,7 +158,7 @@ GEM
     crass (1.0.6)
     css_parser (1.16.0)
       addressable
-    cssbundling-rails (1.1.2)
+    cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
     date (3.3.3)
     debug_inspector (1.1.0)
