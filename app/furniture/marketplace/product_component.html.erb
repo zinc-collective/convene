@@ -4,8 +4,7 @@
       <figure>
         <%= image_tag hero_image, class: "rounded-t-lg w-full" %>
         <figcaption class="px-2 pt-4 sm:px-4">
-          <h3><%= name %></h3>
-          <p class="text-sm">Serves <%= product.servings %></p>
+          <%= render Marketplace::Product::TitleComponent.new(product:) %>
           <%- if product.archived? %>
             <span class="italic">(archived)</span>
           <%- end %>
@@ -14,8 +13,7 @@
     <% end %>
   <%- else %>
     <%- card.with_header do %>
-      <h3><%= name %></h3>
-      <p class="text-sm">Serves <%= product.servings %></p>
+      <%= render Marketplace::Product::TitleComponent.new(product:) %>
     <%- end %>
   <%- end %>
 
