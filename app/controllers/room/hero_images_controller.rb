@@ -1,9 +1,12 @@
 class Room
-  class ImagesController < ApplicationController
+  class HeroImagesController < ApplicationController
     def create
+      old_hero_image = room.hero_image
       new_media = Media.create
-      new_media.upload.attach(params[:hero_image_upload])
+      new_media.upload.attach(media_params[:upload])
+
       if room.update(hero_image: new_media)
+        old_hero_image&.destroy
         flash[:notice] = t(".success", room_name: room.name)
         redirect_to [:edit, room.space, room]
       else
@@ -12,14 +15,12 @@ class Room
       end
     end
 
+    def media_params
+      params.require(:media).permit(:upload)
+    end
+
     helper_method def room
-      @room ||= if params[:room_id]
-        current_space.rooms.friendly.find(params[:room_id])
-      else
-        # TODO error
-      end.tap do |room|
-        authorize(room)
-      end
+      @room ||= authorize(policy_scope(Room).friendly.find(params[:room_id]))
     end
   end
 end

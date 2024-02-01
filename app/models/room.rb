@@ -1,6 +1,6 @@
 # A Room in Convene acts as a gathering place.
 class Room < ApplicationRecord
-  belongs_to :hero_image, class_name: "Media", optional: true
+  belongs_to :hero_image, class_name: "Media", optional: true, dependent: :destroy
 
   # The space whose settings govern the default publicity and access controls for the Room.
   belongs_to :space, inverse_of: :rooms

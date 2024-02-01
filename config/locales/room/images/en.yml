@@ -1,6 +1,6 @@
 en:
   room:
-    images:
+    hero_images:
       create:
-        success: "'%{room_name}'"
-        failure: "'%{room_name}'"
+        success: "You've updated the hero image for Section '%{room_name}' successfully"
+        failure: "There was a problem updating the hero image for Section '%{room_name}'"
