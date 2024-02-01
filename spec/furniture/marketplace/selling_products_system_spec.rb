@@ -27,6 +27,7 @@ describe "Marketplace: Selling Products", type: :system do
 
       fill_in("Description", with: description)
       fill_in("Price", with: "10.00")
+      fill_in("Servings", with: 4)
 
       expect { click_button("Create") }.to change(marketplace.products, :count).by(1)
 
@@ -38,6 +39,7 @@ describe "Marketplace: Selling Products", type: :system do
         expect(page).to have_content("A Delicious Apple")
         expect(page).to have_content(description)
         expect(page).to have_content("$10.00")
+        expect(page).to have_content("Serves 4")
       end
     end
   end
