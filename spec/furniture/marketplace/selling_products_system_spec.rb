@@ -20,7 +20,7 @@ describe "Marketplace: Selling Products", type: :system do
 
       fill_in("Name", with: "A Delicious Apple")
 
-      description = <<~DESC.chomp.gsub("\n", "")
+      description = <<~DESC.gsub("\n", "")
         A red Apple, grown in the an Orchard
         Made with a Trunk.
       DESC
