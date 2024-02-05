@@ -12,6 +12,38 @@ describe "Marketplace: Selling Products", type: :system do
     sign_in(space.members.first, space)
   end
 
+  # @see https://github.com/zinc-collective/convene/issues/2168
+  describe "Listing Products for Sale" do
+    it "Adds the Product to the Menu" do # rubocop:disable RSpec/ExampleLength
+      visit(polymorphic_path(marketplace.location(child: :products)))
+      click_link("Add a Product")
+
+      fill_in("Name", with: "A Delicious Apple")
+
+      description = <<~DESC.gsub("\n", "")
+        A red Apple, grown in the an Orchard
+        Made with a Trunk.
+      DESC
+
+      fill_in("Description", with: description)
+      fill_in("Price", with: "10.00")
+      fill_in("Servings", with: 4)
+
+      expect { click_button("Create") }.to change(marketplace.products, :count).by(1)
+
+      created_product = marketplace.products.last
+
+      visit(polymorphic_path(marketplace.room.location))
+
+      within("##{dom_id(created_product)}") do
+        expect(page).to have_content("A Delicious Apple")
+        expect(page).to have_content(description)
+        expect(page).to have_content("$10.00")
+        expect(page).to have_content("Serves 4")
+      end
+    end
+  end
+
   describe "Archiving Products" do
     before do
       cart.cart_products.create(product:, quantity: 1)

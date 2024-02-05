@@ -1,5 +1,7 @@
 <%= form_with model: entry.location, class: "flex flex-col grow" do |f| %>
     <%= render "text_field", { attribute: :headline, form: f} %>
+    <%= render "text_area", { attribute: :summary, form: f} %>
+
     <%= render "text_area", { attribute: :body, form: f, field_classes: "grow", container_classes: "grow flex flex-col"} %>
     <%= render "datetime_field", { attribute: :published_at, form: f} %>
 

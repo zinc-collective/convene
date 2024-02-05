@@ -1,18 +1,20 @@
 <%= render CardComponent.new(dom_id: dom_id(product)) do |card| %>
-  <%- card.with_header(variant: :no_padding) do %>
-    <% if product.photo.present? %>
+  <% if product.photo.present? %>
+    <%- card.with_header(variant: :no_padding) do %>
       <figure>
         <%= image_tag hero_image, class: "rounded-t-lg w-full" %>
         <figcaption class="px-2 pt-4 sm:px-4">
-          <h3><%= name %></h3>
+          <%= render Marketplace::Product::TitleComponent.new(product:) %>
           <%- if product.archived? %>
             <span class="italic">(archived)</span>
           <%- end %>
         </figcaption>
       </figure>
-    <%- else %>
-      <h3 class="px-4"><%= name %></h3>
     <% end %>
+  <%- else %>
+    <%- card.with_header do %>
+      <%= render Marketplace::Product::TitleComponent.new(product:) %>
+    <%- end %>
   <%- end %>
 
   <div class="text-sm italic">
