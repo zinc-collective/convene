@@ -5,6 +5,7 @@ RSpec.describe Room::HeroImagesController do
   let(:membership) { create(:membership, space: space) }
   let!(:person) { membership.member }
   let(:room) { create(:room, space: space) }
+  let(:upload) { Rack::Test::UploadedFile.new("spec/fixtures/files/cc-kitten.jpg", "image/jpeg") }
 
   describe "#create" do
     subject(:do_request) do
@@ -14,9 +15,9 @@ RSpec.describe Room::HeroImagesController do
     end
 
     let(:path) { polymorphic_path(room.location(child: :hero_image)) }
-    let(:params) { {media: {upload: Rack::Test::UploadedFile.new("spec/fixtures/files/cc-kitten.jpg", "image/jpeg")}} }
+    let(:params) { {media: {upload: upload}} }
 
-    context "when the person is signed in as a member" do
+    context "when the person is signed in as a space member" do
       before { sign_in(space, person) }
 
       context "when a hero image does not exist" do
