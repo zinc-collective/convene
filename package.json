@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "prettier": "^3.2.4"
+    "prettier": "^3.2.5"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
