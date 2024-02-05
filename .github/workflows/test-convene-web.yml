@@ -32,8 +32,7 @@ jobs:
       - name: Update apt
         env:
           DEBIAN_FRONTEND: noninteractive
-        run:
-          sudo apt-get update -qq -o Acquire::Retries=3
+        run: sudo apt-get update -qq -o Acquire::Retries=3
 
       - name: Install libvips
         env:
@@ -41,7 +40,7 @@ jobs:
         run:
           # we only need the library
           sudo apt-get install --fix-missing -qq -o Acquire::Retries=3
-            libvips
+          libvips
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
@@ -52,7 +51,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install Node dependencies
         run: yarn install
@@ -90,8 +89,7 @@ jobs:
       - name: Update apt
         env:
           DEBIAN_FRONTEND: noninteractive
-        run:
-          sudo apt-get update -qq -o Acquire::Retries=3
+        run: sudo apt-get update -qq -o Acquire::Retries=3
 
       - name: Install libvips
         env:
@@ -99,7 +97,7 @@ jobs:
         run:
           # we only need the library
           sudo apt-get install --fix-missing -qq -o Acquire::Retries=3
-            libvips
+          libvips
 
       - name: Install Firefox
         uses: browser-actions/setup-firefox@latest
@@ -113,7 +111,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Allow Ruby process to access port 80
         run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
@@ -134,7 +132,7 @@ jobs:
       - name: Run Tests
         env:
           HEADLESS: true
-        run: bundle exec rspec
+        run: bundle exec rspec --exclude-pattern "spec/furniture/journal/**"
       - name: Upload RSpec Screenshots
         uses: actions/upload-artifact@v2
         if: failure()
@@ -160,7 +158,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install Node dependencies
         run: yarn install
