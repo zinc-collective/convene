@@ -1,6 +1,10 @@
 en:
+  helpers:
+    submit:
+      media:
+        create: Save changes
   room:
     hero_images:
       create:
-        success: "You've updated the hero image for Section '%{room_name}' successfully"
-        failure: "There was a problem updating the hero image for Section '%{room_name}'"
+        success: "You've successfully updated the header image for '%{room_name}'"
+        failure: "There was a problem updating the header image for '%{room_name}'"

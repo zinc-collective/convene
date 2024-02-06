@@ -1,4 +1,7 @@
-<%= render CardComponent.new do %>
+<%= render CardComponent.new do |card| %>
+  <%- card.with_header do %>
+    <h2>Basic info</h2>
+  <%- end %>
   <%= form_with model: room.location do |room_form| %>
     <%= render "text_field", attribute: :name, form: room_form %>
     <%= render "text_field", attribute: :slug, form: room_form %>
@@ -9,7 +12,11 @@
       <%= room_form.submit %>
     </footer>
   <% end %>
-  <%=  %>
+<% end %>
+<%= render CardComponent.new(classes: "mt-3") do |card| %>
+  <%- card.with_header do %>
+    <h2>Header Image</h2>
+  <%- end %>
   <%= form_with model: (room.hero_image || room.build_hero_image), url: room.location(child: :hero_image), method: :post do |room_images_form| %>
     <%- if room.hero_image&.upload&.attached? %>
       <div class="relative overflow-hidden bg-gray-100 dark:bg-gray-600">
@@ -17,12 +24,12 @@
       </div>
     <% end %>
     <%= render "file_field",
-        attribute: :upload,
-        form: room_images_form,
-        label: "Upload a header image",
-        label_hint: "Images are great for marketing!",
-        required: false
-    %>
+          attribute: :upload,
+          form: room_images_form,
+          label: "Upload a header image",
+          label_hint: "Images are great for marketing!",
+          required: false
+      %>
     <footer>
       <%= room_images_form.submit %>
     </footer>
