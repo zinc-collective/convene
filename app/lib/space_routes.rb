@@ -8,6 +8,7 @@ module SpaceRoutes
     router.resources :rooms, only: %i[show edit update new create destroy] do
       Furniture.append_routes(router)
       router.resources :furnitures, only: %i[create edit update destroy]
+      router.resource :hero_image, controller: "room/hero_images"
     end
 
     router.resources :utilities

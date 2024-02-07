@@ -39,15 +39,15 @@ gem "rswag-ui"
 # Allows us to render .markdown.erb files
 gem "redcarpet", "~> 3.6"
 # Breadcrumbs!
-gem "gretel", "~> 4.6"
+gem "gretel", "~> 5.0"
 # Better UI components
 gem "lookbook", ">= 2.0.0.beta.4"
-gem "view_component", "~> 3.9"
+gem "view_component", "~> 3.10"
 # QR Code Generation!
 gem "rqrcode", "~> 2.2"
 
 # Pagination!
-gem "pagy", "~> 6.2"
+gem "pagy", "~> 6.4"
 
 # Database Layer
 #
@@ -62,7 +62,7 @@ gem "ranked-model", "~> 0.4.9"
 gem "friendly_id", "~> 5.5.1"
 # Hashing / Encrypting data at rest
 gem "bcrypt", "~> 3.1.20"
-gem "lockbox", "1.3.0"
+gem "lockbox", "1.3.2"
 gem "rotp", "~> 6.3"
 gem "strong_migrations", "~> 1.7"
 # Soft Deletion
@@ -78,7 +78,7 @@ gem "pg", "~> 1.5"
 gem "image_processing"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.142", require: false
+gem "aws-sdk-s3", "~> 1.143", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -87,7 +87,7 @@ gem "tzinfo-data", "~> 1.2021", platforms: %i[mingw mswin x64_mingw jruby]
 # Performance Optimization
 #
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", "~> 1.17", require: false
+gem "bootsnap", "~> 1.18", require: false
 
 # Permissions and policies
 gem "pundit", "~> 2.3"
@@ -117,9 +117,9 @@ group :development, :test do
 
   # Our preferred testing library for Ruby and Rails projects
   gem "rails-controller-testing"
-  gem "rspec-rails", "~> 6.1.0"
+  gem "rspec-rails", "~> 6.1.1"
   gem "rswag-specs"
-  gem "shoulda-matchers", "~> 6.0"
+  gem "shoulda-matchers", "~> 6.1"
 
   gem "capybara"
   gem "selenium-webdriver"

@@ -41,9 +41,11 @@ describe "Marketplace: Buying Products", type: :system do
       create(:marketplace_delivery_area,
         marketplace: marketplace, label: "Oakland", price_cents: 10_00)
 
-      visit(polymorphic_path(marketplace.room.location))
+      visit(polymorphic_path(marketplace.location))
+
       select("Oakland", from: :cart_delivery_area_id)
       click_button("Save")
+
       expect(page).to have_content("Delivery Fee: $10.00")
     end
   end
@@ -94,8 +96,8 @@ describe "Marketplace: Buying Products", type: :system do
   end
 
   def add_product_to_cart(product)
-    within("##{dom_id(product).gsub("product", "cart_product")}") do
-      click_link(t("marketplace.cart_product_component.add"))
+    within("##{dom_id(product)}") do
+      click_button("Add to Cart")
     end
   end
 

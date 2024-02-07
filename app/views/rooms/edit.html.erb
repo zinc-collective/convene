@@ -3,6 +3,14 @@
 <div class="mt-3 gap-y-3">
   <%= render partial: 'form', locals: { room: room } %>
 </div>
+<%- if room.persisted? %>
+  <%= render CardComponent.new(classes: "mt-3") do |card| %>
+    <%- card.with_header do %>
+      <h2>Header Image</h2>
+    <%- end %>
+    <%= render "rooms/hero_image/form", room: room %>
+  <% end %>
+<%- end %>
 <div class="mt-3 gap-y-3">
   <%= render CardComponent.new do %>
     <h2>Gizmos</h2>

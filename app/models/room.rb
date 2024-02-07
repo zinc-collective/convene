@@ -1,8 +1,6 @@
 # A Room in Convene acts as a gathering place.
 class Room < ApplicationRecord
-  has_one_attached :image do |attachable|
-    attachable.variant :thumb, resize_to_limit: [150, 150]
-  end
+  belongs_to :hero_image, class_name: "Media", optional: true
 
   # The space whose settings govern the default publicity and access controls for the Room.
   belongs_to :space, inverse_of: :rooms

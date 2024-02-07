@@ -1,0 +1,17 @@
+<%= form_with model: (room.hero_image || room.build_hero_image), url: room.location(child: :hero_image), method: :post do |room_images_form| %>
+  <%- if room.hero_image&.upload&.attached? %>
+    <div class="relative overflow-hidden bg-gray-100 dark:bg-gray-600">
+      <%= image_tag room.hero_image&.upload %>
+    </div>
+  <% end %>
+  <%= render "file_field",
+          attribute: :upload,
+          form: room_images_form,
+          label: "Upload a header image",
+          label_hint: "Images are great for marketing!",
+          required: false
+      %>
+  <footer>
+    <%= room_images_form.submit %>
+  </footer>
+<% end %>

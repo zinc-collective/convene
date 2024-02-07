@@ -1,0 +1,154 @@
+name: Test Journal
+on: push
+
+env:
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  # Connect to locally-running Maildev for tests
+  SMTP_PORT: 1025
+  SMTP_DOMAIN: localhost
+  SMTP_ENABLE_TLS: false
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  HEADLESS: true
+
+jobs:
+  setup:
+    name: Install and cache dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Update apt
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          sudo apt-get update -qq -o Acquire::Retries=3
+
+      - name: Install libvips
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          # we only need the library
+          sudo apt-get install --fix-missing -qq -o Acquire::Retries=3
+            libvips
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node with cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install Node dependencies
+        run: yarn install
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: [setup]
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redis:
+        image: redis
+        ports:
+          # Maps port 6379 on service container to the host
+          - 6379:6379
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Update apt
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          sudo apt-get update -qq -o Acquire::Retries=3
+
+      - name: Install libvips
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run:
+          # we only need the library
+          sudo apt-get install --fix-missing -qq -o Acquire::Retries=3
+            libvips
+
+      - name: Install Firefox
+        uses: browser-actions/setup-firefox@latest
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node with cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Allow Ruby process to access port 80
+        run: sudo setcap 'cap_net_bind_service=+ep' `which ruby`
+
+      - name: Setup CI database.yml
+        run: cp config/database.yml.github-actions config/database.yml
+
+      - name: Setup rails
+        run: bin/setup-rails && bin/rails assets:precompile
+
+      - name: Run Tests
+        env:
+          HEADLESS: true
+        run: bundle exec rspec spec/furniture/journal
+      - name: Upload RSpec Screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: rspec-failed-screenshot
+          path: tmp/capybara/*.png
+
+  lint:
+    name: Run style checks
+    runs-on: ubuntu-latest
+    needs: [setup]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node with cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install Node dependencies
+        run: yarn install
+
+      - run: bundle exec rubocop --parallel --config .rubocop.yml
+      - run: yarn prettier --check "./**/*.{scss,css,js}"

@@ -2,6 +2,8 @@
   <%= form_with model: product.location do |f| %>
     <%= render "text_field", { attribute: :name, form: f} %>
     <%= render "text_area", { attribute: :description, form: f} %>
+    <%= render "number_field", { attribute: :servings, form: f, min: 0, step: 1} %>
+
     <%= render "money_field", { attribute: :price, form: f, min: 0, step: 0.01} %>
     <%= render "collection_check_boxes", { attribute: :tax_rate_ids, collection: bazaar.tax_rates, value_method: :id, text_method: :label, form: f} %>
     <%- if product.photo.present? %>

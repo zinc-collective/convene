@@ -1,4 +1,7 @@
-<%= render CardComponent.new do %>
+<%= render CardComponent.new do |card| %>
+  <%- card.with_header do %>
+    <h2>Basic info</h2>
+  <%- end %>
   <%= form_with model: room.location do |room_form| %>
     <%= render "text_field", attribute: :name, form: room_form %>
     <%= render "text_field", attribute: :slug, form: room_form %>
