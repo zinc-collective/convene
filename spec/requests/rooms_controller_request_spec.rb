@@ -136,7 +136,7 @@ RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
     }
 
     let(:path) { polymorphic_path(space.location(child: :rooms)) }
-    let(:room_params) { attributes_for(:room, :with_description, :with_slug, :with_image, space: space) }
+    let(:room_params) { attributes_for(:room, :with_description, :with_slug, :with_hero_image, space: space) }
 
     context "when the person is a guest" do
       it "does not allow creating a new room" do

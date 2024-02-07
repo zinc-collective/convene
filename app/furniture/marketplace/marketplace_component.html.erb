@@ -1,9 +1,26 @@
 <div class="grid grid-cols-1 gap-6">
-
-
+  <%- if marketplace.room.hero_image.attached? %>
+    <div class="relative overflow-hidden bg-cover bg-no-repeat" style="
+        background-position: 50%;
+        background-image: url(<%= rails_blob_url(marketplace.room.image, disposition: "attachment") %>);
+        height: 250px;
+        color: white;
+        ">
+      <div
+      class="h-full w-full overflow-hidden bg-[hsla(0,0%,0%,0.30)] bg-fixed">
+        <div class="flex h-full items-center justify-center">
+          <div class="">
+            <h1 class="">
+              <%= t('.header', space: marketplace.space.name, room: marketplace.room.name) %>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%- else %>
+    <%= t('.header', space: marketplace.space.name, room: marketplace.room.name) %>
+  <%- end %>
   <%= render delivery_area_component %>
-
   <%= render Marketplace::MenuComponent.new(marketplace:, cart:) %>
-
   <%= render cart %>
 </div>
