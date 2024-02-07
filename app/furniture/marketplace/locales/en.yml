@@ -114,6 +114,11 @@ en:
         link_to: Edit Tax Rate '%{name}'
       destroy:
         link_to: Remove Tax Rate '%{name}'
+    vendor_representatives:
+      index:
+        link_to: "Vendor Representatives"
+      new:
+        link_to: "Add a Representative"
     cart_products:
       destroy:
         success: "Removed %{quantity} %{product} from Cart"

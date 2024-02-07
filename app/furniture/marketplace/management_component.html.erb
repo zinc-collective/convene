@@ -20,6 +20,7 @@
         <%= render button({child: :orders}, icon: :cart)  if policy(marketplace.orders).index? %>
         <%= render button({child: :notification_methods}, icon: :bell)  if policy(marketplace.notification_methods).index? %>
         <%= render button({child: :flyer}, icon: :receipt_percent)  if policy(marketplace.flyer).show? %>
+        <%= render button({child: :vendor_representatives}, icon: :cake) if policy(marketplace.vendor_representatives).index? %>
       </nav>
     <% end %>
   <% end %>
