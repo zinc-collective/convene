@@ -1,0 +1,20 @@
+<%- breadcrumb :marketplace_tags, marketplace %>
+
+<%= render CardComponent.new do |card| %>
+
+  <%- marketplace.tags.each do |tag| %>
+    <%- tag.marketplace = marketplace %>
+    <div id="<%= dom_id(tag)%>" class="flex flex-row gap-3">
+      <span class="flex-grow">
+        <%= tag.label %>
+      </span>
+    </div>
+  <%- end %>
+
+  <%- card.with_footer(variant: :action_bar) do %>
+    <%- new_tag = bazaar.tags.new %>
+    <%- if policy(new_tag).create? %>
+      <%= link_to t("marketplace.tags.new.link_to"), marketplace.location(:new, child: :tag), class: "button w-full" %>
+    <%- end %>
+  <%- end %>
+<%- end %>

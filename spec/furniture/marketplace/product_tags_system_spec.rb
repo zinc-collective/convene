@@ -25,6 +25,9 @@ describe "Product Tags", type: :system do
       click_link("⚙️ Edit")
     end
 
+    check("🚫🌾 Gluten Free")
+    click_button("Save")
+
     visit(marketplace)
 
     within(muffins) do

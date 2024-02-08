@@ -2,3 +2,7 @@
 <%- if servings.present? %>
   <p class="text-sm">Serves <%= servings %></p>
 <%- end %>
+
+<%- if product.tags.present? %>
+  <p>(<%= product.tags.pluck(:label).join(", ") %>)</p>
+<%- end %>

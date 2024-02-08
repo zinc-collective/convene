@@ -1,0 +1,6 @@
+<%= form_with(model: tag.location) do |form| %>
+
+<%= render "text_field", attribute: :label, form: form %>
+
+<%= form.submit %>
+<%- end %>

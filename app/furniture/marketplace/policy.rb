@@ -2,7 +2,7 @@ class Marketplace
   class Policy < ApplicationPolicy
     def create?
       return true if current_person.operator?
-      return true if current_person.member_of?(marketplace.space)
+      return true if current_person.member_of?(space)
 
       return true if shopper&.person.blank? && !current_person.authenticated?
 
@@ -23,6 +23,7 @@ class Marketplace
 
       object.marketplace if object.respond_to?(:marketplace)
     end
+    delegate :space, to: :marketplace
 
     module SpecFactories
       def self.included(spec)
