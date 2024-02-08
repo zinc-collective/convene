@@ -1,19 +1,17 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class ProductPolicy < Policy
-    alias_method :product, :object
+  class VendorRepresentativePolicy < Policy
+    alias_method :vendor_representative, :object
     def permitted_attributes(_params = nil)
-      %i[name description price_cents price_currency price photo restore servings] + [tax_rate_ids: []]
+      %i[email_address person_id]
     end
 
     def update?
       return false unless current_person.authenticated?
-      return true if marketplace.vendor_representatives.exists?(person: current_person)
 
       super
     end
-
     alias_method :create?, :update?
 
     def show?

@@ -16,6 +16,7 @@ class Marketplace
     has_many :delivery_areas, inverse_of: :marketplace, dependent: :destroy
 
     has_many :notification_methods, inverse_of: :marketplace, dependent: :destroy
+    has_many :vendor_representatives, inverse_of: :marketplace, dependent: :destroy
 
     setting :stripe_account
     alias_method :vendor_stripe_account, :stripe_account

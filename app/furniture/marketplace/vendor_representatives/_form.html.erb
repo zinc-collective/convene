@@ -1,0 +1,7 @@
+<%= render CardComponent.new(dom_id: dom_id(vendor_representative)) do %>
+  <%= form_with model: vendor_representative.location do |f| %>
+    <%= render "email_field", { attribute: :email_address, form: f } %>
+
+    <%= f.submit %>
+  <%- end %>
+<%- end %>

@@ -74,6 +74,16 @@ crumb :edit_marketplace_product do |product|
   link t("marketplace.products.edit.link_to", name: product.name), product.location(:edit)
 end
 
+crumb :marketplace_vendor_representatives do |marketplace|
+  parent :edit_marketplace, marketplace
+  link t("marketplace.vendor_representatives.index.link_to"), marketplace.location(child: :vendor_representatives)
+end
+
+crumb :new_marketplace_vendor_representative do |vendor_representative|
+  parent :edit_marketplace, vendor_representative.marketplace
+  link t("marketplace.vendor_representatives.new.link_to"), marketplace.location(:new, child: :vendor_representative)
+end
+
 crumb :marketplace_delivery_areas do |marketplace|
   parent :edit_marketplace, marketplace
   link t("marketplace.delivery_areas.index.link_to"), marketplace.location(child: :delivery_areas)

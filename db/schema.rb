@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_01_014607) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_07_040004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -233,6 +233,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_014607) do
     t.index ["marketplace_id"], name: "index_marketplace_tax_rates_on_marketplace_id"
   end
 
+  create_table "marketplace_vendor_representatives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "marketplace_id"
+    t.uuid "person_id"
+    t.string "email_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marketplace_id"], name: "index_marketplace_vendor_representatives_on_marketplace_id"
+    t.index ["person_id"], name: "index_marketplace_vendor_representatives_on_person_id"
+  end
+
   create_table "media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -324,6 +334,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_014607) do
   add_foreign_key "marketplace_shoppers", "people"
   add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_tax_rates", "spaces", column: "bazaar_id"
+  add_foreign_key "marketplace_vendor_representatives", "furnitures", column: "marketplace_id"
+  add_foreign_key "marketplace_vendor_representatives", "people"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "rooms", "media", column: "hero_image_id"
   add_foreign_key "space_agreements", "spaces"
