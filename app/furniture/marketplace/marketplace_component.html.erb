@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 gap-6">
   <%- if hero_image.present? %>
-    <%= image_tag hero_image %>
+    <%= image_tag hero_image, class: "rounded-lg w-full" %>
   <%- end %>
   <%= render delivery_area_component %>
   <%= render Marketplace::MenuComponent.new(marketplace:, cart:) %>

@@ -1,11 +1,10 @@
 class CardComponent < ApplicationComponent
   attr_accessor :media
-  FULL_WIDTH_16_BY_9 = [1290, 726]
 
   def initialize(media: nil, **kwargs)
     super(**kwargs)
 
-    self.media = media&.variant(resize_to_fill: FULL_WIDTH_16_BY_9)
+    self.media = media
   end
 
   HEADER_VARIANTS = {
@@ -26,4 +25,8 @@ class CardComponent < ApplicationComponent
     classes += " rounded-t-none" unless content? || header?
     content_tag(:footer, class: classes, &block)
   }
+
+  def head_image
+    media&.upload&.variant(resize_to_fill: Media::FULL_WIDTH_16_BY_9)
+  end
 end

@@ -33,7 +33,7 @@ class Marketplace
     end
 
     def hero_image
-      marketplace.room.hero_image&.upload&.variant(resize_to_fill: [1290, 726])
+      marketplace.room.hero_image&.upload&.variant(resize_to_fill: Media::FULL_WIDTH_16_BY_9)
     end
   end
 end
