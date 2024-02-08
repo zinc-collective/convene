@@ -1,5 +1,17 @@
 class CardComponent < ApplicationComponent
-  HEADER_VARIANTS = {default: "p-2 sm:p-4", no_padding: ""}
+  attr_accessor :media
+  FULL_WIDTH_16_BY_9 = [1290, 726]
+
+  def initialize(media:, **kwargs)
+    super(**kwargs)
+
+    self.media = media&.variant(resize_to_fill: FULL_WIDTH_16_BY_9)
+  end
+
+  HEADER_VARIANTS = {
+    default: "p-2 sm:p-4",
+    no_padding: ""
+  }
   renders_one :header, ->(variant: :default, &block) {
     content_tag(:header, class: HEADER_VARIANTS.fetch(variant), &block)
   }

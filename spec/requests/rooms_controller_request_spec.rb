@@ -136,7 +136,7 @@ RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
     }
 
     let(:path) { polymorphic_path(space.location(child: :rooms)) }
-    let(:room_params) { attributes_for(:room, :with_description, :with_slug, space: space) }
+    let(:room_params) { attributes_for(:room, :with_description, :with_slug, :with_hero_image, space: space) }
 
     context "when the person is a guest" do
       it "does not allow creating a new room" do
@@ -157,6 +157,7 @@ RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
         expect(created_room.slug).to eql(room_params[:slug])
         expect(created_room.description).to eql(room_params[:description])
         expect(response).to redirect_to(polymorphic_path(space.rooms.last.location(:edit)))
+        expect(created_room.image).to be_present
       end
 
       context "when the space has an entrance" do
@@ -167,6 +168,23 @@ RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
           expect(response).to redirect_to(polymorphic_path(space.rooms.order(created_at: :desc).first.location(:edit)))
         end
       end
+    end
+  end
+
+  describe "#update" do
+    subject(:perform_request) do
+      patch space_room_path(room.space, room), params: {room: {remove_image: 1}}
+    end
+
+    let(:room) { create(:room, :with_furniture, :with_image, space: space) }
+
+    before { sign_in(space, person) }
+
+    it "removes an attachment" do
+      perform_request
+      room.reload
+
+      expect(room.image).not_to be_present
     end
   end
 end
