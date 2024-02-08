@@ -3,7 +3,7 @@
 <%= render CardComponent.new do |card| %>
 
   <%- marketplace.vendor_representatives.each do |vendor_representative| %>
-    <div class="flex flex-row gap-3">
+    <div id="<%= dom_id(vendor_representative)%>" class="flex flex-row gap-3">
       <span class="flex-initial">
         <%- if vendor_representative.claimed? %>
           ✅

@@ -13,7 +13,7 @@ class Marketplace
       authorize(vendor_representative).save
 
       if vendor_representative.persisted?
-        redirect_to marketplace.location(child: :vendor_representatives), notice: t(".success", name: vendor_representative.email_address)
+        redirect_to marketplace.location(child: :vendor_representatives), notice: t(".success", email_address: vendor_representative.email_address)
       else
         render :new, status: :unprocessable_entity
       end
@@ -25,10 +25,10 @@ class Marketplace
 
     def update
       if authorize(vendor_representative).update(vendor_representative_params)
-        redirect_to marketplace.location(child: :vendor_representatives), notice: t(".success", name: vendor_representative.email_address)
+        redirect_to marketplace.location(child: :vendor_representatives), notice: t(".success", email_address: vendor_representative.email_address)
 
       else
-        redirect_to marketplace.location(child: :vendor_representatives), notice: t(".failure", name: vendor_representative.email_address)
+        redirect_to marketplace.location(child: :vendor_representatives), notice: t(".failure", email_address: vendor_representative.email_address)
 
       end
     end

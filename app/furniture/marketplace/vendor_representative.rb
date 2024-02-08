@@ -4,7 +4,7 @@ class Marketplace
 
     belongs_to :marketplace, inverse_of: :vendor_representatives
     has_one :room, through: :marketplace
-    belongs_to :person
+    belongs_to :person, optional: true
 
     attribute :email_address, :string
     validates :email_address, uniqueness: true, presence: true
@@ -16,7 +16,7 @@ class Marketplace
     end
 
     def claimable?
-      matching_person.present?
+      !claimed? && matching_person.present?
     end
 
     def matching_person
