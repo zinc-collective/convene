@@ -2,7 +2,7 @@ class CardComponent < ApplicationComponent
   attr_accessor :media
   FULL_WIDTH_16_BY_9 = [1290, 726]
 
-  def initialize(media:, **kwargs)
+  def initialize(media: nil, **kwargs)
     super(**kwargs)
 
     self.media = media&.variant(resize_to_fill: FULL_WIDTH_16_BY_9)
