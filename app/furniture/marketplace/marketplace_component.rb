@@ -31,9 +31,5 @@ class Marketplace
         Shopper.find_or_create_by(person: current_person)
       end
     end
-
-    def hero_image
-      marketplace.room.hero_image&.upload&.variant(resize_to_fill: Media::FULL_WIDTH_16_BY_9)
-    end
   end
 end
