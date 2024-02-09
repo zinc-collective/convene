@@ -2,9 +2,6 @@
 <% edit_href = furniture.location(:edit) if furniture.configurable? %>
 <% edit_href = furniture.to_kind_class.location(:edit) if furniture.to_kind_class.has_controller_edit? %>
 <section id="<%= dom_id(furniture) %>" class="mt-4 relative">
-  <%- if furniture.room.hero_image&.upload.present? %>
-    <%= image_tag furniture.room.hero_image&.upload&.variant(resize_to_fill: Media::FULL_WIDTH_16_BY_9), class: "w-full" %>
-  <%- end %>
   <%- if local_assigns[:editing] %>
     <header class="flex border-b border-dashed border-orange-500 justify-between">
       <h4><%= furniture.title %></h4>
