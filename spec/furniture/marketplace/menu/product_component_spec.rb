@@ -5,11 +5,23 @@ RSpec.describe Marketplace::Menu::ProductComponent, type: :component do
 
   let(:component) { described_class.new(product:, cart:) }
   let(:marketplace) { create(:marketplace) }
-  let(:cart) { create(:marketplace_cart, marketplace:) }
-  let(:product) { create(:marketplace_product, marketplace:) }
+  let(:cart) { marketplace.cart_for_shopper(shopper: create(:marketplace_shopper)) }
+  let(:product) { create(:marketplace_product, description: product_description, marketplace:) }
+  let(:product_description) do
+    <<~DESC.chomp
+      A delicious fritter made with love
+
+      Make sure to **eat it warm!**
+    DESC
+  end
 
   it { is_expected.to have_content(vc_test_controller.view_context.humanized_money_with_symbol(product.price)) }
   it { is_expected.to have_no_content("Serves") }
+
+  it "renders the description as markdown" do
+    expect(output).to have_css("p", text: "A delicious fritter made with love")
+    expect(output).to have_css("strong", text: "eat it warm!")
+  end
 
   context "when the product has servings" do
     let(:product) { create(:marketplace_product, marketplace:, servings: 2) }
