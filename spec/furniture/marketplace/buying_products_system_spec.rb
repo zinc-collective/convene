@@ -50,6 +50,19 @@ describe "Marketplace: Buying Products", type: :system do
     end
   end
 
+  describe "when the `Marketplace` has one active `DeliveryArea`" do
+    it "allows Checkout" do
+      archived_delivery_area = create(:marketplace_delivery_area,
+        marketplace: marketplace, label: "Oakland", price_cents: 10_00)
+      archived_delivery_area.archive
+      visit(polymorphic_path(marketplace.room.location))
+
+      add_product_to_cart(marketplace.products.first)
+
+      expect { click_link("Checkout") }.not_to raise_error
+    end
+  end
+
   it "Doesn't offer archived Products for sale" do
     archived_product = create(:marketplace_product, :archived, marketplace:)
 
