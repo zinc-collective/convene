@@ -132,7 +132,7 @@ class Marketplace
     end
 
     def default_delivery_area
-      (delivery_areas.size == 1) ? delivery_areas.first : nil
+      (delivery_areas.unarchived.size == 1) ? delivery_areas.unarchived.first : nil
     end
   end
 end
