@@ -15,3 +15,6 @@ ActiveStorage.start();
 
 import "@hotwired/turbo-rails";
 import "./controllers/index.js";
+
+import "trix";
+import "@rails/actiontext";
