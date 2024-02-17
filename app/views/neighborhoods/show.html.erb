@@ -5,7 +5,7 @@
     <%= render @records %>
   </div>
 
-  <%== pagy_nav(@pagy, nav_extra: 'flex justify-between') %>
+  <%== pagy_nav(@pagy) %>
 
   <%- if policy(Space).new? %>
     <div class="text-center w-full">
