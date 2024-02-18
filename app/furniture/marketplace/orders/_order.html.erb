@@ -14,10 +14,10 @@
     <span class="col-span-2 text-right"><%= humanized_money_with_symbol(ordered_product.price) %></span>
 
     <%- if ordered_product.tax_amount.positive? %>
-      <span class="col-span-4 text-sm italic mb-4">
+      <span class="col-span-4 text-sm mb-4">
         <%= ordered_product.tax_rates.map(&:label).to_sentence %>
       </span>
-      <span class="col-span-2 text-right text-sm italic"><%= humanized_money_with_symbol(ordered_product.tax_amount) %></span>
+      <span class="col-span-2 text-right text-sm"><%= humanized_money_with_symbol(ordered_product.tax_amount) %></span>
     <%- end %>
   <%- end %>
   <hr class="col-span-6 mb-4" />
@@ -35,7 +35,7 @@
       <div class="grid grid-cols-2">
         <%- order.events.each do |event| %>
           <p><%= event.description%></p>
-          <p class="italic text-right"><%= l(event.created_at, format: :long_ordinal) %></p>
+          <p class="text-right"><%= l(event.created_at, format: :long_ordinal) %></p>
         <%- end %>
       </div>
     </div>

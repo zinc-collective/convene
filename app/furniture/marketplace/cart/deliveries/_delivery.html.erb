@@ -4,7 +4,7 @@
     <h3 class="font-bold">Delivering to:</h3>
     <p>
       <%= render(delivery.delivery_area) %><br />
-      <span class="text-sm font-light italic"><%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %></span>
+      <span class="text-sm font-light"><%= render(Marketplace::Cart::DeliveryExpectationsComponent.new(cart: delivery.cart)) %></span>
     </p>
 
     <div class="rounded p-2 bg-orange-50 mb-3">
@@ -13,7 +13,7 @@
         <%= number_to_phone(delivery.contact_phone_number) %><br />
         <%= delivery.delivery_address %><br />
 
-        <span class="italic text-gray-800"><%= delivery.delivery_notes %></span>
+        <span class="text-gray-800"><%= delivery.delivery_notes %></span>
       </p>
       <p class="text-sm">
         <%= link_to(t("marketplace.cart.deliveries.edit.link_to"), delivery.location(:edit)) %>
