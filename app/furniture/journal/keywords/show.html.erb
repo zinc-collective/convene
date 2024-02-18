@@ -1,9 +1,9 @@
 <h1><%= keyword.canonical_keyword %></h1>
 <%- if keyword.aliases.present? %>
-  <p class="italic">Also known as <%= to_sentence(keyword.aliases) %></p>
+  <p class="text-sm">Also known as <%= to_sentence(keyword.aliases) %></p>
 <%- end %>
 
-<h2>Entries about <span class="italic"><%= keyword.canonical_keyword %></span></h2>
+<h2>Entries about <span class="text-gray-800"><%= keyword.canonical_keyword %></span></h2>
 <%= render Journal::NewEntryButtonComponent.new(keyword: keyword) %>
 <ul>
   <%- policy_scope(keyword.entries).each do |entry|%>
