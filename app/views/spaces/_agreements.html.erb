@@ -1,7 +1,7 @@
 <%= render CardComponent.new(classes: "mt-3 gap-y-3") do %>
   <header>
     <h3><%= t('space.agreements.index.link_to') %></h3>
-    <p class="text-sm italic"><%= t('space.agreements.help_text') %></p>
+    <p class="text-sm"><%= t('space.agreements.help_text') %></p>
   </header>
   <div class="flex flex-wrap gap-y-6">
     <%- space.agreements.each do |agreement| %>
