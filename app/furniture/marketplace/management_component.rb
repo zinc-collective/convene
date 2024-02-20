@@ -12,19 +12,19 @@ class Marketplace
       OnboardingComponent.new(marketplace: marketplace)
     end
 
-    def button(location, icon:)
-      label, href = if location.is_a?(Symbol)
-        [t("marketplace.marketplace.#{location}.link_to"),
-          marketplace.location(location)]
-      elsif location[:child].to_s.pluralize == location[:child].to_s
-        [t("marketplace.#{location[:child]}.index.link_to"),
-          marketplace.location(**location)]
+    def link_to_child(child, icon:)
+      label, href = if child.to_s.pluralize == child.to_s
+        [t("marketplace.#{child}.index.link_to"),
+          marketplace.location(child:)]
       else
-        [t("marketplace.#{location[:child].to_s.pluralize}.show.link_to"),
-          marketplace.location(**location)]
+        [t("marketplace.#{child.to_s.pluralize}.show.link_to"),
+          marketplace.location(child:)]
       end
 
-      ButtonComponent.new(label: label, icon: icon, href: href, turbo_stream: false, method: :get, scheme: :secondary)
+      link_to(href, class: "button --secondary w-full text-left") do
+        render(SvgComponent.new(icon:, classes: "w-6 h-6 mr-2 inline-block")) +
+          label
+      end
     end
   end
 end

@@ -13,14 +13,14 @@
     <%= content %>
     <% card.with_footer do %>
       <nav class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-        <%= render button({child: :payment_settings}, icon: :money) if policy(marketplace).edit? %>
-        <%= render button({child: :products}, icon: :tag)  if policy(marketplace.products).index? %>
-        <%= render button({child: :delivery_areas}, icon: :map)  if policy(marketplace.delivery_areas).index? %>
-        <%= render button({child: :tax_rates}, icon: :receipt_percent)  if policy(marketplace.tax_rates).index? %>
-        <%= render button({child: :orders}, icon: :cart)  if policy(marketplace.orders).index? %>
-        <%= render button({child: :notification_methods}, icon: :bell)  if policy(marketplace.notification_methods).index? %>
-        <%= render button({child: :flyer}, icon: :receipt_percent)  if policy(marketplace.flyer).show? %>
-        <%= render button({child: :vendor_representatives}, icon: :cake) if policy(marketplace.vendor_representatives).index? %>
+        <%= link_to_child(:payment_settings, icon: :money) if policy(marketplace).edit? %>
+        <%= link_to_child(:products, icon: :cake)  if policy(marketplace.products).index? %>
+        <%= link_to_child(:delivery_areas, icon: :map)  if policy(marketplace.delivery_areas).index? %>
+        <%= link_to_child(:tax_rates, icon: :receipt_percent)  if policy(marketplace.tax_rates).index? %>
+        <%= link_to_child(:orders, icon: :cart)  if policy(marketplace.orders).index? %>
+        <%= link_to_child(:notification_methods, icon: :bell_alert)  if policy(marketplace.notification_methods).index? %>
+        <%= link_to_child(:flyer, icon: :qr_code)  if policy(marketplace.flyer).show? %>
+        <%= link_to_child(:vendor_representatives, icon: :building_storefront) if policy(marketplace.vendor_representatives).index? %>
       </nav>
     <% end %>
   <% end %>
