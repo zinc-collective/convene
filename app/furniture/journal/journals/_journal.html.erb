@@ -7,7 +7,7 @@
     <%= render Journal::EntryComponent.with_collection(@entries) %>
   </div>
 
-  <%== pagy_nav(@pagy, nav_extra: 'flex justify-between') %>
+  <%== pagy_nav(@pagy) %>
 
   <%= render Journal::NewEntryButtonComponent.new(journal: journal) %>
 </section>
