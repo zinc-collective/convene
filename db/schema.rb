@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_16_213129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -29,6 +29,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     "active",
     "revoked",
   ], force: :cascade
+
+  create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -77,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -116,6 +126,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "keywords", array: true
+    t.text "summary"
     t.index ["journal_id"], name: "index_journal_entries_on_journal_id"
   end
 
@@ -209,6 +220,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "discarded_at"
+    t.integer "servings"
     t.index ["discarded_at"], name: "index_marketplace_products_on_discarded_at"
     t.index ["marketplace_id"], name: "index_marketplace_products_on_marketplace_id"
   end
@@ -229,6 +241,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     t.uuid "bazaar_id"
     t.index ["bazaar_id"], name: "index_marketplace_tax_rates_on_bazaar_id"
     t.index ["marketplace_id"], name: "index_marketplace_tax_rates_on_marketplace_id"
+  end
+
+  create_table "marketplace_vendor_representatives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "marketplace_id"
+    t.uuid "person_id"
+    t.string "email_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["marketplace_id"], name: "index_marketplace_vendor_representatives_on_marketplace_id"
+    t.index ["person_id"], name: "index_marketplace_vendor_representatives_on_person_id"
   end
 
   create_table "media", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -253,7 +275,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "operator", default: false, null: false
+    t.boolean "operator", default: false
     t.index ["email"], name: "index_people_on_email", unique: true
   end
 
@@ -322,6 +344,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_034325) do
   add_foreign_key "marketplace_shoppers", "people"
   add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_tax_rates", "spaces", column: "bazaar_id"
+  add_foreign_key "marketplace_vendor_representatives", "furnitures", column: "marketplace_id"
+  add_foreign_key "marketplace_vendor_representatives", "people"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "rooms", "media", column: "hero_image_id"
   add_foreign_key "space_agreements", "spaces"

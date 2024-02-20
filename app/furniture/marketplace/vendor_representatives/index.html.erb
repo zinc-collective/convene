@@ -1,0 +1,35 @@
+<%- breadcrumb :marketplace_vendor_representatives, marketplace %>
+
+<%= render CardComponent.new do |card| %>
+
+  <%- marketplace.vendor_representatives.each do |vendor_representative| %>
+    <div id="<%= dom_id(vendor_representative)%>" class="flex flex-row gap-3">
+      <span class="flex-initial">
+        <%- if vendor_representative.claimed? %>
+          ✅
+        <%- else %>
+          <%- if vendor_representative.claimable? %>
+            <%= button_to "👍", vendor_representative.location, method: :put, params: { vendor_representative: { person_id: vendor_representative.matching_person.id } }%>
+          <%- else %>
+            <span class="button">🛌</span>
+          <%- end %>
+        <%- end %>
+      </span>
+      <span class="flex-grow">
+        <%= vendor_representative.email_address %>
+      </span>
+      <span class="flex-initial">
+        <%- if policy(vendor_representative).destroy? %>
+          <%= button_to "🗑️", vendor_representative.location, method: :delete %>
+        <%- end %>
+      </span>
+    </div>
+  <%- end %>
+
+  <%- card.with_footer(variant: :action_bar) do %>
+    <%- new_vendor_representative = marketplace.vendor_representatives.new %>
+    <%- if policy(new_vendor_representative).create? %>
+      <%= link_to t("marketplace.vendor_representatives.new.link_to"), marketplace.location(:new, child: :vendor_representative), class: "button w-full" %>
+    <%- end %>
+  <%- end %>
+<%- end %>

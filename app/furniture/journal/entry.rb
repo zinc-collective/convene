@@ -33,6 +33,9 @@ class Journal
 
     scope :matching_keywords, ->(keywords) { where("keywords::text[] && ARRAY[?]::text[]", keywords) }
 
+    SUMMARY_MAX_LENGTH = 300
+    validates :summary, length: {maximum: SUMMARY_MAX_LENGTH, allow_blank: true}
+
     def migrate_to(journal:, keywords: [])
       new_body = keywords.present? ? body + "\n##{keywords.join(" #")}" : body
       update(journal: journal, body: new_body)

@@ -2,5 +2,5 @@
 <%- @pagy, @records = pagy(orders.paid) %>
 <div class="mx-auto w-full max-w-prose">
   <%= render @records %>
-  <%== pagy_nav(@pagy, nav_extra: 'flex justify-between mt-4') %>
+  <%== pagy_nav(@pagy) %>
 </div>

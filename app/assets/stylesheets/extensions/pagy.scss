@@ -1,0 +1,8 @@
+.pagy-nav {
+  @apply flex justify-between;
+
+  .page.active a,
+  .page.disabled a {
+    @apply no-underline;
+  }
+}

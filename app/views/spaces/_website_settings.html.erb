@@ -1,7 +1,7 @@
 <%= render CardComponent.new(classes: "mt-3 gap-y-3") do %>
   <header>
     <h3><%= t('website_settings.index.link_to') %></h3>
-    <p class="text-sm italic"><%= t('website_settings.help_text') %></p>
+    <p class="text-sm"><%= t('website_settings.help_text') %></p>
   </header>
 
   <%= form_with model: space.location, data: { turbo: false } do | web_settings_form | %>

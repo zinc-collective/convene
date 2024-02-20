@@ -1,7 +1,14 @@
-<div <%==attributes(classes: "shadow rounded-lg bg-white group-hover:bg-slate-50 flex flex-col justify-between") %>>
- <% if header? %>
-  <%= header%>
- <%- end %>
+<div <%==attributes(classes: "shadow rounded-lg bg-white group-hover:bg-slate-50 flex flex-col justify-between overflow-hidden") %>>
+  <%- if head_image.present? %>
+    <figure>
+      <%= image_tag head_image, class: "rounded-t-lg w-full" %>
+      <figcaption class="px-2 pt-4 sm:px-4">
+        <%= header %>
+      </figcaption>
+    </figure>
+  <%- else %>
+    <%= header %>
+  <%- end %>
   <%#
     NOTE: content? is not always working as described, and is returning a proc in some cases rather than a boolean
   %>
@@ -10,7 +17,6 @@
       <%= content %>
     </div>
   <% end %>
-
   <% if footer? %>
     <%= footer %>
   <% end %>

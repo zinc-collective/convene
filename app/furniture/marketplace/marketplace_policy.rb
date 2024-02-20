@@ -8,7 +8,9 @@ class Marketplace
     end
 
     def create?
-      current_person.operator? || current_person.member_of?(marketplace.space)
+      current_person.operator? ||
+        current_person.member_of?(marketplace.space) ||
+        marketplace.vendor_representatives.exists?(person: current_person)
     end
 
     alias_method :update?, :create?

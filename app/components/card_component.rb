@@ -1,5 +1,16 @@
 class CardComponent < ApplicationComponent
-  HEADER_VARIANTS = {default: "p-2 sm:p-4", no_padding: ""}
+  attr_accessor :media
+
+  def initialize(media: nil, **kwargs)
+    super(**kwargs)
+
+    self.media = media
+  end
+
+  HEADER_VARIANTS = {
+    default: "p-2 sm:p-4",
+    no_padding: ""
+  }
   renders_one :header, ->(variant: :default, &block) {
     content_tag(:header, class: HEADER_VARIANTS.fetch(variant), &block)
   }
@@ -14,4 +25,8 @@ class CardComponent < ApplicationComponent
     classes += " rounded-t-none" unless content? || header?
     content_tag(:footer, class: classes, &block)
   }
+
+  def head_image
+    media&.upload&.variant(resize_to_fill: Media::FULL_WIDTH_16_BY_9)
+  end
 end

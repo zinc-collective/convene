@@ -64,6 +64,15 @@ RSpec.describe Marketplace::Marketplace, type: :model do
         cart = marketplace.cart_for_shopper(shopper:)
         expect(cart.delivery_area).to be_nil
       end
+
+      context "when only one of them is unarchived" do
+        before { marketplace.delivery_areas.first.archive }
+
+        it "sets the default delivery area to the single unarchived one" do
+          cart = marketplace.cart_for_shopper(shopper:)
+          expect(cart.delivery_area).to eq(marketplace.delivery_areas.unarchived.first)
+        end
+      end
     end
   end
 

@@ -1,20 +1,11 @@
-<%= render CardComponent.new do %>
+<%= render CardComponent.new do |card| %>
+  <%- card.with_header do %>
+    <h2>Basic info</h2>
+  <%- end %>
   <%= form_with model: room.location do |room_form| %>
     <%= render "text_field", attribute: :name, form: room_form %>
     <%= render "text_field", attribute: :slug, form: room_form %>
     <%= render "text_area", attribute: :description, form: room_form, label_hint: 'Add brief summary of your section for search engines to display as snippets in results' %>
-    <%- if room.hero_image&.upload&.attached? %>
-      <div class="relative overflow-hidden bg-gray-100 dark:bg-gray-600">
-        <%= image_tag room.hero_image&.upload %>
-      </div>
-    <% end %>
-    <%= render "file_field",
-        attribute: :hero_image_upload,
-        form: room_form,
-        label: "Upload a header image",
-        label_hint: "Images are great for marketing!",
-        required: false
-      %>
     <h3>Privacy and Security</h3>
     <%= render "radio_group", attribute: :access_level, options: Room::access_levels.values, form: room_form %>
     <footer>
