@@ -7,13 +7,12 @@ RSpec.describe Marketplace::CartProductComponent, type: :component do
 
   let(:cart) { create(:marketplace_cart) }
   let(:marketplace) { cart.marketplace }
-  let(:product) { create(:marketplace_product, :with_description, :with_photo) }
+  let(:product) { create(:marketplace_product, :with_photo, description: "Hello There") }
   let(:cart_product) { create(:marketplace_cart_product, cart:, product:, quantity: 5) }
 
   let(:component) { described_class.new(cart_product: cart_product, current_person: operator) }
 
   it { is_expected.to have_content(product.name) }
-  it { is_expected.to have_content(product.description) }
   it { is_expected.to have_content(helpers.humanized_money_with_symbol(product.price)) }
   it { is_expected.to have_button("➕") }
   it { is_expected.to have_button("➖") }

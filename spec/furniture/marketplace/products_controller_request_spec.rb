@@ -28,7 +28,7 @@ RSpec.describe Marketplace::ProductsController, type: :request do
       before { perform_request }
 
       specify { expect(created_product.name).to eql(product_attributes[:name]) }
-      specify { expect(created_product.description).to eql(product_attributes[:description]) }
+      specify { expect(created_product.description.body).to eql(product_attributes[:description]) }
       specify { expect(created_product.price_cents).to eql(product_attributes[:price_cents]) }
       specify { expect(created_product.price_currency).to eql(Money.default_currency.to_s) }
       specify { expect(created_product.tax_rates).to include(tax_rate) }
