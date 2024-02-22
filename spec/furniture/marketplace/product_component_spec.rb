@@ -9,9 +9,9 @@ RSpec.describe Marketplace::ProductComponent, type: :component do
   let(:marketplace) { create(:marketplace) }
   let(:product_description) do
     <<~DESC.chomp
-      A delicious fritter made with love
+      <p>A delicious fritter made with love</p>
 
-      Make sure to **eat it warm!**
+      <p>Make sure to <strong>eat it warm!</strong>
     DESC
   end
   let(:product) { create(:marketplace_product, description: product_description, tax_rates: [tax_rate], marketplace: marketplace) }
@@ -23,7 +23,7 @@ RSpec.describe Marketplace::ProductComponent, type: :component do
 
   it { is_expected.to have_css("a[href='#{polymorphic_path(product.location(:edit))}'][data-turbo=true][data-turbo-method=get]") }
 
-  it "renders the description as markdown" do
+  it "renders the description as rich text" do
     expect(output).to have_css("p", text: "A delicious fritter made with love")
     expect(output).to have_css("strong", text: "eat it warm!")
   end

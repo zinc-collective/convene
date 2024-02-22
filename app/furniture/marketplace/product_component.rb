@@ -1,6 +1,5 @@
 class Marketplace
   class ProductComponent < ApplicationComponent
-    include RendersMarkdown
     attr_accessor :product
     delegate :name, :description, :location, to: :product
 
@@ -12,12 +11,6 @@ class Marketplace
 
     def edit_button
       super(title: t("marketplace.products.edit.link_to", name: name), href: location(:edit))
-    end
-
-    def description_html
-      return "" if description.blank?
-
-      render_markdown(description)
     end
 
     def hero_image
