@@ -3,7 +3,7 @@
 class Marketplace
   class ProductsController < Controller
     expose :product, scope: -> { products }, model: Product
-    expose :products, -> { policy_scope(marketplace.products) }
+    expose :products, -> { policy_scope(marketplace.products.with_all_rich_text) }
 
     def new
       authorize(product)

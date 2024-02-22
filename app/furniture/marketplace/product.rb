@@ -2,6 +2,8 @@
 
 class Marketplace
   class Product < Record
+    self.ignored_columns += ["description"]
+
     include Archivable
 
     # TODO: Refactor to use Media model
@@ -32,7 +34,7 @@ class Marketplace
     attribute :name, :string
     validates :name, presence: true
 
-    attribute :description, :string
+    has_rich_text :description
 
     monetize :price_cents
 

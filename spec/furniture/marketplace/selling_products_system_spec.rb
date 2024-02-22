@@ -2,6 +2,8 @@ require "rails_helper"
 
 # @see https://github.com/zinc-collective/convene/issues/1326
 describe "Marketplace: Selling Products", type: :system do
+  include ActionText::SystemTestHelper
+
   let(:space) { create(:space, :with_entrance, :with_members) }
   let(:marketplace) { create(:marketplace, room: space.entrance) }
   let(:product) { create(:marketplace_product, marketplace:) }
@@ -25,7 +27,7 @@ describe "Marketplace: Selling Products", type: :system do
         Made with a Trunk.
       DESC
 
-      fill_in("Description", with: description)
+      fill_in_rich_text_area("Description", with: description)
       fill_in("Price", with: "10.00")
       fill_in("Servings", with: 4)
 
