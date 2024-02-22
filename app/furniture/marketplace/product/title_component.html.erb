@@ -1,2 +1,4 @@
 <h3><%= name %></h3>
-<p class="text-sm">Serves <%= servings %></p>
+<%- if servings.present? %>
+  <p class="text-sm">Serves <%= servings %></p>
+<%- end %>
