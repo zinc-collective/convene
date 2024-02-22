@@ -1,7 +1,7 @@
 <%= render CardComponent.new(dom_id: dom_id(product), classes: "mt-3") do %>
   <%= form_with model: product.location do |f| %>
     <%= render "text_field", { attribute: :name, form: f} %>
-    <%= render "text_area", { attribute: :description, form: f} %>
+    <%= render "rich_text_area", { attribute: :description, form: f} %>
     <%= render "number_field", { attribute: :servings, form: f, min: 0, step: 1} %>
 
     <%= render "money_field", { attribute: :price, form: f, min: 0, step: 0.01} %>

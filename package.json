@@ -34,11 +34,11 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
-    "@hotwired/turbo-rails": "^8.0.2",
+    "@hotwired/turbo-rails": "^8.0.3",
     "@rails/actioncable": "^7.1.3",
     "@rails/actiontext": "^7.1.3",
     "@rails/activestorage": "^7.1.3",
-    "@sentry/browser": "^7.101.1",
+    "@sentry/browser": "^7.102.0",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "@webpack-cli/serve": "^2.0.5",

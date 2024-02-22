@@ -32,7 +32,7 @@ class Marketplace
     attribute :name, :string
     validates :name, presence: true
 
-    attribute :description, :string
+    has_rich_text :description
 
     monetize :price_cents
 
