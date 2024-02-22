@@ -2,8 +2,6 @@
 
 class Marketplace
   class Product < Record
-    self.ignored_columns += ["description"]
-
     include Archivable
 
     # TODO: Refactor to use Media model
