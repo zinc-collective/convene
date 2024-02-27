@@ -137,7 +137,7 @@ group :development do
   gem "binding_of_caller"
   # Outputs i18n lookup key debug logs
   gem "i18n-debug"
-  gem "listen", "~> 3.8"
+  gem "listen", "~> 3.9"
   gem "rails-erd"
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console", "~> 4.2"
