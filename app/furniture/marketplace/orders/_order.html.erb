@@ -1,18 +1,15 @@
-<%= render CardComponent.new(classes: "w-full grid grid-cols-6 mt-4") do %>
+<%= render CardComponent.new(classes: "w-full mt-4") do %>
+  <h2 class="mb-3">Order Summary</h2>
   <h3 class="col-span-6 sm:col-span-3 text-base">
     <%= link_to(l(order.placed_at.presence || order.created_at, format: :long_ordinal), order.location) %>
   </h3>
-
   <div class="col-span-6 sm:col-span-3 mb-2 sm:text-right">
     <%= order.delivery_address %>
   </div>
-
-
   <%- order.ordered_products.each do |ordered_product| %>
     <span class="col-span-2 mb-2"><%= ordered_product.name %></span>
     <span class="col-span-2 text-sm text-center">x<%= ordered_product.quantity %></span>
     <span class="col-span-2 text-right"><%= humanized_money_with_symbol(ordered_product.price) %></span>
-
     <%- if ordered_product.tax_amount.positive? %>
       <span class="col-span-4 text-sm mb-4">
         <%= ordered_product.tax_rates.map(&:label).to_sentence %>
@@ -26,11 +23,9 @@
   <hr class="col-span-6 mb-2" />
   <div class="col-span-4">Total</div>
   <div class="col-span-2 text-right"><%= humanized_money_with_symbol(order.price_total) %></div>
-
-  <%- if policy(order.events).index? %>
+  <%- if policy(order.events).index? && order.events.present? %>
     <hr class="col-span-6 my-4" />
     <div class="col-span-6 text-xs">
-
       <h3 class="mb-2 text-sm font-bold">Timeline</h3>
       <div class="grid grid-cols-2">
         <%- order.events.each do |event| %>
