@@ -11,7 +11,10 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "build:css": "postcss --config postcss.config.cjs ./app/assets/stylesheets/application.postcss.css -o ./app/assets/builds/application.css",
-    "autoformat": "prettier --write  './**/*.{scss,css,js}'"
+    "autoformat": "prettier --write  './**/*.{scss,css,js}'",
+    "webpack:analyze": "yarn webpack:build_json && yarn webpack:analyze_json",
+    "webpack:build_json": "webpack --profile --json > webpack-stats.json",
+    "webpack:analyze_json": "webpack-bundle-analyzer webpack-stats.json public/packs"
   },
   "repository": {
     "type": "git",
@@ -29,7 +32,8 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "webpack-bundle-analyzer": "^4.10.1"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
