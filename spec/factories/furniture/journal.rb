@@ -28,7 +28,7 @@ FactoryBot.define do
   end
 
   factory :journal_keyword, class: "Journal::Keyword" do
-    canonical_keyword { Faker::Fantasy::Tolkien.location }
+    sequence(:canonical_keyword) { |n| "#{Faker::Fantasy::Tolkien.location}-#{n}" }
     journal
   end
 end
