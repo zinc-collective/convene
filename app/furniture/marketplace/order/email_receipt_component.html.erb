@@ -1,78 +1,81 @@
 <style>
-.align-top { vertical-align: top; }
-.table-fixed { table-layout: fixed; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-.w-full { width: 100%; }
+  .align-top { vertical-align: top; }
+  .table-fixed { table-layout: fixed; }
+  .text-center { text-align: center; }
+  .text-right { text-align: right; }
+  .w-full { width: 100%; }
 </style>
-
 <div id="<%= dom_id %>">
-<h3 class="w-full text-center">
-  <%= link_to "Order #{order.id}", order.persisted? ? order.location : "#" %>
-</h3>
-<p class="w-full text-center text-sm">
-  <%= placed_at %>
-</p>
-
-
-<table class="w-full table-fixed">
-<tr><th colspan="3">Products</th></tr>
-<%- order.ordered_products.each do |ordered_product|%>
-  <tr>
-    <td class="text-right"><%= ordered_product.name %></td>
-    <td class="text-center">x <%= ordered_product.quantity %></td>
-    <td><%= humanized_money_with_symbol(ordered_product.price) %></td>
-  </tr>
-<%- end %>
-<tr>
-  <th class="text-right" colspan="1">Subtotal</th>
-  <td></td>
-  <td><%= humanized_money_with_symbol(order.product_total) %></td>
-</tr>
-<tr><th colspan="3">Taxes and Fees</th></tr>
-<tr>
-  <td class="text-right">Taxes</td>
-  <td></td>
-  <td><%= humanized_money_with_symbol(order.tax_total) %></td>
-</tr>
-<tr>
-  <td class="text-right">Delivery</td>
-  <td></td>
-  <td><%= humanized_money_with_symbol(order.delivery_fee) %></td>
-</tr>
-<tr>
-  <th class="text-right">Total</th>
-  <td></td>
-  <td><%= humanized_money_with_symbol(order.price_total) %></td>
-</tr>
-<tfoot>
-<tr><th colspan="3">Delivery Details</th></tr>
-<tr>
-  <td class="text-right">Delivery Notes</td>
-  <td><%= order.delivery_notes %></td>
-</tr>
-<%- if order.delivery_area.present? %>
-  <tr>
-    <td class="text-right">Delivery Schedule:</td>
-    <td><%= render(Marketplace::Cart::DeliveryWindowComponent.new(window: order.delivery_area.delivery_window)) %></td>
-  </tr>
-  <tr>
-    <td class="text-right">Delivering In:</td>
-    <td><%= order.delivery_area.label %></td>
-  </tr>
-<%- end %>
-<tr>
-  <td class="text-right">Buyer Email:</td>
-  <td colspan="2"><%= order.contact_email %></td>
-</tr>
-<tr>
-  <td class="text-right">Phone Number:</td>
-  <td colspan="2"><%= order.contact_phone_number %></td>
-</tr>
-<tr>
-  <td class="text-right align-top">Address:</td>
-  <td colspan="2"><%= order.delivery_address %></td>
-</tr>
-</tfoot>
-</table>
+  <h3 class="w-full text-center">
+    <%= link_to "Order #{order.id}", order.persisted? ? polymorphic_url(order.location) : "#" %>
+  </h3>
+  <p class="w-full text-center text-sm">
+    <%= placed_at %>
+  </p>
+  <table class="w-full table-fixed">
+    <tr>
+      <th colspan="3">Products</th>
+    </tr>
+    <%- order.ordered_products.each do |ordered_product|%>
+      <tr>
+        <td class="text-right"><%= ordered_product.name %></td>
+        <td class="text-center">x <%= ordered_product.quantity %></td>
+        <td><%= humanized_money_with_symbol(ordered_product.price) %></td>
+      </tr>
+    <%- end %>
+    <tr>
+      <th class="text-right" colspan="1">Subtotal</th>
+      <td></td>
+      <td><%= humanized_money_with_symbol(order.product_total) %></td>
+    </tr>
+    <tr>
+      <th colspan="3">Taxes and Fees</th>
+    </tr>
+    <tr>
+      <td class="text-right">Taxes</td>
+      <td></td>
+      <td><%= humanized_money_with_symbol(order.tax_total) %></td>
+    </tr>
+    <tr>
+      <td class="text-right">Delivery</td>
+      <td></td>
+      <td><%= humanized_money_with_symbol(order.delivery_fee) %></td>
+    </tr>
+    <tr>
+      <th class="text-right">Total</th>
+      <td></td>
+      <td><%= humanized_money_with_symbol(order.price_total) %></td>
+    </tr>
+    <tfoot>
+      <tr>
+        <th colspan="3">Delivery Details</th>
+      </tr>
+      <tr>
+        <td class="text-right">Delivery Notes</td>
+        <td><%= order.delivery_notes %></td>
+      </tr>
+      <%- if order.delivery_area.present? %>
+        <tr>
+          <td class="text-right">Delivery Schedule:</td>
+          <td><%= render(Marketplace::Cart::DeliveryWindowComponent.new(window: order.delivery_area.delivery_window)) %></td>
+        </tr>
+        <tr>
+          <td class="text-right">Delivering In:</td>
+          <td><%= order.delivery_area.label %></td>
+        </tr>
+      <%- end %>
+      <tr>
+        <td class="text-right">Buyer Email:</td>
+        <td colspan="2"><%= order.contact_email %></td>
+      </tr>
+      <tr>
+        <td class="text-right">Phone Number:</td>
+        <td colspan="2"><%= order.contact_phone_number %></td>
+      </tr>
+      <tr>
+        <td class="text-right align-top">Address:</td>
+        <td colspan="2"><%= order.delivery_address %></td>
+      </tr>
+    </tfoot>
+  </table>
 </div>

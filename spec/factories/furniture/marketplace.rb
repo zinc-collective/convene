@@ -78,7 +78,7 @@ FactoryBot.define do
   end
 
   factory :marketplace_product, class: "Marketplace::Product" do
-    name { Faker::TvShows::DrWho.specie }
+    name { Faker::TvShows::DrWho.unique.specie }
     price_cents { Random.rand(1_00..999_99) }
 
     marketplace
@@ -131,7 +131,7 @@ FactoryBot.define do
   end
 
   factory :marketplace_order, class: "Marketplace::Order" do
-    marketplace
+    marketplace { association(:marketplace, :ready_for_shopping) }
     shopper { association(:marketplace_shopper) }
 
     status { :paid }
@@ -141,7 +141,7 @@ FactoryBot.define do
         product_count { 1 }
       end
 
-      ordered_products { Array.new(product_count) { association(:marketplace_ordered_product) } }
+      ordered_products { Array.new(product_count) { association(:marketplace_ordered_product, marketplace: marketplace) } }
     end
 
     trait :with_taxed_products do
@@ -177,8 +177,12 @@ FactoryBot.define do
   end
 
   factory :marketplace_ordered_product, class: "Marketplace::OrderedProduct" do
-    product factory: :marketplace_product
-    order factory: :marketplace_order
+    transient do
+      marketplace { association(:marketplace) }
+    end
+
+    product { association(:marketplace_product, marketplace: marketplace) }
+    order { association(:marketplace_order, marketplace: marketplace) }
     quantity { 1 }
   end
 
