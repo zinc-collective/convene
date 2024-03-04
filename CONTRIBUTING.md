@@ -66,8 +66,11 @@ First, ensure your development environment has:
 1. Ruby (See [.ruby-version](./.ruby-version) for version)
 2. Node (See [.nvmrc](./.nvmrc) for version)
 3. [Yarn]
-4. [PostgreSQL]. (Note: For people using [Docker], a [docker-compose.yml]
-   file has been included for convenience.)
+4. [PostgreSQL]
+5. [Redis]
+
+(Note: If you use [Docker], a [docker-compose.yml] file has been included with
+  [PostgreSQL] and [Redis] for convenience.)
 
 Then, run `bin/setup` to install Ruby and Node dependencies and set up the
 database.
@@ -83,7 +86,8 @@ Log in with space-member@example.com. You can check the email using http://local
 Finally, with the server still running (perhaps in a different terminal), run
 `bin/test` to ensure that your development environment is configured correctly.
 
-[PostgreSQL 12]: https://www.postgresql.org/download/
+[PostgreSQL]: https://www.postgresql.org/
+[Redis]: https://redis.io/
 [Docker]: https://www.docker.com
 [docker-compose.yml]: ./docker-compose.yml
 [.env.development.example]: ./.env.development.example
