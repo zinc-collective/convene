@@ -34,7 +34,7 @@ RSpec.describe Journal::Entry, type: :model do
       it "idempotently creates `Keywords` in the `Journal` and `Entry`" do
         bad_apple = entry.journal.keywords.create!(canonical_keyword: "BadApple", aliases: ["BadApples"])
         good_times = entry.journal.keywords.find_by!(canonical_keyword: "GoodTimes")
-        expect do
+        expect do # rubocop:disable RSpec/RepeatedSubjectCall
           entry.update!(body: "#GoodTimes #HardCider #BadApple #BadApples")
         end.not_to change { "#{bad_apple.reload.updated_at} - #{good_times.reload.updated_at}" }
 
