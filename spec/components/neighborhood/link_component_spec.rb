@@ -12,7 +12,9 @@ RSpec.describe Neighborhood::LinkComponent, type: :component do
 
   context "when an Operator has set custom values" do
     before do
-      stub_const("ENV", "NEIGHBORHOOD_NAME" => "Parsley's Persimmons Cooperative", "NEIGHBORHOOD_TAGLINE" => "The Place for Persimmon People", "APP_ROOT_URL" => "https://parsleys-persimmons-coop.example.com")
+      ENV["NEIGHBORHOOD_NAME"] = "Parsley's Persimmons Cooperative"
+      ENV["NEIGHBORHOOD_TAGLINE"] = "The Place for Persimmon People"
+      ENV["APP_ROOT_URL"] = "https://parsleys-persimmons-coop.example.com"
     end
 
     it { is_expected.to have_link("Parsley's Persimmons Cooperative", href: "https://parsleys-persimmons-coop.example.com") }
