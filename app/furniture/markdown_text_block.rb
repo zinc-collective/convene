@@ -5,7 +5,8 @@ class MarkdownTextBlock < Furniture
   include RendersMarkdown
   location(parent: :room)
 
-  setting :content, default: ""
+  # TODO: deprecate?
+  # setting :action_content, default: ""
 
   def to_html
     render_markdown(content)

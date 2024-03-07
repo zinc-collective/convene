@@ -22,6 +22,8 @@ class Furniture < ApplicationRecord
 
   delegate :attributes=, to: :gizmo, prefix: true
 
+  has_rich_text :action_content
+
   validates :furniture_kind, presence: true
 
   # Used by child classes that require storage of secrets, like Square API keys
