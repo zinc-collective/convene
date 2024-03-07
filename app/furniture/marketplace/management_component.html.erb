@@ -21,6 +21,7 @@
         <%= link_to_child(:notification_methods, icon: :bell_alert)  if policy(marketplace.notification_methods).index? %>
         <%= link_to_child(:flyer, icon: :qr_code)  if policy(marketplace.flyer).show? %>
         <%= link_to_child(:vendor_representatives, icon: :building_storefront) if policy(marketplace.vendor_representatives).index? %>
+        <%= link_to_child(:tags, icon: :tag) if policy(marketplace.tags).index? %>
       </nav>
     <% end %>
   <% end %>

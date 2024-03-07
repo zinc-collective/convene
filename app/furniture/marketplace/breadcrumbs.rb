@@ -104,6 +104,16 @@ crumb :show_marketplace_stripe_account do |marketplace|
   link t("marketplace.stripe_accounts.show.link_to"), marketplace.location(child: :stripe_account)
 end
 
+crumb :marketplace_tags do |marketplace|
+  parent :edit_marketplace, marketplace
+  link(t("marketplace.tags.index.link_to"), marketplace.location(child: :tags))
+end
+
+crumb :new_marketplace_tag do |tag|
+  parent :marketplace_tags, tag.marketplace
+  link t("marketplace.tags.new.link_to"), marketplace.location(:new, child: :tag)
+end
+
 crumb :marketplace_tax_rates do |marketplace|
   parent :edit_marketplace, marketplace
   link t("marketplace.tax_rates.index.link_to"), marketplace.location(child: :tax_rates)

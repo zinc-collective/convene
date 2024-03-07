@@ -26,6 +26,9 @@ class Marketplace
     has_many :ordered_products, inverse_of: :product, dependent: :destroy
     has_many :orders, -> { checked_out }, through: :ordered_products, inverse_of: :products
 
+    has_many :product_tags, inverse_of: :product, dependent: :destroy
+    has_many :tags, through: :product_tags, inverse_of: :products
+
     has_many :product_tax_rates, inverse_of: :product, dependent: :destroy
     has_many :tax_rates, through: :product_tax_rates, inverse_of: :products
 

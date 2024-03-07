@@ -202,6 +202,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_004148) do
     t.index ["shopper_id"], name: "index_marketplace_orders_on_shopper_id"
   end
 
+  create_table "marketplace_product_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id"
+    t.uuid "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_marketplace_product_tags_on_product_id"
+    t.index ["tag_id"], name: "index_marketplace_product_tags_on_tag_id"
+  end
+
   create_table "marketplace_product_tax_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "tax_rate_id"
     t.uuid "product_id"
@@ -229,6 +238,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_004148) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_marketplace_shoppers_on_person_id", unique: true
+  end
+
+  create_table "marketplace_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "bazaar_id"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bazaar_id"], name: "index_marketplace_tags_on_bazaar_id"
   end
 
   create_table "marketplace_tax_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -337,6 +354,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_004148) do
   add_foreign_key "marketplace_notification_methods", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_orders", "marketplace_delivery_areas", column: "delivery_area_id"
   add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id"
+  add_foreign_key "marketplace_product_tags", "marketplace_products", column: "product_id"
+  add_foreign_key "marketplace_product_tags", "marketplace_tags", column: "tag_id"
   add_foreign_key "marketplace_product_tax_rates", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_product_tax_rates", "marketplace_tax_rates", column: "tax_rate_id"
   add_foreign_key "marketplace_products", "furnitures", column: "marketplace_id"

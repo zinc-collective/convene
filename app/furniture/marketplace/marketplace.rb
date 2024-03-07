@@ -9,6 +9,8 @@ class Marketplace
     # @todo replace with through :bazaar
     has_many :tax_rates, inverse_of: :marketplace
 
+    has_many :tags, through: :bazaar
+
     has_many :products, inverse_of: :marketplace, dependent: :destroy
     has_many :carts, inverse_of: :marketplace, dependent: :destroy
     has_many :orders, inverse_of: :marketplace

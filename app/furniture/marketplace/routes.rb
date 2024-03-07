@@ -16,6 +16,7 @@ class Marketplace
         router.resources :products
         router.resource :stripe_account, only: [:show, :new, :create]
         router.resources :stripe_events
+        router.resources :tags
         router.resources :tax_rates
         router.resources :vendor_representatives
         router.resources :payment_settings, only: [:index]

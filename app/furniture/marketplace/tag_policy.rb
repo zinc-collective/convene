@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
 class Marketplace
-  class ProductPolicy < Policy
-    alias_method :product, :object
+  class TagPolicy < Policy
+    alias_method :tag, :object
+    def space
+      tag.bazaar
+    end
+
     def permitted_attributes(_params = nil)
-      %i[name description price_cents price_currency price photo restore servings] + [tag_ids: [], tax_rate_ids: []]
+      %i[label]
     end
 
     def update?
       return false unless current_person.authenticated?
-      return true if marketplace.vendor_representatives.exists?(person: current_person)
 
       super
     end

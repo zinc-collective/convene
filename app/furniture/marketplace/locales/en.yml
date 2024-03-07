@@ -136,3 +136,8 @@ en:
     payment_settings:
       index:
         link_to: "Payment Settings"
+    tags:
+      index:
+        link_to: "Tags"
+      new:
+        link_to: "Add Tag"
