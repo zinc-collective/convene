@@ -18,6 +18,12 @@ AllCops:
     - vendor/bundle/**/*
   NewCops: enable
 
+
+RSpec/Capybara/FeatureMethods:
+  Exclude:
+    - '**/*_system_spec.rb'
+    - spec/system/**/*_spec.rb
+
 RSpec/MultipleExpectations:
   Enabled: false
 
@@ -29,6 +35,10 @@ RSpec/NestedGroups:
 
 RSpec/ExampleLength:
   Max: 10
+  Exclude:
+    - '**/*_system_spec.rb'
+    - spec/system/**/*_spec.rb
+
 
 Style/TrailingCommaInArrayLiteral:
   Exclude:

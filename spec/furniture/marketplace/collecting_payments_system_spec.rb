@@ -10,7 +10,7 @@ describe "Marketplace: Collecting Payments", type: :system do
       sign_in(space.members.first, space)
     end
 
-    it "sets the Distributor's Stripe API Key" do # rubocop:disable RSpec/ExampleLength
+    it "sets the Distributor's Stripe API Key" do
       marketplace = create(:marketplace, room: space.entrance)
       visit polymorphic_path(marketplace.room.location)
 

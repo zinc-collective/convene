@@ -16,7 +16,7 @@ describe "Marketplace: Selling Products", type: :system do
 
   # @see https://github.com/zinc-collective/convene/issues/2168
   describe "Listing Products for Sale" do
-    it "Adds the Product to the Menu" do # rubocop:disable RSpec/ExampleLength
+    it "Adds the Product to the Menu" do
       visit(polymorphic_path(marketplace.location(child: :products)))
       click_link("Add a Product")
 

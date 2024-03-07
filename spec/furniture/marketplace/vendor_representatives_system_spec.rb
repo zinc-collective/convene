@@ -10,7 +10,7 @@ describe "Marketplace: Vendor Representatives", type: :system do
   end
 
   describe "Adding a Vendor Representative" do
-    it "Requires a Member confirm the Vendor" do # rubocop:disable RSpec/ExampleLength
+    it "Requires a Member confirm the Vendor" do
       visit(polymorphic_path(marketplace.location(child: :vendor_representatives)))
       click_link("Add a Representative")
       fill_in("Email address", with: "milton@swingline.example.com")

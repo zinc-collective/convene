@@ -9,7 +9,7 @@ RSpec.describe "Writing Entries", type: :system do
     sign_in(space.members.first, space)
   end
 
-  it "saves the headline, summary and body" do # rubocop:disable RSpec/ExampleLength
+  it "saves the headline, summary and body" do
     visit(polymorphic_path(journal.location(:new, child: :entry)))
 
     body = 1000.times.map { Faker::Books::Dune.quote }.join("\n\n")
