@@ -29,7 +29,7 @@ RSpec.describe RsvpsController do
       context "without the one-time-code" do
         let(:rsvp_params) { {status: :accepted} }
 
-        it "doesnt complete the invitation" do
+        it "doesnt complete the invitation" do # rubocop:disable RSpec/ExampleLength
           expect { request }.to have_enqueued_mail(
             AuthenticatedSessionMailer, :one_time_password_email
           )
@@ -57,7 +57,7 @@ RSpec.describe RsvpsController do
           {status: :accepted, one_time_password: authentication_method.one_time_password}
         end
 
-        it "completes the invitation and confirms their authentication method" do
+        it "completes the invitation and confirms their authentication method" do # rubocop:disable RSpec/ExampleLength
           expect { request }.not_to have_enqueued_mail(
             AuthenticatedSessionMailer, :one_time_password_email
           )
