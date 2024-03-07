@@ -1,18 +1,18 @@
 <%- @pagy, @records = pagy(policy_scope(neighborhood.spaces)) %>
 
-<section class="max-w-3xl mx-auto">
-  <div class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    <%= render @records %>
+
+<div class="grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  <%= render @records %>
+</div>
+
+<%== pagy_nav(@pagy) %>
+
+<%- if policy(Space).new? %>
+  <div class="text-center w-full">
+    <%= link_to "Add a Space",[:new, :space] %>
   </div>
+<%- end %>
 
-  <%== pagy_nav(@pagy) %>
-
-  <%- if policy(Space).new? %>
-    <div class="text-center w-full">
-      <%= link_to "Add a Space",[:new, :space] %>
-    </div>
-  <%- end %>
-</section>
 
 <%- if !neighborhood.email_configured? %>
   <p>It looks like you haven't configured Convene to send email. Check the <code>.env.example</code> file for variables named with <code>SMTP</code> and make sure each is set with your email providers configuration.</p>

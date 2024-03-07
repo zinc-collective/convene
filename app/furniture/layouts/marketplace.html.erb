@@ -1,25 +1,24 @@
 <%- content_for :content do %>
-  <div class="flex flex-col content-between justify-end mx-auto max-w-7xl sm:px-6 lg:px-8">
-    <div class="grow mx-auto w-full">
-      <%= turbo_frame_tag(marketplace, data: { turbo_action: :advance }) do %>
-        <%- if policy(marketplace).edit? %>
-          <%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
-            <%= yield  %>
-          <%- end %>
-        <%- else %>
-          <section>
-            <header>
-              <h2>
-                <%= t('.header', space: marketplace.space.name, room: marketplace.room.name) %>
-              </h2>
-            </header>
-            <div>
-              <%= yield  %>
-            </div>
-          </section>
+  <div class="grow mx-auto w-full">
+    <%= turbo_frame_tag(marketplace, data: { turbo_action: :advance }) do %>
+      <%- if policy(marketplace).edit? %>
+        <%= render Marketplace::ManagementComponent.new(marketplace: marketplace) do %>
+          <%= yield  %>
         <%- end %>
+      <%- else %>
+        <section>
+          <header>
+            <h2>
+              <%= t('.header', space: marketplace.space.name, room: marketplace.room.name) %>
+            </h2>
+          </header>
+          <div>
+            <%= yield  %>
+          </div>
+        </section>
       <%- end %>
     <%- end %>
-  </div>
+  <%- end %>
 </div>
+
 <%= render template: "layouts/application" %>

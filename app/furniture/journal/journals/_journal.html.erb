@@ -1,13 +1,12 @@
-<section class="max-w-3xl mx-auto">
-  <%= render Journal::NewEntryButtonComponent.new(journal: journal) %>
 
-  <div class="flex flex-wrap">
-    <%- @pagy, @entries = pagy(policy_scope(journal.entries.recent)) %>
+<%= render Journal::NewEntryButtonComponent.new(journal: journal) %>
 
-    <%= render Journal::EntryComponent.with_collection(@entries) %>
-  </div>
+<div class="flex flex-wrap">
+  <%- @pagy, @entries = pagy(policy_scope(journal.entries.recent)) %>
 
-  <%== pagy_nav(@pagy) %>
+  <%= render Journal::EntryComponent.with_collection(@entries) %>
+</div>
 
-  <%= render Journal::NewEntryButtonComponent.new(journal: journal) %>
-</section>
+<%== pagy_nav(@pagy) %>
+
+<%= render Journal::NewEntryButtonComponent.new(journal: journal) %>
