@@ -8,6 +8,7 @@ class Furniture < ApplicationRecord
   include RankedModel
   location(parent: :room)
 
+  include RankedModel
   ranks :slot, with_same: [:room_id]
 
   belongs_to :room, inverse_of: :gizmos
