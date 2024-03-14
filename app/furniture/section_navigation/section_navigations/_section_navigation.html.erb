@@ -1,17 +1,1 @@
-<div class="grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
-  <% policy_scope(section_navigation.rooms).each do |room| %>
-    <%= link_to polymorphic_path(room.location), id: dom_id(room, :link_to), class: "group no-underline" do %>
-      <%= render CardComponent.new(media: room.hero_image, classes: "flex flex-col justify-between h-full") do |card| %>
-        <p><%= room.description %></p>
-        <footer class="text-2xl text-justify font-semibold flex justify-between items-center">
-          <h3>
-            <%= room.name %>
-          </h3>
-          <%= render SvgComponent.new(classes: "h-7 w-7 min-w-7 p-1 rounded-full bg-slate-100") do %>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-          <% end %>
-        </footer>
-      <%- end %>
-    <%- end %>
-  <% end %>
-</div>
+<%= render SectionNavigation::SectionGridComponent.new(section_navigation) %>
