@@ -4,9 +4,9 @@
 class MarkdownTextBlock < Furniture
   include RendersMarkdown
   location(parent: :room)
+  has_rich_text :action_content
 
-  # TODO: deprecate?
-  # setting :action_content, default: ""
+  # setting :content, default: ""
 
   def to_html
     render_markdown(content)
@@ -15,7 +15,7 @@ class MarkdownTextBlock < Furniture
   # @todo can we make it so we don't need to define this?
   # and the `settings.fetch` bits?
   def attribute_names
-    super + ["content"]
+    super + ["content", "action_content"]
   end
 
   def form_template

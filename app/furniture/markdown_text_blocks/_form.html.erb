@@ -1,5 +1,5 @@
 <%= form.fields_for(:gizmo) do |furniture_fields| %>
-  <%= furniture_fields.label :content %>
-  <%= form.rich_text_area :action_content %>
+  <%= furniture_fields.label :action_content %>
+  <%= furniture_fields.rich_text_area :action_content %>
   <%= render partial: "error", locals: { model: furniture_fields.object, attribute: :content } %>
 <%- end %>
