@@ -30,6 +30,8 @@ class Room < ApplicationRecord
   has_many :gizmos, dependent: :destroy, inverse_of: :room, class_name: :Furniture
   accepts_nested_attributes_for :gizmos
 
+  has_many :slots, dependent: :destroy, inverse_of: :section
+
   DESCRIPTION_MAX_LENGTH = 300
   validates :description, length: {maximum: DESCRIPTION_MAX_LENGTH, allow_blank: true}
 
