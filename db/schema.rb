@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_004148) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_14_003612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -308,6 +308,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_004148) do
     t.index ["space_id"], name: "index_rooms_on_space_id"
   end
 
+  create_table "slots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "section_id"
+    t.string "slottable_type"
+    t.uuid "slottable_id"
+    t.integer "slot_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_slots_on_section_id"
+    t.index ["slottable_type", "slottable_id"], name: "index_slots_on_slottable"
+  end
+
   create_table "space_agreements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "space_id"
     t.string "name", null: false
@@ -366,6 +377,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_004148) do
   add_foreign_key "marketplace_vendor_representatives", "people"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "rooms", "media", column: "hero_image_id"
+  add_foreign_key "slots", "rooms", column: "section_id"
   add_foreign_key "space_agreements", "spaces"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
