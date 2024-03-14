@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/ruby:3.2
+FROM mcr.microsoft.com/devcontainers/ruby:3.3
 
 LABEL org.opencontainers.image.source=https://github.com/zinc-collective/convene-devcontainer
 LABEL org.opencontainers.image.description="Container to facilitate easier development of convene, specifically to work in GitHub CodeSpaces."
