@@ -54,7 +54,7 @@
     "postcss-import": "^16.1.0",
     "postcss-preset-env": "^9.5.1",
     "tailwindcss": "^3.4.1",
-    "trix": "^2.0.10",
+    "trix": "^2.1.0",
     "webpack": "^5.76.0",
     "webpack-cli": "^5.1.4"
   }
