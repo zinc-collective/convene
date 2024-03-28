@@ -40,3 +40,6 @@ journal_section = FactoryBot.create(
 )
 journal = FactoryBot.create(:journal, room: journal_section)
 FactoryBot.create_list(:journal_entry, 7, :with_keywords, :published, journal:)
+
+_content_block_section = FactoryBot.create(:room, space:, name: "Content Block-o-Clock",
+  description: "Content Blocks show static Words, Photos, or Videos!")

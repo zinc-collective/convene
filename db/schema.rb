@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_14_003612) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_28_004901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_enum :invitation_status, [
     "pending",
+    "sent",
     "accepted",
     "rejected",
     "expired",
     "ignored",
     "revoked",
-    "sent",
   ], force: :cascade
 
   create_enum :membership_status, [
@@ -87,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_003612) do
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
-    t.datetime "created_at", precision: nil
+    t.datetime "created_at"
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
@@ -291,7 +291,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_003612) do
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "operator", default: false
+    t.boolean "operator", default: false, null: false
     t.index ["email"], name: "index_people_on_email", unique: true
   end
 
@@ -344,6 +344,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_003612) do
     t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
   end
 
+  create_table "text_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "utility_hookups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "space_id"
     t.string "name", null: false
@@ -355,29 +360,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_14_003612) do
     t.index ["space_id"], name: "index_utility_hookups_on_space_id"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "journal_entries", "furnitures", column: "journal_id"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id", validate: false
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id", validate: false
+  add_foreign_key "journal_entries", "furnitures", column: "journal_id", validate: false
   add_foreign_key "journal_keywords", "furnitures", column: "journal_id"
-  add_foreign_key "marketplace_cart_products", "marketplace_orders", column: "cart_id"
-  add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id"
-  add_foreign_key "marketplace_delivery_areas", "furnitures", column: "marketplace_id"
-  add_foreign_key "marketplace_notification_methods", "furnitures", column: "marketplace_id"
-  add_foreign_key "marketplace_orders", "marketplace_delivery_areas", column: "delivery_area_id"
-  add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id"
+  add_foreign_key "marketplace_cart_products", "marketplace_orders", column: "cart_id", validate: false
+  add_foreign_key "marketplace_cart_products", "marketplace_products", column: "product_id", validate: false
+  add_foreign_key "marketplace_delivery_areas", "furnitures", column: "marketplace_id", validate: false
+  add_foreign_key "marketplace_notification_methods", "furnitures", column: "marketplace_id", validate: false
+  add_foreign_key "marketplace_orders", "marketplace_delivery_areas", column: "delivery_area_id", validate: false
+  add_foreign_key "marketplace_orders", "marketplace_shoppers", column: "shopper_id", validate: false
   add_foreign_key "marketplace_product_tags", "marketplace_products", column: "product_id"
   add_foreign_key "marketplace_product_tags", "marketplace_tags", column: "tag_id"
-  add_foreign_key "marketplace_product_tax_rates", "marketplace_products", column: "product_id"
-  add_foreign_key "marketplace_product_tax_rates", "marketplace_tax_rates", column: "tax_rate_id"
-  add_foreign_key "marketplace_products", "furnitures", column: "marketplace_id"
-  add_foreign_key "marketplace_shoppers", "people"
-  add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
-  add_foreign_key "marketplace_tax_rates", "spaces", column: "bazaar_id"
+  add_foreign_key "marketplace_product_tax_rates", "marketplace_products", column: "product_id", validate: false
+  add_foreign_key "marketplace_product_tax_rates", "marketplace_tax_rates", column: "tax_rate_id", validate: false
+  add_foreign_key "marketplace_products", "furnitures", column: "marketplace_id", validate: false
+  add_foreign_key "marketplace_shoppers", "people", validate: false
+  add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id", validate: false
+  add_foreign_key "marketplace_tax_rates", "spaces", column: "bazaar_id", validate: false
   add_foreign_key "marketplace_vendor_representatives", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_vendor_representatives", "people"
-  add_foreign_key "memberships", "invitations"
+  add_foreign_key "memberships", "invitations", validate: false
   add_foreign_key "rooms", "media", column: "hero_image_id"
   add_foreign_key "slots", "rooms", column: "section_id"
-  add_foreign_key "space_agreements", "spaces"
-  add_foreign_key "spaces", "rooms", column: "entrance_id"
+  add_foreign_key "space_agreements", "spaces", validate: false
+  add_foreign_key "spaces", "rooms", column: "entrance_id", validate: false
 end
