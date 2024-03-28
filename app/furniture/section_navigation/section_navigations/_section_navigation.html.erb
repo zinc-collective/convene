@@ -1,7 +1,17 @@
 <div class="grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  <% has_section_images = section_navigation.rooms.any? { |r| r.hero_image.present? } %>
   <% policy_scope(section_navigation.rooms).each do |room| %>
     <%= link_to polymorphic_path(room.location), id: dom_id(room, :link_to), class: "group no-underline" do %>
       <%= render CardComponent.new(media: room.hero_image, classes: "flex flex-col justify-between h-full") do |card| %>
+        <% if has_section_images && room.hero_image.blank? %>
+          <% card.with_header do %>
+            <div class="text-6xl tracking-wider h-36 bg-amber-50 text-amber-600/25 p-4 rounded-md text-clip overflow-hidden flex">
+              <span class="self-center line-clamp-3">
+              <%= room.name %>
+              </span>
+            </div>
+          <% end %>
+        <% end %>
         <p><%= room.description %></p>
         <footer class="text-2xl text-justify font-semibold flex justify-between items-center">
           <h3>
