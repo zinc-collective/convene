@@ -1,5 +1,0 @@
-<%= form_with(model: [slot.space, slot.section, slot]) do |slot_form| %>
-  <%= slot_form.label(:slottable_type) %>
-  <%= slot_form.select(:slottable_type, [:MarkdownTextBlock]) %>
-  <%= slot_form.submit %>
-<%- end %>

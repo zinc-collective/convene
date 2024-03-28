@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Slots" do
+  include ActionText::SystemTestHelper
+
   let(:space) { create(:space, :with_members) }
   let(:section) { create(:room, space:) }
 

@@ -1,0 +1,3 @@
+class Section < Room
+
+end
