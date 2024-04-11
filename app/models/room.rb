@@ -41,6 +41,10 @@ class Room < ApplicationRecord
     space.entrance == self
   end
 
+  def hero_image?
+    !!hero_image&.upload&.attached?
+  end
+
   def ==(other)
     super(other.becomes(Room))
   end
