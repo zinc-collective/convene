@@ -17,7 +17,7 @@ class SectionNavigation
     end
 
     def image_placeholder?(room)
-      section_images? && room.hero_image.blank?
+      section_images? && !room.hero_image?
     end
 
     BG_COLORS = %w[
@@ -33,7 +33,7 @@ class SectionNavigation
     end
 
     def section_images?
-      @section_images ||= rooms.any? { |r| r.hero_image.present? }
+      @section_images ||= rooms.any?(&:hero_image?)
     end
 
     def section_descriptions?
