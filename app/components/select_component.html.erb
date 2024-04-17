@@ -2,9 +2,6 @@
   <% unless @skip_label %>
     <%= @form.label @attribute %>
   <% end %>
-  <% if @label_hint %>
-    <small><%= @label_hint %></small>
-  <% end %>
   <%= @form.select @attribute, @choices, @options, @html_options %>
   <%= render partial: "error", locals: { model: @form.object, attribute: @attribute } %>
 </div>

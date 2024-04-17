@@ -13,7 +13,7 @@
       <%- end %>
     <% end %>
   </div>
-  <footer class="mb-4">
+  <footer>
     <%= link_to [:new, space, :room] do %>
       <span class="icon --add" role="img" aria-label="Add"></span>Add New Section
     <% end %>
@@ -23,8 +23,6 @@
       choices: space.rooms.map { |room| [room.name, room.id] },
       attribute: :entrance_id,
       form: space_form,
-      skip_label: false,
-      label_hint: "Select a section for your Space home page"
     }) %>
     <%= space_form.submit %>
   <%- end %>

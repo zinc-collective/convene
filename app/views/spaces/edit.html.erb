@@ -1,29 +1,24 @@
 <% breadcrumb :edit_space, space %>
-
 <% if space.configured?(space) %>
   <%= render AlertComponent.new(scheme: :warning, icon: :exclamation_triangle,
     title: t('spaces.edit.config_missing_title')) do %>
     <%= t('spaces.edit.config_missing_explainer_html' ) %>
-
     <ul>
       <% if space.rooms.blank? %>
         <li>
           <%= t('spaces.edit.config_missing_sections_text_html' ) %>
         </li>
       <% end %>
-
       <% if space.entrance_id.blank? %>
         <li>
           <%= t('spaces.edit.config_missing_entrance_text_html' ) %>
         </li>
       <% end %>
-
       <% if space.members.blank? %>
         <li>
           <%= t('spaces.edit.config_missing_members_text_html' ) %>
         </li>
       <% end %>
-
       <% if space.entrance_id.present? && space.entrance&.gizmos&.blank? %>
         <li>
           <%= t('spaces.edit.config_missing_entrance_furniture_text_html', room_name: link_to(space.entrance.name, space.entrance.location(:edit) )) %>
@@ -32,9 +27,9 @@
     </ul>
   <% end %>
 <% end %>
-
 <%= render "people", space: space %>
 <%= render "sections", space: space %>
+<%= render "branding", space: space %>
 <%= render "utilities", space: space %>
 <%= render "website_settings", space: space %>
 <%= render "agreements", space: space %>

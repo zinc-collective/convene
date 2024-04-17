@@ -45,6 +45,9 @@ class Space < ApplicationRecord
   # @returns {ActiveRecord::Relation<Utilities>}
   has_many :utilities, inverse_of: :space, dependent: :destroy
 
+  attribute :brand_header, :boolean
+  attribute :brand_color, :string
+
   def parent_location
     []
   end

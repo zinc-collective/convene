@@ -1,0 +1,15 @@
+<div class="mt-3 gap-y-3">
+  <%= render CardComponent.new do %>
+    <h3>Branding</h3>
+    <p class="text-sm">Make your site look pretty</p>
+    <%= form_with(model: space.location) do |space_form| %>
+      <div>
+        <%= space_form.label :brand_header, "Add a site header?" %>
+        <%= space_form.check_box :brand_header %>
+        <%= space_form.label :brand_color, "Choose a brand color" %>
+        <%= space_form.color_field :brand_color %>
+      </div>
+      <%= space_form.submit %>
+    <%- end %>
+  <% end %>
+</div>
