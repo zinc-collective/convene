@@ -18,6 +18,6 @@ class Space::HeaderComponent < ApplicationComponent
   end
 
   def render?
-    @space.present? && @space.entrance.present?
+    @space.present? && @space.entrance_id.present?
   end
 end
