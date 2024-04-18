@@ -3,9 +3,7 @@
   <%= render 'layouts/head' %>
   <body>
     <%= render 'layouts/header' %>
-    <%- if current_space&.show_header %>
-      <%= render Space::HeaderComponent.new(space: current_space) %>
-    <% end %>
+    <%= render Space::HeaderComponent.new(space: current_space) %>
     <main id="<%= current_space.present? ? dom_id(current_space) : nil %>"
           class="gap-3 flex flex-col content-between mx-auto w-full max-w-7xl sm:px-6 lg:px-8">
       <%= content_for?(:content) ? yield(:content) : yield %>
