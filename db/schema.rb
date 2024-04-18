@@ -330,7 +330,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_202354) do
     t.uuid "entrance_id"
     t.boolean "enforce_ssl", default: false, null: false
     t.boolean "brand_header", default: false, null: false
-    t.string "brand_color"
+    t.string "brand_header_color"
     t.index ["client_id"], name: "index_spaces_on_client_id"
     t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
   end

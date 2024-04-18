@@ -46,7 +46,7 @@ class Space < ApplicationRecord
   has_many :utilities, inverse_of: :space, dependent: :destroy
 
   attribute :brand_header, :boolean
-  attribute :brand_color, :string
+  attribute :brand_header_color, :string
 
   def parent_location
     []
