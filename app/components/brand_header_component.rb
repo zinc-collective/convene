@@ -6,7 +6,7 @@ class BrandHeaderComponent < ApplicationComponent
   end
 
   def sections
-    Pundit.policy_scope(current_person, @space.rooms)
+    policy_scope(@space.rooms)
   end
 
   def render?

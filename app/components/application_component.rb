@@ -2,6 +2,7 @@ class ApplicationComponent < ViewComponent::Base
   attr_accessor :data
   attr_writer :classes, :dom_id
   include Turbo::FramesHelper
+  delegate :policy_scope, to: :helpers
 
   def initialize(data: {}, dom_id: nil, classes: "", current_person: nil)
     self.data = data
