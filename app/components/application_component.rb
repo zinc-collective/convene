@@ -2,6 +2,7 @@ class ApplicationComponent < ViewComponent::Base
   attr_accessor :data
   attr_writer :classes, :dom_id
   include Turbo::FramesHelper
+  delegate :policy_scope, to: :helpers
 
   def initialize(data: {}, dom_id: nil, classes: "", current_person: nil)
     self.data = data
@@ -34,6 +35,8 @@ class ApplicationComponent < ViewComponent::Base
     Pundit.policy(current_person, *, **)
   end
 
+  # Gives components access to the current user on application context which is
+  # not automatically shared across ApplicationController and ViewComponent::Base
   attr_writer :current_person
   def current_person
     @current_person ||= helpers.current_person

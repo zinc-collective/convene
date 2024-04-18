@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html>
   <%= render 'layouts/head' %>
-
   <body>
     <%= render 'layouts/header' %>
-
+    <%- if current_space&.show_header %>
+      <%= render Space::HeaderComponent.new(space: current_space) %>
+    <% end %>
     <main id="<%= current_space.present? ? dom_id(current_space) : nil %>"
           class="gap-3 flex flex-col content-between mx-auto w-full max-w-7xl sm:px-6 lg:px-8">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </main>
-
-
     <footer class="flex-wrap">
-
       <%= render partial: "breadcrumbs" %>
-
       <nav class="text-sm w-full flex flex-wrap justify-center" aria-label="Profile Menu" data-person-email="<%= current_person.email %>">
         <%- if current_person.authenticated? %>
           <%- if current_membership.present? %>
@@ -25,11 +22,9 @@
           <%= link_to "Sign in", [:new, current_space, :authenticated_session].compact, class: "px-4 py-1" %>
         <%- end %>
       </nav>
-
       <div class="text-xs w-full flex flex-wrap justify-center mt-1">
         <%= link_to "💾 Contribute", "https://github.com/zinc-collective/convene", class: "px-2 py-1" %>
         <%= link_to "💚 Sponsor", "https://opencollective.com/zinccommunity", class: "px-2 py-1" %>
-
         <%- current_space&.agreements&.each do |agreement| %>
           <%- next unless agreement.persisted? %>
           <%= link_to(agreement.name, agreement.location, class: "px-2 py-1") %>
