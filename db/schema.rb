@@ -331,6 +331,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_202354) do
     t.boolean "enforce_ssl", default: false, null: false
     t.boolean "show_header", default: false, null: false
     t.string "header_bg_color"
+    t.string "header_txt_color"
     t.index ["client_id"], name: "index_spaces_on_client_id"
     t.index ["slug", "client_id"], name: "index_spaces_on_slug_and_client_id", unique: true
   end
