@@ -23,7 +23,7 @@ class SpacePolicy < ApplicationPolicy
   alias_method :create?, :destroy?
 
   def permitted_attributes(_params)
-    [:name, :slug, :entrance_id, :blueprint, :enforce_ssl, :branded_domain, :brand_header, :brand_header_color]
+    [:name, :slug, :entrance_id, :blueprint, :enforce_ssl, :branded_domain, :show_header, :header_bg_color]
   end
 
   class Scope < ApplicationScope

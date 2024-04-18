@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BrandHeaderComponent < ApplicationComponent
+class Space::HeaderComponent < ApplicationComponent
   def initialize(space:)
     @space = space
   end
