@@ -3,7 +3,7 @@
   <%= render 'layouts/head' %>
   <body>
     <%= render 'layouts/header' %>
-    <%- if current_space?.brand_header %>
+    <%- if current_space&.brand_header %>
       <%= render BrandHeaderComponent.new(space: current_space) %>
     <% end %>
     <main id="<%= current_space.present? ? dom_id(current_space) : nil %>"
