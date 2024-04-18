@@ -9,7 +9,7 @@ module SpaceRoutes
       Furniture.append_routes(router)
       router.resources :furnitures, only: %i[create edit update destroy]
       router.resource :hero_image, controller: "room/hero_images"
-      router.resources :text_block, controller: "text_block/text_blocks"
+      router.resources :content_block, controller: "content_block/content_blocks"
     end
 
     router.resources :utilities

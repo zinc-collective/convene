@@ -1,4 +1,4 @@
-class TextBlock < ApplicationRecord
+class ContentBlock < ApplicationRecord
   belongs_to :slot
   has_one :section, through: :slot
   has_one :space, through: :section
