@@ -2248,10 +2248,10 @@ totalist@^3.0.0:
   resolved "https://registry.yarnpkg.com/totalist/-/totalist-3.0.1.tgz#ba3a3d600c915b1a97872348f79c127475f6acf8"
   integrity sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==
 
-trix@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.0.tgz#da9daddded6ee0cb2ba5676246bb343e1d45eaab"
-  integrity sha512-TPhgGvIjM1VqcfoR/OQQERRlMDuEw7UBIoGroJGuiTmu5yqk5KqR29ZzPgGIoOJgsqoAgxGUCK92+CRJLoO43Q==
+trix@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.1.tgz#688f1213601316cf8b92c5e625d2f562c118c780"
+  integrity sha512-IljOMGOlRUPg1i5Pk/+x/Ia65ZY7Gw5JxxKCh/4caxG5ZaKuFJCKdn1+TF0efUYfdg+bqWenB/mAYCHjZu0zpQ==
 
 ts-interface-checker@^0.1.9:
   version "0.1.13"
