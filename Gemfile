@@ -58,6 +58,8 @@ gem "active_record_extended", "~> 3.2"
 gem "activerecord-postgres_enum", "~> 2.0"
 # Support for models with "slots" or "positions"
 gem "ranked-model", "~> 0.4.9"
+gem "positioning"
+
 # Slug-based model lookup
 gem "friendly_id", "~> 5.5.1"
 # Hashing / Encrypting data at rest
