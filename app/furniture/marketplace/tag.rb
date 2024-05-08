@@ -10,5 +10,10 @@ class Marketplace
 
     attr_accessor :marketplace
     location(parent: :marketplace)
+
+    positioned
+
+    scope :without_group, -> { where(is_group: false) }
+    scope :ordered_tag_groups, -> { where(is_group: true).merge(order(position: :asc, updated_at: :desc)) }
   end
 end

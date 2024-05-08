@@ -1,5 +1,16 @@
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-  <%- marketplace.products.with_all_rich_text.unarchived.each do |product| %>
-    <%= render Marketplace::Menu::ProductComponent.new(product:, cart:)%>
+<%- marketplace.tags.ordered_tag_groups.each do |tag| %>
+  <%- unless tag.products.empty? %>
+    <h1><%= tag.label %></h1>
+    <div class="grid lg:grid-cols-3 gap-3">
+      <%- tag.products.with_all_rich_text.unarchived.each do |product| %>
+        <%= render Marketplace::Menu::ProductComponent.new(product:, cart:) %>
+      <%- end %>
+    </div>
+  <%- end %>
+<%- end %>
+<h1>Everything</h1>
+<div class="grid lg:grid-cols-3 gap-3">
+  <%- marketplace.products_with_no_group_tags.each do |product| %>
+    <%= render Marketplace::Menu::ProductComponent.new(product:, cart:) %>
   <%- end %>
 </div>

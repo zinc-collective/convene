@@ -1,16 +1,47 @@
 <%- breadcrumb :marketplace_tags, marketplace %>
-
 <%= render CardComponent.new do |card| %>
-
-  <%- marketplace.tags.each do |tag| %>
-    <%- tag.marketplace = marketplace %>
-    <div id="<%= dom_id(tag)%>" class="flex flex-row gap-3">
-      <span class="flex-grow">
-        <%= tag.label %>
-      </span>
-    </div>
+  <h1>Product Groups</h1>
+  <p>Drag and drop to change the order in which groups will display on your Marketplace</p>
+  <ul data-controller="sortable" data-sortable-animation-value="150" data-sortable-resource-name-value="tag" class="flex flex-col gap-2 p-0">
+    <%- bazaar.tags.ordered_tag_groups.each do |tag| %>
+      <%-
+      # We must assign the marketplace object explicitly in the current scope
+      # because of the funky way we relate Tags to the Marketplace through a Bazaar.
+      # Yet our routing and navigation depends on a `marketplace` object being present
+      # on a Tag.
+      tag.marketplace = marketplace
+    %>
+      <li data-sortable-update-url="<%= polymorphic_path(tag.location) %>" id="<%= dom_id(tag)%>" class="items-center rounded-md bg-gray-50 px-2 py-1 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 list-none cursor-move">
+        <%= render SvgComponent.new(icon: "bars_3", classes: "w-6 h-6 inline-block") %>
+        <%= link_to tag.label, tag.location(:edit) %>
+        <%- if tag.is_group %>
+          <span class="inline-flex items-center text-xs justify-center px-1 text-xs bg-gray-200 rounded-full">
+            group
+          </span>
+        <% end %>
+      </li>
+    <%- end %>
+    <%- card.with_footer(variant: :action_bar) do %>
+      <%- new_tag = bazaar.tags.new %>
+      <%- if policy(new_tag).create? %>
+        <%= link_to t("marketplace.tags.new.link_to"), marketplace.location(:new, child: :tag), class: "button w-full" %>
+      <%- end %>
+    <%- end %>
+  </ul>
+  <h1>Tags</h1>
+  <p>Add tags to label your products as vegan, discounted, etc...</p>
+  <%- bazaar.tags.without_group.each do |tag| %>
+    <%-
+      # We must assign the marketplace object explicitly in the current scope
+      # because of the funky way we relate Tags to the Marketplace through a Bazaar.
+      # Yet our routing and navigation depends on a `marketplace` object being present
+      # on a Tag.
+      tag.marketplace = marketplace
+    %>
+    <span id="<%= dom_id(tag)%>" class="items-center rounded-md bg-gray-50 px-2 py-1 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 list-none cursor-move">
+      <%= link_to tag.label, tag.location(:edit) %>
+    </span>
   <%- end %>
-
   <%- card.with_footer(variant: :action_bar) do %>
     <%- new_tag = bazaar.tags.new %>
     <%- if policy(new_tag).create? %>

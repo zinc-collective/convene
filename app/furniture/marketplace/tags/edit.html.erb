@@ -1,0 +1,9 @@
+<%
+  # We must assign the marketplace object explicitly in the current scope
+  # because of the funky way we relate Tags to the Marketplace through a Bazaar.
+  # Yet our routing and navigation depends on a `marketplace` object being present
+  # on a Tag.
+  mtag.marketplace = marketplace
+%>
+<%- breadcrumb :edit_marketplace_tag, mtag %>
+<%= render "form", tag: mtag %>
