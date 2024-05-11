@@ -15,7 +15,7 @@ RSpec.describe Marketplace::Product, type: :model do
       create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag) }
     end
     let!(:product_with_group_tag) do
-      create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag, :group)}
+      create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag, :group) }
     end
 
     it "returns only products with a group tag" do
@@ -33,7 +33,7 @@ RSpec.describe Marketplace::Product, type: :model do
       create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag) }
     end
     let!(:product_with_group_tag) do
-      create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag, :group)}
+      create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag, :group) }
     end
 
     it "returns only products without a group tag" do
