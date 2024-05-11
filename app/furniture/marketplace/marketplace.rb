@@ -136,44 +136,5 @@ class Marketplace
     def default_delivery_area
       (delivery_areas.unarchived.size == 1) ? delivery_areas.unarchived.first : nil
     end
-
-    # Because we've decided to make tagging or assigning to group optional for
-    # Marketplace Products, we need a method for querying these non-tagged
-    # Products for display
-    def products_with_no_group_tags
-      # A rough mental model of this query
-      #
-      # Step 1: Build a list of unarchived marketplace products represented by
-      # an array of boolean markers that map to the "is_group" column for each
-      # of their respective tags.
-      #
-      # | mp_tag_groups |
-      # | ------------- |
-      # | {t, f, t, f}  | <-- has some group tags
-      # | {f, f}        | <-- has no group tags
-      # | {t, t, t}     | <-- has all group tags
-      #
-      # Step 2: Filter this list and return only the Marketplace Products who's
-      # corresonding row includes all `f`s.
-      with_no_group_tags = Product.find_by_sql <<-SQL.squish
-        select
-            mp.*
-        from
-            marketplace_products mp
-            full join marketplace_product_tags mpt on mpt.product_id = mp.id
-            full join marketplace_tags mt on mt.id = mpt.tag_id
-        where
-            mp.marketplace_id = '#{id}'
-            and mp.discarded_at is null
-        group by
-            mp.id
-        having not
-            't' = any(array_agg(mt.is_group));
-      SQL
-
-      # Step 3: Merge the above with all other products that are missing tags
-      # which won't be captured by the above query
-      with_no_group_tags + products.unarchived.where.missing(:tags)
-    end
   end
 end
