@@ -13,7 +13,10 @@ class Marketplace
 
     positioned
 
-    scope :without_group, -> { where(is_group: false) }
-    scope :ordered_tag_groups, -> { where(is_group: true).merge(order(position: :asc, updated_at: :desc)) }
+    # Tacking `_tag` onto the end of this scope name solely to avoid
+    # collisions with ActiveRecord `groups`
+    scope :group_tag, -> { where(is_group: true) }
+    scope :not_group, -> { where(is_group: false) }
+    scope :by_position, -> { order(position: :asc) }
   end
 end

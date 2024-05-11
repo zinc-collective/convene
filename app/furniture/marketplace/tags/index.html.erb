@@ -3,7 +3,7 @@
   <h1>Product Groups</h1>
   <p>Drag and drop to change the order in which groups will display on your Marketplace</p>
   <ul data-controller="sortable" data-sortable-animation-value="150" data-sortable-resource-name-value="tag" class="flex flex-col gap-2 p-0">
-    <%- bazaar.tags.ordered_tag_groups.each do |tag| %>
+    <%- bazaar.tags.group_tag.by_position.each do |tag| %>
       <%-
       # We must assign the marketplace object explicitly in the current scope
       # because of the funky way we relate Tags to the Marketplace through a Bazaar.
@@ -30,7 +30,7 @@
   </ul>
   <h1>Tags</h1>
   <p>Add tags to label your products as vegan, discounted, etc...</p>
-  <%- bazaar.tags.without_group.each do |tag| %>
+  <%- bazaar.tags.not_group.each do |tag| %>
     <%-
       # We must assign the marketplace object explicitly in the current scope
       # because of the funky way we relate Tags to the Marketplace through a Bazaar.
