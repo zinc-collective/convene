@@ -30,7 +30,7 @@ gem "turbo-rails"
 # API Layer
 #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.11"
+gem "jbuilder", "~> 2.12"
 gem "rswag-api"
 gem "rswag-ui"
 
@@ -47,7 +47,7 @@ gem "view_component", "~> 3.12"
 gem "rqrcode", "~> 2.2"
 
 # Pagination!
-gem "pagy", "~> 8.3"
+gem "pagy", "~> 8.4"
 
 # Database Layer
 #
