@@ -55,7 +55,7 @@
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^16.1.0",
     "sortablejs": "^1.15.2",
-    "postcss-preset-env": "^9.5.11",
+    "postcss-preset-env": "^9.5.13",
     "tailwindcss": "^3.4.3",
     "trix": "^2.1.1",
     "webpack": "^5.76.0",

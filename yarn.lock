@@ -1845,7 +1845,11 @@ postcss-place@^9.0.1:
   dependencies:
     postcss-value-parser "^4.2.0"
 
+<<<<<<< HEAD
 postcss-preset-env@^9.5.11:
+=======
+postcss-preset-env@^9.5.13:
+>>>>>>> 202b58db (Bump postcss-preset-env from 9.5.11 to 9.5.13 (#2402))
   version "9.5.13"
   resolved "https://registry.yarnpkg.com/postcss-preset-env/-/postcss-preset-env-9.5.13.tgz#7dfab9cbcc35044fd7a0465f87f643249a66cf31"
   integrity sha512-YQMwWu6MAc4Envrjf/mW2BTrb5J8WkrJ4dV2VostZVDhrmEPpYREOyhmvtlFLDxK1/AmTDY8aXjZViMC1qKu/w==
