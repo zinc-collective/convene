@@ -11,7 +11,7 @@ class Marketplace
     attr_accessor :marketplace
     location(parent: :marketplace)
 
-    positioned
+    positioned on: :bazaar
 
     # Tacking `_tag` onto the end of this scope name solely to avoid
     # collisions with ActiveRecord `groups`
