@@ -8,7 +8,7 @@
     </div>
   <%- end %>
 <%- end %>
-<h1>Everything</h1>
+<h1>Other</h1>
 <div class="grid lg:grid-cols-3 gap-3">
   <%- marketplace.products.unarchived.without_group_tag.each do |product| %>
     <%= render Marketplace::Menu::ProductComponent.new(product:, cart:) %>
