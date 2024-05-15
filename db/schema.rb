@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_14_174529) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_202354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -245,9 +245,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_174529) do
     t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_group", default: false, null: false
-    t.integer "position", default: 0, null: false
-    t.index ["bazaar_id", "position"], name: "index_marketplace_tags_on_bazaar_id_and_position", unique: true
     t.index ["bazaar_id"], name: "index_marketplace_tags_on_bazaar_id"
   end
 
