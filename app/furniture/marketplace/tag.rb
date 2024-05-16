@@ -8,7 +8,6 @@ class Marketplace
 
     validates :label, uniqueness: {case_sensitive: false, scope: :bazaar_id}
 
-    attr_accessor :marketplace
     location(parent: :marketplace)
   end
 end
