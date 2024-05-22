@@ -22,7 +22,7 @@ class Journal
 
     class Scope < ApplicationScope
       def resolve
-        scope.includes(:journal).where("published_at < ?", Time.zone.now)
+        scope.includes(:journal).where(published_at: ...Time.zone.now)
           .or(scope.includes(:journal).where(journal: {room: person.rooms}))
       end
     end
