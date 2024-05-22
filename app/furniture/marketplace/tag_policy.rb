@@ -3,8 +3,9 @@
 class Marketplace
   class TagPolicy < Policy
     alias_method :tag, :object
+
     def space
-      tag.bazaar
+      tag.marketplace.bazaar
     end
 
     def permitted_attributes(_params = nil)
