@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Marketplace::Tag, type: :model do
-  it { is_expected.to validate_uniqueness_of(:label).case_insensitive.scoped_to(:bazaar_id) }
+  subject { build(:marketplace_tag) }
+
+  it { is_expected.to validate_uniqueness_of(:label).case_insensitive.scoped_to(:marketplace_id) }
 
   describe ".group_tag" do
     subject(:group_tag) { described_class.group_tag }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_04_202354) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_15_215452) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -241,11 +241,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_202354) do
   end
 
   create_table "marketplace_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "bazaar_id"
     t.string "label"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["bazaar_id"], name: "index_marketplace_tags_on_bazaar_id"
+    t.boolean "is_group", default: false, null: false
+    t.integer "position", default: 0, null: false
+    t.uuid "marketplace_id", null: false
+    t.index ["marketplace_id"], name: "index_marketplace_tags_on_marketplace_id"
   end
 
   create_table "marketplace_tax_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -363,6 +365,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_202354) do
   add_foreign_key "marketplace_product_tax_rates", "marketplace_tax_rates", column: "tax_rate_id"
   add_foreign_key "marketplace_products", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_shoppers", "people"
+  add_foreign_key "marketplace_tags", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_tax_rates", "furnitures", column: "marketplace_id"
   add_foreign_key "marketplace_tax_rates", "spaces", column: "bazaar_id"
   add_foreign_key "marketplace_vendor_representatives", "furnitures", column: "marketplace_id"

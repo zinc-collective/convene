@@ -6,7 +6,7 @@ class Marketplace
     # helper_method named `tag` our method gets called when it really shouldn't
     # be... so `mtag` it is. For now.
     expose :mtag, scope: -> { tags }, model: Tag
-    expose :tags, -> { policy_scope(bazaar.tags.create_with(marketplace: marketplace)) }
+    expose :tags, -> { policy_scope(marketplace.tags.create_with(marketplace: marketplace)) }
 
     def new
       authorize(mtag)
