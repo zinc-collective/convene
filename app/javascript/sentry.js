@@ -8,7 +8,7 @@ export function initializeSentry() {
 
   Sentry.init({
     dsn: dsn,
-    integrations: [new Sentry.BrowserTracing()],
+    integrations: [Sentry.browserTracingIntegration()],
     release: document.head.querySelector("meta[name=release_tag").content,
 
     // Set tracesSampleRate to 1.0 to capture 100%
