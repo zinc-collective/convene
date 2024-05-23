@@ -5,7 +5,7 @@
 name: Create and publish Docker devcontainer
 on:
   push:
-    branches: ['main', 'neighborhood/speed-up-devcontainer-startup'] # second branch is temporary for testing...
+    #branches: ['main', 'neighborhood/speed-up-devcontainer-startup'] # second branch is temporary for testing...
     paths:
       - .github/workflows/build-publish-devcontainer.yml
       - .devcontainer/Dockerfile
