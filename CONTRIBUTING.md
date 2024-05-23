@@ -108,6 +108,9 @@ To run `pry` or `byebug`, run `bin/connect web`.
 Guides: [`pry`](http://pry.github.io/) |  [`byebug`](https://github.com/deivid-rodriguez/byebug/blob/master/GUIDE.md)
 
 ### 2.3. Using the devcontainer.
+
+The devcontainer workflow was disabled on 2024/05/22, see https://github.com/zinc-collective/convene/issues/2415 for rationale. If you want to re-enable it, let one of the maintainers know.
+
 We have setup a developer container environment using VS Code's Dev Containers extension.
 Please see [this document](docs/devcontainer-usage.md) for instructions on using.
 
