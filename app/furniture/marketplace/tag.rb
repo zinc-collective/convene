@@ -10,7 +10,7 @@ class Marketplace
 
     location(parent: :marketplace)
 
-    positioned on: :bazaar
+    positioned on: :marketplace
 
     # Tacking `_tag` onto the end of this scope name solely to avoid
     # collisions with ActiveRecord `groups`
