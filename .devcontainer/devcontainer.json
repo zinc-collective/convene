@@ -12,6 +12,9 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/ruby:1": {
+      "version": "3.3.0"
+    },
     "node": {
       "version": "16",
       "nodeGypDependencies": true
