@@ -7,7 +7,7 @@
         There are currently no tags marked as Menu Groups
       <% else %>
         <p>Drag and drop to change the order in which groups will display on your Marketplace</p>
-        <ul data-controller="sortable" data-sortable-animation-value="150" data-sortable-resource-name-value="tag" class="flex flex-col gap-2 p-0">
+        <ul data-tag-list-test data-controller="sortable" data-sortable-animation-value="150" data-sortable-resource-name-value="tag" class="flex flex-col gap-2 p-0">
           <%- marketplace.tags.group_tag.by_position.each do |tag| %>
             <li data-sortable-update-url="<%= polymorphic_path(tag.location) %>" id="<%= dom_id(tag)%>" class="items-center rounded-md bg-gray-50 px-2 py-1 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 list-none cursor-move">
               <%= render SvgComponent.new(icon: "bars_3", classes: "w-6 h-6 inline-block") %>
