@@ -114,6 +114,11 @@ crumb :new_marketplace_tag do |tag|
   link t("marketplace.tags.new.link_to"), marketplace.location(:new, child: :tag)
 end
 
+crumb :edit_marketplace_tag do |tag|
+  parent :marketplace_tags, tag.marketplace
+  link t("marketplace.tags.edit.link_to"), marketplace.location(:edit, child: :tag)
+end
+
 crumb :marketplace_tax_rates do |marketplace|
   parent :edit_marketplace, marketplace
   link t("marketplace.tax_rates.index.link_to"), marketplace.location(child: :tax_rates)
