@@ -138,6 +138,10 @@ en:
         link_to: "Payment Settings"
     tags:
       index:
-        link_to: "Tags"
+        link_to: "Product Tags"
       new:
-        link_to: "Add Tag"
+        link_to: "Add Product Tag"
+      edit:
+        link_to: "Edit Product Tag"
+      update:
+        success: "Product Tag saved!"

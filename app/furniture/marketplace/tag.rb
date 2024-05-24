@@ -9,5 +9,13 @@ class Marketplace
     validates :label, uniqueness: {case_sensitive: false, scope: :marketplace_id}
 
     location(parent: :marketplace)
+
+    positioned on: :marketplace
+
+    # Tacking `_tag` onto the end of this scope name solely to avoid
+    # collisions with ActiveRecord `groups`
+    scope :group_tag, -> { where(is_group: true) }
+    scope :not_group, -> { where(is_group: false) }
+    scope :by_position, -> { order(position: :asc) }
   end
 end
