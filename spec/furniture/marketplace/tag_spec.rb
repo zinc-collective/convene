@@ -20,15 +20,21 @@ RSpec.describe Marketplace::Tag, type: :model do
   describe ".by_position" do
     subject(:by_position) { described_class.by_position }
 
-    let!(:second_tag) { create(:marketplace_tag, position: 2) }
-    let!(:first_tag) { create(:marketplace_tag, position: 1) }
+    let(:marketplace) { create(:marketplace) }
+    let!(:menu_tags) do
+      # The positioning gem won't let us manually assign positions on creation
+      create_list(:marketplace_tag, 3, :group, marketplace: marketplace).tap do |tags|
+        tags[0].update(position: :last)
+        tags[2].update(position: :first)
+      end
+    end
 
     before do
       freeze_time  # Freeze time so that the `updated_at` values are the same
     end
 
     it "sorts tags by ascending position" do
-      expect(by_position).to eq([first_tag, second_tag])
+      expect(by_position).to eq([menu_tags[2], menu_tags[1], menu_tags[0]])
     end
   end
 end
