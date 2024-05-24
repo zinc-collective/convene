@@ -12,24 +12,6 @@ class Marketplace
       authorize(mtag)
     end
 
-    def edit
-      authorize(mtag)
-    end
-
-    def update
-      if authorize(mtag).update(mtag_params)
-        # POST requests to reorder tags (Stimulus Sortable) are sent with an
-        # html content-type so they cannot be handled by a JS responder.
-        if request.xhr?
-          render json: {}, status: :ok
-        else
-          redirect_to marketplace.location(child: :tags)
-        end
-      else
-        render :edit
-      end
-    end
-
     def create
       if authorize(mtag).save
         redirect_to marketplace.location(child: :tags)

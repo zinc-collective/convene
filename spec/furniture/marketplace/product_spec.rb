@@ -7,42 +7,6 @@ RSpec.describe Marketplace::Product, type: :model do
   it { is_expected.to have_many(:product_tax_rates).inverse_of(:product).dependent(:destroy) }
   it { is_expected.to have_many(:tax_rates).through(:product_tax_rates).inverse_of(:products) }
 
-  describe ".with_group_tag" do
-    subject(:with_group_tag) { described_class.with_group_tag }
-
-    let!(:untagged_product) { create(:marketplace_product) }
-    let!(:product_with_non_group_tag) do
-      create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag) }
-    end
-    let!(:product_with_group_tag) do
-      create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag, :group) }
-    end
-
-    it "returns only products with a group tag" do
-      expect(with_group_tag).to include(product_with_group_tag)
-      expect(with_group_tag).not_to include(untagged_product)
-      expect(with_group_tag).not_to include(product_with_non_group_tag)
-    end
-  end
-
-  describe ".without_group_tag" do
-    subject(:without_group_tag) { described_class.without_group_tag }
-
-    let!(:untagged_product) { create(:marketplace_product) }
-    let!(:product_with_non_group_tag) do
-      create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag) }
-    end
-    let!(:product_with_group_tag) do
-      create(:marketplace_product).tap { |p| p.tags << create(:marketplace_tag, :group) }
-    end
-
-    it "returns only products without a group tag" do
-      expect(without_group_tag).to include(untagged_product)
-      expect(without_group_tag).to include(product_with_non_group_tag)
-      expect(without_group_tag).not_to include(product_with_group_tag)
-    end
-  end
-
   describe "#name" do
     it { is_expected.to validate_presence_of(:name) }
   end

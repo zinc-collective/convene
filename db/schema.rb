@@ -247,7 +247,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_215452) do
     t.boolean "is_group", default: false, null: false
     t.integer "position", default: 0, null: false
     t.uuid "marketplace_id", null: false
-    t.index ["marketplace_id", "position"], name: "index_marketplace_tags_on_marketplace_id_and_position", unique: true
     t.index ["marketplace_id"], name: "index_marketplace_tags_on_marketplace_id"
   end
 

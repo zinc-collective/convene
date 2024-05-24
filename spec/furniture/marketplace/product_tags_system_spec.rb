@@ -14,7 +14,7 @@ describe "Product Tags", type: :system do
     visit(marketplace)
     click_link("Tags")
 
-    click_link("Add Product Tag")
+    click_link("Add Tag")
 
     fill_in("Label", with: "🚫🌾 Gluten Free")
 
