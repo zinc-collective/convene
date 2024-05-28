@@ -3,6 +3,8 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application.js";
-
 import MenuController from "./menu_controller.js";
+import Sortable from "@stimulus-components/sortable";
+
 application.register("menu", MenuController);
+application.register("sortable", Sortable);

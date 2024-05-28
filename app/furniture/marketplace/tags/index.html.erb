@@ -1,20 +1,40 @@
 <%- breadcrumb :marketplace_tags, marketplace %>
-
 <%= render CardComponent.new do |card| %>
-
-  <%- marketplace.tags.each do |tag| %>
-    <%- tag.marketplace = marketplace %>
-    <div id="<%= dom_id(tag)%>" class="flex flex-row gap-3">
-      <span class="flex-grow">
-        <%= tag.label %>
-      </span>
+  <div class="flex flex-col gap-4">
+    <div>
+      <h1>Menu Groups</h1>
+      <%- if marketplace.tags.group_tag.empty? %>
+        There are currently no tags marked as Menu Groups
+      <% else %>
+        <p>Drag and drop to change the order in which groups will display on your Marketplace</p>
+        <ul data-tag-list-test data-controller="sortable" data-sortable-animation-value="150" data-sortable-resource-name-value="tag" class="flex flex-col gap-2 p-0">
+          <%- marketplace.tags.group_tag.by_position.each do |tag| %>
+            <li data-sortable-update-url="<%= polymorphic_path(tag.location) %>" id="<%= dom_id(tag)%>" class="items-center rounded-md bg-gray-50 px-2 py-1 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 list-none cursor-move">
+              <%= render SvgComponent.new(icon: "bars_3", classes: "w-6 h-6 inline-block") %>
+              <%= link_to tag.label, tag.location(:edit) %>
+            </li>
+          <%- end %>
+        <%- end%>
+      </ul>
     </div>
-  <%- end %>
-
-  <%- card.with_footer(variant: :action_bar) do %>
-    <%- new_tag = bazaar.tags.new %>
-    <%- if policy(new_tag).create? %>
-      <%= link_to t("marketplace.tags.new.link_to"), marketplace.location(:new, child: :tag), class: "button w-full" %>
-    <%- end %>
-  <%- end %>
+    <div>
+      <h1>Tags</h1>
+      <p>Adding tags to your products like "vegan" or "discounted" will help shoppers more easily find what they want</p>
+      <div class="flex space-x-2">
+        <%- marketplace.tags.not_group.each do |tag| %>
+          <span id="<%= dom_id(tag)%>" class="rounded-md bg-gray-50 px-2 py-1 font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+            <%= link_to tag.label, tag.location(:edit) %>
+          </span>
+        <%- end %>
+      </div>
+    </div>
+    <div>
+      <%- card.with_footer(variant: :action_bar) do %>
+        <%- new_tag = marketplace.tags.new %>
+        <%- if policy(new_tag).create? %>
+          <%= link_to t("marketplace.tags.new.link_to"), marketplace.location(:new, child: :tag), class: "button w-full" %>
+        <%- end %>
+      <%- end %>
+    </div>
+  </div>
 <%- end %>

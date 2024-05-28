@@ -120,6 +120,8 @@ class ApplicationController < ActionController::Base
     request.content_type == "application/json"
   end
 
+  # Use Pundit's customization hook to ensure that Pundit can always access the
+  # `current_user`
   def pundit_user
     current_person
   end

@@ -30,7 +30,7 @@ gem "turbo-rails"
 # API Layer
 #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.11"
+gem "jbuilder", "~> 2.12"
 gem "rswag-api"
 gem "rswag-ui"
 
@@ -42,12 +42,12 @@ gem "redcarpet", "~> 3.6"
 gem "gretel", "~> 5.0"
 # Better UI components
 gem "lookbook", ">= 2.0.0.beta.4"
-gem "view_component", "~> 3.11"
+gem "view_component", "~> 3.12"
 # QR Code Generation!
 gem "rqrcode", "~> 2.2"
 
 # Pagination!
-gem "pagy", "~> 8.2"
+gem "pagy", "~> 8.4"
 
 # Database Layer
 #
@@ -58,6 +58,8 @@ gem "active_record_extended", "~> 3.2"
 gem "activerecord-postgres_enum", "~> 2.0"
 # Support for models with "slots" or "positions"
 gem "ranked-model", "~> 0.4.9"
+gem "positioning"
+
 # Slug-based model lookup
 gem "friendly_id", "~> 5.5.1"
 # Hashing / Encrypting data at rest
@@ -78,7 +80,7 @@ gem "pg", "~> 1.5"
 gem "image_processing"
 
 # Use S3 for file storage
-gem "aws-sdk-s3", "~> 1.146", require: false
+gem "aws-sdk-s3", "~> 1.151", require: false
 # Date/Time and Internationalization
 #
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -129,7 +131,7 @@ group :development, :test do
 
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "standard", "~> 1.35"
+  gem "standard", "~> 1.36"
 end
 
 group :development do
