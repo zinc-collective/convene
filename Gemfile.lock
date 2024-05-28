@@ -69,7 +69,7 @@ GEM
       activemodel (= 7.1.1)
       activesupport (= 7.1.1)
       timeout (>= 0.4.0)
-    activerecord-postgres_enum (2.0.1)
+    activerecord-postgres_enum (2.0.2)
       activerecord (>= 5.2)
       pg
     activestorage (7.1.1)
