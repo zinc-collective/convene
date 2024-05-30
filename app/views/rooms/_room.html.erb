@@ -1,9 +1,8 @@
 <%- if room.hero_image&.upload.present? %>
   <%= image_tag room.hero_image&.upload&.variant(resize_to_fill: Media::FULL_WIDTH_SHORT), class: "w-full" %>
 <%- end %>
-
 <div class="grow mx-auto w-full">
   <section id="furnitures">
-    <%= render room.gizmos.rank(:slot) %>
+    <%= render room.gizmos.by_position %>
   </section>
 </div>

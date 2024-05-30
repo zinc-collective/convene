@@ -1,7 +1,6 @@
 <div id="new_furniture">
   <h3><%= t('rooms.place_furniture_heading') %></h3>
   <%= form_with model: furniture.location do | form | %>
-    <%= form.hidden_field :slot, value: furniture.room.gizmos.count %>
     <%= render SelectComponent.new({
       choices: Furniture.registry.keys.map { |k| [k.to_s.titleize, k] },
       attribute: :furniture_kind,
