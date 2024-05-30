@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_021224) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_003329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -94,7 +94,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_021224) do
   end
 
   create_table "furnitures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "slot"
+    t.integer "position", default: 0, null: false
     t.string "furniture_kind"
     t.jsonb "settings"
     t.datetime "created_at", null: false
