@@ -16,7 +16,7 @@
     <h2>Gizmos</h2>
     <div id="furnitures">
       <% if room.gizmos.present? %>
-        <%= render room.gizmos.rank(:slot), editing: true %>
+        <%= render room.gizmos.by_position, editing: true %>
       <% else %>
         <p class="text-gray-500"><%= t('rooms.no_furniture_notice') %></p>
       <% end %>

@@ -5,10 +5,9 @@
 # as JSON, so that {Furniture} can be tweaked and configured as appropriate for
 # it's particular use case.
 class Furniture < ApplicationRecord
-  include RankedModel
   location(parent: :room)
 
-  ranks :slot, with_same: [:room_id]
+  positioned on: :room
 
   belongs_to :room, inverse_of: :gizmos
   has_one :space, through: :room, inverse_of: :gizmos
@@ -17,9 +16,6 @@ class Furniture < ApplicationRecord
 
   attribute :settings, :json, default: -> { {} }
 
-  # The order in which {Furniture} is rendered in a Room. Lower is higher.
-  attribute :slot, :integer
-
   delegate :attributes=, to: :gizmo, prefix: true
 
   validates :furniture_kind, presence: true
@@ -27,6 +23,8 @@ class Furniture < ApplicationRecord
   # Used by child classes that require storage of secrets, like Square API keys
   # for a Marketplace
   has_encrypted :secrets, type: :json
+
+  scope :by_position, -> { order(position: :asc) }
 
   # Setting `secrets` to an empty hash after initialization will force consistent access for developers, rather than having to code around a potential nil value
   after_initialize do

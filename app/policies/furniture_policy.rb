@@ -25,7 +25,7 @@ class FurniturePolicy < ApplicationPolicy
   alias_method :destroy?, :update?
 
   def permitted_attributes(_params)
-    [:furniture_kind, :slot, gizmo_attributes: furniture_params]
+    [:furniture_kind, :position, gizmo_attributes: furniture_params]
   end
 
   def furniture_params

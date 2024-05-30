@@ -21,7 +21,6 @@ RSpec.describe FurnituresController do
       perform_request
       placement = room.gizmos.last
       expect(placement.furniture).to be_a(MarkdownTextBlock)
-      expect(placement.slot).to be(0)
       expect(response).to redirect_to([space, room])
     end
   end

@@ -7,6 +7,5 @@ FactoryBot.define do
     room
     furniture_kind { "markdown_text_block" }
     settings { {content: content} }
-    slot_position { :last }
   end
 end
