@@ -25,29 +25,43 @@ describe "Marketplace Tags", type: :system do
     click_button("Create")
     expect(page).to have_content("🚫🌾 Gluten Free")
 
-    click_link("🚫🌾 Gluten Free")
+    click_link("Edit")
     fill_in("Label", with: "🌾 Very Glutenous")
     click_button("Save changes")
     expect(page).to have_content("🌾 Very Glutenous")
 
-    click_link("🌾 Very Glutenous")
-    check("tag_is_group")
+    click_link("Edit")
+    check("tag_is_menu")
     click_button("Save changes")
     within("[data-tag-list-test]") do
       expect(page).to have_content("🌾 Very Glutenous")
     end
   end
 
-  describe "Menu Groups" do
+  scenario "Remove a Marketplace Tag" do
+    visit(marketplace)
+    click_link("Tags")
+    click_link("Add Product Tag")
+    fill_in("Label", with: "🚫🌾 Gluten Free")
+    click_button("Create")
+    expect(page).to have_content("🚫🌾 Gluten Free")
+
+    accept_confirm do
+      click_link("Remove")
+    end
+    expect(page).to have_no_content("🚫🌾 Gluten Free")
+  end
+
+  describe "Menus" do
     let!(:menu_tags) do
       # The positioning gem won't let us manually assign positions on creation
-      create_list(:marketplace_tag, 3, :group, marketplace: marketplace).tap do |tags|
+      create_list(:marketplace_tag, 3, :menu, marketplace: marketplace).tap do |tags|
         tags[0].update(position: :last)
         tags[2].update(position: :first)
       end
     end
 
-    scenario "Displays Menu Groups in the correct order" do
+    scenario "Displays Menus in the correct order" do
       visit(marketplace)
       click_link("Tags")
       within("[data-tag-list-test]") do

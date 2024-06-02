@@ -9,7 +9,7 @@ class Marketplace
     end
 
     def permitted_attributes(_params = nil)
-      %i[label is_group position]
+      %i[label is_menu position]
     end
 
     def update?

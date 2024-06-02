@@ -1,13 +1,11 @@
 <%- breadcrumb :marketplace_products, marketplace%>
-
 <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mt-3 mx-auto">
   <%- if params[:archive] %>
-    <%= render Marketplace::ProductComponent.with_collection(marketplace.products.archived) %>
+    <%= render Marketplace::ProductComponent.with_collection(marketplace.products.archived.sort_alpha) %>
   <%- else %>
-    <%= render Marketplace::ProductComponent.with_collection(marketplace.products.unarchived) %>
+    <%= render Marketplace::ProductComponent.with_collection(marketplace.products.unarchived.sort_alpha) %>
   <%- end %>
 </div>
-
 <div class="text-center mt-3">
   <%- new_product = marketplace.products.new %>
   <%- if policy(new_product).create? %>
@@ -19,7 +17,6 @@
       scheme: :secondary) %>
   <%- end %>
 </div>
-
 <div class="text-center mt-3">
   <%= render Marketplace::Archivable::IndexLinkComponent.new(marketplace: marketplace, resource: :products, to_archive: !params[:archive]) %>
 </div>

@@ -42,6 +42,20 @@ class Marketplace
       skip_authorization
     end
 
+    def destroy
+      authorize(mtag).destroy
+
+      respond_to do |format|
+        format.turbo_stream do
+          if mtag.destroyed?
+            render turbo_stream: turbo_stream.remove(mtag)
+          else
+            render turbo_stream: turbo_stream.replace(mtag)
+          end
+        end
+      end
+    end
+
     def mtag_params
       policy(Tag).permit(params.require(:tag))
     end

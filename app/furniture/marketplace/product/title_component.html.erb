@@ -1,8 +1,11 @@
-<h3><%= name %></h3>
+<div class="mb-2">
+  <h3><%= name %></h3>
+</div>
 <%- if servings.present? %>
   <p class="text-sm">Serves <%= servings %></p>
 <%- end %>
-
 <%- if product.tags.present? %>
-  <p>(<%= product.tags.pluck(:label).join(", ") %>)</p>
+  <div class="flex gap-1">
+    <%= render Marketplace::Tag::DisplayComponent.with_collection(product.tags.not_menu) %>
+  </div>
 <%- end %>

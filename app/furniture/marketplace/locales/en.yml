@@ -70,6 +70,7 @@ en:
         success: "Notification Method '%{contact_location}' Saved!"
       destroy:
         success: "Notification Method '%{contact_location}' Removed!"
+        link_to: "Remove Notification Method '%{contact_location}'"
     order:
       placed_mailer:
         notification:
@@ -142,6 +143,8 @@ en:
       new:
         link_to: "Add Product Tag"
       edit:
-        link_to: "Edit Product Tag"
+        link_to: "Edit Product Tag '%{label}'"
       update:
         success: "Product Tag saved!"
+      destroy:
+        link_to: "Remove Product Tag '%{label}'"

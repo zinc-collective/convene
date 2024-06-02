@@ -2,8 +2,8 @@
   <div class="flex flex-col gap-5">
     <div>
       <%= render "text_field", attribute: :label, form: form %>
-      <%= form.label :is_group, "Is this a menu group?" %>
-      <%= form.check_box :is_group %>
+      <%= form.label :is_menu, "Make this a menu" %>
+      <%= form.check_box :is_menu %>
     </div>
     <%= form.submit %>
   </div>
