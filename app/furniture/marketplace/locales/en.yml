@@ -70,7 +70,6 @@ en:
         success: "Notification Method '%{contact_location}' Saved!"
       destroy:
         success: "Notification Method '%{contact_location}' Removed!"
-        link_to: "Remove Notification Method '%{contact_location}'"
     order:
       placed_mailer:
         notification:

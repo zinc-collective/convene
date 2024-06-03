@@ -46,11 +46,11 @@ class Marketplace
       authorize(mtag).destroy
 
       respond_to do |format|
-        format.turbo_stream do
+        format.html do
           if mtag.destroyed?
-            render turbo_stream: turbo_stream.remove(mtag)
+            redirect_to marketplace.location(child: :tags)
           else
-            render turbo_stream: turbo_stream.replace(mtag)
+            render :show
           end
         end
       end
