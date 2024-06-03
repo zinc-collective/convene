@@ -142,6 +142,8 @@ en:
       new:
         link_to: "Add Product Tag"
       edit:
-        link_to: "Edit Product Tag"
+        link_to: "Edit Product Tag '%{label}'"
       update:
         success: "Product Tag saved!"
+      destroy:
+        link_to: "Remove Product Tag '%{label}'"

@@ -14,8 +14,8 @@ class Marketplace
 
     # Tacking `_tag` onto the end of this scope name solely to avoid
     # collisions with ActiveRecord `groups`
-    scope :group_tag, -> { where(is_group: true) }
-    scope :not_group, -> { where(is_group: false) }
+    scope :menu_tag, -> { where(is_menu: true) }
+    scope :not_menu, -> { where(is_menu: false) }
     scope :by_position, -> { order(position: :asc) }
   end
 end

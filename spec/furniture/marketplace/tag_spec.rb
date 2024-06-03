@@ -5,15 +5,15 @@ RSpec.describe Marketplace::Tag, type: :model do
 
   it { is_expected.to validate_uniqueness_of(:label).case_insensitive.scoped_to(:marketplace_id) }
 
-  describe ".group_tag" do
-    subject(:group_tag) { described_class.group_tag }
+  describe ".menu_tag" do
+    subject(:menu_tag) { described_class.menu_tag }
 
-    let!(:tag) { create(:marketplace_tag, :group) }
-    let!(:not_group_tag) { create(:marketplace_tag) }
+    let!(:tag) { create(:marketplace_tag, :menu) }
+    let!(:not_menu_tag) { create(:marketplace_tag) }
 
     it "only returns tags that are groups" do
-      expect(group_tag).to include(tag)
-      expect(group_tag).not_to include(not_group_tag)
+      expect(menu_tag).to include(tag)
+      expect(menu_tag).not_to include(not_menu_tag)
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe Marketplace::Tag, type: :model do
     let(:marketplace) { create(:marketplace) }
     let!(:menu_tags) do
       # The positioning gem won't let us manually assign positions on creation
-      create_list(:marketplace_tag, 3, :group, marketplace: marketplace).tap do |tags|
+      create_list(:marketplace_tag, 3, :menu, marketplace: marketplace).tap do |tags|
         tags[0].update(position: :last)
         tags[2].update(position: :first)
       end

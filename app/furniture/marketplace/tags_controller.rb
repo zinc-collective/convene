@@ -42,6 +42,20 @@ class Marketplace
       skip_authorization
     end
 
+    def destroy
+      authorize(mtag).destroy
+
+      respond_to do |format|
+        format.html do
+          if mtag.destroyed?
+            redirect_to marketplace.location(child: :tags)
+          else
+            render :show
+          end
+        end
+      end
+    end
+
     def mtag_params
       policy(Tag).permit(params.require(:tag))
     end

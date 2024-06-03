@@ -41,8 +41,9 @@ class Marketplace
 
     before_commit :standardize_attachment_name
 
-    scope :with_group_tag, -> { joins(:tags).merge(Tag.group_tag) }
-    scope :without_group_tag, -> { where.not(id: with_group_tag) }
+    scope :with_menu_tag, -> { joins(:tags).merge(Tag.menu_tag) }
+    scope :without_menu_tag, -> { where.not(id: with_menu_tag) }
+    scope :sort_alpha, -> { order(name: :asc) }
 
     def standardize_attachment_name
       return unless photo.attached? && photo.blob.persisted?

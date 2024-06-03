@@ -4,8 +4,8 @@ FactoryBot.define do
     sequence(:label) { |n| "#{Faker::Food.allergen} #{n}" }
     sequence(:position) { |n| n }
 
-    trait :group do
-      is_group { true }
+    trait :menu do
+      is_menu { true }
     end
   end
 end

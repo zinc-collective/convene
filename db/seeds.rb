@@ -33,7 +33,7 @@ marketplace_section = FactoryBot.create(
   hero_image: FactoryBot.create(:media)
 )
 marketplace = FactoryBot.create(:marketplace, :ready_for_shopping, product_quantity: 16, room: marketplace_section)
-magic_menu_group = FactoryBot.create(:marketplace_tag, :group, marketplace: marketplace, label: "Magic")
+magic_menu_group = FactoryBot.create(:marketplace_tag, :menu, marketplace: marketplace, label: "Magic")
 fire_tag = FactoryBot.create(:marketplace_tag, marketplace: marketplace, label: "🔥")
 marketplace.products.sample(8).each do |product|
   product.tags << magic_menu_group
