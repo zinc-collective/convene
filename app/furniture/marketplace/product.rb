@@ -44,6 +44,8 @@ class Marketplace
     scope :with_menu_tag, -> { joins(:tags).merge(Tag.menu_tag) }
     scope :without_menu_tag, -> { where.not(id: with_menu_tag) }
     scope :sort_alpha, -> { order(name: :asc) }
+    scope :menu_tag_product, -> { with_all_rich_text.merge(unarchived).merge(sort_alpha) }
+    scope :menu_product, -> { with_all_rich_text.merge(unarchived).merge(without_menu_tag).merge(sort_alpha) }
 
     def standardize_attachment_name
       return unless photo.attached? && photo.blob.persisted?
