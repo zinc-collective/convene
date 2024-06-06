@@ -17,7 +17,7 @@ class Marketplace
     end
 
     def all_other_products
-      @all_other_products |= marketplace.products.with_all_rich_text.unarchived.without_menu_tag.sort_alpha
+      @all_other_products ||= marketplace.products.with_all_rich_text.unarchived.without_menu_tag.sort_alpha
     end
   end
 end
