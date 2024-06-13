@@ -18,8 +18,7 @@ AllCops:
     - vendor/bundle/**/*
   NewCops: enable
 
-
-RSpec/Capybara/FeatureMethods:
+RSpec/Dialect:
   Exclude:
     - '**/*_system_spec.rb'
     - spec/system/**/*_spec.rb
