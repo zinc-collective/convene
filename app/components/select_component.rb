@@ -1,5 +1,5 @@
 class SelectComponent < ApplicationComponent
-  def initialize(config, **kwargs)
+  def initialize(config, **)
     @form = config.fetch(:form)
     @attribute = config.fetch(:attribute)
     @choices = config.fetch(:choices, [])
@@ -8,6 +8,6 @@ class SelectComponent < ApplicationComponent
     @skip_label = config.fetch(:skip_label, true)
     @label_hint = config.fetch(:label_hint, "")
 
-    super(**kwargs)
+    super(**)
   end
 end

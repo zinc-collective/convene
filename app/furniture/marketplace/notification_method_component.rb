@@ -3,8 +3,8 @@ class Marketplace
     attr_accessor :notification_method
     delegate :contact_location, to: :notification_method
 
-    def initialize(notification_method:, **kwargs)
-      super(**kwargs)
+    def initialize(notification_method:, **)
+      super(**)
 
       self.notification_method = notification_method
     end

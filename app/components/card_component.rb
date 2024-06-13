@@ -1,8 +1,8 @@
 class CardComponent < ApplicationComponent
   attr_accessor :media
 
-  def initialize(media: nil, **kwargs)
-    super(**kwargs)
+  def initialize(media: nil, **)
+    super(**)
 
     self.media = media
   end

@@ -3,8 +3,8 @@ class Marketplace
     class DeliveryWindowComponent < ApplicationComponent
       attr_accessor :window
 
-      def initialize(window:, **kwargs)
-        super(**kwargs)
+      def initialize(window:, **)
+        super(**)
         self.window = window
       end
 

@@ -18,7 +18,7 @@ class ButtonComponent < ApplicationComponent
     turbo_stream: false,
     turbo: true,
     scheme: nil,
-    **kwargs
+    **
   )
     @label = label
     @title = title
@@ -31,7 +31,7 @@ class ButtonComponent < ApplicationComponent
     @turbo = turbo
     @scheme = scheme
 
-    super(data: data, **kwargs)
+    super(data: data, **)
   end
 
   private

@@ -416,7 +416,7 @@ GEM
     rswag-ui (2.13.0)
       actionpack (>= 3.1, < 7.2)
       railties (>= 3.1, < 7.2)
-    rubocop (1.63.5)
+    rubocop (1.64.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -485,10 +485,10 @@ GEM
       apimatic_core (~> 0.3.0)
       apimatic_core_interfaces (~> 0.2.0)
       apimatic_faraday_client_adapter (~> 0.1.0)
-    standard (1.36.0)
+    standard (1.37.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
-      rubocop (~> 1.63.0)
+      rubocop (~> 1.64.0)
       standard-custom (~> 1.0.0)
       standard-performance (~> 1.4)
     standard-custom (1.0.2)
@@ -601,7 +601,7 @@ DEPENDENCIES
   spring-watcher-listen!
   sprockets-rails
   square.rb
-  standard (~> 1.36)
+  standard (~> 1.37)
   stimulus-rails
   strip_attributes (~> 1.13)
   stripe

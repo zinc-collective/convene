@@ -3,9 +3,9 @@ class Journal
     include RendersMarkdown
     attr_accessor :entry
 
-    def initialize(*args, entry:, **kwargs)
+    def initialize(*, entry:, **)
       self.entry = entry
-      super(*args, **kwargs)
+      super(*, **)
     end
 
     def body_html

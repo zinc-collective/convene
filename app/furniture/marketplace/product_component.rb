@@ -3,8 +3,8 @@ class Marketplace
     attr_accessor :product
     delegate :name, :description, :location, to: :product
 
-    def initialize(product:, data: {}, classes: "", **kwargs)
-      super(data: data, classes: classes, **kwargs)
+    def initialize(product:, data: {}, classes: "", **)
+      super(data: data, classes: classes, **)
 
       self.product = product
     end

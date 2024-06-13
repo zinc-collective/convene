@@ -4,8 +4,8 @@ class Marketplace
     delegate :name, :description, :quantity, :location, to: :cart_product
     delegate :cart, :product, to: :cart_product
 
-    def initialize(cart_product:, **kwargs)
-      super(**kwargs)
+    def initialize(cart_product:, **)
+      super(**)
 
       self.cart_product = cart_product
     end

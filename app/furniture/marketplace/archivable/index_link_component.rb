@@ -2,11 +2,11 @@ class Marketplace
   class Archivable::IndexLinkComponent < Component
     attr_accessor :marketplace, :resource, :to_archive
 
-    def initialize(marketplace:, resource:, to_archive:, **kwargs)
+    def initialize(marketplace:, resource:, to_archive:, **)
       self.marketplace = marketplace
       self.resource = resource
       self.to_archive = to_archive
-      super(**kwargs)
+      super(**)
     end
 
     def location
