@@ -3,8 +3,8 @@ class Marketplace::StripeOverviewComponent < ApplicationComponent
   attr_accessor :marketplace
   delegate :stripe_utility, to: :marketplace, prefix: true
 
-  def initialize(marketplace:, **kwargs)
-    super(**kwargs)
+  def initialize(marketplace:, **)
+    super(**)
 
     @marketplace = marketplace
   end

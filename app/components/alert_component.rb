@@ -5,13 +5,13 @@ class AlertComponent < ApplicationComponent
     scheme: :default,
     title: nil,
     icon: nil,
-    **kwargs
+    **
   )
     @scheme = scheme
     @title = title
     @icon = icon
 
-    super(data: data, **kwargs)
+    super(data: data, **)
   end
 
   private

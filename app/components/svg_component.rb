@@ -3,9 +3,9 @@ class SvgComponent < ApplicationComponent
   # "Outline" style. Add more as needed.
   attr_reader :icon
 
-  def initialize(icon: nil, **kwargs)
+  def initialize(icon: nil, **)
     @icon = icon
-    super(**kwargs)
+    super(**)
   end
 
   def call

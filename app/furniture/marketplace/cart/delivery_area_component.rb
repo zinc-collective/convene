@@ -3,9 +3,9 @@ class Marketplace
     attr_accessor :cart
     delegate :delivery_area, to: :cart
 
-    def initialize(*args, cart:, **kwargs)
+    def initialize(*, cart:, **)
       self.cart = cart
-      super(*args, **kwargs)
+      super(*, **)
     end
 
     def dom_id

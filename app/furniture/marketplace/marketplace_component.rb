@@ -3,8 +3,8 @@ class Marketplace
     attr_accessor :marketplace
     delegate :location, :carts, :ready_for_shopping?, to: :marketplace
 
-    def initialize(marketplace:, **kwargs)
-      super(**kwargs)
+    def initialize(marketplace:, **)
+      super(**)
       self.marketplace = marketplace
     end
 

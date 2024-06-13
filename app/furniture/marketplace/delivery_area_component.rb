@@ -3,8 +3,8 @@ class Marketplace
     attr_accessor :delivery_area
     delegate :label, to: :delivery_area
 
-    def initialize(delivery_area:, **kwargs)
-      super(**kwargs)
+    def initialize(delivery_area:, **)
+      super(**)
 
       self.delivery_area = delivery_area
     end
