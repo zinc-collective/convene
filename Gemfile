@@ -131,6 +131,8 @@ group :development, :test do
 
   gem "rubocop-rails"
   gem "rubocop-rspec"
+  gem "rubocop-capybara"
+  gem "rubocop-factory_bot"
   gem "standard", "~> 1.36"
 end
 
