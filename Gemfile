@@ -55,7 +55,7 @@ gem "pagy", "~> 8.4"
 # @see https://github.com/GeorgeKaraszi/ActiveRecordExtended
 gem "active_record_extended", "~> 3.2"
 # Postgres enums
-gem "activerecord-postgres_enum", "~> 2.0"
+gem "activerecord-postgres_enum", "~> 2.1"
 # Support for models with "slots" or "positions"
 gem "ranked-model", "~> 0.4.9"
 gem "positioning"
