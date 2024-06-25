@@ -265,7 +265,6 @@ GEM
     method_source (1.1.0)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.7)
     minitest (5.24.0)
     monetize (1.12.0)
       money (~> 6.12)
@@ -293,8 +292,7 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.6)
-      mini_portile2 (~> 2.8.2)
+    nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
     pagy (8.4.5)
     parallel (1.25.1)
@@ -502,7 +500,7 @@ GEM
     stringio (3.1.1)
     strip_attributes (1.13.0)
       activemodel (>= 3.0, < 8.0)
-    stripe (10.15.0)
+    stripe (12.0.0)
     strong_migrations (1.8.0)
       activerecord (>= 5.2)
     strscan (3.1.0)
@@ -542,7 +540,7 @@ GEM
     zlib (2.1.1)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   active_record_extended (~> 3.2)
