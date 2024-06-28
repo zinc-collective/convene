@@ -47,7 +47,7 @@ gem "view_component", "~> 3.12"
 gem "rqrcode", "~> 2.2"
 
 # Pagination!
-gem "pagy", "~> 8.4"
+gem "pagy", "~> 8.6"
 
 # Database Layer
 #
