@@ -129,7 +129,6 @@ describe "Marketplace: Buying Products", type: :system do
     fill_in("billingName", with: billing_name)
     fill_in("email", with: email)
     fill_in("billingPostalCode", with: billing_postal_code)
-    uncheck("enableStripePass", visible: false)
     find("*[data-testid='hosted-payment-submit-button']").click
   end
 end
