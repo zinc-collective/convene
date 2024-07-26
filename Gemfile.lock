@@ -301,7 +301,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.6)
-    positioning (0.2.2)
+    positioning (0.2.3)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
     pry (0.14.1)
