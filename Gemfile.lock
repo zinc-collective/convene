@@ -58,8 +58,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
-    active_record_extended (3.2.1)
-      activerecord (>= 5.2, < 7.2.0)
+    active_record_extended (3.3.0)
+      activerecord (>= 5.2, < 8.0.0)
       pg (< 3.0)
     activejob (7.1.3.4)
       activesupport (= 7.1.3.4)
@@ -547,7 +547,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_record_extended (~> 3.2)
+  active_record_extended (~> 3.3)
   activerecord-postgres_enum (~> 2.1)
   aws-sdk-s3 (~> 1.156)
   bcrypt (~> 3.1.20)
