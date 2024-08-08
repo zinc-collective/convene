@@ -53,7 +53,7 @@ gem "pagy", "~> 9.0"
 #
 # Postgres extensions for ActiveRecord
 # @see https://github.com/GeorgeKaraszi/ActiveRecordExtended
-gem "active_record_extended", "~> 3.2"
+gem "active_record_extended", "~> 3.3"
 # Postgres enums
 gem "activerecord-postgres_enum", "~> 2.1"
 # Support for models with "slots" or "positions"
