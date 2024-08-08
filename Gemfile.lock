@@ -369,7 +369,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
-    ranked-model (0.4.9)
+    ranked-model (0.4.10)
       activerecord (>= 5.2)
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
@@ -585,7 +585,7 @@ DEPENDENCIES
   rails (~> 7.1)
   rails-controller-testing
   rails-erd
-  ranked-model (~> 0.4.9)
+  ranked-model (~> 0.4.10)
   redcarpet (~> 3.6)
   rotp (~> 6.3)
   rqrcode (~> 2.2)
