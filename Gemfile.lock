@@ -298,7 +298,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
-    pagy (9.0.2)
+    pagy (9.0.5)
     parallel (1.25.1)
     parser (3.3.4.0)
       ast (~> 2.4.1)
