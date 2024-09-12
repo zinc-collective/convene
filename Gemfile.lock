@@ -203,6 +203,7 @@ GEM
       net-http-persistent (~> 4.0)
     faraday-retry (2.2.1)
       faraday (~> 2.0)
+    ffi (1.17.0)
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     friendly_id (5.5.1)
@@ -267,6 +268,7 @@ GEM
     method_source (1.1.0)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.7)
     minitest (5.25.1)
     monetize (1.12.0)
       money (~> 6.12)
@@ -294,6 +296,9 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.7.0)
+    nokogiri (1.16.7)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.16.7-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
@@ -547,6 +552,7 @@ GEM
     zlib (2.1.1)
 
 PLATFORMS
+  ruby
   x86_64-darwin-23
   x86_64-linux
 
@@ -622,4 +628,4 @@ RUBY VERSION
    ruby 3.3.0p0
 
 BUNDLED WITH
-   2.5.6
+   2.5.18
