@@ -50,7 +50,7 @@
     "@webpack-cli/serve": "^2.0.5",
     "autoprefixer": "^10.4.20",
     "event-target-shim": "^6.0.2",
-    "postcss": "^8.4.41",
+    "postcss": "^8.4.45",
     "postcss-cli": "^11.0.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^16.1.0",
