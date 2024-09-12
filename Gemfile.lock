@@ -154,7 +154,7 @@ GEM
     choice (0.2.0)
     chunky_png (1.4.0)
     coderay (1.1.3)
-    concurrent-ruby (1.3.4)
+    concurrent-ruby (1.3.3)
     connection_pool (2.4.1)
     crack (1.0.0)
       bigdecimal
@@ -267,7 +267,7 @@ GEM
     method_source (1.1.0)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
-    minitest (5.25.1)
+    minitest (5.24.1)
     monetize (1.12.0)
       money (~> 6.12)
     money (6.16.0)
@@ -464,7 +464,7 @@ GEM
     sentry-ruby (5.18.2)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    shoulda-matchers (6.4.0)
+    shoulda-matchers (6.2.0)
       activesupport (>= 5.2.0)
     sidekiq (7.3.0)
       concurrent-ruby (< 2)
@@ -600,7 +600,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails
   sentry-ruby
-  shoulda-matchers (~> 6.4)
+  shoulda-matchers (~> 6.2)
   sidekiq
   simplecov
   spring
