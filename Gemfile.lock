@@ -385,7 +385,7 @@ GEM
     redis-client (0.22.2)
       connection_pool
     regexp_parser (2.9.2)
-    reline (0.5.9)
+    reline (0.5.10)
       io-console (~> 0.5)
     rexml (3.3.6)
       strscan
@@ -420,9 +420,9 @@ GEM
       json-schema (>= 2.2, < 5.0)
       railties (>= 3.1, < 7.2)
       rspec-core (>= 2.14)
-    rswag-ui (2.13.0)
-      actionpack (>= 3.1, < 7.2)
-      railties (>= 3.1, < 7.2)
+    rswag-ui (2.14.0)
+      actionpack (>= 5.2, < 8.0)
+      railties (>= 5.2, < 8.0)
     rubocop (1.64.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -548,7 +548,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.36)
-    zeitwerk (2.6.17)
+    zeitwerk (2.6.18)
     zlib (2.1.1)
 
 PLATFORMS
