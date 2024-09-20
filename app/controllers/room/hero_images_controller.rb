@@ -10,7 +10,7 @@ class Room
         flash[:notice] = t(".success", room_name: room.name)
         redirect_to [:edit, room.space, room]
       else
-        flash[:notice] = t(".failure", room_name: room.name)
+        flash.now[:notice] = t(".failure", room_name: room.name)
         render :new, status: :unprocessable_entity
       end
     end

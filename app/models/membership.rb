@@ -19,7 +19,7 @@ class Membership < ApplicationRecord
     member.display_name
   end
 
-  enum status: {
+  enum :status, {
     active: "active",
     revoked: "revoked"
   }

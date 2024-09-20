@@ -19,7 +19,7 @@ class Invitation < ApplicationRecord
   attribute :email, :string
   validates :email, presence: true
 
-  enum status: {
+  enum :status, {
     pending: "pending",
     accepted: "accepted",
     rejected: "rejected",
