@@ -20,10 +20,10 @@ class Room < ApplicationRecord
 
   # A Room's Access Level indicates what a participant must know in order to gain access to the room.
   # `internal` only Members may access the Room
-  enum access_level: {
+  enum :access_level, {
     public: "public",
     internal: "internal"
-  }, _suffix: :access
+  }, suffix: :access
   alias_method :internal?, :internal_access?
   alias_method :public?, :public_access?
 
