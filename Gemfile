@@ -90,7 +90,7 @@ gem "tzinfo-data", "~> 1.2021", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootsnap", "~> 1.18", require: false
 
 # Permissions and policies
-gem "pundit", "~> 2.3"
+gem "pundit", "~> 2.4"
 gem "decent_exposure", "~> 3.0"
 
 # Utility support
