@@ -31,8 +31,6 @@ gem "turbo-rails"
 #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.12"
-gem "rswag-api"
-gem "rswag-ui"
 
 # View Layer
 #
@@ -120,7 +118,7 @@ group :development, :test do
   # Our preferred testing library for Ruby and Rails projects
   gem "rails-controller-testing"
   gem "rspec-rails", "~> 6.1.3"
-  gem "rswag-specs"
+
   gem "shoulda-matchers", "~> 6.4"
 
   gem "capybara"

@@ -18,24 +18,12 @@ class SpacesController < ApplicationController
 
     space = Space::Factory.create(space_params)
 
-    respond_to do |format|
-      if space.persisted?
-        format.json do
-          render json: Space::Serializer.new(space).to_json, status: :created
-        end
-
-        format.html do
-          redirect_to space.location
-        end
-      else
-        format.json do
-          render json: Space::Serializer.new(space).to_json, status: :unprocessable_entity
-        end
-
-        format.html do
-          render :new
-        end
+    if space.persisted?
+      format.html do
+        redirect_to space.location
       end
+    else
+      render :new
     end
   end
 
