@@ -2,10 +2,6 @@
 
 class RoomsController < ApplicationController
   def show
-    respond_to do |format|
-      format.html
-      format.json { render json: Room::Serializer.new(room).to_json }
-    end
   end
 
   def new
@@ -24,16 +20,10 @@ class RoomsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if room.update(room_params)
-        format.html do
-          redirect_to [:edit, room.space], notice: t(".success", room_name: room.name)
-        end
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
-
-      format.json { render json: Room::Serializer.new(room).to_json }
+    if room.update(room_params)
+      redirect_to [:edit, room.space], notice: t(".success", room_name: room.name)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

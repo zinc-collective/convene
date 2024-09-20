@@ -1,86 +1,11 @@
 # frozen_string_literal: true
 
-require "swagger_helper"
+require "rails_helper"
 
 RSpec.describe RoomsController do # rubocop:disable RSpec/DescribeClass
   let(:space) { create(:space) }
   let(:membership) { create(:membership, space: space) }
   let!(:person) { membership.member }
-
-  path "/spaces/{space_slug}/rooms/{room_slug}" do
-    parameter name: :space_slug, in: :path, type: :string
-    parameter name: :room_slug, in: :path, type: :string
-    let(:api_key) { ENV["OPERATOR_API_KEY"] }
-    let(:Authorization) { encode_authorization_token(api_key) } # rubocop:disable RSpec/VariableName
-    include ApiHelpers::Path
-
-    let(:space_slug) { space.slug }
-    let(:room_slug) { room.slug }
-
-    get "Returns the Room Resource" do
-      tags "Room"
-      security [api_key: []]
-      produces "application/json"
-      consumes "application/json"
-
-      let(:room) { create(:room, :with_furniture, space: space) }
-
-      response "200", "Room retrieved" do
-        run_test! do |response|
-          data = response_data(response)
-          furniture_data = room.gizmos
-            .map(&Furniture::Serializer.method(:new))
-            .map(&:to_json)
-          expect(data[:room]).to eq(id: room.id, name: room.name,
-            slug: room.slug,
-            furnitures: furniture_data)
-        end
-      end
-    end
-
-    put "Modifies the Room" do
-      tags "Room"
-      security [api_key: []]
-      produces "application/json"
-      consumes "application/json"
-
-      parameter name: :body, in: :body, schema: {
-        type: :object,
-        properties: {
-          room: {
-            type: :object,
-            properties: {
-              name: {type: :string, example: "Fancy Room"},
-              slug: {type: :string, example: "fancy-room"},
-              gizmos_attributes: {
-                type: :array,
-                items: {
-                  type: :object,
-                  properties: {}
-                }
-              }
-            }
-          }
-        },
-        required: ["room"]
-      }
-
-      let(:body) { {room: attributes} }
-
-      response "200", "Room updated with furniture" do
-        let(:room) { create(:room, space: space) }
-        let(:attributes) do
-          {name: "A new name", gizmos_attributes: [attributes_for(:furniture)]}
-        end
-
-        run_test! do
-          data = response_data(response)
-          expect(data[:room][:name]).to eq("A new name")
-          expect(data[:room][:furnitures]).to be_present
-        end
-      end
-    end
-  end
 
   describe "#new" do
     let(:path) { polymorphic_path(space.location(:new, child: :room)) }

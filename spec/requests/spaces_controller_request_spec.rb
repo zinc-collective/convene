@@ -1,61 +1,9 @@
 # frozen_string_literal: true
 
-require "swagger_helper"
+require "rails_helper"
 
 RSpec.describe SpacesController do
   include ActiveJob::TestHelper
-
-  path "/spaces" do
-    include ApiHelpers::Path
-
-    post "Creates a Space" do
-      tags "Spaces"
-      consumes "application/json"
-      produces "application/json"
-
-      security [api_key: []]
-      parameter name: :body, in: :body, schema: {
-        type: :object,
-        properties: {
-          space: {
-            type: :object,
-            properties: {
-              name: {type: :string, example: "A Cool Book Club for Cool Folks"},
-              blueprint: {type: :string, optional: true, example: "book_club"}
-            },
-            required: ["name"]
-          }
-        },
-        required: ["space"]
-      }
-
-      let(:api_key) { ENV["OPERATOR_API_KEY"] }
-      let(:Authorization) { encode_authorization_token(api_key) } # rubocop:disable RSpec/VariableName
-      let(:body) { {space: attributes} }
-      response "201", "space created" do
-        let(:attributes) { attributes_for(:space) }
-        run_test! do |_response|
-          space = Space.find_by(name: attributes[:name])
-          expect(space.rooms).to be_empty
-          expect(space.memberships).to be_empty
-          expect(space.utilities).to be_empty
-        end
-      end
-
-      context "with a blueprint" do # rubocop:disable RSpec/EmptyExampleGroup
-        let(:attributes) { attributes_for(:space, blueprint: :system_test) }
-
-        response "201", "space created from the blueprint" do
-          run_test! do |_response|
-            space = Space.find_by(name: attributes[:name])
-            expect(space.rooms).not_to be_empty
-            expect(space.memberships).not_to be_empty
-          end
-        end
-      end
-    end
-  end
-
   describe "#show" do
     subject(:perform_request) do
       get url

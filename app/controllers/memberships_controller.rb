@@ -8,14 +8,6 @@ class MembershipsController < ApplicationController
   def show
   end
 
-  def create
-    if membership.save
-      render json: Membership::Serializer.new(membership).to_json, status: :created
-    else
-      render json: Membership::Serializer.new(membership).to_json, status: :unprocessable_entity
-    end
-  end
-
   def destroy
     if membership.revoked!
       flash.now[:notice] = t(".success")
@@ -43,7 +35,9 @@ class MembershipsController < ApplicationController
       policy_scope(Membership).find(params[:id])
     else
       Membership.new(membership_params)
-    end.tap(&method(:authorize))
+    end.tap do |membership|
+      authorize(membership)
+    end
   end
 
   private
