@@ -411,13 +411,13 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
-    rubocop (1.64.1)
+    rubocop (1.65.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.8, < 3.0)
+      regexp_parser (>= 2.4, < 3.0)
       rexml (>= 3.2.5, < 4.0)
       rubocop-ast (>= 1.31.1, < 2.0)
       ruby-progressbar (~> 1.7)
@@ -483,10 +483,10 @@ GEM
       apimatic_core (~> 0.3.9)
       apimatic_core_interfaces (~> 0.2.1)
       apimatic_faraday_client_adapter (~> 0.1.4)
-    standard (1.39.2)
+    standard (1.40.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
-      rubocop (~> 1.64.0)
+      rubocop (~> 1.65.0)
       standard-custom (~> 1.0.0)
       standard-performance (~> 1.4)
     standard-custom (1.0.2)
@@ -511,7 +511,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicode-display_width (2.5.0)
+    unicode-display_width (2.6.0)
     uniform_notifier (1.16.0)
     uri (0.13.1)
     view_component (3.13.0)
@@ -597,7 +597,7 @@ DEPENDENCIES
   spring-watcher-listen!
   sprockets-rails
   square.rb
-  standard (~> 1.39)
+  standard (~> 1.40)
   stimulus-rails
   strip_attributes (~> 1.13)
   stripe
