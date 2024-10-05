@@ -81,3 +81,6 @@ Rails/UniqueValidationWithoutIndex:
     - 'app/models/membership.rb'
     - 'app/models/space.rb'
     - 'app/models/utility.rb'
+
+AllCops:
+  SuggestExtensions: false
