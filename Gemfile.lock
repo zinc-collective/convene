@@ -581,6 +581,7 @@ DEPENDENCIES
   redcarpet (~> 3.6)
   rotp (~> 6.3)
   rqrcode (~> 2.2)
+  rspec-mocks
   rspec-rails (~> 7.0.1)
   rubocop-capybara
   rubocop-factory_bot
