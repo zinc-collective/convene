@@ -6,7 +6,7 @@ class Marketplace
 
       def notification(order)
         @order = order
-        mail(to: to,
+        mail(to: to, reply_to: reply_to,
           subject: t(".subject", marketplace_name: order.marketplace_name,
             order_id: order.id))
       end
