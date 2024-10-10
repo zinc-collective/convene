@@ -17,12 +17,26 @@ class Marketplace
     attribute :delivery_window
     monetize :price_cents
 
+    def delivery_fee(subtotal: nil)
+      if charges_fee_as_price? && !charges_fee_as_percentage?
+        price
+      elsif charges_fee_as_price? && charges_fee_as_percentage? && subtotal.present?
+        price + fee_as_percentage_of(subtotal:)
+      elsif !charges_fee_as_price? && charges_fee_as_percentage? && subtotal.present?
+        fee_as_percentage_of(subtotal:)
+      end
+    end
+
     def charges_fee_as_percentage?
       fee_as_percentage.present? && fee_as_percentage.positive?
     end
 
     def charges_fee_as_price?
       price.present? && price.positive?
+    end
+
+    def fee_as_percentage_of(subtotal:)
+      subtotal * (fee_as_percentage.to_f / 100)
     end
   end
 end
