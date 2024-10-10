@@ -33,7 +33,7 @@ describe "Marketplace: Delivery Areas", type: :system do
     it "Makes the DeliveryArea selectable" do
       visit(polymorphic_path(marketplace.location(child: :delivery_areas)))
       click_link("Archived Delivery Areas")
-      within("##{dom_id(delivery_area)}") do
+      within(delivery_area) do
         click_link("Edit")
       end
 
@@ -55,7 +55,7 @@ describe "Marketplace: Delivery Areas", type: :system do
         cart = create(:marketplace_cart, delivery_area:, marketplace:)
         visit(polymorphic_path(marketplace.location(child: :delivery_areas)))
         click_link("Archived Delivery Areas")
-        within("##{dom_id(delivery_area)}") do
+        within(delivery_area) do
           accept_confirm { click_link(I18n.t("destroy.link_to")) }
         end
 
@@ -71,7 +71,7 @@ describe "Marketplace: Delivery Areas", type: :system do
         visit(polymorphic_path(marketplace.location(child: :delivery_areas)))
         click_link("Archived Delivery Areas")
 
-        within("##{dom_id(delivery_area)}") do
+        within(delivery_area) do
           expect(page).to have_no_content(I18n.t("destroy.link_to"))
         end
       end
