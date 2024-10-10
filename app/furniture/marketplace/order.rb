@@ -42,7 +42,7 @@ class Marketplace
     end
 
     def delivery_fee
-      delivery_area&.price
+      delivery_area&.delivery_fee(subtotal: product_total)
     end
     delegate :delivery_window, to: :delivery_area, allow_nil: true
 

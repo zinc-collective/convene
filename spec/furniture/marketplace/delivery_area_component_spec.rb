@@ -9,10 +9,30 @@ RSpec.describe Marketplace::DeliveryAreaComponent, type: :component do
   let(:delivery_area) { create(:marketplace_delivery_area) }
 
   it { is_expected.to have_content(delivery_area.label) }
-  it { is_expected.to have_content(vc_test_controller.view_context.humanized_money_with_symbol(delivery_area.price)) }
-
   it { is_expected.to have_css("a[href='#{polymorphic_path(delivery_area.location)}'][data-turbo-method=delete]") }
   it { is_expected.to have_link(I18n.t("archive.link_to", href: polymorphic_path(delivery_area.location))) }
+
+  context "when the delivery area has a fee as percentage" do
+    let(:delivery_area) { create(:marketplace_delivery_area, fee_as_percentage: 10) }
+
+    it { is_expected.to have_content("10% of subtotal") }
+  end
+
+  context "when the delivery area has a price" do
+    let(:delivery_area) { create(:marketplace_delivery_area, price: 10) }
+
+    it { is_expected.to have_content("$10.00") }
+  end
+
+  context "when the delivery are has a price and a fee as percentage" do
+    let(:delivery_area) { create(:marketplace_delivery_area, price: 10, fee_as_percentage: 10) }
+
+    it { is_expected.to have_content("$10.00 plus 10% of subtotal") }
+  end
+
+  context "when the delivery area has neither a price nor a percentage" do
+    it { is_expected.to have_no_content("of subtotal") }
+  end
 
   context "when the delivery area is Discarded" do
     let(:delivery_area) { create(:marketplace_delivery_area, :archived) }

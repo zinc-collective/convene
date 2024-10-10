@@ -200,7 +200,6 @@ FactoryBot.define do
     marketplace
 
     label { Faker::Address.city }
-    price { Faker::Commerce.price }
     trait :archived do
       discarded_at { 1.hour.ago }
     end

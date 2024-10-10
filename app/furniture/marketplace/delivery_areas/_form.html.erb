@@ -1,7 +1,8 @@
 <%= render CardComponent.new(dom_id: dom_id(delivery_area), classes: "mt-3") do %>
   <%= form_with(model: delivery_area.location) do |delivery_area_form| %>
     <%= render "text_field", attribute: :label, form: delivery_area_form %>
-    <%= render "money_field", attribute: :price, form: delivery_area_form, required: true, step: 0.01, min: 0 %>
+    <%= render "money_field", attribute: :price, form: delivery_area_form, step: 0.01, min: 0 %>
+    <%= render "percentage_field", attribute: :fee_as_percentage, form: delivery_area_form, step: 1, min: 0, max: 100 %>
     <%= render "text_field", attribute: :order_by, form: delivery_area_form %>
     <%= render "text_field", attribute: :delivery_window, form: delivery_area_form %>
 

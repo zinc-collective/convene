@@ -5,6 +5,7 @@ class Marketplace
     belongs_to :marketplace
     belongs_to :shopper
     belongs_to :delivery_area
+    has_many :ordered_products, inverse_of: :order, foreign_key: :cart_id
 
     has_encrypted :delivery_address
     has_encrypted :contact_phone_number
@@ -16,7 +17,11 @@ class Marketplace
     alias_method :window, :delivery_window
 
     def fee
-      delivery_area&.price.presence || Money.new(0)
+      delivery_area&.delivery_fee(subtotal: product_total) || Money.new(0)
+    end
+
+    def product_total
+      ordered_products.sum(0, &:price_total)
     end
 
     def details_filled_in?
