@@ -15,6 +15,10 @@ class Marketplace
     has_many :products, through: :ordered_products, inverse_of: :orders
     has_many :events, inverse_of: :regarding, dependent: :destroy, as: :regarding
 
+    after_update_commit(if: :switched_to_paid?) { FinalizeOrderPaymentJob.perform_later(id, latest_stripe_charge_id) }
+
+    attribute :latest_stripe_charge_id, :string
+
     has_encrypted :delivery_address
     has_encrypted :contact_phone_number
     has_encrypted :contact_email
@@ -52,6 +56,14 @@ class Marketplace
 
     def price_total
       [product_total, delivery_fee, tax_total].compact.sum(0)
+    end
+
+    private
+
+    def switched_to_paid?
+      previous_changes.key?(:status) &&
+        record.previous_changes[:status].first != record.previous_changes[:status].last &&
+        record.previous_changes[:status].last == :paid
     end
   end
 end
