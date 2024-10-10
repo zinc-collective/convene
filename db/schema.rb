@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_31_200256) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_10_004915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -159,6 +159,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_31_200256) do
     t.string "delivery_window"
     t.string "order_by"
     t.datetime "discarded_at"
+    t.integer "fee_as_percentage"
     t.index ["discarded_at"], name: "index_marketplace_delivery_areas_on_discarded_at"
     t.index ["marketplace_id"], name: "index_marketplace_delivery_areas_on_marketplace_id"
   end

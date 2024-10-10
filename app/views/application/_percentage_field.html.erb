@@ -1,0 +1,13 @@
+<% required = local_assigns[:required] || false %>
+<% min = local_assigns[:min] || 0 %>
+<% step = local_assigns[:step] || 0.01 %>
+<div>
+  <%= form.label attribute, class: "block font-medium text-gray-700"%>
+  <div class="relative mt-1 rounded-md shadow-sm">
+    <%= form.number_field attribute, class: "block w-full rounded-md border-gray-300 !pl-7 !pr-12 focus:border-indigo-500 focus:ring-indigo-500", step: step, min: min, required: required %>
+    <div class="pointer-events-none absolute bottom-0 right-0 flex items-center pt-3 pr-3">
+      <span class="text-gray-500">%</span>
+    </div>
+  </div>
+  <%= render partial: "error", locals: { model: form.object, attribute: attribute } %>
+</div>

@@ -16,5 +16,13 @@ class Marketplace
 
     attribute :delivery_window
     monetize :price_cents
+
+    def charges_fee_as_percentage?
+      fee_as_percentage.present? && fee_as_percentage.positive?
+    end
+
+    def charges_fee_as_price?
+      price.present? && price.positive?
+    end
   end
 end

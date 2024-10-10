@@ -9,6 +9,21 @@ describe "Marketplace: Delivery Areas", type: :system do
     sign_in(space.members.first, space)
   end
 
+  describe "Setting a Delivery Fee" do
+    it "allows Percentage-Based Delivery Fees" do
+      visit(polymorphic_path(marketplace.location(child: :delivery_areas)))
+      click_link("Add Delivery Area")
+      fill_in("Label", with: "Percentage Based Delivery Area")
+      fill_in("Fee as percentage", with: "10")
+
+      expect { click_button("Create") }.to change(marketplace.delivery_areas, :count).by(1)
+      expect(page).to have_content("Percentage Based Delivery Area")
+      within(marketplace.delivery_areas.order(created_at: :desc).first) do
+        expect(page).to have_content("10% of subtotal")
+      end
+    end
+  end
+
   describe "Restoring Delivery Areas" do
     let!(:delivery_area) do
       create(:marketplace_delivery_area, :archived, marketplace:,
@@ -61,5 +76,9 @@ describe "Marketplace: Delivery Areas", type: :system do
         end
       end
     end
+  end
+
+  def within(model, *, **, &block)
+    page.within("##{dom_id(model)}", *, **, &block)
   end
 end
