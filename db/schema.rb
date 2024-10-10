@@ -82,6 +82,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_10_004915) do
     t.index ["person_id"], name: "index_authentication_methods_on_person_id"
   end
 
+  create_table "content_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -312,6 +317,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_10_004915) do
     t.index ["space_id"], name: "index_rooms_on_space_id"
   end
 
+  create_table "slots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "section_id"
+    t.string "slottable_type"
+    t.uuid "slottable_id"
+    t.integer "slot_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_slots_on_section_id"
+    t.index ["slottable_type", "slottable_id"], name: "index_slots_on_slottable"
+  end
+
   create_table "space_agreements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "space_id"
     t.string "name", null: false
@@ -374,6 +390,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_10_004915) do
   add_foreign_key "marketplace_vendor_representatives", "people"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "rooms", "media", column: "hero_image_id"
+  add_foreign_key "slots", "rooms", column: "section_id"
   add_foreign_key "space_agreements", "spaces"
   add_foreign_key "spaces", "rooms", column: "entrance_id"
 end
