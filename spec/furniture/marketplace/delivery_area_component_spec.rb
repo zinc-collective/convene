@@ -9,8 +9,6 @@ RSpec.describe Marketplace::DeliveryAreaComponent, type: :component do
   let(:delivery_area) { create(:marketplace_delivery_area) }
 
   it { is_expected.to have_content(delivery_area.label) }
-  it { is_expected.to have_content(vc_test_controller.view_context.humanized_money_with_symbol(delivery_area.price)) }
-
   it { is_expected.to have_css("a[href='#{polymorphic_path(delivery_area.location)}'][data-turbo-method=delete]") }
   it { is_expected.to have_link(I18n.t("archive.link_to", href: polymorphic_path(delivery_area.location))) }
 

@@ -26,9 +26,10 @@ RSpec.describe Marketplace::DeliveryAreasController, type: :request do
 
     specify do
       perform_request
-      assert_select("form input", 5)
+      assert_select("form input", 6)
       assert_select("#delivery_area_label")
       assert_select("#delivery_area_price")
+      assert_select("#delivery_area_fee_as_percentage")
       assert_select("#delivery_area_order_by")
       assert_select("#delivery_area_delivery_window")
     end
