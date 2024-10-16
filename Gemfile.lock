@@ -164,7 +164,7 @@ GEM
       addressable
     cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
-    date (3.3.3)
+    date (3.3.4)
     debug_inspector (1.2.0)
     decent_exposure (3.0.4)
       activesupport (>= 4.0)
@@ -286,14 +286,14 @@ GEM
       uri
     net-http-persistent (4.0.4)
       connection_pool (~> 2.2)
-    net-imap (0.4.1)
+    net-imap (0.4.17)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.1)
+    net-protocol (0.2.2)
       timeout
-    net-smtp (0.4.0)
+    net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
     nokogiri (1.16.7)
