@@ -6,7 +6,13 @@
     <dl class="grid grid-cols-2 gap-3 w-96">
       <%- cart.cart_products.each do |cart_product| %>
         <dt class="text-right"><%= cart_product.name %><br />
-        (<%=cart_product.quantity%>) x <%= humanized_money_with_symbol(cart_product.price) %></dt>
+        (<%=cart_product.quantity%>) x <%= humanized_money_with_symbol(cart_product.price) %><br />
+          <div>
+            <%= turbo_frame_tag(cart_product, :note) do %>
+              <%= render "marketplace/cart_product/notes/note", cart_product: %>
+            <%- end %>
+          </div>
+        </dt>
         <dd><%= humanized_money_with_symbol(cart_product.price_total) %></dd>
       <%- end %>
       <dt class="font-bold text-right">Sub Total</dt>

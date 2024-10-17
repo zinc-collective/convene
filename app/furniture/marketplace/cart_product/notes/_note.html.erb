@@ -1,0 +1,6 @@
+<%- if cart_product.note.present? %>
+  <p><%= cart_product.note %></p>
+  <%= link_to("Edit Note", cart_product.location(:edit, child: :note)) %>
+<%- else %>
+  <%= link_to("Add Note", cart_product.location(:new, child: :note)) %>
+<%- end %>

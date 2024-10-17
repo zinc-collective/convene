@@ -3,7 +3,10 @@ class Marketplace
     def self.append_routes(router)
       router.resources :marketplaces, only: [:show, :edit, :update], module: "marketplace" do
         router.resources :carts, only: [] do
-          router.resources :cart_products
+          router.resources :cart_products do
+            router.resource :note, controller: "cart_product/notes"
+          end
+
           router.resource :checkout, only: [:show, :create]
           router.resource :delivery, controller: "cart/deliveries"
           router.resource :delivery_area, controller: "cart/delivery_areas"
