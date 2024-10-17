@@ -22,6 +22,13 @@
         <td class="text-center">x <%= ordered_product.quantity %></td>
         <td><%= humanized_money_with_symbol(ordered_product.price) %></td>
       </tr>
+
+      <%- if ordered_product.note.present? %>
+        <tr>
+          <td></td>
+          <td colspan="2"><em><%= ordered_product.note %></em></td>
+        </tr>
+      <%- end %>
     <%- end %>
     <tr>
       <th class="text-right" colspan="1">Subtotal</th>

@@ -1,0 +1,8 @@
+<%= form_with(model: cart_product,
+                url: polymorphic_path(cart_product.location(child: :note))) do |form| %>
+
+  <%= form.label :note %>
+  <%= form.text_area :note %>
+
+  <%= form.submit %>
+<%- end %>

@@ -183,6 +183,7 @@ FactoryBot.define do
 
     product { association(:marketplace_product, marketplace: marketplace) }
     order { association(:marketplace_order, marketplace: marketplace) }
+    note { "No #{Faker::Food.allergen} Please!" }
     quantity { 1 }
   end
 

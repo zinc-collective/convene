@@ -81,6 +81,10 @@ describe "Marketplace: Buying Products", type: :system do
     click_link("Checkout")
     expect(page).to have_current_path(polymorphic_path(marketplace.carts.first.location(child: :checkout)))
 
+    click_link("Add Note")
+    fill_in("Note", with: "No bananas!")
+    click_button("Save changes")
+
     set_delivery_details(delivery_address: "123 N West St Oakland, CA",
       contact_email: "AhsokaTano@example.com",
       contact_phone_number: "1234567890")
