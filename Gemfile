@@ -104,6 +104,7 @@ gem "sidekiq"
 # Error reporting in production
 gem "sentry-rails"
 gem "sentry-ruby"
+gem "lograge"
 
 # Demo data
 gem "factory_bot_rails"
