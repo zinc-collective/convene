@@ -57,7 +57,7 @@ RSpec.describe Marketplace::StripeEventsController, type: :request do
       expect(order.stripe_transfer_id).to eq("st_fake_1234")
       expect(order.events).to exist(description: "Payment Split Attempted")
       expect(order.events).to exist(description: "Payment Split Completed")
-      expect(Stripe::Transfer).to(have_received(:create).with({amount: order.vendors_share.to_i, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key}))
+      expect(Stripe::Transfer).to(have_received(:create).with({amount: order.vendors_share.cents, currency: "usd", destination: marketplace.stripe_account, transfer_group: order.id}, {api_key: marketplace.stripe_api_key}))
     end
 
     context "when stripe sends us an event we can't handle" do
