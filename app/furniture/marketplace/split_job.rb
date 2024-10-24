@@ -16,7 +16,7 @@ class Marketplace
       end
 
       transfer = Stripe::Transfer.create({
-        amount: vendors_share.to_i,
+        amount: vendors_share.cents,
         currency: "usd",
         destination: vendor_stripe_account,
         transfer_group: order.id
