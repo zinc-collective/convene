@@ -434,10 +434,10 @@
   dependencies:
     "@rails/activestorage" ">= 7.2.0-alpha"
 
-"@rails/activestorage@>= 7.2.0-alpha", "@rails/activestorage@^7.2.101":
-  version "7.2.101"
-  resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-7.2.101.tgz#fc786623431e7d5ef2b4e73b8c1cbfb890f18aac"
-  integrity sha512-N4Lb2xW+6OFeE8f0nvOo6vigVM3VWlEYO6+wPBgc26CFstVG2zXbj4SV88JW3hZSArcCVox726hbXogwMV7hcg==
+"@rails/activestorage@>= 7.2.0-alpha", "@rails/activestorage@^7.2.102":
+  version "7.2.102"
+  resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-7.2.102.tgz#6c44033e4698ea92466a764515d3b156d58c6530"
+  integrity sha512-indJKK6bhETIfyYqUtbE3neUQCZ7Qm3lcPXSHqlVBYsJ3DnUKKejqvaIHHA5MrmqTKNbnnrX4zyeA1mrJgLk9Q==
   dependencies:
     spark-md5 "^3.0.1"
 
