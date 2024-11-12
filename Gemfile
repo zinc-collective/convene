@@ -69,7 +69,7 @@ gem "strong_migrations", "~> 2.1"
 gem "discard", "~> 1.4"
 
 # ActiveModel extension to remove extra whitespace from attributes
-gem "strip_attributes", "~> 1.13"
+gem "strip_attributes", "~> 1.14"
 
 # Use postgresql for data persistence
 gem "pg", "~> 1.5"

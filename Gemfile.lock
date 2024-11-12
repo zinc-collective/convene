@@ -500,8 +500,8 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.2)
-    strip_attributes (1.13.0)
-      activemodel (>= 3.0, < 8.0)
+    strip_attributes (1.14.0)
+      activemodel (>= 3.0, < 9.0)
     stripe (10.15.0)
     strong_migrations (2.1.0)
       activerecord (>= 6.1)
@@ -601,7 +601,7 @@ DEPENDENCIES
   square.rb
   standard (~> 1.41)
   stimulus-rails
-  strip_attributes (~> 1.13)
+  strip_attributes (~> 1.14)
   stripe
   strong_migrations (~> 2.1)
   turbo-rails
