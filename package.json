@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/zinc-collective/convene#readme",
   "devDependencies": {
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.1",
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "dependencies": {
