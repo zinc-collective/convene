@@ -2114,10 +2114,10 @@ slash@^5.0.0, slash@^5.1.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-5.1.0.tgz#be3adddcdf09ac38eebe8dcdc7b1a57a75b095ce"
   integrity sha512-ZA6oR3T/pEyuqwMgAKT0/hAv8oAXckzbkmR0UkUosQ+Mc4RxGoJkRmwHgHufaenlyAgE1Mxgpdcrf75y6XcnDg==
 
-sortablejs@^1.15.4:
-  version "1.15.4"
-  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.15.4.tgz#f5601f6aa725df1601c09a4a50a8f4ea5d95d96b"
-  integrity sha512-wr7G5Id/WNllca5yF9I2vsz/2wDKJebX5FJBtfUFBGGpaaIVjW4kziAnNMEcigaTZAaPLB92NYBGqWenGDH++g==
+sortablejs@^1.15.5:
+  version "1.15.5"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.15.5.tgz#225edc6ae153b2e5eca54f150abc2bc5f9305b29"
+  integrity sha512-xDJLosRJzZ+nVnjaUYmO9H/wZth0lWTRq7VzV1eQyDSKsvxmoJ69HTGcwnwGYpJG/AkJ9OWiwWH4BhIycdonWw==
 
 source-map-js@^1.2.1:
   version "1.2.1"
