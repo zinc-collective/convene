@@ -2097,10 +2097,10 @@ slash@^5.0.0, slash@^5.1.0:
   resolved "https://registry.yarnpkg.com/slash/-/slash-5.1.0.tgz#be3adddcdf09ac38eebe8dcdc7b1a57a75b095ce"
   integrity sha512-ZA6oR3T/pEyuqwMgAKT0/hAv8oAXckzbkmR0UkUosQ+Mc4RxGoJkRmwHgHufaenlyAgE1Mxgpdcrf75y6XcnDg==
 
-sortablejs@^1.15.5:
-  version "1.15.5"
-  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.15.5.tgz#225edc6ae153b2e5eca54f150abc2bc5f9305b29"
-  integrity sha512-xDJLosRJzZ+nVnjaUYmO9H/wZth0lWTRq7VzV1eQyDSKsvxmoJ69HTGcwnwGYpJG/AkJ9OWiwWH4BhIycdonWw==
+sortablejs@^1.15.6:
+  version "1.15.6"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.15.6.tgz#ff93699493f5b8ab8d828f933227b4988df1d393"
+  integrity sha512-aNfiuwMEpfBM/CN6LY0ibyhxPfPbyFeBTYJKCvzkJ2GkUpazIt3H+QIPAMHwqQ7tMKaHz1Qj+rJJCqljnf4p3A==
 
 source-map-js@^1.2.1:
   version "1.2.1"
