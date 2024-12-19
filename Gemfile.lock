@@ -519,7 +519,7 @@ GEM
     uniform_notifier (1.16.0)
     uri (1.0.2)
     useragent (0.16.11)
-    view_component (3.20.0)
+    view_component (3.21.0)
       activesupport (>= 5.2.0, < 8.1)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -609,7 +609,7 @@ DEPENDENCIES
   strong_migrations (~> 2.1)
   turbo-rails
   tzinfo-data (~> 1.2021)
-  view_component (~> 3.20)
+  view_component (~> 3.21)
   web-console (~> 4.2)
   webmock
 
