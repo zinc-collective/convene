@@ -240,7 +240,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     lockbox (2.0.0)
-    logger (1.6.3)
+    logger (1.6.4)
     lograge (0.14.0)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -384,7 +384,7 @@ GEM
     rdoc (6.10.0)
       psych (>= 4.0.0)
     redcarpet (3.6.0)
-    redis-client (0.22.2)
+    redis-client (0.23.0)
       connection_pool
     regexp_parser (2.9.3)
     reline (0.6.0)
@@ -463,7 +463,7 @@ GEM
       concurrent-ruby (~> 1.0, >= 1.0.2)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
-    sidekiq (7.3.6)
+    sidekiq (7.3.7)
       connection_pool (>= 2.3.0)
       logger
       rack (>= 2.2.4)
