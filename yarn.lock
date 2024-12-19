@@ -2295,10 +2295,10 @@ totalist@^3.0.0:
   resolved "https://registry.yarnpkg.com/totalist/-/totalist-3.0.1.tgz#ba3a3d600c915b1a97872348f79c127475f6acf8"
   integrity sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==
 
-trix@^2.1.10:
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.10.tgz#6f048115c2c20206067abbab8a6e7308710c39e0"
-  integrity sha512-PrMOKriE76tJbjqiOFpjTiRkOomWBiGPT/YrBw83HJ5SlFAcybYZVjVlkDkOrFZoYI4qCfWUw42BTAjSE9KSYQ==
+trix@^2.1.11:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.11.tgz#503fc059d247e0ac7a32f8defe6009e9b835caa6"
+  integrity sha512-xAndkKAQCZ7DbLvfU5svNEEo3+nnIh4uUTwZ3VAPgDfhGv0m82yjxS6b1BR3c8YnBM9brJgFsAZKwBHiMl2kjA==
   dependencies:
     dompurify "^3.2.3"
 
