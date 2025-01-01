@@ -1,8 +1,8 @@
-<%- marketplace.tags.menu_tag.by_position.each do |tag| %>
+<%- menu_tags_ordered.each do |tag| %>
   <%- unless tag.products.empty? %>
     <h1><%= tag.label %></h1>
     <div class="grid lg:grid-cols-3 gap-3">
-      <%- tag.products.with_all_rich_text.unarchived.sort_alpha.each do |product| %>
+      <%- products_for_menu_tag(tag).each do |product| %>
         <%= render Marketplace::Menu::ProductComponent.new(product:, cart:) %>
       <%- end %>
     </div>
@@ -10,7 +10,7 @@
 <%- end %>
 <h1>Other</h1>
 <div class="grid lg:grid-cols-3 gap-3">
-  <%- marketplace.products.unarchived.without_menu_tag.sort_alpha.each do |product| %>
+  <%- all_other_products.each do |product| %>
     <%= render Marketplace::Menu::ProductComponent.new(product:, cart:) %>
   <%- end %>
 </div>
