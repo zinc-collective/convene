@@ -4,6 +4,8 @@ RSpec.describe Room do
   let(:space) { Space.new }
 
   it { is_expected.to have_many(:gizmos).inverse_of(:room).dependent(:destroy) }
+  it { is_expected.to have_many(:slots).inverse_of(:section).dependent(:destroy) }
+
   it { is_expected.to belong_to(:space).inverse_of(:rooms) }
 
   describe "#description" do
