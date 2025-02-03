@@ -520,10 +520,10 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/merge-streams/-/merge-streams-2.3.0.tgz#719df7fb41766bc143369eaa0dd56d8dc87c9958"
   integrity sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==
 
-"@stimulus-components/sortable@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@stimulus-components/sortable/-/sortable-5.0.1.tgz#622b54bd11ab905ab28bdd8282399dc682d06933"
-  integrity sha512-03wQ+0fRaa0cYR3ia8+DJ4vW+UnAmBz24N8ChujWbceN79il49l7+hUZr74FNghmdX2OWhrmcr4YoG+VZ5XQ2g==
+"@stimulus-components/sortable@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@stimulus-components/sortable/-/sortable-5.0.2.tgz#e13134c73ba40547a99428d57271a92248f592c6"
+  integrity sha512-7A8W/sBEkwA1x+ZU/iYgf2FLLtHvpKLQR3c2FABpovYyVq+I7gFxnKkv/qnX4Fh24d0MyWj/krpGY1pPvCXEZw==
 
 "@tailwindcss/forms@^0.5.10":
   version "0.5.10"
