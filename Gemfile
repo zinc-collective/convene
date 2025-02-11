@@ -118,7 +118,7 @@ group :development, :test do
 
   # Our preferred testing library for Ruby and Rails projects
   gem "rails-controller-testing"
-  gem "rspec-rails", "~> 7.1.0"
+  gem "rspec-rails", "~> 7.1.1"
 
   gem "shoulda-matchers", "~> 6.4"
 
