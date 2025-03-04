@@ -333,7 +333,7 @@ GEM
     public_suffix (6.0.1)
     puma (6.6.0)
       nio4r (~> 2.0)
-    pundit (2.4.0)
+    pundit (2.5.0)
       activesupport (>= 3.0.0)
     racc (1.8.1)
     rack (3.1.10)
@@ -588,7 +588,7 @@ DEPENDENCIES
   positioning
   pry-byebug
   puma (~> 6.6)
-  pundit (~> 2.4)
+  pundit (~> 2.5)
   rails (~> 7.2)
   rails-controller-testing
   rails-erd
