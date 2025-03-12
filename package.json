@@ -57,7 +57,7 @@
     "sortablejs": "^1.15.6",
     "postcss-preset-env": "^10.1.5",
     "tailwindcss": "^3.4.17",
-    "trix": "^2.1.12",
+    "trix": "^2.1.13",
     "webpack": "^5.76.0",
     "webpack-cli": "^5.1.4"
   }
