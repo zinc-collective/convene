@@ -41,7 +41,7 @@
     "@hotwired/turbo-rails": "^8.0.13",
     "@rails/actioncable": "^8.0.200",
     "@rails/actiontext": "^8.0.100",
-    "@rails/activestorage": "^8.0.100",
+    "@rails/activestorage": "^8.0.200",
     "@rails/request.js": "^0.0.11",
     "@stimulus-components/sortable": "^5.0.2",
     "@sentry/browser": "^9.5.0",
