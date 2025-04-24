@@ -404,10 +404,10 @@ GEM
     rexml (3.4.1)
     rotp (6.3.0)
     rouge (4.5.1)
-    rqrcode (2.2.0)
+    rqrcode (3.0.0)
       chunky_png (~> 1.0)
-      rqrcode_core (~> 1.0)
-    rqrcode_core (1.2.0)
+      rqrcode_core (~> 2.0)
+    rqrcode_core (2.0.0)
     rspec-core (3.13.3)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.3)
@@ -602,7 +602,7 @@ DEPENDENCIES
   ranked-model (~> 0.4.11)
   redcarpet (~> 3.6)
   rotp (~> 6.3)
-  rqrcode (~> 2.2)
+  rqrcode (~> 3.0)
   rspec-rails (~> 7.1.1)
   rubocop-capybara
   rubocop-factory_bot
