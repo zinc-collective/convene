@@ -476,7 +476,7 @@ GEM
     sentry-ruby (5.23.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    shoulda-matchers (6.4.0)
+    shoulda-matchers (6.5.0)
       activesupport (>= 5.2.0)
     sidekiq (8.0.3)
       connection_pool (>= 2.5.0)
@@ -611,7 +611,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails
   sentry-ruby
-  shoulda-matchers (~> 6.4)
+  shoulda-matchers (~> 6.5)
   sidekiq
   simplecov
   spring
