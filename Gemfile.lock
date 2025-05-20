@@ -168,7 +168,7 @@ GEM
     debug_inspector (1.2.0)
     decent_exposure (3.0.4)
       activesupport (>= 4.0)
-    diff-lcs (1.5.1)
+    diff-lcs (1.6.1)
     discard (1.4.0)
       activerecord (>= 4.2, < 9.0)
     docile (1.4.0)
@@ -418,10 +418,10 @@ GEM
     rspec-mocks (3.13.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (7.1.1)
-      actionpack (>= 7.0)
-      activesupport (>= 7.0)
-      railties (>= 7.0)
+    rspec-rails (8.0.0)
+      actionpack (>= 7.2)
+      activesupport (>= 7.2)
+      railties (>= 7.2)
       rspec-core (~> 3.13)
       rspec-expectations (~> 3.13)
       rspec-mocks (~> 3.13)
@@ -605,7 +605,7 @@ DEPENDENCIES
   redcarpet (~> 3.6)
   rotp (~> 6.3)
   rqrcode (~> 3.1)
-  rspec-rails (~> 7.1.1)
+  rspec-rails (~> 8.0.0)
   rubocop-capybara
   rubocop-factory_bot
   rubocop-rails
