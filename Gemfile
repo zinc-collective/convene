@@ -72,7 +72,7 @@ gem "discard", "~> 1.4"
 gem "strip_attributes", "~> 2.0"
 
 # Use postgresql for data persistence
-gem "pg", "~> 1.5"
+gem "pg", "~> 1.6"
 
 # For image manipulation in Active Storage
 gem "image_processing"

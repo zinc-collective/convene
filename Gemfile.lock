@@ -316,7 +316,9 @@ GEM
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.9)
+    pg (1.6.0)
+    pg (1.6.0-x86_64-darwin)
+    pg (1.6.0-x86_64-linux)
     positioning (0.4.6)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
@@ -593,7 +595,7 @@ DEPENDENCIES
   lookbook (>= 2.0.0.beta.4)
   money-rails
   pagy (~> 9.3)
-  pg (~> 1.5)
+  pg (~> 1.6)
   positioning
   pry-byebug
   puma (~> 6.6)
