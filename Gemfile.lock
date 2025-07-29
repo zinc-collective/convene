@@ -522,7 +522,7 @@ GEM
     strip_attributes (2.0.0)
       activemodel (>= 3.0, < 9.0)
     stripe (10.15.0)
-    strong_migrations (2.4.0)
+    strong_migrations (2.5.0)
       activerecord (>= 7.1)
     thor (1.4.0)
     timeout (0.4.3)
@@ -624,7 +624,7 @@ DEPENDENCIES
   stimulus-rails
   strip_attributes (~> 2.0)
   stripe
-  strong_migrations (~> 2.4)
+  strong_migrations (~> 2.5)
   turbo-rails
   tzinfo-data (~> 1.2021)
   view_component (~> 3.23)
