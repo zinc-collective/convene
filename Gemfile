@@ -30,7 +30,7 @@ gem "turbo-rails"
 # API Layer
 #
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.13"
+gem "jbuilder", "~> 2.14"
 
 # View Layer
 #
