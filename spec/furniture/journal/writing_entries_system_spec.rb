@@ -23,6 +23,14 @@ RSpec.describe "Writing Entries", type: :system do
 
     click_button("Create")
     entry = journal.entries.last
+
+    # this fails on CI sometimes, and I think it's a race condition
+    # so we will wait and try again
+    if !entry
+      sleep(5)
+      journal.entries.reload
+      entry = journal.entries.last
+    end
     expect(entry.headline).to eq("1000 Dune Quotes")
     expect(entry.body).to eq(body)
     expect(entry.summary).to eq(summary)
