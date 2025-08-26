@@ -134,6 +134,8 @@ describe "Marketplace: Buying Products", type: :system do
     fill_in("email", with: email)
     fill_in("billingPostalCode", with: billing_postal_code)
     find(".SignUpForm .CheckboxField--checked").click if has_css?(".SignUpForm .CheckboxField--checked")
+
+    find_by_id("enableStripePass", visible: false).uncheck
     find("*[data-testid='hosted-payment-submit-button']").click
   end
 end
