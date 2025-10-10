@@ -3,3 +3,5 @@ en:
     entries:
       new:
         link_to: "New Journal Entry"
+      create:
+        success: "Entry Created"

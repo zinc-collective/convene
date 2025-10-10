@@ -12,7 +12,7 @@ RSpec.describe "Writing Entries", type: :system do
   it "saves the headline, summary and body" do
     visit(polymorphic_path(journal.location(:new, child: :entry)))
 
-    body = 1000.times.map { Faker::Books::Dune.quote }.join("\n\n")
+    body = Array.new(1000) { Faker::Books::Dune.quote }.join("\n\n")
     fill_in("Headline", with: "1000 Dune Quotes")
     fill_in("Body", with: body)
     summary = %(
@@ -22,6 +22,8 @@ RSpec.describe "Writing Entries", type: :system do
     fill_in("Summary", with: summary)
 
     click_button("Create")
+    expect(page).to have_content("Entry Created")
+
     entry = journal.entries.last
     expect(entry.headline).to eq("1000 Dune Quotes")
     expect(entry.body).to eq(body)
