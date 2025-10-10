@@ -4,7 +4,7 @@ class Journal::EntriesController < FurnitureController
 
   def create
     if entry.save
-      redirect_to [space, room]
+      redirect_to [space, room], notice: t(".success")
     else
       render :new, status: :unprocessable_entity
     end
