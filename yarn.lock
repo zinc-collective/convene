@@ -484,10 +484,10 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.25.tgz#f077fdc0b5d0078d30893396ff4827a13f99e817"
   integrity sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==
 
-"@rails/actioncable@>=7.0", "@rails/actioncable@^8.0.300":
-  version "8.0.300"
-  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-8.0.300.tgz#ae78fbb42ae688f66852206ba02fea3518749791"
-  integrity sha512-X+jxLnyYciTciEeM9crFFsR6DCodCsnoQIzv4hEST6Lx1rEBEjNQbBopnyDT4gr7lBeHJNfb6fEcvZuWFxUSQg==
+"@rails/actioncable@>=7.0", "@rails/actioncable@^8.1.100":
+  version "8.1.100"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-8.1.100.tgz#b1f85f3482425fb91e5eba1deb55152ee0bb2f85"
+  integrity sha512-j4vJQqz51CDVYv2UafKRu4jiZi5/gTnm7NkyL+VMIgEw3s8jtVtmzu9uItUaZccUg9NJ6o05yVyBAHxNfTuCRA==
 
 "@rails/actiontext@^8.1.0":
   version "8.1.0"
