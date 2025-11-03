@@ -40,7 +40,7 @@
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@hotwired/turbo-rails": "^8.0.20",
     "@rails/actioncable": "^8.1.100",
-    "@rails/actiontext": "^8.1.0",
+    "@rails/actiontext": "^8.1.100",
     "@rails/activestorage": "^8.1.100",
     "@rails/request.js": "^0.0.12",
     "@stimulus-components/sortable": "^5.0.3",
