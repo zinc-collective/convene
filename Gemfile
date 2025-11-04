@@ -62,7 +62,7 @@ gem "positioning"
 gem "friendly_id", "~> 5.5.1"
 # Hashing / Encrypting data at rest
 gem "bcrypt", "~> 3.1.20"
-gem "lockbox", "2.0.1"
+gem "lockbox", "2.1.0"
 gem "rotp", "~> 6.3"
 gem "strong_migrations", "~> 2.5"
 # Soft Deletion

@@ -244,7 +244,7 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    lockbox (2.0.1)
+    lockbox (2.1.0)
     logger (1.7.0)
     lograge (0.14.0)
       actionpack (>= 4)
@@ -593,7 +593,7 @@ DEPENDENCIES
   jbuilder (~> 2.14)
   jsbundling-rails
   listen (~> 3.9)
-  lockbox (= 2.0.1)
+  lockbox (= 2.1.0)
   lograge
   lookbook (>= 2.0.0.beta.4)
   money-rails
